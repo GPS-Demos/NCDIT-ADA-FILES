@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>Government Data Analytics Center (GDAC) Annual Report</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Government Data Analytics Center (GDAC) Annual Report</h1>
+    </header>
+    <nav aria-label="Table of Contents" class="document-nav">
+        <p class="nav-title"><strong>Contents</strong></p>
+        <ul>
+                <li><a href="#heading-1">Government Data Analytics Center (GDAC)</a></li>
+                <li><a href="#heading-2">Annual Report</a></li>
+                <li><a href="#planned-activities">Planned Activities</a></li>
+                    <li><a href="#north-carolina-health-information-exchange">North Carolina Health Information Exchange</a></li>
+                <li><a href="#longitudinal-and-performance-systems">Longitudinal and Performance Systems</a></li>
+                    <li><a href="#common-follow-up-system">Common Follow-up System</a></li>
+                    <li><a href="#p20w-system">P20W System</a></li>
+                    <li><a href="#north-carolina-early-childhood-data-system-nc-ecids">North Carolina Early Childhood Data System (NC ECIDS)</a></li>
+                    <li><a href="#governmental-budgetary-transparencyexpenditures-online---osbm-transparency">Governmental Budgetary Transparency/Expenditures Online - OSBM Transparency</a></li>
+                <li><a href="#enterprise-solution-development">Enterprise Solution Development</a></li>
+                    <li><a href="#deceased-matching">Deceased Matching</a></li>
+                    <li><a href="#master-business-records">Master Business Records</a></li>
+                <li><a href="#challenges">Challenges</a></li>
+                    <li><a href="#return-on-investment">Return on Investment</a></li>
+                    <li><a href="#data-quality">Data Quality</a></li>
+                    <li><a href="#portfolio-management">Portfolio Management</a></li>
+                <li><a href="#gdac-public-private-partnership">GDAC Public Private Partnership</a></li>
+                <li><a href="#appendix-a---legislation">Appendix A - Legislation</a></li>
+                <li><a href="#appendix-b---gdac-portfolio">Appendix B - GDAC Portfolio</a></li>
+        </ul>
+    </nav>
+    <main id="main-content" role="main">
+<section>
+<h2 id="heading-1">Government Data Analytics Center (GDAC)</h2>
+<h2 id="heading-2">Annual Report</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAC/CAYAAADNRSFsAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAgK0lEQVR4nO2d+3cUx5XH/QfsOT6xDcIGo0TYxjbOykYIvRBCL4QRIEAajaQZqR+DIYmdkJiXjR9y4njZBRFn17vrjZP9WxD7j9XWre6aqa6p6u6Zqe7qlu4P39PSPHqqq+pT99at1wsvvPACQaFsqX/KIccXWnr7Mr0utnQMtKBXv6zzDrsnl+3nsyjrCUDtcQ0uOaE88h7VL5dcKnq96tP/Q13xyYkrDfIO1buXfSr6N9XxS1SLgd6ievNiS2982CDHQBcCDYAWGuQXoPMN8vNQ/fMN8vqcT47O+uTIrEden/HI4VmHvLi3wbeeANQeE4P4mkc+uO6x6/vXffq3T96/5pN/Bl0NlCfYR+c54PTvueB6ZLZBDgPk0z55dcojfXsLdPM3vfvTPHnw4wLTHabFln4IdFvW94vk46aWAj1p6ZasR6Bl0hD1bVSOqO0l2xnd1OLHtYgWQLdi1KiRWSZHuLY0BXLiNVFrCcAzDnPFIR8se+QkaMWn10AAdZHBZpoBwAO9ds4jhyjkr0751utJocD+7B8fks//cZF89vdFpgdU9/92idz/n0vkHujHy+Tuf18id/7rMtOn/wm6Qv7wwxK5/R+h/v0q+e1fqb6/Sj75/hr55C/XyMdPr5Pf7AT69c4y+dVj0Aq5Bfq3FXLzXyvko0dU/1IhN0I1vqP68yrxqRrfrhL3m1WrgC/cqpLLv62TK7/bpNctpkufbJLFT7Yo4Fvk4m9C/dohH4J+FejCLYd+F+SS8zcdMv+R29Qc1ewNqoZLZpg8Mu3TK9W05zGdc10Kt8d0lmpyy2WA9wwzbSCGKh4ZWvHIqYpPr4HKDDaDezrQoXM+g7xvpJSW3NzN7v90gTz834uFBdv7U5WCvWots6/8LoDaNtigM5tuT0CfojAPr/rkFKji70mwX4XrOXqdapC+sz7pmygV4OZu9uDvC4UH2/tj1ZrVLhLYk1te50BXKdCrFOiqT05ToPcT2Fx9Z72yAL4fwbZjtcsM9nDVI6eZ/H0N9iG4nqWAT/rkwHihAd9/YNvqa5cR7OGKQ4bXXDKy7pORNR/BDsE+FKpvonPPB8HOCOzAalcQ7IT0nl7zyOi6F0CNYCvBPjTZIAfPFNJ671Owv0Gw49I6su6Q0Q0fwU4Bdh+IwV2oIbL9CbZLtfEwX7jLADZEvMc2XCoPwe4AbHY90yAHiuOa71+w619VEWwF1OM1D8HuEmzQwWJY7v0L9ubXVbJ0O78gWpHBZlDXAqgR7N7ABr1iH+79C/bW9hqpf5mfO15ksMcB6rqPYBsC++AEdcvHrbrl+xvsra/zG9MuKtjjdYdM1D0E2zDYAdzWLPf+BtvZrpLaF/n0tYsI9hiF+symh2BnBHYAt5WhMAQ7ryBa0cAeqYKldhHsjMGG/vaLg7nDjWBvfb2WSxCtaGBzqBHsbMEGvTyae38bwQawNx9m39cuGtggBDsfsA+MUw3narURbAb2l9m74wj2Pgd7LNdAGoINYG99BUNf2VptBHt/g32Q6uX8Nm1AsFtgryHYCHa2YOdntRFsDvbmV+uk+iA7l9wm2Ge3QiHYVsF+JT+rjWCLYGc5pm0D7MBatyrS5KbD9jzjYENkHGadjdZgNZeHYOcA9kv5WG0EOwL2w+zccVtgy+mAeeFsDDvctVR8b2zDQbAzBhv0YvZWG8EWwa5/uU42HmZjtW254nI6xjf0lQqAR7CzB/uV7Me1EWwZ7NoX2VhtG2BzNxyAnaw7sVAPbzhosXMDO3N3HMGWwQZlEUTLE+xpz4n0rQHoMzAvfEsPtrxsc2Qdt0bKCuwDY5m74wi2CuyNDPraNsHm0h0WMFJrrcceXXfJ6JrDNjIcWXPZ3mcItnmwXxrJ1Goj2HsZbNlqs8MC6i33XEwfBNUA6rGN1vugYbgi2MbBztgdR7BVYNe+MB9EswG2PNwFcAPALCK+6TThhdfHal7zfzHdaLGzAjvTABqCrQfbrNXOO3gGQPMAGsDM+9jwN2yuAP/zI27j0o0WOxuwM+5nI9g6sEGVu+a2TrIVFQfxaPikYKXBYielGaAHsE/DoQEINoK9V8Be/3y91GDLrrgILHfLkyz26VUncMctgf3Whx5566JP3qTXYwtORP0R+eQX8x7pP++Tn8/7pQD7ZyOZueMIdhLYpjZhsGmx5X6zCLjuvcjnwMrnCPY7l3zy9iWPAdttfvfPU9jn/IKDnVkADcGOA3vj4YaxMe08wT4HwTONte5GeYLNgJ4y56L20Xu9PusXEuwMh7wQ7CSw1z4z447nCrarHsfuVswdr7qZg338cnZDQEep9UawEewm2Oufm7HaeYB9LoyGT3nmgzIB3NmB/c7l7PcFO0wtd5HAfnm0gWDbBbt3q50H2NO+2lLrgmQwnj0eziFX9bXF17I8H/vEZTdzqEHglhcN7Ix2MEWw04AN6jWIlifYsgDqs9I8cYCWbbIQTjEdW9c0CDDcVc02Kn5iMb+N/o7M+MUCO5shLwQ7Ldirn/U2YcXmDip8eEuGlltkNp0UFn+sK2aeURd8OBzuGl71yMlKOExGrybAPnHFzQ1qBBvBbgO72mMQzeZwl+yGs9Vem+H00rpLxqjVhoUgwVxxt21qKYNb4aoPVbyewX73cv4nZRyZ8wsD9j8NIdhWwV4DuO90H0SzMaU0Lj1nwr71eL0dfAb2mps4xm3CYpsc2korCKIVBWy02AUAe/V+91a7aGAnzThLo14tdt5ueAtsD8FGsFtgrz2AIFp3VjtrsKd44EyzFtukYK02gzq02PD30LLXMdjv5jDEpQR7BsFGsCWwK/e6s9pZgj2dYtxatcECiAfWYNlmerC9SFT85IpHBpedzi22LbBnHQQbwY6C3a07niXYaSy0uCupuLILwObR8DTzxvl35L9PXuvcYuc5zIVgI9ixYFcf1MhqF1Y7S7Bn/OTKIe55NrEZDZhBRHwknKSiGs9OI3DFT1INUsA/uB4o0RW/aAfs16YQbARbBXYXVjsLsGcaDlPaPjVYbNitFIa4uNWegOh4zWWuOAx1wZAXRMR7qQuD151UFtsG1FwINoLdBjao0yCaabBnb1Cgb3ReKfjOKdw1Z5DXvaYbDhYbdik93aXl5hYbwUawSwl25e6GNbBnuwCaC3YqPbMZjFGPhRsbQvBsOJyZxiaorEc3PBwMrzwangj3ElpsBLusYN+zB/YcBXu2EV8hYCop30EF3G++aSFb+LHR+lv+3rAw9ZTNOKMw85lnp1Y9Nld8uOJGvjMURsU51Glc8feW7ETEEWwEOxbs1fudWW3jrngM2HwjQw42LAA5E8INWxCn2e+Mzz4bBlWCxSDDq64SbJg3fhICZhBASxkVP7Hkps47BBvB3vNgg7XWgS3uJS7+DWCDwA1nljoF2AzutXB1l7AIhFlt6o4DzOJnh653No6NYCPYxQX7Xvogmimwp0I3XASYX9lGC57TtpmhePD9ZEqoRQWbLATrsU9Raw3LNtkqLwHusoF9eMZHsBFsPdgrKa22KbDl+wK4MI4Na7HFueItqB0GMz/4nh3zU3dTzxXnbvhpZqndpsU+BdNI6f9sKinrU7ulAvu1AoANWyPhRgsFBbtyt5ZqEwbTYDOgbwTj2LMN9SIQeaOFs9xqbwWBK7a/eD1hsUi1NZlluOI0wYb/wWoHC0C8jheB2AYbdHjKIYenPQqxoKlAffw6GaMJjxyYaF2bGovqZeHKNBII9xUvMtj36uT6p8lW26QrDhYahrwCaXYpFY74AWvNXXF+ftdItXUqCJ9OCkNdnZY73GNoxS0l2HtYCLYJsJfv1HIDmw93pdmlVHbFIyeBSENdIxvdgQ2CRSBlc8X3uBBsE2Cv3K1Tdzzeaue9Hlt3Cggbz5bc72DDBb85IaWTBSEgNtzV4bJNBBvBLgXYSe64jY0WdHPIZWvNl23yvjRMJ4WD75MCbBA0Q1e8kEKwTYEdWG19EC1PsDvdaIGBvREFeWTdbZ6PPZhgvdlssw7XYyPYCHZpwL72B31fOy+w+WEBMtz8KF0Or+rg+8h00rVgYQhc05Q/H/JCsAshBNso2J/mD/Z0w2E7qLDD7jUHBoBgvvikEEDj7jgHfSzcfnh0LZgfzqeUAtjwPxfbBul6MDmFzREXrDyCXRgh2CbBXr4D7rgabtNgQ2R8JuUqLw7fZBg0E/vYMI4NGy3I/enhcFYZOx97NXDH+SIQmHnGJqcwteCG+eIIdiGEYJsG+9of1EE042CnnCuu2ldcdMn5aq+05cxc9tByn+Szz6igj82WayLYRRCCbRrs65+qg2hZWGwZaBFscdmmnJYzCbPN0opFxGGaKcw+W/bQFS+OEOwswFYF0bIAeyqceTbjO23DWzLoptS2qmvZ6WpfcQQ7U5m7GYKdL9g8eMb3PJsW9hPne4vrXPFuxI/44WAzaw1DXMsegl08IdhZgB2449END02BzfY6c4J12fD3dNjXnvb0FjupD813KYW/+VbEYmMwFJ64yY/jZYtBWP/aY5FxBLtw2ptg+9+tEP/bFbtgS1bbBNjzN7eaGxiKGy00IRbGsOP62Eq4he2HYbKKeHZXc9lmc6MFt+djdBFsBLtjsHma/G8r1sC+xqx2axMGI2DfqGvzX7bW7LRNNxmeiVr7pJXRcErpSLgtEv8sQA1W2sT52Ag2gt012J51sFtW2wTYU07yum9mrT2nM2tdiy76ANBhYsoohXtYATeCXXjtbbCd7SXLYLcs7NLtzZ7AVu2eotKU6yQuAhEhZu53DeSyKaUw84y/fnoNLLcfmVbK+9gy2Lhss1Da22CDwGrbAvvq7zcZ3GC5ewV7HgJnjeR133KEPA7sMX4KyLrTnFLK+tqCKy6DzcUi4hU3WItdCSen4Dh2UbT3wXb+dN0q2Fzdgr0AATOnSvvXKS22BHTccBc/DQSi5iPhNFOw2KPMUrtsl1IAe0izuku+7xBOKS2K9j7YIO9PlVKCvXBrK1W/WpQ8C40fGACLP9gikHpr+AvAZBsvUKvNdlBZd5oLQeD9TlZ3gU6WaF/xPa59AvYfywk26PzNzuDmrrgYPGMHBYSbGQLc/LPi+DYPoPUymQXmi7OTNq8ln7aJYGcqczcrMtgQRCsr2OCKn7+pH+ZSic08k6Li/MAAgFsc3upkC6ROBQf0IdhWZO5mRQYb5PxxtXRgL9yqduyKJ4m737r3Wf9aHPrqAnw+Qw2EYFuRuZsVHuzt5VKBDf3rXsqj2wUgoxtOxJKfDjdb0AXQVApccRcttj2Zu1nRwQa536yWAuwLv9pi1rrbspAXgegstOq0TVFsogo/cbPqsSGuNL8vB8/ep4APXnUR7Pxk7mZlANvZLg/YF25uJuY530GFLdv0W9BNC33suOGupEAZ28wwtNawugsAP1nRfwfuxw+952CD1ea/g2DnJnM3KwfYS6UAO3DFg/41F6QfrgxiCjTsoALLNvnZXeJzTrvBXHE2XzzBHU+y2sPhkNdwNVgEApCeWlFbb96vFv9uCS12jtpfYIPAapcB7Au3gmg4aP6jTbaaa/6jreZyTb7ZwnSjvS/NV3eJYMPQlnzSJj/iJy6/xHO72GmbsMJrJVgMkqZeDLL+Nvaxc5a5m5UH7EopwGbTSW9uhcNdW2yuuLyDCsAOGy3IFlsJWLj9sPx6c3rpunTkTzilFPrWzFpXXQZ2cPB9C27YsTT2dxFsGzJ3s7KADXK+qRQebIiKL9yqkYVGTXl21xw/afNG8iquuI0WRNdZfD047D6YK8605kfAFncpjbt3UcF+EU7ahKN0LR2j+8qoR1487SPYRsHeLj7Y4IIv3Npki0DAYs9/RKG+sRUceh+CzfcVjwObn7apg3sinGIKi0BgWmlk8gob6nJDyFtgn2aruly2S2lcAG7wmstURLDx4Ps9CfYS2fy6WmiwISoO/Wy+CERM/4xw2uaMZhtifgXF7UrKFoLUPXYo3ziFGwSru9j5XcLqLnDHxX3F2dZIy05TTZipa16GKaUMagR7b4ENqn9VbLDFKaWQXr4VUiR4JmxmGAd23EwzdtJmzY2ADVsjjW74bKMF0RUfDsEWXXG2yUIlXItdomWbCPYeBbv6oDxg8+AZbI0013Ciu5RKk1FUgINgrrjsNjM3vJ4e7Kgr3ttmhu8h2Ah2FmCDtr5eLTzY4kYLDOwbLbBnhQkqfHMFvqGhKLDK7OB7KtEtP7PpMcmueBqwh0Kwu90a6ZdXMwscIdj7Hez6l5XSgM0sNguiuRGwVUf6yDuowPj1lOMFyzY3zYA9HMKNYCPYhQMbtEn72kUHWzeOLbvebB22cn9xLxOwe9nMEMFGsDMGe7XwYHOLLY5jT4UTVESA4dB7EGxmyGeeBRsuFBPs4wvZrQWP0+FZB8He62BDEK0MYIsTVHjfWrbM5wSw+VzxOLAn6q5VsE8sItgIdkZgg+pfrpYKbHFKKaR/Jjz0/pyXDLYYPLMN9juXEGwEG8FuO5SPB89YVNyHKaZeItjRQ+8tW+zL6TdKNAu2h2DvB7ADuNdKB/YMny/egIkqbvnAvuJaAfsIgr1/wK59US0d2HPh+djlBduWxfYR7P0CNgTRSgc2c8fLC/Z7S3b62a/PNYoD9jCCnSnYoNoXawh2zmDnbbWPzPjFAhstdh5gVxHsnMEG9U/lZ7UR7H0INoP74RqCnTPYJy7lY7X7aANylEJdKLAHEWwEe4+C/d4V6GtnP8UUgmZFAzujZ0WwZS3dXkKwLYD97mWfvHkxO5f86FzgghcJ7JdGcGuk3MAGbTysItg5g33iSoO8TeF+e9GsWw57mx2hUPfPNxDs/Q42DH0h2PmD/Q4VWO53Fn1yvMd55BCQ65/zmKU+SqEuItg/Q7DzBRu0QfvaCLYdsN+9TP+meota77cuetRF98mxhJVg/fMU5FmqeY/KJz8/32ACoIsK9kunMwsaIth6sKsItmWwj1+iWgz0FtWbF1t648MGOQa6EGgAtNAgvwCFUBcd7IyGuhDsOEEQbf3zdQQbwc4M7IygRrCThGAj2NkdGJDp8B6CHafK3QqCjWBnAvbLo5lOykGwk7T22TqCjWCbBzu7/jWCnUYw9IVgI9gmwc7YDUew0wqsNoKNYBsDO7vxawS7M7DXEGwE2xjYGbvhCHZagTuOYCPYJsDOOGiGYHcMN1htBBvB7hHslxDsgoENVhvBRrB7APvlMT+r9dcIdk9w319HsBHsHsDObRsoBLsjsO8h2Ah2d2AfyM9aI9gdg327imAj2F2B/Uo+fWsEu1uthu44go1gpwX7lbHcTxZFsDsG+x6CjWB3BnZGe4cj2MbhplYbwUaw04B9IL+AGYLdO9hrCDaCnQj2gfHcXXAEuxfBJgwINoIdB/aBcS/PKDiCbUor9zYQbARbCTZY6gPj1qBGsHvR8p1qKcEeqbYq3HjdQbANg31wwjrUCHavWrm7XiqwJ7fcSPoRbLNgFwRqBLt3sNdKBfaZrWilA+uNYJsB+6B99xvBNiUIolXu1koDtti/5oJ+NoLdG9h9E7lOF0Ww89DK3Y1SgH1WcsO5wB1HsLsH+8CElXFqBDtrVUoC9pm63qKM11wEu0Ow+yYL5Xoj2Flo+U6t0GCf3YqvgOMbDoKdEuxDFOiDk4W00gi2aV3/dKOwYE85DhlcSrYsoyHUCLYa7ENnfWqlrU46QbDzzkgIooHVLhrYgRueviKOgeVGsCNg9531ygQ0gm1aYLWLBHanUItwI9jgdvvUUlub641gFwXspdtVCnStEGBPu05XUHPB+PYIhXo/gf3atM/UR2F+capU1jlbsO//dKEQYDe+W7GWoWC1bYJ9zuvOSmvhZoDvTbAPz/iBpqmrXX6QswPb2Z6iUH9oFewb31WI82c7Fptr6fYGufb7Wm5gzzQc6npTC+1nUzkHKdzDVY/KLSXYR+c88vqsT68U4lmPytmLIGcHNtenfztPHvy4wHSHabGlHwLdlvX9Ivm4qaVAT1q6JesRaJk0BN2gQDvbS7YztKmLv6kwyJdu15gWP1ZrAXQrRo0atcggR7gGrrYp65xW/VNBhH244pCh5agGRS2pdULWYkvHFToGWtCrn+t8eJ1qyXb5W5b1BKBQKPOyngAUCmVe1hOAQqHMy3oCUCiUeVlPAAqFMi/rCUChUOZlPQEoFMq8rCcAhUKZl/UEoFAo87KeABQKZV7WE4BCoczLegJQKJR5WU8ACoUyL+sJQKFQ5mU9ASgUyrysJwCFQpmX9QSgUCjzsp4AFAplXtYTgEKhzMt6AlAolHlZTwAKhTIv6wlAoVDmZT0BKBTKvKwnAIVCmVc+P9T/6BkZePqcHKNi1yfPbD84qqDq337G6gcTrStQd2ynqQxpkyQk+lGQ2IgMADiwE9zrjb/8X0QAeAEywF4lKVClYBVWLvs4ZdgwH3u626wjDJ7t4uRTkdMmSSrcnRaA8Hf/494SDhVABpm/VqSKbaOCFKnFH9hpb3jjlGWjDPWwBc+u9bwpS9okRV8QLWuvULP7hRUGrpHX97gr3ux67LQDAPlaNK9lIGxoRIkNPH9tILRYmVpswRgc2ylWPSly2iRJCecgGqhwULlLkgnG1QRAATZ7n8Gyaz2drJxCT010K1WeVvM9mm4Tjb4+71qNiu28KVPaJEVf4C31gFTpoNDlwkwqXNG9S9MXgfslfQ4aC9l9VbmzUDHFe+nS2mkFVeWDSjwfe2kgVc+qSo9sPdPkY9szSb8T57mp0sTS2slvxnxe1Siq0piqbnRQvmnKNqnB7jY/0v4++0y6+0YzQdcfFlupNldNbgQeR78jS/7sgBCQ4DDIFl4MWsDnA1d3V5m25n2ePGtL60BYIHD/6DPoCwrSyPvEkXSGLqpYmY7F9FWbbu7O8+Z3VQXXnr/tn5XzWFkuCZUvTQWOs0xBWnfb0jqg+d0gOKso67A8W2XdahR5GUYCVlLlH5ADWo+kWFFMmtj3FcFdVscUAMU12Lr8SFO3dHWF50v0GXfbn0Hi44Xom1EoVK2UruKKIDJopIxtVebdSIaqKr0qDWLQYkAFWXhf+G3xc6oM0wWKVBZhQFFIbekUKs2xHUX/NFRQiPENYqRSh5Ve1/jw9+TPRSpol3A306GDVE6rlKeyFzEg5ZecZg6r2H1TlZ9QcZV1Q9UAxzXcssEQG0e5exLXtey07DqtW7zB15XJMYHRMM3qh4y8LhdaGOYXrYYq4XGVKxKEkAqK/55YgGLhNR/g8bNm68wzWoaWp0vVEAR9SyEdcmWMgTDSgMiBwZhWPfJ7O9GGS1ehIm7xdnuDKz9TUrkkKen7fFhUTqvcUKugVuWV7rPNRiDsVuniP211Q7DQcV2KCNSi2/9YXba6rmWaspPTHM2rdHVLx6fo5QnGKbmVjmv5tNZEALetj7Ydbd1kl0csDHVDoB8m0rWSEUjFzHqiBjvSOitcn3h4n3f8PZX1SkpjnPXvBexIpVNEv0XAdBaNd+Wi+ageIYhWXmm4NQLJrjrvdqS68fiZ8r3I60/i09Uqp93235f4GBDS1RarUJRdt3VLF7jj6ZKCnKqKrG695AfStWxJFT/qlun7MRGwxX5yTGVNBc4j0eo9V74uViJlX0vhVchQqdKp9EaSCjqxckjlogCsE0XySm50n+itmdKKa2DU/vZOjIXVDZ3G1A1VXYrcS1e+CiOn8hiSvBtV2XVbt5T3Cl9TuOeKVm9HXfHjXNW2lkpTCLoMSno/zTBctB+ua2h2pWdQV7xYKxMDTpynooM+ko+K76jej3VvNVYqNdhxZSf3C+WYghB06rSBSZr8oSuTuLqhepZEL2K7/f1I3dJ4GMrRGUXZdVu3IulqNhLPdeWsSEAK9yf5PX1mxxWeHCRLcz9lhRYyOZIhbdF2hculcX3l51ZalTgXXQN9klVTNnRxv5Mir9LBpQeFw8IDolDZ2xv3+HyMy5+2coopk7j0qt5LKl+VR6mrW50aqaQJLpFGUln3uDV/nlTO8QlMV4GigEbcE0XiYiuO4sGS7peUVi3wjzStcEzBq4aZlAUZY+20FqeDIGNcVyDufolwaTy3bu6tMxadlp98L23+PIlpDEQvdCedlU3TkKYvOwXYct169Ez7nO2cxrvzL7TDthv5IVXFb3svDBo0x9wSJqboMikyZCD23xIeNqmyp4lMsvQ/jvZb5O+o5tLzdOt+SwyoDDSDHK3otfh6UrdFzEsx7+XviGlPM7FDC6Oq0idYKG5J5PxVNRKsvFV92Lh8kPI8DoQBqWFRlq/cGIj9dWX/ejeSp7o0y1F8Xnad1q328pFGQvSGLtpKRx9GbelUCWSSgwMJiRMfWB4HVAayYqxEbP86AXj+3JECENIC70WCQ4KnwsdNVcAN7ETnike+t6MGoDmeux2dgCPPE5A/ryoX/vudzOtOdC01/Wk2kST8PVUfW0yHaJnE+qaq8PLvDjTzfDeEN6ZRFOrZgJDf0VGZVp2IG96M1PUUZaebj5FUt+LyoK3Oxk1JbkuE+PBxQQlpRlonga7IOOjT9gF5sbLKn9VPQ9QHoLTAy5mpcddEcVhkq6isAE+fK6158znFWIaUB9GKpJ5ppQy+PJbLJabw5TyUnlk5dVSqL9H8U/Szn2o++/R5W1Q9zgrJQbs04/Vx1k01YSZNw6JqRGLLLqEPL+eJqi6qvhvHAhNvLUQ1W+Dwf93sJdny8IIXIdD9cHNQfacl1efb0qfIKHkdue491RzzAf4Myv5kywoNCAsfuHUSX4ukN817ikIZkPJDVXjpykX/fW15dLAWP23ZifnYymd1WejKLy5fxbqhiv5zV19bvk/kdO1qnzmu7ALvKrns4uoWS0sKaJveZ3KMI11rnlZx7jsKhdJLF4xuvr+jHbNWyXTiOpuQgELtN8V1G3TWWoxBpTSYhhKrWIVjOwNRqKKpOVOMdQGeRWI2ui6FHLhN+VuGEvw0OqXQdgaiUEWUbhWeCur2wPZuJ79l/2FRqP0kMQCqs9KiVJtpJOn/AZ8CfP28ssyGAAAAAElFTkSuQmCC" alt="NC Information Technology logo with a pine tree silhouette inside the N." width="246" height="191"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>Chairs of the House of Representatives Appropriations
+Senate Base Budget/Appropriations Committees 
+Joint Legislative Oversight Committee on Information Technology
+Fiscal Research Division </p>
+
+<p>Keith Werner
+State Chief Information Officer
+Department of Information Technology</p>
+
+<p>May 2016</p>
+
+<p>This page left blank intentionally</p>
+
+</section>
+<section aria-labelledby="section-1">
+<h2 id="section-1">Legislative Reporting Requirement</h2>
+<p>This report is submitted pursuant to the S.L. 2015-241 §7A.(f) (N.C.G.S. 143B-1385(f)) which directs the State CIO to report annually on the activities of the GDAC including:</p>
+
+<ol><li>
+The funding, expenditures, cost savings, cost avoidance, efficiency gains, process improvements, and major accomplishments. </li>
+<li>
+The contribution of funds or resources by those private entities which are participating in public-private partnerships within the GDAC, including, but not limited to, knowledge transfer and education activities, software licensing, hardware and technical infrastructure resources, personnel resources, and such other resources as agreed upon by the State and the private entity.</li>
+</ol>
+<p>The full text of the GDAC legislation is available in Appendix A.</p>
+
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">Introduction</h2>
+<p>The Government Data Analytics Center’s (GDAC) mission is to promote collaboration and access to information for improved decision-making. Since 2007, the GDAC has implemented solutions for Stakeholders, which integrates State, Federal, and Public data, and transforms it into information to support safety, compliance and service delivery. </p>
+
+<p>On July 1, 2014, in accordance with Session Law 2013-360 §7.10 (F), the GDAC program and resources transitioned from the Office of the State Controller (OSC) to the State Chief Information Officer (CIO) within the Office of Information Technology Services (OITS) currently known as the Department of Information Technology (DIT). Under the guidance of the State CIO, the GDAC program broadened its approach to data sharing by aligning with the State’s Information Technology Plan, directing the GDAC program toward an enterprise delivery approach. </p>
+
+<p>This report details the GDAC activities during the 2015 calendar year. </p>
+
+</section>
+<section aria-labelledby="section-3">
+<h2 id="section-3">Accomplishments</h2>
+<p>The GDAC program develops analytics to support business needs associated with criminal justice, child safety, fraud, compliance, healthcare and longitudinal and performance analysis. Three technical environments support the GDAC, Criminal Justice Automated Data System (CJLEADS), Fraud and Compliance (NC FACTS) and the Early Childhood Integrated Data System (NC ECIDS). </p>
+
+<p>GDAC collaborates with most agencies and departments to support data sharing and service development. To protect and secure the data, GDAC leverages a data governance model which ensures proper access and use of data. As the need for information grows, the GDAC portfolio continues to expand. Appendix B provides a summary of calendar year 2016 activities.</p>
+
+<p>Session Law 2015-241 §12A.17. (b) directed NCDHHS to coordinate with the GDAC to develop a pilot program that applies analytics to Medicaid data to maximize health care savings and efficiencies and optimize positive impacts on health outcomes. Seven hundred fifty thousand dollars ($750,000) in nonrecurring funds for the 2015-2016 fiscal year and two hundred fifty thousand dollars ($250,000) in recurring funds for the 2015-2016 fiscal year and the 2016-2017 fiscal year were appropriated to support the development and implementation of a pilot program for Medicaid claims analytics and population health management. Further, Session Law 2015-241 §7A.2.(c) directs NCDHHS to share claims and encounter data with GDAC to support outcome-based analysis of services and programs and population health analytics associated with Medicaid and LME/MCO patient population.</p>
+
+<h2 id="planned-activities">Planned Activities</h2>
+<p>NCDHHS, GDAC and SAS health care subject matter experts are collaborating to develop the Medicaid Analytics Pilot. To achieve this objective, the pilot will use existing SAS-provided health analytics models applied to NC Medicaid data to demonstrate the value of usability of the application of visual analytics and drill-down capabilities to transform data into information to provide point-in-time and trending information regarding the Medicaid program.</p>
+
+<p>Pilot areas of focus include:</p>
+
+<ol><li>
+Site of Service Analysis – Assist the State in understanding the amount and type of care being provided for qualified Medicaid beneficiaries by facility type (site) – hospital inpatient, doctor’s office, emergency room, clinic, etc. – and the cost associated with that particular care. Additional analysis understanding the populations within the site include types of patients, where they are from, where are they being treated, and services received and projected trends.</li>
+<li>
+Recipients Category Analysis – Assist the State in understanding how much of the population is cared for under that category or program, and how each population group attributes to the total cost. Further analysis to understand population cost, utilization, demographics, and projected trends.</li>
+<li>
+Prescription – Assist the State in understanding the therapeutic drug codes (e.g. GC3, GCN, NDC) being prescribed within population categories, their utilization, and trends.</li>
+<li>
+Super utilizers - Assist the State in understanding associated costs within population types. An analysis of the percentage costs associated with the top 1%, 2-5%, and 6-10%. A correlation with the types of conditions, demographics, services, and identification of what triggers them as a super utilizer.</li>
+<li>
+Cost Overview – Assist the State with a visual representation of the budget to actual trend analysis.</li>
+</ol>
+<h3 id="north-carolina-health-information-exchange">North Carolina Health Information Exchange</h3>
+<p>North Carolina’s statewide health information exchange is a secure, standardized electronic network in which providers can share patient clinical health information. The use of this system promotes the access, exchange, and analysis of health information.</p>
+
+<p>Session Law 2015-241 §12A.5.(a) establishes a state-managed Health Information Exchange Authority (NC HIEA) to oversee and administer the NC Health Information Exchange Network. The NC HIEA is housed within the NC Department of Information Technology’s (DIT) Government Data Analytics Center (GDAC). The legislation establishes a:</p>
+
+<ul><li>
+State-controlled Health Information Exchange Authority (NCHIEA) to oversee and administer the successor HIE Network</li>
+<li>
+Health Information Exchange Advisory Board to provide consultation to the Authority on matters pertaining to administration and operation of the HIE Network and on statewide health information exchange.</li>
+<li>
+Successor HIE network to which all Medicaid providers shall be connected by February 1, 2018 and connects all other entities that receive State funds for the provision of health services, including management entities/managed care organizations by June 1, 2018.</li>
+<li>
+Target that the HIE Network gradually become and remain one hundred percent (100%) receipt-supported by establishing reasonable participation fees and by drawing down available matching funds whenever possible.</li>
+</ul>
+<h4 id="planned-activities-1">Planned Activities</h4>
+<p>The NC HIEA has transitioned the prior NC HIE operations and management from the Community Care of North Carolina (CCNC) / North Carolina Community Care Networks (N3CN) to the State-managed NC HIEA.</p>
+
+<p>Currently, the NC HIEA is diligently working to onboard legacy NC HIE participants, while also assisting health care providers who are connecting to the network for the first time. The NC HIEA is eager to listen to provider and stakeholder input, and maintain ongoing conversations with all participants.</p>
+
+<h2 id="longitudinal-and-performance-systems">Longitudinal and Performance Systems</h2>
+<p>The collection of data over a period of time provides the capability of measuring the change and impacts to programs and services and the ability to measure effectiveness. GDAC supports the following longitudinal programs.</p>
+
+<h3 id="common-follow-up-system">Common Follow-up System</h3>
+<p>The North Carolina General Statute 96-30 – 96-35 directs the Department of Commerce’s Labor and Economic Analysis Division (LEAD) with the operation of the Common Follow-up System (CFS). This system evaluates the performance and effectiveness of the State’s job training, education and placement programs by measuring participant’s presence in the workforce.</p>
+
+<p>Session Law 2014-100 directs the Department of Commerce to develop a plan for the transfer of the information and capabilities of the CFS to the Government Data Analytics Center (GDAC) within the Office of Information Technology Services, now known as DIT. To this end, LEAD and GDAC have joined forces and developed a phased approach to migrate and modernize the Common Follow-up System.</p>
+
+<p>The objective of the migration and modernization of CFS is to improve access to the State’s longitudinal data providing flexibility and scalability, and advance data analysis capabilities associated with workforce and educational program operation and performance.</p>
+
+<p>CFS modernization is following a phased implementation, which includes: migration, improved data collection, and advanced analytics. The first phase included the migration of the existing environment into the GDAC-hosted reporting environment. Subsequent phases include the expansion of the data collection to improve reporting and analytic capabilities.</p>
+
+<h4 id="completed-activities">Completed Activities</h4>
+<p>In 2015, the CFS system was successfully migrated into the GDAC-hosted environment. This new environment provides an infrastructure which is scalable to support the expansion of data and analytics.</p>
+
+<h4 id="planned-activities-2">Planned Activities</h4>
+<p>The second phase of the CFS modernization includes collaboration with the data stakeholders to explore the expansion of data submissions to position the CFS with more robust performance reporting and analytics capabilities. LEAD has championed individual meetings and design sessions to understand data availability and needs with the Department of Public Instruction, Department Health and Human Services, Department of Public Safety, Department of Commerce, Community College System, and the University of North Carolina General Administration.</p>
+
+<p>In preparation for the inclusion of additional data, GDAC and LEAD are developing data models which will provide a platform for efficient and effective data analysis and reporting.</p>
+
+<h3 id="p20w-system">P20W System</h3>
+<p>In June 2012, the U.S. Department of Education awarded a $3.6 million grant (Grant) to the North Carolina Department of Public Instruction to undertake the NC P-20W Statewide Longitudinal Data System project (SLDS Project), hereafter referred to as the “P20-W System”. The objective of the P-20W System is to enable five statewide entities to partner and share data. The partnership includes the North Carolina Department of Public Instruction (NCDPI), the University of North Carolina (UNC), the North Carolina Community College System (NCCCS), North Carolina Independent Colleges and Universities, Inc. (NCICU), and the North Carolina Department of Employment Security (NCDES) (currently known as the North Carolina Department of Commerce Division of Employment Security).</p>
+
+<p>In accordance with the grant, the P20-W System may disclose and share any aggregated, anonymized information derived from student education records without limitation, to the extent that such data do not include Personally Identifiable Information (PII), as defined in 20 U.S.C. §1232(g) and 34 C.F.R. §99.3, or to the extent that any PII has been removed. The P-20W System data contributors have agreed to utilize a common ID known as “eScholar ID” to link data across the partner entities. Where appropriate, and to ensure the output derived, the eScholar ID will be transformed to a single-use random generated ID and/or small cell suppression and aggregation rules will be applied to reduce access to PII or information through secondary disclosure.</p>
+
+<h4 id="completed-activities-1">Completed Activities</h4>
+<p>The P20W infrastructure has been migrated into the GDAC environment to provide stability and scalability.</p>
+
+<h4 id="planned-activities-3">Planned Activities</h4>
+<p>The following development activities are under way:</p>
+
+<ul><li>
+The development of analytic models to support the integration of education data with wage records.</li>
+<li>
+The development of an automated process to redact and/or aggregate data where appropriate.</li>
+</ul>
+<h3 id="north-carolina-early-childhood-data-system-nc-ecids">North Carolina Early Childhood Data System (NC ECIDS)</h3>
+<p>The NC Early Childhood Integrated Data System (NC ECIDS) Project is being funded by a Race to the Top – Early Learning Challenge Grant co-sponsored by the Federal Departments of Health and Human Services and Education. The lead State agency for this project is the Division of Child Development and Early Education (DCDEE) within DHHS. The goal of NC ECIDS is to develop and sustain a high quality early childhood data system in North Carolina that integrates data from key participating agencies to inform policies and practices that ultimately support better outcomes for children and families. The GDAC technical team is responsible for performing application development, maintenance, and operational support services for the NC ECIDS Project.</p>
+
+<h4 id="completed-activities-2">Completed Activities</h4>
+<ul><li>
+Completed the installation and configuration of all software and hardware required for supporting the NC ECIDS development, test, and production environments</li>
+<li>
+Completed the development of user stories and functional/non-functional requirements for the NC ECIDS application</li>
+<li>
+Completed the data integration from the NC ECIDS application to the NC DHHS Data Warehouse (CSDW) and the NC DPI Data Warehouse (CEDARS)</li>
+<li>
+Completed the data integration from the NC ECIDS application to the DPI eScholar Shared Service environment</li>
+<li>
+Completed the initial development of the NC ECIDS application portal and user interface supporting the “Standard Reports” and other base release functionality</li>
+<li>
+Initiated the quality assurance and overall systems integration testing phase for the NC ECIDS application</li>
+</ul>
+<h4 id="planned-activities-4">Planned Activities</h4>
+<ul><li>
+Complete the quality assurance and production implementation activities for NC ECIDS Release 1.0 supporting the portal and the standard/query report features/functions</li>
+<li>
+Complete the development, test, and production implementation activities for NC ECIDS Release 2.0 supporting the data request process features/functions</li>
+<li>
+Complete the development, test, and production implementation activities for integrating the NC Vital Records and NC Head Start (via ChildPlus) data sources into the NC ECIDS application on or before December 31, 2016</li>
+<li>
+Prepare the GDAC and NC ECIDS business organization for the transition from a grant funded project to an O&amp;M/appropriated funding based support operation</li>
+</ul>
+<h3 id="governmental-budgetary-transparencyexpenditures-online---osbm-transparency">Governmental Budgetary Transparency/Expenditures Online - OSBM Transparency</h3>
+<p>Session Law 2015-241 §7.17 directs the State Controller, the Office of State Budget and Management (OSBM), and the State Chief Information Officer (State CIO) to establish a State budget transparency internet web site to provide information on budget expenditures for each State agency for each fiscal year beginning 2015-2016. Additionally, it is to provide access to Local Government Commission (LGC) data in a standardized format. The website is to be:</p>
+
+<ul><li>
+User-friendly with easy-to-use search features</li>
+<li>
+Provide data in formats that can be readily downloaded and analyzed by the public.</li>
+<li>
+Include budgeted amounts and actual expenditures for each State agency and local entity budget code.</li>
+<li>
+Include information on receipts and expenditures from and to all sources, including vendor payments, updated on a monthly basis.</li>
+</ul>
+<h4 id="completedplanned-activities">Completed/Planned Activities</h4>
+<p>The NCOpenBudget site went live April 1, 2016, utilizing GDAC resources and tools to provide a web-based solution that provides users a visual representation of historical budget and expenditure information with data download capabilities. The Governor’s Budget was made available on the site on April 27, 2016. The project is being delivered in phases as data is transformed, verified and validated. OSBM is working with OSC and other agencies to identify and provide access to additional data for use on the website. Planned releases over the next few months include information on: vendor payments, grants and contracts, enhancements to local government and public schools data, and popular searches.</p>
+
+<h2 id="enterprise-solution-development">Enterprise Solution Development</h2>
+<p>As GDAC has expanded its support across all agencies and departments, solutions are being developed from an enterprise data governance perspective. GDAC is leveraging and managing the State’s data assets to support the enterprise. The following activities are under development.</p>
+
+<h3 id="deceased-matching">Deceased Matching</h3>
+<p>Three separate requests to match deceased records with agency specific records led GDAC to develop and implement an enterprise deceased master file to support the matching of deceased records across the enterprise. This enterprise solution combined deceased records from a variety of sources to build a master file of deceased records (DMF). An analytic tool was developed to support the matching of the deceased master file allowing agencies to crosswalk their individuals receiving services and/or payments with the deceased master. Agencies that utilize this tool are provided with a set of alerts upon which investigations and/or confirmations can be undertaken.</p>
+
+<h4 id="completed-activities-3">Completed Activities</h4>
+<p>GDAC developed individual reports supporting the Integration of the DMF with:</p>
+
+<ul><li>
+Department of Revenue – compliance alerting</li>
+<li>
+Department of Treasurer, Retirement Division – compliance alerting</li>
+<li>
+Department of Commerce, Division of Unemployment – Claimant fraud and detection alerting</li>
+</ul>
+<h4 id="planned-activities-5">Planned Activities</h4>
+<p>GDAC is developing a web-service and bulk load capability for agencies in the support verification of payment and services.</p>
+
+<h3 id="master-business-records">Master Business Records</h3>
+<p>GDAC is maturing its approach to analytic development. The explosion of business analysis to ensure compliance has recognized that business data collected by State agencies can take different forms. Without standards across agencies, it becomes difficult to match businesses. To facilitate data sharing, and to provide scalability with fraud and compliance detection, the GDAC is undertaking the mastering of data (the best name, address, etc.) for businesses.</p>
+
+<h4 id="planned-activities-6">Planned Activities</h4>
+<p>The GDAC Master Data Management (MDM) implementation for business will provided consistent, high quality Business Entity, Person, and Address data. This will include:</p>
+
+<ul><li>
+A single identifier (Master Record ID) for a business entity, person, and address</li>
+<li>
+Matching logic from data sources to build enterprise business data table(s)</li>
+<li>
+Development of MDM table(s) that are scalable for future data sources</li>
+</ul>
+<h2 id="challenges">Challenges</h2>
+<h3 id="return-on-investment">Return on Investment</h3>
+<p>Quantifying the return on investment remains a challenge. GDAC bases its successes by the continued expansion of analytic efforts across North Carolina government agencies, as well as the continued request to expand upon the previously delivered solutions. History has demonstrated that approximately a year after an analytics project is installed into production, the business area becomes comfortable with the incorporation of the tool within their work flow, and at that point, expansion and tuning of the analytics will take place to improve their business outcomes. This has been realized in both the CJLEADS and NC FACTS compliance analytics. After six (6) years in production, CJLEADS continues to expand and bring new features to support the criminal justice community, and after two (2) years the NC FACTS alerts generated for Division of Employment Security are now being expanded to be fully integrated within the Department of Commerce Division of Employment Security replacement of Unemployment Claims system (i.e., SCUBI).</p>
+
+<h3 id="data-quality">Data Quality</h3>
+<p>Access to quality data continues to be a challenge. Understanding the data that spans across multiple years for a longitudinal view, and/or data that is collected by aging application systems, requires in-depth analysis. Competing resources for subject matter experts and/or the loss of those experts can expand the data analysis timeframes and result in the delay of timely delivery of solutions.</p>
+
+<h3 id="portfolio-management">Portfolio Management</h3>
+<p>The GDAC project portfolio’s rapid growth presents challenges in resourcing. Over the last year, GDAC has had, on average, 15 separate initiatives at any one point of time, in various stages of development, size and complexity.</p>
+
+<h2 id="gdac-public-private-partnership">GDAC Public Private Partnership</h2>
+<p>The State of North Carolina and the SAS Institute have entered into a public-private partnership for the hosting, licensing, application development and services to support the GDAC program and infrastructure. For each contract period, SAS has committed to contribute a minimum of Five Million Dollars ($5,000,000). During the 2015 calendar year, the State invested Eight Million Dollars ($8,000,000) with an estimated SAS investment of approximately 15.6 million dollars.</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="NC GDAC Project Contribution by SAS">
+<table>
+<caption>NC GDAC Project Contribution by SAS</caption><thead><tr><th scope="col"><strong>NC GDAC Project Contribution by SAS</strong></th><th scope="col"><strong>Cumulative Contract Total
+(12/23/2014 – 12/22/2015)</strong></th></tr>
+</thead><tbody><tr><td>Knowledge transfer and education activities</td><td>$0.00</td></tr>
+<tr><td>Software licensing1</td><td>$13,848,000.00</td></tr>
+<tr><td>Hosting operations2</td><td>$1,519,816.00</td></tr>
+<tr><td>Personnel resources3</td><td>$8,292,679.00</td></tr>
+<tr><td>Other Agreed /Resources</td><td>$0.00</td></tr>
+<tr><td><strong>Total Value for Period</strong></td><td>$23,660,495.00</td></tr>
+<tr><td><strong>State Payments</strong></td><td>$8,000,000.00</td></tr>
+<tr><td><strong>SAS Investment</strong></td><td>$15,660,495.00</td></tr>
+</tbody></table>
+</div>
+
+<p><sup>1</sup> Non-discounted software licensing fees are $1,154,000 per month for unlimited enterprise usage of SAS Fraud Framework modules and unlimited enterprise usage for all other GDAC analytic initiatives. The twelve-month market value of these licenses is $13,848,000.</p>
+
+<p><sup>2</sup> Includes hardware and IT personnel required to support the NC GDAC environments and solutions.</p>
+
+<p><sup>3</sup> Base upon the most current 2011 non-discounted SAS Rate resource card. (Ranges between $200-500 per hour).</p>
+
+<h2 id="appendix-a---legislation">Appendix A - Legislation</h2>
+<p>N.C.G.S. 143B-1385(f):</p>
+
+<ul><li>
+(f) Reporting. - The State CIO shall:<ol><li>
+(1) On or before March 1 of each year, submit and present a report on the activities described in this section to the Chairs of the House of Representatives Appropriations and Senate Base Budget/Appropriations Committees, to the Joint Legislative Oversight Committee on Information Technology, and to the Fiscal Research Division of the General Assembly. The report shall include the following:<ul><li>
+a. A description of project funding and expenditures, cost savings, cost avoidance, efficiency gains, process improvements, and major accomplishments. Cost savings and cost avoidance shall include immediate monetary impacts as well as ongoing projections.</li>
+<li>
+b. A description of the contribution of funds or resources by those private entities which are participating in public-private partnerships under this section, including, but not limited to, knowledge transfer and education activities, software licensing, hardware and technical infrastructure resources, personnel resources, and such other resources as agreed upon by the State and the private entity.</li>
+</ul></li>
+<li>
+(2) Report the following information upon its occurrence or as requested:<ul><li>
+a. Any failure of a State agency to provide information requested pursuant to this section. The failure shall be reported to the Joint Legislative Oversight Committee on Information Technology and to the Chairs of the House of Representatives Appropriations and Senate Base Budget/Appropriations Committees.</li>
+<li>
+b. Any additional information to the Joint Legislative Commission on Governmental Operations and the Joint Legislative Oversight Committee on Information Technology that is requested by those entities. (2013-360, s. 7.10(d); 2013-363, s. 2.4(a); 2014-100, s. 7.6(a); 2014-115, s. 56.8(a); 2015- 241, s. 7A.2(c).)</li>
+</ul></li>
+</ol></li>
+</ul>
+<p>The full text of N.C.G.S. 143B-1385 can be found here:</p>
+
+<p>http://www.ncleg.net/EnactedLegislation/Statutes/PDF/BySection/Chapter_143B/GS_143B-1385.pdf</p>
+
+<h2 id="appendix-b---gdac-portfolio">Appendix B - GDAC Portfolio</h2>
+<figure>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAzcAAAQqCAYAAAB6PoERAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAYQUlEQVR4nO3dMYoUCRSA4T6W2UYjE6nJJB5gMwPxAGaCiIjJwh7ApA8gDAaCiNHCgheqnVdO6+yq487u0C3/fMEHTVW/pjr8eVXdm81mswAAAAQc/AIAAACuw8EvAAAA4Dp878QCAADwk7lS3HwaONlul80vjwEAAH4Ka6NcaJYfxM2yDoxbD7fLr7//sRw9Ol3NawAAgH262CPTKLte+U7g/P3AvPHo2ely98Xb5fbzD6v7v30EAAA4iF2XTKNMq3zZ4FwSN7uNzQwdv3y3uvfkzXL/1eG/EAAAcAOdtcg0ya5PplV2G5xL4mZZ72Obdc9U0QzOB915+n6to0OvowAAgJtnWmSaZNpkGmVaZY6vz+F8fWva13EzgydnQ/Mhxw9efxkGAADYo2mRaZJpk2mUaZWrxc35+me3sfHT0AAAwGFsPm9wdo/LXD1uLh8CAADYgyt1yn8aAgAA2ANxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACeIGAABIEDcAAECCuAEAABLEDQAAkCBuAACABHEDAAAkiBsAACBB3AAAAAniBgAASBA3AABAgrgBAAASxA0AAJAgbgAAgARxAwAAJIgbAAAgQdwAAAAJ4gYAAEgQNwAAQIK4AQAAEsQNAACQIG4AAIAEcQMAACSIGwAAIEHcAAAACdcRN68+LkfPTj8N7s4DAADs1WZtkmmTaZSrx83Z0L0nb5Y7T98vxw9efxkGAADYo2mRaZJpk2mU288/LEePTj+d/zdxMwPHL9+tkTMfstvgAAAA7NO0yDTJtMk0yrTKHP9B3GyWk+12ufVwu9x98ec6OKaOdusfAACAvTq/q2za5GQWMGfHbj3fru1yadzMyXnTyeO3a+BMFY2DfyEAAODGutgl0yrfCZt/xM1yHjfnG5x1DfTodHXodRQAAHDzXOyR3cZmjZvlR3FzHji7Dc6hHx4CAADY+byx+XbYfCNuLv7AAAAAwE/l0v/FOfSf8gAAAFyLg18AAADA//YXnOdI8dxbD8cAAAAASUVORK5CYII=" alt="Gantt chart titled GDAC Activities - Calendar Year 2015-2016"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+><figcaption>GDAC Activities - Calendar Year 2015-2016 Gantt Chart</figcaption></figure>
+<section aria-labelledby="section-4">
+<h3 id="section-4">Criminal Justice and Public Safety</h3>
+<p>GDAC supports the criminal justice community by integrating and transforming data to improve public safety. A summary of the criminal justice application development follows. </p>
+
+<section aria-labelledby="section-5">
+<h4 id="section-5">CJLEADS</h4>
+<p>The Criminal Justice Law Enforcement Automated Data Services (CJLEADS) is a foundational cornerstone of the GDAC. This application supports criminal justice professionals by providing access of criminal records on any device 24 x 7 x 365. With a user base exceeding thirty thousand (30,000), the CJLEADS application provides:</p>
+
+<ul><li>
+A comprehensive view of an offender’s records and photographic images </li>
+<li>
+Alerting capability notifying a user of an offender’s change in status</li>
+<li>
+Access to real-time warrant information</li>
+<li>
+Access to real-time license and registration information associated with drivers, motor vehicles, hunting, fishing and vessels.</li>
+</ul>
+<section aria-label="Completed Activities (part 1)">
+<h5 id="section-6">Completed Activities</h5>
+<p>The CJLEADS application development activities are driven by user feedback and availability of data. Enhancements implemented in 2015 include:</p>
+
+<ul><li>
+The integration of Domestic Violence Protective Orders</li>
+<li>
+The integration of Administrative Office of the Courts (AOC) infractions</li>
+<li>
+Automated criminal background checks for individuals submitting retailer applications with the North Carolina Education Lottery (NCEL) and Alcohol Beverage Commission (ABC) – assisting the Department of Public Safety, Alcohol Law Enforcement Division in processing applicants</li>
+<li>
+Class 3 &amp; Misdemeanor Offense Report– assists courts personnel in determining and offender’s eligibility for court appointed counsel</li>
+<li>
+Maintenance <ul><li>
+Tuning of existing reporting and screen displays </li>
+<li>
+Enhanced analytics to drive new dashboard alerts (DWI, Habitual Felon)</li>
+<li>
+Multiple offender viewing capability</li>
+</ul></li>
+</ul>
+</section>
+<section aria-label="Planned Activities (part 1)">
+<h5 id="section-7">Planned Activities</h5>
+<ul><li>
+Federal Data Interface. The integration of a federated query within CJLEADS to allow on-demand access to Federal criminal records.</li>
+<li>
+An upgrade of the existing real-time integration with NC Automated Warrant Repository (NCAWARE) for offender’s pre-trial release orders supports law enforcement and magistrates with an expanded offender profile.</li>
+<li>
+A criminal background check solution offering authorized users a means to verify individual records.</li>
+<li>
+Application and technical infrastructure upgrade of CJLEADS to support agile development capabilities and improve functionality.</li>
+</ul>
+</section>
+</section>
+<section aria-labelledby="section-8">
+<h4 id="section-8">Criminal Investigative Case Management</h4>
+<p>Session Law 2015-241 §7A.2(c) directs the State CIO through the GDAC to manage and coordinate the deployment of an intelligence-based investigative case management system. Working with the Department of Public Safety (DPS), the GDAC has initiated the development of system requirements to include: </p>
+
+<ul><li>
+A scalable case management system, which supports multiple sections of DPS. </li>
+<li>
+The ability to incorporate and integrate data from various sources.</li>
+<li>
+The ability to manage investigators, and investigation documentation such as interviews, property and evidence, offenses, charges and court dispositions. </li>
+<li>
+Integrated workflow to assist in guiding the user through the entire case management life cycle. </li>
+</ul>
+<section aria-label="Planned Activities (part 2)">
+<h5 id="section-9">Planned Activities</h5>
+<p>Application design activities are in process. User joint application design (JAD) sessions have commenced to document the business workflow, data integration needs and confirm system configurations. Based on the business requirements identified, planning and development will follow.</p>
+
+</section>
+</section>
+</section>
+<section aria-labelledby="section-10">
+<h3 id="section-10">Child and Family Safety</h3>
+<p>Access to information is paramount to supporting the health and wellbeing of children. The Department of Public Safety, Division of Adult Corrections and Juvenile Justice, and the Department of Health and Human Services Division of Social Services are working with the GDAC to integrate data to improve access to information for social services case workers and juvenile court counselors to assist in developing appropriate care plans. </p>
+
+<section aria-labelledby="section-11">
+<h4 id="section-11">Child Protective Services Pilot</h4>
+<p>Session Law 2014-100 §12C.1.(e) directed the Department of Health and Human Services (DHHS) to coordinate with GDAC to establish and implement a Child Protective Services Pilot Program to enhance coordination of services and information sharing. An appropriation of three hundred thousand dollars ($300,000) assisted in supporting the development and implementation. Session Law 2015-241 §12C.11.(a) (HB97) directed the continued collaboration between the DHHS and DIT to enhance the pilot to include the: </p>
+
+<ul><li>
+Development of a dashboard linking the family to the child. </li>
+<li>
+Integration of additional DHHS and other State department data sources to build a more comprehensive view of the child and family, including: <ul><li>
+Matching the child to the caretaker;</li>
+<li>
+Linking child, family, and address information; and </li>
+<li>
+Integrating Criminal Justice Law Enforcement Automated Data Services (CJLEADS) data to determine if the caretaker or someone living in the house is a sex offender or has a criminal history. </li>
+</ul></li>
+<li>
+Development of a comprehensive profile of a child that includes demographic and caretaker information and indicators or flags of other services, including, but not limited to, prior assessments of the child, eligibility for food and 25 nutrition programs, Medicaid, and subsidized child care. </li>
+</ul>
+<section aria-label="Planned Activities (part 3)">
+<h5 id="section-12">Planned Activities</h5>
+<p>The release of a proof of concept to a limited subset of users during the first quarter of 2016 will provide an opportunity for the incorporation of user feedback and tuning prior to the Pilot release later in 2016. </p>
+
+</section>
+</section>
+<section aria-labelledby="section-13">
+<h4 id="section-13">Juvenile Justice </h4>
+<p>The North Carolina Department of Public Safety, Division of Adult Correction and Juvenile Justice (DACJJ) is committed to the reduction and prevention of juvenile delinquency by effectively intervening, educating and treating youth in order to strengthen families and increase public safety. To support these objectives, DACJJ received an Implementation Grant for the Second Chance Act from the Office of Justice Programs at the U.S. Department of Justice to implement the juvenile re-entry plan developed by the North Carolina Task Force on Juvenile Justice Re-Entry Reform. A portion of this grant will be directed to GDAC for the development of applications to integrate and analyze data available both internal and external to the DACJJ systems. </p>
+
+<section aria-labelledby="section-14">
+<h5 id="section-14">Development Activities</h5>
+<p>Design discussions are under way to support the development of three major components:</p>
+
+<ul><li>
+A service plan cataloging application, which captures and catalogs providers of juvenile and family services.</li>
+<li>
+A service plan document generation system to support on-demand printing of plans for distribution to juveniles and families. </li>
+<li>
+An analytics-based service-matching tool, which evaluates the needs of juveniles and families with peers and prior outcomes, and provides a set of recommended services for use by juvenile court counselors in the development of a service plan. </li>
+</ul>
+</section>
+</section>
+</section>
+<section aria-labelledby="section-15">
+<h3 id="section-15">Fraud and Compliance </h3>
+<p>North Carolina Financial Accountability and Compliance Technology System (NC FACTS) is an alerting and lead generation tool that prioritizes opportunities based on risk and recovery modeling. The Department of Commerce Division of Employment Security (DES), the North Carolina Industrial Commission (NCIC), and the Secretary of State (SOS) Corporations Division have implemented solutions within NC FACTS. Working with GDAC, the Department of Revenue has integrated NC FACTS components to support compliance-related lead generation within their existing State-hosted case management system.</p>
+
+<section aria-labelledby="section-16">
+<h4 id="section-16">The Department of Commerce – Division of Employment Security (DES)</h4>
+<p>Unemployment Insurance (UI) Wage/Tax Analysis and Alerts -- Fictitious business alerting analyzes situations where non-existent employers establish a business with Employment Security and submit false quarterly wage reports, often with stolen identities, for the sole purpose of the fraudulent collection of UI benefits. Undocumented successions (e.g. SUTA dumping) highlights employers whose intention is to move employees to the new business with a lower UI experience ranking in an effort to avoid higher UI taxes. </p>
+
+<p>Unemployment Insurance Claims and Benefit Analysis and Alerts -- NC FACTS Unemployment Claims Analysis identifies benefit claimants with suspect activity for investigation. Information from the DES BARTS Case Management System, DES GUIDE Unemployment Payment System, SSA Death Master File, BEACON Payroll and CJLEADS State Prison and County Jail Incarceration is cross-matched with unemployment benefits to identify any potential eligibility or compensation calculation issues.</p>
+
+<section aria-label="Completed Activities (part 2)">
+<h5 id="section-17">Completed Activities</h5>
+<p>Fraud and compliance alerting is continuously tuned based upon user feedback and the changing schemes of the fraudsters. Enhancements to NC FACTS application this period provided operational efficiencies to reduce manual efforts and redirect resources in support of investigations:</p>
+
+<ul><li>
+Triggering fictitious business alerts based upon pre-payment activities.</li>
+<li>
+Integrating the DES case management system with NCFACTS for a comprehensive set of metrics. </li>
+<li>
+Alignment of NC FACTS alert generation with DES workflow by automating the assignment and dispositioning of alerts.</li>
+</ul>
+</section>
+<section aria-label="Planned Activities (part 4)">
+<h5 id="section-18">Planned Activities</h5>
+<p>DES recognizes the value of the alerting capabilities of NC FACTS. As a result, development efforts are under way to support the integration of the DES claimant-related alerts into the new DES claims payment system, Southeast Consortium Unemployment Benefits Initiative (SCUBI). </p>
+
+</section>
+</section>
+<section aria-labelledby="section-19">
+<h4 id="section-19">North Carolina Industrial Commission (NCIC)</h4>
+<p>The North Carolina Industrial Commission (NCIC) leverages the data and analytics within the GDAC to identify businesses that have failed to maintain Workers Compensation insurance. For employers to be found out of compliance can result in civil penalties and/or criminal charges. During 2014-2015, the Commission collected $992,965 in penalties. This amount nearly tripled the amount of fees applied and collected 2013 to 2014, and was five times greater than fiscal year 2012-13. The N.C. Department of Commerce says the proceeds collected from these penalties go to a state fund exclusively for maintaining the public school system.</p>
+
+<p>Two recent articles highlight the success of the workers’ compensation alerts.</p>
+
+<ul><li>
+http://www.bizjournals.com/triangle/news/2015/07/14/1m-in-n-c-business-penalties-go-to-public-school.html</li>
+<li>
+https://gcn.com/articles/2015/08/06/workers-comp-fraud-detection.aspx?admgarea=TC_STATELOCAL</li>
+</ul>
+<section aria-label="Planned Activities (part 5)">
+<h5 id="section-20">Planned Activities</h5>
+<p>Following a successful run of alerts, development is under way to improve the compensation alerts to refine the analytics and integrate additional data. </p>
+
+</section>
+</section>
+<section aria-labelledby="section-21">
+<h4 id="section-21">Department of the Secretary of State</h4>
+<p>NC FACTS link analysis provides the Department of the Secretary of State with information and associations to support corporate identity theft investigations.</p>
+
+</section>
+<section aria-labelledby="section-22">
+<h4 id="section-22">The Department of Revenue (NCDOR)</h4>
+<p>NCDOR’s partnership with GDAC has resulted in several short-term and long-term projects. N.C.G.S. 105-259 precludes NCDOR from providing specific details regarding data and standards used to determine selection of audit candidates. </p>
+
+<p>The NCDOR/GDAC project objectives are to improve operational efficiency and return on investment. The GDAC projects have helped to automate manual functions, which has reduced time needed for business tax audits, and will ultimately increase the state’s return on investment. </p>
+
+<p>Analytics implemented in 2015 included the integration of new data sources and subsequent scoring to enhance NCDOR’s ability to determine identity theft prior to issuance of a refund check. Further, the analytics applied has enhanced and streamlined NCDOR’s ability to improve overall tax compliance within multiple tax schedules. </p>
+
+</section>
+<section aria-labelledby="section-23">
+<h4 id="section-23">Employee Misclassification and Underground Economy </h4>
+<p>Underground Economy refers to businesses that utilize schemes to conceal or misrepresent (misclassify) their employee population to avoid one or more of their employer responsibilities related to wages, payroll taxes, insurance, licensing, safety or other regulatory requirements. Underground Economy also encompasses other activities such as misclassifying employees as independent contractors and forcing employees to set up shell subcontractor entities. </p>
+
+<p>The Underground Economy results in unfair competition in the marketplace and forces law-abiding businesses to pay greater direct costs to stay in business and indirectly subsidize socialized benefits like health care, unemployment, workers’ compensation, for those companies and individuals who do not play by the rules. Businesses that participate in Underground Economy may negatively affect their employees by denying them access to workers’ compensation benefits, unemployment insurance coverage, health care coverage, and social security eligibility. As a result, other employers and taxpayers are required to fund these liabilities in the form of workers’ compensation or UI coverage through funds and other state and federal subsidies.</p>
+
+<p>Under Governor McCrory, Executive Order Number 83 (Employee and Employee Fairness Initiative) established the Employee Classification Section within the North Carolina Industrial Commission. The Section receives complaints related to employee misclassification, and coordinates and tracks all misclassification investigations. In addition to tracking complaints, the Department of Revenue, Department of Commerce, and the North Carolina Industrial Commission are collaborating to share data to identify employers who might be improperly classifying employees to avoid direct business costs. </p>
+
+<section aria-label="Planned Activities  (part 6)">
+<h5 id="section-24">Planned Activities </h5>
+<p>The GDAC, utilizing the NC FACTS alerting and compliance tools, plans to integrate multiple data sources and the development of models and filters to support the identification of Underground Economy. Efforts are under way to integrate business information found across State agencies to develop a profile of a business. Based upon the business and its reporting, GDAC’s advanced analytics will surface leads relating to employee misclassification and/or underground business operations within the North Carolina. </p>
+
+</section>
+</section>
+</section>
+<section aria-labelledby="section-25">
+<h3 id="section-25">Health Care</h3>
+<p>Health care is a top priority for Governor McCrory and the North Carolina General Assembly. People who are healthier tend to live longer, use fewer health care services, and are generally happier and more productive at work. Healthy people are essential contributors to industry and productivity, which benefits everyone in North Carolina.</p>
+
+<p>The GDAC supports both the Department of the State Treasurer and the Department of Health and Human Services. </p>
+
+<section aria-labelledby="section-26">
+<h4 id="section-26">State Health Plan for Teachers and State Employees </h4>
+<p>The North Carolina Department of State Treasurer, State Health Plan for Teachers and State Employees (NCSHP) provides health care coverage to more than 685,000 teachers, state employees, retirees, current and former lawmakers, state university and community college personnel, and their dependents. </p>
+
+<p>In 2014, NCSHP’s data warehouse and reporting repository was migrated to the GDAC’s technical environment. </p>
+
+<section aria-label="Completed Activities (part 3)">
+<h5 id="section-27">Completed Activities</h5>
+<p>This past year, the GDAC supported the maintenance and operations of the technical environment in 2014 and upgraded to current software licensing in 2015.</p>
+
+</section>
+<section aria-label="Planned Activities  (part 7)">
+<h5 id="section-28">Planned Activities </h5>
+<p>NCSHP is expanding their reporting repository to broaden their access to data from external sources and apply analytics to evaluate health care outcomes and costs. </p>
+
+</section>
+</section>
+<section aria-labelledby="section-29">
+<h4 id="section-29">Division of Medicaid Assistance - Medicaid Analytics Pilot</h4>
+<p>The North Carolina Department of Health and Human Services (NCDHHS) manages the delivery of health and human-related services for all North Carolinians, especially the State’s most vulnerable citizens – children, elderly, disabled and low-income families. NC Medicaid serves approximately 1.8 million Children and Adults. The certified budget for State Fiscal Year 2015, detailed expenditures to be $13,8086,413,305, with revenues totaling $10,111,233,389, and a State appropriation of $3,695,179,916. </p>
+
+<p>Session Law 2015-241 §12A.17. (b) directed NCDHHS to coordinate with the GDAC to develop a pilot program that applies analytics to Medicaid data to maximize health care savings and efficiencies and optimize positive impacts on health outcomes. Seven hundred fifty thousand dollars ($750,000) in nonrecurring funds for the 2015-2016 fiscal year and two hundred fifty thousand dollars ($250,000) in recurring funds for the 2015-2016 fiscal year and the 2016-2017 fiscal year were appropriated to support the development and implementation of a pilot program for Medicaid claims analytics and population health management. Further, Session Law 2015-241 §7A.2.(c) directs NCDHHS to share claims and encounter data with GDAC to support outcome-based analysis of services and programs and population health analytics associated with Medicaid and LME/MCO patient population.</p>
+
+<section aria-label="Planned Activities (part 8)">
+<h5 id="section-30">Planned Activities</h5>
+<p>NCDHHS, GDAC and SAS health care subject matter experts are collaborating to develop the Medicaid Analytics Pilot. </p>
+
+<p>To achieve this objective, the pilot will use existing SAS-provided health analytics models applied to NC Medicaid data to demonstrate the value of usability of the application of visual analytics and drill-down capabilities to transform data into information to provide point-in-time and trending information regarding the Medicaid program.</p>
+
+<p>Pilot areas of focus include:</p>
+
+<p>1. Site of Service Analysis – Assist the State in understanding the amount and type of care being provided for qualified Medicaid beneficiaries by facility type (site) – hospital inpatient, doctor’s office, emergency room, clinic, etc. – and the cost associated with that particular care. Additional analysis understanding the populations within the site include types of patients, where they are from, where are they being treated, and services received and projected trends.</p>
+
+<p>2. Recipients Category Analysis – Assist the State in understanding how much of the population is cared for under that category or program, and how each population group attributes to the total cost. Further analysis to understand population cost, utilization, demographics, and projected trends.</p>
+
+<p>3. Prescription – Assist the State in understanding the therapeutic drug codes (e.g. GC3, GCN, NDC) being prescribed within population categories, their utilization, and trends.</p>
+
+<p>4. Super utilizers - Assist the State in understanding associated costs within population types. An analysis of the percentage costs associated with the top 1%, 2-5%, and 6-10%. A correlation with the types of conditions, demographics, services, and identification of what triggers them as a super utilizer.</p>
+
+<p>5. Cost Overview – Assist the State with a visual representation of the budget to actual trend analysis.</p>
+
+</section>
+</section>
+<section aria-labelledby="section-31">
+<h4 id="section-31">North Carolina Health Information Exchange</h4>
+<p>North Carolina’s statewide health information exchange is a secure, standardized electronic network in which providers can share patient clinical health information. The use of this system promotes the access, exchange, and analysis of health information. </p>
+
+<p>Session Law 2015-241 §12A.5.(a) establishes a state-managed Health Information Exchange Authority (NC HIEA) to oversee and administer the NC Health Information Exchange Network. The NC HIEA is housed within the NC Department of Information Technology’s (DIT) Government Data Analytics Center (GDAC). The legislation establishes a:</p>
+
+<ul><li>
+State-controlled Health Information Exchange Authority (NCHIEA) to oversee and administer the successor HIE Network </li>
+<li>
+Health Information Exchange Advisory Board to provide consultation to the Authority on matters pertaining to administration and operation of the HIE Network and on statewide health information exchange.</li>
+</ul>
+</section>
+</section>
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>
