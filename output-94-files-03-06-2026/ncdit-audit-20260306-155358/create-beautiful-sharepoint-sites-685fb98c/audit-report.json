@@ -1,0 +1,120 @@
+{
+  "document_id": "create-beautiful-sharepoint-sites-685fb98c",
+  "audited_at": "2026-03-06T20:15:52.122203Z",
+  "quality_score": 84,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While programmatic signals show high text recall (95.2%), the LLM fidelity evaluation identifies significant structural and visual failures that cannot be ignored. Specifically, the mismatch between JSON-defined headings and HTML rendering, combined with the loss of critical diagrammatic content (replaced by green placeholders), falls short of the quality required for automated approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the number of headings identified in the semantic JSON (0) and those rendered in the HTML (21). The JSON uses section titles which the renderer appears to have converted into headings, but these were not explicitly tagged or counted as heading elements in the JSON structure, violating the count threshold requirements.",
+      "source_pdf_quote": "Titles on pages 1-21 (e.g., 'Overview', 'Layout and Design', 'Conclusion').",
+      "output_quote": "Headings in semantic.json: 0; Headings in rendered HTML: 21",
+      "location": "Metadata",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Several meaningful images from the source PDF are broken or missing in the HTML output. Page 5 features a diagram of Microsoft 365 integration which appears as a large green block in the HTML. Similarly, the site screenshots on pages 16, 18, and 19 are replaced by green placeholders. The screenshot for page 17 (Crisis Communications) is entirely missing from the output with no placeholder. These are critical content images illustrating the presentation's examples.",
+      "source_pdf_quote": "Page 5: Diagram of M365 integration; Page 16: Screenshot of 'The Perspective' site; Page 17: Screenshot of 'Crisis Management' site; Page 18: Screenshot of 'The Landing' site; Page 19: Screenshot of 'Engineering Onboarding' site.",
+      "output_quote": "The HTML rendering shows large green rectangular blocks instead of images for pages 5, 16, 18, and 19. The image for page 17 is completely absent.",
+      "location": "Sections: Integrated with Microsoft 365, The Perspective, Crisis Communications, The Landing, Engineering Onboarding.",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S5",
+      "analysis": "Several pages in the source (e.g., Overview on Page 2, Why use SharePoint Online on Page 3) use bullet points followed by a bold sub-title and a descriptive paragraph. In the output, these are split: the bold sub-title is captured as a list item, but the associated descriptive paragraph is placed as a separate, root-level element following the list. This incorrectly decouples the description from its corresponding list item.",
+      "source_pdf_quote": "Page 2 Overview: Bullet point with arrow, bold title 'Why Microsoft 365 Intranet is a Smart Choice', followed by description 'Microsoft 365 SharePoint Online is a smart choice...'",
+      "output_quote": "Section 'Overview': list item 'Why Microsoft 365 Intranet is a Smart Choice' followed by a separate 'paragraph' element containing the description.",
+      "location": "Section 'Overview', Page 2",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The output fails to capture interactive links present in the source. For example, Page 15 contains a URL (https://lookbook.microsoft.com) and Page 21 contains a formatted link ('Microsoft Copilot'). The semantic JSON link count is 0, indicating these were captured as plain text rather than functional link objects.",
+      "source_pdf_quote": "Page 15 URL: https://lookbook.microsoft.com; Page 21 link: Microsoft Copilot",
+      "output_quote": "Links in semantic.json: 0",
+      "location": "Metadata",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is degraded by the presence of large, bright green blocks which act as placeholders for broken images. These blocks create inconsistent whitespace and a highly unprofessional appearance compared to the polished source PDF slides. This significantly impacts the document's presentation quality.",
+      "source_pdf_quote": "Visually integrated images within slides.",
+      "output_quote": "Jarring green rectangular blocks throughout the document where images failed to render.",
+      "location": "Pages 5, 16, 18, 19 of the output.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Restore or fix the broken image placeholders on pages 5, 16, 18, and 19, and locate the missing page 17 screenshot.",
+    "Validate and re-tag the heading structure to ensure the HTML reflects the document's semantic hierarchy.",
+    "Correct list formatting to ensure descriptive text is nested within or correctly associated with list items.",
+    "Convert plain text URLs and link references into functional hyperlinks."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8222,
+      "text_match": 0.9619917012448133,
+      "content_completeness": 0.9881031064111038,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8445,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.8222,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7407407407407407,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9523496549457772,
+      "shingling_precision": 0.971830985915493,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9762062128222075,
+      "baseline_words": 1513,
+      "gemini_words": 1477,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 8955,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

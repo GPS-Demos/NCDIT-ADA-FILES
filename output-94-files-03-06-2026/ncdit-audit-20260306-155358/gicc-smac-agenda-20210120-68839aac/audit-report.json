@@ -1,0 +1,86 @@
+{
+  "document_id": "gicc-smac-agenda-20210120-68839aac",
+  "audited_at": "2026-03-06T20:16:41.056187Z",
+  "quality_score": 88,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the LLM fidelity score is high, the programmatic signals reveal a fabricated table (1 detected vs 0 in baseline) and a low shingling recall of 0.795, which suggests structural hallucination or significant content mismatch. Furthermore, the loss of semantic link metadata for critical meeting information ('Join meeting', URLs) constitutes a failure in fidelity that requires manual correction.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 1",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline_tables=0, gemini_tables=1",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "Several active links in the source document are not captured as semantic links (with href attributes) in the JSON output, though the text is preserved. Specifically, 'Join meeting', 'minutes', and the URL 'www.nconemap.gov/pages/metadata' lack clickable link metadata despite being clearly identified as links in the source PDF through color, underlining, or URL format.",
+      "source_pdf_quote": "Join meeting (blue link text); minutes (blue underlined text); www.nconemap.gov/pages/metadata (URL text)",
+      "output_quote": "The text for these items exists, but they are represented as plain text elements or paragraph content without 'href' attributes.",
+      "location": "Join meeting (section 0, element 5); minutes (section 0, subsection 0, list item 0); metadata URL (section 0, subsection 2, list item 5)",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Identify and remove the fabricated table structure if it misrepresents the agenda layout",
+    "Verify text completeness against the baseline due to the low recall score",
+    "Restore functional hyperlink metadata to the meeting invite and metadata URL"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9889,
+      "text_match": 0.8708520179372199,
+      "content_completeness": 0.9059233449477352,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8806,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9889,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.962962962962963,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.7945990180032734,
+      "shingling_precision": 0.9632936507936508,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9059233449477352,
+      "baseline_words": 287,
+      "gemini_words": 260,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 9543,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "document_id": "logo-imagery-graphic-colors-map-imagery-6e2e",
+  "audited_at": "2026-03-06T20:16:43.882505Z",
+  "quality_score": 80,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the LLM fidelity score is high, the document has an extremely low word count (11 words), making the programmatic metrics highly sensitive. The word count ratio of 1.818 and precision of 0.779 corroborate the major finding of content duplication where the heading and date appear as both HTML text and within the image graphic, creating a redundant user experience.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V4",
+      "analysis": "There is a visual duplication of text content associated with the map section. The heading 'NC Parcels Project Status by County' and the date 'October 7, 2025' are rendered as HTML text at the top of the map section, but they are also visibly included inside the image graphic that immediately follows. This causes the same heading and date to appear twice in immediate succession.",
+      "source_pdf_quote": "Page 2 of the PDF contains the title 'NC Parcels Project Status by County' and date 'October 7, 2025' within the map's layout frame.",
+      "output_quote": "The HTML screenshot shows 'NC Parcels Project Status by County' and 'October 7, 2025' as text headings, followed by an image containing the same exact text strings within its top border.",
+      "location": "Middle of HTML output, corresponding to Page 2 of the PDF.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify if the duplicated text should be removed from the HTML or if the image requires an alt-text adjustment to prevent screen readers from announcing the heading twice.",
+    "Investigate why the pipeline flagged 'needs_retry' despite a 0.99 confidence score."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "text_match": 0.8625954198473282,
+      "content_completeness": 0.5909090909090909,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8028,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9658119658119658,
+      "shingling_precision": 0.7793103448275862,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.8181818181818181,
+      "baseline_words": 11,
+      "gemini_words": 20,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 7830,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

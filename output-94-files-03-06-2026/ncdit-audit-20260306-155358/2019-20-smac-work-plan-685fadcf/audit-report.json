@@ -1,0 +1,75 @@
+{
+  "document_id": "2019-20-smac-work-plan-685fadcf",
+  "audited_at": "2026-03-06T20:15:33.520198Z",
+  "quality_score": 85,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While LLM fidelity scores are high, the programmatic signals indicate a significant discrepancy in table counts (0.5 ratio) and a major structural mismatch where HTML contains headings not reflected in metadata. Given the cost asymmetry and the pipeline's explicit recommendation for review, human verification is required to ensure no tabular data was lost and structural integrity is sound.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "A significant mismatch exists between the JSON metadata and the rendered HTML. The JSON metadata reports 'heading_count': 0, whereas the rendered HTML identifies 7 headings. This mismatch (7 vs 0) exceeds the threshold of 3 headings, indicating a failure in the renderer's heading identification or metadata reporting consistency.",
+      "source_pdf_quote": "The document contains multiple section headings (Goals, Objectives, Expected Benefits by Objective, Ongoing Responsibilities, Major Tasks Numbered by Objective).",
+      "output_quote": "html_heading_count: 7, json_heading_count: 0",
+      "location": "Document metadata / HTML Metadata section",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify if all tables from the original PDF are present in the HTML",
+    "Check heading levels (H1-H6) for correct hierarchy and accessibility standards",
+    "Confirm that the 10.8% word count difference is due to extraction noise and not actual content loss"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9444,
+      "text_match": 0.9817534490431686,
+      "content_completeness": 0.695879458794588,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8535,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9444,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.8148148148148149,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.970523537175539,
+      "shingling_precision": 0.9932462854570013,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8917589175891759,
+      "baseline_words": 813,
+      "gemini_words": 725,
+      "table_count_ratio": 0.5,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 8851,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

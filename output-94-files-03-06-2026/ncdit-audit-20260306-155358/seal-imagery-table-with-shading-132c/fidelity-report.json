@@ -1,0 +1,233 @@
+{
+  "document_id": "seal-imagery-table-with-shading-132c",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Human-readable name of the check",
+        "a_analysis": "The output does not appear to contain any completely fabricated paragraphs or sentences that have no basis in the source document. The document title and metadata fields are acceptable additions for structured output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "No fabricated phone numbers, email addresses, or URLs were detected. Placeholders like [INSERT AGENCY CONTACT] correctly reflect the template nature of the source's Appendix A. External links such as the CVE mitre URL were found in the source but correctly omitted as part of the broader section omissions rather than being altered.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "A massive portion of the document is missing. Entire pages (approximately pages 2 through 10, and 13 through 17) and major policy sections (RA-1 Policy and Procedures, RA-2 Security Categorization, RA-3 Risk Assessment, RA-4/RA-5 Vulnerability Monitoring and Scanning) are omitted. These sections represent the core regulatory requirements of the policy. The output explicitly contains a placeholder field indicating that 9 sections were omitted.",
+        "b_evidence_source": "The source PDF contains core technical and procedural sections: RA-1 (pages 2-3), RA-2 (page 6), RA-3 (pages 7-10), and RA-5 (pages 13-17) along with various supporting analysis activities and procedural descriptions.",
+        "b_evidence_output": "{\"_omitted\": \"9 sections omitted for token budget\"}",
+        "b_evidence_location": "Following the 'Material Superseded' section (element index 3)",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables that are present in the output (Responsibilities, Impact Definitions, Risk Determination matrix, Risk Level, and Appendix A tables) accurately reflect the row counts of their counterparts in the source PDF, including rows that spanned multiple pages.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "While there are massive omissions of entire sections (flagged under C3), the sections that were included in the output (Scope, Material Superseded, Appendix A, etc.) appear to have their internal text preserved relatively faithfully.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "There is a significant OCR-related difference in the definition of 'Senior Management' where 'ESRMO' (Enterprise Security and Risk Management Office) has been converted to 'SCRO'. SCRO is not a defined term in this policy and this change alters the meaning of the reporting obligation.",
+        "b_evidence_source": "...reporting to the ESRMO what mitigation actions have been taken.",
+        "b_evidence_output": "...reporting to the SCRO what mitigation actions have been taken.",
+        "b_evidence_location": "Section: Responsibilities, Table: IT Risk Assessment Responsibilities by Role, Row: Senior Management",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6976744186046512,
+    "penalty_sum": 26,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Human-readable name of the check\",\n      \"a_analysis\": \"The output does not appear to contain any completely fabricated paragraphs or sentences that have no basis in the source document. The document title and metadata fields are acceptable additions for structured output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"No fabricated phone numbers, email addresses, or URLs were detected. Placeholders like [INSERT AGENCY CONTACT] correctly reflect the template nature of the source's Appendix A. External links such as the CVE mitre URL were found in the source but correctly omitted as part of the broader section omissions rather than being altered.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"A massive portion of the document is missing. Entire pages (approximately pages 2 through 10, and 13 through 17) and major policy sections (RA-1 Policy and Procedures, RA-2 Security Categorization, RA-3 Risk Assessment, RA-4/RA-5 Vulnerability Monitoring and Scanning) are omitted. These sections represent the core regulatory requirements of the policy. The output explicitly contains a placeholder field indicating that 9 sections were omitted.\",\n      \"b_evidence_source\": \"The source PDF contains core technical and procedural sections: RA-1 (pages 2-3), RA-2 (page 6), RA-3 (pages 7-10), and RA-5 (pages 13-17) along with various supporting analysis activities and procedural descriptions.\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"9 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"Following the 'Material Superseded' section (element index 3)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables that are present in the output (Responsibilities, Impact Definitions, Risk Determination matrix, Risk Level, and Appendix A tables) accurately reflect the row counts of their counterparts in the source PDF, including rows that spanned multiple pages.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"While there are massive omissions of entire sections (flagged under C3), the sections that were included in the output (Scope, Material Superseded, Appendix A, etc.) appear to have their internal text preserved relatively faithfully.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"There is a significant OCR-related difference in the definition of 'Senior Management' where 'ESRMO' (Enterprise Security and Risk Management Office) has been converted to 'SCRO'. SCRO is not a defined term in this policy and this change alters the meaning of the reporting obligation.\",\n      \"b_evidence_source\": \"...reporting to the ESRMO what mitigation actions have been taken.\",\n      \"b_evidence_output\": \"...reporting to the SCRO what mitigation actions have been taken.\",\n      \"b_evidence_location\": \"Section: Responsibilities, Table: IT Risk Assessment Responsibilities by Role, Row: Senior Management\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 26,\n    \"score\": 0.6976744186046512\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output exhibits significant content duplication at the end of Section 16 (APPENDIX A). The signature block ('Printed Name of Secretary/CIO or Designee' and 'Signature of Secretary/CIO or Designee') appears twice. This is not a repetition in the source document, which only has one signature block on the final page (page 21).",
+        "b_evidence_source": "The signature block appears only once on page 21 of the PDF.",
+        "b_evidence_output": "The signature block text ('Printed Name of Secretary/CIO or Designee' and 'Signature of Secretary/CIO or Designee') appears as elements 22-23 and is repeated as elements 26-27 in the last section.",
+        "b_evidence_location": "Section 16, elements index 22-27",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading levels in the JSON are consistent and logical (H2 for major sections, H3 for subsections). Adjustments for accessibility are permitted.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The tables are well-structured. For example, the Responsibilities table correctly merges content split across pages 1 and 2 in the source into a single semantic entity with proper headers. All other tables identify headers and body rows correctly, matching the source layout.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is materially disrupted at the end of the document. In Section 16, header metadata (the 'Document Information' table and the State Seal image) is incorrectly injected into the middle of the signature block. In the source, these elements are part of the page header, while the signatures are the concluding elements of the text flow.",
+        "b_evidence_source": "The State Seal and 'Document Information' block are headers at the top of page 21. The signature lines are at the bottom.",
+        "b_evidence_output": "The signature block starts (elements 22-23), followed by the Document Information table (element 24) and the Seal image (element 25), before repeating the signature block (elements 26-27).",
+        "b_evidence_location": "Section 16, elements 22-27",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Checkbox items and numbered/bulleted lists from the source (e.g., pages 13, 18, and 19) are correctly represented as list structures in the JSON, preserving their grouping and meaning.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S6",
+        "check_name": "Heading count mismatch between JSON and HTML",
+        "a_analysis": "There is a significant mismatch between the number of headings defined in the semantic JSON (9) and those rendered in the final HTML (26). This difference (188%) far exceeds the 10% tolerance threshold, indicating that the renderer is likely incorrectly promoting non-heading elements or section titles to headings.",
+        "b_evidence_source": "HTML METADATA: json_heading_count: 9, html_heading_count: 26",
+        "b_evidence_output": "HTML METADATA: json_heading_count: 9, html_heading_count: 26",
+        "b_evidence_location": "Document Metadata / HTML Analysis",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "No fabricated or broken links were detected in the provided JSON snippet. The presence of URLs in the source (like cve.mitre.org) is handled as text in the sections where they appear.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.4444444444444444,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output exhibits significant content duplication at the end of Section 16 (APPENDIX A). The signature block ('Printed Name of Secretary/CIO or Designee' and 'Signature of Secretary/CIO or Designee') appears twice. This is not a repetition in the source document, which only has one signature block on the final page (page 21).\",\n      \"b_evidence_source\": \"The signature block appears only once on page 21 of the PDF.\",\n      \"b_evidence_output\": \"The signature block text ('Printed Name of Secretary/CIO or Designee' and 'Signature of Secretary/CIO or Designee') appears as elements 22-23 and is repeated as elements 26-27 in the last section.\",\n      \"b_evidence_location\": \"Section 16, elements index 22-27\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading levels in the JSON are consistent and logical (H2 for major sections, H3 for subsections). Adjustments for accessibility are permitted.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The tables are well-structured. For example, the Responsibilities table correctly merges content split across pages 1 and 2 in the source into a single semantic entity with proper headers. All other tables identify headers and body rows correctly, matching the source layout.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is materially disrupted at the end of the document. In Section 16, header metadata (the 'Document Information' table and the State Seal image) is incorrectly injected into the middle of the signature block. In the source, these elements are part of the page header, while the signatures are the concluding elements of the text flow.\",\n      \"b_evidence_source\": \"The State Seal and 'Document Information' block are headers at the top of page 21. The signature lines are at the bottom.\",\n      \"b_evidence_output\": \"The signature block starts (elements 22-23), followed by the Document Information table (element 24) and the Seal image (element 25), before repeating the signature block (elements 26-27).\",\n      \"b_evidence_location\": \"Section 16, elements 22-27\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Checkbox items and numbered/bulleted lists from the source (e.g., pages 13, 18, and 19) are correctly represented as list structures in the JSON, preserving their grouping and meaning.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S6\",\n      \"check_name\": \"Heading count mismatch between JSON and HTML\",\n      \"a_analysis\": \"There is a significant mismatch between the number of headings defined in the semantic JSON (9) and those rendered in the final HTML (26). This difference (188%) far exceeds the 10% tolerance threshold, indicating that the renderer is likely incorrectly promoting non-heading elements or section titles to headings.\",\n      \"b_evidence_source\": \"HTML METADATA: json_heading_count: 9, html_heading_count: 26\",\n      \"b_evidence_output\": \"HTML METADATA: json_heading_count: 9, html_heading_count: 26\",\n      \"b_evidence_location\": \"Document Metadata / HTML Analysis\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"No fabricated or broken links were detected in the provided JSON snippet. The presence of URLs in the source (like cve.mitre.org) is handled as text in the sections where they appear.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.4444444444444444\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully transforms the fixed-page PDF layout into a responsive single-page document. The logical flow of sections (Scope, Material Superseded, Responsibilities, RA-sections, and Appendices) is preserved. The repeating header table from the PDF is correctly consolidated into a 'Document Information' block at the top and bottom of the HTML, which is an appropriate adaptation for the format.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "All tables from the source PDF, including the multi-page Responsibilities table (pages 1-2), the Impact Definitions and Threat Likelihood matrix (page 11), and the various form tables in the Appendix, are rendered correctly as HTML tables. Borders are intact, headers are distinct, and cell alignment is preserved. A sighted user can easily read and understand all tabular data.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The North Carolina State seal, which appears in the header of every page in the source PDF, is present at the top of the HTML document. There are no other meaningful images (photos, charts, diagrams) in the source document that are missing from the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The signature block intended for the Secretary/CIO or Designee from Page 21 is visually duplicated at the end of the HTML document. One instance appears before the final 'Document Information' metadata block (including visual underscore characters from the original line), and a second instance of the text appears again after the metadata block.",
+        "b_evidence_source": "Printed Name of Secretary/CIO or Designee [Date] ... Signature of Secretary/CIO or Designee",
+        "b_evidence_output": "The text 'Printed Name of Secretary/CIO or Designee' and 'Signature of Secretary/CIO or Designee' appears twice at the end of the document, separated by the final metadata table.",
+        "b_evidence_location": "End of document, following content from page 21",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V5",
+        "check_name": "Overall visual quality significantly degraded",
+        "a_analysis": "The document is highly readable with consistent formatting and logical structural flow. While there are some variations in whitespace and list marker styles compared to the PDF, these are standard for HTML conversion and do not degrade the overall quality or utility of the document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7619047619047619,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully transforms the fixed-page PDF layout into a responsive single-page document. The logical flow of sections (Scope, Material Superseded, Responsibilities, RA-sections, and Appendices) is preserved. The repeating header table from the PDF is correctly consolidated into a 'Document Information' block at the top and bottom of the HTML, which is an appropriate adaptation for the format.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"All tables from the source PDF, including the multi-page Responsibilities table (pages 1-2), the Impact Definitions and Threat Likelihood matrix (page 11), and the various form tables in the Appendix, are rendered correctly as HTML tables. Borders are intact, headers are distinct, and cell alignment is preserved. A sighted user can easily read and understand all tabular data.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The North Carolina State seal, which appears in the header of every page in the source PDF, is present at the top of the HTML document. There are no other meaningful images (photos, charts, diagrams) in the source document that are missing from the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The signature block intended for the Secretary/CIO or Designee from Page 21 is visually duplicated at the end of the HTML document. One instance appears before the final 'Document Information' metadata block (including visual underscore characters from the original line), and a second instance of the text appears again after the metadata block.\",\n      \"b_evidence_source\": \"Printed Name of Secretary/CIO or Designee [Date] ... Signature of Secretary/CIO or Designee\",\n      \"b_evidence_output\": \"The text 'Printed Name of Secretary/CIO or Designee' and 'Signature of Secretary/CIO or Designee' appears twice at the end of the document, separated by the final metadata table.\",\n      \"b_evidence_location\": \"End of document, following content from page 21\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V5\",\n      \"check_name\": \"Overall visual quality significantly degraded\",\n      \"a_analysis\": \"The document is highly readable with consistent formatting and logical structural flow. While there are some variations in whitespace and list marker styles compared to the PDF, these are standard for HTML conversion and do not degrade the overall quality or utility of the document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7619047619047619\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 6,
+  "total_critical": 1,
+  "total_major": 4,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

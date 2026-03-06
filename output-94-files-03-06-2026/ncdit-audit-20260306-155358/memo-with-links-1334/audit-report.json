@@ -1,0 +1,85 @@
+{
+  "document_id": "memo-with-links-1334",
+  "audited_at": "2026-03-06T20:17:27.814195Z",
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the document exhibits high content fidelity scores (0.94) and strong shingling recall (0.97), the programmatic signal detected a structural hallucination in the form of a fabricated table where none existed in the baseline. Additionally, a significant heading mismatch (6 in HTML vs 0 in semantic metadata) indicates structural inconsistency that conflicts with the 'AUTO_APPROVE' recommendation from the LLM fidelity signal.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the heading counts provided in the metadata. The semantic.json is reported to have 0 headings (as it uses section titles rather than explicit heading elements), while the rendered HTML has 6 headings. This difference of 6 exceeds the allowed threshold of 3.",
+      "source_pdf_quote": "Headings in semantic.json: 0",
+      "output_quote": "Headings in rendered HTML: 6",
+      "location": "HTML METADATA",
+      "corroborated": false
+    },
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 1",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline_tables=0, gemini_tables=1",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Inspect the document for the presence of a hallucinated table or structural misinterpretation of content",
+    "Verify the 6 headings in the HTML to ensure they provide correct semantic navigation for accessibility"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9444,
+      "text_match": 0.977121067683508,
+      "content_completeness": 0.9823369565217391,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8955,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9444,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.8148148148148149,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9724857685009488,
+      "shingling_precision": 0.9818007662835249,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9823369565217391,
+      "baseline_words": 736,
+      "gemini_words": 723,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.94,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 19011,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

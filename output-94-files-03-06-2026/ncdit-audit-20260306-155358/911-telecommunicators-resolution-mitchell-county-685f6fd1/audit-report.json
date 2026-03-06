@@ -1,0 +1,106 @@
+{
+  "document_id": "911-telecommunicators-resolution-mitchell-county-685f6fd1",
+  "audited_at": "2026-03-06T20:15:38.370369Z",
+  "quality_score": 78,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "Source PDF unavailable — cannot compute text fidelity. Manual review required.",
+  "decision_method": "hard_veto:V2",
+  "concerns": [
+    {
+      "description": "Major visual layout difference",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V1",
+      "analysis": "The HTML output exhibits significant layout changes and content rearrangement compared to the source PDF. First, the document header ('NORTH CAROLINA' and 'MITCHELL COUNTY') which is justified to the left and right margins at the top of the PDF is collapsed into a single line of text in the HTML and moved below a redundant title header. Second, the signature block at the bottom, which is organized as two distinct columns in the source PDF, has been collapsed into a single-column vertical list in",
+      "source_pdf_quote": "The source PDF features 'NORTH CAROLINA' and 'MITCHELL COUNTY' at the top left/right margins respectively, and two signature columns (Taylor McCurry on the left, Steve Pitman on the right) at the bottom.",
+      "output_quote": "The HTML concatenates the header text into '<p><strong>NORTH CAROLINA</strong><strong>MITCHELL COUNTY</strong></p>' and places it below the <h1> title. The signatures are rendered as a vertical list of paragraphs at the end of the <section>.",
+      "location": "Header area and signature area at the bottom of the page.",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "The source document contains two meaningful handwritten signatures that serve as proof of adoption by the Clerk and the Chairman. While the names are present as text in the HTML, the visual representation of the signatures (images) is missing entirely from the output. In the context of a legal resolution, these signatures are meaningful visual content.",
+      "source_pdf_quote": "Handwritten signatures for Taylor McCurry (above 'Clerk to the Board') and Steve Pitman (above 'Chairman').",
+      "output_quote": "The HTML contains no <img> elements or placeholders corresponding to the handwritten signatures; only the plain text of the names is provided.",
+      "location": "Signature block at the bottom of the document.",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V4",
+      "analysis": "The main title of the document, 'RESOLUTION SUPPORTING THE RECLASSIFICATION OF MITCHELL COUNTY 911 DISPATCHERS', is visually duplicated in the HTML output. It appears once in the <header> block as an <h1> element and again inside the <main> block as an <h2> element. In the source PDF, this title appears only once.",
+      "source_pdf_quote": "The document title 'RESOLUTION SUPPORTING THE RECLASSIFICATION OF MITCHELL COUNTY 911 DISPATCHERS' appears only once, centered below the county seal.",
+      "output_quote": "<h1>RESOLUTION SUPPORTING THE RECLASSIFICATION OF MITCHELL COUNTY 911 DISPATCHERS</h1> (line 377) and <h2 id=\"heading-1\">RESOLUTION SUPPORTING THE RECLASSIFICATION OF MITCHELL COUNTY 911 DISPATCHERS</h2> (line 383).",
+      "location": "Top of the document and beginning of the main section.",
+      "corroborated": false
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "C6",
+      "analysis": "In the first 'WHEREAS' clause, the output omits the title 'Rep.' (Representative) between 'US' and 'Norma T. Torres'. The source clearly reads 'US Rep. Norma T. Torres'. This is a minor wording change that slightly alters the identification of the person mentioned.",
+      "source_pdf_quote": "US Rep. Norma T. Torres",
+      "output_quote": "US Norma T. Torres",
+      "location": "First 'WHEREAS' paragraph element",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Source PDF unavailable — cannot compute text fidelity. Manual review required."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7459,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7792,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7459,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.2857142857142857,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 245,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 0.0625,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 3,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

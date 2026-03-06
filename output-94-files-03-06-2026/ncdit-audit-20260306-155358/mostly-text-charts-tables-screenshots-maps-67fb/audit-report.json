@@ -1,0 +1,120 @@
+{
+  "document_id": "mostly-text-charts-tables-screenshots-maps-67fb",
+  "audited_at": "2026-03-06T20:17:24.623778Z",
+  "quality_score": 84,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The conversion exhibits significant structural and content failures, most notably a 75% data loss in the 'Language rankings' table and the corruption of multi-column tables into single-cell strings. While accessibility scores are technically clean, the severe degradation of table fidelity and the presence of hallucinated links make this document unfit for automated approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C4",
+      "analysis": "On page 54 of the source PDF, there is a table titled 'Language rankings across Council of Government Regions (COGRs)'. This table contains 12 data rows, each representing a different language or language group. However, the corresponding table in the JSON output (located in Section 9: Appendix) only contains the first 3 data rows (Spanish, Other Asian and Pacific Island languages, and Other Indo-European languages). Nine rows are missing, which constitutes a 75% loss of row data for this table.",
+      "source_pdf_quote": "Table 'Language rankings across Council of Government Regions (COGRs)' on page 54 contains 12 data rows: Spanish, Other Asian and Pacific Island languages, Other Indo-European languages, Vietnamese, Chinese (incl. Mandarin, Cantonese), French, Haitian, or Cajun, Arabic, Russian, Polish, or other Slavic languages, Korean, German or other West Germanic languages, Other and unspecified languages, and Tagalog (incl. Filipino).",
+      "output_quote": "The table in the JSON output with caption 'Language rankings across Council of Government Regions (COGRs)' contains only 3 data rows: Spanish, Other Asian and Pacific Island languages, and Other Indo-European languages.",
+      "location": "Section 9: Appendix, Page 54",
+      "corroborated": true
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S2",
+      "analysis": "The heading hierarchy in Section 3 is inconsistent and contains structural breaks. For example, heading '1. Language Need Identification' is correctly nested as an H4 under its parent section. However, the subsequent parallel heading '4. Employing/ Utilizing Multilingual Staff' is assigned an H2, which is the same level as the main section header and higher than its preceding sibling. Furthermore, sub-headings such as '● Overview of Standard' switch between H5 and H3 without a consistent parent-",
+      "source_pdf_quote": "The source document (pp. 26-32) shows '1. Language Need Identification' and '4. Employing/ Utilizing Multilingual Staff' as parallel subsections within Section 3.1.",
+      "output_quote": "Heading '1. Language Need Identification' (id: heading-38) is level 4. Heading '4. Employing/ Utilizing Multilingual Staff' (id: heading-53) is level 2.",
+      "location": "Section 3, elements index 1820 and 1845",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S3",
+      "analysis": "The conversion of Table 17 ('Language rankings across Council of Government Regions') is structurally corrupted. In the source, this table contains 18 distinct columns (Language, 16 individual region columns A-R, and Average Rank). In the output, the 16 regional data columns have been merged into a single cell with a 'colspan' of 16. The individual rank values for each region are now concatenated as a comma-separated string within that single merged cell. This destroys the tabular relationship b",
+      "source_pdf_quote": "Table on page 54 titled 'Council of Government Regions (COGRs)' with distinct columns for each region labeled A through R.",
+      "output_quote": "The data cells for columns A-R are merged: {\"cell_type\": \"data\", \"content\": [{\"text\": \"4, 4, 2, 7, 2, 3, 3, 4, 2, 5, 3, 7, 3, 2, 2, 4\", ...}], \"colspan\": 16, ...}",
+      "location": "Section 9, element index 5410 (Table 17)",
+      "corroborated": false
+    },
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 17",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline_tables=0, gemini_tables=17",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": true
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "A fabricated link has been injected into the output. In the 'Introduction' section, the word 'state's' from the source has been converted into a link pointing to an external Google Doc. The source document contains no link at this location. While most other links are correctly captured from the source text and footnotes, this instance constitutes a fabricated link injection.",
+      "source_pdf_quote": "...Given the state’s growing cultural and linguistic diversity...",
+      "output_quote": "{\"href\": \"https://docs.google.com/document/d/1QNy4lhBuygGX67AmSr9zROexRIjUUOew/edit?usp=sharing&ouid=105660598405190980573&rtpof=true&sd=true\", \"text\": \" state\", ...}",
+      "location": "Section 1.1, element index 300",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Restore missing rows in the Appendix language rankings table.",
+    "Repair the 18-column structure of Table 17 which was collapsed into a comma-separated string.",
+    "Correct the heading levels in Section 3 to ensure a logical nested hierarchy.",
+    "Remove the hallucinated link on the word 'state's' in the Introduction."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8574,
+      "text_match": 0.9035793289584535,
+      "content_completeness": 0.9291890364509748,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8381,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.8574,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5925925925925926,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8611868710617888,
+      "shingling_precision": 0.9730103070874508,
+      "duplication_ratio": 0.01531902015238909,
+      "word_count_ratio": 0.9291890364509748,
+      "baseline_words": 17695,
+      "gemini_words": 16442,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 12760,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

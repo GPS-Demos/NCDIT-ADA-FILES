@@ -1,0 +1,233 @@
+{
+  "document_id": "gicc-mo-minutes-20191216-68614cc3",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output follows the source document's structure and content closely. No entirely fabricated paragraphs or sections were found. The insertion of a hyperlink (hallucination) is addressed in Check C2.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output contains a fabricated URL: 'https://files.nc.gov/ncdit/GICC-TAC-OpenSource-GIS-Software-20171201.pdf'. This URL does not appear anywhere in the source PDF. It was hallucinated and inserted into the middle of the word 'documented' in section 6.a, splitting the word into 'document' (as a link) and 'ed'. This is a critical failure as it introduces external, unverified information into the document.",
+        "b_evidence_source": "Accomplishments have been documented for the GICC annual report.",
+        "b_evidence_output": "\"text\": \"Accomplishments have been\", \"href\": \"https://files.nc.gov/ncdit/GICC-TAC-OpenSource-GIS-Software-20171201.pdf\", \"text\": \" document\", \"text\": \"ed for the GICC annual report.\"",
+        "b_evidence_location": "Section 6.a (Local Government Committee), Page 2",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All sections (1 through 9) and all three pages of content from the source PDF are accounted for in the JSON structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document contains no tables.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The body text of all sections appears complete and faithfully transcribed, aside from the minor word-splitting issue caused by the hallucinated link in section 6.a.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text transcription is highly accurate, properly handling superscripts (e.g., '4th', 'm2', '20th'). The only significant difference is the splitting of the word 'documented' in section 6.a, which is a consequence of the critical defect found in C2.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output follows the source document's structure and content closely. No entirely fabricated paragraphs or sections were found. The insertion of a hyperlink (hallucination) is addressed in Check C2.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output contains a fabricated URL: 'https://files.nc.gov/ncdit/GICC-TAC-OpenSource-GIS-Software-20171201.pdf'. This URL does not appear anywhere in the source PDF. It was hallucinated and inserted into the middle of the word 'documented' in section 6.a, splitting the word into 'document' (as a link) and 'ed'. This is a critical failure as it introduces external, unverified information into the document.\",\n      \"b_evidence_source\": \"Accomplishments have been documented for the GICC annual report.\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"Accomplishments have been\\\", \\\"href\\\": \\\"https://files.nc.gov/ncdit/GICC-TAC-OpenSource-GIS-Software-20171201.pdf\\\", \\\"text\\\": \\\" document\\\", \\\"text\\\": \\\"ed for the GICC annual report.\\\"\",\n      \"b_evidence_location\": \"Section 6.a (Local Government Committee), Page 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All sections (1 through 9) and all three pages of content from the source PDF are accounted for in the JSON structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document contains no tables.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The body text of all sections appears complete and faithfully transcribed, aside from the minor word-splitting issue caused by the hallucinated link in section 6.a.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text transcription is highly accurate, properly handling superscripts (e.g., '4th', 'm2', '20th'). The only significant difference is the splitting of the word 'documented' in section 6.a, which is a consequence of the critical defect found in C2.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The content in the output follows the source document without any observed duplication of paragraphs or sections. Each agenda item and status report appears exactly once, matching the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is logical and consistent. The main title and 'MINUTES' are H2, and the primary numbered agenda items (1-9) are H3. While subsections (e.g., 6a, 8a) are rendered as lists rather than headings, there are no skips in heading levels (e.g., H2 to H4).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document contains no tables; therefore, no table structure corruption is possible.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the output correctly reflects the linear flow of the meeting minutes from the header through to the adjournment.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The source document uses lettered subsections (a., b., etc.) under sections 6 and 8. The output converts these lettered headers into single-item unordered lists, but the subsequent paragraphs that logically belong to those subsections are rendered as top-level sibling elements. This breaks the structural grouping where the body text should be contained within or associated with the list item 'a' or 'b'.",
+        "b_evidence_source": "6. Status Reports \r\na. Local Government Committee – Debbie Brannan \r\nThe LGC last met on November 20th... [paragraph continues]",
+        "b_evidence_output": "{\"type\": \"list\", \"list_type\": \"unordered\", \"items\": [{\"content\": [{\"text\": \"a. Local Government Committee – Debbie Brannan\"}]}]}, {\"type\": \"paragraph\", \"content\": [{\"text\": \"The LGC last met on November 20th...\"}]}",
+        "b_evidence_location": "Section 6a, Page 2",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S6",
+        "check_name": "Heading count mismatch between JSON and HTML",
+        "a_analysis": "The json_heading_count is 11 and the html_heading_count is 13. The difference of 2 headings is within the allowed tolerance (maximum of 10% of JSON headings or 3 headings, which in this case is 3).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There is a link injection defect. In the source PDF (page 3, section 6e), the word 'document' is a link to a specific URL. In the output, this link is missing from section 6e and is instead incorrectly injected into the middle of the word 'documented' in section 6a (page 2).",
+        "b_evidence_source": "Section 6a: Accomplishments have been documented for the GICC annual report. Section 6e: An item to work on is an update to the open source document [LINK] to include...",
+        "b_evidence_output": "Section 6a: Accomplishments have been {\"href\": \"...\", \"text\": \" document\"}ed for the GICC annual report.",
+        "b_evidence_location": "Section 6a, Page 2, Element index 19",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9259259259259259,
+    "penalty_sum": 2,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The content in the output follows the source document without any observed duplication of paragraphs or sections. Each agenda item and status report appears exactly once, matching the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is logical and consistent. The main title and 'MINUTES' are H2, and the primary numbered agenda items (1-9) are H3. While subsections (e.g., 6a, 8a) are rendered as lists rather than headings, there are no skips in heading levels (e.g., H2 to H4).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document contains no tables; therefore, no table structure corruption is possible.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the output correctly reflects the linear flow of the meeting minutes from the header through to the adjournment.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The source document uses lettered subsections (a., b., etc.) under sections 6 and 8. The output converts these lettered headers into single-item unordered lists, but the subsequent paragraphs that logically belong to those subsections are rendered as top-level sibling elements. This breaks the structural grouping where the body text should be contained within or associated with the list item 'a' or 'b'.\",\n      \"b_evidence_source\": \"6. Status Reports \\r\\na. Local Government Committee – Debbie Brannan \\r\\nThe LGC last met on November 20th... [paragraph continues]\",\n      \"b_evidence_output\": \"{\\\"type\\\": \\\"list\\\", \\\"list_type\\\": \\\"unordered\\\", \\\"items\\\": [{\\\"content\\\": [{\\\"text\\\": \\\"a. Local Government Committee – Debbie Brannan\\\"}]}]}, {\\\"type\\\": \\\"paragraph\\\", \\\"content\\\": [{\\\"text\\\": \\\"The LGC last met on November 20th...\\\"}]}\",\n      \"b_evidence_location\": \"Section 6a, Page 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S6\",\n      \"check_name\": \"Heading count mismatch between JSON and HTML\",\n      \"a_analysis\": \"The json_heading_count is 11 and the html_heading_count is 13. The difference of 2 headings is within the allowed tolerance (maximum of 10% of JSON headings or 3 headings, which in this case is 3).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There is a link injection defect. In the source PDF (page 3, section 6e), the word 'document' is a link to a specific URL. In the output, this link is missing from section 6e and is instead incorrectly injected into the middle of the word 'documented' in section 6a (page 2).\",\n      \"b_evidence_source\": \"Section 6a: Accomplishments have been documented for the GICC annual report. Section 6e: An item to work on is an update to the open source document [LINK] to include...\",\n      \"b_evidence_output\": \"Section 6a: Accomplishments have been {\\\"href\\\": \\\"...\\\", \\\"text\\\": \\\" document\\\"}ed for the GICC annual report.\",\n      \"b_evidence_location\": \"Section 6a, Page 2, Element index 19\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 2,\n    \"penalty_sum\": 2,\n    \"score\": 0.9259259259259259\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully maintains the logical visual organization of the source document. The single-column text flow of the original minutes is preserved in the main content area. A Table of Contents sidebar has been added for navigation, which is an expected enhancement in HTML conversion and does not detract from the original layout intent. Numbered sections and sub-points are correctly represented with appropriate nesting and bulleting.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source PDF document contains only structured text paragraphs and lists; it does not contain any data tables. Therefore, there are no tables to misrender.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF is a text-only document and does not contain any meaningful images, logos, or charts. The HTML output correctly reflects this absence of graphical content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The primary heading of the document is visually duplicated at the start of the main content area. In the source PDF, the council name and committee name appear once as a header. In the HTML rendering, this combined line appears twice consecutively: once as a top-level heading and immediately following as the first line of the document body text.",
+        "b_evidence_source": "Geographic Information Coordinating Council\nMANAGEMENT AND OPERATIONS COMMITTEE",
+        "b_evidence_output": "Geographic Information Coordinating Council MANAGEMENT AND OPERATIONS COMMITTEE\nGeographic Information Coordinating Council MANAGEMENT AND OPERATIONS COMMITTEE",
+        "b_evidence_location": "Top of document, main content section before the date.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V5",
+        "check_name": "Overall visual quality significantly degraded",
+        "a_analysis": "Aside from the header duplication, the overall visual quality is high. The text is legible, spacing is consistent, and the hierarchical structure (headings and lists) is clearly defined, making the document easy to read in a web format.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7619047619047619,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully maintains the logical visual organization of the source document. The single-column text flow of the original minutes is preserved in the main content area. A Table of Contents sidebar has been added for navigation, which is an expected enhancement in HTML conversion and does not detract from the original layout intent. Numbered sections and sub-points are correctly represented with appropriate nesting and bulleting.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source PDF document contains only structured text paragraphs and lists; it does not contain any data tables. Therefore, there are no tables to misrender.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF is a text-only document and does not contain any meaningful images, logos, or charts. The HTML output correctly reflects this absence of graphical content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The primary heading of the document is visually duplicated at the start of the main content area. In the source PDF, the council name and committee name appear once as a header. In the HTML rendering, this combined line appears twice consecutively: once as a top-level heading and immediately following as the first line of the document body text.\",\n      \"b_evidence_source\": \"Geographic Information Coordinating Council\\nMANAGEMENT AND OPERATIONS COMMITTEE\",\n      \"b_evidence_output\": \"Geographic Information Coordinating Council MANAGEMENT AND OPERATIONS COMMITTEE\\nGeographic Information Coordinating Council MANAGEMENT AND OPERATIONS COMMITTEE\",\n      \"b_evidence_location\": \"Top of document, main content section before the date.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V5\",\n      \"check_name\": \"Overall visual quality significantly degraded\",\n      \"a_analysis\": \"Aside from the header duplication, the overall visual quality is high. The text is legible, spacing is consistent, and the hierarchical structure (headings and lists) is clearly defined, making the document easy to read in a web format.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7619047619047619\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

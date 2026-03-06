@@ -1,0 +1,86 @@
+{
+  "document_id": "text-background-colors-53e2",
+  "audited_at": "2026-03-06T20:47:25.084829Z",
+  "quality_score": 89,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While aggregate scores are high, a specific numeric error was identified where '6,000' was truncated to '6,00', which represents a factual integrity failure in a government document. Additionally, the structural mismatch involving 9 headings exceeds the safety threshold for automatic approval and requires human verification of the semantic hierarchy.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the heading counts provided in the metadata. The JSON element count for headings is 0, while the rendered HTML contains 9 headings. This occurs because the JSON structure stores headings as 'title' attributes within section objects rather than as standalone heading elements. Per the audit instructions, a mismatch of 3+ headings is a failure.",
+      "source_pdf_quote": "The source document has clear visual headings for sections like MISSION, BUDGET, etc. (approximately 9 headings).",
+      "output_quote": "Headings in semantic.json: 0, Headings in rendered HTML: 9",
+      "location": "HTML METADATA section",
+      "corroborated": false
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "C6",
+      "analysis": "In the 'QUICK FACTS' section on page 1, there is a numeric error. The source document states 'another 6,000 in onboarding', whereas the JSON output contains 'another 6,00 in onboarding', missing the final digit '0'. This alters the statistical information provided.",
+      "source_pdf_quote": "9,000+ healthcare facilities linked to NC HealthConnex; another 6,000 in onboarding",
+      "output_quote": "9,000+ healthcare facilities linked to NC HealthConnex; another 6,00 in onboarding",
+      "location": "Section: QUICK FACTS, Page 1, Element index 5",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Correct the numeric error in the 'QUICK FACTS' section from 6,00 to 6,000",
+    "Manually verify that all 9 visual headings are properly tagged with semantic HTML heading elements",
+    "Audit other numerical figures for potential character truncation"
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9404,
+      "text_match": 0.9741157873937957,
+      "content_completeness": 0.9807692307692308,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8931,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9404,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.8148148148148149,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9681853888452474,
+      "shingling_precision": 0.9801192842942346,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9615384615384616,
+      "baseline_words": 728,
+      "gemini_words": 700,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 247948,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

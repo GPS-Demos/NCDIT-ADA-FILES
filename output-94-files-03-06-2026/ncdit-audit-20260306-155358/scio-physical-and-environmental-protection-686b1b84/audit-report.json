@@ -1,0 +1,86 @@
+{
+  "document_id": "scio-physical-and-environmental-protection-686b1b84",
+  "audited_at": "2026-03-06T20:41:07.729961Z",
+  "quality_score": 82,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the fidelity composite score is high, major visual defects were identified including a duplicated section header and inconsistent list numbering (switching from Roman to Arabic) caused by page-break handling errors. These issues are corroborated by a low table count ratio (0.5) and a pipeline status of 'needs_retry', making the document unsuitable for auto-approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V4",
+      "analysis": "The header for section 'PE-17 – Alternate Work Site' is visually duplicated. In the source PDF, this section spans pages 11 and 12. In the converted HTML, the header appears once at the start of the section and is then repeated in the middle of sub-point 'd', corresponding to where the page break occurred in the original PDF.",
+      "source_pdf_quote": "PE-17 – Alternate Work Site (heading on page 11)",
+      "output_quote": "PE-17 – Alternate Work Site (heading appears twice in the HTML output, the second time between sub-points 'i' and 'ii' of section 'd')",
+      "location": "PE-17 – Alternate Work Site section, near the end of the document",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is high, but there is a noticeable inconsistency in list formatting caused by the page-break handling. In the 'PE-17' section, sub-point 'i' uses a Roman numeral, but after the duplicated header, the subsequent sub-points (which were ii, iii, iv, v, vi in the source) switch to Arabic numerals (1, 2, 3, 4, 5). This inconsistent formatting degrades the polish of the document.",
+      "source_pdf_quote": "PE-17(d) sub-points: i. Sufficient physical... ii. Design requirements... iii. Equipment being used...",
+      "output_quote": "PE-17(d) sub-points: i. Sufficient physical... [Repeated Header] 1. Design requirements... 2. Equipment being used...",
+      "location": "PE-17 – Alternate Work Site section",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove the duplicated section header for PE-17 on the second page of that section.",
+    "Restore consistent Roman numeral formatting for the sub-points in section PE-17.",
+    "Verify if any tables were omitted during conversion as indicated by the programmatic signals."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9,
+      "text_match": 0.8575563150778416,
+      "content_completeness": 0.7429595172240382,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.818,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8150442477876106,
+      "shingling_precision": 0.9903225806451613,
+      "duplication_ratio": 0.055482488187442155,
+      "word_count_ratio": 0.9859190344480765,
+      "baseline_words": 3977,
+      "gemini_words": 3921,
+      "table_count_ratio": 0.5,
+      "image_count_ratio": 0.0,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 355955,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

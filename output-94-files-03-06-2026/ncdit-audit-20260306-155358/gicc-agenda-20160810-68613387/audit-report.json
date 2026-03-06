@@ -1,0 +1,108 @@
+{
+  "document_id": "gicc-agenda-20160810-68613387",
+  "audited_at": "2026-03-06T20:16:21.206189Z",
+  "quality_score": 88,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the composite fidelity score is high, the low visual score (0.71) and the programmatic flag for a fabricated table indicate significant structural discrepancies. Specifically, the misrendering of the Committee Reports section breaks the alignment between names and roles, potentially leading to misinformation, which necessitates human verification.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Tables visually broken or misrendered",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V2",
+      "analysis": "In the agenda table, row 8 (Committee Reports) is misrendered. In the source PDF, this row contains a list of sub-items where committees in the middle column are horizontally aligned with specific names in the right column (e.g., 'Local Government' aligns with 'Kathryn Clifton'). In the HTML output, these columns are rendered as single blocks of text within their respective cells, breaking the visual alignment and mapping between committees and their representatives. This makes the table data si",
+      "source_pdf_quote": "Row 8 of the table shows committee names (e.g., 'Statewide Mapping Advisory Committee') aligned horizontally with individual names (e.g., 'Ryan Draughn').",
+      "output_quote": "In the HTML table, Row 8 contains all committee names in one cell and all member names in another cell, causing 'Ryan Draughn' to appear at the top of its cell across from '8. Committee Reports' instead of its corresponding committee.",
+      "location": "Main agenda table, item 8",
+      "corroborated": false
+    },
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 1",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline_tables=0, gemini_tables=1",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The source document contains several clickable text links indicated by blue, underlined text (e.g., 'Minutes', 'Standard for Parcel Data Content (Summary)', and 'LGC Bylaws Revised'). These links are missing from the JSON output, where the text is rendered as plain text without hyperlinks. Only the website URL at the bottom of the document was captured as a link.",
+      "source_pdf_quote": "Minutes (in Item 3); Standard for Parcel Data Content (Summary) (in Item 8); LGC Bylaws Revised (in Item 8)",
+      "output_quote": "The corresponding text is plain text with no 'href' attribute in the JSON elements.",
+      "location": "sections[0].elements[4].rows[3].cells[1] and sections[0].elements[4].rows[8].cells[1]",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V4",
+      "analysis": "The main document title 'North Carolina GEOGRAPHIC INFORMATION COORDINATING COUNCIL' and the heading 'AGENDA' are duplicated at the start of the document. They appear first as a combined text block at the very top of the page and then again separately following the 'Meeting Agenda' heading and logo.",
+      "source_pdf_quote": "The title 'North Carolina GEOGRAPHIC INFORMATION COORDINATING COUNCIL' and 'AGENDA' appear once in the header section.",
+      "output_quote": "The text 'North Carolina GEOGRAPHIC INFORMATION COORDINATING COUNCIL AGENDA' appears at the top of the page, then the title and 'AGENDA' appear again separately below the 'Meeting Agenda' heading.",
+      "location": "Top of the document, before and after the table of contents and logo.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Check the Committee Reports table to ensure committee names correctly align with their respective representatives",
+    "Remove duplicated titles and headings at the beginning of the document",
+    "Restore missing hyperlinks for referenced documents"
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8889,
+      "text_match": 0.98005698005698,
+      "content_completeness": 1.0,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8766,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.8889,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.962962962962963,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9817351598173516,
+      "shingling_precision": 0.9783845278725825,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 188,
+      "gemini_words": 188,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 8142,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

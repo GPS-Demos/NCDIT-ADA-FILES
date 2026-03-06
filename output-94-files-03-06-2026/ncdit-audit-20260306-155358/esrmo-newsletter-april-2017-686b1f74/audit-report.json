@@ -1,0 +1,120 @@
+{
+  "document_id": "esrmo-newsletter-april-2017-686b1f74",
+  "audited_at": "2026-03-06T20:15:57.114858Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While programmatic signals show high text preservation, the document contains critical defects in contact information accuracy where hyphens in URLs were replaced with spaces, rendering them non-functional. Additionally, the low fidelity score (0.4) and the replacement of numerous meaningful images and logos with green placeholder blocks represent a significant failure in visual and structural integrity.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C2",
+      "analysis": "Verification of URLs revealed three instances where hyphens in valid URLs from the source were replaced with spaces in the output, creating invalid and non-existent URLs. Per the evaluation criteria, any mismatch in contact information, including URLs, is a critical failure.",
+      "source_pdf_quote": "1. http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management (Page 3)\n2. https://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-awareness (Page 3)\n3. www.us-cert.gov (Page 5, Resources section)",
+      "output_quote": "1. http://it.nc.gov/statewide-resources/cybersecurity-and-risk management (Hyphen replaced by space)\n2. https://it.nc.gov/statewide-resources/cybersecurity-and risk-management/cybersecurity-awareness (Hyphen replaced by space)\n3. www.us cert.gov (Hyphen replaced by space)",
+      "location": "1. Sections[1].elements[28]\n2. Sections[1].elements[30]\n3. Sections[2].elements[15]",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the number of headings defined in the JSON (12) and the number rendered in the HTML (18). Even accounting for the promotion of section and subsection titles to headings, the difference of 6 headings exceeds the allowed threshold of 3.",
+      "source_pdf_quote": "The PDF contains 12 explicit headings/subheadings (excluding the main titles).",
+      "output_quote": "Headings in semantic.json: 12; Headings in rendered HTML: 18.",
+      "location": "Metadata and heading elements throughout the JSON.",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Numerous meaningful images, logos, and graphics are either missing or replaced by solid green placeholder blocks in the HTML output. Specifically, icons for 'Newsletter' and SANS computer (page 2), the PCI DSS logo (page 3), the Calendar icon (page 3), the 'Useful Links' graphic (page 3), the 'My idea is...' lightbulb (page 3), the diverse portraits in the sidebar (pages 4-5), and the Homeland Security/Stop Think Connect logos in the footer (page 5) are all affected. These are meaningful element",
+      "source_pdf_quote": "Meaningful graphics including the 'Newsletter' icon (page 2), 'SANS' computer graphic (page 2), PCI DSS logo (page 3), Calendar graphic (page 3), 'Useful Links' graphic (page 3), lightbulb 'My idea is...' graphic (page 3), portraits in the left margin (pages 4-5), and DHS/STC logos in the footer (page 5).",
+      "output_quote": "These graphics are either entirely absent (portraits) or replaced by solid green rectangular placeholder blocks (Newsletter icon, computer graphic, PCI DSS logo, Calendar, Useful Links, lightbulb, and footer logos).",
+      "location": "Throughout the document, specifically on pages 2, 3, 4, and 5.",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The JSON output contains numerous visible URLs that are not wrapped in an interactive `href` attribute, being represented instead as plain text (sometimes with an underline style). Examples include the 'SECURITYsense' URL on page 2, the various 'Useful Links' on page 3, and several resource URLs on page 5. This results in a loss of interactive functionality for those links.",
+      "source_pdf_quote": "PDF Page 3 contains URLs like http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management.",
+      "output_quote": "In Section 4, the corresponding element is a paragraph containing only text: \"http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management\". No href is defined.",
+      "location": "Section 4 and Section 5.",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is degraded due to the failure to render the majority of the document's graphics. While the first few images appear, the rest of the document is filled with green placeholders or missing elements, making it appear broken, unprofessional, and incomplete compared to the source material.",
+      "source_pdf_quote": "The source PDF is a professionally laid out 5-page newsletter with integrated graphics, logos, and illustrative icons throughout.",
+      "output_quote": "The HTML output appears unfinished with broken/placeholder graphics for nearly all visual elements after the first page, resulting in a significantly degraded presentation.",
+      "location": "Pages 2 through 5",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Restore correct URL formatting by removing injected spaces and ensuring hyphens are present.",
+    "Re-insert missing logos and graphical icons to maintain document meaning and professionalism.",
+    "Convert plain-text URLs into interactive <a> tags.",
+    "Review and correct the heading hierarchy to match the document structure."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9509055701104909,
+      "content_completeness": 0.9990202482037884,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.675,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.7777777777777778,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9490677580718508,
+      "shingling_precision": 0.9527505135813741,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9980404964075767,
+      "baseline_words": 1531,
+      "gemini_words": 1528,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 9461,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

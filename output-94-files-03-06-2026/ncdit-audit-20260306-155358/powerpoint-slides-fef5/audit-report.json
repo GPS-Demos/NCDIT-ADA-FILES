@@ -1,0 +1,131 @@
+{
+  "document_id": "powerpoint-slides-fef5",
+  "audited_at": "2026-03-06T20:35:11.776453Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The document exhibits catastrophic content loss, with 18 out of 25 pages (approximately 72%) missing from the output, including critical instructional exercises. This is corroborated by a low fidelity score of 0.4 and a significantly reduced image count ratio (0.48), along with structural failures like fabricated tables and heading mismatches.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "The source PDF contains 25 pages. The output JSON array includes a placeholder '6 sections omitted for token budget' and only provides content for pages 1, 2, 3, 4, 5, 24, and 25. Consequently, the content for 18 pages (Pages 6 through 23), which includes all the practice exercises and instructional screenshots, is entirely missing from the output.",
+      "source_pdf_quote": "The source PDF contains practice exercises and instructions on pages 6 through 23 (e.g., 'Practice : Create a Copilot training plan' on page 8, 'Summarize a Document' on page 20).",
+      "output_quote": "The JSON sections list skips from the 'Prompting Overview' (Page 5) to 'Copilot Word Prompts' (Page 24), with no content representing the intervening pages.",
+      "location": "sections array, following the 'Prompting Overview' section.",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "The provided metadata indicates that the semantic JSON contains 25 headings, while the rendered HTML contains 38 headings. This is a discrepancy of 13 headings, which significantly exceeds the allowed threshold (max of 10% or 3 headings). This suggests the renderer duplicated or injected headings during the conversion process.",
+      "source_pdf_quote": "The source PDF contains approximately 25 slides, each with a title that would serve as a heading.",
+      "output_quote": "Headings in semantic.json: 25; Headings in rendered HTML: 38",
+      "location": "Metadata summary",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Multiple meaningful images are missing or broken in the HTML output. Specifically, the UI screenshots illustrating how to use Copilot in Word (e.g., on pages 6 and 7) and the comprehensive grid of 12 prompt cards (page 24) are rendered as empty green placeholder blocks. These images are critical for a tutorial document.",
+      "source_pdf_quote": "Page 24 of the PDF displays 12 distinct 'Word prompts' cards with icons and text. Pages 6 and 7 show screenshots of the Microsoft Word interface.",
+      "output_quote": "The HTML shows a single large green rectangular block under the heading 'Find more Word prompts to try in Copilot Lab'. Other UI screenshots are similarly replaced by green blocks (e.g., under 'Add an image').",
+      "location": "Find more Word prompts to try in Copilot Lab section, and sections following 'How to use: Copilot in Word...'",
+      "corroborated": false
+    },
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 1",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline_tables=0, gemini_tables=1",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The source PDF contains multiple functional links, including an email on slide 2 and URLs on slides 8, 12, 13, 14, and others. However, the semantic JSON only identifies 1 link. Examination of the JSON for slide 2 shows that the email address is treated as plain text with underlining, rather than a functional link object. This constitutes a failure to preserve functional links present in the source.",
+      "source_pdf_quote": "Josh.Meredith@microsoft.com (Slide 2 email); https://www.microsoft365.com/chat (Slide 8 URL)",
+      "output_quote": "\"text\": \"Josh.Meredith@microsoft.com\", \"bold\": false, \"italic\": false, \"underline\": true",
+      "location": "Slide 2, element 2",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The document's visual quality is degraded by the presence of raw metadata strings and uncleaned alt-text. For example, instead of just displaying an icon, the text 'Microsoft Word Logo - PNG and Vector - Logo Download' is printed multiple times in the document, which looks unprofessional and cluttered.",
+      "source_pdf_quote": "Page 24 shows small Word icons next to each prompt card.",
+      "output_quote": "The text 'Microsoft Word Logo - PNG and Vector - Logo Download' appears repeatedly in the text blocks corresponding to page 24.",
+      "location": "Find more Word prompts to try in Copilot Lab section",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Identify why 72% of the document content was omitted and attempt a full re-conversion.",
+    "Manually restore functional hyperlinks on slide 2 and slides 8-14.",
+    "Remove the fabricated table and fix the heading hierarchy to match the source PDF.",
+    "Clean up professional visual presentation by removing raw metadata strings like 'Microsoft Word Logo - PNG'."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9171316033641915,
+      "content_completeness": 0.8897360703812317,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6519,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.7777777777777778,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8999662047989185,
+      "shingling_precision": 0.9561938958707361,
+      "duplication_ratio": 0.015298195291024263,
+      "word_count_ratio": 0.8897360703812317,
+      "baseline_words": 1705,
+      "gemini_words": 1517,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 0.48,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 342432,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

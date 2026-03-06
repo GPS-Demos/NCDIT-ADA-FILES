@@ -1,0 +1,130 @@
+{
+  "document_id": "powerpoint-slides-feef",
+  "audited_at": "2026-03-06T20:32:39.706696Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The routing is a mandatory HUMAN_REVIEW due to a major disagreement between high programmatic recall (0.937) and a low LLM fidelity score (0.40). The LLM identifies a critical failure where slides 4-24 were purportedly omitted due to token budget constraints, which, if true, constitutes near-total content loss despite the programmatic signals suggesting text presence.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "The output document is missing content for the vast majority of the source PDF. Specifically, slides 4 through 24 are entirely absent from the 'sections' array, replaced by a note stating that sections were omitted for token budget. This represents a critical failure to preserve the source document's content.",
+      "source_pdf_quote": "The source PDF contains 25 pages/slides of content, including slides titled 'Productivity Tools', 'Teams', 'AI-powered assistant', 'Alt text', 'Get Support', and 'Accessibility Training'.",
+      "output_quote": "The output contains a block: '{\\n      \"_omitted\": \"27 sections omitted for token budget\"\\n    }' between Slide 3 and Slide 25 content.",
+      "location": "Sections between reading_order 3 and 31 (Slides 4-24)",
+      "corroborated": false
+    },
+    {
+      "description": "Significant text omission within a section",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C5",
+      "analysis": "Slide 25 in the source document contains three distinct sections: 'Microsoft Learn', 'LinkedIn Learning', and 'Accessibility links'. The output for this slide completely omits the 'Microsoft Learn' section and its four list items, which constitutes a major omission within that page.",
+      "source_pdf_quote": "Microsoft Learn\\nAccessibility Fundamentals\\nAccessibility guide for M365 apps\\nAccessibility by design | Microsoft Docs\\nAccessibility - Windows apps | Microsoft Docs",
+      "output_quote": "Section 'Microsoft Learn' is entirely absent from the elements of Slide 25 in the JSON.",
+      "location": "Slide 25 (reading_order 31/32)",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a massive discrepancy between the heading count in the JSON (22) and the rendered HTML (54). This difference of 32 headings (approx 145%) significantly exceeds the 10% tolerance. This suggests that the JSON extraction failed to tag sub-headings on slides (such as the product names on slide 5 or category names on slide 6) that were later identified or synthesized by the renderer.",
+      "source_pdf_quote": "The source document contains approximately 25 slide titles and over 30 sub-headings (e.g., 'Windows', 'Vision', 'Microsoft Learn').",
+      "output_quote": "Heading count mismatch. JSON: 22, HTML: 54.",
+      "location": "metadata / html_metadata",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Virtually all meaningful images from the source PDF are missing in the HTML rendering. This includes the Microsoft logo on page 1, the illustrative screenshots of the Accessibility Assistant on page 10 and 17, the instructional photo on page 11, the color contrast examples on page 12, the video screenshot on page 13, the status icons on page 14, and the Clippy GIF on page 16. These images are not merely decorative but are essential for understanding the software features being described.",
+      "source_pdf_quote": "Page 10 contains three screenshots of the Accessibility Assistant interface; Page 11 contains a photo of a man in a wheelchair with a dog; Page 14 contains three Microsoft Teams status icons.",
+      "output_quote": "The HTML output contains large empty vertical spaces where these images should be located, and in some cases (e.g., page 10), the alt-text 'Keycap labels' is rendered as plain text without the accompanying image.",
+      "location": "Sections: 'Accessibility Assistant', 'Alt text', 'Convey information', 'Emojis and GIFs', 'Accessibility Assistant - SharePoint'",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The source document is heavily link-based, particularly on slides 20 through 25, which contain dozens of 'aka.ms' URLs and descriptive text links. The JSON metadata reports only 2 links, while the rendered HTML shows 25. This indicates that the structural identification of links within the JSON is incomplete, leaving many URLs in the source as non-functional text in the conversion.",
+      "source_pdf_quote": "Slides 22-25 contain at least 48 distinct links (e.g., 'Accessibility tools for Word', 'Accessibility Learning Path').",
+      "output_quote": "Link count mismatch. JSON: 2, HTML: 25.",
+      "location": "metadata / html_metadata",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is degraded due to the absence of images, which results in massive, inconsistent white space gaps throughout the document. This makes the document appear unfinished and poorly formatted, which would be unprofessional for a government or corporate presentation.",
+      "source_pdf_quote": "Source PDF has consistent spacing and layout for its slides.",
+      "output_quote": "The HTML output has large, irregular white space gaps between sections, particularly where images failed to render (e.g., below 'Opportunity to improve accessibility').",
+      "location": "Throughout the document, notably equivalent to pages 10, 11, 14, and 17.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Confirm if the text for slides 4-24 exists in the HTML body or if the conversion was truncated.",
+    "Manually re-insert and tag essential instructional images and screenshots.",
+    "Audit and repair heading hierarchies and functional links for slides 20-25."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.936779716825815,
+      "content_completeness": 0.9858657243816255,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6702,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.7777777777777778,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9373970345963756,
+      "shingling_precision": 0.9361632115827575,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9717314487632509,
+      "baseline_words": 1132,
+      "gemini_words": 1100,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 607828,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

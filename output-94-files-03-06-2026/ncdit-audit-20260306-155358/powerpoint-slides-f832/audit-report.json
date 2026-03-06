@@ -1,0 +1,108 @@
+{
+  "document_id": "powerpoint-slides-f832",
+  "audited_at": "2026-03-06T20:30:45.358362Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The document exhibits severe content and structural failures, specifically the silent truncation of four critical slides (32-35) containing core NSDI goals, which is corroborated by a low shingling recall (0.801). The near-total absence of visual elements (image ratio 0.096) and a massive heading count mismatch suggest a fundamental failure in the rendering pipeline, despite a deceptive '0 violations' accessibility score. Given the 9x cost of an improper approval, human intervention is mandatory to address these structural and content gaps.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "A significant portion of the document's end content is missing. Slides 32, 33, 34, and 35, which contain the detailed descriptions for 'Draft NSDI Goal 1: Governance', 'Draft NSDI Goal 2: Data and Technology', 'Draft NSDI Goal 3: People', and the 'Next Steps' bullet points, are completely absent from the JSON output. The reading order in the JSON jumps directly from Slide 31 (Section 24: Priority National Datasets) to Slide 36 (Section 17: Opportunities to Work Together), silently dropping 4 con",
+      "source_pdf_quote": "Content for Slides 32 ('Draft NSDI Goal 1: Governance'), 33 ('Draft NSDI Goal 2: Data and Technology'), 34 ('Draft NSDI Goal 3: People'), and 35 ('Next Steps').",
+      "output_quote": "The output jumps from Slide 31 (Section 24) directly to Slide 36 (Section 17).",
+      "location": "Between Section 24 (index 24) and Section 17 (index 17), pages 32-35 of the source PDF.",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the heading count in the semantic.json (24) and the rendered HTML (42). The difference of 18 headings exceeds both the 10% threshold and the 3-heading absolute limit. This indicates that the renderer generated nearly twice as many headings as exist in the source JSON structure, which is a major structural fidelity failure.",
+      "source_pdf_quote": "The source document contains slide titles that map to approximately 37 logical headings.",
+      "output_quote": "Headings in semantic.json: 24; Headings in rendered HTML: 42",
+      "location": "HTML Metadata section",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "A significant number of meaningful images, infographics, and diagrams from the source PDF are missing in the HTML output. This includes the grid of 32 agency logos (page 4), the maturity assessment map (page 9), the Geospatial Data Act infographic (page 10), the 'Economic Value of Location' infographic (page 12), and the technical diagrams on pages 14, 15, 21, and 22. These visual elements contain critical contextual information that is lost in the conversion.",
+      "source_pdf_quote": "The source PDF contains several critical visual elements: a grid of agency logos on page 4; a map and report card on page 9; a detailed 'Economic Value of Location' infographic with statistics on page 12; and two maps on page 18.",
+      "output_quote": "The HTML output is missing the logo grid on page 4, the map on page 9, and the infographic on page 12. On page 18, the maps are replaced by a broken placeholder or are missing entirely.",
+      "location": "Who is the FGDC? (page 4), NSGIC Maturity Assessment (page 9), Economic Value of Location (page 12), NSDI In Action Serving Citizens – North Carolina (page 18)",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is degraded by a specific rendering error on page 18, where a large, solid green rectangular block appears as a broken placeholder for the map images. This is a noticeable quality defect that distracts from the content.",
+      "source_pdf_quote": "Map images on page 18 of the PDF.",
+      "output_quote": "A solid green rectangular block appears in the middle of the 'NSDI In Action Serving Citizens – North Carolina' section.",
+      "location": "NSDI In Action Serving Citizens – North Carolina (page 18)",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Manually restore content from Slides 32 through 35.",
+    "Verify the 18 extra headings in the HTML to ensure they are not hallucinated text.",
+    "Re-insert or provide alternative text for missing infographics and diagrams on pages 4, 9, 10, 12, 14, 15, 21, and 22."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8753070649503782,
+      "content_completeness": 0.9252155172413793,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6488,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.8148148148148149,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8007910823444804,
+      "shingling_precision": 0.9651137594799567,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8504310344827586,
+      "baseline_words": 2320,
+      "gemini_words": 1973,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 0.0963855421686747,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 634699,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

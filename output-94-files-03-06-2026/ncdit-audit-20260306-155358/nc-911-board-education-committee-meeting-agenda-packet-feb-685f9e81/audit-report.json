@@ -1,0 +1,131 @@
+{
+  "document_id": "nc-911-board-education-committee-meeting-agenda-packet-feb-685f9e81",
+  "audited_at": "2026-03-06T20:17:34.985417Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The document displays a major conflict between high programmatic recall and extremely low LLM fidelity (0.4), primarily due to significant content truncation. The explicit omission of nine pages of presentation slides and a 90% data loss in attendance tables constitutes a critical failure in document completeness. Human intervention is required to restore the missing sections and verify the table structures.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "The JSON output explicitly omits several pages of the document, specifically slides 2 through 10 of the presentation (pages 6, 7, 9, 10, 11, 12, 13, 14, and 15), as indicated by the placeholder '9 sections omitted for token budget'. These pages contain significant data regarding campaign metrics, analytics, and lists of URLs.",
+      "source_pdf_quote": "The source PDF contains presentation slides on pages 6, 7, 9, 10, 11, 12, 13, 14, and 15 covering campaign overview, metrics, and website analytics.",
+      "output_quote": "\"_omitted\": \"9 sections omitted for token budget\"",
+      "location": "Between Section 3 and Section 5 of the JSON output",
+      "corroborated": false
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C4",
+      "analysis": "The attendance tables on page 2 of the minutes are severely truncated. The 'Committee Members' table in the source has 10 data rows, while the output only includes 1. The 'Staff' table in the source has 11 data rows, while the output only includes 1. This represents a loss of over 90% of the data in these tables.",
+      "source_pdf_quote": "The 'Committee Members' table on page 2 lists 10 members (Jeryl Anderson through Donna Wright). The 'Staff' table on page 2 lists 11 members (Richard Bradford through Angie Turbeville).",
+      "output_quote": "The 'Committee Members and Guests Attendance' table contains only 1 member row (Jeryl Anderson). The 'Staff Attendance' table contains only 1 staff row (Richard Bradford).",
+      "location": "Section 2, Meeting Attendees",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S3",
+      "analysis": "There is a major structural failure in the attendance tables on page 2 of the source document. The 'Committee Members and Guests Attendance' table and the 'Staff Attendance' table in the JSON only contain a single data row each (Jeryl Anderson and Richard Bradford respectively), whereas the source document lists over 10 individuals in each category. This results in significant loss of structural data.",
+      "source_pdf_quote": "The table on Page 2 lists 10 committee members (Anderson, Cole, Greene, Gusa, Hartman, Joyner, Downs, Short, Stewart, Wright) and 11 staff members.",
+      "output_quote": "The tables in the JSON output only contain one data row for 'Jeryl Anderson' and one for 'Richard Bradford'.",
+      "location": "Sept 23 2021 EDU Committee Minutes Draft section, page 2",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "The provided HTML metadata indicates a significant discrepancy between the number of headings identified in the semantic JSON (6) and those rendered in the HTML (23). A difference of 17 headings far exceeds the allowed threshold of 10% or 3 headings.",
+      "source_pdf_quote": "json_heading_count: 6",
+      "output_quote": "html_heading_count: 23",
+      "location": "HTML METADATA",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Several meaningful images from the source presentation slides are missing in the HTML rendering, replaced by solid green rectangular placeholders. Specifically, the analytics dashboard screenshots on PDF pages 10, 11, and 13 are not rendered, depriving the user of significant visual data intended by the original document.",
+      "source_pdf_quote": "Dashboard images on pages 10 (Site Summary), 11 (Engagement), and 13 (Top Clicks) showing Google Analytics data.",
+      "output_quote": "Solid green rectangular blocks appear under the corresponding headings 'Webpage Analytics: Site Summary', 'Webpage Analytics: Engagement', and 'Webpage Analytics: Top 10 Clicks...'.",
+      "location": "Sections 'Webpage Analytics: Site Summary', 'Webpage Analytics: Engagement', and 'Webpage Analytics: Top 10 Clicks after accessing the Recruitment Webpage'",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The JSON fails to capture any links (metadata count is 0), even though page 13 of the source document explicitly lists 10 government URLs which should be semantically tagged as links.",
+      "source_pdf_quote": "URLs on Page 13 such as 'https://durhamnc.gov/3774/City-Jobs-Careers'",
+      "output_quote": "link_count: 0 in semantic.json",
+      "location": "semantic.json metadata / Page 13",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Manually re-insert and format the omitted presentation slides (pages 6-15).",
+    "Complete the attendance tables for Committee Members and Staff to reflect the full list of attendees.",
+    "Standardize heading levels to resolve the discrepancy between JSON and HTML metadata.",
+    "Ensure all 10 URLs on page 13 are converted into active, accessible links."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9294365446626373,
+      "content_completeness": 0.47667777248929083,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.5924,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5925925925925926,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9041331802525833,
+      "shingling_precision": 0.9778559602649006,
+      "duplication_ratio": 0.015324336090552896,
+      "word_count_ratio": 0.9533555449785817,
+      "baseline_words": 2101,
+      "gemini_words": 2003,
+      "table_count_ratio": 2.0,
+      "image_count_ratio": 0.3,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 17656,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

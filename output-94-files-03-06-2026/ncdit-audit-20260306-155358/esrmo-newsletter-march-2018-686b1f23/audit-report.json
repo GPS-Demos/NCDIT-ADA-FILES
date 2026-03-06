@@ -1,0 +1,119 @@
+{
+  "document_id": "esrmo-newsletter-march-2018-686b1f23",
+  "audited_at": "2026-03-06T20:16:05.945901Z",
+  "quality_score": 85,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While text content preservation is high (97.8% recall), the document exhibits significant structural and visual failures. The programmatic detection of a fabricated table corroborates the fidelity report's concerns regarding structural hallucination, and the loss of multiple contextual images (FEMA logo, icons) plus visual artifacts (large brown block) significantly degrades the document's professional quality.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "The provided metadata indicates a significant mismatch between the heading count in the semantic.json (4) and the rendered HTML (10). The mismatch of 6 headings exceeds the threshold of 3 (or 10%). While the renderer appears to be promoting section titles and metadata titles to headings to improve accessibility, the binary check specifically flags this degree of count discrepancy as a failure of structural fidelity between the source JSON and the target output.",
+      "source_pdf_quote": "Original document structure with various section headers and sub-headers.",
+      "output_quote": "html_heading_count: 10 vs json_heading_count: 4",
+      "location": "Metadata summary provided in the audit request.",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Several meaningful images from the source PDF are missing in the HTML output. These include the green highlighter graphic (page 1), the 'Monthly Newsletter' decorative header (page 3), the calendar icon (page 3), the FEMA logo (page 4), the 'WWW' mouse graphic (page 4), and the 'My idea is...' lightbulb graphic (page 4). While the NC DIT and EU flag logos are present, the loss of these other contextual and branding images is a significant omission.",
+      "source_pdf_quote": "Visual graphics including: Green highlighter (p1), 'Monthly Newsletter' header (p3), Calendar icon (p3), FEMA logo (p4), 'WWW' mouse (p4), 'My idea is...' lightbulb (p4).",
+      "output_quote": "These images are entirely absent from the rendered HTML screenshot in their respective sections.",
+      "location": "Throughout the document (Pages 1, 3, and 4)",
+      "corroborated": false
+    },
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 1",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline_tables=0, gemini_tables=1",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "A check of the semantic.json reveals that several URLs explicitly listed in the source text (specifically on pages 3 and 4) are not marked as semantic links (using the 'href' property). While the text content is present, the links are 'missing' in terms of semantic data. Furthermore, the mismatch between the JSON link count (8) and HTML link count (13) indicates that the renderer is injecting links that were not explicitly defined as such in the source JSON.",
+      "source_pdf_quote": "Page 3: 'https://www.cisecurity.org/resources/newsletter'; Page 4: 'https://it.nc.gov/'",
+      "output_quote": "URLs are present as text in the 'content' or 'items' arrays but lack corresponding 'href' metadata objects in several sections.",
+      "location": "Sections 'Other Monthly Newsletters' and 'Check out the following resources…'",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is degraded by a few factors: 1) A large brown rectangular block at the top of the HTML which does not exist in the PDF (likely a failed rendering of the header background). 2) The NC DIT logo is misplaced, appearing after the 'New Policies for Statewide Security!' heading instead of in the header area. These issues, combined with the missing images, result in a less professional appearance than the original.",
+      "source_pdf_quote": "NC DIT logo appears in the top header section above the 'New Policies' heading. There is no brown box.",
+      "output_quote": "A large brown box appears under the title. The NC DIT logo appears after the 'New Policies for Statewide Security!' heading.",
+      "location": "Top of page 1",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify the content of the 'fabricated table' to see if it misrepresents text as tabular data.",
+    "Determine if the missing branding and contextual images are required for government standards.",
+    "Correct the heading hierarchy to match the original document structure."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8333,
+      "text_match": 0.9814858214202016,
+      "content_completeness": 0.9848084544253632,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8523,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.8333,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7777777777777778,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9782761037140855,
+      "shingling_precision": 0.9847166705854691,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9848084544253632,
+      "baseline_words": 1514,
+      "gemini_words": 1491,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 0.9,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 8830,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

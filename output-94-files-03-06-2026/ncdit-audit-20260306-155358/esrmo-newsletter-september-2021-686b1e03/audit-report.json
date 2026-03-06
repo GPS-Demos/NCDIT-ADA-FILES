@@ -1,0 +1,86 @@
+{
+  "document_id": "esrmo-newsletter-september-2021-686b1e03",
+  "audited_at": "2026-03-06T20:16:12.569249Z",
+  "quality_score": 80,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While content recall is high (0.973), the document fails on visual and structural fidelity. Multiple meaningful images (phishing graphics, photos, and a calendar) are missing or broken, and there is a significant discrepancy in heading counts between metadata and HTML. Given the pipeline's 'needs_retry' signal and the 9x cost of false positives, human review is required to ensure visual context is preserved.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the heading counts provided in the metadata. The `semantic.json` reports 3 headings, which corresponds only to the explicit elements of `type: \"heading\"` found within the sections. However, the rendered HTML contains 14 headings. This discrepancy occurs because the renderer is converting the titles of the 10 sections into headings (likely H1 or H2), which are not being tallied in the JSON metric. This difference of 11 headings exceeds the allowable thresho",
+      "source_pdf_quote": "The source PDF is organized into approximately 10 titled sections/articles, with additional internal sub-headings like 'Enterprise Security and Risk Management Office' and 'CYBERSECURITY NEWSLETTERS'.",
+      "output_quote": "Headings in semantic.json: 3; Headings in rendered HTML: 14.",
+      "location": "Metadata and structural analysis of sections.",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Several meaningful images present in the PDF are missing from the HTML output. Specifically, the 'PHISHING' monitor graphic on page 1 is replaced by a blank yellow block. The photo of individuals on page 2, the Lego figure graphic on page 3, the laptop photo on page 5, and the calendar graphic in the 'Upcoming Events' section on page 5 are all absent. These images provide visual context for the newsletter articles.",
+      "source_pdf_quote": "Graphic of a computer monitor with 'PHISHING' on the screen (Page 1); Photo of two individuals looking at a laptop (Page 2); Graphic of Lego figures at a desk (Page 3); Photo of hands on a laptop keyboard (Page 5); Calendar graphic next to 'UPCOMING EVENTS' (Page 5).",
+      "output_quote": "The images are completely missing from the rendered HTML screenshot, with the Phishing graphic appearing as an empty yellow/orange placeholder.",
+      "location": "Throughout the document (elements corresponding to pages 1, 2, 3, and 5).",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify whether the missing images provide essential context for the newsletter content",
+    "Inspect the 14 HTML headings to ensure they follow a logical semantic hierarchy",
+    "Confirm if any actual data tables were lost or if the low table ratio is due to layout table removal"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8611,
+      "text_match": 0.9819321148825064,
+      "content_completeness": 0.5387096774193548,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7966,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.8611,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.8148148148148149,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9734934769103334,
+      "shingling_precision": 0.9905183312262958,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9865102639296187,
+      "baseline_words": 1705,
+      "gemini_words": 1682,
+      "table_count_ratio": 0.09090909090909091,
+      "image_count_ratio": 0.9230769230769231,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 11264,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "document_id": "20200522-nc911-board-minutes-approved-685f9cb7",
+  "audited_at": "2026-03-06T20:15:43.697190Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "reject",
+  "routing_label": "Reject",
+  "reasoning": "The document shows catastrophic content loss and structural corruption. Programmatic signals (shingling recall 0.776, table count ratio 0.25) strongly corroborate the LLM fidelity findings of missing tables, voting records, and financial data. With over 25% of the total text and 75% of tables missing, the output is fundamentally broken.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "Several significant sections/elements are entirely absent from the output. This includes the 'ROLL CALL' table on page 2, the 'Phone Numbers' list on page 3, and the 'ROLL CALL VOTE' table on page 4. These are substantial data blocks required for the fidelity of the document.",
+      "source_pdf_quote": "Phone Numbers: 336-373-2646... 919-754-6642 (Page 3); NORTH CAROLINA 911 BOARD MEETING ROLL CALL Table (Page 2); NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE Table (Page 4)",
+      "output_quote": "The text jumps from the 'Roll Call' paragraph directly to '1. Chair’s Opening Remarks', and from '5. Consent Agenda' directly to '6. Executive Director Report', omitting the tables and phone list mentioned.",
+      "location": "Sections between elements 'Roll Call' and 'Chair's Opening Remarks', and 'Consent Agenda' and 'Executive Director Report'",
+      "corroborated": false
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C4",
+      "analysis": "The attendance table (element index 6) is severely truncated. The source document lists approximately 15 members, 15 staff members, and over 30 guests across pages 1, 2, and 3. The JSON output contains only a single data row with one entry for each category (David Bone, Richard Bradford, and Ron Adams). This is a loss of over 95% of the table's data rows.",
+      "source_pdf_quote": "The source table for 'Members Present via Teams', 'Staff Present via Teams', and 'Guests via Teams' spans approximately 50 rows across pages 1-3.",
+      "output_quote": "The JSON table at element index 6 contains only 1 header row and 1 data row.",
+      "location": "Attendance table, element index 6",
+      "corroborated": false
+    },
+    {
+      "description": "Significant text omission within a section",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C5",
+      "analysis": "Section 5 (Consent Agenda) is missing significant content. The source document includes sub-items c) CMRS Fund/Account, d) PSAP Fund/Account, e) Grant Fund/Account, and f) Grant Project Updates, all with detailed financial figures. The JSON output only includes sub-items a) and b), omitting more than 50% of the text and data for this section.",
+      "source_pdf_quote": "c) CMRS Fund/Account... d) PSAP Fund/Account... e) Grant Fund/Account... f) Grant Project Updates... (Page 4)",
+      "output_quote": "The output ends after 'b) NG 911 Fund/Account' and proceeds to the paragraph about the motion to accept.",
+      "location": "Section 5 (Consent Agenda), Page 4",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S3",
+      "analysis": "The attendance table on page 1 is severely corrupted by truncation; only the first data row is present in the JSON, while the source PDF contains 13 rows on page 1 and continues with a Guest list on pages 2 and 3. Furthermore, the 'NORTH CAROLINA 911 BOARD MEETING ROLL CALL' table (pages 2-3) and the 'ROLL CALL VOTE' table (pages 4 and 6) are entirely missing from the output.",
+      "source_pdf_quote": "The Attendance table on Page 1 contains 13 rows of data. The Roll Call table on Page 2 contains 35 rows. The Roll Call Vote table on Page 4 contains 16 rows.",
+      "output_quote": "The Attendance table (id: heading-2) contains only 1 data row. The Roll Call and Roll Call Vote tables are missing from the sections array.",
+      "location": "Attendance table, page 1; Roll Call table, pages 2-3; Roll Call Vote table, pages 4/6",
+      "corroborated": false
+    },
+    {
+      "description": "Major visual layout difference",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V1",
+      "analysis": "The HTML fails to represent several major visual components from the source PDF. The multi-column attendance list on Page 1 is truncated to a single row in the HTML. Entire tabular sections, such as the 'ROLL CALL' table on Page 2 and the 'ROLL CALL VOTE' table on Page 4, are completely absent from the HTML. Additionally, the list of phone numbers on Page 3 is missing, fundamentally changing the layout and information hierarchy.",
+      "source_pdf_quote": "The source PDF contains a large 3-column table for attendance (Page 1), a full-page 'ROLL CALL' table (Page 2), a list of phone numbers (Page 3), and a 'ROLL CALL VOTE' table (Page 4).",
+      "output_quote": "The HTML only contains a single-row attendance table and completely omits the Roll Call tables, the phone number list, and the financial figures from the PSAP/Grant fund accounts.",
+      "location": "Throughout the document, specifically pages 1, 2, 3, and 4.",
+      "corroborated": false
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V2",
+      "analysis": "Tables are severely misrendered. The attendance table is truncated, showing only the first entry of each column. More importantly, the complex Roll Call and Roll Call Vote tables are not rendered as tables at all—they are omitted entirely, losing all visual structure and associated data.",
+      "source_pdf_quote": "The PDF features detailed tables with columns for 'IN PERSON', 'VIA MS TEAMS/PHONE', and 'NOT PRESENT' for both Board and Staff members (Page 2).",
+      "output_quote": "The 'Attendance' table in the HTML only contains one row: 'David Bone... | Richard Bradford... | Ron Adams'. No other tables are present in the output.",
+      "location": "Page 1 (Attendance), Page 2 (Roll Call), Page 4 (Roll Call Vote).",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S5",
+      "analysis": "The list for section '5. Consent Agenda' is truncated. The source document lists items 'a' through 'f' across pages 3 and 4. The JSON output only captures items 'a' and 'b', completely omitting the financial balance/disbursement data (items c, d, e) and grant updates (item f).",
+      "source_pdf_quote": "5. Consent Agenda ... a) Minutes ... b) NG 911 ... c) CMRS Fund/Account ... d) PSAP Fund/Account ... e) Grant Fund/Account ... f) Grant Project Updates",
+      "output_quote": "The list under '5. Consent Agenda' only contains items 'a) Minutes...' and 'b) NG 911...'.",
+      "location": "Section 5, page 3-4",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is significantly degraded due to the omission of large blocks of information. Specifically, the financial data list under section 5 (Consent Agenda) on page 4, which includes month-end balances and disbursements, is missing. This makes the document feel incomplete and unprofessional.",
+      "source_pdf_quote": "Page 4 shows a detailed list of fund amounts, e.g., 'April 2020 Month-End Balance $66,897,707'. Page 3 shows a block of 'Phone Numbers'.",
+      "output_quote": "The HTML skips from the Consent Agenda list directly to the Executive Director Report, omitting all financial data points and phone numbers.",
+      "location": "Sections 5 and 6, and following the Attendance table.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Document must be re-processed as the current output has lost the majority of the meeting's substantive data (votes and financial reporting)."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8691283200280738,
+      "content_completeness": 0.49135404454865184,
+      "accessibility": 1.0,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.515,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5930232558139534,
+      "fidelity_structural": 0.7777777777777778,
+      "fidelity_visual": 0.47619047619047616,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7758168792591298,
+      "shingling_precision": 0.9982014388489209,
+      "duplication_ratio": 0.005972991689750693,
+      "word_count_ratio": 0.7327080890973037,
+      "baseline_words": 2559,
+      "gemini_words": 1875,
+      "table_count_ratio": 0.25,
+      "image_count_ratio": 0.0,
+      "pipeline_confidence": 0.94,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 10176,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
