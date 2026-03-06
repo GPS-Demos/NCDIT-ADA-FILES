@@ -1,0 +1,85 @@
+{
+  "document_id": "fillable-form-logo-imagery-bddf",
+  "audited_at": "2026-03-06T20:16:10.984684Z",
+  "quality_score": 89,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the content preservation is strong with a shingling recall of 0.957, the document exhibits significant structural failures, specifically the absence of a top-level H1 heading and the loss of functional hyperlinks. Given the pipeline's recommendation to flag for review and the identified major defect in heading hierarchy, a manual correction is required to ensure accessibility compliance.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S2",
+      "analysis": "The output JSON starts its heading hierarchy at Level 2 ('North Carolina Local Government Committee') and continues all subsequent sections as Level 2. There is no H1 assigned to the document title or the primary subject ('Hurricane Preparedness Checklist'), resulting in a skip of the top-level hierarchy (skipping H1 to start at H2). This is a structural defect for accessibility and logical organization.",
+      "source_pdf_quote": "North Carolina Local Government Committee / Hurricane Preparedness Checklist",
+      "output_quote": "{\"type\": \"heading\", \"level\": 2, \"text\": \"North Carolina Local Government Committee\"}",
+      "location": "Element index 1 (JSON beginning)",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The source PDF contains functional hyperlinks (indicated by blue underlined text) for 'NC GIS Contact App' on page 1 and 'PACE plan' on page 2. The metadata confirms that the semantic JSON contains 0 links, meaning these interactive elements were stripped and converted to plain text during conversion.",
+      "source_pdf_quote": "NC GIS Contact App (Page 1); PACE plan (Page 2)",
+      "output_quote": "\"Links in semantic.json: 0\"",
+      "location": "HTML Metadata / List item text on Page 1 and 2",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Assign a proper H1 tag to the document title or primary subject.",
+    "Restore functional hyperlinks that were converted to plain text."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9333,
+      "text_match": 0.940986257073565,
+      "content_completeness": 0.9949152542372881,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8858,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9333,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7777777777777778,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9572368421052632,
+      "shingling_precision": 0.9252782193958664,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9898305084745763,
+      "baseline_words": 295,
+      "gemini_words": 292,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 7521,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "document_id": "powerpoint-slides-fef1",
+  "audited_at": "2026-03-06T20:34:01.589374Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The document exhibits a major signal disagreement: programmatic metrics suggest high word retention (0.965), yet LLM fidelity analysis reports a critical loss of content from pages 4 through 20. Given the low composite fidelity score (0.4) and the reports of missing screenshots essential to the document's 'how-to' nature, human intervention is required to determine if the content is truly missing or merely poorly structured.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "The output JSON contains an explicit omission flag indicating that several sections were omitted. A comparison between the source PDF (21 pages) and the JSON (which only contains data for pages 1, 2, 3, and 21) shows that content from pages 4 through 20 is entirely missing. This constitutes a significant loss of information present in the source original.",
+      "source_pdf_quote": "The entire content of source PDF pages 4 through 20, which includes sections such as 'Art of Prompting', 'Summarize teams, email and channel messages...', 'Create a Copilot usage guide...', and various practice exercises.",
+      "output_quote": "{\"_omitted\": \"11 sections omitted for token budget\"}",
+      "location": "sections, after element at reading_order 3",
+      "corroborated": false
+    },
+    {
+      "description": "Content duplicated",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S1",
+      "analysis": "The output demonstrates structural duplication of the text 'Questions' found on page 21. In the source, the word appears once. In the JSON output, it is captured as a level 2 heading in Section 15 ('Untitled Section'), and then the same text is used as the title for Section 16. This results in the content appearing more times in the structured output than in the source.",
+      "source_pdf_quote": "Questions",
+      "output_quote": "Section 15 element: \"text\": \"Questions\"; Section 16 title: \"Questions\"",
+      "location": "Sections 15 and 16, Page 21",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the heading count in the semantic JSON (10) and the rendered HTML (26). The difference of 16 headings far exceeds the threshold of 3 or 10%. This indicates that the renderer is adding a large number of headings (likely promoting every section title to an H tag) that were not semantically labeled as headings in the source JSON.",
+      "source_pdf_quote": "Structural headers/page titles across 21 pages.",
+      "output_quote": "json_heading_count: 10, html_heading_count: 26",
+      "location": "Metadata",
+      "corroborated": false
+    },
+    {
+      "description": "Major visual layout difference",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V1",
+      "analysis": "The source PDF (pages 4 and 5) uses a sophisticated visual layout for 'Art of Prompting - Key Elements', utilizing colored boxes, icons, and arrows to annotate specific parts of an example prompt. In the HTML output, this visual organization is completely lost. The annotations are presented as a simple list below the prompt text, removing the direct visual connection between the concepts (Goal, Context, etc.) and the text they describe. This fundamentally changes how the information is parsed by",
+      "source_pdf_quote": "Source PDF Page 5 shows an example prompt text with arrows pointing from labeled boxes ('Goal', 'Context', 'Source', 'Expectations') to specific color-coded sections of the text.",
+      "output_quote": "The HTML output displays the prompt text as a single block, followed by a vertical list of the components (Goal, Context, etc.) without any visual indicators or arrows linking them to the text.",
+      "location": "Art of Prompting - Key Elements section, corresponding to PDF page 5.",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Several meaningful images from the source PDF are missing or broken in the HTML output. Specifically, the screenshots demonstrating the software interface (PDF pages 9, 11, 12, 13, 14) are entirely absent from the HTML version, often replaced only by a slide number header. Additionally, the informational graphic on page 20 showing a grid of prompt cards is replaced by a large green placeholder block in the HTML render. These images are central to the 'how-to' nature of the document.",
+      "source_pdf_quote": "Page 9 of the source PDF consists of a full-page screenshot of the Microsoft Outlook interface showing the Copilot summary feature. Page 20 shows a 4x3 grid of colorful prompt cards from 'Copilot Lab'.",
+      "output_quote": "In the HTML screenshot, the section for Slide 9 contains only the text 'Slide 9' with no following image. At the end of the document, the 'Copilot Lab' prompts are represented by a large, empty green rectangular block.",
+      "location": "Slide 9 header and 'Find more Email prompts to try in Copilot Lab' section at the end of the document.",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The source PDF contains several URLs and an email address (Josh.Meredith@microsoft.com on page 2). The semantic JSON metadata explicitly reports a link_count of 0, indicating that none of these active elements were captured as link objects in the JSON. While the text is present, the structural functionality of the links is missing from the semantic representation.",
+      "source_pdf_quote": "Josh.Meredith@microsoft.com (Page 2); https://www.microsoft365.com/chat (Page 6, 7, etc.)",
+      "output_quote": "\"link_count\": 0",
+      "location": "Metadata and Page 2",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is degraded due to the presence of large green placeholder blocks (pages 4, 5, and 20) which signal broken or unrendered components. The loss of the slide-based formatting makes the document feel disjointed, and the missing visual aids (screenshots) significantly lower the utility and professional appearance of the guide.",
+      "source_pdf_quote": "The PDF features a consistent slide-deck design with integrated screenshots and clean diagrams.",
+      "output_quote": "The HTML output contains large, empty green blocks where diagrams should be, and lacks the instructional screenshots present throughout the PDF.",
+      "location": "Throughout the document, notably under 'Art of Prompting' and 'Copilot Lab' sections.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify the presence of text from pages 4-20 to resolve the conflict between programmatic and LLM signals.",
+    "Re-integrate missing screenshots and graphics which are central to the instructional value of the slides.",
+    "Fix the heading hierarchy and remove duplicated text elements on the final page.",
+    "Convert plain text URLs and emails into functional hyperlinks."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9419604471195184,
+      "content_completeness": 0.982706002034588,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6708,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.5925925925925926,
+      "fidelity_visual": 0.47619047619047616,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9387317909168809,
+      "shingling_precision": 0.9452113891285591,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.965412004069176,
+      "baseline_words": 983,
+      "gemini_words": 949,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 0.5384615384615384,
+      "pipeline_confidence": 0.96,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 423569,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

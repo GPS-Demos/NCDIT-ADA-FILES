@@ -1,0 +1,108 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1",
+  "audited_at": "2026-03-06T20:17:08.801194Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The document has critical content loss, with the conversion process explicitly omitting nine major sections due to token budget constraints, corroborated by a low fidelity composite score of 0.4. Furthermore, major structural defects in heading hierarchy and a significant discrepancy between JSON and HTML heading counts indicate a fundamental failure in the document's navigational architecture.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "Several entire sections and pages from the source PDF are missing in the output. These include 'Introduction' (p. 8), 'Statement of Need' (p. 9), 'Watershed Boundaries' (p. 42), and the entire 'Stewardship and Maintenance' section (p. 42-43) including its sub-sections (Roles, Update and Maintenance, Stewardship, Additional Considerations, State and Local Needs). The output explicitly identifies these as missing with a placeholder stating '9 sections omitted for token budget'.",
+      "source_pdf_quote": "The Table of Contents lists sections on pages 8, 9, 42, and 43 that are not present in the output.",
+      "output_quote": "The output contains a placeholder: { \"_omitted\": \"9 sections omitted for token budget\" } between sections 3 and 12, and after section 13.",
+      "location": "Sections 4 and 14-15 (placeholders), mapping to PDF pages 8, 9, 42, and 43.",
+      "corroborated": false
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S2",
+      "analysis": "The heading hierarchy is significantly broken in Section 8. The heading 'Missing In-Line Waterbodies' (Source page 32) is assigned level H2, despite being a sub-heading of 'Feature Attributes and Network Connectivity' (assigned H3 in JSON). This causes the hierarchy to revert to a higher level than its parent. Furthermore, the document immediately skips from this H2 to H4 for the next heading 'Z Enabled Features', violating the requirement for sequential heading levels.",
+      "source_pdf_quote": "The PDF structure on pages 31-32 shows 'Missing In-Line Waterbodies' as a subsection of 'Feature Attributes and Network Connectivity'.",
+      "output_quote": "H3: 'Feature Attributes and Network Connectivity' (id: heading-25), followed later by H2: 'Missing In-Line Waterbodies' (id: heading-27), followed by H4: 'Z Enabled Features' (id: heading-29).",
+      "location": "Section 8: NC Hydrography Issue, Gaps, and Recommendations",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the heading count in the JSON (31) and the rendered HTML (48). This difference of 17 headings (a 54% increase) indicates that the renderer has likely converted other structural elements (such as figure captions or bolded table rows) into headings, which is a structural corruption of the document's navigation.",
+      "source_pdf_quote": "Headings in semantic.json: 31",
+      "output_quote": "Headings in rendered HTML: 48",
+      "location": "Metadata",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The JSON document completely fails to capture the hyperlinks present in the source PDF. The source contains numerous blue underlined hyperlinks (e.g., page 15, page 44), yet the semantic.json reports 0 links. While the rendered HTML miraculously contains 22 links, their absence from the JSON data indicates a failure in the conversion pipeline's link extraction.",
+      "source_pdf_quote": "Source page 15 contains links for 'Elevation-Derived Hydrography Acquisition Specifications' and other 3DHP documents.",
+      "output_quote": "Links in semantic.json: 0",
+      "location": "Section 7, heading-11 subsection",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Re-run the conversion with increased token limits or chunked processing to restore the 9 missing sections.",
+    "Correct the heading hierarchy to ensure sequential H1-H6 ordering.",
+    "Investigate the HTML renderer to prevent non-heading text elements from being wrapped in heading tags."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9285125405959891,
+      "content_completeness": 0.6040902394638783,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6113,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.5925925925925926,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8970209256777651,
+      "shingling_precision": 0.9904393353061689,
+      "duplication_ratio": 0.019554171727712864,
+      "word_count_ratio": 0.9004881712354488,
+      "baseline_words": 10652,
+      "gemini_words": 9592,
+      "table_count_ratio": 1.6923076923076923,
+      "image_count_ratio": 0.5,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 9910,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-i-f7f6",
+  "audited_at": "2026-03-06T20:17:17.328106Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "reject",
+  "routing_label": "Reject",
+  "reasoning": "The document exhibits catastrophic content loss, with 46 out of 55 slides omitted from the final output as evidenced by both the fidelity report and the explicit placeholders in the text. There is a massive structural failure indicated by the discrepancy between the 14 headings in the JSON and 68 in the HTML, alongside the corruption of complex diagrams into meaningless table structures.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "A very large number of pages and sections are missing from the JSON output. The document explicitly includes a placeholder indicating that 46 sections were omitted. For an audit of fidelity, the absence of slides 4, 5, 7-28, 30, 32-42, and 44-53 constitutes a critical failure to represent the source material.",
+      "source_pdf_quote": "Source PDF contains 55 slides with distinct content on each, including 'Council Members' (p4), 'Who We Are' (p5), and various committee detailed slides (p7-28, etc.).",
+      "output_quote": "The JSON sections array contains only 9 sections (corresponding to slides 1, 2, 3, 6, 29, 31, 43, 54, and 55) and includes the metadata: \"_omitted\": \"46 sections omitted for token budget\".",
+      "location": "sections array",
+      "corroborated": false
+    },
+    {
+      "description": "Significant text omission within a section",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C5",
+      "analysis": "In Section 6 (GICC Committees), the output fails to semantically capture the vast majority of the text content present in the diagram on the slide. While the title is present, the names of the committees and subgroups (e.g., 'Management and Operations', 'Technical Advisory Committee', 'Statewide Mapping Advisory', 'Federal Interagency Committee', etc.) are entirely missing from the paragraph, list, or table elements of the section. This loss exceeds the 25% threshold for the section.",
+      "source_pdf_quote": "Slide 6 contains labels for the committee structure: 'Management and Operations', 'Technical Advisory Committee', 'Statewide Mapping Advisory', 'Federal Interagency Committee', 'State Government Users Committee', and 'Local Government Committee'.",
+      "output_quote": "Section 6 elements contain only the heading 'GICC COMMITTEES' and an image; the text labels from the diagram are not transcribed into any semantic text elements.",
+      "location": "Section 6, Page 6",
+      "corroborated": false
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S2",
+      "analysis": "The source document consists of 55 slides, nearly all of which feature a primary title, and several of which contain distinct sub-headers (e.g., Slide 4 'Governor', 'Senate', 'House'; Slide 20 'Objectives', 'Members'). The HTML metadata indicates 68 headings were detected in the rendered output, which likely corresponds to the slide titles plus sub-headers. However, the JSON metadata reports only 14 headings total. This indicates a systemic failure to correctly identify slide titles and internal",
+      "source_pdf_quote": "Slide 4 (Council Members) has sub-headers: Governor, Senate, House, Statutory Members. Slide 20 (Who We Are & Our Objectives) has sub-headers: Objectives, Permanent Members, Additional members.",
+      "output_quote": "The json_heading_count provided in the metadata is only 14, while the source document has at least 55 slide titles.",
+      "location": "Throughout document; metadata counts",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S3",
+      "analysis": "On Slide 6, a diagram depicting a hierarchy of GICC committees as a vertical stack of books is converted into a 1x4 table containing only the title words 'GICC' and 'COMMITTEES' in a header row. This conversion fails to capture the structural information of the diagram (the hierarchy levels) and loses all the internal text labels within the books (e.g., Management, Technical, Users Groups). While the grid layout on Slide 43 is reasonably handled, the failure to represent the Slide 6 diagram's st",
+      "source_pdf_quote": "Slide 6: Diagram of stacked books labeled Management, Technical, Users Groups, and their sub-committees.",
+      "output_quote": "\"type\": \"table\", \"rows\": [ { \"cells\": [ { \"content\": [ { \"text\": \"GICC\" } ], ... }, { \"content\": [ { \"text\": \"COMMITTEES\" } ], ... } ], \"is_header_row\": true } ]",
+      "location": "Section 6, Slide 6",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a massive mismatch between the heading count in semantic.json (14) and the rendered HTML (68). The difference of 54 headings far exceeds the allowed threshold (10% or 3 headings). This indicates that the renderer is identifying headings (likely the slide titles) that were not structurally tagged as such in the JSON, or the tool-based counts are derived from inconsistent detection logic.",
+      "source_pdf_quote": "Headings in semantic.json: 14",
+      "output_quote": "Headings in rendered HTML: 68",
+      "location": "HTML METADATA",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "Several meaningful images from the source PDF are missing in the HTML output. Specifically, the collage of agency logos on page 11, which identifies the members of the SGUC, is absent. The dashboard screenshots on page 30, which illustrate the 'Value of GIS in Disaster Response', are missing. The screenshots of the WGEER Hub on page 40 and the collage of existing accessibility resources on page 50 are also absent. These are meaningful content images, not merely decorative background elements.",
+      "source_pdf_quote": "PDF page 11 contains logos for various North Carolina state agencies; Page 30 contains multiple dashboard screenshots ('Hurricane Helene Landslide Observations Dashboard', 'FIMAN TOOLS', etc.); Page 40 contains 'WGEER Hub: Helene Resources' screenshots.",
+      "output_quote": "The HTML sections for 'STATE GOVERNMENT GIS USERS COMMITTEE (SGUC)', 'During the Storm', and 'WGEER Hub: Helene Resources' contain headings but are missing all associated images/screenshots.",
+      "location": "SGUC section, Disaster Response section, WGEER section",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The JSON output fails to capture interactive links present in the source. Slide 34 contains a clearly visible link ('13. All Imagery Map') which is not represented in the JSON structural data. Furthermore, the HTML metadata reports 15 links while the JSON has 0, indicating that the renderer found links (possibly from URLs in text or QR codes) that were not identified as structural link elements in the JSON conversion.",
+      "source_pdf_quote": "Slide 34: '13. All Imagery Map' (blue, underlined hyperlink text)",
+      "output_quote": "Links in semantic.json: 0",
+      "location": "Section 34; Metadata counts",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall visual quality is degraded by the loss of structural diagrams. Elements like the 'GICC COMMITTEES' stack of books (page 6), the WGEER timeline (page 37), the 'What is WGEER?' Venn diagram (page 38), and the 'WGEER Volunteer Pathway' arrow diagram (page 41) have been reduced to simple text lists. While the text is present, the visual relationships and structural meaning conveyed by the original graphics are lost, resulting in a less effective presentation of the information.",
+      "source_pdf_quote": "PDF Page 38 contains a diagram with a central 'Community' circle linked to 'Tools', 'Assistance', 'Data', and 'Site Support'.",
+      "output_quote": "The HTML section 'What is WGEER?' presents these items as a plain text list without the visual diagram structure.",
+      "location": "WGEER section, element index ~140",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "The document is unfit for publication and must be re-processed; a human reviewer cannot repair a document missing 80% of its content."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.98,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9131930428248984,
+      "content_completeness": 0.4776839565741858,
+      "accessibility": 1.0,
+      "decision_confidence": 0.020000000000000018,
+      "raw_score": 0.5173,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.40740740740740744,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8615929863831375,
+      "shingling_precision": 0.9771525280304633,
+      "duplication_ratio": 0.0038612609014047,
+      "word_count_ratio": 0.9553679131483716,
+      "baseline_words": 2487,
+      "gemini_words": 2376,
+      "table_count_ratio": 4.0,
+      "image_count_ratio": 0.9019607843137255,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 12123,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "document_id": "standards-committee-meeting-agenda-packet-october-7-2021-685fa26e",
+  "audited_at": "2026-03-06T20:46:10.214610Z",
+  "quality_score": 60,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The document exhibits catastrophic table extraction failure, where approximately 90% of data rows in critical tables (Attendance and Roll Call Votes) are missing, leaving only headers. This structural failure is corroborated by both the LLM fidelity report (visual_score 0.23) and programmatic signals (fabricated_tables_detected), directly contradicting the pipeline's 'auto_approve' recommendation.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C4",
+      "analysis": "Two critical tables in the document are severely truncated. 1) The 'NORTH CAROLINA 911 Standards Committee Attendance' table on page 2 contains approximately 25 rows in the source but only 2 rows in the JSON (headers only). 2) The 'ROLL CALL VOTES' table on page 4 contains 12 rows in the source but only 1 row in the JSON. In both instances, over 90% of the data rows are missing.",
+      "source_pdf_quote": "Attendance table (page 2) with ~25 rows of members and staff; Roll Call Votes table (page 4) with 11 member votes.",
+      "output_quote": "The 'Standards Committee Meeting Attendance' table in JSON has 2 rows. The 'Roll Call Votes' table in JSON has 1 row.",
+      "location": "Standards Meeting Minutes January, elements index 5 and 13.",
+      "corroborated": true
+    },
+    {
+      "description": "Significant text omission within a section",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C5",
+      "analysis": "The 'Standards Meeting Minutes January' section (covering pages 2-4) is missing a substantial amount of information due to the failure to extract data from the Attendance and Roll Call Votes tables. The names of attendees and the actual votes cast are entirely absent from the output, representing a loss of more than 25% of the information for those pages.",
+      "source_pdf_quote": "Attendance data (names and checkmarks on page 2) and Roll Call Vote results (Y/N marks on page 4).",
+      "output_quote": "The JSON output for these tables contains only the title/header strings and no member data.",
+      "location": "Standards Meeting Minutes January, elements index 5 and 13.",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S3",
+      "analysis": "Multiple tables in the document are structurally corrupted or incomplete. The 'Attendance' table on page 2 and the 'Roll Call Votes' table on page 4 in the JSON output only contain header rows. The data rows (names of members, staff, and their respective attendance or vote statuses) which are clearly visible in the source PDF images are entirely absent from the JSON structure.",
+      "source_pdf_quote": "The table on Page 2 contains rows for 'Commissioner Marty Cooke', 'Greg Coltrain', etc. The table on Page 4 contains rows for 'Commissioner Marty Cooke', 'Greg Coltrain', etc. with 'Y' indicators.",
+      "output_quote": "The 'rows' array for the table in section 1, element 5 (Attendance) contains only 2 entries (headers). The 'rows' array for the table in section 1, element 9 (Roll Call Votes) contains only 1 entry (header).",
+      "location": "Standards Meeting Minutes January, section 1, elements 5 and 9",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "The metadata reports 8 headings in the semantic.json, while the rendered HTML contains 13. This is a mismatch of 5 headings (62.5%), which exceeds the allowed threshold of 3+ headings or 10%. This indicates the renderer added headings or failed to correctly translate the JSON structure.",
+      "source_pdf_quote": "json_heading_count: 8",
+      "output_quote": "html_heading_count: 13",
+      "location": "HTML Metadata section",
+      "corroborated": false
+    },
+    {
+      "description": "Major visual layout difference",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V1",
+      "analysis": "There is a significant layout rearrangement on the second page of content. In the source PDF (page 2), the header information ('North Carolina 911 Board... Draft Minutes') appears at the top of the page, above the 'Meeting Attendees' line and the attendance table. In the HTML output, this header text is placed below the image of the attendance table and the 'Meeting Attendees' section. Furthermore, the content from page 4 (Roll Call Votes) is missing its entire data structure, significantly alte",
+      "source_pdf_quote": "The top of PDF page 2 shows 'North Carolina 911 Board Standards Committee Meeting Draft Minutes Thursday, October 7, 2021'.",
+      "output_quote": "In the HTML, this text block appears after the 'Standards Meeting Minutes January' image section and before the 'Standards Committee Meeting Attendance' heading.",
+      "location": "After the 'Standards Meeting Minutes January' section.",
+      "corroborated": false
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V2",
+      "analysis": "The document contains two major table rendering failures. First, the HTML table under 'Standards Committee Meeting Attendance' contains only the header row; all data rows for committee members and staff are missing. Second, the 'Roll Call Votes' table from page 4 of the source PDF is rendered in the HTML as a text box containing only header information, with the actual data table (names and 'Y' votes) entirely absent.",
+      "source_pdf_quote": "PDF page 2 (Attendance table with rows for members like Commissioner Marty Cooke) and PDF page 4 (Roll Call table with columns and 'Y' markers).",
+      "output_quote": "The HTML table under 'Standards Committee Meeting Attendance' is empty except for headers. The 'Roll Call Votes' section in the HTML lacks the data table entirely.",
+      "location": "Sections 'Standards Committee Meeting Attendance' and 'Roll Call Votes'.",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V4",
+      "analysis": "The attendance information from page 2 of the PDF is visually duplicated in the HTML. It appears first as an image-based block under the heading 'Standards Meeting Minutes January' and then again immediately following it as an empty HTML table shell under the heading 'Standards Committee Meeting Attendance'.",
+      "source_pdf_quote": "PDF Page 2 contains one instance of the Attendance table.",
+      "output_quote": "The attendance table data/headers appear twice in the HTML output within the same general area.",
+      "location": "Between 'Standards Meeting Minutes January' and 'Standards Committee Meeting Attendance'.",
+      "corroborated": false
+    },
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 3",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline_tables=0, gemini_tables=3",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": true
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall quality is degraded due to the broken and duplicated tables, as well as inconsistent section naming. For example, the resignation letter is prefixed with a strange, non-human-friendly heading 'standards06212021'. These issues combined with missing content (the roll call votes) result in a poor user experience.",
+      "source_pdf_quote": "PDF Page 5 is a formal resignation letter from Jason P. Steward.",
+      "output_quote": "HTML displays this content under the heading 'standards06212021'.",
+      "location": "Resignation letter section.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Manually reconstruct the Attendance table (approx. 25 rows) and Roll Call table (12 rows).",
+    "Deduplicate the 'Standards Committee Meeting Attendance' section.",
+    "Correct the heading hierarchy to resolve the mismatch and fix the layout order on page 2."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.5815,
+      "text_match": 0.9685984246609718,
+      "content_completeness": 0.9683060109289618,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7466,
+      "ceiling": 0.6,
+      "ceiling_reason": "fidelity_low_score",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.5815,
+      "fidelity_content": 0.8837209302325582,
+      "fidelity_structural": 0.6296296296296297,
+      "fidelity_visual": 0.23809523809523814,
+      "fidelity_routing": "MANDATORY_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9790431000395413,
+      "shingling_precision": 0.9637991436356559,
+      "duplication_ratio": 0.004186202277294039,
+      "word_count_ratio": 1.0316939890710382,
+      "baseline_words": 915,
+      "gemini_words": 944,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 0.75,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 237133,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "document_id": "gicc-meeting-minutes-02122003-685fb099",
+  "audited_at": "2026-03-06T20:16:34.133294Z",
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While content preservation is excellent (98.9% recall) and accessibility reports zero violations, a major structural defect exists where heading counts in the HTML (18) significantly deviate from the semantic JSON (6). This mismatch, combined with link encoding failures and the pipeline's 'needs_retry' signal, indicates a synchronization failure between the semantic model and the final renderer that requires human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the heading count in the semantic.json (6) and the rendered HTML (18). This exceeds the allowed threshold (max of 10% or 3). The mismatch occurs because the renderer is promoting top-level section 'title' attributes from the JSON structure into HTML headings, while only the explicit 'heading' elements in the elements array are being counted in the JSON metadata. This indicates a synchronization defect between the semantic model and the renderer.",
+      "source_pdf_quote": "The source document contains approximately 17-18 identifiable section headers and sub-headers (MINUTES, GICC, Date, PRESENT, PROCEEDINGS, Report..., Status..., Priority 1-4, Presentation..., Committee Reports, News, Governor's..., Other Business, ADJOURNMENT).",
+      "output_quote": "Headings in semantic.json: 6; Headings in rendered HTML: 18",
+      "location": "Metadata and throughout document structure",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The output fails to correctly identify and encode all links found in the source. The source document contains two URLs: a USGS link on page 5 and a CGIA link on page 7. The semantic.json only contains one formal link object ('href') for the CGIA link. The USGS URL is rendered as plain text (with underline formatting) rather than a clickable link object. Furthermore, the mismatch between 1 link in the JSON and 8 links in the HTML suggests the injection of fabricated links or skip links that are n",
+      "source_pdf_quote": "The source contains two URLs: http://gisdata.usgs.net/website/NC3/viewer.htm (page 5) and www.cgia.state.nc.us/gicc (page 7).",
+      "output_quote": "Links in semantic.json: 1; Links in rendered HTML: 8. The USGS URL is formatted as text: 'text': 'http://gisdata.usgs.net/website/NC3/viewer.htm', 'underline': true.",
+      "location": "Section 'Presentation: Mecklenburg County and the National Map', page 5; and metadata",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify heading hierarchy (H1-H6) in the HTML to ensure document structure is logical and accessible.",
+    "Ensure the USGS URL on page 5 and CGIA link on page 7 are functional, clickable anchor tags.",
+    "Determine if the extra links in the HTML are legitimate navigational aids or erroneous injections."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9333,
+      "text_match": 0.9918603675421666,
+      "content_completeness": 0.9897035881435257,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8951,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9333,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7777777777777778,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9892869099430867,
+      "shingling_precision": 0.99444724886421,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9794071762870514,
+      "baseline_words": 3205,
+      "gemini_words": 3139,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 9796,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

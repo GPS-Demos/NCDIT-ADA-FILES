@@ -1,0 +1,97 @@
+{
+  "document_id": "smac-lidar-apr-10-2024-6860db7b",
+  "audited_at": "2026-03-06T20:45:17.952770Z",
+  "quality_score": 62,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the LLM fidelity composite score is high, the underlying signals reveal significant discrepancies. The programmatic precision is critically low (19%) with an extreme word count ratio (5.4x), and the fidelity report explicitly notes the omission of the document's primary visual content—the LiDAR Quality Level map and aircraft diagram. Given the document's small baseline (34 words), these omissions and potential hallucinations represent a substantial portion of the total content.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Low text precision (possible hallucination): 19%",
+      "source": "programmatic",
+      "severity": "critical",
+      "check_id": null,
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a mismatch between the number of headings identified in the JSON (0) and the number present in the rendered HTML (3). The HTML metadata indicates that the renderer generated 3 headings, likely derived from the section titles, whereas the semantic.json elements do not explicitly contain any items of type 'heading'. This mismatch of 3 headings meets the defined threshold for a failure.",
+      "source_pdf_quote": "The source document contains clear titles on Page 1 ('2020 United States Geological Survey LiDAR') and Page 2 ('NC Light Detection and Ranging (LiDAR) Elevation Data').",
+      "output_quote": "Headings in semantic.json: 0; Headings in rendered HTML: 3",
+      "location": "HTML Metadata",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "The source PDF Page 2 contains a large map titled 'North Carolina LiDAR Quality Level By Phase' and a diagram illustrating an aircraft collecting LiDAR data. Both of these meaningful visual elements are completely missing from the HTML output under the 'NC Light Detection and Ranging (LiDAR) Elevation Data' section. Additionally, the text box 'QL 1 data collection planned for early 2024' that was part of the Page 2 graphic layout is also absent.",
+      "source_pdf_quote": "Page 2 contains a map titled 'North Carolina LiDAR Quality Level By Phase' and an illustration of an aircraft collecting LiDAR data.",
+      "output_quote": "In the HTML section for Page 2 (under the heading 'NC Light Detection and Ranging (LiDAR) Elevation Data'), these images and the 'QL 1 data collection planned...' text box are missing.",
+      "location": "Section 'NC Light Detection and Ranging (LiDAR) Elevation Data', corresponding to PDF Page 2",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Locate and restore the missing LiDAR map and aircraft diagram graphics.",
+    "Investigate the cause of the 5.4x word count expansion to remove potential hallucinated text or repetitive boilerplate.",
+    "Verify heading levels for accessibility compliance."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.8611,
+      "text_match": 0.305668016194332,
+      "content_completeness": 0.25,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6181,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.8611,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.8148148148148149,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8628571428571429,
+      "shingling_precision": 0.1857318573185732,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 5.411764705882353,
+      "baseline_words": 34,
+      "gemini_words": 184,
+      "table_count_ratio": 0.5,
+      "image_count_ratio": 0.7142857142857143,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 250215,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

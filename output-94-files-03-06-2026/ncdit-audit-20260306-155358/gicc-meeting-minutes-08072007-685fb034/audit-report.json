@@ -1,0 +1,74 @@
+{
+  "document_id": "gicc-meeting-minutes-08072007-685fb034",
+  "audited_at": "2026-03-06T20:16:36.498070Z",
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While composite scores are exceptionally high (0.9889) and programmatic metrics show excellent content preservation, a specific discrepancy was flagged regarding semantic link tagging. The failure to convert a visible URL ('www.nconemap.net') on page 7 into a functional link object, combined with a significant mismatch between JSON and HTML link counts, suggests a minor but inconsistent application of accessibility standards that requires human verification.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "A URL clearly visible in the source text on page 7 ('www.nconemap.net') is not converted into a clickable link in the JSON output; it is rendered only as underlined text. In contrast, URLs on page 2 ('www.ncstreams.net') and page 10 ('www.ncgicc.org/') are correctly converted into link objects with href attributes. The link count mismatch in metadata (JSON: 2, HTML: 12) suggests the renderer added navigational links (skip links, etc.), but the missing functional link in the JSON content is a min",
+      "source_pdf_quote": "The map of the initial 23 counties that responded to the preliminary inquiry is on the NC OneMap website, www.nconemap.net. (Page 7)",
+      "output_quote": "{\"text\": \"www.nconemap.net\", \"bold\": false, \"italic\": false, \"underline\": true, ...}",
+      "location": "Section 1, paragraph beginning 'Zsolt Nagy mentioned that a third year...'",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify that the URL 'www.nconemap.net' on page 7 is correctly tagged as a functional link in the final HTML.",
+    "Investigate the discrepancy between the 2 links identified in JSON and the 12 links reported in HTML metadata to ensure no content links were missed."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9889,
+      "text_match": 0.9900588620013081,
+      "content_completeness": 0.9935447123599772,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.9176,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9889,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.962962962962963,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.983753574213673,
+      "shingling_precision": 0.9964454976303317,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9870894247199544,
+      "baseline_words": 5267,
+      "gemini_words": 5199,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 10984,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

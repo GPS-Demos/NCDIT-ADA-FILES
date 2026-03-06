@@ -1,0 +1,95 @@
+{
+  "document_id": "appenc-initialdatalayers-685fad7d",
+  "audited_at": "2026-03-06T20:15:38.388453Z",
+  "quality_score": 25,
+  "quality_grade": "Critical",
+  "routing": "reject",
+  "routing_label": "Reject",
+  "reasoning": "Output appears mostly fabricated: shingling_precision=0.00. Only 0% of output text found in source.",
+  "decision_method": "hard_veto:V4",
+  "concerns": [
+    {
+      "description": "Low text precision (possible hallucination): 0%",
+      "source": "programmatic",
+      "severity": "critical",
+      "check_id": null,
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    },
+    {
+      "description": "Low text recall (possible truncation): 0%",
+      "source": "programmatic",
+      "severity": "critical",
+      "check_id": null,
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    },
+    {
+      "description": "Major visual layout difference",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V1",
+      "analysis": "In the source PDF, the data is organized into two distinct sections: 'Framework Layers' and 'Other Important Layers'. Each section has its own header. In the rendered HTML, these two headers have been merged into a single <thead> block at the very top of a single table. This removes the visual separation between the two categories of data. A user looking for 'Other Important Layers' would not find it as a divider in the list, but rather at the very top of the table, which misrepresents the visua",
+      "source_pdf_quote": "The section header 'Other Important Layers' appears on page 1, immediately following the 'Elevation' row and preceding the 'Land Use' row.",
+      "output_quote": "<tr><th scope=\"col\"><strong>Other Important Layers</strong></th><th scope=\"col\"><strong>Description</strong></th></tr>",
+      "location": "Inside the <thead> element at the start of the table (line 527).",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Output appears mostly fabricated: shingling_precision=0.00. Only 0% of output text found in source."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "text_match": 0.0,
+      "content_completeness": 0.25,
+      "accessibility": 1.0,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5117,
+      "ceiling": 0.25,
+      "ceiling_reason": "extreme_hallucination",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.0,
+      "shingling_precision": 0.0,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 2.659090909090909,
+      "baseline_words": 132,
+      "gemini_words": 351,
+      "table_count_ratio": 0.5,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 8,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

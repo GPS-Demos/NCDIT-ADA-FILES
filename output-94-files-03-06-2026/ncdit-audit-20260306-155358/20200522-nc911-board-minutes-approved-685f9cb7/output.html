@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>North Carolina 911 Board Meeting MINUTES</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>North Carolina 911 Board Meeting MINUTES</h1>
+    </header>
+    <main id="main-content" role="main">
+<section>
+<h2 id="heading-1">North Carolina 911 Board Meeting</h2>
+<h2 id="heading-2">MINUTES</h2>
+<p><strong>Via Simultaneous Communication</strong></p>
+
+<p><strong>Microsoft Teams Meeting</strong></p>
+
+<p><strong>Friday, May 22, 2020</strong></p>
+
+<p><strong>10:00 AM – 12:00 PM</strong></p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Attendance">
+<table>
+<caption>Attendance</caption><thead><tr><th scope="col"><strong><u>Members Present via Teams</u></strong></th><th scope="col"><strong><u>Staff Present via Teams</u></strong></th><th scope="col"><strong><u>Guests via Teams</u></strong></th></tr>
+</thead><tbody><tr><td>David Bone, (NCACC) Martin County Manager</td><td>Richard Bradford, (DOJ) NC 911 Board Legal Counsel</td><td>Ron Adams</td></tr>
+</tbody></table>
+</div>
+
+<p><strong>Call to Order</strong> — Chairman Boyette called the meeting to order at 10:02 AM and thanked everyone for attending. He then asked Ms. Harris to read SL 2020-3, which relates to modifications made to General Statutes concerning the Board’s remote meetings.</p>
+
+<p><strong>SL 2020-3 (Section 4.31 Remote Meetings)</strong> — Ms. Harris covered the changes made in regard to remote/virtual meetings, which include members identifying themselves during roll call and when making motions or other actions, including voting. All votes must be made by roll call. Chairman Boyette then asked Ms. Harris to proceed with the roll call. </p>
+
+<p>Ms. Harris took a moment to acknowledge the upcoming Memorial Day holiday, remembering those that have given the ultimate sacrifice for our country, also expressing appreciation for those that have served and are currently serving in the military.</p>
+
+<p><strong>Roll Call</strong> - Ms. Harris advised Regional Coordinator Stephanie Conner would call the roll of attendees and monitor the chat for the online meeting. Regional Coordinator David Newberry would serve as technical facilitator for today’s virtual meeting.</p>
+
+<p><strong>1. Chair’s Opening Remarks</strong> — Chairman Boyette again thanked everyone for taking the time to participate in the meeting. He then confirmed with Ms. Harris that a quorum was present. Chairman Boyette also recognized Secretary Doaks and thanked her for attending today. Secretary Doaks extended a thank you to all the Board members for their time and commitment serving on the Board, and also thanked all those who are engaged in 911 efforts across the state. </p>
+
+<p><strong>2. Ethics Awareness/Conflict of Interest Statement</strong> — Chairman Boyette read the Ethics Awareness/Conflict of Interest statement as published in the agenda.</p>
+
+<p><em>Ms. Harris noted that Greg Coltrain had joined the meeting.</em></p>
+
+<p><strong>3. Ceremonial Swearing-In of Melanie Neal</strong> — Ms. Harris welcomed Melanie Neal to the Board and mentioned she had been officially sworn in three weeks ago. Ms. Neal has 32 years of experience in Public Safety, with 10 years spent as a Deputy Sheriff before transitioning into 911. She worked as an Emergency Communications Specialist, Assistant Supervisor, Senior Supervisor and Operations Manager before becoming Executive Director at Guilford Metro 911 in 2015. She served as NC APCO president from 2017-2018 and is Vice Chair of Women United Group of Greater Greensboro United Way. Ms. Neal was then sworn in by Ms. Harris.</p>
+
+<p><strong>4. Public Comment</strong> — Chairman Boyette read the invitation for public comment as published in the agenda. No one had preregistered to speak, and no one virtually present had comments.</p>
+
+<p><strong>5. Consent Agenda</strong> — Chairman Boyette asked Ms. Harris to proceed with the consent agenda.</p>
+
+<ol><li>
+a) Minutes of Previous Meeting – April 24, 2020</li>
+<li>
+b) NG 911 Fund/Account</li>
+</ol>
+<p>Ms. Wright moved to accept the consent agenda as presented, with the motion being seconded by Greg Coltrain. Ms. Conner conducted a roll-call vote. All attending Board members voted, and the motion carried unanimously.</p>
+
+<p><strong>6. Executive Director Report</strong></p>
+
+<ol><li>
+a) COVID-19 Update – Staff is still teleworking and will continue to do so until advised differently. On-site work for NextGen911 implementation has resumed as of May 18th, beginning with Mitchell County. No migrations are currently scheduled for June, but prep work will continue to take place for those scheduled in July. Regional Coordinators continue their weekly outreach to PSAPs to monitor staff status regarding COVID-19. Currently there are 0.48% impacted telecommunicators.</li>
+<li>
+b) SL 2020-3 (Section 4.38 Regulatory Flexibility) – Mr. Bradford gave an overview of SL 2020-3. It includes provisions authorizing agencies to delay fees, fines, late payments, extend renewal dates, and delay or modify continuing education requirements. Details of this section (4.38 of the SL) make the changes retroactive to March 10, 2020, and include delaying “educational or examination requirements.” Given the broad language of the new law and the apparent intent, the Board may wish to act to delay telecommunicator certification requirements, and deadlines for appeals or reconsiderations.</li>
+</ol>
+<p><em>Ms. Conner noted that Secretary Doaks had left the meeting.</em></p>
+
+<ol><li>
+c) Upcoming Board Meetings – The June and July Board meetings will be conducted virtually. Ms. Harris mentioned the PSAP Manager’s course graduation may occur at the Board meeting in August, but if the meeting is not able to be done in-person the graduation would be delayed until September.</li>
+<li>
+d) 2020 PSAP Manager’s Meeting – Originally planned for April and delayed again for July, Ms. Harris advised the PSAP Manager’s meeting will not take place this year. She and staff are considering creating a Continuity Planning Group that would facilitate discussions about backup planning and remote access.</li>
+<li>
+e) NextGen 911 Migration Status – Ms. Harris congratulated Mitchell County for their ESInet migration on May 18 but skipped opening the live map due to the previous suspension of implementations.</li>
+<li>
+f) NextGen 911 GIS Status – This item was skipped due to the previous suspension of implementations, but Ms. Harris noted PSAPs continue efforts to upload GIS data.</li>
+<li>
+g) Support for ACN/AACN Research Plan Pilot Project – As previously noted in an email to Board members, Virginia Tech Transportation Institute and Wake Forest University invited the Board staff to be part of their project stakeholder working group to bring 911 perspective as they look at Advanced Automatic Crash Notification (AACN) technology. Virginia Tech and Wake Forest University are working on a proposal to a NHTSA RFP titled “ACN/AACN Research Plan Pilot Project”. NHTSA is generally requesting work to inform the design of a pilot deployment of AACN. Ms. Donna Wright and Ms. Melanie Neal were brought into the discussion as representatives of NC NENA and NC APCO. Should the project be awarded, as part of the stakeholder committee, the NC 911 Board , NC NENA and NC APCO will work with the research team and provide feedback regarding project-related topics.</li>
+</ol>
+<p><strong>7. Education Committee Report</strong> — Mr. Greene said the committee had a brainstorming discussion about the 911 Board’s website and have plans for enhancements and improvements. Next steps include gathering input from stakeholders about what they want to see on the new website. He and Ms. Turbeville also worked on a rough draft of a brief introduction to the 911 Board and received comments and feedback from committee members and staff. They covered SL 2020-3 (Section 4.38 Regulatory Flexibility) regarding telecommunicator training and EMD certification and have plans to work with the ad-hoc committee to discuss enforcement of those requirements once restrictions are lifted. Ms. Turbeville reported the Regional Coordinators had asked PSAPs what basic training program they were using. Of the 104 responses received, 62 currently use the NC Sheriff’s Training and Education Program (their Basic Telecommunicator Program), 15 use APCO, 19 use Priority Dispatch’s Emergency Telecommunicator Certification, 2 use PowerPhone, and 2 use an in-house program. The remainder are not using any telecommunicator program at this time. </p>
+
+<p><strong>8. Funding Committee Report</strong> — Mr. Bone reported the committee met on May 21 discussing an item for funding eligibility, which will be on the Board’s agenda next month. Ms. Tapler will discuss the status of funding reconsiderations in the Finance Team Report. The committee is working on the priority goal of PSAP fund balances utilizing the PAT for discussion with the PSAPs, and will bring additional information to the Board in the coming months.</p>
+
+<ol><li>
+a) FY 2021 Proposed PSAP Distribution — Ms. Tapler presented the FY 2021 Proposed PSAP Distribution. The Funding Committee unanimously recommended approval of the 2020-21 PSAP Distribution, as presented by staff, and Chairman Boyette called a vote to approve the 2020-21 PSAP Distribution as recommended by the Committee. Ms. Conner conducted the roll-call vote. All attending Board members voted, and the motion carried unanimously.</li>
+</ol>
+<p><strong>9. Finance Team Report</strong> — Ms.Tapler has met with several PSAPs to discuss eligibility of expenditures, seat count changes and their cost shift for the FY 2021 funding distribution for PSAP budgeting purposes. She currently is working on funding reconsiderations and has two for this fiscal year and six for FY 2021. </p>
+
+<p>Ms. Falco gave an update on FY 2018 and FY 2019 Revenue Expenditure reports status. For FY 2018, 69 are finalized, 13 awaiting the signed revised report, and 44 are in clarification process. For FY 2019 there are 25 completed, 13 awaiting the signed revised report, 48 in the clarification process, and 41 awaiting review.</p>
+
+<p><strong>10. Standards Committee Report</strong> — Ms. Wright reported the committee discussed the SL 2020-3 legislation, the PSAP peer reviews, and the need to recruit more reviewers. Ms. Gardner welcomed the students from the PSAP Manager’s class, who were assigned to listen to today’s Board meeting.</p>
+
+<p><strong>11. Technology Committee Report</strong> — The committee reviewed the ESInet/GIS implementation schedule, discussed the cybersecurity assessment project, and created an ad-hoc committee to address mobile/remote network access. They also reviewed their 2020 goals and re-aligned them based on the COVID-19 pandemic.</p>
+
+<p>Mr. Means reported migrations had resumed with Mitchell County migrating as i3, making a total of 37 PSAPs live on ESInet. The NC State Highway Patrol project kicked off this week which was a milestone event. The new schedule of implementations has 44 PSAPs migrating by the end of 2020. During i3 migrations partners are seeing areas of their applications that can be tweaked. GeoComm and Intrado worked out an agreement to simplify some of the final qualification checks used before moving data from GeoComm’s DataHub into AT&amp;T’s routing database for a smooth transition. Four PSAPs are currently ready to transfer their data and 19 are waiting for their final qualification check. The NMAC is engaged in service monitoring perspective and incident response as well as service implementation. Mr. Meeks also added that his team is currently working to get SolarWinds implemented. Cybersecurity assessments are on-schedule, with the first five PSAP assessments scheduled for next week. Mr. Means commented on the great work by End-to-End Computing (EEC) on the cybersecurity project in consideration of the quality of the project management effort, communication, and their responsiveness to team requests. An ad-hoc committee was created to consider alternative plans for service continuity/remote access. They will meet again in June.</p>
+
+<p><strong>12. 911 Regional Coordinator Reports</strong> — The Regional Coordinators gave brief reports. Ms. Conner has been busy reviewing backup plans, conducting mini-regional calls, and having PAT meetings with PSAPs. Ms. Gardner has been conducting COVID-19 outreach and is starting work on the cybersecurity assessment meetings. She also is working to set a date for the ESInet User’s Group meeting. Mr. Newberry reported he also been assisting PSAPs with cost-shift and seat count meetings, along with the cybersecurity assessments that are upcoming. Ms. Turbeville reported doing the same PSAP checks as the other coordinators, along with GIS meetings for PSAPs in her region. She continues to work on the CRM project, reporting any needs for adjustments/revisions to the vendor.</p>
+
+<p><strong>13. Other</strong> — Ms. Harris noted the master calendar of events contains upcoming committee meeting dates and encouraged members and guests to access the calendar and website often. </p>
+
+<p>The next Board meeting will be held on Friday, June 26, using simultaneous communication via Microsoft Teams Meeting.</p>
+
+<p><strong>Adjourn</strong> — Chairman Boyette adjourned the meeting at 11:18 AM.</p>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

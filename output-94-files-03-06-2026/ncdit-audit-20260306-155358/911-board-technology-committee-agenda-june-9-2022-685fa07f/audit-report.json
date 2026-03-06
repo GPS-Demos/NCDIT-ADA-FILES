@@ -1,0 +1,108 @@
+{
+  "document_id": "911-board-technology-committee-agenda-june-9-2022-685fa07f",
+  "audited_at": "2026-03-06T20:15:43.165266Z",
+  "quality_score": 77,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The document exhibits severe content loss within tabular data, corroborated by a low shingling recall of 0.767 and specific fidelity flags indicating that over 90% of rows are missing from the Attendance and Minutes Vote tables. Although the pipeline confidence is high, the visual and content scores from the fidelity system are significantly degraded by this truncation, requiring human intervention to restore the missing information.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C4",
+      "analysis": "Two tables in the output have significantly fewer rows than the source document. The 'Attendance Record' table on Page 2 of the source contains approximately 36 rows of participants (Members, Staff, and Guests). The output table contains only one data row ('Rachel Bello'). Similarly, the 'Minutes Vote' table on Page 3 of the source contains 11 rows of voting results, while the output contains only one data row ('Rachel Bello'). This constitutes a loss of over 90% of the data in both tables.",
+      "source_pdf_quote": "Page 2 'Attendance' table lists 27 members and staff. Page 3 continues the list with 9 guests. Page 3 'Minutes Vote' table lists 11 voting members (Rachel Bello through Earl Struble).",
+      "output_quote": "The 'Attendance Record' table contains only 1 data row: 'Rachel Bello'. The 'Minutes Vote' table contains only 1 data row: 'Rachel Bello'.",
+      "location": "Section 'Meeting Minutes', Page 2 and 3",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a mismatch between the number of headings in the semantic.json (15) and the rendered HTML (19). The difference of 4 headings exceeds the allowable threshold of 10% or 3 headings. This discrepancy indicates that the renderer added headings (likely the document title and three section titles) that were not present as heading elements within the JSON's main elements list.",
+      "source_pdf_quote": "The source document contains approximately 15 distinct headings across its 8 pages.",
+      "output_quote": "Headings in semantic.json: 15. Headings in rendered HTML: 19.",
+      "location": "HTML METADATA",
+      "corroborated": false
+    },
+    {
+      "description": "Major visual layout difference",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V1",
+      "analysis": "The visual organization of the document is severely compromised by the truncation of content in the Minutes section. Specifically, the Attendance Record and Minutes Vote tables are missing approximately 95% of their content. In the source PDF, the Attendance table spans more than a page (pages 2-3) and contains nearly 40 entries including members, staff, and guests. The HTML output renders only a header and a single entry (Rachel Bello). Similarly, the Minutes Vote table on PDF page 3 contains 1",
+      "source_pdf_quote": "The Attendance table on PDF pages 2-3 contains rows for Members (11), Staff (16), and Guests (10). The Minutes Vote table on page 3 contains 11 rows of voters.",
+      "output_quote": "The 'Attendance Record' table in Section 2 contains only one data row: 'Rachel Bello | P | | '. The 'Minutes Vote' table in Section 2 contains only one data row: 'Rachel Bello | Y'.",
+      "location": "Section 2, Meeting Minutes / Attendance Record and Minutes Vote tables",
+      "corroborated": false
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V2",
+      "analysis": "The tables in Section 2 (Meeting Minutes) are misrendered due to extreme truncation. Only the first row of data is present for both the Attendance Record and the Minutes Vote tables, whereas the source PDF contains dozens of rows across these tables. This rendering failure makes the tables functionally useless for a user seeking the full information present in the source document. Other tables, such as the Agenda table in Section 1 and the Deployment tables in Section 3, appear correctly rendere",
+      "source_pdf_quote": "PDF Page 2 and 3 show multi-row tables for Attendance and Minutes Voting results.",
+      "output_quote": "The corresponding tables in the HTML output (Section 2) are truncated to a single data row each (Rachel Bello).",
+      "location": "Section 2, Meeting Minutes",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify and restore approximately 35 missing rows in the Attendance Record table on pages 2-3.",
+    "Restore the 10 missing rows from the Minutes Vote table.",
+    "Investigate why the HTML renderer is injecting four additional headings not found in the semantic JSON."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7574,
+      "text_match": 0.8616368968275127,
+      "content_completeness": 0.8026315789473684,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7707,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.7574,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.8148148148148149,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7669672520170859,
+      "shingling_precision": 0.9829683698296837,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8552631578947368,
+      "baseline_words": 1520,
+      "gemini_words": 1300,
+      "table_count_ratio": 1.25,
+      "image_count_ratio": 0.6666666666666666,
+      "pipeline_confidence": 0.96,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 8307,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

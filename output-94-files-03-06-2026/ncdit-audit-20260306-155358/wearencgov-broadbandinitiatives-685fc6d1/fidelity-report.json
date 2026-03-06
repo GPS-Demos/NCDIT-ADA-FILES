@@ -1,0 +1,233 @@
+{
+  "document_id": "wearencgov-broadbandinitiatives-685fc6d1",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON contains headings, lists, and tables that correspond directly to the content of the source PDF. AI-generated table captions, summaries, and image alt text are present as expected for accessibility and are not considered fabrications. No entirely invented paragraphs or sentences were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All contact information provided in the output, including URLs (fcc.gov, it.nc.gov), email addresses (firsttech@nc.gov), and social media handles (@NCDIT, @BroadbandIO, etc.), matches the source PDF exactly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source PDF contains 27 pages. While the output JSON includes a placeholder element for 15 omitted sections at index 4 (presumably covering pages 5-12), it silently drops several other critical content pages. Specifically, Page 14 (Vision Statement) is missing between the sections for Page 13 and Page 15. Additionally, Pages 16 through 25 (covering the State Broadband Plan, Executive Order 91, Technical Assistance regions, and Grant programs) are entirely absent between the sections for Page 15 and Page 26, without any omission placeholder in those locations.",
+        "b_evidence_source": "Page 14: Vision - Every North Carolinian should be able to access affordable high-speed internet anywhere, at any time. Pages 16-25: Multiple content slides covering the State Broadband Plan, Executive Order 91, and Grant programs.",
+        "b_evidence_output": "The JSON sections jump from index 5 (Page 13 content) to index 6 (Page 15 content), skipping Page 14. It then jumps from index 6 (Page 15) to index 7 (Page 26 content), skipping pages 16-25.",
+        "b_evidence_location": "sections array, between indices 5 and 6, and between indices 6 and 7",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables present in the output JSON for 'Broadband Speeds' and 'Typical Broadband Usage' were cross-referenced with the source PDF. Every row and data point from the original tables is present in the conversion.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The sections that were included in the output (Pages 1, 2, 3, 4, 13, 15, 26, and 27) appear to be complete. List items and table cell contents within these sections match the source material without significant omissions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text content was checked for wording changes that might alter the meaning of technical specifications or policy details. No such differences were found; the output preserves the information fidelity of the source text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON contains headings, lists, and tables that correspond directly to the content of the source PDF. AI-generated table captions, summaries, and image alt text are present as expected for accessibility and are not considered fabrications. No entirely invented paragraphs or sentences were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All contact information provided in the output, including URLs (fcc.gov, it.nc.gov), email addresses (firsttech@nc.gov), and social media handles (@NCDIT, @BroadbandIO, etc.), matches the source PDF exactly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source PDF contains 27 pages. While the output JSON includes a placeholder element for 15 omitted sections at index 4 (presumably covering pages 5-12), it silently drops several other critical content pages. Specifically, Page 14 (Vision Statement) is missing between the sections for Page 13 and Page 15. Additionally, Pages 16 through 25 (covering the State Broadband Plan, Executive Order 91, Technical Assistance regions, and Grant programs) are entirely absent between the sections for Page 15 and Page 26, without any omission placeholder in those locations.\",\n      \"b_evidence_source\": \"Page 14: Vision - Every North Carolinian should be able to access affordable high-speed internet anywhere, at any time. Pages 16-25: Multiple content slides covering the State Broadband Plan, Executive Order 91, and Grant programs.\",\n      \"b_evidence_output\": \"The JSON sections jump from index 5 (Page 13 content) to index 6 (Page 15 content), skipping Page 14. It then jumps from index 6 (Page 15) to index 7 (Page 26 content), skipping pages 16-25.\",\n      \"b_evidence_location\": \"sections array, between indices 5 and 6, and between indices 6 and 7\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables present in the output JSON for 'Broadband Speeds' and 'Typical Broadband Usage' were cross-referenced with the source PDF. Every row and data point from the original tables is present in the conversion.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The sections that were included in the output (Pages 1, 2, 3, 4, 13, 15, 26, and 27) appear to be complete. List items and table cell contents within these sections match the source material without significant omissions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text content was checked for wording changes that might alter the meaning of technical specifications or policy details. No such differences were found; the output preserves the information fidelity of the source text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output document follows the source PDF slide by slide without repeating sections or paragraphs. Each text block appears once, corresponding to its single occurrence in the original presentation material. No repeated sections like 'Broadband Technology Types' or 'Broadband Speeds' were found in the provided JSON snippet.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The semantic JSON uses section titles which logically correspond to major section headers. Within 'Broadband Technology Types', a level 3 heading is used for a subtitle ('Multiple technology types, multiple industries'), which correctly nests under the main section title. The structure provided in the JSON is hierarchical and logical.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The tables on pages 3 and 4 match the source structure. For the 'Broadband Speeds' table (page 3), the output correctly uses header cells with colspans to represent categorical separators like 'General Usage' and 'Watching Video'. The 'Typical Broadband Usage' matrix (page 4) maintains the correct column/row relationships. While the layout of the title block (page 13) and social media section (page 27) are converted into tables, they represent the original layout blocks without corrupting data relationships.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The conversion follows the sequential slide order of the original PDF presentation. Content blocks such as lists, tables, and images are placed in the same relative sequence as they appear on the slides.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are correctly identified and nested. On page 2, the main technology types are list items, and their details are properly nested as sub-lists, accurately reflecting the bulleted structure in the source. Similarly, the 'How do we help?' section on page 26 is correctly transformed into an unordered list.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S6",
+        "check_name": "Heading count mismatch between JSON and HTML",
+        "a_analysis": "There is a significant mismatch between the heading count in the semantic.json (5) and the rendered HTML (28). This difference of 23 headings exceeds the allowed threshold (which is 3 in this case). This indicates that the renderer is adding or mis-tagging elements as headings during the final generation phase, likely tagging slide titles as headings that were not explicitly marked as such in the source JSON.",
+        "b_evidence_source": "Heading count in semantic.json: 5; Heading count in rendered HTML: 28",
+        "b_evidence_output": "Heading count in semantic.json: 5; Heading count in rendered HTML: 28",
+        "b_evidence_location": "HTML Metadata section",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output contains the URLs found in the source document (e.g., FCC guides on pages 3 and 4, email on page 26, website on page 27). No broken or fabricated links were observed in the converted text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.8148148148148149,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output document follows the source PDF slide by slide without repeating sections or paragraphs. Each text block appears once, corresponding to its single occurrence in the original presentation material. No repeated sections like 'Broadband Technology Types' or 'Broadband Speeds' were found in the provided JSON snippet.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The semantic JSON uses section titles which logically correspond to major section headers. Within 'Broadband Technology Types', a level 3 heading is used for a subtitle ('Multiple technology types, multiple industries'), which correctly nests under the main section title. The structure provided in the JSON is hierarchical and logical.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The tables on pages 3 and 4 match the source structure. For the 'Broadband Speeds' table (page 3), the output correctly uses header cells with colspans to represent categorical separators like 'General Usage' and 'Watching Video'. The 'Typical Broadband Usage' matrix (page 4) maintains the correct column/row relationships. While the layout of the title block (page 13) and social media section (page 27) are converted into tables, they represent the original layout blocks without corrupting data relationships.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The conversion follows the sequential slide order of the original PDF presentation. Content blocks such as lists, tables, and images are placed in the same relative sequence as they appear on the slides.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are correctly identified and nested. On page 2, the main technology types are list items, and their details are properly nested as sub-lists, accurately reflecting the bulleted structure in the source. Similarly, the 'How do we help?' section on page 26 is correctly transformed into an unordered list.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S6\",\n      \"check_name\": \"Heading count mismatch between JSON and HTML\",\n      \"a_analysis\": \"There is a significant mismatch between the heading count in the semantic.json (5) and the rendered HTML (28). This difference of 23 headings exceeds the allowed threshold (which is 3 in this case). This indicates that the renderer is adding or mis-tagging elements as headings during the final generation phase, likely tagging slide titles as headings that were not explicitly marked as such in the source JSON.\",\n      \"b_evidence_source\": \"Heading count in semantic.json: 5; Heading count in rendered HTML: 28\",\n      \"b_evidence_output\": \"Heading count in semantic.json: 5; Heading count in rendered HTML: 28\",\n      \"b_evidence_location\": \"HTML Metadata section\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output contains the URLs found in the source document (e.g., FCC guides on pages 3 and 4, email on page 26, website on page 27). No broken or fabricated links were observed in the converted text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.8148148148148148\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML conversion simplifies the slide deck layout into a linear vertical format. While the visual complexity (hexagons, chevrons, etc.) is reduced, the visual organization of information remains consistent. Headings follow the same sequence as the PDF pages, and text blocks are positioned predictably relative to their respective headers. The layout transformation from slides to a responsive web page is functionally sound.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables on PDF pages 3 ('Broadband Speeds'), 4 ('Typical Broadband Usage'), and 24 ('GREAT Grant Program') are rendered correctly in HTML. They maintain clear row and column alignment, distinct headers, and are fully readable. The HTML uses styling (such as alternating row colors) that preserves the tabular structure effectively.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Multiple meaningful informational images are missing from the HTML output and replaced by green placeholder boxes. This includes two out of three header images on page 1, the broadband service inventory map on page 5, the house-icon infographics on pages 6-9, the broadband adoption rate map on page 11, the regional assistance map on page 19, and the cover graphic on page 22. These are not merely decorative but provide essential geographical and statistical data.",
+        "b_evidence_source": "The source PDF contains several informational maps and charts, such as the 'North Carolina Broadband Service Inventory' map on page 5 and the '2017 County Broadband Adoption Rates' map on page 11.",
+        "b_evidence_output": "The HTML renders these maps and charts as large green placeholder boxes (e.g., in the 'North Carolina Broadband Service Inventory' and '2017 County Broadband Adoption Rates' sections).",
+        "b_evidence_location": "Sections: 'North Carolina Broadband Service Inventory', 'House Graphics', '2017 County Broadband Adoption Rates', 'Community: Technical Assistance Team'.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A thorough review of the HTML screenshot does not reveal any visual duplication of headers, tables, or text blocks. Every content section appears once in the same order as the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V5",
+        "check_name": "Overall visual quality significantly degraded",
+        "a_analysis": "The overall visual quality is noticeably lower than the source PDF. The document's branding and professional polish are undermined by the numerous large green placeholder squares where graphics should be. Additionally, graphical organizational elements like the hexagons (pp. 10, 12) and chevrons (p. 23) are removed, leaving the page looking like an unpolished or broken website. While readable, it lacks the professional appearance of the original government document.",
+        "b_evidence_source": "The source PDF uses various graphical shapes (hexagons, chevrons, colored bars) to organize and brand information (e.g., Page 10, 12, 15, 23).",
+        "b_evidence_output": "The HTML replaces these structural graphics with plain lists or simple tables, and displays numerous large green blocks where images failed to render, giving it an 'under construction' or broken appearance.",
+        "b_evidence_location": "Throughout the document, notably in 'Common Barriers to Broadband Adoption' and 'The Broadband Infrastructure Office'.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7142857142857143,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML conversion simplifies the slide deck layout into a linear vertical format. While the visual complexity (hexagons, chevrons, etc.) is reduced, the visual organization of information remains consistent. Headings follow the same sequence as the PDF pages, and text blocks are positioned predictably relative to their respective headers. The layout transformation from slides to a responsive web page is functionally sound.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables on PDF pages 3 ('Broadband Speeds'), 4 ('Typical Broadband Usage'), and 24 ('GREAT Grant Program') are rendered correctly in HTML. They maintain clear row and column alignment, distinct headers, and are fully readable. The HTML uses styling (such as alternating row colors) that preserves the tabular structure effectively.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Multiple meaningful informational images are missing from the HTML output and replaced by green placeholder boxes. This includes two out of three header images on page 1, the broadband service inventory map on page 5, the house-icon infographics on pages 6-9, the broadband adoption rate map on page 11, the regional assistance map on page 19, and the cover graphic on page 22. These are not merely decorative but provide essential geographical and statistical data.\",\n      \"b_evidence_source\": \"The source PDF contains several informational maps and charts, such as the 'North Carolina Broadband Service Inventory' map on page 5 and the '2017 County Broadband Adoption Rates' map on page 11.\",\n      \"b_evidence_output\": \"The HTML renders these maps and charts as large green placeholder boxes (e.g., in the 'North Carolina Broadband Service Inventory' and '2017 County Broadband Adoption Rates' sections).\",\n      \"b_evidence_location\": \"Sections: 'North Carolina Broadband Service Inventory', 'House Graphics', '2017 County Broadband Adoption Rates', 'Community: Technical Assistance Team'.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A thorough review of the HTML screenshot does not reveal any visual duplication of headers, tables, or text blocks. Every content section appears once in the same order as the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V5\",\n      \"check_name\": \"Overall visual quality significantly degraded\",\n      \"a_analysis\": \"The overall visual quality is noticeably lower than the source PDF. The document's branding and professional polish are undermined by the numerous large green placeholder squares where graphics should be. Additionally, graphical organizational elements like the hexagons (pp. 10, 12) and chevrons (p. 23) are removed, leaving the page looking like an unpolished or broken website. While readable, it lacks the professional appearance of the original government document.\",\n      \"b_evidence_source\": \"The source PDF uses various graphical shapes (hexagons, chevrons, colored bars) to organize and brand information (e.g., Page 10, 12, 15, 23).\",\n      \"b_evidence_output\": \"The HTML replaces these structural graphics with plain lists or simple tables, and displays numerous large green blocks where images failed to render, giving it an 'under construction' or broken appearance.\",\n      \"b_evidence_location\": \"Throughout the document, notably in 'Common Barriers to Broadband Adoption' and 'The Broadband Infrastructure Office'.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7142857142857143\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

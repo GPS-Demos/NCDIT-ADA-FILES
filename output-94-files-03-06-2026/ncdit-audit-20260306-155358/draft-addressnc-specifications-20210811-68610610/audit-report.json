@@ -1,0 +1,161 @@
+{
+  "document_id": "draft-addressnc-specifications-20210811-68610610",
+  "audited_at": "2026-03-06T20:15:55.199356Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "reject",
+  "routing_label": "Reject",
+  "reasoning": "The document exhibits catastrophic content loss and structural failure, with a word count ratio of only 0.387 and shingling recall of 0.454. The LLM fidelity report and programmatic signals converge on the fact that over 60% of the content was omitted, including critical technical tables and entire sections explicitly discarded due to token budget constraints.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "Several significant sections are missing from the output. The 'NC Counties' domain section on page 9 is entirely absent. Furthermore, the output explicitly states that six sections were 'omitted for token budget', which includes key content from page 3: 'Introduction', 'Definition', 'General Data Requirements', 'Coordinate System', 'Geometry - Point Feature Type', and 'Fields and Domains'.",
+      "source_pdf_quote": "Page 9 contains the 'NC Counties' domain section with a table of all North Carolina counties. Page 3 contains sections for Introduction, Definition, and General Data Requirements (including Coordinate System and Geometry subsections).",
+      "output_quote": "The JSON output contains a block: '{\"_omitted\": \"6 sections omitted for token budget\"}' and entirely skips the 'NC Counties' section and table.",
+      "location": "Sections following 'Preface', page 3; and 'Appendix B - Domains', page 9.",
+      "corroborated": false
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C4",
+      "analysis": "Two major tables are severely truncated. The 'Appendix A - Fields' table, which spans pages 4 through 8 in the source and contains approximately 47 data rows, only contains the first 9 rows in the output (ending at 'St_PosDir'). The 'Place Type' domain table is also truncated; it skips all rows on pages 9, 10, and 11 (from 'Agricultural' to 'Preserved Open Space'), containing only the rows from pages 12 and 13 (starting at 'Religious').",
+      "source_pdf_quote": "The 'Appendix A - Fields' table contains fields from 'Add_Number' through 'UniqueID' across pages 4-8. The 'Place Type' table contains attributes from 'Agricultural' through 'Vacant' across pages 9-13.",
+      "output_quote": "The 'Appendix A - Fields' table in the output has only 9 data rows. The 'Place Type' domain table in the output is missing approximately 30 rows of data from the first three pages of the table in the source.",
+      "location": "Appendix A - Fields, pages 4-8; Appendix B - Place Type table, pages 9-13.",
+      "corroborated": false
+    },
+    {
+      "description": "Significant text omission within a section",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C5",
+      "analysis": "The section titled 'AddressNC Data Content Standard' (which appears as a heading on page 3) is present in the JSON structure but contains no content (elements are empty). This represents a loss of the introductory structure corresponding to that heading in the source.",
+      "source_pdf_quote": "Page 3 of the PDF has the heading 'AddressNC Data Content Standard'.",
+      "output_quote": "The section with title 'AddressNC Data Content Standard' has an empty 'elements' array.",
+      "location": "AddressNC Data Content Standard section, page 3.",
+      "corroborated": false
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S2",
+      "analysis": "The heading hierarchy is severely broken. Major sections that appear as top-level headers in the source, such as 'Appendix B - Domains' (page 9) and 'References' (page 14), are missing as section titles. Furthermore, the 'Placement' section (page 13) and 'References' list are incorrectly nested as elements within the 'Appendix A - Fields' section, rather than being their own distinct sections or subsections of the correct parent.",
+      "source_pdf_quote": "Major section headers on pages 9 ('Appendix B - Domains') and 14 ('References').",
+      "output_quote": "The JSON structure nests 'Placement' and 'References' as 'elements' within the 'Appendix A - Fields' section (reading_order 12).",
+      "location": "Sections for Appendix A and References, page 12-14",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S3",
+      "analysis": "The table structure for the 'Place Type' data is corrupted. In the source, this is a continuous table spanning pages 9 to 13. In the output, the first three pages of the table (Agricultural through Mixed Use) are omitted, and the remainder of the table (starting at 'Religious' on page 12) is incorrectly appended as a secondary table element within the 'Appendix A - Fields' section. This breaks the integrity of the data and its relationship to the headers.",
+      "source_pdf_quote": "The 'Place Type' table starting on page 9 and ending on page 13.",
+      "output_quote": "The JSON contains a table titled 'Domain Attributes for Classification (Continued)' which starts at the 'Religious' row, missing all previous data, and is placed inside the 'Appendix A - Fields' section.",
+      "location": "Appendix A - Fields section, page 12",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the heading counts. The rendered HTML contains 13 headings, while the semantic.json only explicitly defines 2 elements of type 'heading'. This indicates that the renderer is generating headings from section titles while the count logic is inconsistent, or that headings are being suppressed/added improperly.",
+      "source_pdf_quote": "html_heading_count: 13, json_heading_count: 2",
+      "output_quote": "The JSON only contains 2 explicit heading types ('Placement' and 'References') whereas the source contains many more (Preface, Introduction, Definition, etc.).",
+      "location": "Full document",
+      "corroborated": false
+    },
+    {
+      "description": "Major visual layout difference",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V1",
+      "analysis": "The source PDF contains an extensive 'Fields' table in Appendix A (pages 4-8), an 'NC Counties' table in Appendix B (page 9), and a comprehensive 'Place Type' table (pages 9-13). The rendered HTML output significantly truncates this content. It omits the content from PDF pages 5 through 11 entirely. The Appendix A table ends prematurely after the 9th row, and the Appendix B Place Type table starts abruptly at the 'Religious' entry with a header labeled '(Continued)', despite the first three page",
+      "source_pdf_quote": "PDF pages 5-11 contain significant sections: the remainder of Appendix A Fields, the NC Counties domain table, and the initial three pages of the Place Type domain table.",
+      "output_quote": "The HTML output skips from the field 'St_PosDir' (end of PDF page 4) directly to the domain attribute 'Religious' (PDF page 12). Large sections of data are visually missing between these points.",
+      "location": "Sections following Appendix A (page 4) and preceding 'Domain Attributes for Classification (Continued)' (page 12).",
+      "corroborated": false
+    },
+    {
+      "description": "Significant word count loss: 39% of baseline",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline=3214, output=1244",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The overall quality is significantly degraded due to the massive truncation of the document. The output renders only about half of the original 14-page document, leading to an incomplete and fragmented visual presentation that would not be suitable for official use.",
+      "source_pdf_quote": "14-page source PDF document with continuous data tables and references.",
+      "output_quote": "Rendered HTML is missing nearly 50% of the substantive data rows and sections from the middle of the document.",
+      "location": "Throughout the document, specifically between Appendix A and the middle of Appendix B.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "The document is unfit for publication or manual repair in its current state; it requires a complete re-conversion with increased token limits or chunked processing to capture the full technical specification."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.6170714781401804,
+      "content_completeness": 0.3298919499915144,
+      "accessibility": 1.0,
+      "decision_confidence": 0.0,
+      "raw_score": 0.4329,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5930232558139534,
+      "fidelity_structural": 0.4444444444444444,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.45376607470912433,
+      "shingling_precision": 0.9640069384215091,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.38705662725575607,
+      "baseline_words": 3214,
+      "gemini_words": 1244,
+      "table_count_ratio": 0.2727272727272727,
+      "image_count_ratio": 0.043478260869565216,
+      "pipeline_confidence": 0.88,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 9349,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

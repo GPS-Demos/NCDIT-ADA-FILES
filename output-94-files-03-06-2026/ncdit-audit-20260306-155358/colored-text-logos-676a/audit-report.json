@@ -1,0 +1,97 @@
+{
+  "document_id": "colored-text-logos-676a",
+  "audited_at": "2026-03-06T20:15:47.187894Z",
+  "quality_score": 86,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "The document suffers from significant structural and content fidelity issues, including the incorrect vertical stacking of page headers at the end of the HTML and the complete omission of functional contact links and text. These defects are corroborated by a sub-0.90 shingling recall score and a low visual fidelity score (0.76), indicating that the automated conversion failed to maintain the document's original structure and completeness.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V4",
+      "analysis": "The branding header (containing the NCDIT logo) is visually duplicated at the end of the HTML document. In the source PDF, this header appears once at the top of each page. In the single-page HTML rendering, the converter has incorrectly placed the headers from pages 2, 3, and 4 in a vertical stack at the very bottom of the document, resulting in identical visual blocks appearing three times consecutively.",
+      "source_pdf_quote": "The NCDIT header logo appears once at the top of pages 1, 2, 3, and 4.",
+      "output_quote": "Three identical NCDIT logo header blocks are stacked at the end of the HTML document.",
+      "location": "Bottom of the HTML page, below the 'Future' section.",
+      "corroborated": false
+    },
+    {
+      "description": "Content duplicated",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S1",
+      "analysis": "The NCDIT logo, which serves as a header in the source PDF, appears on each of the 4 pages (4 times total). In the output JSON, the logo appears 5 times: once at the start of the document (index 0) and four more times at the end of the document (indices 27, 28, 29, and 30). This results in one additional instance of the logo compared to the source.",
+      "source_pdf_quote": "The NCDIT logo appears in the top right header of pages 1, 2, 3, and 4.",
+      "output_quote": "The logo appears at element index 0 and then again at indices 27, 28, 29, and 30 in the elements array.",
+      "location": "semantic.json; sections[0].elements",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The source PDF contains contact information ('FirstTech can be reached at firsttech@nc.gov and it.nc.gov/firsttech') repeated on every page. This text contains the only functional links (email and URL) in the document. These strings and their corresponding links are entirely absent from the 'elements' array in the semantic JSON, meaning the links are missing from the output content.",
+      "source_pdf_quote": "FirstTech can be reached at firsttech@nc.gov and it.nc.gov/firsttech (Page 1 bottom; Pages 2-4 top)",
+      "output_quote": "The text 'firsttech@nc.gov' and 'it.nc.gov/firsttech' is missing from all paragraphs and lists in the elements array.",
+      "location": "semantic.json; sections[0].elements",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Correct the placement of headers to ensure they do not aggregate at the bottom of the document.",
+    "Manually restore the missing contact text and hyperlinks for FirstTech.",
+    "Deduplicate the extra logo instance found at index 30."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8944,
+      "text_match": 0.9297142857142857,
+      "content_completeness": 0.9615931721194879,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8629,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.8944,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9259259259259259,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8777987591043971,
+      "shingling_precision": 0.9881566960218645,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9231863442389758,
+      "baseline_words": 1406,
+      "gemini_words": 1298,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 4.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 8799,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

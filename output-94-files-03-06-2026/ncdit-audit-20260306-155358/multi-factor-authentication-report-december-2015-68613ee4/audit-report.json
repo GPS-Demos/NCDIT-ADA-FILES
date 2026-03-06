@@ -1,0 +1,74 @@
+{
+  "document_id": "multi-factor-authentication-report-december-2015-68613ee4",
+  "audited_at": "2026-03-06T20:17:20.695550Z",
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the LLM fidelity signals show a perfect score, the programmatic evaluation detected a major discrepancy in table counts, identifying two tables in the output that were not present in the baseline. Because false negatives are significantly more costly than false positives and there is a clear signal disagreement regarding document structure, this requires manual verification.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 2",
+      "source": "programmatic",
+      "severity": "major",
+      "check_id": null,
+      "analysis": "baseline_tables=0, gemini_tables=2",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify if the two tables in the HTML output actually exist in the source PDF or if they are hallucinations.",
+    "Check for missing content given the shingling recall (0.914) and word count ratio (0.924)."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 1.0,
+      "text_match": 0.9434355118565645,
+      "content_completeness": 0.923728813559322,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.9022,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 1.0,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9137351557248488,
+      "shingling_precision": 0.9751315160210425,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.923728813559322,
+      "baseline_words": 2124,
+      "gemini_words": 1962,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 7041,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

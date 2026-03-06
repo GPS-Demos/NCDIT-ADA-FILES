@@ -1,0 +1,73 @@
+{
+  "document_id": "cyber-incident-reporting-north-carolina-state-government-686b1b59",
+  "audited_at": "2026-03-06T20:15:51.071823Z",
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While programmatic and fidelity scores are exceptionally high, the identified defect regarding non-functional contact links in a 'Cyber Incident Reporting' document is a significant usability issue. In a high-stakes document where reporting speed is essential, the failure to correctly tag emails, phone numbers, and URLs as interactive elements requires human correction to meet accessibility and functional standards.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "Several functional links clearly visible in the source PDF are not captured as structured link elements in the JSON. While one URL ('https://it.nc.gov/report') is correctly linked in a paragraph, the same URL, multiple email addresses, and phone numbers in the 'Reporting Points of Contact' table are extracted as plain text only.",
+      "source_pdf_quote": "The table on page 2 contains several contact links including '800-722-3946', 'NCEOC@ncdps.gov', '1-800-858-0368', 'https://it.nc.gov/report', 'ncisaac@ncsbi.gov', and 'mailto:DITThreatManagement@nc.gov'.",
+      "output_quote": "\"content\": [\n                    {\n                      \"text\": \"Use the Statewide Cybersecurity Incident Report form at https://it.nc.gov/report.\",\n                      \"bold\": false,\n                      \"italic\": false,\n                      \"underline\": false,\n                      \"strikethrough\": false,\n                      \"superscript\": false,\n                      \"subscript\": false,\n                      \"code\": false,\n                      \"lang\": null\n                    }\n      ",
+      "location": "Section 'How to Report Cyber Incidents to the State', table element at index 16.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Identify text-based URLs, email addresses, and phone numbers in the contact table and wrap them in appropriate <a> tags (e.g., mailto: and tel: protocols)."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "auto_approve",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9889,
+      "text_match": 0.9898580121703855,
+      "content_completeness": 0.991725768321513,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.9173,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.9889,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.962962962962963,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9878542510121457,
+      "shingling_precision": 0.991869918699187,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.983451536643026,
+      "baseline_words": 846,
+      "gemini_words": 832,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 7374,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

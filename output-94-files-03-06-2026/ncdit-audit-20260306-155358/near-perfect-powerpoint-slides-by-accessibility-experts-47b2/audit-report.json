@@ -1,0 +1,109 @@
+{
+  "document_id": "near-perfect-powerpoint-slides-by-accessibility-experts-47b2",
+  "audited_at": "2026-03-06T20:21:19.351631Z",
+  "quality_score": 83,
+  "quality_grade": "Fair",
+  "routing": "human_review",
+  "routing_label": "Needs Human Review",
+  "reasoning": "While the document passed automated accessibility checks, it suffers from severe structural and visual fidelity issues. The extreme heading mismatch (1 vs 35) indicates a significant failure in the rendering logic, and the replacement of essential instructional images with green blocks constitutes a major loss of educational content. Programmatic recall (0.86) and word count ratios corroborate the content loss reported by the LLM fidelity signal.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a severe mismatch between the number of headings identified in the semantic JSON (1) and those rendered in the final HTML (35). The renderer is generating 34 additional headings, likely by promoting section titles that were not explicitly typed as headings in the element array. This indicates a significant failure in the heading deduplication or mapping logic of the renderer.",
+      "source_pdf_quote": "The PDF contains 34 slide titles intended as structural headers.",
+      "output_quote": "Headings in semantic.json: 1; Headings in rendered HTML: 35",
+      "location": "HTML Metadata",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "A significant number of meaningful instructional images from the source PDF are missing or rendered as large green blocks in the HTML output. Key missing images include the signpost diagram on page 4, the accessibility scan screenshot on page 12, the NVDA setup screen on page 17, macOS accessibility settings on page 25, keyboard photos on pages 26, 27, and 28, rotor navigation screenshots on pages 29 and 32, and iDevice settings on page 30. These images are essential for the instructional value ",
+      "source_pdf_quote": "Multiple instructional screenshots and photos on pages 4, 12, 17, 25, 26, 27, 28, 29, 30, and 32.",
+      "output_quote": "Large green rectangular blocks appear in place of images in the HTML rendering, or images are omitted entirely.",
+      "location": "Sections corresponding to pages 4, 12, 17, 25, 26, 27, 28, 29, 30, and 32.",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The source PDF contains multiple functional web and email links (e.g., slide 5, 33, and 34). The semantic JSON output fails to identify any of these as link elements, instead treating them as plain text with underlining. Furthermore, the HTML metadata shows one link was injected during rendering that does not exist in the JSON, indicating inconsistency in link detection and conversion.",
+      "source_pdf_quote": "Web: www.ablr360.com\nEmail: kim.casey@ablr360.com",
+      "output_quote": "Links in semantic.json: 0; Links in rendered HTML: 1",
+      "location": "Section 'Get in touch' (reading_order 34)",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The visual quality is significantly degraded by the presence of large, bright green blocks throughout the document. These placeholders are aesthetically jarring and disrupt the professional presentation of the instructional material, making the document appear broken or incomplete.",
+      "source_pdf_quote": "A professional slide deck with consistent design and integrated visual aids.",
+      "output_quote": "The HTML document contains multiple large, distracting green rectangles that replace missing visual content.",
+      "location": "Throughout the rendered output.",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Audit the 35 rendered headings to ensure they are not erroneous promotions of body text.",
+    "Recover and re-insert the missing instructional images on pages 4, 12, 17, 25-30, and 32.",
+    "Manually convert plain-text URLs and email addresses into functional <a> tags.",
+    "Investigate the pipeline's image processing failure that resulted in green block placeholders."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8333,
+      "text_match": 0.8979769414835763,
+      "content_completeness": 0.9385542168674699,
+      "accessibility": 1.0,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8287,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.8333,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7777777777777778,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8596418159100375,
+      "shingling_precision": 0.9398907103825137,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8771084337349397,
+      "baseline_words": 830,
+      "gemini_words": 728,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.069767441860465,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 227831,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

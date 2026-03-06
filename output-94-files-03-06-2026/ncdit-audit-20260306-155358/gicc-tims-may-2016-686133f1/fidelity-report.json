@@ -1,0 +1,233 @@
+{
+  "document_id": "gicc-tims-may-2016-686133f1",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output content across the preserved sections (1, 2, 3, 16, 19, 23, 24) corresponds to the text and titles found on the respective slides in the source PDF. The generated table captions and summaries for images and tables are acceptable AI additions for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "No contact information such as phone numbers, email addresses, or URLs was found in the output. The source PDF itself contains minimal contact information, none of which appears on the audited pages.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output explicitly acknowledges the omission of 17 sections due to token budget constraints. This results in the complete loss of information from pages 4 through 15, 17, 18, and 20 through 22. These missing pages contain critical regulatory information, digitization history, TIMS system diagrams, and sample routing reports.",
+        "b_evidence_source": "Source PDF contains content on pages 4-15 (Implementation, Digitizing, Pen Plotters, Maps, TIMS System, Student Data, Reports, Routing Info, NCDOT Reports, Optimization, Case Studies), 17-18 (Boundary Planning, Funding), and 20-22 (Other apps, Growth projections, School assignment).",
+        "b_evidence_output": "{\"_omitted\": \"17 sections omitted for token budget\"}",
+        "b_evidence_location": "Sections array, between indices for reading_order 3 and 16.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Table 1 (Slide 16) accurately captures all data rows from the source document. Table 2 (Slide 19) is a transcription of chart data; while the data mapping is incorrect, the table contains the expected number of labels from the chart axes.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The sections present in the output are largely complete for the slides they represent. The major text omissions are the entire pages documented in check C3.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Table 2 in Section 19 incorrectly transcribes a line chart. It maps the Y-axis maximum value (15,000) as the bus count for the X-axis starting year (1974-75), creating a false data point (the actual count was ~11,250). Furthermore, it incorrectly associates notes such as 'Buses Saved: 1482' with the year '1978-79', whereas this data point belongs to the year 2012-13. This creates a completely false and misleading dataset.",
+        "b_evidence_source": "Slide 19 Line Chart: Data point for 1974-75 is ~11,250. 'Buses Saved: 1482' is a measurement for the year 2012-13.",
+        "b_evidence_output": "Row 2: '15,000' | '1974-75' | 'Trend Line'; Row 4: '14,000' | '1978-79' | 'Buses Saved: 1482'",
+        "b_evidence_location": "Section 'Public Schools of North Carolina Number of Buses Operated', Table 2.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output content across the preserved sections (1, 2, 3, 16, 19, 23, 24) corresponds to the text and titles found on the respective slides in the source PDF. The generated table captions and summaries for images and tables are acceptable AI additions for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"No contact information such as phone numbers, email addresses, or URLs was found in the output. The source PDF itself contains minimal contact information, none of which appears on the audited pages.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output explicitly acknowledges the omission of 17 sections due to token budget constraints. This results in the complete loss of information from pages 4 through 15, 17, 18, and 20 through 22. These missing pages contain critical regulatory information, digitization history, TIMS system diagrams, and sample routing reports.\",\n      \"b_evidence_source\": \"Source PDF contains content on pages 4-15 (Implementation, Digitizing, Pen Plotters, Maps, TIMS System, Student Data, Reports, Routing Info, NCDOT Reports, Optimization, Case Studies), 17-18 (Boundary Planning, Funding), and 20-22 (Other apps, Growth projections, School assignment).\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"17 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"Sections array, between indices for reading_order 3 and 16.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Table 1 (Slide 16) accurately captures all data rows from the source document. Table 2 (Slide 19) is a transcription of chart data; while the data mapping is incorrect, the table contains the expected number of labels from the chart axes.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The sections present in the output are largely complete for the slides they represent. The major text omissions are the entire pages documented in check C3.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Table 2 in Section 19 incorrectly transcribes a line chart. It maps the Y-axis maximum value (15,000) as the bus count for the X-axis starting year (1974-75), creating a false data point (the actual count was ~11,250). Furthermore, it incorrectly associates notes such as 'Buses Saved: 1482' with the year '1978-79', whereas this data point belongs to the year 2012-13. This creates a completely false and misleading dataset.\",\n      \"b_evidence_source\": \"Slide 19 Line Chart: Data point for 1974-75 is ~11,250. 'Buses Saved: 1482' is a measurement for the year 2012-13.\",\n      \"b_evidence_output\": \"Row 2: '15,000' | '1974-75' | 'Trend Line'; Row 4: '14,000' | '1978-79' | 'Buses Saved: 1482'\",\n      \"b_evidence_location\": \"Section 'Public Schools of North Carolina Number of Buses Operated', Table 2.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output correctly reflects the content of the source document without unintended duplication. While the final slide (Page 24) is a duplicate of the first slide (Page 1) in the source PDF, this is intentional repetition within the original document. No other instances of repeated text blocks or sections were found in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved and logically structured. Each slide title in the source PDF is treated as a section heading in the JSON. The hierarchy is flat, which is appropriate for a presentation slide deck where each slide title represents a major division of the content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The table on page 16, 'Improvement from Stop Consolidation', has a corrupted structure in the output. In the source document, 'Average Walk Distance to Bus Stop (miles)' is a single logical row where the label is in the first column and the data points (0.07, 0.12, 0.05) are in the subsequent columns. The converted JSON splits this into two rows: Row 7 contains the main label and spans all 4 columns (colspan 4), while Row 8 contains the unit '(miles)' and the data values. This structure breaks the semantic relationship and visual alignment between the category label and its associated data.",
+        "b_evidence_source": "Page 16 table: Row starting with 'Average Walk Distance to Bus Stop (miles)' has data 0.07, 0.12, 0.05 in columns 2, 3, and 4.",
+        "b_evidence_output": "Rows 7 and 8 in the table within section 'Improvement from Stop Consolidation'. Row 7: cell 1 content 'Average Walk Distance to Bus Stop' with colspan 4. Row 8: cell 1 '(miles)', cell 2 '0.07', cell 3 '0.12', cell 4 '0.05'.",
+        "b_evidence_location": "Section: Improvement from Stop Consolidation, Page 16",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the output JSON faithfully follows the sequence of the source PDF, moving page by page (slide by slide) from the beginning to the end.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list conversion is accurate. For example, the unordered list on page 3 ('A Bit of History') is correctly identified and structured in the JSON, preserving the text and organizational intent of the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S6",
+        "check_name": "Heading count mismatch between JSON and HTML",
+        "a_analysis": "There is a major mismatch between the heading count reported for the JSON and the count in the rendered HTML. The provided metadata indicates only 1 heading in the JSON, while 24 headings are found in the HTML. Given that the document consists of 24 slides, each with a title that should be a heading, a count of 1 for the JSON is an error, reflecting a failure in the conversion pipeline's metadata tracking or heading identification process.",
+        "b_evidence_source": "Headings in semantic.json: 1",
+        "b_evidence_output": "Headings in rendered HTML: 24",
+        "b_evidence_location": "HTML Metadata",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document contains no hyperlinks, and none were incorrectly injected into the converted output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6296296296296297,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output correctly reflects the content of the source document without unintended duplication. While the final slide (Page 24) is a duplicate of the first slide (Page 1) in the source PDF, this is intentional repetition within the original document. No other instances of repeated text blocks or sections were found in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved and logically structured. Each slide title in the source PDF is treated as a section heading in the JSON. The hierarchy is flat, which is appropriate for a presentation slide deck where each slide title represents a major division of the content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The table on page 16, 'Improvement from Stop Consolidation', has a corrupted structure in the output. In the source document, 'Average Walk Distance to Bus Stop (miles)' is a single logical row where the label is in the first column and the data points (0.07, 0.12, 0.05) are in the subsequent columns. The converted JSON splits this into two rows: Row 7 contains the main label and spans all 4 columns (colspan 4), while Row 8 contains the unit '(miles)' and the data values. This structure breaks the semantic relationship and visual alignment between the category label and its associated data.\",\n      \"b_evidence_source\": \"Page 16 table: Row starting with 'Average Walk Distance to Bus Stop (miles)' has data 0.07, 0.12, 0.05 in columns 2, 3, and 4.\",\n      \"b_evidence_output\": \"Rows 7 and 8 in the table within section 'Improvement from Stop Consolidation'. Row 7: cell 1 content 'Average Walk Distance to Bus Stop' with colspan 4. Row 8: cell 1 '(miles)', cell 2 '0.07', cell 3 '0.12', cell 4 '0.05'.\",\n      \"b_evidence_location\": \"Section: Improvement from Stop Consolidation, Page 16\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the output JSON faithfully follows the sequence of the source PDF, moving page by page (slide by slide) from the beginning to the end.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list conversion is accurate. For example, the unordered list on page 3 ('A Bit of History') is correctly identified and structured in the JSON, preserving the text and organizational intent of the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S6\",\n      \"check_name\": \"Heading count mismatch between JSON and HTML\",\n      \"a_analysis\": \"There is a major mismatch between the heading count reported for the JSON and the count in the rendered HTML. The provided metadata indicates only 1 heading in the JSON, while 24 headings are found in the HTML. Given that the document consists of 24 slides, each with a title that should be a heading, a count of 1 for the JSON is an error, reflecting a failure in the conversion pipeline's metadata tracking or heading identification process.\",\n      \"b_evidence_source\": \"Headings in semantic.json: 1\",\n      \"b_evidence_output\": \"Headings in rendered HTML: 24\",\n      \"b_evidence_location\": \"HTML Metadata\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document contains no hyperlinks, and none were incorrectly injected into the converted output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.6296296296296297\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output correctly reflects the visual organization of the slide deck. Each slide is rendered as a distinct section with its heading and corresponding content (text, images, or tables) following the same logical flow as the source PDF. The transformation from a landscape presentation to a vertical scrolling HTML document is an expected format change and does not disrupt the visual organization of information.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "There are three tables in the document (Page 16: 'Improvement from Stop Consolidation', Page 17: 'Here's your tally...', and Page 19: 'Number of Buses Operated'). The tables on Page 16 and Page 19 are rendered correctly as accessible HTML tables with clear row/column alignment. However, the 'Here's your tally...' data from Page 17 is missing entirely as a table; only the main header 'School Boundary Planning' and the map image are present in the corresponding section. Additionally, the table for 'Number of Buses Operated' (Page 19) is present but the data is significantly truncated compared to the source chart's data points, and the 'Notes' column is mostly empty where labels existed in the PDF.",
+        "b_evidence_source": "Page 17 contains a detailed 'Here's your tally....' data table overlaying a map. Page 19 contains a line chart with data points for every 2 years from 1974 to 2013.",
+        "b_evidence_output": "The 'School Boundary Planning' section contains no table. The 'Public Schools of North Carolina Number of Buses Operated' table only contains 9 rows and missing 'Notes' content (e.g., 'Buses Saved: 1482').",
+        "b_evidence_location": "Sections 'School Boundary Planning' and 'Public Schools of North Carolina Number of Buses Operated'",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful images from the source PDF are missing or replaced by green placeholder blocks in the HTML. Specifically, images on pages 3, 6, 8, 9, 10, 11, 13, 14, 15, 17, 22, and 23 are either missing or rendered as green rectangles. These are not decorative; they are key content-bearing elements like diagrams of the TIMS system, software screenshots, routing maps, and growth projection heatmaps.",
+        "b_evidence_source": "Meaningful diagrams and screenshots on pages 3, 6, 8, 9, 10, 11, 13, 14, 15, 17, 22, and 23.",
+        "b_evidence_output": "Green rectangular placeholders are shown instead of the actual images for these sections.",
+        "b_evidence_location": "Multiple sections throughout the document corresponding to the listed pages.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The content from the first/last slide ('The Value of GIS...') appears to be duplicated. It appears at the very beginning of the HTML and again at the very end. While this reflects the PDF structure (where the slide is repeated), the HTML also duplicates the header and sub-header text ('Derek Graham, Section Chief...') at the very bottom of the document below the final green placeholder.",
+        "b_evidence_source": "Page 1 and Page 24 are identical slides.",
+        "b_evidence_output": "The title 'The Value of GIS Supporting our Public Schools' and associated text appear at the top and bottom of the rendered HTML.",
+        "b_evidence_location": "Beginning and end of document",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V5",
+        "check_name": "Overall visual quality significantly degraded",
+        "a_analysis": "The overall visual quality is poor due to the extensive use of large green placeholder blocks instead of actual content (images/diagrams). This makes the document look unfinished. Furthermore, the text under 'Bus Routing Information' (Page 11) is rendered in a very small font size within a fixed-width block that does not match the styling of the rest of the document, making it difficult to read compared to other sections.",
+        "b_evidence_source": "Page 11 'Bus Routing Information' text is clear and legible.",
+        "b_evidence_output": "The routing data is in a tiny, pre-formatted style font that is significantly smaller than surrounding text.",
+        "b_evidence_location": "Section 'Bus Routing Information'",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.47619047619047616,
+    "penalty_sum": 11,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output correctly reflects the visual organization of the slide deck. Each slide is rendered as a distinct section with its heading and corresponding content (text, images, or tables) following the same logical flow as the source PDF. The transformation from a landscape presentation to a vertical scrolling HTML document is an expected format change and does not disrupt the visual organization of information.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"There are three tables in the document (Page 16: 'Improvement from Stop Consolidation', Page 17: 'Here's your tally...', and Page 19: 'Number of Buses Operated'). The tables on Page 16 and Page 19 are rendered correctly as accessible HTML tables with clear row/column alignment. However, the 'Here's your tally...' data from Page 17 is missing entirely as a table; only the main header 'School Boundary Planning' and the map image are present in the corresponding section. Additionally, the table for 'Number of Buses Operated' (Page 19) is present but the data is significantly truncated compared to the source chart's data points, and the 'Notes' column is mostly empty where labels existed in the PDF.\",\n      \"b_evidence_source\": \"Page 17 contains a detailed 'Here's your tally....' data table overlaying a map. Page 19 contains a line chart with data points for every 2 years from 1974 to 2013.\",\n      \"b_evidence_output\": \"The 'School Boundary Planning' section contains no table. The 'Public Schools of North Carolina Number of Buses Operated' table only contains 9 rows and missing 'Notes' content (e.g., 'Buses Saved: 1482').\",\n      \"b_evidence_location\": \"Sections 'School Boundary Planning' and 'Public Schools of North Carolina Number of Buses Operated'\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful images from the source PDF are missing or replaced by green placeholder blocks in the HTML. Specifically, images on pages 3, 6, 8, 9, 10, 11, 13, 14, 15, 17, 22, and 23 are either missing or rendered as green rectangles. These are not decorative; they are key content-bearing elements like diagrams of the TIMS system, software screenshots, routing maps, and growth projection heatmaps.\",\n      \"b_evidence_source\": \"Meaningful diagrams and screenshots on pages 3, 6, 8, 9, 10, 11, 13, 14, 15, 17, 22, and 23.\",\n      \"b_evidence_output\": \"Green rectangular placeholders are shown instead of the actual images for these sections.\",\n      \"b_evidence_location\": \"Multiple sections throughout the document corresponding to the listed pages.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The content from the first/last slide ('The Value of GIS...') appears to be duplicated. It appears at the very beginning of the HTML and again at the very end. While this reflects the PDF structure (where the slide is repeated), the HTML also duplicates the header and sub-header text ('Derek Graham, Section Chief...') at the very bottom of the document below the final green placeholder.\",\n      \"b_evidence_source\": \"Page 1 and Page 24 are identical slides.\",\n      \"b_evidence_output\": \"The title 'The Value of GIS Supporting our Public Schools' and associated text appear at the top and bottom of the rendered HTML.\",\n      \"b_evidence_location\": \"Beginning and end of document\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V5\",\n      \"check_name\": \"Overall visual quality significantly degraded\",\n      \"a_analysis\": \"The overall visual quality is poor due to the extensive use of large green placeholder blocks instead of actual content (images/diagrams). This makes the document look unfinished. Furthermore, the text under 'Bus Routing Information' (Page 11) is rendered in a very small font size within a fixed-width block that does not match the styling of the rest of the document, making it difficult to read compared to other sections.\",\n      \"b_evidence_source\": \"Page 11 'Bus Routing Information' text is clear and legible.\",\n      \"b_evidence_output\": \"The routing data is in a tiny, pre-formatted style font that is significantly smaller than surrounding text.\",\n      \"b_evidence_location\": \"Section 'Bus Routing Information'\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 1,\n    \"penalty_sum\": 11,\n    \"score\": 0.47619047619047616\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 7,
+  "total_critical": 1,
+  "total_major": 5,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

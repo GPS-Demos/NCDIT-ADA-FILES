@@ -1,0 +1,141 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-ff40",
+  "audited_at": "2026-03-06T20:17:13.653550Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "routing": "reject",
+  "routing_label": "Reject",
+  "reasoning": "The conversion is fundamentally broken, evidenced by the explicit omission of 8 full sections (Pages 4-11) due to token limitations and a 75% text loss on Page 2. The presence of green block placeholders instead of images and the injection of OCR metadata confirm a catastrophic failure of the pipeline.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "source": "fidelity_llm",
+      "severity": "critical",
+      "check_id": "C3",
+      "analysis": "The output is missing content for Pages 4 through 11. The JSON explicitly contains a placeholder element stating '_omitted': '8 sections omitted for token budget'. These pages in the source contain significant 'Highlights' and 'Collaboration' content that is entirely absent from the conversion result provided.",
+      "source_pdf_quote": "Pages 4 through 11 of the source PDF containing content for 'Highlights: COVID Response', 'Resiliency', 'NC GIS Conference', 'Infrastructure', and various collaboration initiatives.",
+      "output_quote": "The sections array in the JSON jumps from reading_order 3 to reading_order 12, with an explicit omission note.",
+      "location": "sections, index 3",
+      "corroborated": false
+    },
+    {
+      "description": "Significant text omission within a section",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "C5",
+      "analysis": "In Section 2 (Page 2), the output omits nearly all descriptive text associated with the 'What We're Doing' dashboard. While some icon headers are summarized in image alt text, the detailed descriptions (e.g., 'Meeting Schedule, Agendas, Minutes and Presentations', 'All Council, Committee and Workgroup Meetings Information', 'Statewide Standardized Parcel Dataset') are missing from the semantic text elements. This accounts for over 75% of the text on that page.",
+      "source_pdf_quote": "Descriptive text under icons on Page 2: 'Meeting Schedule, Agendas, Minutes and Presentations', 'All Council, Committee and Workgroup Meetings Information', 'Standing Committees, Working Groups and Ad Hoc Committees', 'Access North Carolina's Geospatial Data Resources', 'Statewide Standardized Parcel Dataset'.",
+      "output_quote": "The Section 2 elements contain only font metadata paragraphs and a single URL paragraph. The descriptive content is not present.",
+      "location": "sections[1].elements",
+      "corroborated": false
+    },
+    {
+      "description": "Content duplicated",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S1",
+      "analysis": "The output contains repeated instances of font metadata text (e.g., 'Title is Avenir Next LT Pro Regular 24pt' and 'Subtitle is Avenir Next LT Pro Light 18pt') at the beginning of multiple sections (Section 1, 2, 3, etc.). These strings are not part of the source PDF content according to the images provided and represent a repeated injection of OCR-related metadata that is not present in the original document.",
+      "source_pdf_quote": "The source PDF images (Pages 1-13) do not contain the text 'Title is Avenir Next LT Pro Regular 24pt' or 'Subtitle is Avenir Next LT Pro Light 18pt'.",
+      "output_quote": "\"text\": \"Title is Avenir Next LT Pro Regular 24pt\"",
+      "location": "Sections 1, 2, and 3, element 0",
+      "corroborated": false
+    },
+    {
+      "description": "Heading count mismatch between JSON and HTML",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "S6",
+      "analysis": "There is a significant mismatch between the explicit heading count in the semantic JSON (1) and the number of headings identified in the rendered HTML (13), based on the provided metadata. This exceeds the 10% and 3-heading threshold, indicating that the renderer is adding or identifying headings (likely from section titles) that are not properly tagged as headings in the source JSON.",
+      "source_pdf_quote": "The authoritative JSON count of explicit headings is 1.",
+      "output_quote": "The HTML METADATA provided indicates 13 headings are rendered in HTML.",
+      "location": "Metadata Summary",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "source": "fidelity_llm",
+      "severity": "major",
+      "check_id": "V3",
+      "analysis": "The HTML output fails to render several meaningful images and icons from the source PDF. Instead of the original graphical assets, the document displays solid green block placeholders. This includes the agency logo (NCDIT), thematic icons for every collaboration section (Pages 8-12), and the 'What We're Doing' grid on Page 2. The loss of the Page 2 image is particularly significant as it contained unique category labels (e.g., 'Council Meetings', 'Upcoming GICC Events') that are not captured els",
+      "source_pdf_quote": "Source PDF Page 1 contains NCDIT logo and cover photo; Page 2 contains a 'What We're Doing' grid image with text content; Pages 8-12 contain thematic icons (map, compass, cloud, etc.).",
+      "output_quote": "The HTML output shows solid green blocks in place of these items, specifically at indices 4 (logo), 12 (grid image), and multiple locations throughout the collaboration sections (e.g., indices 37, 38, 48, 49, 56, 64-67, 74-76).",
+      "location": "Pages 1, 2, and 8-13",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "S7",
+      "analysis": "The document contains two clear URLs: one on Page 2 and one on Page 13. While the text is captured correctly in the JSON, the HTML metadata reports only 1 link in the rendered output, indicating that one of the URLs was not converted into a clickable link.",
+      "source_pdf_quote": "Two URLs are present in the PDF: 'https://it.nc.gov/gicc-annual-report-FY-20-21' (Page 2) and 'www.nconemap.gov/pages/feedback' (Page 13).",
+      "output_quote": "Links in rendered HTML: 1",
+      "location": "HTML METADATA",
+      "corroborated": false
+    },
+    {
+      "description": "Overall visual quality significantly degraded",
+      "source": "fidelity_llm",
+      "severity": "minor",
+      "check_id": "V5",
+      "analysis": "The document's visual quality is degraded by the presence of numerous large green placeholder blocks, which make the output feel unfinished or broken. Additionally, the 'Highlights' sections (Pages 4-7) have lost their stylized blue bar formatting from the source, appearing as plain text blocks with excessive whitespace gaps between them.",
+      "source_pdf_quote": "Source PDF Pages 4-7 show distinct blue bars for highlights; the document has a polished, professional design.",
+      "output_quote": "The HTML version is visually sparse, dominated by green placeholders and lacking the consistent styling found in the original presentation.",
+      "location": "Entire document",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Document requires full re-processing with increased token limits to capture omitted pages.",
+    "Investigate image extraction failure causing green block placeholders.",
+    "Clean OCR/metadata injection logic to prevent non-content strings from entering the semantic layer."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.98,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8816169393647738,
+      "content_completeness": 0.7474489795918368,
+      "accessibility": 1.0,
+      "decision_confidence": 0.020000000000000018,
+      "raw_score": 0.5514,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 5
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5925925925925926,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9414182939362795,
+      "shingling_precision": 0.8289592760180996,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9948979591836735,
+      "baseline_words": 392,
+      "gemini_words": 390,
+      "table_count_ratio": 0.5,
+      "image_count_ratio": 0.725,
+      "pipeline_confidence": 0.91,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 12680,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
