@@ -1,0 +1,110 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1",
+  "audited_at": "2026-03-10T08:12:27.579246Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.5930232558139534,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output explicitly mentions that '10 sections omitted for token budget'. Several significant sections present in the source PDF are entirely missing from the output, including 'Introduction' (Page 8), 'Statement of Need' (Page 9), 'Existing North Carolina Hydrography Data Status' (Page 9), 'ATLAS Project' (Page 10), and 'Stewardship and Maintenance' (Page 42). This represents a loss of several pages of authoritative content.",
+      "source_pdf_quote": "Introduction (Page 8); Statement of Need (Page 9); ATLAS Project (Page 10); Stewardship and Maintenance (Page 42).",
+      "output_quote": "The output uses an omission tag: '{\n      \"_omitted\": \"10 sections omitted for token budget\"\n    }'",
+      "location": "Between 'Executive Summary' and 'ATLAS Schema'; after 'Federal Needs'."
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "Several tables in the output are severely truncated compared to the source. Table 7 (NC Hydro Polyline Attributes, Page 18) has 18 data rows in the source but only 1 in the output. Table 8 (NC Hydro Polygon Attributes, Page 19) has 17 data rows in the source but only 1 in the output. Table 9 (Page 20) and Table 1010 (Page 21) are missing all data rows, showing only headers.",
+      "source_pdf_quote": "Table 7 (Page 18) contains 18 rows (AUID, HUC10AIDX, AUIDA, WB_ID, etc.); Table 8 (Page 19) contains 17 rows; Table 9 (Page 20) contains 9 rows; Table 1010 (Page 21) contains 8 rows.",
+      "output_quote": "Table 7 (Page 18) in the output shows only 1 row (HYDROID); Table 8 (Page 19) shows 1 row (WaterbodyID); Table 9 and Table 1010 are essentially empty shells with no data rows.",
+      "location": "Sections 'Line Features', 'Polygon Features', 'Water Boundary Dataset'."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The sections 'Hydrography Dataset' and 'Water Boundary Dataset' are missing substantial information because the primary data containers (the attribute tables) were truncated or omitted. This results in a loss of more than 25% of the information intended for those specific sections.",
+      "source_pdf_quote": "Detailed attribute lists and definitions for line, polygon, and water boundary features (Pages 18-21).",
+      "output_quote": "Tables containing only one or zero data rows, omitting the bulk of the specification data.",
+      "location": "Sections 'Line Features', 'Polygon Features', 'Water Boundary Dataset'."
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Significant structural corruption occurred in four consecutive tables (Tables 7, 8, 9, and 10). Tables 7 and 8 contain only the first row of data, omitting nearly twenty rows each. Tables 9 and 10 contain only the header row, omitting all data rows entirely. This represents a major failure in preserving the document's tabular information structure.",
+      "source_pdf_quote": "Table 7 (Page 18) contains 18 rows of polyline attributes. Table 8 (Page 19) contains 17 rows of polygon attributes. Table 9 (Page 20) contains 9 data rows. Table 10 (Page 21) contains 8 data rows.",
+      "output_quote": "Table 7 (element in Hydrography Dataset section) only contains 1 data row ('HYDROID'). Table 8 only contains 1 data row ('WaterbodyID'). Table 9 contains 0 data rows. Table 10 contains 0 data rows.",
+      "location": "Sections 'Line Features', 'Polygon Features', 'Recommended Data Schema', and 'Water Boundary Dataset' spanning pages 18-21."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source PDF is a highly technical document that relies heavily on a integrated visual layout where maps, charts, and diagrams are interspersed with text to provide meaning. In the HTML output, nearly all of these visual elements (with the exception of the cover image and basic tables) are missing. This collapses the complex, visually rich organization of the document into a simple text-and-caption layout. This significantly alters the user's ability to find and interpret the same information ",
+      "source_pdf_quote": "The PDF features a sophisticated visual flow integrating text with complex technical diagrams (e.g., Table 4 on page 14), maps (e.g., Figure 1 on page 10), and charts (e.g., Figure 11 on page 28).",
+      "output_quote": "The HTML output presents a simplified single-column text layout where captions exist (e.g., 'Table 4. ATLAS schema...', 'Figure 1. HSSD dataset...', 'Figure 11. Survey Results...') but the corresponding images are entirely absent, leaving only text.",
+      "location": "Throughout the document, particularly pages 9-42."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "There is a massive failure in image rendering. Dozens of critical, meaningful images—including technical maps of hydrography data, bar charts representing survey results, pie charts, and complex relational data schema diagrams—are missing from the HTML output. While the captions for these figures are present, the images themselves are absent. This includes Figures 1 through 27, and several other unnumbered charts and diagrams.",
+      "source_pdf_quote": "Technical maps and charts throughout PDF pages 9-42, such as Figure 3 (page 21), Figure 11 (page 28), and Figure 27 (page 42).",
+      "output_quote": "The HTML output shows captions for these figures but no image data is rendered above them. For example, after the text for Figure 3, the image showing the relationship between HUCs is missing.",
+      "location": "Throughout the document, specifically PDF pages 9, 10, 14, 17, 21-42."
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.914610958543215,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.556,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5930232558139534,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8696010720544274,
+      "shingling_precision": 0.986897519887693,
+      "duplication_ratio": 0.015049775873553078,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 90184,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

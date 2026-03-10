@@ -1,0 +1,134 @@
+{
+  "document_id": "911-education-committee-meeting-agenda-packet-03-25-2021-685f9fa9",
+  "audited_at": "2026-03-10T09:23:33.530952Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.3687,
+  "fidelity_content": 0.06976744186046513,
+  "fidelity_structural": 0.2727272727272727,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.37 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated paragraphs or sentences",
+      "severity": "critical",
+      "analysis": "The output contains several tables with fabricated content. In the section 'Document Content' (reading_order 1), the tables 'Statutory Provision Text' and 'Statutory Context' (reading_order 4) contain headers like 'Dummy' and repeated data rows with values '1', '2', '3', '4'. This information does not exist in the source document, which contains full text paragraphs at these locations (specifically the text of 47 U.S.C. § 615a-1).",
+      "source_pdf_quote": "47 U.S.C. § 615a-1(f)(1) provided that nothing in the NET 911 Act... [full text of statute]",
+      "output_quote": "specifically designa | by a State, politica | Dummy | Dummy\n1 | 2 | 3 | 4",
+      "location": "Statutory Provision Text table, reading_order 1, page 10"
+    },
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The output contains a fabricated YouTube URL. In 'Document Content' (reading_order 1), the text 'the video' is hyperlinked to 'https://www.youtube.com/watch?v=1lCjDNS2Vok'. While the source PDF mentions that a video may be shared, it does not provide any URL.",
+      "source_pdf_quote": "They are hopeful that the script and the video can be shared with committee at the next meeting.",
+      "output_quote": "the video (linked to https://www.youtube.com/watch?v=1lCjDNS2Vok)",
+      "location": "Goal 4 discussion, page 5, reading_order 1, index 13"
+    },
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output explicitly states that '10 sections omitted for token budget'. This has resulted in the total omission of several distinct documents found in the source PDF, including North Carolina House Bill 203 (page 34), House Bill 213 (pages 35-36), informational sheets on NG9-1-1 Program Areas, Migration Process, and Architecture (pages 37-38), and the WA 911 Jobs marketing plan report (pages 40-42).",
+      "source_pdf_quote": "Entire pages 34 through 42 including House Bill 203, House Bill 213, and various NG9-1-1 informational sheets.",
+      "output_quote": "\"_omitted\": \"10 sections omitted for token budget\"",
+      "location": "JSON object between reading_order 3 and reading_order 4"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Large portions of the FCC Notice of Proposed Rulemaking (NPRM) are missing from the sections that were converted. The output transitions from paragraph 33 (page 21) directly to Appendix A (page 25), effectively skipping pages 22-24 of the procedural matters and ordering clauses without representation.",
+      "source_pdf_quote": "FCC Notice of Proposed Rulemaking, pages 14 through 24.",
+      "output_quote": "The text jumps from Section D (paragraph 33) to Section IV (paragraph 34) and then jumps to Appendix A.",
+      "location": "FCC NPRM section, reading_order 1 and reading_order 4"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output exhibits significant content duplication. Specifically, the content of the agenda table from source page 1 is included twice in the JSON: once as forced text within a paragraph (element index 1) and immediately after as a structured table (element index 2). This results in identical information appearing sequentially in the document flow.",
+      "source_pdf_quote": "The agenda table content starting with 'Tab Topic Presenter 1. Chair Opening Remarks Chuck Greene...'",
+      "output_quote": "The text is present in the second element (type: paragraph) and again in the third element (type: table).",
+      "location": "Document Content, page 1, elements index 1 and 2"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent and broken in several places. The major section heading 'III. DISCUSSION' (source page 13) is flattened into a paragraph, while its subsections (B, C, D) are correctly identified as headings (indices 38, 51, 54). This creates a hierarchy where subsections appear without their parent section heading. Additionally, while sections IV and V are promoted to JSON section titles, the inconsistent treatment of top-level sections (III vs IV/V) breaks the logical docu",
+      "source_pdf_quote": "Major heading 'III. DISCUSSION' on page 13.",
+      "output_quote": "The text 'III. DISCUSSION' is embedded in a paragraph element (index 13 in page 13 context), but subsections like 'B. Designation of Obligations...' are H2 headings (index 38).",
+      "location": "Document Content, pages 13-21"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Several tables suffer from structural corruption. 1. The three attendance tables on page 2 (Committee Members, Guests, Staff) are flattened into a single text paragraph (element index 5), losing their tabular organization entirely. 2. The advertising line item tables in the KXLY Invoice (source page 45, element index 16.8) have their columns merged into single text strings per row, destroying the grid structure. 3. Elements 23 and 26 demonstrate forced table structures ('Dummy' headers) for text",
+      "source_pdf_quote": "Attendance tables on page 2; Invoice table columns (Line, Start Date, End Date, Description, etc.) on page 45.",
+      "output_quote": "Element 5 (paragraph) flattens page 2 tables; Element 16.8 (table) contains merged data like '1 10/12/20 11/01/20 M-F News 5-7p 5-7p MTWTF-- :30 2 $200.00 NM' in single cells.",
+      "location": "Document Content index 5 (page 2); KXLY Invoice index 16.8 (page 45)"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several critical and meaningful images/diagrams from the source PDF are missing in the HTML output. Specifically, the complex migration process and solution architecture diagrams on PDF page 38 are absent. Additionally, the 'Analytics' line chart and 'The Commercial' photograph on PDF page 41 are missing. These are significant content omissions as they provide visual data and context not fully captured by text alone.",
+      "source_pdf_quote": "The source PDF contains meaningful diagrams on page 38 ('NC 911 Board NG9-1-1 Migration Process' and 'NG9-1-1 Call Handling Solution Architecture') and a chart and photo on page 41 ('Analytics' line chart and 'The Commercial' photo).",
+      "output_quote": "The HTML rendering contains the section headers for these items but does not display any corresponding images or graphical elements.",
+      "location": "HTML sections corresponding to PDF pages 38 and 41."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "There are two issues: link injection and missing links. 1. A link is injected in the minutes section (page 5, element index 16) on the text 'the video' which does not exist in the source text. 2. Numerous URLs present in the text of the FCC regulatory sections (e.g., source pages 6, 8, 11) are rendered as plain text in the JSON without functional 'href' properties, unlike contact emails which are correctly linked.",
+      "source_pdf_quote": "Source page 5 text 'the video' has no link; Source page 6 URL 'https://www.fcc.gov/general/911-fee-reports'.",
+      "output_quote": "Element 16 contains a hyperlink to YouTube for 'the video'; Element 17 contains the FCC URL as plain text without an href.",
+      "location": "Document Content, element index 16 (page 5) and 17 (page 6)"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.37 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.3687,
+      "text_match": 0.8404871258906205,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5256,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.3687,
+      "fidelity_content": 0.06976744186046513,
+      "fidelity_structural": 0.2727272727272727,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7573282354304252,
+      "shingling_precision": 0.9774936443846269,
+      "duplication_ratio": 0.019626168224299065,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 78078,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
