@@ -1,0 +1,88 @@
+{
+  "document_id": "table-seal-imagery-diagram-1468",
+  "audited_at": "2026-03-10T08:27:46.341356Z",
+  "quality_score": 78,
+  "fidelity_composite": 0.8047,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The programmatic shingling recall (0.671) strongly corroborates the LLM fidelity report regarding significant content loss (40% of informative text). The conversion failed to capture a central network topology diagram and the State Seal, which are core to the document's purpose. Given the cost asymmetry and the failure to render the primary visual model, human intervention is necessary.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output omits a substantial amount of critical technical text labels present in the central diagram. This includes server names (XIQ, Enterprise AD, NCID, Policy Servers), VLAN and Subnet details (Employee - 210, agency; NCGovRoam - 410, guest; NCGov Guest - 410, guest), SSID broadcast/hidden status (hidden, broadcast), and several functional labels (User Authentication Requests, OOB Management, Data Center). The missing text accounts for approximately 40% of the informative content of the pa",
+      "source_pdf_quote": "VLANs & Subnets: Employee – 210, agency; NCGovRoam – 410, guest; NCGov Guest – 410, guest. SSIDs status: Employee – hidden; NCGovRoam - broadcast; NCGov Guest – broadcast. Servers: XIQ, Enterprise AD, NCID, Policy Servers (EDC & WDC). Labels: User Authentication Requests, OOB Management, Data Center.",
+      "output_quote": "The text content for these technical labels is completely missing from the structured JSON text/paragraph elements. While a high-level summary is provided in the AI-generated image alt text, it omits all specific technical identifiers like VLAN IDs and SSID visibility settings.",
+      "location": "Central diagram area, Page 1"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source PDF is primarily a visual network topology diagram that organizes information spatially using icons, arrows, and labels to show the relationship between users and network resources. The converted HTML completely fails to reproduce this layout. The core content of the document—the visual model—is removed, leaving only the introductory text and the footer table. This fundamentally changes the visual organization and flow of information, as the primary explanatory mechanism of the docume",
+      "source_pdf_quote": "A central network topology diagram connecting 'Guests' and 'State Employees' to various networks like 'Internet Access' and 'State Network' via an 'Access Point'.",
+      "output_quote": "The HTML output omits the entire central diagram, showing only the text descriptions from the top and a 'Document Information' table at the bottom.",
+      "location": "Middle section of page 1"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The document contains two critical visual elements that are missing or broken in the HTML output. First, the large, complex network diagram that occupies the center of the page is absent (represented only by a small, blurry green fragment that is unidentifiable). Second, the 'Great Seal of the State of North Carolina' located in the bottom right corner of the source PDF is entirely missing from the HTML rendering.",
+      "source_pdf_quote": "1) The central network diagram with icons for people, clouds, and hardware. 2) The Great Seal of the State of North Carolina in the bottom-right corner.",
+      "output_quote": "1) A blurry green gradient box with no recognizable features. 2) The seal is completely absent.",
+      "location": "1) Center of page 1. 2) Bottom right of page 1."
+    }
+  ],
+  "action_items": [
+    "Assess whether the diagram should be converted as a high-quality image with comprehensive alt-text",
+    "Manually restore missing technical labels (XIQ, NCID, VLAN details) into the document",
+    "Verify the presence and placement of the Great Seal of North Carolina"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8047,
+      "text_match": 0.794044665012407,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7841,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8047,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6708595387840671,
+      "shingling_precision": 0.9726443768996961,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.94,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 70166,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

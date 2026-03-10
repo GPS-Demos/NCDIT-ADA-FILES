@@ -1,0 +1,105 @@
+{
+  "document_id": "nc-911-board-minutes-september-30-2022-685f9a2b",
+  "audited_at": "2026-03-10T08:10:04.569023Z",
+  "quality_score": 82,
+  "fidelity_composite": 0.8638,
+  "fidelity_content": 0.8837209302325582,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "Although the fidelity score is slightly above the auto-approval threshold, the programmatic shingling recall (0.74) and the specific concerns indicate substantial content loss, including an entire 17-row roll-call vote table and half of a committee report section. For official meeting minutes, the omission of vote records is a significant failure that necessitates human intervention to ensure the public record is complete and accessible.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "minor",
+      "analysis": "The table titled 'NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE' on page 10 is entirely absent from the output elements list. Although it appears in the metadata image count, it is not rendered in the JSON content, resulting in a 100% loss of its information (approximately 17 rows).",
+      "source_pdf_quote": "NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE table on page 10 containing vote results for board members.",
+      "output_quote": "The table is missing from the elements array between element 21 ('Roster of Roll Call Votes:') and element 22 ('Adjourn').",
+      "location": "Page 10, element index 21-22"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "Two significant omissions were found. First, item 12c ('General Committee Report') on page 9 is missing its final two paragraphs regarding RapidDeploy and Cybersecurity tabletop exercises, which constitutes a 50% loss of that sub-section's text. Second, a brief sentence on page 7 ('Greg Coltrain joined...') is missing between items 10 and 11.",
+      "source_pdf_quote": "1. 'RapidDeploy is on schedule... moving forward with the project.' and 'The Technology Cybersecurity Ad hoc is planning... how it is integrated.' (Page 9)\n2. 'Greg Coltrain joined the meeting at 11:13 AM.' (Page 7)",
+      "output_quote": "1. Absent from Section 3, element 18, item 12c.\n2. Absent from Section 3, between element 16 and element 17.",
+      "location": "1. Section 3, element 18 (Item 12c), Page 9.\n2. Section 3, between elements 16 and 17, Page 7."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "On page 10, the text header 'Roster of Roll Call Votes:' precedes the table. In the conversion, the image of the table (Element Index 30) is placed before the text paragraph containing the header (Element Index 31). This inverts the logical flow of the document at that point. Additionally, the headers for the tables on pages 1 and 2 are omitted from the text flow and only appear in the image alt-text.",
+      "source_pdf_quote": "Roster of Roll Call Votes: [Table follows]",
+      "output_quote": "[Image: Table containing Roster of Roll Call Votes], \"content\": [{\"text\": \"Roster of Roll Call Votes:\"}]",
+      "location": "Section 3, Element Index 30 and 31, page 10"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There is a systemic failure in list conversion. Several ordered (lettered) list items that were part of larger sequences (e.g., 5f-j, 8b-c, 10b-c, 12c) have been broken into separate list objects and converted from ordered to 'unordered' list types. This causes the items to lose their structural numbering/lettering identity, even if the characters like 'f)' remain in the text string.",
+      "source_pdf_quote": "f) Cybersecurity... g) NASNA... (part of ordered list 5)",
+      "output_quote": "\"type\": \"list\", \"list_type\": \"unordered\", \"items\": [{\"content\": [{\"text\": \"f) Cybersecurity...\"}]}]",
+      "location": "Section 3, Element Index 12, page 4"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains a clear hyperlink for 'Live Status Map' in section 5b. The conversion identifies this text and applies formatting (underline), but it fails to include the URI/link metadata required for a functional link.",
+      "source_pdf_quote": "NextGen 911 Migration Status – Live Status Map [Hyperlink]",
+      "output_quote": "\"text\": \"Live Status Map\", \"underline\": true [No URL provided]",
+      "location": "Section 3, Element Index 8, Item b, page 3"
+    }
+  ],
+  "action_items": [
+    "Manually insert the missing roll call vote table on page 10.",
+    "Restore missing text in section 12c and the sentence regarding Greg Coltrain on page 7.",
+    "Correct reading order to ensure headers precede tables.",
+    "Fix list structures to maintain ordered lettering/numbering and proper nesting."
+  ],
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.8638,
+      "text_match": 0.8313188094868036,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8186,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8638,
+      "fidelity_content": 0.8837209302325582,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.7402349486049926,
+      "shingling_precision": 0.9966389877421906,
+      "duplication_ratio": 0.027564365726350362,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 119261,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

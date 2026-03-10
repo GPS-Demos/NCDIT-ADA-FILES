@@ -1,0 +1,213 @@
+{
+  "document_id": "powerpoint-slides-fef1",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains invented section headings that do not exist in the source document. Specifically, Section 1 is titled 'Default Section' and Section 2 is titled 'Slide 2'. The source PDF for Page 1 contains 'Copilot in Outlook' and 'State of NC' without any 'Default Section' header. Page 2 contains contact information without any 'Slide 2' title. Per the audit instructions, invented section headings like 'Slide 1: Title' are considered fabrications.",
+        "b_evidence_source": "Page 1 and Page 2 of the source document contain no structural titles like 'Default Section' or 'Slide 2'.",
+        "b_evidence_output": "\"title\": \"Default Section\" (Section 1); \"title\": \"Slide 2\" (Section 2)",
+        "b_evidence_location": "Sections 1 and 2, Pages 1 and 2",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The contact information in the output (Josh.Meredith@microsoft.com) correctly matches the email address provided on Page 2 of the source document. No other contact details were found to be fabricated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output document is missing a vast amount of content from the source PDF. Pages 5 through 19, which include the 'Art of Prompting' examples, various practice exercises, and feature overviews, are entirely absent from the conversion result. The output includes a placeholder string '{\"_omitted\": \"16 sections omitted for token budget\"}' instead of the actual content from these pages.",
+        "b_evidence_source": "Pages 5 through 19 of the source PDF contain detailed instructional content, practice exercises, and feature overviews.",
+        "b_evidence_output": "{\"_omitted\": \"16 sections omitted for token budget\"}",
+        "b_evidence_location": "Sections list, between index 3 and 4",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The table in Section 4 correctly represents the four key elements shown on Page 4 of the source document. All four categories (Goal, Context, Source, Expectations) and their respective descriptions are preserved in the data row of the table.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Section 2 (corresponding to Page 2 of the source) is missing a significant image. While it includes three lifestyle photos, it omits the primary portrait/headshot of the author, Josh Meredith. This image is essential for author identification on the introductory slide. The omission of 1 out of 4 non-decorative images constitutes a significant loss of information for that section.",
+        "b_evidence_source": "Page 2 of the source document contains 4 non-decorative images, including a round portrait of Josh Meredith.",
+        "b_evidence_output": "Section 2 contains only 3 image elements (alt texts: 'child and a dog...', 'three people in a kitchen...', 'person riding a motorized surfboard...').",
+        "b_evidence_location": "Section 2, Page 2",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text content that was successfully converted (Pages 1-4, 20-21) accurately reflects the information in the source document without meaningful wording changes or alterations to data.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.36046511627906974,
+    "penalty_sum": 55,
+    "defect_count": 3,
+    "critical_count": 2,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains invented section headings that do not exist in the source document. Specifically, Section 1 is titled 'Default Section' and Section 2 is titled 'Slide 2'. The source PDF for Page 1 contains 'Copilot in Outlook' and 'State of NC' without any 'Default Section' header. Page 2 contains contact information without any 'Slide 2' title. Per the audit instructions, invented section headings like 'Slide 1: Title' are considered fabrications.\",\n      \"b_evidence_source\": \"Page 1 and Page 2 of the source document contain no structural titles like 'Default Section' or 'Slide 2'.\",\n      \"b_evidence_output\": \"\\\"title\\\": \\\"Default Section\\\" (Section 1); \\\"title\\\": \\\"Slide 2\\\" (Section 2)\",\n      \"b_evidence_location\": \"Sections 1 and 2, Pages 1 and 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The contact information in the output (Josh.Meredith@microsoft.com) correctly matches the email address provided on Page 2 of the source document. No other contact details were found to be fabricated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output document is missing a vast amount of content from the source PDF. Pages 5 through 19, which include the 'Art of Prompting' examples, various practice exercises, and feature overviews, are entirely absent from the conversion result. The output includes a placeholder string '{\\\"_omitted\\\": \\\"16 sections omitted for token budget\\\"}' instead of the actual content from these pages.\",\n      \"b_evidence_source\": \"Pages 5 through 19 of the source PDF contain detailed instructional content, practice exercises, and feature overviews.\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"16 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"Sections list, between index 3 and 4\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The table in Section 4 correctly represents the four key elements shown on Page 4 of the source document. All four categories (Goal, Context, Source, Expectations) and their respective descriptions are preserved in the data row of the table.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Section 2 (corresponding to Page 2 of the source) is missing a significant image. While it includes three lifestyle photos, it omits the primary portrait/headshot of the author, Josh Meredith. This image is essential for author identification on the introductory slide. The omission of 1 out of 4 non-decorative images constitutes a significant loss of information for that section.\",\n      \"b_evidence_source\": \"Page 2 of the source document contains 4 non-decorative images, including a round portrait of Josh Meredith.\",\n      \"b_evidence_output\": \"Section 2 contains only 3 image elements (alt texts: 'child and a dog...', 'three people in a kitchen...', 'person riding a motorized surfboard...').\",\n      \"b_evidence_location\": \"Section 2, Page 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text content that was successfully converted (Pages 1-4, 20-21) accurately reflects the information in the source document without meaningful wording changes or alterations to data.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 2,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 55,\n    \"score\": 0.3604651162790697\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output JSON represents the sections of the slide deck without repeating text blocks that only appear once in the source. While several slides share the same title (e.g., 'Art of Prompting - Key Elements' on slides 4 and 5), this is intentional repetition in the source document and is not a conversion defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved and normalized. The main title on page 1 is assigned level 2, and subsequent slide titles are used as section titles, which is a standard accessibility practice for presentation conversion. No levels are skipped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Page 4 contains a grid of four conceptual boxes ('WHAT', 'WHY/WHO', 'WHERE', 'HOW'). The pipeline correctly interpreted this structural organization as a table with a header row containing the questions and a data row containing the objectives and descriptions. This faithfully preserves the visual and logical grouping found in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The JSON sections and their associated reading_order values follow the logical progression of the slides in the source PDF (Pages 1, 2, 3, 4, 20, 21). The omission of sections in the provided snippet is noted, but the sequence remains correct.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The bulleted list on Page 3 ('Topics') is correctly identified as an unordered list in the JSON, with all items preserved in the correct order.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The contact email address on Page 2 is present. Other URLs found in the source (e.g., Pages 6, 7, 15, 16, 17, 18) are within the omitted sections of the provided JSON, but there is no evidence of fabricated or broken links in the visible elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output JSON represents the sections of the slide deck without repeating text blocks that only appear once in the source. While several slides share the same title (e.g., 'Art of Prompting - Key Elements' on slides 4 and 5), this is intentional repetition in the source document and is not a conversion defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved and normalized. The main title on page 1 is assigned level 2, and subsequent slide titles are used as section titles, which is a standard accessibility practice for presentation conversion. No levels are skipped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Page 4 contains a grid of four conceptual boxes ('WHAT', 'WHY/WHO', 'WHERE', 'HOW'). The pipeline correctly interpreted this structural organization as a table with a header row containing the questions and a data row containing the objectives and descriptions. This faithfully preserves the visual and logical grouping found in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The JSON sections and their associated reading_order values follow the logical progression of the slides in the source PDF (Pages 1, 2, 3, 4, 20, 21). The omission of sections in the provided snippet is noted, but the sequence remains correct.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The bulleted list on Page 3 ('Topics') is correctly identified as an unordered list in the JSON, with all items preserved in the correct order.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The contact email address on Page 2 is present. Other URLs found in the source (e.g., Pages 6, 7, 15, 16, 17, 18) are within the omitted sections of the provided JSON, but there is no evidence of fabricated or broken links in the visible elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully converts the slide-based layout of the source PDF into a single-column web format. This is appropriate for document conversion. Visual organization is largely preserved; for example, the 4-part 'Art of Prompting' diagram on Page 4 is rendered as a clean 4-column table in the HTML, maintaining the spatial relationship between the concepts. The flow of information follows the slide order correctly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The document contains one primary table-like structure on Page 4 ('Art of Prompting - Key Elements'). In the HTML output, this is rendered as a proper table with clear borders, distinct headers, and aligned cell content. It is fully readable and understandable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful images from the source PDF are missing in the HTML render. While decorative background elements are appropriately hidden, functional screenshots that illustrate the product features are missing and replaced by solid green blocks. This includes the main Outlook screenshot on Page 9, the process screenshots on Pages 11, 12, 13, and 14, and the grid of prompt examples on Page 20. These are critical for understanding the 'Demo' and instructional portions of the document.",
+        "b_evidence_source": "The source PDF contains instructional screenshots on pages 9, 11, 12, 13, and 14, and a grid of 12 prompt examples on page 20.",
+        "b_evidence_output": "The HTML rendering shows solid green rectangles instead of these images (e.g., under headers 'Slide 9', 'Summary by Copilot in Outlook', and 'Find more Email prompts to try in Copilot Lab').",
+        "b_evidence_location": "Throughout the document, specifically at elements corresponding to PDF pages 9, 11-14, and 20.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of visual content duplication. Each slide title and content block appears exactly once in the rendered output. While some text from graphic elements is extracted and placed below the image (e.g., Slide 5), this is an accessibility feature (text alternative) rather than a duplication of source content blocks.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully converts the slide-based layout of the source PDF into a single-column web format. This is appropriate for document conversion. Visual organization is largely preserved; for example, the 4-part 'Art of Prompting' diagram on Page 4 is rendered as a clean 4-column table in the HTML, maintaining the spatial relationship between the concepts. The flow of information follows the slide order correctly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The document contains one primary table-like structure on Page 4 ('Art of Prompting - Key Elements'). In the HTML output, this is rendered as a proper table with clear borders, distinct headers, and aligned cell content. It is fully readable and understandable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful images from the source PDF are missing in the HTML render. While decorative background elements are appropriately hidden, functional screenshots that illustrate the product features are missing and replaced by solid green blocks. This includes the main Outlook screenshot on Page 9, the process screenshots on Pages 11, 12, 13, and 14, and the grid of prompt examples on Page 20. These are critical for understanding the 'Demo' and instructional portions of the document.\",\n      \"b_evidence_source\": \"The source PDF contains instructional screenshots on pages 9, 11, 12, 13, and 14, and a grid of 12 prompt examples on page 20.\",\n      \"b_evidence_output\": \"The HTML rendering shows solid green rectangles instead of these images (e.g., under headers 'Slide 9', 'Summary by Copilot in Outlook', and 'Find more Email prompts to try in Copilot Lab').\",\n      \"b_evidence_location\": \"Throughout the document, specifically at elements corresponding to PDF pages 9, 11-14, and 20.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of visual content duplication. Each slide title and content block appears exactly once in the rendered output. While some text from graphic elements is extracted and placed below the image (e.g., Slide 5), this is an accessibility feature (text alternative) rather than a duplication of source content blocks.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 2,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

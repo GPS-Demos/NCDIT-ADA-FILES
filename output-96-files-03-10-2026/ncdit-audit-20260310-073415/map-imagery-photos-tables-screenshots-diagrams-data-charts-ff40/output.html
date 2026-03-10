@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>2020-2021 GICC Annual Report</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>2020-2021 GICC Annual Report</h1>
+    </header>
+    <main id="main-content" role="main">
+<section>
+<p>Tim Johnson</p>
+
+<p>Colleen Kiley</p>
+
+<p>Center for Geographic Information and Analysis</p>
+
+<img src="data:image/jpeg;base64,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" alt="NCDIT logo" width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Aerial view of a suburban neighborhood" width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Report Presentation Details">
+<table>
+<caption>Report Presentation Details</caption><thead><tr><th scope="col"><strong>North Carolina Geographic Information Coordinating Council</strong></th></tr>
+</thead><tbody><tr><td>2021 Annual Report
+
+Presented to:
+
+Roy Cooper
+Governor
+
+Joint Legislative Commission on Governmental Operations
+
+James Weaver
+State Chief Information Officer and Secretary
+NC Department of Information Technology
+
+Hope Morgan
+Chair
+NC Geographic Information Coordinating Council</td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-1">
+<h2 id="section-1">What We&#39;re Doing</h2>
+<p><u>https://it.nc.gov/gicc-annual-report-FY-20-21</u></p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Screenshot of the GICC Annual Report webpage showing various resources like Council Meetings, Upcoming GICC Events, Committees &amp; Work Groups, NC OneMap, Annual Report FY 20-21, and NC Parcels Program." width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">Outline</h2>
+<ul><li>
+Executive Summary</li>
+<li>
+About the Council</li>
+<li>
+FY 20-21 Highlights</li>
+<li>
+Goals</li>
+<li>
+Accomplishments<ul><li>
+Data Governance</li>
+<li>
+Public Access to GIS Data</li>
+<li>
+Collaboration for Land Information</li>
+<li>
+Intergovernmental Collaboration</li>
+<li>
+Sharing Information and Knowledge</li>
+<li>
+Future Priorities</li>
+</ul></li>
+</ul>
+</section>
+<section aria-labelledby="section-3">
+<h2 id="section-3">Highlights: COVID Response</h2>
+<ul><li>
+DHHS Dashboard</li>
+<li>
+DHHS Analysis for testing and vaccination sites</li>
+<li>
+Need for increased Broadband Access</li>
+</ul>
+</section>
+<section aria-labelledby="section-4">
+<h2 id="section-4">Highlights: Resiliency</h2>
+<ul><li>
+GIS as an important tool</li>
+<li>
+LGC resiliency presentations</li>
+<li>
+FIC resiliency tools</li>
+<li>
+NextGen 911</li>
+</ul>
+</section>
+<section aria-labelledby="section-5">
+<h2 id="section-5">Highlights: NC GIS Conference</h2>
+<ul><li>
+Online Benefits: National attendance</li>
+<li>
+Keynotes: 911 Board and Broadband Infrastructure Office</li>
+</ul>
+</section>
+<section aria-labelledby="section-6">
+<h2 id="section-6">Highlights: Infrastructure</h2>
+<ul><li>
+Introduction to the working group</li>
+<li>
+Working Group stakeholders</li>
+<li>
+Process</li>
+</ul>
+</section>
+<section aria-labelledby="section-7">
+<h2 id="section-7">Collaboration for Data Governance and Consistency</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for ADDRESS NC STEERING COMMITTEE" width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>ADDRESS NC STEERING COMMITTEE</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for WORKING GROUP FOR SEAMLESS PARCELS" width="330" height="56"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>WORKING GROUP FOR SEAMLESS PARCELS</p>
+
+</section>
+<section aria-labelledby="section-8">
+<h2 id="section-8">Collaboration for Public Access to Geographic Information</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for NC ONEMAP CLOUD MIGRATION" width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>NC ONEMAP CLOUD MIGRATION</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for TAC INFRASTRUCTURE WORKING GROUP" width="330" height="56"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>TAC INFRASTRUCTURE WORKING GROUP</p>
+
+</section>
+<section aria-labelledby="section-9">
+<h2 id="section-9">Collaboration for Land Information</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for ORTHOIMAGERY PROGRAM" width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>ORTHOIMAGERY PROGRAM</p>
+
+</section>
+<section aria-labelledby="section-10">
+<h2 id="section-10">Intergovernmental Collaboration for Efficiency</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for 2020 CENSUS UPDATES AND ASSISTANCE" width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>2020 CENSUS UPDATES AND ASSISTANCE</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for NOAA LAND COVER PILOT" width="330" height="56"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>NOAA LAND COVER PILOT</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for ELEVATION DATA" width="256" height="256"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>ELEVATION DATA</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon for HYDROGRAPHY WORKING GROUP" width="167" height="167"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>HYDROGRAPHY WORKING GROUP</p>
+
+</section>
+<section aria-labelledby="section-11">
+<h2 id="section-11">Sharing Information and Knowledge</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon of an award ribbon" width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>ESRI SPECIAL ACHIEVEMENT AWARD</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon of a document with a signature" width="330" height="56"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>ESRI ENTERPRISE LICENSE AGREEMENT</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Icon of people in a meeting" width="256" height="256"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>PROFESSIONAL MEETINGS</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="NCDIT North Carolina Department of Information Technology Logo" width="225" height="225"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-12">
+<h2 id="section-12">Questions?</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="A group of people raising their hands in a presentation or meeting" width="434" height="73"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="NCDIT North Carolina Department of Information Technology Logo" width="434" height="72"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p><strong>www.nconemap.gov/pages/feedback</strong></p>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

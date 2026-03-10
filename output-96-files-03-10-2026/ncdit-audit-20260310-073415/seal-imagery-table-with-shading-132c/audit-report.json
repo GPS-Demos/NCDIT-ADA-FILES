@@ -1,0 +1,94 @@
+{
+  "document_id": "seal-imagery-table-with-shading-132c",
+  "audited_at": "2026-03-10T08:32:35.558385Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6976744186046512,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 1.0,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "A significant portion of the document is missing from the output. The JSON includes an explicit note that 11 sections were omitted. Specifically, major policy sections such as RA-1 (Policy and Procedures), RA-2 (Security Categorization), RA-3 (Risk Assessment), and RA-5 (Vulnerability Monitoring and Scanning) are entirely absent. These sections span pages 2-10 and 13-17 of the source PDF.",
+      "source_pdf_quote": "The source PDF contains full sections for RA-1 (pages 2-3), RA-2 (pages 6-7), RA-3 (pages 7-10), and RA-5 (pages 13-17) which include critical policy requirements, procedures, and technical standards.",
+      "output_quote": "{\"_omitted\": \"11 sections omitted for token budget\"}",
+      "location": "Sections list, between 'Material Superseded' and 'Responsibilities'"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The signature block on page 21, consisting of the lines 'Printed Name of Secretary/CIO or Designee [Date]' and 'Signature of Secretary/CIO or Designee', appears only once in the source document. However, in the JSON output, these two text blocks are duplicated within the elements of Section 19 (appearing as elements 14/15 and again as elements 18/19).",
+      "source_pdf_quote": "Printed Name of Secretary/CIO or Designee [Date]\nSignature of Secretary/CIO or Designee",
+      "output_quote": "\"text\": \"_______________________________________ ________________\\nPrinted Name of Secretary/CIO or Designee [Date]\" ... \"text\": \"_______________________________________ \\nSignature of Secretary/CIO or Designee\" (Repeated twice)",
+      "location": "Section 19, elements 14, 15, 18, 19"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order for content derived from page 21 is incorrect. In the source, the document header metadata ('Risk Assessment Policy...', 'Page No. 21 of 21') appears at the top of the page, followed by the signature lines. In the JSON, the signature lines (element 14/15) are placed before this header text (element 17), and then the signature lines are repeated again (element 18/19). This split and reordering of unique page elements constitutes a structural failure.",
+      "source_pdf_quote": "Page 21: [Header: Risk Assessment Policy... Page No. 21 of 21] followed by [Signature Block]",
+      "output_quote": "Section 19: Element 14 (Signature Line) -> Element 17 (Header Text) -> Element 18 (Signature Line)",
+      "location": "Section 19, elements 14-19"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In the 'Impact Definitions' table, specifically in the 'Low' impact cell, a closing parenthesis present in the source is missing in the output. This slightly alters the grouping of the parenthetical list of examples compared to the original text.",
+      "source_pdf_quote": "(including mission, functions, image or reputation), agency assets, or individuals;",
+      "output_quote": "(including mission, functions, image or reputation, agency assets, or individuals;",
+      "location": "Section 'Impact Definitions', table 'Impact Definitions', 'Low' row definition cell"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9511080332409972,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5641,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6976744186046512,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9105011933174224,
+      "shingling_precision": 0.9955059437518121,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 161238,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
