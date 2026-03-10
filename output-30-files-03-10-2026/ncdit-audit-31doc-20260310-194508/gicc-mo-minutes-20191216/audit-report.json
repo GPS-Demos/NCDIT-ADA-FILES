@@ -1,0 +1,76 @@
+{
+  "document_id": "gicc-mo-minutes-20191216",
+  "audited_at": "2026-03-10T19:52:02.560292Z",
+  "quality_score": 99,
+  "fidelity_composite": 0.9823,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document exhibits exceptional fidelity (0.982) and programmatic scores (0.99 recall/precision), confirming near-perfect content and structural preservation. The two identified concerns describe the same minor issue: a misplaced hyperlink on the generic word 'document'. Per the routing instructions, minor cosmetic and link-related defects do not block approval for a document with such high signal convergence.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a minor defect regarding hyperlink mapping. In the source PDF (Page 3, Section 6.e under the Technical Advisory Committee report), the word 'document' in the sentence 'update to the open source document' is hyperlinked. In the JSON output, this hyperlink is incorrectly associated with the word 'document' in Section 6.b (Page 2 under the State Government Users Group Committee report) in the sentence 'document accomplishments'. This causes a semantic error as a user clicking the link in 6",
+      "source_pdf_quote": "Section 6.e: 'An item to work on is an update to the open source document...' [hyperlink on 'document']; Section 4: '...data needs that are required...'",
+      "output_quote": "Section 6.b: 'John will work with Tim to document accomplishments...' [hyperlink incorrectly placed on 'document']; Section 4: '...data needsthat are required...'",
+      "location": "Sections 4, 6.b, and 6.e"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The pipeline identified a link associated with the 'open source document' mentioned in the text. However, the link was injected into the wrong instance of the word 'document'. In the source PDF (page 3, section 6e), the word 'document' in the phrase 'update to the open source document' is blue/underlined. In the output, the link is attached to the word 'document' in section 6b ('document accomplishments'). The link exists in the source but is misplaced in the output.",
+      "source_pdf_quote": "An item to work on is an update to the open source document to include the addition of ArcGIS Pro... (Page 3, Section 6e)",
+      "output_quote": "John will work with Tim to document accomplishments from the previous fiscal year... (Section 6b)",
+      "location": "Section 6b, element 2 vs Section 6e, element 1"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.98,
+    "score_breakdown": {
+      "fidelity_composite": 0.9823,
+      "text_match": 0.9906965049031934,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.98,
+      "raw_score": 0.9867,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9823,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9901985423473234,
+      "shingling_precision": 0.9911949685534591,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 60643,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
