@@ -1,0 +1,94 @@
+{
+  "document_id": "esrmo-newsletter-april-2024-686b1c64",
+  "audited_at": "2026-03-10T07:41:20.813020Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The conversion pipeline has introduced multiple URLs into the output text that are not present in the corresponding locations in the source PDF. Specifically: 1. A URL for Keeper Security is attached to the word 'the' in the introductory line of the newsletter; 2. NCDIT's Twitter URL is attached to 'X' in the first article; 3. A private SharePoint link is attached to the word 'Access' in the McAfee article on page 2. These links do not exist as hyperlinked text or plain text URLs in the source d",
+      "source_pdf_quote": "Page 1: 'From the Desk of the State Chief Risk Officer – Torry Crass' (No link on 'the').\nPage 1: 'A recent post on Twitter/X from entrepreneur' (No link on 'X').\nPage 2: '...through the use of Android’s Accessibility Services' (No link on 'Access').",
+      "output_quote": "Section 1, element 2 (paragraph): 'the' linked to 'https://www.keepersecurity.com/en_GB/top-data-threats-insight-report'.\nSection 1, subsection 'Apple Users...', element 1: 'X' linked to 'https://twitter.com/NCDIT'.\nSection 1, subsection 'Malicious App...', element 5: 'Access' linked to 'https://ncconnect.sharepoint.com/:f:/r/sites/it_ext/esrmo_ext/Documents/Newsletters/Security%20Awareness%20News/2022?csf=1&web=1&e=IPYjwO'.",
+      "location": "Section 1"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The text 'Be sure to follow the N.C. Department of Information Technology on X (Formerly Known as Twitter), Facebook and LinkedIn for more tips.' is duplicated at the end of the document. It appears once as a level 2 heading (element index 9 in the final subsection) and immediately again as a paragraph (element index 10). In the source PDF on page 6, this text appears only once as a standard paragraph.",
+      "source_pdf_quote": "Be sure to follow the N.C. Department of Information Technology on X (Formerly Known as Twitter), Facebook and LinkedIn for more tips.",
+      "output_quote": "ID: heading-2 (text: 'Be sure to follow the N.C. Department of Information Technology on X (Formerly Known as Twitter), Facebook and LinkedIn for more tips.') and subsequent paragraph (index 10) containing the same text.",
+      "location": "Upcoming Events subsection, elements index 9 and 10, page 6"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images from the source PDF are missing in the HTML output. Specifically: 1. The image of the man and woman with a tablet on page 3 (associated with the AI/Deepfake article) is absent. 2. The virus cell image on page 5 (associated with the malware piece count article) is absent. 3. The small image of hands on a laptop in the Training section (page 5) is absent. 4. The newspaper icon in the Cybersecurity Newsletters box (page 5) is absent. 5. The 'Upcoming Events' calendar icon ",
+      "source_pdf_quote": "Source PDF contains images on page 3 (IT Leaders), page 5 (Malware growth, Training resources, Newsletters), and page 6 (Upcoming Events).",
+      "output_quote": "The HTML screenshot shows missing image placeholders or simply omits these images in their respective sections (e.g., above 'IT Leaders Can’t Stop AI...', 'The Number of New Pieces...', 'Training and Continued Learning Resources', etc.).",
+      "location": "HTML rendering of pages 3, 5, and 6 content."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Multiple fabricated links are injected into the text where no links exist in the source PDF. For example, on page 2, the word 'Access' in the phrase 'Accessibility Services' is turned into a SharePoint link. On page 1, the character 'X' in 'Twitter/X' is linked to the NCDIT Twitter profile, and the word 'the' in the intro paragraph is linked to a Keeper Security report. None of these are blue or underlined links in the source PDF.",
+      "source_pdf_quote": "Page 1: 'Twitter/X'; Page 2: 'Android’s Accessibility Services'; Page 1: 'From the Desk...'",
+      "output_quote": "Page 1 link on 'X' to https://twitter.com/NCDIT; Page 2 link on 'Access' to https://ncconnect.sharepoint.com/...; Page 1 link on 'the' to https://www.keepersecurity.com/...",
+      "location": "Multiple locations: Page 1, Page 2"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9852568018628032,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5717,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9919120696806304,
+      "shingling_precision": 0.9945934705760033,
+      "duplication_ratio": 0.012112361480972425,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 48139,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "document_id": "gicc-ncdot-florence-20181107-68614eed",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output sections for Page 1, 2, 3, 14, and 15 contain text directly extracted from the source PDF. The image alt text, table captions, and summaries are AI-generated as allowed. There is no evidence of invented section headings or hallucinated body text in the provided elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All contact handles (@NCDIT, @BroadbandIO, @ncicenter) and the URL (it.nc.gov) found on Page 15 of the source PDF are correctly reflected in the output. No additional or fabricated contact information was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output explicitly omits content from Pages 4 through 13 of the source document, representing approximately 66% of the pages. Major sections such as the Disaster Event Time Line, UAS deployment details, Storm Maps, and Lessons Learned are entirely missing from the structured output.",
+        "b_evidence_source": "The source PDF contains content on Pages 4 through 13, including 'Hurricane Florence Disaster Event Time Line', 'UAS – Unmanned Aerial Systems', 'Storm Maps', 'Storm Apps', 'After Action and Lessons Learned', and 'Some Recommendations…'.",
+        "b_evidence_output": "{\"_omitted\": \"9 sections omitted for token budget\"}",
+        "b_evidence_location": "sections array, index 3",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The table on Page 3 ('Road Closures by Road Type') in the source contains one header row and five data rows (Interstate, US, NC, Secondary, Total). The output JSON table correctly includes all six rows.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within the sections that are present (Pages 1, 2, 3, 14, 15), the text content is captured accurately. While most pages are missing (handled under C3), the individual sections provided do not show evidence of internal truncation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text captured in the present sections matches the source PDF. Table data (counts and percentages) for road closures matches the source exactly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output sections for Page 1, 2, 3, 14, and 15 contain text directly extracted from the source PDF. The image alt text, table captions, and summaries are AI-generated as allowed. There is no evidence of invented section headings or hallucinated body text in the provided elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All contact handles (@NCDIT, @BroadbandIO, @ncicenter) and the URL (it.nc.gov) found on Page 15 of the source PDF are correctly reflected in the output. No additional or fabricated contact information was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output explicitly omits content from Pages 4 through 13 of the source document, representing approximately 66% of the pages. Major sections such as the Disaster Event Time Line, UAS deployment details, Storm Maps, and Lessons Learned are entirely missing from the structured output.\",\n      \"b_evidence_source\": \"The source PDF contains content on Pages 4 through 13, including 'Hurricane Florence Disaster Event Time Line', 'UAS – Unmanned Aerial Systems', 'Storm Maps', 'Storm Apps', 'After Action and Lessons Learned', and 'Some Recommendations…'.\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"9 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"sections array, index 3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The table on Page 3 ('Road Closures by Road Type') in the source contains one header row and five data rows (Interstate, US, NC, Secondary, Total). The output JSON table correctly includes all six rows.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within the sections that are present (Pages 1, 2, 3, 14, 15), the text content is captured accurately. While most pages are missing (handled under C3), the individual sections provided do not show evidence of internal truncation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text captured in the present sections matches the source PDF. Table data (counts and percentages) for road closures matches the source exactly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I reviewed the converted JSON against the source PDF to identify any duplicated text blocks. All text elements in the JSON, such as the slide titles ('Florence Response Utilizing GIS', 'Hurricane Florence', 'Storm Apps', etc.), quote, and contact information, appear exactly as many times as they do in the source document. There are no instances of paragraphs or list items being repeated within the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is consistent. The pipeline uses section titles to represent slide headers, and internal headings (like 'Florence Response Utilizing GIS' in Section 1) are assigned appropriate levels (Level 2). This structure allows for logical navigation without skipping levels.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The data table on slide 3 ('Road Closures by Road Type') has been converted with high structural fidelity. The source table contains complex merged cells in the fourth column (grouping Interstate/US and Secondary types). The JSON representation correctly uses 'rowspan': 2 for the '23%' value and places the '77%' value in the appropriate row, maintaining the original layout's meaning and organization.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the JSON follows the logical flow of the presentation. Slide titles are correctly identified as section headers, followed by body elements (images, lists, tables). In Section 1, the minor reordering of the date and author information is an acceptable adjustment for metadata grouping and does not impede the document's meaning. The social media handles in Section 14 correctly follow the visual top-to-bottom arrangement of the source slide.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The lists present in the source document, such as the closure statistics on slide 3, are correctly converted into structured list objects in the JSON. The bulleted items are preserved, and their relationship to the preceding chart is maintained.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document contains textual URLs (e.g., 'it.nc.gov' on slide 15) and screenshots of web applications. The JSON accurately captures these as text elements. No broken or fabricated links were added by the pipeline.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I reviewed the converted JSON against the source PDF to identify any duplicated text blocks. All text elements in the JSON, such as the slide titles ('Florence Response Utilizing GIS', 'Hurricane Florence', 'Storm Apps', etc.), quote, and contact information, appear exactly as many times as they do in the source document. There are no instances of paragraphs or list items being repeated within the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is consistent. The pipeline uses section titles to represent slide headers, and internal headings (like 'Florence Response Utilizing GIS' in Section 1) are assigned appropriate levels (Level 2). This structure allows for logical navigation without skipping levels.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The data table on slide 3 ('Road Closures by Road Type') has been converted with high structural fidelity. The source table contains complex merged cells in the fourth column (grouping Interstate/US and Secondary types). The JSON representation correctly uses 'rowspan': 2 for the '23%' value and places the '77%' value in the appropriate row, maintaining the original layout's meaning and organization.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the JSON follows the logical flow of the presentation. Slide titles are correctly identified as section headers, followed by body elements (images, lists, tables). In Section 1, the minor reordering of the date and author information is an acceptable adjustment for metadata grouping and does not impede the document's meaning. The social media handles in Section 14 correctly follow the visual top-to-bottom arrangement of the source slide.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The lists present in the source document, such as the closure statistics on slide 3, are correctly converted into structured list objects in the JSON. The bulleted items are preserved, and their relationship to the preceding chart is maintained.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document contains textual URLs (e.g., 'it.nc.gov' on slide 15) and screenshots of web applications. The JSON accurately captures these as text elements. No broken or fabricated links were added by the pipeline.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the document is significantly compromised. Most notably, the timeline from page 4 of the source PDF, which contains a dense array of text-based event actions (e.g., 'GIS Coordination begins', 'Hotel Mapping', 'Drone Imagery Published'), is completely missing its textual content in the HTML output. Only the legend and a small fragment of the timeline graphic are rendered. Additionally, content from Page 8 ('Storm Maps' link list) is absent from its designated section, appearing only later under the Page 10 header. This disruption in content flow and the loss of entire slide informational structures constitutes a major layout failure.",
+        "b_evidence_source": "Page 4 contains a complex timeline with numerous callouts like 'Communicate w all DOT', 'TIMS History Event Map started', etc. Page 8 contains a list of 10 links under the 'Storm Maps' header.",
+        "b_evidence_output": "In the HTML, the section 'Hurricane Florence Disaster Event Time Line' contains only the legend text and a fragmented image. The 'Storm Maps' section contains no links, which only appear much later under 'GO!NC NCDOT Weather Event Information Map'.",
+        "b_evidence_location": "Sections corresponding to Page 4 and Page 8/10.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The table 'Road Closures by Road Type' from page 3 of the source PDF is correctly rendered in the HTML. It maintains clear row and column structure, borders are visible, and the data (including percentages and totals) is aligned and legible. The multi-row spanning cells from the source are handled gracefully enough that the data remains understandable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Multiple meaningful images are either missing entirely or rendered as broken green blocks. The 'Total Reported Closures' chart on page 3 and the hurricane satellite image on page 12 are both rendered as large, solid green rectangles. Meaningful content such as the UAS deployment maps (page 5), flood site photos (page 6), video capture stills (page 7), and the comprehensive 'Kitchen Sink' map (page 9) are completely absent from the HTML rendering. Given that this is a presentation focused on GIS and visual response data, the loss of these maps and charts is a major defect.",
+        "b_evidence_source": "Source PDF contains: Chart on p3 ('Total Reported Closures'), Timeline on p4, Map and photo on p5, Three photos on p6, Two photos on p7, Map on p9, Usage chart and map thumbnails on p10, Satellite images on p12 and p13.",
+        "b_evidence_output": "HTML shows: Large green rectangle for p3 chart. Fragmented image for p4 timeline. No images for p5, p6, p7, p9, or p10. Large green rectangle for p12 image. No image for p13.",
+        "b_evidence_location": "Throughout the document, specifically sections corresponding to pages 3, 4, 5, 6, 7, 9, 10, 12, and 13.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "No instances of visually duplicated content blocks (paragraphs, tables, or sections) were observed in the HTML output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the document is significantly compromised. Most notably, the timeline from page 4 of the source PDF, which contains a dense array of text-based event actions (e.g., 'GIS Coordination begins', 'Hotel Mapping', 'Drone Imagery Published'), is completely missing its textual content in the HTML output. Only the legend and a small fragment of the timeline graphic are rendered. Additionally, content from Page 8 ('Storm Maps' link list) is absent from its designated section, appearing only later under the Page 10 header. This disruption in content flow and the loss of entire slide informational structures constitutes a major layout failure.\",\n      \"b_evidence_source\": \"Page 4 contains a complex timeline with numerous callouts like 'Communicate w all DOT', 'TIMS History Event Map started', etc. Page 8 contains a list of 10 links under the 'Storm Maps' header.\",\n      \"b_evidence_output\": \"In the HTML, the section 'Hurricane Florence Disaster Event Time Line' contains only the legend text and a fragmented image. The 'Storm Maps' section contains no links, which only appear much later under 'GO!NC NCDOT Weather Event Information Map'.\",\n      \"b_evidence_location\": \"Sections corresponding to Page 4 and Page 8/10.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The table 'Road Closures by Road Type' from page 3 of the source PDF is correctly rendered in the HTML. It maintains clear row and column structure, borders are visible, and the data (including percentages and totals) is aligned and legible. The multi-row spanning cells from the source are handled gracefully enough that the data remains understandable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Multiple meaningful images are either missing entirely or rendered as broken green blocks. The 'Total Reported Closures' chart on page 3 and the hurricane satellite image on page 12 are both rendered as large, solid green rectangles. Meaningful content such as the UAS deployment maps (page 5), flood site photos (page 6), video capture stills (page 7), and the comprehensive 'Kitchen Sink' map (page 9) are completely absent from the HTML rendering. Given that this is a presentation focused on GIS and visual response data, the loss of these maps and charts is a major defect.\",\n      \"b_evidence_source\": \"Source PDF contains: Chart on p3 ('Total Reported Closures'), Timeline on p4, Map and photo on p5, Three photos on p6, Two photos on p7, Map on p9, Usage chart and map thumbnails on p10, Satellite images on p12 and p13.\",\n      \"b_evidence_output\": \"HTML shows: Large green rectangle for p3 chart. Fragmented image for p4 timeline. No images for p5, p6, p7, p9, or p10. Large green rectangle for p12 image. No image for p13.\",\n      \"b_evidence_location\": \"Throughout the document, specifically sections corresponding to pages 3, 4, 5, 6, 7, 9, 10, 12, and 13.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"No instances of visually duplicated content blocks (paragraphs, tables, or sections) were observed in the HTML output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

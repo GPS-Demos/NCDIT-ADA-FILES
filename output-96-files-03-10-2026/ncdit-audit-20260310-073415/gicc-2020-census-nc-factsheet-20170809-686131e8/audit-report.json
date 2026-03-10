@@ -1,0 +1,96 @@
+{
+  "document_id": "gicc-2020-census-nc-factsheet-20170809-686131e8",
+  "audited_at": "2026-03-10T07:45:17.605086Z",
+  "quality_score": 78,
+  "fidelity_composite": 0.7432,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document exhibits major structural and visual defects that preclude auto-approval, specifically the corruption of a multi-year timeline into a 3-column table and the total loss of a key funnel infographic on page two. While programmatic shingling recall is high (0.993), the fidelity signals reveal that the presentation and organization of that content are significantly compromised, including visual duplication of data blocks.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The timeline at the top of page 2, which consists of 8 distinct year markers (2014-2021) each with specific associated text, has been converted into a 3-column table. This is a corruption of the structural organization because columns representing individual years have been merged into ranges (2014-2015, 2016-2018, 2019-2021), losing the discrete 1-to-1 relationship between years and milestones present in the source.",
+      "source_pdf_quote": "Timeline on Page 2 shows 8 distinct columns/years: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.",
+      "output_quote": "The table in 'Preparing for the Census' section contains only 3 header cells: '2014-2015', '2016-2018', and '2019-2021'.",
+      "location": "Section 2: 'Preparing for the Census – We Have Work To Do!', elements index 0 (table)"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "A significant infographic on page 2 of the PDF, which uses a funnel metaphor to explain how various programs (BAS, LUCA, PSAP, SDRP, GSS) contribute to accurate census data (correct addresses, boundaries, and streets), is missing from the HTML output. In its place, a large, solid green rectangular placeholder block is rendered. This is a meaningful image that provides a visual summary of the document's second-page content, and its absence is a major visual defect.",
+      "source_pdf_quote": "Infographic on page 2 showing programs (BAS, LUCA, PSAP, SDRP, GSS) feeding into a funnel to produce 'Correct addresses', 'Correct boundaries', and 'Correct streets'.",
+      "output_quote": "A large solid green rectangular block appears in the HTML rendering where the infographic should be.",
+      "location": "Following the 'Preparing for the Census Timeline' table on page 2"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The statistics block found at the bottom of PDF page 1 (titled '2020 Census' and containing figures like '330+ million people' and '140+ million households') is visually duplicated in the HTML output. The content appears first at the top of the document with graphical icons, and then repeats as a plain text paragraph under a second '2020 Census' heading later in the document.",
+      "source_pdf_quote": "The statistics block at the bottom of Page 1 ('330+ million people', '140+ million households', etc.)",
+      "output_quote": "This content appears twice: once at the beginning of the document with icons, and again as a plain text paragraph under a '2020 Census' heading further down.",
+      "location": "Sections '2020 Census' (top and middle of output)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The infographic facts at the bottom of page 1 (330+ million people, etc.) are visually a list of four distinct data points with icons. In the JSON, these have been merged into a single paragraph. While newlines are used to separate them, the structural distinction of a list or separate elements is lost.",
+      "source_pdf_quote": "Bottom infographic on page 1 lists four distinct items: '330+ million people', '140+ million households', 'less than 9 months...', and '1 chance to succeed'.",
+      "output_quote": "The content is merged into a single paragraph element: '330+ million people\\n140+ million households\\nless than 9 months to count every person, tabulate data, and produce the results\\n1 chance to succeed'",
+      "location": "Section 1: 'North Carolina and the 2020 Census', elements index 15"
+    }
+  ],
+  "action_items": [
+    "Reconstruct the timeline on page 2 to maintain the discrete 1-to-1 relationship between years and milestones.",
+    "Manually insert or repair the missing funnel infographic on page 2.",
+    "Deduplicate the '2020 Census' statistics content and restore proper list formatting."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7432,
+      "text_match": 0.8907608695652174,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7783,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7432,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9933333333333333,
+      "shingling_precision": 0.8073891625615763,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 88686,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
