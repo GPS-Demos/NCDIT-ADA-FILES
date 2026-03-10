@@ -1,0 +1,86 @@
+{
+  "document_id": "pdf-04-newsletter",
+  "audited_at": "2026-03-10T19:54:06.830575Z",
+  "quality_score": 81,
+  "fidelity_composite": 0.85,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "Source PDF unavailable — cannot compute text fidelity. Manual review required.",
+  "decision_method": "hard_veto:V2",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The heading hierarchy is failed in several ways. First, major headings from the source are missing in the output, specifically 'Finance Reminders' from page 21. Second, multiple sections (Sections 4, 5, 6, 10, 11) skip directly from the Section Title (acting as H1) to H3 level elements (e.g., Section 4 'In the Field...' followed immediately by H3 'The Eastern Region Report'). Third, Section 17 displays an inverse hierarchy, placing 'Happy Retirement!' at H2 level below specific retiree headings ",
+      "source_pdf_quote": "Finance Reminders (Page 21, primary heading); The Eastern Region Report (Page 3, sub-heading under In the Field...); Kevin Anderson... (Page 22, sub-heading under PSAP Highlights).",
+      "output_quote": "The heading 'Finance Reminders' is completely missing from Section 17. Section 4 element 0 is H3 'The Eastern Region Report'. Section 17 elements alternate between H3 retiree names and H2 'Happy Retirement!'.",
+      "location": "Sections 4, 5, 6, 10, 11, and 17."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The output significantly diverges from the source's organization by lumping content from four distinct pages (21, 22, 23, and 24) into a single JSON section (Section 17) titled 'PSAP Highlights'. This miscategorizes the 'Finance Reminders' (Page 21) and 'WANT TO Share WITH US?' (Page 24) content, which are distinct from the PSAP retiree highlights on pages 22 and 23. This is a material failure in preserving the document's structure.",
+      "source_pdf_quote": "Page 21 (Finance Reminders), Page 22 (PSAP Highlights), Page 24 (WANT TO Share WITH US?).",
+      "output_quote": "All content from pages 21 through 24 is contained within section index 17, titled 'PSAP Highlights'.",
+      "location": "Section 17, elements index 0-15."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "A URL on page 11 ('https://statescoop.com/statescoop50/vote/#') is rendered as plain text in the output paragraph and is not a functional link. Other links (emails) are generally preserved.",
+      "source_pdf_quote": "https://statescoop.com/statescoop50/vote/# (Page 11)",
+      "output_quote": "\"text\": \"https://statescoop.com/statescoop50/vote/#\"",
+      "location": "Section 11, element index 3."
+    }
+  ],
+  "action_items": [
+    "Source PDF unavailable — cannot compute text fidelity. Manual review required."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.85,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8071,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 3
+    },
+    "signals": {
+      "fidelity_composite": 0.85,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 79900,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

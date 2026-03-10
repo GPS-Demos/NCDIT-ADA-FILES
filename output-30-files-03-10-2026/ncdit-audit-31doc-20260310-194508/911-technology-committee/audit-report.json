@@ -1,0 +1,79 @@
+{
+  "document_id": "911-technology-committee",
+  "audited_at": "2026-03-10T19:48:38.008059Z",
+  "quality_score": 86,
+  "fidelity_composite": 0.9182,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "The document displays high fidelity scores (0.9182) and strong content preservation, but the structural score (0.727) highlights significant semantic issues in the attendance tables. These table corruptions, specifically the incorrect header mapping and colspan errors, directly impact screen reader accessibility, and the pipeline's 'needs_retry' flag further corroborates structural instability. Given the 3x cost of publishing a document with accessibility defects, human review is required to repair the table logic and restore missing hyperlinks.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The table structure contains major corruptions in the Attendance section. In the first Attendance table (Page 2), the header cell 'Phone/Teams' is assigned a 'colspan' of 2. This incorrectly merges the 'Name' column (Members/Staff) with the first status column under the 'Phone/Teams' header, making the name column semantically incorrect for screen readers. Furthermore, the second part of the Attendance table (Page 3) identifies its first data row ('Brian Eaton -- AT&T') as a header row ('is_head",
+      "source_pdf_quote": "Attendance table on Page 2 and Page 3. Page 3 first row: 'Brian Eaton -- AT&T'.",
+      "output_quote": "Element index 5 (Table 2): first header cell has 'colspan': 2. Element index 6 (Table 3): first row is marked 'is_header_row': true.",
+      "location": "subsections[0].elements[2] and subsections[0].elements[3]"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to identify and inject functional links for several clear hyperlinks present in the source document. Specifically, underlined text such as 'NC NG911 Deployment Map' (Page 6), 'NC Next Generation 911 GIS Services Webpage' (Page 7), and 'NC NextGen911 Days Since Last Upload Dashboard (arcgis.com)' (Page 7) are converted as standard text paragraphs rather than interactive link elements.",
+      "source_pdf_quote": "NC NextGen911 Days Since Last Upload Dashboard (arcgis.com) on Page 7.",
+      "output_quote": "The text is present in a paragraph element (index 19) but is not a link object.",
+      "location": "subsections[2].elements[5]"
+    }
+  ],
+  "action_items": [
+    "Correct table headers and column spanning in the Attendance section on pages 2 and 3.",
+    "Manually add hyperlinks to the text paragraphs identified in the GIS and Deployment sections."
+  ],
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.9182,
+      "text_match": 0.9230574217264546,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8632,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9182,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8640246796392976,
+      "shingling_precision": 0.9907482993197279,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.96,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 71953,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
