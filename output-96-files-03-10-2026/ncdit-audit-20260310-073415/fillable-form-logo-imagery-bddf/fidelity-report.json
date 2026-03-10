@@ -1,0 +1,213 @@
+{
+  "document_id": "fillable-form-logo-imagery-bddf",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains sections and list items that correspond directly to the source PDF. No hallucinated body text, introductions, or conclusions were found. All headings present in the output exist in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output includes references to the 'NC GIS Contact App' which is present in the source text on Page 1. No other specific contact information (phone, email, URL) is provided in the source except for labels, and the output does not invent any.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source document contains two significant sections on Page 2: 'Documentation & Planning' and 'Technology & Infrastructure'. These sections, including their respective checklists, are completely absent from the output JSON, which instead provides a placeholder: '{\"_omitted\": \"2 sections omitted for token budget\"}'. This constitutes a critical failure in fidelity.",
+        "b_evidence_source": "The sections 'Documentation & Planning' (with 4 checklist items) and 'Technology & Infrastructure' (with 5 checklist items) located on Page 2 of the source document.",
+        "b_evidence_output": "{\"_omitted\": \"2 sections omitted for token budget\"}",
+        "b_evidence_location": "Sections array, element index 3 (appearing between 'External Coordination & Partnerships' and 'External Coordination & Partnerships Contacts')",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The table under 'External Coordination & Partnerships Contacts' in the source contains 8 empty data rows. The output JSON table correctly includes 8 data rows with empty content arrays, accurately representing the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "While two entire sections are missing (flagged in C3), the sections that are included are complete and do not show significant internal text omissions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text content of the included sections matches the source document precisely, including specific terminology like 'ICS 100, 200, 700, 800', 'EOC 101', and 'NC GIS Contact App'. No wording changes altering meaning were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains sections and list items that correspond directly to the source PDF. No hallucinated body text, introductions, or conclusions were found. All headings present in the output exist in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output includes references to the 'NC GIS Contact App' which is present in the source text on Page 1. No other specific contact information (phone, email, URL) is provided in the source except for labels, and the output does not invent any.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source document contains two significant sections on Page 2: 'Documentation & Planning' and 'Technology & Infrastructure'. These sections, including their respective checklists, are completely absent from the output JSON, which instead provides a placeholder: '{\\\"_omitted\\\": \\\"2 sections omitted for token budget\\\"}'. This constitutes a critical failure in fidelity.\",\n      \"b_evidence_source\": \"The sections 'Documentation & Planning' (with 4 checklist items) and 'Technology & Infrastructure' (with 5 checklist items) located on Page 2 of the source document.\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"2 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"Sections array, element index 3 (appearing between 'External Coordination & Partnerships' and 'External Coordination & Partnerships Contacts')\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The table under 'External Coordination & Partnerships Contacts' in the source contains 8 empty data rows. The output JSON table correctly includes 8 data rows with empty content arrays, accurately representing the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"While two entire sections are missing (flagged in C3), the sections that are included are complete and do not show significant internal text omissions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text content of the included sections matches the source document precisely, including specific terminology like 'ICS 100, 200, 700, 800', 'EOC 101', and 'NC GIS Contact App'. No wording changes altering meaning were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have carefully reviewed the source PDF and the output JSON. The checklist item 'Create a local road and local facilities map series for offline use' appears twice in the source document (once under 'Data Management & Quality' and once under 'Emergency Response Tools & Maps'). The output correctly reproduces this repetition. No unintentional duplication of content blocks was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The structural hierarchy of the document is broken because two major sections are entirely missing from the output. In the source PDF on Page 2, there are two distinct sections: 'Documentation & Planning' and 'Technology & Infrastructure', each with their own checklists. In the JSON output, these sections are completely omitted and replaced by a placeholder property '\"_omitted\": \"2 sections omitted for token budget\"'. This omission constitutes a failure to faithfully preserve the source document's structural organization and hierarchy.",
+        "b_evidence_source": "Page 2 contains two major headings: 'Documentation & Planning' and 'Technology & Infrastructure', followed by their respective checklists.",
+        "b_evidence_output": "The JSON contains a key '\"_omitted\": \"2 sections omitted for token budget\"' following the 'External Coordination & Partnerships Contacts' section, with the missing headers nowhere in the list of sections.",
+        "b_evidence_location": "Page 2, after element index 4 (External Coordination & Partnerships Contacts table)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The table found on Page 2 under 'External Coordination & Partnerships Contacts' has been correctly converted. The source table has four headers: 'Name', 'Title', 'Email', and 'Phone', and includes seven empty rows for data entry. The JSON output faithfully replicates this structure with one header row containing the correct labels and seven empty data rows.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "Excluding the omitted sections, the flow of information in the output follows the logical sequence of the source document from Page 1 to Page 3. The logos and QR codes have been integrated into sections in a way that is acceptable for structured data. The reading order of the preserved elements is consistent with the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The checklists across all pages have been converted into unordered lists. The nesting is correct (flat lists as per source), and the itemization matches the source PDF exactly. Checkbox characters are preserved within the text strings.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There are no visible raw URLs or clickable contact links (like mailto: or tel:) in the source PDF that would require specific link structural mapping in the JSON. Phrases like 'NC GIS Contact App' are likely links in the PDF but lack a visible target URL, and their representation as plain text is acceptable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have carefully reviewed the source PDF and the output JSON. The checklist item 'Create a local road and local facilities map series for offline use' appears twice in the source document (once under 'Data Management & Quality' and once under 'Emergency Response Tools & Maps'). The output correctly reproduces this repetition. No unintentional duplication of content blocks was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The structural hierarchy of the document is broken because two major sections are entirely missing from the output. In the source PDF on Page 2, there are two distinct sections: 'Documentation & Planning' and 'Technology & Infrastructure', each with their own checklists. In the JSON output, these sections are completely omitted and replaced by a placeholder property '\\\"_omitted\\\": \\\"2 sections omitted for token budget\\\"'. This omission constitutes a failure to faithfully preserve the source document's structural organization and hierarchy.\",\n      \"b_evidence_source\": \"Page 2 contains two major headings: 'Documentation & Planning' and 'Technology & Infrastructure', followed by their respective checklists.\",\n      \"b_evidence_output\": \"The JSON contains a key '\\\"_omitted\\\": \\\"2 sections omitted for token budget\\\"' following the 'External Coordination & Partnerships Contacts' section, with the missing headers nowhere in the list of sections.\",\n      \"b_evidence_location\": \"Page 2, after element index 4 (External Coordination & Partnerships Contacts table)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The table found on Page 2 under 'External Coordination & Partnerships Contacts' has been correctly converted. The source table has four headers: 'Name', 'Title', 'Email', and 'Phone', and includes seven empty rows for data entry. The JSON output faithfully replicates this structure with one header row containing the correct labels and seven empty data rows.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"Excluding the omitted sections, the flow of information in the output follows the logical sequence of the source document from Page 1 to Page 3. The logos and QR codes have been integrated into sections in a way that is acceptable for structured data. The reading order of the preserved elements is consistent with the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The checklists across all pages have been converted into unordered lists. The nesting is correct (flat lists as per source), and the itemization matches the source PDF exactly. Checkbox characters are preserved within the text strings.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There are no visible raw URLs or clickable contact links (like mailto: or tel:) in the source PDF that would require specific link structural mapping in the JSON. Phrases like 'NC GIS Contact App' are likely links in the PDF but lack a visible target URL, and their representation as plain text is acceptable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully maintains the visual organization of the source PDF. The document structure, which includes a series of checklist items under categorized headings (Staff Training & Development, External Coordination & Partnerships, etc.), is preserved in a logical, single-column flow. Headers from each PDF page are repeated to maintain context in the continuous HTML format. The general information fields are grouped logically at the top.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The 'External Coordination & Partnerships Contacts' table from page 2 of the PDF is rendered correctly in the HTML. The column headers (Name, Title, Email, Phone) are clearly defined, and the table structure with rows and columns is intact and readable. It functions correctly as a visual representation of the original table.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present in the HTML output. This includes the institutional logos (Hurri Up NC and LGC) and the QR codes found at the bottom of each page. These elements are repeated in the HTML corresponding to their appearance on each page of the original document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no visual duplication of unique content. While headers and footer elements (logos and QR codes) are repeated, this is an intentional artifact of the conversion process to indicate where new pages from the source document began, maintaining navigational context. The unique checklist items and form fields are presented only once, except where they were already duplicated in the source PDF itself (e.g., the last item under 'Data Management & Quality' and 'Emergency Response Tools & Maps').",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully maintains the visual organization of the source PDF. The document structure, which includes a series of checklist items under categorized headings (Staff Training & Development, External Coordination & Partnerships, etc.), is preserved in a logical, single-column flow. Headers from each PDF page are repeated to maintain context in the continuous HTML format. The general information fields are grouped logically at the top.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The 'External Coordination & Partnerships Contacts' table from page 2 of the PDF is rendered correctly in the HTML. The column headers (Name, Title, Email, Phone) are clearly defined, and the table structure with rows and columns is intact and readable. It functions correctly as a visual representation of the original table.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present in the HTML output. This includes the institutional logos (Hurri Up NC and LGC) and the QR codes found at the bottom of each page. These elements are repeated in the HTML corresponding to their appearance on each page of the original document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no visual duplication of unique content. While headers and footer elements (logos and QR codes) are repeated, this is an intentional artifact of the conversion process to indicate where new pages from the source document began, maintaining navigational context. The unique checklist items and form fields are presented only once, except where they were already duplicated in the source PDF itself (e.g., the last item under 'Data Management & Quality' and 'Emergency Response Tools & Maps').\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

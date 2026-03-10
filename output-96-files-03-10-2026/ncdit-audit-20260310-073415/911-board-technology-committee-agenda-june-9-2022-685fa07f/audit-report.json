@@ -1,0 +1,104 @@
+{
+  "document_id": "911-board-technology-committee-agenda-june-9-2022-685fa07f",
+  "audited_at": "2026-03-10T07:37:56.097734Z",
+  "quality_score": 76,
+  "fidelity_composite": 0.7228,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "Significant content loss is corroborated by both the LLM fidelity report (noting 80% row loss in three critical tables) and programmatic shingling recall (0.762). The document fails to capture the core record-keeping data of the 911 Board meeting—specifically attendance and voting records—making the current conversion unusable for public record purposes.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "Three major tables in the 'Minutes' section are severely truncated. The 'Attendance' table (source page 2) contains 26 data rows for members and staff, but the output only contains 2 rows (Rachel Bello, Randy Cress). The 'Guests' table (source pages 2-3) contains 10 individuals, but the output only lists 2. The 'Minutes Vote' table (source page 3) contains 11 rows, whereas the output lists only 2. In each instance, over 80% of the row data is missing.",
+      "source_pdf_quote": "Attendance table on page 2 contains 26 data rows (11 Members, 15 Staff). Guests table on pages 2-3 contains 10 rows. Minutes Vote table on page 3 contains 11 rows.",
+      "output_quote": "Attendance table (index under heading-3) contains only 2 data rows (Bello, Cress). Guests table contains only 2 rows (Briggs, Eaton). Minutes Vote table (index under heading-4) contains only 2 rows.",
+      "location": "Sections 'Attendance' (page 2), 'Guests' (pages 2-3), and 'Minutes Vote' (page 3)."
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The structural fidelity of several tables is severely compromised due to truncation. The 'Attendance' table (spanning pages 2-3 in the source with approximately 30 rows) only contains 2 data rows in the output. Similarly, the 'Guests' table (page 3, 10 entries) and the 'Minutes Vote' table (page 3, 11 rows) are truncated to only 2 rows each. This represents a major failure in preserving the table's structural organization and content.",
+      "source_pdf_quote": "Attendance table (Pages 2-3) containing rows for Rachel Bello through Evan Warner and several staff; Guests list (Page 3) containing 10 entries; Minutes Vote table (Page 3) containing 11 rows.",
+      "output_quote": "Element 6 (Attendance table) truncated to 2 rows (Rachel Bello, Randy Cress); Element 7 (Guests table) truncated to 2 rows; Element 10 (Minutes Vote table) truncated to 2 rows.",
+      "location": "Section 'MINUTES', elements 6, 7, and 10"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "Several tables in the converted HTML are severely truncated and missing most of their content. Specifically, the 'Attendance' tables for 'Members', 'Staff', and 'Guests' (pages 2-3 of the PDF) are missing nearly all rows. The 'Minutes Vote' table (page 3) is also truncated, showing only two entries out of eleven. This makes the data in these sections unreadable and incomplete.",
+      "source_pdf_quote": "The PDF shows complete tables for Members (11 names), Staff (15 names), Guests (9 entries), and Minutes Vote (11 names) across pages 2 and 3.",
+      "output_quote": "The HTML screenshot shows the 'Members' table with only 2 rows, the 'Staff' table is entirely missing, the 'Guests' table has only 2 rows, and the 'Minutes Vote' table has only 2 rows.",
+      "location": "Minutes section, Attendance and Minutes Vote tables (corresponds to PDF pages 2-3)"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "A significant data visualization, the 'Summary of PSAPS Live on ESInet' bar chart on page 6 of the PDF, is entirely missing from the HTML output. While the data table it represents is present on the previous page, the chart itself is a meaningful visual element of the source document that has not been rendered.",
+      "source_pdf_quote": "Summary of PSAPS Live on ESInet bar chart graphic",
+      "output_quote": "The HTML content jumps from the 'Current Deployment Service Types' table to the text '*Hosted Viper #49 is Macon Count', omitting the chart graphic entirely.",
+      "location": "After the 'Current Deployment Service Types' table (corresponds to PDF page 6)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to preserve functional hyperlinks present in the source document. While the text for URLs (e.g., 'arcgis.com') and linked page titles is present, they are rendered as plain text without the underlying link metadata or being wrapped in a clickable element.",
+      "source_pdf_quote": "Clickable links on Page 7: 'NC Next Generation 911 GIS Services Webpage' and 'NC NextGen911 Days Since Last Upload Dashboard (arcgis.com)'",
+      "output_quote": "Plain text strings for these items without functional links.",
+      "location": "Section 'MINUTES', elements 19 and 21"
+    }
+  ],
+  "action_items": [
+    "Manually restore missing rows in the Attendance, Guests, and Minutes Vote tables from the source PDF.",
+    "Insert the missing bar chart image or a detailed long-description/data-table alternative for the ESInet visualization.",
+    "Ensure all URL strings are converted into functional clickable hyperlinks."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7228,
+      "text_match": 0.8605865809562073,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7625,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7228,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7624584717607974,
+      "shingling_precision": 0.9877036581616969,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 86237,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

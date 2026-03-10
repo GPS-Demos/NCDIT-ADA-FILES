@@ -1,0 +1,80 @@
+{
+  "document_id": "map-imagery-logo-imagery-f810",
+  "audited_at": "2026-03-10T07:55:08.190763Z",
+  "quality_score": 83,
+  "fidelity_composite": 0.825,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "While programmatic signals show high text recall, the LLM fidelity report identifies a fundamental failure in visual preservation: the primary spatial map of North Carolina is missing. The conversion transformed a visual-spatial document into a fragmented linear list, which constitutes a major layout deviation and loss of core informational context that requires human intervention to remediate.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source document is primarily a spatial map of North Carolina counties. The HTML output completely reorganizes this information by removing the map layout and replacing it with a vertical stack of oversized logo fragments, a dense block of county abbreviations in plain text, and then the legend as a list. This shift from a visual/spatial organization to a linear text-based organization constitutes a major layout difference that changes how a user interacts with the information.",
+      "source_pdf_quote": "Page 1 shows a map of North Carolina where county names are placed within their geographical boundaries, serving as the primary visual organization.",
+      "output_quote": "The HTML screenshot shows a list of county abbreviations ('HYDE DARE CART BEAU...') following oversized logos, with no map structure present.",
+      "location": "Main document body, starting after the title."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The most critical visual element of the source document—the map of North Carolina with its color-coded parcel status data—is entirely missing from the HTML output. Additionally, the north arrow graphic from the top left of the PDF is missing. While some logos are present, they are rendered as fragmented, oversized tiles that distort the original visual intent.",
+      "source_pdf_quote": "The source PDF features a central map of North Carolina and a north arrow in the top left corner.",
+      "output_quote": "The HTML screenshot does not contain the map image or the north arrow image.",
+      "location": "Main page area."
+    }
+  ],
+  "action_items": [
+    "Assess if the map can be rendered as an accessible SVG or if a detailed data table alternative is required",
+    "Fix fragmented logo rendering that distorts the page layout",
+    "Restore the north arrow and spatial context lost during conversion"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.825,
+      "text_match": 0.9749152542372882,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8333,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.825,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9742547425474255,
+      "shingling_precision": 0.9755766621438263,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 74986,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

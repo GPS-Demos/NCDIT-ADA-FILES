@@ -1,0 +1,118 @@
+{
+  "document_id": "logo-tables-shading-watermark-photos-13a3",
+  "audited_at": "2026-03-10T08:00:35.601308Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output explicitly states that 8 sections were omitted. Cross-referencing the source PDF (38 pages) with the output shows that Pages 7-27 and Pages 29-36 are entirely missing. These pages contain the 'RQI T-CPR Program Instructional Overview', the 'Saving Lives Together' brochure, and the 'RAK Academy' training course information. This represents more than 75% of the document pages being absent.",
+      "source_pdf_quote": "The source document includes Pages 7-17 (RQI Instructional Overview), Pages 18-27 (Program Brochure), Pages 29-33 (Brochure continued), and Pages 34-36 (RAK Academy flyers).",
+      "output_quote": "\"_omitted\": \"8 sections omitted for token budget\"",
+      "location": "Between Section 3 (Minutes) and Section 10 (Comparison Table)"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The 'Curriculum Overview Comparison' table on Page 28 of the source document contains 14 rows of data (comparing features like Training Hours, Certification, Performance Baseline, etc.). The corresponding table in the output JSON contains only one data row ('Cost per Learner, per Year:'), missing approximately 93% of the required data rows.",
+      "source_pdf_quote": "Table 'RQI Telecommunicator CPR Curriculum Overview Comparison' on Page 28 contains rows: RQI T-CPR Course, Quarterly Continuing Education, Quarterly Simulation Skills..., Quarterly Individual..., T-CPR Training Hours, Certificate..., T-CPR Performance..., Resuscitation Quality..., Designated RQI..., RQI Learning..., FirstWatch..., Cardiac Arrest Case Review..., AHA Responder..., Cost per Learner.",
+      "output_quote": "The table in section 10 ('RQI Telecommunicator CPR Curriculum Overview Comparison') contains only one data row: 'Cost per Learner, per Year: $55 $75 $175'",
+      "location": "Section 10, element index 0"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "There are major structural corruptions in table conversion. On page 28, the comparison matrix table is severely truncated, containing only the header row and one data row, omitting roughly 13 rows of content. Additionally, the meeting agenda on page 1, which uses 'Tab', 'Topic', and 'Presenter' headers in the source, is flattened into a single paragraph block, losing all tabular structure.",
+      "source_pdf_quote": "Page 28 contains a multi-row table with features like 'RQI T-CPR Course', 'Quarterly Continuing Education', etc. Page 1 contains a tabular agenda with three columns.",
+      "output_quote": "The table in section 'RQI Telecommunicator CPR Curriculum Overview Comparison' contains only the 'Cost per Learner, per Year:' data row. The Section 1 agenda is a 'paragraph' type containing the text 'Tab Topic Presenter'.",
+      "location": "Section 1 (Page 1) and Section 'RQI Telecommunicator CPR Curriculum Overview Comparison' (Page 28)."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "A significant number of meaningful images and infographics from the source PDF are missing in the HTML output. While decorative backgrounds are intentionally excluded for accessibility, several functional images are absent: the example certificates and credentials (pages 16, 17, 25, 27), the 'Resuscitation excellence' diagram (page 19), the 38% pie chart infographic (page 20), the US map infographic (page 21), and organizational logos such as the First Watch logo (page 29) and the RAK Academy lo",
+      "source_pdf_quote": "Meaningful images including RAK Academy logo (p. 34), First Watch logo (p. 29), example certificates and credentials (p. 16, 17, 25, 27), diagrams for resuscitation excellence (p. 19), and pie chart infographic (p. 20).",
+      "output_quote": "These meaningful images are entirely missing from the HTML rendering in their respective sections.",
+      "location": "Throughout the document, specifically in sections corresponding to pages 16, 17, 19, 20, 21, 25, 27, 29, and 34."
+    },
+    {
+      "description": "Low text recall (possible truncation): 39%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The output document lacks an H1 heading for the overall document title. Section headers are mapped to H2 levels (e.g., 'Ethics Statement' in Section 2, 'Minutes' in Section 3), effectively skipping the top-level H1 which should be used for the document title.",
+      "source_pdf_quote": "The document title on page 1 is 'North Carolina 911 Board Education Committee Meeting Agenda'.",
+      "output_quote": "The first heading element encountered is an H2 in Section 2: 'Ethics Statement:'. There is no H1 element in the JSON array.",
+      "location": "Throughout the document, beginning with Section 2, element index 0."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The numbered list (1-13) and nested bullets (under item 8) on the first page agenda are incorrectly converted into a single large paragraph block. This removes the structural meaning of the list items and their hierarchical relationship.",
+      "source_pdf_quote": "Numbered list 1-13 on page 1, with bulleted sub-items for Buncombe County and Haywood County 911 under item 8.",
+      "output_quote": "Section 1 elements contain a single 'paragraph' element where all agenda items are concatenated as plain text (e.g., '1. Chair Opening Remarks Chuck Greene 2. Welcome...').",
+      "location": "Section 1, Page 1."
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.5475017483274643,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.4744,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.38804192472606003,
+      "shingling_precision": 0.952520173079172,
+      "duplication_ratio": 0.005962481146304675,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.92,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 80246,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

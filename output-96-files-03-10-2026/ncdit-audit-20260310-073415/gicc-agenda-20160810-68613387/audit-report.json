@@ -1,0 +1,84 @@
+{
+  "document_id": "gicc-agenda-20160810-68613387",
+  "audited_at": "2026-03-10T07:45:49.091524Z",
+  "quality_score": 93,
+  "fidelity_composite": 0.8852,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.75,
+  "routing": "auto_approve",
+  "reasoning": "The document displays high fidelity scores (0.885) and excellent content recall (0.982), indicating the core text is well-preserved. While minor issues exist regarding list semantics and the loss of specific inline hyperlinks, these are secondary to content accuracy. The table alignment issue in item 8 is noted but characterized as a visual/structural minor defect that does not result in data loss, aligning with the overall high scores and 'converge_with_minors' signal agreement.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "In the table row for 'Agenda Item 8', the source document contains a nested list with bullets and sub-bullets. In the output JSON, this entire list is merged into a single text block within the table cell, using newline characters and manually typed bullet markers (•, o) instead of a proper semantic list structure. This merging of list items into a single paragraph block is a structural failure.",
+      "source_pdf_quote": "8. Committee Reports\n• Statewide Mapping Advisory Committee\n o Vote: Standard for Parcel Data Content (Summary)\n• Local Government\n o Vote: LGC Bylaws Revised...",
+      "output_quote": "\"text\": \"8. Committee Reports\\n• Statewide Mapping Advisory Committee\\n  o Vote: Standard for Parcel Data Content (Summary)\\n• Local Government\\n  o Vote: LGC Bylaws Revised...\"",
+      "location": "Section 1, Table, row index 8, cell 2"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains several visible hyperlinks that were missed in the conversion. Specifically, 'Minutes' in Item 3, 'Standard for Parcel Data Content (Summary)' in Item 8, and 'LGC Bylaws Revised' in Item 8 are all blue and underlined in the PDF, indicating they are links. These appear only as plain text in the output. Only the URL at the bottom of the document was correctly converted as a link.",
+      "source_pdf_quote": "Items in blue/underlined text: 'Minutes' (Item 3), 'Standard for Parcel Data Content (Summary)' (Item 8), 'LGC Bylaws Revised' (Item 8).",
+      "output_quote": "Plain text is used for these items without accompanying href or link objects.",
+      "location": "Section 1, Table, row index 3 and row index 8"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "minor",
+      "analysis": "The table rendering for agenda item 8 ('Committee Reports') is visually broken. In the source PDF, the sub-committees are listed with their respective representatives horizontally aligned on the same line (e.g., 'Statewide Mapping Advisory Committee' is aligned with 'Ryan Draughn'). In the HTML output, all sub-committees are grouped into a single cell under 'AGENDA ITEM' and all representatives are grouped into a single cell under 'GICC MEMBER or GUEST'. This destroys the visual alignment and ma",
+      "source_pdf_quote": "Item 8 shows sub-bullets (e.g., 'Statewide Mapping Advisory Committee', 'Local Government') horizontally aligned with specific names on the right (e.g., 'Ryan Draughn', 'Kathryn Clifton').",
+      "output_quote": "The HTML table row for item 8 collapses all sub-bullets into one cell and all names into another, losing the row-level correspondence. For example, 'Ryan Draughn Kathryn Clifton John Farley...' appears as a single block of text in the right-hand cell.",
+      "location": "Agenda table, row 8, page 1"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.8852,
+      "text_match": 0.9817351598173516,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.92,
+      "raw_score": 0.9316,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8852,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9817351598173516,
+      "shingling_precision": 0.9817351598173516,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 50683,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

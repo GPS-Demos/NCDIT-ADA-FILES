@@ -1,0 +1,79 @@
+{
+  "document_id": "gicc-mo-minutes-20191216-68614cc3",
+  "audited_at": "2026-03-10T07:48:09.649379Z",
+  "quality_score": 91,
+  "fidelity_composite": 0.9823,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While fidelity and programmatic scores are exceptionally high (0.98+), the specific link injection error results in text corruption within Section 6a, where the word 'documented' is split into 'document' and 'ed'. This functional defect, combined with the loss of the original hyperlink in Section 6e, exceeds simple cosmetic styling and warrants a manual fix to ensure the integrity of the government record.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a minor content fidelity issue regarding a hyperlink. In the source PDF (Section 6e, Page 3), the word 'document' in the phrase 'update to the open source document' is a hyperlink. In the output JSON, this hyperlink has been removed from Section 6e and erroneously inserted into Section 6a (Page 2), where it splits the word 'documented' into a linked ' document' and plain text 'ed'. This causes both text corruption in section 6a ('document ed') and a loss of information/functionality in ",
+      "source_pdf_quote": "Accomplishments have been documented for the GICC annual report. [Section 6a] ... update to the open source document to include [Section 6e, 'document' is a link]",
+      "output_quote": "...Accomplishments have been\", {\"href\": \"...\", \"text\": \" document\"}, {\"text\": \"ed for the GICC annual report...\" [Section 6a]. The link is missing from the word 'document' in Section 6e.",
+      "location": "Sections 6a and 6e (element indexes corresponding to paragraph 1 of section 6a and paragraph 1 of section 6e)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "In section 6a, a hyperlink has been incorrectly injected into the middle of the word 'documented'. The pipeline parsed 'document' as a link to a PDF relevant to section 6e (Technical Advisory Committee) and left 'ed' as trailing text. This URL does not appear in the source document at this location.",
+      "source_pdf_quote": "Accomplishments have been documented for the GICC annual report.",
+      "output_quote": "\"text\": \". All open slots on the committee have been filled. The FY2019-2020 workplan was approved. Accomplishments have been\",\n            {\n              \"href\": \"https://files.nc.gov/ncdit/GICC-TAC-OpenSource-GIS-Software-20171201.pdf\",\n              \"text\": \" document\",\n              \"title\": null,\n              \"opens_new_window\": true\n            },\n            {\n              \"text\": \"ed for the GICC annual report.\"",
+      "location": "Section 'a. Local Government Committee – Debbie Brannan', first paragraph."
+    }
+  ],
+  "action_items": [
+    "Rejoin the word 'documented' in Section 6a and remove the incorrect hyperlink.",
+    "Restore the hyperlink to the word 'document' in Section 6e as it appears in the source PDF."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9823,
+      "text_match": 0.9924452279022916,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.9071,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9823,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9904498617743152,
+      "shingling_precision": 0.9944486500126167,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 62251,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
