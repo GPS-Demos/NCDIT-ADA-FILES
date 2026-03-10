@@ -1,0 +1,213 @@
+{
+  "document_id": "pdf-04-newsletter",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The textual content of the provided sections (1, 2, 3, 12, 13) was compared against the corresponding pages in the source PDF (Pages 1, 2, 3, 4, 5, 23, 24). Every sentence, heading, and caption in the output is derived directly from the source material. No invented paragraphs, hallucinated section titles, or introductory/concluding remarks not present in the original document were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The provided sections do not contain specific phone numbers, email addresses, or URLs beyond general references like 'Regional Coordinator' or 'Senator Budd'. While specific contact information exists in the source PDF (e.g., the NMAC phone number and email on Page 15), these sections were excluded from the JSON output. No fabricated contact information was introduced in the visible portions of the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source PDF is a 24-page newsletter containing multiple regional reports and technical updates. The JSON output provided is missing content from 17 pages (Pages 6 through 22). This is explicitly noted in the JSON with an '_omitted' key stating that 8 sections were removed. These missing sections contain significant information, including the North Central, South Central, and Western Region Reports, technical articles from 'The Nerd Herd', training updates from 'Education Station', and 'The Finance Team' reports. The omission of the majority of the document constitutes a critical failure of completeness.",
+        "b_evidence_source": "The source PDF contains content on pages 6 through 22, including regional reports, 'The Nerd Herd' technical updates, 'Education Station' training info, 'The Finance Team' reports, and 'PSAP Highlights' for Kevin Anderson.",
+        "b_evidence_output": "{\"_omitted\": \"8 sections omitted for token budget\"}",
+        "b_evidence_location": "Sections array, between Section index 2 and index 3 (Section 12)",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "A review of the source PDF confirms that it consists of textual articles, photographic images, and lists of names or courses. There are no formal data tables present in the source document, so no table data loss occurred.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The sections that are present in the JSON (1, 2, 3, 12, 13) were checked for internal completeness. For example, Section 3 covers the entirety of the text on Pages 3, 4, and 5 related to the Eastern Region Report without skipping paragraphs. Section 12 captures the full text regarding Brett Renfrow's retirement from Page 23. While entire sections are missing (see C3), the individual sections provided are complete.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The textual fidelity of the provided sections is extremely high. Key dates (e.g., '12th March, 2025', 'February 28, 2025', '2/24/2025'), names (e.g., 'Justice Berger', 'Kristen Falco', 'Brett Renfrow'), and technical acronyms (PSAP, CRI, C2C) match the source document perfectly. No meaning-altering changes were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The textual content of the provided sections (1, 2, 3, 12, 13) was compared against the corresponding pages in the source PDF (Pages 1, 2, 3, 4, 5, 23, 24). Every sentence, heading, and caption in the output is derived directly from the source material. No invented paragraphs, hallucinated section titles, or introductory/concluding remarks not present in the original document were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The provided sections do not contain specific phone numbers, email addresses, or URLs beyond general references like 'Regional Coordinator' or 'Senator Budd'. While specific contact information exists in the source PDF (e.g., the NMAC phone number and email on Page 15), these sections were excluded from the JSON output. No fabricated contact information was introduced in the visible portions of the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source PDF is a 24-page newsletter containing multiple regional reports and technical updates. The JSON output provided is missing content from 17 pages (Pages 6 through 22). This is explicitly noted in the JSON with an '_omitted' key stating that 8 sections were removed. These missing sections contain significant information, including the North Central, South Central, and Western Region Reports, technical articles from 'The Nerd Herd', training updates from 'Education Station', and 'The Finance Team' reports. The omission of the majority of the document constitutes a critical failure of completeness.\",\n      \"b_evidence_source\": \"The source PDF contains content on pages 6 through 22, including regional reports, 'The Nerd Herd' technical updates, 'Education Station' training info, 'The Finance Team' reports, and 'PSAP Highlights' for Kevin Anderson.\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"8 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"Sections array, between Section index 2 and index 3 (Section 12)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"A review of the source PDF confirms that it consists of textual articles, photographic images, and lists of names or courses. There are no formal data tables present in the source document, so no table data loss occurred.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The sections that are present in the JSON (1, 2, 3, 12, 13) were checked for internal completeness. For example, Section 3 covers the entirety of the text on Pages 3, 4, and 5 related to the Eastern Region Report without skipping paragraphs. Section 12 captures the full text regarding Brett Renfrow's retirement from Page 23. While entire sections are missing (see C3), the individual sections provided are complete.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The textual fidelity of the provided sections is extremely high. Key dates (e.g., '12th March, 2025', 'February 28, 2025', '2/24/2025'), names (e.g., 'Justice Berger', 'Kristen Falco', 'Brett Renfrow'), and technical acronyms (PSAP, CRI, C2C) match the source document perfectly. No meaning-altering changes were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the provided JSON sections and the source PDF. The text blocks in the JSON, such as the descriptions of the board members on page 1, the Eastern Region report on pages 3-5, and the PSAP Highlights on page 23, appear only once in the output, mirroring their single appearance in the source document. The word count of 2706 is consistent with the amount of text across the 24-page newsletter, suggesting no significant duplication occurred in the omitted sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is well-maintained and follows a logical structure. The document title 'NC 911 Board Monthly Dispatch' serves as the primary heading (H1 via section title). Major articles like 'NEW 911 BOARD MEMBERS' are correctly tagged as H2. Subordinate reports within the 'In the Field...' section, such as 'The Eastern Region Report', are appropriately nested as H3. No instances of skipping heading levels (e.g., H1 to H3) were observed in the provided output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document consists of newsletter text, images, and decorative graphics arranged in layouts that resemble columns, but it does not contain any formal data tables. The JSON correctly reflects this with a 'table_count' of 0.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The output preserves the logical reading order of the newsletter. For instance, on page 1, it linearizes the layout by presenting the main text first, followed by the images and their corresponding captions. Similarly, the regional reports are presented in the order they appear across pages 3, 4, and 5. The transition from the header information to the content blocks follows the top-to-bottom, left-to-right flow of the original document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The document contains a few bulleted lists (e.g., training courses on page 16). While the specific list elements are in the omitted sections of the JSON, the summary statistics and the structure of visible sections show no list-related errors. Text-based lists (like the names of counties on page 13) are correctly rendered as part of their respective paragraphs.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The document contains several URLs and email addresses (e.g., on pages 11, 12, 15, and 21). These are primarily present as plain text in the source and are treated as such in the conversion. There is no evidence of fabricated links or missing essential navigational links in the converted output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the provided JSON sections and the source PDF. The text blocks in the JSON, such as the descriptions of the board members on page 1, the Eastern Region report on pages 3-5, and the PSAP Highlights on page 23, appear only once in the output, mirroring their single appearance in the source document. The word count of 2706 is consistent with the amount of text across the 24-page newsletter, suggesting no significant duplication occurred in the omitted sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is well-maintained and follows a logical structure. The document title 'NC 911 Board Monthly Dispatch' serves as the primary heading (H1 via section title). Major articles like 'NEW 911 BOARD MEMBERS' are correctly tagged as H2. Subordinate reports within the 'In the Field...' section, such as 'The Eastern Region Report', are appropriately nested as H3. No instances of skipping heading levels (e.g., H1 to H3) were observed in the provided output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document consists of newsletter text, images, and decorative graphics arranged in layouts that resemble columns, but it does not contain any formal data tables. The JSON correctly reflects this with a 'table_count' of 0.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The output preserves the logical reading order of the newsletter. For instance, on page 1, it linearizes the layout by presenting the main text first, followed by the images and their corresponding captions. Similarly, the regional reports are presented in the order they appear across pages 3, 4, and 5. The transition from the header information to the content blocks follows the top-to-bottom, left-to-right flow of the original document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The document contains a few bulleted lists (e.g., training courses on page 16). While the specific list elements are in the omitted sections of the JSON, the summary statistics and the structure of visible sections show no list-related errors. Text-based lists (like the names of counties on page 13) are correctly rendered as part of their respective paragraphs.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The document contains several URLs and email addresses (e.g., on pages 11, 12, 15, and 21). These are primarily present as plain text in the source and are treated as such in the conversion. There is no evidence of fabricated links or missing essential navigational links in the converted output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output correctly translates the multi-page PDF into a single-column responsive layout. The visual organization of sections (e.g., 'New 911 Board Members', 'In the Field...', 'The Nerd Herd') matches the sequence and grouping in the source PDF. Information remains easy to find in its expected context.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source PDF does not contain any formal data tables. Sections that used multi-column text layouts (like the Finance Reminders on page 20) are rendered as sequential text blocks in HTML, which is an appropriate and accessible transformation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images, photographs, and logos from the source PDF are present in the HTML output. This includes portraits, site visit photos, graphics like the 'Welcome' and 'Happy Retirement' banners, and departmental logos (e.g., NC DIT Challenge Coin). Decorative background elements like faded watermarks are omitted as intended for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "No instances of unintended content duplication were found. Headings that repeat (like 'In the Field...') correctly reflect the structure of the source PDF where these headings appear on multiple consecutive pages.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output correctly translates the multi-page PDF into a single-column responsive layout. The visual organization of sections (e.g., 'New 911 Board Members', 'In the Field...', 'The Nerd Herd') matches the sequence and grouping in the source PDF. Information remains easy to find in its expected context.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source PDF does not contain any formal data tables. Sections that used multi-column text layouts (like the Finance Reminders on page 20) are rendered as sequential text blocks in HTML, which is an appropriate and accessible transformation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images, photographs, and logos from the source PDF are present in the HTML output. This includes portraits, site visit photos, graphics like the 'Welcome' and 'Happy Retirement' banners, and departmental logos (e.g., NC DIT Challenge Coin). Decorative background elements like faded watermarks are omitted as intended for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"No instances of unintended content duplication were found. Headings that repeat (like 'In the Field...') correctly reflect the structure of the source PDF where these headings appear on multiple consecutive pages.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 1,
+  "total_critical": 1,
+  "total_major": 0,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

@@ -1,0 +1,118 @@
+{
+  "document_id": "logo-tables-shading-watermark-photos-13a3",
+  "audited_at": "2026-03-10T04:58:32.543000Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.2727272727272727,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The source document has 38 pages. The output JSON only contains content from pages 1-6 and page 38. Entire sections representing pages 7 through 37 are missing, including the 'RQI T-CPR Program Instructional Overview', the 'Saving Lives Together' brochure, the 'Dispatch Response to Active Killers' flyer, and the 'Education Committee Goals'. The output acknowledges this with placeholders like '5 sections omitted for token budget' and '[Pages 18-34 unavailable]'.",
+      "source_pdf_quote": "Content on Pages 7-37: RQI T-CPR Program Instructional Overview, Telecommunicator CPR Program Brochure, Dispatch Response to Active Killers Flyer, and Education Committee Goals.",
+      "output_quote": "The output jumps from page 6 (end of Section 3) to page 38 (Section 9), with placeholders stating sections were omitted or unavailable.",
+      "location": "Sections between Section 3 and Section 9, covering pages 7-37"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is incomplete and inconsistent. While the first two sections use headings (H1 and H2), subsequent major sections such as the 'Meeting Minutes' (Page 3) and 'Meeting Dates' (Page 38) lack corresponding heading elements in their elements array, even though they have titles in the section metadata. This makes them unreachable for screen reader users via heading navigation.",
+      "source_pdf_quote": "North Carolina 911 Board Education Committee Meeting MINUTES (Page 3); 2023 Education Committee Meeting Dates (Page 38)",
+      "output_quote": "The 'elements' array for sections 'North Carolina 911 Board Education Committee Meeting MINUTES' and '2023 Education Committee Meeting Dates' contains only paragraphs, images, or tables, but no heading-type elements.",
+      "location": "sections[2], sections[9]"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The agenda on page 1 of the source document is organized into a clear three-column structure (Tab, Topic, Presenter). In the output, this structured information is flattened into a single paragraph, losing the columns and headers entirely. This significantly degrades the structural organization and accessibility of the agenda.",
+      "source_pdf_quote": "3-column layout on Page 1 with headers 'Tab', 'Topic', and 'Presenter'.",
+      "output_quote": "\"text\": \"Tab Topic Presenter\\n1. Chair Opening Remarks Chuck Greene\\n2. Welcome Pokey Harris...\"",
+      "location": "sections[0], element index 2"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order and document completeness are fundamentally broken. Nearly half of the document (Pages 18-34) failed to convert and is replaced by an error message. Furthermore, this error placeholder is positioned after the content of Page 38, breaking the logical sequence of the document.",
+      "source_pdf_quote": "The document contains 38 pages in numerical order.",
+      "output_quote": "\"reading_order\": 9 (January-November 2023 meeting dates from Page 38) is followed by \"reading_order\": 10 (\"Content from pages 18-34 could not be converted.\").",
+      "location": "sections[9], sections[10]"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images present in the source PDF are missing from the HTML output. Specifically, the 'RAK Academy' logo at the start of the D-RAK training course section (Source PDF, page 34) is absent. Additionally, illustrative images such as the 'Certificate' on page 16 and the 'eCredential' on page 17 are not rendered in the output. Furthermore, a significant number of images and graphics within the RQI brochure (Source PDF, pages 18-33) are entirely missing due to that section being mark",
+      "source_pdf_quote": "The RAK Academy logo at the top of page 34; Certificate image on page 16; eCredential image on page 17.",
+      "output_quote": "The HTML output is missing these images in their respective sections (e.g., above the 'Dispatch Response to Active Killers (D-RAK)' heading and within the 'Competency Based Certification and Credentialing' section).",
+      "location": "Dispatch Response to Active Killers (D-RAK) section (page 34) and Competency Based Certification and Credentialing section (pages 16-17)"
+    },
+    {
+      "description": "Low text recall (possible truncation): 39%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Numbered lists on Page 1 (Agenda items 1-13) and Page 3 (Minutes items 1-5) are converted into plain text within paragraph blocks rather than structured list elements. This loses the semantic meaning of the list structure.",
+      "source_pdf_quote": "Numbered list 1-13 on Page 1; Numbered list 1-5 on Page 3.",
+      "output_quote": "The text for these lists is found inside \"type\": \"paragraph\" elements without any list item markers or structure.",
+      "location": "sections[0], sections[2]"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.5569515620771508,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.4765,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.2727272727272727,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.392663172939495,
+      "shingling_precision": 0.9830629770992366,
+      "duplication_ratio": 0.006401497899903851,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.94,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 144932,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

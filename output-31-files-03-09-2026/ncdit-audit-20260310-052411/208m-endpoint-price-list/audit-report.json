@@ -1,0 +1,118 @@
+{
+  "document_id": "208m-endpoint-price-list",
+  "audited_at": "2026-03-10T05:28:14.935088Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.5813953488372092,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The first table of the 'Carahsoft Trellix (Formerly McAfee) Price List' appearing on page 11 of the source PDF is entirely missing from the output JSON. This table contains items with line numbers 1 through 9.",
+      "source_pdf_quote": "Table titled 'Carahsoft Trellix (Formerly McAfee) Price List' containing Line No. 1 to 9 (starting with PART NO. CWACDE-AB-HI).",
+      "output_quote": "The output skips directly from the Trellix Professional Services text to 'Carahsoft Trellix Price List Items 10-29'.",
+      "location": "Page 11"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "Several tables in the output JSON are severely truncated, containing only the first row of data despite the source tables having ten or more rows. Specifically: the Trellix table for items 10-29 only has one row (item 10); the Trellix table for items 30-43 only has row 30; the DLT CrowdStrike table on page 14 only has the first row; and the Presidio Cisco table on page 17 only has the first row.",
+      "source_pdf_quote": "Page 12: Table with 20 items (Line No. 10-29); Page 13: Table with 14 items (Line No. 30-43); Page 14: Table with 10 cost items; Page 17: Table with 10 cost items.",
+      "output_quote": "Table 'Carahsoft Trellix Price List Items 10-29' has 1 row; Table 'Carahsoft Trellix Price List Items 30-43' has 1 data row; Table 'DLT CrowdStrike Cost Proposal Form' has 1 row; Table 'Presidio Cisco Cost Proposal Form' has 1 row.",
+      "location": "Sections for Trellix, CrowdStrike, and Cisco (Pages 12, 13, 14, 17)"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Large portions of the document are not correctly converted into structured text. The Sophos (pages 3-7) and SHI Trellix (pages 8-9) sections are represented solely as images, meaning all tabular text data is missing from the JSON stream. Additionally, the summary table on page 15 and the 'Notes' section on page 16 for CrowdStrike are completely omitted.",
+      "source_pdf_quote": "Detailed pricing tables for Sophos (pages 3-7) and SHI Trellix (pages 8-9); Summary table on page 15; 'Notes' section on page 16.",
+      "output_quote": "Sophos and SHI Trellix data provided as image elements only; Page 15 table and Page 16 notes are absent.",
+      "location": "Sophos and Trellix sections (Pages 3-9, 15, 16)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "There is a significant failure in table structure conversion across multiple sections of the document. Firstly, the tables for Sophos (Pages 5-9) and SHI Trellix (Pages 10-11) are captured as 'image' elements rather than structured 'table' elements, losing all accessible row/column data. Secondly, the Carahsoft Trellix table spanning Pages 13-15 is severely truncated in the JSON; for instance, the table labeled 'Items 10-29' contains only one data row (Item 10) and the table for 'Items 30-43' co",
+      "source_pdf_quote": "The source contains extensive tables for Sophos (pp. 5-9), SHI Trellix (pp. 10-11), a 43-line table for Carahsoft Trellix (pp. 13-15), and a continued table for CrowdStrike (p. 17).",
+      "output_quote": "Sophos and SHI Trellix tables are images (e.g., image_count: 8). Carahsoft Trellix tables contain single rows (Items 10 and 30). The Page 17 table is omitted.",
+      "location": "Sections 'SOPHOS', 'TRELLIX (Formerly MCAFEE)', and 'CROWDSTRIKE'."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "Several sections of the price list are missing their core content in the HTML output. Specifically, the entire Sophos price list (PDF pages 3-7) and SHI Trellix price list (PDF pages 8-9) are empty except for headings. Additionally, the first table of the Carahsoft Trellix section (lines 1-9 from PDF page 11) is completely missing from the HTML rendering. This fundamentally breaks the visual organization and intent of the document as a comprehensive price list.",
+      "source_pdf_quote": "PDF pages 3-9 (Sophos/SHI Trellix lists) and page 11 (Carahsoft Trellix lines 1-9) contain primary pricing tables.",
+      "output_quote": "The HTML screenshot shows headings for 'SHI (Sophos) Price List', 'SHI Trellix (Formerly McAfee) Price List', and 'Carahsoft Trellix (Formerly McAfee) Price List', but the content tables for Sophos and Trellix (SHI) are missing, and the Carahsoft Trellix section skips lines 1-9, starting at line 10.",
+      "location": "Sections for Sophos, SHI Trellix, and Carahsoft Trellix."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The price list tables on PDF pages 3 through 9 appear to be embedded image blocks (scans or screenshots from other documents). These are meaningful content images that are essential to the document. None of these image-based tables are present in the HTML output, leaving those sections blank.",
+      "source_pdf_quote": "Visual table blocks on PDF pages 3, 4, 5, 6, 7, 8, and 9.",
+      "output_quote": "The HTML output contains only the headings for these pages with no image content or equivalent tables rendered.",
+      "location": "SHI (Sophos) and SHI Trellix sections."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "A significant typo was introduced in a section heading where 'CrowdStrike' was spelled as 'CowdStrike'.",
+      "source_pdf_quote": "SHI (CrowdStrike) Price List",
+      "output_quote": "SHI (CowdStrike) Price List",
+      "location": "Heading for Section 5, element index 11 (corresponds to page 16)"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.743620178041543,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.518,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5813953488372092,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.927461139896373,
+      "shingling_precision": 0.620604259534423,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 89562,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
