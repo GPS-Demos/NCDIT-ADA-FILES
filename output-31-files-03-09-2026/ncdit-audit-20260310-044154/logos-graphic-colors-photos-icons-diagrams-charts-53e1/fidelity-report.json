@@ -1,0 +1,213 @@
+{
+  "document_id": "logos-graphic-colors-photos-icons-diagrams-charts-53e1",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON contains only information derived from the source PDF. No fabricated sections, headings, or body text were discovered. The document title and section headings match the original content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The URL for NC.gov was verified against the source text and is correct. No other contact information such as phone numbers, emails, or physical addresses was present in the output to be verified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "Two major portions of the document are missing from the output without being marked as intentionally omitted. First, Page 2 (Contents) is entirely absent. Second, a large block of content from Page 23 through Page 40 is missing. This range includes various sections on service delivery for other agencies, cybersecurity initiatives, workforce development, data linking, and awards. While some other pages were noted as omitted for the token budget (Pages 5-13), these specific sections were silently dropped between existing sections in the JSON array.",
+        "b_evidence_source": "Page 2 contains the 'Contents' table. Pages 23-40 contain sections such as 'Customer Experience for Other Agencies', 'Workforce Development', 'Data Linking', and 'Awards and Recognitions'.",
+        "b_evidence_output": "The JSON output skips from Page 1 to Page 3, and from Page 22 ('Emerging Technologies') directly to Page 41 ('NC.gov Delivers a Frictionless Customer and Citizen Digital Experience').",
+        "b_evidence_location": "Missing Page 2; Missing range from Page 23 to Page 40.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Tables present in the output, specifically the Budget Expenditures (Page 14), Budget Funding Sources (Page 15), Broadband by the Numbers (Page 19), and 911 Capabilities statistics (Page 21), were checked. They contain all the relevant data rows and values found in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The sections that are included in the output appear to preserve the full text of the corresponding sections in the PDF. Truncation within sections was not observed; the primary issue is the omission of entire pages and sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "A numerical error was found on Page 21. In the '911 Capabilities' section, the population number served by Next Generation 911 is missing a digit. The source PDF states '10,177,959', whereas the output JSON provides '10,77,959'. This changes the statistic significantly, altering the factual meaning of the report.",
+        "b_evidence_source": "99 percent (10,177,959) of the state’s population",
+        "b_evidence_output": "99 percent (10,77,959) of the state’s population",
+        "b_evidence_location": "Section '911 Capabilities', Page 21.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6976744186046512,
+    "penalty_sum": 26,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON contains only information derived from the source PDF. No fabricated sections, headings, or body text were discovered. The document title and section headings match the original content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The URL for NC.gov was verified against the source text and is correct. No other contact information such as phone numbers, emails, or physical addresses was present in the output to be verified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"Two major portions of the document are missing from the output without being marked as intentionally omitted. First, Page 2 (Contents) is entirely absent. Second, a large block of content from Page 23 through Page 40 is missing. This range includes various sections on service delivery for other agencies, cybersecurity initiatives, workforce development, data linking, and awards. While some other pages were noted as omitted for the token budget (Pages 5-13), these specific sections were silently dropped between existing sections in the JSON array.\",\n      \"b_evidence_source\": \"Page 2 contains the 'Contents' table. Pages 23-40 contain sections such as 'Customer Experience for Other Agencies', 'Workforce Development', 'Data Linking', and 'Awards and Recognitions'.\",\n      \"b_evidence_output\": \"The JSON output skips from Page 1 to Page 3, and from Page 22 ('Emerging Technologies') directly to Page 41 ('NC.gov Delivers a Frictionless Customer and Citizen Digital Experience').\",\n      \"b_evidence_location\": \"Missing Page 2; Missing range from Page 23 to Page 40.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Tables present in the output, specifically the Budget Expenditures (Page 14), Budget Funding Sources (Page 15), Broadband by the Numbers (Page 19), and 911 Capabilities statistics (Page 21), were checked. They contain all the relevant data rows and values found in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The sections that are included in the output appear to preserve the full text of the corresponding sections in the PDF. Truncation within sections was not observed; the primary issue is the omission of entire pages and sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"A numerical error was found on Page 21. In the '911 Capabilities' section, the population number served by Next Generation 911 is missing a digit. The source PDF states '10,177,959', whereas the output JSON provides '10,77,959'. This changes the statistic significantly, altering the factual meaning of the report.\",\n      \"b_evidence_source\": \"99 percent (10,177,959) of the state’s population\",\n      \"b_evidence_output\": \"99 percent (10,77,959) of the state’s population\",\n      \"b_evidence_location\": \"Section '911 Capabilities', Page 21.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 2,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 51,\n    \"score\": 0.41\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output was reviewed for duplicated paragraphs or sections. While the document contains some repetitive language regarding the 'strategic plan' and goals (which are summarized on pages 16-17 and then detailed on subsequent pages), this repetition is present in the source PDF. No instances of conversion-induced duplication (e.g., a text block appearing twice where the source has it once) were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy in the 'Goals' section is inconsistent and fails to reflect the nesting of the source document. For example, 'Foster a connected North Carolina...' (PDF p. 18) is correctly assigned Level 2. However, its sub-section 'BROADBAND AND DIGITAL INCLUSION' is also assigned Level 2 instead of Level 3. Further, under 'ENHANCE PUBLIC SAFETY' (Level 2), the sub-heading '911 Capabilities' is correctly nested as Level 3, but the subsequent peer sub-heading 'Emerging Technologies' (PDF p. 22) is promoted back to Level 2. This creates a confusing and inaccurate structure for navigation.",
+        "b_evidence_source": "The section 'Emerging Technologies' on PDF page 22 is a sub-topic of 'ENHANCE PUBLIC SAFETY' (PDF page 21).",
+        "b_evidence_output": "The heading 'Emerging Technologies' is set to 'level': 2 (id: emerging-technologies), while its peer '911 Capabilities' is 'level': 3 (id: heading-34).",
+        "b_evidence_location": "sections[13].elements, indices 23 and 15",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Tables representing budget data (Expenditures and Funding Sources) correctly identify headers and data rows. The conversion of statistical sidebars (e.g., 'Broadband by the Numbers') into tables is a valid structural choice that preserves the logical relationship of the data.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the logical flow of the document, prioritizing main content and then integrating sidebars or feature boxes in a manner that makes sense for top-to-bottom reading. Multicolumn layouts (e.g., page 20) are serialized correctly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists throughout the document, including the key goals on pages 16-17 and the itemized responsibilities on page 4, are correctly identified and formatted as lists in the JSON.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Several active links in the source PDF are converted to plain text with underlining in the output, losing their clickable functionality. For example, the legal citation on page 4 and the session law reference on page 19 are rendered as formatted text but lack an 'href' property.",
+        "b_evidence_source": "The text 'N.C.G.S. 143B, Article 15' on page 4 is a blue clickable link.",
+        "b_evidence_output": "The text is rendered as plain text within a paragraph: 'text': 'N.C.G.S. 143B, Article 15', 'bold': false, 'italic': false, 'underline': true. There is no href element.",
+        "b_evidence_location": "sections[2].elements[6]",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output was reviewed for duplicated paragraphs or sections. While the document contains some repetitive language regarding the 'strategic plan' and goals (which are summarized on pages 16-17 and then detailed on subsequent pages), this repetition is present in the source PDF. No instances of conversion-induced duplication (e.g., a text block appearing twice where the source has it once) were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy in the 'Goals' section is inconsistent and fails to reflect the nesting of the source document. For example, 'Foster a connected North Carolina...' (PDF p. 18) is correctly assigned Level 2. However, its sub-section 'BROADBAND AND DIGITAL INCLUSION' is also assigned Level 2 instead of Level 3. Further, under 'ENHANCE PUBLIC SAFETY' (Level 2), the sub-heading '911 Capabilities' is correctly nested as Level 3, but the subsequent peer sub-heading 'Emerging Technologies' (PDF p. 22) is promoted back to Level 2. This creates a confusing and inaccurate structure for navigation.\",\n      \"b_evidence_source\": \"The section 'Emerging Technologies' on PDF page 22 is a sub-topic of 'ENHANCE PUBLIC SAFETY' (PDF page 21).\",\n      \"b_evidence_output\": \"The heading 'Emerging Technologies' is set to 'level': 2 (id: emerging-technologies), while its peer '911 Capabilities' is 'level': 3 (id: heading-34).\",\n      \"b_evidence_location\": \"sections[13].elements, indices 23 and 15\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Tables representing budget data (Expenditures and Funding Sources) correctly identify headers and data rows. The conversion of statistical sidebars (e.g., 'Broadband by the Numbers') into tables is a valid structural choice that preserves the logical relationship of the data.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the logical flow of the document, prioritizing main content and then integrating sidebars or feature boxes in a manner that makes sense for top-to-bottom reading. Multicolumn layouts (e.g., page 20) are serialized correctly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists throughout the document, including the key goals on pages 16-17 and the itemized responsibilities on page 4, are correctly identified and formatted as lists in the JSON.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Several active links in the source PDF are converted to plain text with underlining in the output, losing their clickable functionality. For example, the legal citation on page 4 and the session law reference on page 19 are rendered as formatted text but lack an 'href' property.\",\n      \"b_evidence_source\": \"The text 'N.C.G.S. 143B, Article 15' on page 4 is a blue clickable link.\",\n      \"b_evidence_output\": \"The text is rendered as plain text within a paragraph: 'text': 'N.C.G.S. 143B, Article 15', 'bold': false, 'italic': false, 'underline': true. There is no href element.\",\n      \"b_evidence_location\": \"sections[2].elements[6]\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output maintains the visual organization and flow of the original document. While it converts the multi-column and sidebar-heavy magazine layout of the PDF into a linear, responsive web format, the hierarchy of information remains consistent. Section headers, callout boxes (like 'Consolidated Agencies' and 'Broadband by the Numbers'), and feature articles are clearly delineated and appear in the correct sequence relative to the surrounding text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The document contains several data presentations. The pie charts from PDF pages 14 and 15 are appropriately converted into accessible HTML tables under the 'Budget Report' section. These tables have clear headers and row associations. Additionally, the sidebar statistics from page 19 are rendered as a clean two-column table. All tables are visually sound and easy to interpret.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF, including the cover art, executive headshots, group photos from award ceremonies, and complex diagrams (like the NC eLink and Health Information Exchange Authority governance structure), are present in the HTML output. The diagrams are rendered clearly. Purely decorative background elements and pixelated page borders are correctly omitted for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A thorough visual scan of the entire rendered HTML document confirms that no blocks of content, such as paragraphs, headers, tables, or images, are duplicated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output maintains the visual organization and flow of the original document. While it converts the multi-column and sidebar-heavy magazine layout of the PDF into a linear, responsive web format, the hierarchy of information remains consistent. Section headers, callout boxes (like 'Consolidated Agencies' and 'Broadband by the Numbers'), and feature articles are clearly delineated and appear in the correct sequence relative to the surrounding text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The document contains several data presentations. The pie charts from PDF pages 14 and 15 are appropriately converted into accessible HTML tables under the 'Budget Report' section. These tables have clear headers and row associations. Additionally, the sidebar statistics from page 19 are rendered as a clean two-column table. All tables are visually sound and easy to interpret.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF, including the cover art, executive headshots, group photos from award ceremonies, and complex diagrams (like the NC eLink and Health Information Exchange Authority governance structure), are present in the HTML output. The diagrams are rendered clearly. Purely decorative background elements and pixelated page borders are correctly omitted for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A thorough visual scan of the entire rendered HTML document confirms that no blocks of content, such as paragraphs, headers, tables, or images, are duplicated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

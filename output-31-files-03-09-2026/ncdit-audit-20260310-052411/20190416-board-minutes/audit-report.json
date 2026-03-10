@@ -1,0 +1,97 @@
+{
+  "document_id": "20190416-board-minutes",
+  "audited_at": "2026-03-10T05:26:42.432472Z",
+  "quality_score": 80,
+  "fidelity_composite": 0.7432,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "flag_for_review",
+  "reasoning": "While programmatic signals show high text recall, the LLM fidelity report identifies three major structural failures, specifically regarding the corruption of the agenda table. The output splits a single agenda into fragmented tables and plain text paragraphs, orphaning sub-items (4g, 4h) from their presenters and flattening complex financial data into unreadable strings. Given the moderate fidelity score (0.74) and the importance of structural integrity in government minutes, human review is required to restore the table's semantic relationship.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The agenda is presented as a table in the source document. The output splits this into two table objects (due to the page break) and a paragraph. Crucially, item 4's sub-points 'g)' and 'h)' are placed in a paragraph element (element index 9) between the two tables. This orphans these items from the table's 3-column structure, losing their association with the 'Presenter' column (Pokey Harris).",
+      "source_pdf_quote": "Item 4 contains sub-points a) through h), all associated with presenter 'Pokey Harris' in a 3-column table layout spanning pages 1 and 2.",
+      "output_quote": "The output places sub-points a-f in element 8 (table row) and sub-points g-h in element 9 (paragraph), breaking the table structure.",
+      "location": "Sections[0], element index 9"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output significantly alters the visual organization of the agenda items. In the source PDF, the agenda is a single, cohesive list from items 1 through 13. In the HTML, this is split into two separate tables ('Agenda Topics and Presenters' and 'Agenda Topics and Presenters Continued'). Crucially, sub-items 4g and 4h are placed as plain text between these two tables, losing their visual context as part of item 4. Additionally, the complex structure of item 4 (a-f), which contains aligned ",
+      "source_pdf_quote": "The source PDF shows a continuous list of agenda items (1-13) with item 4 sub-points (a-h) clearly organized beneath it. Item 4 sub-points a-f include financial figures aligned to the right of the topic text.",
+      "output_quote": "The HTML renders the agenda as two separate tables. Items 4g and 4h are rendered as plain text between the two tables, breaking the visual sequence. Sub-items 4a-4f are merged into a single text block within one table cell.",
+      "location": "Main agenda section, pages 1 and 2."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The rendering of the data in item 4 within the HTML table is visually broken. In the original document, the NG 911, CMRS, PSAP, and Grant funds are presented with sub-rows for 'Fund Balance' and 'Disbursement' (or 'Encumbered'), with currency values neatly aligned on the right. The HTML conversion flattens all of this structured data into a single continuous string of text within a single cell. This makes the financial data nearly impossible to parse visually, as the labels and values are run to",
+      "source_pdf_quote": "In the source PDF, Item 4b-e show financial data (Fund Balance, Disbursement) in a tabular format where labels are on the left and currency values are aligned on the right in distinct rows.",
+      "output_quote": "In the HTML, these financial lines are flattened into a single paragraph inside the 'Topic' cell for Item 4: 'November 2018 Fund Balance $27,867,858 November 2018 Disbursement -$15,088...'. All row and column visual structure is lost.",
+      "location": "First table under 'Agenda Topics and Presenters', row 4."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source contains several lists. While the top-level list (1-13) is rendered as table rows, the sub-list of names under item g) (i. Vicki Callicutt through v. Tracy Trogdon) is flattened into a single paragraph block using newline characters rather than being structured as a semantic list element.",
+      "source_pdf_quote": "g) Peer Reviewer Approvals... i. Vicki Callicutt ii. Megan Daub iii. Greg Dotson iv. Mark Reavis v. Tracy Trogdon",
+      "output_quote": "\"g) Peer Reviewer Approvals – Presented as Recommendation of Standards Committee\\ni. Vicki Callicutt\\nii. Megan Daub\\niii. Greg Dotson\\niv. Mark Reavis\\nv. Tracy Trogdon\\nh) Orthoimagery September, October, and November 2018 Reports\"",
+      "location": "Sections[0], element index 9"
+    }
+  ],
+  "action_items": [
+    "Re-unify the fragmented 'Agenda Topics' tables into a single cohesive table.",
+    "Re-associate items 4g and 4h with the correct table columns.",
+    "Format the financial data in item 4 to ensure labels and currency values are distinct and readable.",
+    "Convert flattened sub-lists into semantic <ul> or <ol> elements."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7432,
+      "text_match": 0.9816576086956521,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7985,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7432,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9724091520861373,
+      "shingling_precision": 0.9910836762688614,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 53971,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

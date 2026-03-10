@@ -1,0 +1,213 @@
+{
+  "document_id": "tables-screenshots-photos-background-colors-59df",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I carefully compared the text in the output JSON against the source PDF. The textual content present in the output, such as the introduction to the 911 environment, the goals and objectives, and the metadata, corresponds to the text found in the original document. No fabricated paragraphs or sentences were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "I verified the URLs provided in the footnotes of the JSON against the source PDF. For example, footnote 1 (Census Bureau URL) on page 9, footnote 3 (NC DIT URL) on page 11, and footnote 6 (911 Fund URL) on page 14 all match the source document exactly. No fabricated URLs or contact details were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output document contains an explicit omission tag: '33 sections omitted for token budget'. This has resulted in the loss of substantial portions of the document. Specifically, Sections 2.1 through 2.3 (covering the statutory framework, governance, and infrastructure on pages 10-20) and the entirety of Section 3 (Next Generation 911, pages 21-31) are missing. Furthermore, the county population tables in Appendix B (pages 46-48) and the standards reference charts in Appendix C (pages 49-50) are almost entirely absent.",
+        "b_evidence_source": "The source document includes sections 2.1 through 2.3 (pages 10-20), Section 3 (pages 21-31), and comprehensive data tables in Appendices B and C (pages 46-50).",
+        "b_evidence_output": "{\"_omitted\": \"33 sections omitted for token budget\"}",
+        "b_evidence_location": "Sections following 1.4 Methodology (index 7), and Appendix sections (index 50, 51)",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Several tables are either missing or severely truncated. Table 2 (Study Group members, page 8) and Table 3 (Population breakdown, page 9) are missing. The Appendix B table, which lists 100 counties, only contains the state total row in the output. The Appendix C table, which contains dozens of standards across several categories, only contains one data row in the output. These tables have far more than 20% of their rows missing.",
+        "b_evidence_source": "Appendix B (pages 46-48) contains estimates for all 100 North Carolina counties. Appendix C (pages 49-50) contains dozens of entries across categories like Security, VoIP, and Wellness.",
+        "b_evidence_output": "The tables for Appendix B and Appendix C in the output only contain one data row each.",
+        "b_evidence_location": "Appendix B (index 50) and Appendix C (index 51)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The document suffers from significant text omission within its sections due to the truncation of the Appendix tables. For instance, Appendix C is intended to be a comprehensive reference chart of NENA standards, but the output omits approximately 95% of this information, leaving only the first entry of the first category.",
+        "b_evidence_source": "Appendix C (pages 49-50) lists numerous documents under categories: DATA STRUCTURES, DATA MANAGEMENT, NG911 TRANSITION, SECURITY, VoIP, NG911, WIRELESS, and WELLNESS.",
+        "b_evidence_output": "Appendix C table contains only one document (NENA-STA-015.10-2018).",
+        "b_evidence_location": "Appendix C (index 51)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "I cross-referenced the remaining text snippets in the output with the source PDF. The information that was successfully converted appears to be accurate and preserves the original meaning. For example, population statistics and goal descriptions are consistent with the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5930232558139534,
+    "penalty_sum": 35,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I carefully compared the text in the output JSON against the source PDF. The textual content present in the output, such as the introduction to the 911 environment, the goals and objectives, and the metadata, corresponds to the text found in the original document. No fabricated paragraphs or sentences were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"I verified the URLs provided in the footnotes of the JSON against the source PDF. For example, footnote 1 (Census Bureau URL) on page 9, footnote 3 (NC DIT URL) on page 11, and footnote 6 (911 Fund URL) on page 14 all match the source document exactly. No fabricated URLs or contact details were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output document contains an explicit omission tag: '33 sections omitted for token budget'. This has resulted in the loss of substantial portions of the document. Specifically, Sections 2.1 through 2.3 (covering the statutory framework, governance, and infrastructure on pages 10-20) and the entirety of Section 3 (Next Generation 911, pages 21-31) are missing. Furthermore, the county population tables in Appendix B (pages 46-48) and the standards reference charts in Appendix C (pages 49-50) are almost entirely absent.\",\n      \"b_evidence_source\": \"The source document includes sections 2.1 through 2.3 (pages 10-20), Section 3 (pages 21-31), and comprehensive data tables in Appendices B and C (pages 46-50).\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"33 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"Sections following 1.4 Methodology (index 7), and Appendix sections (index 50, 51)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Several tables are either missing or severely truncated. Table 2 (Study Group members, page 8) and Table 3 (Population breakdown, page 9) are missing. The Appendix B table, which lists 100 counties, only contains the state total row in the output. The Appendix C table, which contains dozens of standards across several categories, only contains one data row in the output. These tables have far more than 20% of their rows missing.\",\n      \"b_evidence_source\": \"Appendix B (pages 46-48) contains estimates for all 100 North Carolina counties. Appendix C (pages 49-50) contains dozens of entries across categories like Security, VoIP, and Wellness.\",\n      \"b_evidence_output\": \"The tables for Appendix B and Appendix C in the output only contain one data row each.\",\n      \"b_evidence_location\": \"Appendix B (index 50) and Appendix C (index 51)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The document suffers from significant text omission within its sections due to the truncation of the Appendix tables. For instance, Appendix C is intended to be a comprehensive reference chart of NENA standards, but the output omits approximately 95% of this information, leaving only the first entry of the first category.\",\n      \"b_evidence_source\": \"Appendix C (pages 49-50) lists numerous documents under categories: DATA STRUCTURES, DATA MANAGEMENT, NG911 TRANSITION, SECURITY, VoIP, NG911, WIRELESS, and WELLNESS.\",\n      \"b_evidence_output\": \"Appendix C table contains only one document (NENA-STA-015.10-2018).\",\n      \"b_evidence_location\": \"Appendix C (index 51)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"I cross-referenced the remaining text snippets in the output with the source PDF. The information that was successfully converted appears to be accurate and preserves the original meaning. For example, population statistics and goal descriptions are consistent with the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 35,\n    \"score\": 0.5930232558139535\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the content of the JSON output against the source PDF. No text blocks or sections were found to be duplicated incorrectly. The repetition of the Goals 1-10 in the Executive Summary and then later in detailed tables is consistent with the source document's structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document title elements are assigned H2, which is acceptable normalization. Main sections like 'Executive Summary', 'Introduction', 'Methodology', and the individual 'GOAL' sections are treated as primary section titles. Sub-sections within the Table of Contents are correctly nested. No skips in hierarchy (e.g., H1 to H3) are observed in the provided segments.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The tables captured in the JSON (Table 1, Table 4, Goal Tables, and Appendix Tables) accurately reflect the column counts and organizational structure of the source. Specifically, the complex multi-row/multi-column headers in Appendix B (Population Estimate table on page 46) are correctly preserved using appropriate rowspans and colspans.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The flow of the document in the JSON output follows the sequential order of the PDF pages. The Table of Contents is placed before the Executive Summary content, and sections follow the logical progression from introduction to appendices as intended by the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are correctly identified and structured. The Table of Contents is converted into a nested unordered list that mirrors the indentation and sub-section structure seen in the PDF. Bulleted lists within the Executive Summary and footnotes are also correctly preserved as list elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "URLs present in the source footnotes (e.g., census.gov, it.nc.gov) are correctly extracted and preserved in the text of the footnote elements in the JSON. No broken or fabricated links were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the content of the JSON output against the source PDF. No text blocks or sections were found to be duplicated incorrectly. The repetition of the Goals 1-10 in the Executive Summary and then later in detailed tables is consistent with the source document's structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document title elements are assigned H2, which is acceptable normalization. Main sections like 'Executive Summary', 'Introduction', 'Methodology', and the individual 'GOAL' sections are treated as primary section titles. Sub-sections within the Table of Contents are correctly nested. No skips in hierarchy (e.g., H1 to H3) are observed in the provided segments.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The tables captured in the JSON (Table 1, Table 4, Goal Tables, and Appendix Tables) accurately reflect the column counts and organizational structure of the source. Specifically, the complex multi-row/multi-column headers in Appendix B (Population Estimate table on page 46) are correctly preserved using appropriate rowspans and colspans.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The flow of the document in the JSON output follows the sequential order of the PDF pages. The Table of Contents is placed before the Executive Summary content, and sections follow the logical progression from introduction to appendices as intended by the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are correctly identified and structured. The Table of Contents is converted into a nested unordered list that mirrors the indentation and sub-section structure seen in the PDF. Bulleted lists within the Executive Summary and footnotes are also correctly preserved as list elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"URLs present in the source footnotes (e.g., census.gov, it.nc.gov) are correctly extracted and preserved in the text of the footnote elements in the JSON. No broken or fabricated links were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output maintains the visual organization of the source PDF. The document structure, including the cover page, table of contents, executive summary, and detailed sections with tables, follows the same linear flow. While the font styling and specific spacing differ as expected for an HTML conversion, the placement of information and its hierarchy are preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables throughout the document, specifically the 'Study Group' table (PDF page 8), 'Population Breakdown' (PDF page 9), financial spreadsheets (PDF pages 31-32), and the ten 'Goal' tables (PDF pages 34-43), are rendered correctly in the HTML. They retain their row/column structure, bordered cells, and distinct headers, ensuring the data remains readable and understandable for a sighted user.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present in the HTML output. This includes the North Carolina flag and the Ritter Strategic Services logo on the cover page, as well as the 'Simplified NENA i3 NG911 Conceptual System Diagram' found on PDF page 24. No broken image icons or missing visual assets were observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A visual inspection of the rendered HTML confirms that there are no duplicated content blocks. Each section, paragraph, and table appears only once, matching the source PDF's content flow.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output maintains the visual organization of the source PDF. The document structure, including the cover page, table of contents, executive summary, and detailed sections with tables, follows the same linear flow. While the font styling and specific spacing differ as expected for an HTML conversion, the placement of information and its hierarchy are preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables throughout the document, specifically the 'Study Group' table (PDF page 8), 'Population Breakdown' (PDF page 9), financial spreadsheets (PDF pages 31-32), and the ten 'Goal' tables (PDF pages 34-43), are rendered correctly in the HTML. They retain their row/column structure, bordered cells, and distinct headers, ensuring the data remains readable and understandable for a sighted user.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present in the HTML output. This includes the North Carolina flag and the Ritter Strategic Services logo on the cover page, as well as the 'Simplified NENA i3 NG911 Conceptual System Diagram' found on PDF page 24. No broken image icons or missing visual assets were observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A visual inspection of the rendered HTML confirms that there are no duplicated content blocks. Each section, paragraph, and table appears only once, matching the source PDF's content flow.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

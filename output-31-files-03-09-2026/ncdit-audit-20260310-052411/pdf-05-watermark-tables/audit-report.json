@@ -1,0 +1,88 @@
+{
+  "document_id": "pdf-05-watermark-tables",
+  "audited_at": "2026-03-10T05:33:13.027707Z",
+  "quality_score": 83,
+  "fidelity_composite": 0.8307,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "flag_for_review",
+  "reasoning": "The document exhibits significant structural and visual failures that preclude auto-approval. Specifically, the conversion of complex tables into lists merges distinct data columns, and several critical technical network diagrams are entirely missing from the output. While text recall is high, the loss of technical visual content and tabular relationships represents a significant fidelity gap.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "There are several structural issues with table conversion. First, the 'Topic Presenter' table on Page 1 is converted into an ordered list, which merges the data from the 'Topic' and 'Presenter' columns into single strings (e.g., 'Welcome Bo Ferguson'), losing the original tabular relationship. Second, the Attendance table on Page 6 is split into two separate tables in the output ('Attendance' and 'Guests Continuation'), whereas it is a single continuous table in the source. Third, the header row",
+      "source_pdf_quote": "Topic | Presenter (Page 1 table structure); Attendance table spanning pages 6 and 7.",
+      "output_quote": "The Page 1 table is rendered as an ordered list (index 13); the Page 6 table is split into two separate JSON table elements (indices 23 and 24); the first header cell of the Attendance table is 'Members' (index 23).",
+      "location": "Sections 'Technology Committee Meeting Agenda' and '2_9_2023 Technology Committee Minutes Draft', pages 1, 6, and 7."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful technical diagrams and infographics present in the source PDF are missing from the HTML output. Specifically, the 'Legacy Admin' vs 'SIP Admin' comparison diagrams on page 12, the 'Enabling SIP for enhanced 911 capabilities' infographic on page 14, the 'Design Drawing' network map on page 18, and the 'SIP Admin' diagram on page 21 are all absent. While the logos and the PSAP deployment bar chart (page 3) are present, the loss of these technical diagrams constitutes a significa",
+      "source_pdf_quote": "In the source PDF, pages 12, 14, 18, and 21 contain critical technical network diagrams and infographics (e.g., 'Design Drawing' network map on p. 18).",
+      "output_quote": "The HTML output shows text headings for these sections (e.g., 'Design Drawing', 'SIP Admin') but the actual images/diagrams are missing from the rendered content.",
+      "location": "Sections 'Legacy Admin line design' (p. 12), 'Enabling SIP...' (p. 14), 'Design Drawing' (p. 18), and 'SIP Admin' (p. 21)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output document fails to identify and convert URLs found in the text into functional link elements. For example, the arcgis.com URL on Page 4 is present as plain text but is not a clickable link object in the JSON structure.",
+      "source_pdf_quote": "NC NextGen911 Days Since Last Upload Dashboard (arcgis.com)",
+      "output_quote": "The text exists but there is no corresponding link object in the elements list for that section.",
+      "location": "Section 'Current Status of PSAP deployments', Page 4"
+    }
+  ],
+  "action_items": [
+    "Restore the tabular structure for the 'Topic Presenter' and 'Attendance' tables.",
+    "Manually capture and insert the missing technical diagrams from the source PDF.",
+    "Verify and convert all plain-text URLs to functional link elements for accessibility."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8307,
+      "text_match": 0.9573648079007587,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8319,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8307,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9318874560375147,
+      "shingling_precision": 0.984274393263992,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.94,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 78599,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "document_id": "pdf-06-powerpoint-slides",
+  "composite_score": 0.5,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the source PDF, which is a slide deck, is significantly compromised in the HTML conversion because complex visual layouts are collapsed into linear text without the supporting images. Specifically, page 17 of the source contains a sophisticated arrangement of maps and captions (e.g., NDVI Change Detection, Flood Maps, Night Lights) where the spatial placement is key to understanding. In the HTML, this layout is destroyed, leaving the text floating without its visual context.",
+        "b_evidence_source": "Page 17 shows a complex layout of 7+ map images with specific descriptive captions placed relative to those images (e.g., 'NDVI Change Detection' captions placed under specific red/yellow maps).",
+        "b_evidence_output": "The HTML renders the captions as a list of text without the corresponding images, breaking the visual flow and meaning of the disaster program application section.",
+        "b_evidence_location": "Applying Science: NASA Disasters Program (page 17)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "There are no formal tables in the source PDF document. The HTML output includes a generic table structure under the 'Resources' section ('Column 1', 'Column 2', 'Column 3') that does not correspond to any table in the source, but no existing tables from the source were misrendered because none existed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The conversion has failed to render almost all meaningful images from the source document. The HTML output contains large green placeholder blocks where images should be. Essential visual content such as the 'Earth Fleet' mission graphic (page 2), the thematic Earth science category images (page 4), and all satellite imagery maps related to Hurricane Helene (page 17) are missing. These images are not decorative; they are the primary content of the presentation.",
+        "b_evidence_source": "Page 2 contains the 'EARTH FLEET' mission infographic and a satellite photo of a river delta. Page 17 contains numerous satellite maps (NDVI, Flood, Night Lights).",
+        "b_evidence_output": "The HTML screenshot shows large green blocks in place of these images, and the meaningful diagrams/maps are absent from the rendering.",
+        "b_evidence_location": "Throughout the document, specifically pages 2, 4, 5, and 17.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The source PDF intentionally repeats the 'Discovery & Access Methods' overview slide (pages 5, 9, 13) as a structural element of the presentation. This content is correctly reflected in the HTML without any additional accidental duplication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the source PDF, which is a slide deck, is significantly compromised in the HTML conversion because complex visual layouts are collapsed into linear text without the supporting images. Specifically, page 17 of the source contains a sophisticated arrangement of maps and captions (e.g., NDVI Change Detection, Flood Maps, Night Lights) where the spatial placement is key to understanding. In the HTML, this layout is destroyed, leaving the text floating without its visual context.\",\n      \"b_evidence_source\": \"Page 17 shows a complex layout of 7+ map images with specific descriptive captions placed relative to those images (e.g., 'NDVI Change Detection' captions placed under specific red/yellow maps).\",\n      \"b_evidence_output\": \"The HTML renders the captions as a list of text without the corresponding images, breaking the visual flow and meaning of the disaster program application section.\",\n      \"b_evidence_location\": \"Applying Science: NASA Disasters Program (page 17)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"There are no formal tables in the source PDF document. The HTML output includes a generic table structure under the 'Resources' section ('Column 1', 'Column 2', 'Column 3') that does not correspond to any table in the source, but no existing tables from the source were misrendered because none existed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The conversion has failed to render almost all meaningful images from the source document. The HTML output contains large green placeholder blocks where images should be. Essential visual content such as the 'Earth Fleet' mission graphic (page 2), the thematic Earth science category images (page 4), and all satellite imagery maps related to Hurricane Helene (page 17) are missing. These images are not decorative; they are the primary content of the presentation.\",\n      \"b_evidence_source\": \"Page 2 contains the 'EARTH FLEET' mission infographic and a satellite photo of a river delta. Page 17 contains numerous satellite maps (NDVI, Flood, Night Lights).\",\n      \"b_evidence_output\": \"The HTML screenshot shows large green blocks in place of these images, and the meaningful diagrams/maps are absent from the rendering.\",\n      \"b_evidence_location\": \"Throughout the document, specifically pages 2, 4, 5, and 17.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The source PDF intentionally repeats the 'Discovery & Access Methods' overview slide (pages 5, 9, 13) as a structural element of the presentation. This content is correctly reflected in the HTML without any additional accidental duplication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 0,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}
