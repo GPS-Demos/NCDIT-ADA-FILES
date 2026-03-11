@@ -1,0 +1,102 @@
+{
+  "document_id": "911-education-committee-meeting-agenda-packet-03-25-2021-685f9fa9",
+  "audited_at": "2026-03-10T22:06:35.317479Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The conversion results are missing approximately the first 12.5 pages of the source document. Specifically, the Agenda (p. 1), Minutes (pp. 2-5), FCC NPRM Background (pp. 6-7), FCC Fact Sheet (p. 8), and the first seven paragraphs of the FCC NPRM (pp. 9-12) are entirely absent from the output. This represents a critical loss of content (roughly 27% of the document).",
+      "source_pdf_quote": "Content from pages 1 through the middle of page 13.",
+      "output_quote": "The JSON starts at index 0 with text from the end of paragraph 8 on page 13: 'to Congress on 911 fees].\"' and contains a placeholder section at index 20 indicating 'Pages 1-13 unavailable'.",
+      "location": "Metadata/Section 1 & 20"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "Multiple tables in the financial/contractual sections are significantly truncated. In Section 18 (KOMO Contract), the output only captures the first line item (N 1) while omitting items N 2, N 3, and N 4. In Section 19 (KXLY Invoice), the output begins at Line 3, omitting Line 1 and Line 2 entirely. This loss of data is greater than 20% for these specific tables.",
+      "source_pdf_quote": "Page 43 (KOMO): Items N 2, N 3, N 4. Page 45 (KXLY): Items 1 and 2.",
+      "output_quote": "Section 18 only shows 'N 1'. Section 19 begins text with 'Line 3'.",
+      "location": "Sections 18 and 19"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "A major structural failure occurs in Section 18 ('CONTRACT'). The line item table from PDF page 43, which contains 13 distinct columns (Line, Ch, Start Date, End Date, etc.), is collapsed into a 2-column structure in the JSON table 'KOMO spots and rates'. This merging combines unrelated data fields into single cells (e.g., 'N 1 KOMO10/12/20 11/'), rendering the tabular data unintelligible.",
+      "source_pdf_quote": "The line item table on PDF page 43 contains 13 columns: *Line, Ch, Start Date, End Date, Description, Start/End Time, Days, Length, Spots/Week, Rate, Type, Spots, Amount.",
+      "output_quote": "The JSON table 'KOMO spots and rates' has only 2 columns. Header 1: 'N 1 KOMO10/12/20 11/'. Header 2: '3 $4,500.00'.",
+      "location": "Section 18, element 3 (index 2)"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially compromised. PDF pages 1 through 12, which include the meeting agenda, minutes, and the first four pages of the main FCC document, are missing from the start of the output. These pages are moved to the very end of the JSON as a placeholder section (Section 20) with an error message. The main content of the JSON starts mid-sentence on PDF page 12/13, disrupting the intended logical flow of the combined documents.",
+      "source_pdf_quote": "The document should begin with the 'Education Committee Meeting Agenda' on PDF page 1.",
+      "output_quote": "The JSON content begins with Section 1 at the end of paragraph 8 of the FCC document (PDF page 13). PDF pages 1-12 are relegated to Section 20 at the end.",
+      "location": "Section 1 and Section 20"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images are missing from the HTML output. Specifically, the 'NC DIT 911 Board' logo found in the header of the source (pages 1-2) is absent. More critically, the two large, complex diagrams on source page 38—'NC 911 Board NG9-1-1 Migration Process' and 'NG9-1-1 Call Handling Solution Architecture'—are completely missing. The headings for these diagrams appear in the HTML, but there is no content or image rendered beneath them. These diagrams provide essential technical informat",
+      "source_pdf_quote": "The source PDF on page 38 contains two meaningful diagrams: 'NC 911 Board NG9-1-1 Migration Process' and 'NG9-1-1 Call Handling Solution Architecture'. Page 1 also contains the NC DIT logo.",
+      "output_quote": "The HTML screenshot shows the headings for these sections ('NC 911 Board NG9-1-1 Migration Process' and 'NG9-1-1 Call Handling Solution Architecture'), but no content or images are rendered below them. The agency logo is also missing from the document top.",
+      "location": "Page 1 (header), Page 38 (diagrams)"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.7665058356628982,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5231,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6426254199976827,
+      "shingling_precision": 0.9786501985002205,
+      "duplication_ratio": 0.014105771719437495,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 79006,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

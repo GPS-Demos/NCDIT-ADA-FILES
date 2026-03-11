@@ -1,0 +1,213 @@
+{
+  "document_id": "create-beautiful-sharepoint-sites-685fb98c",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I reviewed each section of the JSON output against the provided OCR and images of the 21 slides. The text in the output, including headings, list items, and paragraphs, has a direct basis in the source document. For instance, the text 'Deliver on the promise for your links' on page 9 and the page numbers (17, 18, 19) appear in the source. Although there is redundant structure on page 21 (text appears as both a paragraph and a list item), the information itself is present in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "I verified all URLs mentioned in the output against the source document. The URL 'https://lookbook.microsoft.com' appears multiple times in the source (e.g., slides 15-19) and is correctly captured. However, in the 'Thank you' section corresponding to slide 21, the output includes a hyperlink 'https://copilot.microsoft.com/' for the text 'Microsoft Copilot'. This URL does not appear anywhere in the source PDF. Per the instructions, even one mismatch or non-existent URL constitutes a critical failure.",
+        "b_evidence_source": "Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot",
+        "b_evidence_output": "{\"href\": \"https://copilot.microsoft.com/\", \"text\": \"Microsoft Copilot\", ...}",
+        "b_evidence_location": "Section 'Thank you', page 21, element index 0",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source document consists of 21 slides. The JSON output contains 21 sections (labeled by reading_order 1 to 21), each corresponding to one slide of the source. No pages or major sections were omitted.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Neither the source document nor the converted JSON output contains any tables.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "I compared the content of each JSON section with its corresponding slide. The lists on slides 16, 17, 18, and 19 match the source exactly in terms of items provided. Key descriptive text and best practice points from slides 2-14 are all present in the output. There are no significant omissions of text within any section.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The output text faithfully follows the source OCR. Minor differences are limited to expected reformatting for structure (e.g., converting bulleted text into JSON list items). No wording changes that alter meaning were observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I reviewed each section of the JSON output against the provided OCR and images of the 21 slides. The text in the output, including headings, list items, and paragraphs, has a direct basis in the source document. For instance, the text 'Deliver on the promise for your links' on page 9 and the page numbers (17, 18, 19) appear in the source. Although there is redundant structure on page 21 (text appears as both a paragraph and a list item), the information itself is present in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"I verified all URLs mentioned in the output against the source document. The URL 'https://lookbook.microsoft.com' appears multiple times in the source (e.g., slides 15-19) and is correctly captured. However, in the 'Thank you' section corresponding to slide 21, the output includes a hyperlink 'https://copilot.microsoft.com/' for the text 'Microsoft Copilot'. This URL does not appear anywhere in the source PDF. Per the instructions, even one mismatch or non-existent URL constitutes a critical failure.\",\n      \"b_evidence_source\": \"Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot\",\n      \"b_evidence_output\": \"{\\\"href\\\": \\\"https://copilot.microsoft.com/\\\", \\\"text\\\": \\\"Microsoft Copilot\\\", ...}\",\n      \"b_evidence_location\": \"Section 'Thank you', page 21, element index 0\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source document consists of 21 slides. The JSON output contains 21 sections (labeled by reading_order 1 to 21), each corresponding to one slide of the source. No pages or major sections were omitted.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Neither the source document nor the converted JSON output contains any tables.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"I compared the content of each JSON section with its corresponding slide. The lists on slides 16, 17, 18, and 19 match the source exactly in terms of items provided. Key descriptive text and best practice points from slides 2-14 are all present in the output. There are no significant omissions of text within any section.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The output text faithfully follows the source OCR. Minor differences are limited to expected reformatting for structure (e.g., converting bulleted text into JSON list items). No wording changes that alter meaning were observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "On page 21, the 'Thank you' slide text regarding Microsoft Copilot is duplicated in the output. The text 'Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot' is first rendered as a paragraph (with an injected link) and then immediately repeated as an unordered list item. In the source document, this statement appears only once.",
+        "b_evidence_source": "Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot",
+        "b_evidence_output": "The text is repeated twice in the elements of the 'Thank you' section: first as a paragraph and then as a list item.",
+        "b_evidence_location": "Section 'Thank you', Page 21",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved and logically organized. Section titles are treated as the primary structural headers (H1 level), and where internal slide content used bulleted titles (like on pages 12-15 and 20), these have been normalized to H2 'heading' elements. This provides a consistent and accessible navigation structure without skipping levels.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "There are no tables present in either the source document or the converted output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the output correctly follows the sequence of slides in the presentation and the logical flow of content within each slide (Title, Image, List/Body).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "On multiple pages (specifically 2, 3, 6, 7, 8, 10, and 11), the structural integrity of bulleted lists is lost. In the source, these are single lists with multiple items. In the output, each bullet point is treated as a separate one-item list, with the associated descriptive paragraph placed between them. This breaks the semantic connection of the items as a unified list.",
+        "b_evidence_source": "Page 2 'Overview' contains a 4-item list.",
+        "b_evidence_output": "Section 'Overview' contains 4 separate 'list' objects each with one item, interleaved with paragraphs.",
+        "b_evidence_location": "Section 'Overview', Page 2 (and others cited)",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There are several link-related issues. First, the URLs provided on pages 15 through 19 (e.g., lookbook.microsoft.com) are rendered as plain text paragraphs without the necessary `href` metadata, even though they are clearly intended as links in the source. Second, on page 21, a functional link to 'https://copilot.microsoft.com/' has been injected into the text 'Microsoft Copilot', which is only formatted as underlined text in the source and does not have an associated URL.",
+        "b_evidence_source": "https://lookbook.microsoft.com (Page 15); Microsoft Copilot (Page 21)",
+        "b_evidence_output": "Missing href for lookbook URL; Fabricated href 'https://copilot.microsoft.com/' added to Page 21.",
+        "b_evidence_location": "Pages 15-19, and Page 21",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6818181818181819,
+    "penalty_sum": 7,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"On page 21, the 'Thank you' slide text regarding Microsoft Copilot is duplicated in the output. The text 'Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot' is first rendered as a paragraph (with an injected link) and then immediately repeated as an unordered list item. In the source document, this statement appears only once.\",\n      \"b_evidence_source\": \"Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot\",\n      \"b_evidence_output\": \"The text is repeated twice in the elements of the 'Thank you' section: first as a paragraph and then as a list item.\",\n      \"b_evidence_location\": \"Section 'Thank you', Page 21\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved and logically organized. Section titles are treated as the primary structural headers (H1 level), and where internal slide content used bulleted titles (like on pages 12-15 and 20), these have been normalized to H2 'heading' elements. This provides a consistent and accessible navigation structure without skipping levels.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"There are no tables present in either the source document or the converted output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the output correctly follows the sequence of slides in the presentation and the logical flow of content within each slide (Title, Image, List/Body).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"On multiple pages (specifically 2, 3, 6, 7, 8, 10, and 11), the structural integrity of bulleted lists is lost. In the source, these are single lists with multiple items. In the output, each bullet point is treated as a separate one-item list, with the associated descriptive paragraph placed between them. This breaks the semantic connection of the items as a unified list.\",\n      \"b_evidence_source\": \"Page 2 'Overview' contains a 4-item list.\",\n      \"b_evidence_output\": \"Section 'Overview' contains 4 separate 'list' objects each with one item, interleaved with paragraphs.\",\n      \"b_evidence_location\": \"Section 'Overview', Page 2 (and others cited)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There are several link-related issues. First, the URLs provided on pages 15 through 19 (e.g., lookbook.microsoft.com) are rendered as plain text paragraphs without the necessary `href` metadata, even though they are clearly intended as links in the source. Second, on page 21, a functional link to 'https://copilot.microsoft.com/' has been injected into the text 'Microsoft Copilot', which is only formatted as underlined text in the source and does not have an associated URL.\",\n      \"b_evidence_source\": \"https://lookbook.microsoft.com (Page 15); Microsoft Copilot (Page 21)\",\n      \"b_evidence_output\": \"Missing href for lookbook URL; Fabricated href 'https://copilot.microsoft.com/' added to Page 21.\",\n      \"b_evidence_location\": \"Pages 15-19, and Page 21\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 2,\n    \"penalty_sum\": 7,\n    \"score\": 0.6818181818181818\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully converts the slide-based PDF into a single-column web layout. Headers, bullet points, and text blocks are generally placed in an order that respects the logical flow of the original document. Responsive adjustments (like stacking side-by-side content) are acceptable differences.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source document contains no tables to evaluate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful images are missing from the HTML output, represented by large green placeholder boxes. Specifically, the technical diagram on page 5 and the full-page screenshots of example SharePoint sites on pages 16, 18, and 19 are missing. These images are core to the content of the presentation, which focuses on showcasing 'beautiful intranet' examples.",
+        "b_evidence_source": "Page 5 shows a diagram of Microsoft 365 app icons around a central logo; Pages 16, 18, and 19 show full-page screenshots of SharePoint intranet sites ('The Perspective', 'The Landing', 'Engineering Onboarding').",
+        "b_evidence_output": "The corresponding areas in the HTML show large green rectangular placeholder boxes instead of the images.",
+        "b_evidence_location": "Sections 'Integrated with Microsoft 365', 'The Perspective', 'The Landing', and 'Engineering Onboarding'.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The final statement of the presentation is visually duplicated in the HTML output. The text 'Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot' appears twice in immediate succession at the end of the document.",
+        "b_evidence_source": "Page 21 contains a single bullet point: 'Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot'",
+        "b_evidence_output": "The HTML body renders this sentence twice in a row: 'Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot' followed by '- Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot'",
+        "b_evidence_location": "Section 'Thank you' at the end of the document.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully converts the slide-based PDF into a single-column web layout. Headers, bullet points, and text blocks are generally placed in an order that respects the logical flow of the original document. Responsive adjustments (like stacking side-by-side content) are acceptable differences.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source document contains no tables to evaluate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful images are missing from the HTML output, represented by large green placeholder boxes. Specifically, the technical diagram on page 5 and the full-page screenshots of example SharePoint sites on pages 16, 18, and 19 are missing. These images are core to the content of the presentation, which focuses on showcasing 'beautiful intranet' examples.\",\n      \"b_evidence_source\": \"Page 5 shows a diagram of Microsoft 365 app icons around a central logo; Pages 16, 18, and 19 show full-page screenshots of SharePoint intranet sites ('The Perspective', 'The Landing', 'Engineering Onboarding').\",\n      \"b_evidence_output\": \"The corresponding areas in the HTML show large green rectangular placeholder boxes instead of the images.\",\n      \"b_evidence_location\": \"Sections 'Integrated with Microsoft 365', 'The Perspective', 'The Landing', and 'Engineering Onboarding'.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The final statement of the presentation is visually duplicated in the HTML output. The text 'Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot' appears twice in immediate succession at the end of the document.\",\n      \"b_evidence_source\": \"Page 21 contains a single bullet point: 'Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot'\",\n      \"b_evidence_output\": \"The HTML body renders this sentence twice in a row: 'Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot' followed by '- Most images you saw in this presentation, with the exception of the screen captures, were created by Microsoft Copilot'\",\n      \"b_evidence_location\": \"Section 'Thank you' at the end of the document.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 6,
+  "total_critical": 1,
+  "total_major": 3,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

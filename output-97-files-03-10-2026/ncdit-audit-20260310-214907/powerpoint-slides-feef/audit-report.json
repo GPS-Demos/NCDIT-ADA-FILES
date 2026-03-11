@@ -1,0 +1,113 @@
+{
+  "document_id": "powerpoint-slides-feef",
+  "audited_at": "2026-03-10T22:29:39.854410Z",
+  "quality_score": 75,
+  "fidelity_composite": 0.6547,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document contains significant content omissions on Page 15, where more than 50% of the text and a major structural block are missing. Furthermore, the loss of link functionality on pages 22-25 and instances of content duplication on page 11 represent major fidelity failures that the programmatic shingling scores failed to capture. Given the high cost of auto-approving a defective document, human remediation is required.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "On Page 15, 'Accessible links', a significant text box is missing from the output. The source includes a box containing the heading 'No one-size-fits-all', a paragraph regarding Microsoft's commitment to accessibility ('We believe accessibility needs to be a priority...'), and a link 'Learn more about accessibility at Microsoft'. None of this content appears in the output section, representing an omission of more than 50% of the text on that page. Additionally, several illustrative screenshots o",
+      "source_pdf_quote": "The text box on Page 15 contains: 'No one-size-fits-all', 'We believe accessibility needs to be a priority that drives transformative change. As we navigate the promise of AI to fuel accessibility innovation, we’re committed to advancing accessibility as a fundamental right.', and 'Learn more about accessibility at Microsoft'.",
+      "output_quote": "The output for section 15 ('Accessible links') only contains the two bullet points: 'Describe the link destination clearly' and 'Avoid generic phrases like “click here”'.",
+      "location": "Section 'Accessible links', Page 15"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "In the section 'Alt text' (corresponding to page 11 of the source), the 'Bonus Tip' paragraph and the associated image/alt text are duplicated in the output. The source document contains the tip 'Bonus Tip: This also applies to images in email, Word, PowerPoint, PDF, and other documents.' only once at the bottom right. The output lists this paragraph twice (elements at index 5 and 7 in that section) and provides a second image placeholder (index 6) with similar alt text.",
+      "source_pdf_quote": "Bonus Tip: This also applies to images in email, Word, PowerPoint, PDF, and other documents.",
+      "output_quote": "The text 'Bonus Tip: This also applies to images in email, Word, PowerPoint, PDF, and other documents.' appears twice in the 'Alt text' section (elements 5 and 7).",
+      "location": "Section 'Alt text', Page 11, element indices 5, 6, 7"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "On page 15 ('Accessible links'), the document organization is significantly compromised because a major structural block is missing. The source contains a text box on the right titled 'No one-size-fits-all' which includes a paragraph and a link. This callout is completely absent from the output, which only captures the two bullet points on the left. This omission materially alters the intended organization of the page.",
+      "source_pdf_quote": "The callout box on the right side of Page 15: 'No one-size-fits-all... We believe accessibility needs to be a priority... Learn more about accessibility at Microsoft'.",
+      "output_quote": "The output section 'Accessible links' terminates after the second paragraph ('Avoid generic phrases...'), omitting the 'No one-size-fits-all' content block.",
+      "location": "Section 'Accessible links', Page 15"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images that illustrate core concepts are missing from the HTML output. Specifically, the screenshot of a TED talk showing captions (source page 13), the three Teams status icons showing accessibility symbols (source page 14), and the illustrative example block for accessible links (source page 15) are all absent from the rendered HTML. These omissions degrade the informational value of their respective sections.",
+      "source_pdf_quote": "Source PDF Page 13 shows a TED talk video screenshot; Page 14 shows three Teams status icons; Page 15 shows a 'No one-size-fits-all' example block.",
+      "output_quote": "The HTML rendering for sections 'Captions and transcripts', 'Convey information', and 'Accessible links' is missing these illustrative images/blocks, showing only the surrounding text.",
+      "location": "Sections: Captions and transcripts (page 13), Convey information (page 14), Accessible links (page 15)"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "A significant instance of content duplication occurs in the body of the rendered HTML. In the 'Alt text' section, the 'Bonus Tip' sentence is repeated twice consecutively. This is not a case of navigational duplication (like a heading appearing in both TOC and body), but actual body text appearing twice in the same content block.",
+      "source_pdf_quote": "Bonus Tip: This also applies to images in email, Word, PowerPoint, PDF, and other documents.",
+      "output_quote": "The sentence 'Bonus Tip: This also applies to images in email, Word, PowerPoint, PDF, and other documents.' is rendered twice, one after the other.",
+      "location": "Alt text section, element following the 'Everything you need to know...' link (Page 11)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "A significant number of links visible in the source document are missing their URL functionality in the output. On pages 22 through 25, which consist of lists of links, the output renders the text and marks it as underlined, but fails to include the 'href' property in the JSON. Additionally, prominent URLs like 'aka.ms/askMA' on page 20 are rendered as plain text rather than clickable link objects.",
+      "source_pdf_quote": "Links on Pages 22-25 (e.g., 'Accessibility features for Windows', 'Accessibility tools for Word') and Page 20 (e.g., 'aka.ms/askMA').",
+      "output_quote": "The corresponding JSON elements (e.g., in Section 'Productivity Tools Links') contain text spans without 'href' attributes.",
+      "location": "Pages 20, 22, 23, 24, 25"
+    }
+  ],
+  "action_items": [
+    "Restore missing text box and links on Page 15",
+    "Remove duplicated paragraph and image elements on Page 11",
+    "Manually add missing URL functionality (href attributes) to the link lists on pages 22-25",
+    "Insert missing illustrative images/screenshots on pages 13, 14, and 15"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6547,
+      "text_match": 0.9493132766514062,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7519,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6547,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.956507413509061,
+      "shingling_precision": 0.9422265498214866,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 126008,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

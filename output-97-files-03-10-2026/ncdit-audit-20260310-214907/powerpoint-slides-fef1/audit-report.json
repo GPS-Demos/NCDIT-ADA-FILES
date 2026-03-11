@@ -1,0 +1,118 @@
+{
+  "document_id": "powerpoint-slides-fef1",
+  "audited_at": "2026-03-10T22:30:27.347345Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.4545454545454546,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated paragraphs or sentences",
+      "severity": "critical",
+      "analysis": "The output contains several section headings that do not exist in the source PDF. These include 'Prompting Overview' (reading_order 8), 'About Copilot in Outlook' (reading_order 11), 'Follow Along - Copilot Chat - Optional' (reading_order 16), and 'Follow Along - Copilot in Outlook' (reading_order 19). While these may be intended to organize the document, they are invented text not present in the original source.",
+      "source_pdf_quote": "The source PDF contains slide titles such as 'Demo' (Slide 8), 'What can you do with Copilot in Outlook?' (Slide 10), 'Practice : Email Summaries...' (Slide 15), and 'Practice : Draft with Copilot' (Slide 17).",
+      "output_quote": "The output includes invented headings: 'Prompting Overview' (element 8), 'About Copilot in Outlook' (element 11), 'Follow Along - Copilot Chat - Optional' (element 16), and 'Follow Along - Copilot in Outlook' (element 19).",
+      "location": "Sections indexed by reading_order 8, 11, 16, and 19."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "On page 20 of the source PDF, there are 12 individual prompt cards containing substantial text examples (e.g., 'Write an email congratulating my team on the end of the fiscal year'). The JSON output omits all of this text, providing only the main heading. This results in a loss of more than 25% of the text content for that specific page/section.",
+      "source_pdf_quote": "Twelve cards with text such as: 'Draft an email. Write an email to [invite parents to the PTSA bake sale]', 'New project announcement template...', 'Downtime explanation email...', etc.",
+      "output_quote": "The section 'Find more Email prompts to try in Copilot Lab' (reading_order 23) contains no text elements for the card content, only an image placeholder.",
+      "location": "Section 'Find more Email prompts to try in Copilot Lab', page 20, reading_order 23."
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy in the output is flat and fails to correctly distinguish the document title from section headers. The document title 'Copilot in Outlook' is assigned a level of H2 (index 'heading-1'), and every subsequent section/slide title is also assigned H2. Furthermore, H1 is entirely skipped, which is a major accessibility defect as the unique document title should be H1.",
+      "source_pdf_quote": "The document title is 'Copilot in Outlook' (Page 1). Major slide titles include 'Topics' (Page 3), 'Summarize Practice' (Page 6), etc.",
+      "output_quote": "All headings in the JSON are set to level 2, including the document title ('heading-1') and all sub-headings like 'Topics' ('heading-3').",
+      "location": "metadata.title and throughout all sections"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The structural fidelity is compromised by several issues. First, the pipeline has hallucinated four empty sections with titles not present in the source ('Prompting Overview', 'About Copilot in Outlook', 'Follow Along - Copilot Chat - Optional', and 'Follow Along - Copilot in Outlook'). Second, the text 'Questions' from the final slide (Page 21) is missing from the output elements; while it appears as a section title, the actual text content is absent, with the slide being incorrectly marked as ",
+      "source_pdf_quote": "The source consists of 21 slides with specific titles. The final slide (Page 21) contains the text 'Questions'.",
+      "output_quote": "The JSON contains hallucinated empty sections at indices 7, 10, 16, and 19. Section 24 ('Questions') contains no text elements, only an image marked 'is_decorative': true.",
+      "location": "sections[7], sections[10], sections[16], sections[19], sections[24]"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images from the source PDF are missing and replaced by green placeholder boxes in the HTML output. Specifically, on Slide 2, the photos of the family with BBQ and the man wakeboarding are missing. Slides 11 and 12, which rely on screenshots of the Outlook interface to illustrate the instructional text, show only green boxes. Slide 20, which contains 12 visual prompt cards from 'Copilot Lab', is also replaced by a single green placeholder box. These are meaningful content image",
+      "source_pdf_quote": "The source PDF contains a photo of family with BBQ and a man wakeboarding (page 2), screenshots of the Outlook interface (pages 11 and 12), and 12 prompt cards in the 'Copilot Lab' section (page 20).",
+      "output_quote": "The HTML screenshot shows solid green boxes instead of these specific images in the sections corresponding to Slide 2, Slide 11, Slide 12, and the 'Copilot Lab' area.",
+      "location": "Sections 'Josh Meredith', 'Summary by Copilot in Outlook', 'Draft with Copilot in Outlook', and 'Find more Email prompts to try in Copilot Lab'"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Several lists in the practice sections are broken. On Page 16, the numbered list (1-5) is split into two separate ordered lists (1-2 and 1-3), resetting the count for the final three items. On Page 17, the list (1-6) is split similarly, with items 5 and 6 losing their proper sequence or being converted to paragraphs. On Page 18, the list (1-5) is truncated after item 3, with items 4 and 5 merged into a single paragraph, losing their structural integrity as list items.",
+      "source_pdf_quote": "Page 16: Numbered list 1-5. Page 17: Numbered list 1-6. Page 18: Numbered list 1-5.",
+      "output_quote": "sections[18]: items 3-5 reset numbering to 1-3. sections[20]: items 5-6 reset to 1 or become paragraphs. sections[21]: items 4-5 merged into a paragraph.",
+      "location": "sections[18], sections[20], sections[21]"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "While the email on page 2 is correctly hyperlinked, numerous URLs found within the text of the practice slides (pages 6, 7, 15, 16, 17, and 18) are rendered as plain text rather than clickable links. URLs like 'https:///www.microsoft365.com/chat' and 'https://outlook.office365.com/' should be captured as link objects for accessibility.",
+      "source_pdf_quote": "URLs appearing on pages 6, 7, 15, 16, 17, and 18.",
+      "output_quote": "The URLs are captured only as strings within the text property of 'paragraph' or 'list' elements, with no 'href' or 'link' metadata.",
+      "location": "sections[5], [6], [17], [18], [20], [21]"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9412269412269412,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5619,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.4545454545454546,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9400171379605827,
+      "shingling_precision": 0.9424398625429553,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.94,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 99413,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

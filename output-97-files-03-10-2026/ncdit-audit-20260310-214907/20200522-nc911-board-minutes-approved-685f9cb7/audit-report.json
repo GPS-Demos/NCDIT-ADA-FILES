@@ -1,0 +1,84 @@
+{
+  "document_id": "20200522-nc911-board-minutes-approved-685f9cb7",
+  "audited_at": "2026-03-10T21:53:59.835367Z",
+  "quality_score": 91,
+  "fidelity_composite": 0.85,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document meets the mandatory auto-approval threshold with a fidelity_composite score of 0.85 and near-perfect programmatic content recall (0.98). While significant structural issues were identified—including the corruption of voting tables and broken heading hierarchies—these were explicitly classified as minor defects by the evaluation signals. According to the arbiter's instructions, a converge_with_minors agreement at this scoring band constitutes a directive for auto-approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The output fails to utilize an H1 heading for the document title, starting instead at H2. Furthermore, the numbered sections (1 through 13), which represent major structural divisions in the source, are rendered as paragraphs rather than headings. This significantly degrades the navigable structure for screen reader users.",
+      "source_pdf_quote": "North Carolina 911 Board Meeting MINUTES",
+      "output_quote": "\"type\": \"heading\", \"level\": 2, \"text\": \"North Carolina 911 Board Meeting\\nMINUTES\"",
+      "location": "heading-1, page 1"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The 'ROLL CALL VOTE' tables found on pages 4 and 6 of the source document were incorrectly identified as images ('image-2' and 'image-3') rather than tabular data structures. Additionally, they were assigned incorrect AI-generated alt text ('NC DIT logo'), which obscures the actual content of the tables (voting records).",
+      "source_pdf_quote": "NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE Friday, May 22, 2020",
+      "output_quote": "\"type\": \"image\", \"src\": \"...\", \"alt\": \"NC DIT logo\"",
+      "location": "image-2 (after section 5) and image-3 (after section 8)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The 'Consent Agenda' items (a through f) are structurally fragmented. Items a and b are merged into a paragraph block, while c, d, and e are rendered as three separate unordered list blocks, followed by independent paragraphs containing the associated data. This inconsistency breaks the semantic grouping intended by the source list.",
+      "source_pdf_quote": "5. Consent Agenda — ... a) Minutes of Previous Meeting... b) NG 911 Fund/Account c) CMRS Fund/Account... d) PSAP Fund/Account... e) Grant Fund/Account... f) Grant Project Updates...",
+      "output_quote": "Items a and b are in a paragraph. c, d, and e are separate list blocks followed by paragraphs. f is a nested list block.",
+      "location": "Section 5, page 3 and 4"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.85,
+      "text_match": 0.9841077027395403,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.9,
+      "raw_score": 0.9131,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.85,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9802551109557924,
+      "shingling_precision": 0.9941520467836257,
+      "duplication_ratio": 0.004616619831393015,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 85682,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "document_id": "gicc-ncdot-florence-20181107-68614eed",
+  "audited_at": "2026-03-10T22:04:09.115116Z",
+  "quality_score": 74,
+  "fidelity_composite": 0.7365,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document shows significant content loss corroborated by a low shingling recall of 0.624 and specific LLM findings regarding omitted text in the timeline and map sections. Multiple major defects were identified involving the corruption of a complex infographic timeline and the systemic failure to render critical visual data such as flood maps and satellite imagery.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are several sections where significant text content from the source is omitted in the output. Section 4 (Timeline) is missing all specific event text (e.g., 'SOE Declared', 'Wilmington Cutoff', 'Florence landfall'). Section 10 is missing the descriptive header text ('~ NCDOT Weather Event Information Map...') and the summary footer text ('Most of the views were generated...'). Section 2 is missing all text labels from the GAO diagram ('Data source', 'Data layers', 'Street data', etc.). The",
+      "source_pdf_quote": "Slide 10: '~ NCDOT Weather Event Information Map - Created 9/11 - 26,270 views (this is our original TIMS and weather data map and is probably more public oriented)' and 'Most of the views were generated in that time window with over 200 times increase of daily viewing from about 15 to over 3000.'",
+      "output_quote": "The text content for section 10 contains only the title and images, with no paragraph or list elements capturing the descriptive text found on the slide.",
+      "location": "Section 10, page 10"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table on page 3, which lists road closures by type, contains a structural defect in its row-spanning logic. In the source document, the value '23%' in the final column is associated with a bracket that encompasses three rows ('Interstate', 'US', and 'NC'). However, the output JSON assigns a 'rowspan' of 2 to the cell containing '23%', which means it only structurally groups the 'Interstate' and 'US' rows, leaving the 'NC' row as a separate entity with an empty fourth cell. This is a direct v",
+      "source_pdf_quote": "The table on page 3 contains a summary column where the value '23%' is associated with a bracket that encompasses three rows: 'Interstate', 'US', and 'NC'.",
+      "output_quote": "In the converted table (section index 2, element index 2), the cell containing '23%' has a 'rowspan' of 2, which only covers the 'Interstate' and 'US' rows, excluding the 'NC' row from the structural grouping.",
+      "location": "Section 'Hurricane Florence', page 3, element index 2"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of several key informational slides is fundamentally broken in the HTML conversion. Slide 4 (Hurricane Florence Disaster Event Time Line) in the source is a complex infographic showing the temporal relationship of events across multiple categories. In the HTML, the entire horizontal axis, swimlanes, and the majority of event markers are missing, leaving only the legend and two icons; this destroys the visual flow and spatial context of the timeline. Additionally, slides d",
+      "source_pdf_quote": "Page 4 shows a horizontal timeline with color-coded circles and text labels distributed by date across three horizontal lanes (Business Impacts, Events, IT Actions).",
+      "output_quote": "The HTML output for this section only displays the legend text and the two 'Florence landfall' flags. The dates, horizontal axis, and most event markers are absent.",
+      "location": "Section 'Hurricane Florence Disaster Event Time Line', Page 4"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The converted document exhibits a systemic failure to render meaningful graphics. Nearly every chart, map, and photograph from the source PDF is missing or replaced by a placeholder. Specifically, the line graph on Page 3 is a solid green rectangle; the maps on Pages 5, 9, and 10 are missing; the photographs of flood damage and drone imagery on Pages 5, 6, and 7 are missing (replaced by repetitive black logo blocks); and the satellite imagery on Pages 12 and 13 is missing (green rectangles). The",
+      "source_pdf_quote": "The source PDF contains critical charts (pp. 3, 10), maps (pp. 5, 9, 10), and situational photographs (pp. 5, 6, 7, 12, 13).",
+      "output_quote": "The HTML screenshots show these items replaced by solid green blocks (pp. 3, 12, 13), solid black blocks with logos (pp. 5, 6, 7), or entirely absent (pp. 4, 10).",
+      "location": "Throughout the document, specifically Pages 3, 4, 5, 6, 7, 9, 10, 12, 13, and 15"
+    }
+  ],
+  "action_items": [
+    "Restore missing text labels in the GAO diagram (Section 2) and the Event Timeline (Section 4).",
+    "Correct the rowspan attributes in the road closure table on page 3 to properly group 'Interstate', 'US', and 'NC' rows.",
+    "Address the failure of image rendering for maps and satellite imagery to ensure the document remains informative.",
+    "Verify the integrity of section headers and footers in Section 10."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7365,
+      "text_match": 0.7524617996604415,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7445,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7365,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6235227912211593,
+      "shingling_precision": 0.9486301369863014,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.92,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 118319,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

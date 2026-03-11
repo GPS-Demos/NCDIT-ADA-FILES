@@ -1,0 +1,172 @@
+{
+  "document_id": "seal-imagery-11ab",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output document's body text faithfully reflects the source material. No instances of invented paragraphs, sections, or sentences were found. While metadata like AI-generated titles and image alt-text were added for accessibility as expected, the actual definitions and instructional text in the glossary match the source content exactly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The conversion pipeline has hallucinated several external URLs that do not exist in the source PDF. These URLs (from techtarget.com) have been injected into definitions for terms like 'ARP', 'Access', and 'OSI Layers'. While the glossary contains legitimate URLs (e.g., csrc.nist.gov, it.nc.gov) that were correctly preserved, the addition of external, unauthorized reference links constitutes fabrication of URL information.",
+        "b_evidence_source": "ARP – Address Resolution Protocol (Page 3); ...otherwise make use of any resources of a computer, information system or information network. (Page 4)",
+        "b_evidence_output": "\"href\": \"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212839,00.html\", \"text\": \"Protocol\" (Section 'Glossary of Terms', term 'ARP'); \"href\": \"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html\", \"text\": \"network\" (Section 'Glossary of Terms', term 'Access')",
+        "b_evidence_location": "Glossary of Terms, element indices 9, 15, 34, 334",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages and major sections from the original document are present in the output. The alphabetical terms from A to Z are accounted for, as are the introductory sections (Purpose, Scope, History). The literal Table of Contents page was omitted, which is expected behavior for accessibility-optimized structured output as the navigation structure is preserved via headings.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document does not contain any formal data tables; it consists entirely of heading-based lists and paragraphs. Therefore, this check is not applicable, but no data structures were lost.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Major lists containing significant data (such as identifying information on page 53 or FERPA details on page 31) are fully present in the JSON. No sections appear truncated or missing more than 25% of their content. The conversion captured even small typographical errors present in the source (e.g., 'eve–t' in 'Critical Activity'), indicating high capture fidelity.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text content matches the source document with high accuracy. Punctuation, capitalization in definitions, and specific legal citations (e.g., N.C.G.S 132-1) are preserved exactly as written. No wording changes that alter the meaning of the technical definitions were observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output document's body text faithfully reflects the source material. No instances of invented paragraphs, sections, or sentences were found. While metadata like AI-generated titles and image alt-text were added for accessibility as expected, the actual definitions and instructional text in the glossary match the source content exactly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The conversion pipeline has hallucinated several external URLs that do not exist in the source PDF. These URLs (from techtarget.com) have been injected into definitions for terms like 'ARP', 'Access', and 'OSI Layers'. While the glossary contains legitimate URLs (e.g., csrc.nist.gov, it.nc.gov) that were correctly preserved, the addition of external, unauthorized reference links constitutes fabrication of URL information.\",\n      \"b_evidence_source\": \"ARP – Address Resolution Protocol (Page 3); ...otherwise make use of any resources of a computer, information system or information network. (Page 4)\",\n      \"b_evidence_output\": \"\\\"href\\\": \\\"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212839,00.html\\\", \\\"text\\\": \\\"Protocol\\\" (Section 'Glossary of Terms', term 'ARP'); \\\"href\\\": \\\"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html\\\", \\\"text\\\": \\\"network\\\" (Section 'Glossary of Terms', term 'Access')\",\n      \"b_evidence_location\": \"Glossary of Terms, element indices 9, 15, 34, 334\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages and major sections from the original document are present in the output. The alphabetical terms from A to Z are accounted for, as are the introductory sections (Purpose, Scope, History). The literal Table of Contents page was omitted, which is expected behavior for accessibility-optimized structured output as the navigation structure is preserved via headings.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document does not contain any formal data tables; it consists entirely of heading-based lists and paragraphs. Therefore, this check is not applicable, but no data structures were lost.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Major lists containing significant data (such as identifying information on page 53 or FERPA details on page 31) are fully present in the JSON. No sections appear truncated or missing more than 25% of their content. The conversion captured even small typographical errors present in the source (e.g., 'eve–t' in 'Critical Activity'), indicating high capture fidelity.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text content matches the source document with high accuracy. Punctuation, capitalization in definitions, and specific legal citations (e.g., N.C.G.S 132-1) are preserved exactly as written. No wording changes that alter the meaning of the technical definitions were observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output content follows the sequence of the source PDF. No prose blocks or definitions were found to be duplicated or appearing more times than in the original source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is inconsistent and broken. In the source, the alphabetical section headers (A, B, C, D, etc.) are all styled identically as sub-sections of the glossary. In the output, 'A', 'B', and 'D' are assigned level 3 headings (H3), which is correct given major sections are H2. However, 'C' and almost all letters from 'E' to 'Z' are assigned level 2 headings (H2). This elevates sub-sections to the same level as the document's main chapters (Purpose, Scope, History), corrupting the organizational structure.",
+        "b_evidence_source": "The alphabetical headers (A, B, C, D, E, F...) are all styled identically in the PDF as sub-headings within the Glossary of Terms.",
+        "b_evidence_output": "Alphabetical headers 'A' (element index 12), 'B' (index 104), and 'D' (index 314) are level 3. Heading 'C' (index 177) and 'E' (index 381) through 'Z' (index 1113) are level 2.",
+        "b_evidence_location": "Glossary of Terms section, multiple element indices (177, 381, 418, 461, 481, 505, 581, 608, 661, 685, 711, 804, 811, 881, 961, 1031, 1042, 1075, 1111, 1112, 1113)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document does not contain any tables; it consists entirely of text-based definitions and lists. The output correctly reflects a table count of zero.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order of the output content follows the logical flow of the source PDF. Content is presented sequentially from page 1 to 78, excluding the Table of Contents page which is skipped, though this does not disrupt the order of the actual information presented.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists in the output generally preserve the structure and intent of the source. Numbered lists (e.g., IPSec forms, PII identifiers) are correctly identified as 'ordered', and bulleted lists (e.g., APT characteristics, THIRA questions) are correctly identified as 'unordered'. The OSI layers list on page 51, which uses round bullets in the source, is correctly rendered as an unordered list.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output contains several fabricated links that do not exist in the source document. Specifically, several instances of the words 'Protocol' and 'network' have been converted into hyperlinks pointing to searchnetworking.techtarget.com. These links are hallucinations injected during conversion.",
+        "b_evidence_source": "ARP – Address Resolution Protocol (Plain text, no link on page 3)",
+        "b_evidence_output": "\"href\": \"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212839,00.html\", \"text\": \"Protocol\"",
+        "b_evidence_location": "element index 16 (also indices 27, 51, 604)",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output content follows the sequence of the source PDF. No prose blocks or definitions were found to be duplicated or appearing more times than in the original source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is inconsistent and broken. In the source, the alphabetical section headers (A, B, C, D, etc.) are all styled identically as sub-sections of the glossary. In the output, 'A', 'B', and 'D' are assigned level 3 headings (H3), which is correct given major sections are H2. However, 'C' and almost all letters from 'E' to 'Z' are assigned level 2 headings (H2). This elevates sub-sections to the same level as the document's main chapters (Purpose, Scope, History), corrupting the organizational structure.\",\n      \"b_evidence_source\": \"The alphabetical headers (A, B, C, D, E, F...) are all styled identically in the PDF as sub-headings within the Glossary of Terms.\",\n      \"b_evidence_output\": \"Alphabetical headers 'A' (element index 12), 'B' (index 104), and 'D' (index 314) are level 3. Heading 'C' (index 177) and 'E' (index 381) through 'Z' (index 1113) are level 2.\",\n      \"b_evidence_location\": \"Glossary of Terms section, multiple element indices (177, 381, 418, 461, 481, 505, 581, 608, 661, 685, 711, 804, 811, 881, 961, 1031, 1042, 1075, 1111, 1112, 1113)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document does not contain any tables; it consists entirely of text-based definitions and lists. The output correctly reflects a table count of zero.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order of the output content follows the logical flow of the source PDF. Content is presented sequentially from page 1 to 78, excluding the Table of Contents page which is skipped, though this does not disrupt the order of the actual information presented.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists in the output generally preserve the structure and intent of the source. Numbered lists (e.g., IPSec forms, PII identifiers) are correctly identified as 'ordered', and bulleted lists (e.g., APT characteristics, THIRA questions) are correctly identified as 'unordered'. The OSI layers list on page 51, which uses round bullets in the source, is correctly rendered as an unordered list.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output contains several fabricated links that do not exist in the source document. Specifically, several instances of the words 'Protocol' and 'network' have been converted into hyperlinks pointing to searchnetworking.techtarget.com. These links are hallucinations injected during conversion.\",\n      \"b_evidence_source\": \"ARP – Address Resolution Protocol (Plain text, no link on page 3)\",\n      \"b_evidence_output\": \"\\\"href\\\": \\\"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212839,00.html\\\", \\\"text\\\": \\\"Protocol\\\"\",\n      \"b_evidence_location\": \"element index 16 (also indices 27, 51, 604)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "total_defects": 3,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}
