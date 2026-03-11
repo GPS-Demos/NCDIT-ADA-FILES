@@ -1,0 +1,86 @@
+{
+  "document_id": "seal-imagery-11ab",
+  "audited_at": "2026-03-10T22:49:33.061844Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": null,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The conversion pipeline has hallucinated several external URLs that do not exist in the source PDF. These URLs (from techtarget.com) have been injected into definitions for terms like 'ARP', 'Access', and 'OSI Layers'. While the glossary contains legitimate URLs (e.g., csrc.nist.gov, it.nc.gov) that were correctly preserved, the addition of external, unauthorized reference links constitutes fabrication of URL information.",
+      "source_pdf_quote": "ARP – Address Resolution Protocol (Page 3); ...otherwise make use of any resources of a computer, information system or information network. (Page 4)",
+      "output_quote": "\"href\": \"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212839,00.html\", \"text\": \"Protocol\" (Section 'Glossary of Terms', term 'ARP'); \"href\": \"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html\", \"text\": \"network\" (Section 'Glossary of Terms', term 'Access')",
+      "location": "Glossary of Terms, element indices 9, 15, 34, 334"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent and broken. In the source, the alphabetical section headers (A, B, C, D, etc.) are all styled identically as sub-sections of the glossary. In the output, 'A', 'B', and 'D' are assigned level 3 headings (H3), which is correct given major sections are H2. However, 'C' and almost all letters from 'E' to 'Z' are assigned level 2 headings (H2). This elevates sub-sections to the same level as the document's main chapters (Purpose, Scope, History), corrupting the o",
+      "source_pdf_quote": "The alphabetical headers (A, B, C, D, E, F...) are all styled identically in the PDF as sub-headings within the Glossary of Terms.",
+      "output_quote": "Alphabetical headers 'A' (element index 12), 'B' (index 104), and 'D' (index 314) are level 3. Heading 'C' (index 177) and 'E' (index 381) through 'Z' (index 1113) are level 2.",
+      "location": "Glossary of Terms section, multiple element indices (177, 381, 418, 461, 481, 505, 581, 608, 661, 685, 711, 804, 811, 881, 961, 1031, 1042, 1075, 1111, 1112, 1113)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output contains several fabricated links that do not exist in the source document. Specifically, several instances of the words 'Protocol' and 'network' have been converted into hyperlinks pointing to searchnetworking.techtarget.com. These links are hallucinations injected during conversion.",
+      "source_pdf_quote": "ARP – Address Resolution Protocol (Plain text, no link on page 3)",
+      "output_quote": "\"href\": \"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212839,00.html\", \"text\": \"Protocol\"",
+      "location": "element index 16 (also indices 27, 51, 604)"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9763502764524288,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5697,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9602213001383126,
+      "shingling_precision": 0.9938158497480531,
+      "duplication_ratio": 0.0005750202362890847,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 85042,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>The National Spatial Data Infrastructure (NSDI) What is it? and why is it important to North Carolina?</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>The National Spatial Data Infrastructure (NSDI) What is it? and why is it important to North Carolina?</h1>
+    </header>
+    <nav aria-label="Table of Contents" class="document-nav">
+        <p class="nav-title"><strong>Contents</strong></p>
+        <ul>
+                <li><a href="#heading-1">The National Spatial Data Infrastructure (NSDI)</a></li>
+                <li><a href="#heading-2">What is it? and why is it important to North Carolina?</a></li>
+                <li><a href="#heading-3">Economic Value of Location</a></li>
+                    <li><a href="#heading-4">Slide 11 Comments</a></li>
+                <li><a href="#heading-5">What does the NSDI consist of?</a></li>
+                <li><a href="#heading-6">How is the NSDI Being Used?</a></li>
+                    <li><a href="#heading-7">Slide 13 Comments</a></li>
+                <li><a href="#heading-8">Examples of Local, State and Federal Data</a></li>
+                <li><a href="#heading-9">NSDI In Action Serving Citizens – North Carolina</a></li>
+                <li><a href="#heading-10">Why the NSDI?</a></li>
+                <li><a href="#heading-11">NC and the NSDI</a></li>
+                <li><a href="#heading-12">National Spatial Data Infrastructure Now and into the Future</a></li>
+                    <li><a href="#heading-13">Vision</a></li>
+                    <li><a href="#heading-14">Mission</a></li>
+        </ul>
+    </nav>
+    <main id="main-content" role="main">
+<section>
+<h2 id="heading-1">The National Spatial Data Infrastructure (NSDI)</h2>
+<h2 id="heading-2">What is it? and why is it important to North Carolina?</h2>
+<img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAA0JCgsKCA0LCwsPDg0QFCEVFBISFCgdHhghMCoyMS8qLi00O0tANDhHOS0uQllCR05QVFVUMz9dY1xSYktTVFH/2wBDAQ4PDxQRFCcVFSdRNi42UVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVH/wAARCAFhCUgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD06iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACmuiyKVcAg06igDLn01wcxHI9DVc2dwDjyzW5RWiqyRi6MWZEWmzMfnIQfrWnBBHAm1B9T61JRSlNy3LjTjHYKKKKgsKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKA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9FFdZfaybTXLTTfsruLgZMo6L1/wrlq0/Zu17nVSquom7WRj+BNpl1ctjzvtR3Z645/rmtzWdUbS4o5Fsp7re23EK5K/WsC/t7zw9r02r2Nubmyuv+PiJPvKfUfz/E1ZbxxpW0iOG7eXtGIuc+nWszUi1HWk1rwbqc8UEkHlny2V+vVSf51q+FTGvhmw2H5fL7+uTn9aoeFLCZ9Gv1v7Z4VvZ3fY3XawArHt7m88Lu2n6lbPNYBj5U6LnAzmmB3c2PJfd02nNch4ChW58P39u+TBJMyD6FRmi+8TS6vbnTtBtLiSWUbGmddoQdz/APXrotC0xdI0mGzU7mUZdvVj1pbAYngy7NpZ32mXbbX0+Ric/wBz1/Q/nR4Mja8uNQ1yVfnupSqeyj/IH4Vm+NLa8sdXNzYoSNRhMEgA6nj/AOtXSCKTRtDtbS3XJRQjN79SfxOaYGzRVLS7iaeFvNH3cAN61dqRhRQTgZpAQelAATgZNITkfWhjt5NL9KADHHPNFBAIzQOTntQAZA70pphYbtuKX+IHrQA6iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqrd6lZWLql1cxxMwyAx6irVef8A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pwjFe5sWKKKKDQKKQnFAOcHpQAtFBIAyTgUzd8/B4NADicDNMYEzDEgHqtDe1JhPNzwJCKAKrs5d1jnVSpztbvVi2maZcsu32NEsEcihnUFh0IHNJOY4k8yR2VQQaYibHze1IQoccZJ6GmwyrNErjgN0zQJUHQk+w7UhjwmGLA8mjPPNMLqvO4kHnilZg0ZYdcUCKczFpCc0xSR1NML75SAO+KUu2/bjjGc1qZkqSA7lJ5Xmmh2Vtz4z2pEVSSDzuHOKPmCFV4I6ZrN7lIjlMhbdnIx0poQSDcFAbHNPZsHBOQO1ROUAyxIz0ouJohJwCRTbUYlRnxgGjduzimRkjqMHNakm6fNBR0KlO4qRlWVdxXJ9KigJeIZPGOlSRM29kC4QdG9ayZqh4Vj1xjHIpDuxhQABxzTQCjfeJJPepepFAFX7UwfG0bc49zVrbkEZ4qMxr5m/Zk5qU9KAEVQBjrS1Gm7dUlIEFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArH1mz0r7RHqWpsu2FNqqx4Pfp3rYrgPiMx/tCzXJx5ROPxoMa8uWDdrkGu+L57sG308G3t+m4c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UAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH/9k=" alt="Abstract graphic of a globe connected to various icons via lines, representing data infrastructure." height="353"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p><strong>Josh Delmonico,</strong></p>
+
+<p><strong>FGDC Executive Director</strong></p>
+
+<p>May 8, 2024</p>
+
+</section>
+<section aria-labelledby="section-1">
+<h2 id="section-1">Topics</h2>
+<ul><li>
+FGDC</li>
+<li>
+NSDI</li>
+<li>
+Relationship to NC</li>
+<li>
+NSDI Strategic Plan</li>
+<li>
+How you can participate</li>
+</ul>
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">FGDC and the Geospatial Data Act</h2>
+<ol><li>
+Federal Geographic Data Committee (FGDC) – a 32-member interagency committee established in the Geospatial Data Act (GDA) of 2018 that “shall act as the <strong>lead entity in the executive branch</strong> for the development, implementation, and review of policies, practices, and standards relating to geospatial data.” </li>
+<li>
+Secretary of the Interior shall serve as Chairperson of the Committee</li>
+<li>
+Director of the Office of Management and Budget shall serve as Vice Chairperson of the Committee</li>
+<li>
+Not later than October 5, 2019, and as needed thereafter, the Director of the OMB shall update guidance with respect to <strong>membership of the Committee and the roles of members of the Committee.</strong></li>
+</ol>
+<p><strong><em>The GDA established FGDC as the lead for federal geospatial policy in 2018.</em></strong></p>
+
+</section>
+<section aria-labelledby="section-3">
+<h2 id="section-3">Who is the FGDC?</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Collection of seals and logos representing the 32 members of the Federal Geographic Data Committee." height="22"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p><strong><em>FGDC is a 32-member Interagency Committee.</em></strong></p>
+
+</section>
+<section aria-labelledby="section-4">
+<h2 id="section-4">Summary of FGDC Duties under GDA</h2>
+<ol><li>
+National <ol><li>
+Lead the development and management the National Spatial Data Infrastructure (NSDI) strategic plan and geospatial data policy </li>
+<li>
+Define roles and responsibilities and promote and guide cooperation and coordination among agencies of the Federal Government, State, tribal, and local governments, academia, and the private sector in the collection, production, sharing, and use of geospatial information, and the implementation of the NSDI</li>
+<li>
+Coordinate with international organizations having an interest in the National Spatial Data Infrastructure or global spatial data infrastructures</li>
+<li>
+Advise Federal/non-Federal users of geospatial data on their responsibilities relating to implementation of the NSDI</li>
+</ol></li>
+<li>
+Federal<ol><li>
+Oversee the coordinated management of the federal geospatial portfolio (i.e., National Geospatial Data Asset data themes) </li>
+<li>
+Establish and maintain geospatial data standards</li>
+<li>
+Operate a GeoPlatform that provides access to geospatial data and metadata to the general public </li>
+<li>
+Communicate with and foster communication among covered agencies and other entities relating to geospatial data technology development, transfer, and exchange; promote cost-effective data collection, maintenance, distribution, and preservation strategies; and leverage Federal and non-Federal resources</li>
+<li>
+Develop and submit a report to Congress every 2 years</li>
+</ol></li>
+</ol>
+</section>
+<section aria-labelledby="section-5">
+<h2 id="section-5">Slide 5</h2>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Slide 5 Comments">
+<table>
+<caption>Slide 5 Comments</caption><tbody><tr><td><strong>KD0</strong></td><td>Make this into 2 slides. Txt is too small for one slide. Or cut down the bullets. 
+Killpack, Darcee, 2023-08-24T15:58:04.530</td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-6">
+<h2 id="section-6">FGDC and NC</h2>
+<ol><li>
+<strong>NSDI</strong></li>
+<li>
+<strong>Interagency Coordination </strong></li>
+<li>
+<strong>Standards for geospatial data and metadata</strong></li>
+<li>
+<strong>Data Access and sharing</strong></li>
+<li>
+<strong>Advocacy</strong></li>
+<li>
+<strong>Outreach and Strategic Communications</strong></li>
+</ol>
+</section>
+<section aria-labelledby="section-7">
+<h2 id="section-7">Federal Geospatial Portfolio</h2>
+<ol><li>
+18 themes</li>
+<li>
+172 National Geospatial Data Assets</li>
+<li>
+220,000 geospatial data sets</li>
+</ol>
+</section>
+<section aria-labelledby="section-8">
+<h2 id="section-8">NSGIC Maturity Assessment</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Map of the United States highlighting North Carolina, alongside the Geospatial Maturity Assessment 2023 report card for North Carolina showing an Overall Grade of A." height="22"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-9">
+<h2 id="section-9">The Geospatial Data Act</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Graphic titled &#39;Unleashing Data for Public Good - Geospatial Data Act of 2018&#39; detailing aspects of the act." height="22"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-10">
+<h2 id="section-10">NSDI: A Digital Infrastructure for the Nation</h2>
+<ul><li>
+The NSDI is a digital infrastructure that connects location information from Federal, State, Tribal, and local Governments making that information available for all to use.</li>
+<li>
+The NSDI connects national and Federal data to State, local, Tribal, and other data sources to deliver data for joint use, reuse, and informing local-to- national solutions.</li>
+<li>
+Just like the Interstate Highway System (IHS), the NSDI is an infrastructure that enables every facet of our society.</li>
+</ul>
+<p><strong>The NSDI is the digital infrastructure that connects our Nation’s
+data enabling local to national solutions.</strong></p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Graphic depicting a city skyline and network connections overlay." width="291" height="124"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Map of North America showing highway infrastructure." height="715"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>… seamlessly connects local and national data.</p>
+
+<h2 id="heading-3">Economic Value of Location</h2>
+<p>The U.S. Geospatial Services Industry is a $73 billion business.<sup>2</sup></p>
+
+<p>The U.S. Geospatial Services Industry Employs a workforce of 649,000 people.<sup>4</sup></p>
+
+<p>Geospatial Services companies drive $1.6 trillion in revenue and $1.4 trillion in cost savings throughout the U.S. economy.<sup>2</sup></p>
+
+<p>Economic impact of geospatial services in marketing, logistics, and strategic decision-making will grow by at least 10% over the next five years. <sup>2</sup></p>
+
+<p>The majority of records in the Nation’s open data catalog are Geospatial<sup>3</sup></p>
+
+<p>Economic benefit of 3D elevation in the U.S. is conservatively estimated at $690 million per year<sup>1</sup></p>
+
+<p>Geospatial data and location-based services are critical components underpinning the U.S. and global economy.</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="References for Economic Value of Location Statistics">
+<table>
+<caption>References for Economic Value of Location Statistics</caption><tbody><tr><td><sup>1 </sup>National Enhanced Elevation Study, Rvsd March 29, 2012, Dewberry, commissioned by USGS, Pg 79; <sup>2</sup> Putting the U.S. Geospatial Services Industry on the Map, December 2012, Boston Consulting Group; <sup>3</sup> <a href="https://Data.gov" target="_blank" rel="noopener noreferrer" class="external-link">Data.gov<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a> Data Catalog, <a href="https://catalog.data.gov/dataset/" target="_blank" rel="noopener noreferrer" class="external-link">https://catalog.data.gov/dataset/<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a>, February 13, 2023; Dept of Labor - <a href="https://www.careeronestop.org/Toolkit/Careers/Occupations/occupation-profile.aspx?keyword=geospatial" target="_blank" rel="noopener noreferrer" class="external-link">https://www.careeronestop.org/Toolkit/Careers/Occupations/occupation-profile.aspx?keyword=geospatial<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a>.<sup>4</sup></td></tr>
+</tbody></table>
+</div>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Graphic illustrating $73 Billion business value with a globe icon" height="23"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Graphic illustrating $1.6 Trillion revenue with a bar chart icon" width="293" height="88"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Graphic illustrating 10% Growth with a money/chart icon" width="336" height="336"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Graphic illustrating 649,000 Jobs with people icons" height="526"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Graphic illustrating $690 Million benefit with a 3D elevation icon" height="525"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Graphic illustrating 77% Open data with a pie chart icon" width="186" height="183"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<h3 id="heading-4">Slide 11 Comments</h3>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Comments on Slide 11">
+<table>
+<caption>Comments on Slide 11</caption><tbody><tr><td><strong>KD0</strong></td><td>You have footnotes but not references on the slide. 
+Killpack, Darcee, 2024-04-02T17:30:01.221</td></tr>
+<tr><td><strong>SKM0 0</strong></td><td>Footnote numbers are at the end of the text under the bottom 3 stats.
+Shaffer, Kenneth M, 2024-04-10T20:15:09.728</td></tr>
+</tbody></table>
+</div>
+
+<h2 id="heading-5">What does the NSDI consist of?</h2>
+<p>The NSDI is made up of the <strong>technology, policies, criteria, standards</strong>, and <strong>people</strong> necessary to promote geospatial data sharing throughout the Federal Government, State, tribal, and local governments, non-profits, academia and the private sector.</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Diagram showing the components of NSDI: Governance and Coordination, Policies and Processes, Technology, Standards, People, and Geodata Layers."    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<h2 id="heading-6">How is the NSDI Being Used?</h2>
+<p>Location data is used across the Nation to address a wide variety of challenges critical to government and business – saving, time, money and lives.</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Infographic showing NSDI Supports: Policy &amp; Compliance, Assessment, Forecasting, Monitoring, Planning, Mapping, Modeling, Navigation, Early Warning. These are applied across sectors like Agriculture, Hazards, Infrastructure, Land &amp; Infrastructure Management, and Transportation." height="22"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<h3 id="heading-7">Slide 13 Comments</h3>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Comments on Slide 13">
+<table>
+<caption>Comments on Slide 13</caption><tbody><tr><td><strong>FEL0</strong></td><td>[@Delmonico, Joshua J] I took elements from slide 7 and others for this slide. Added some notes to consider.
+Frazier, Eldrich L., 2024-03-29T18:37:41.415</td></tr>
+</tbody></table>
+</div>
+
+<h2 id="heading-8">Examples of Local, State and Federal Data</h2>
+<ol><li>
+Local or State data<ol><li>
+Road Data</li>
+<li>
+Address Data</li>
+<li>
+Parcel Data</li>
+<li>
+Hydrography</li>
+<li>
+Ortho-imagery</li>
+<li>
+Local boundaries (e.g., city, county, special service districts, school districts, and zoning designations)</li>
+</ol></li>
+<li>
+Federal Data<ol><li>
+Public land parcels</li>
+<li>
+Elevation</li>
+<li>
+Satellite remote sensing - Federal Domain for initial technology investment and continuity of operations, growing commercial space for use cases that can be monetized. No one is holding their breath for a state or local government funded satellite deployment.</li>
+</ol></li>
+</ol>
+<h2 id="heading-9">NSDI In Action Serving Citizens – North Carolina</h2>
+<ul><li>
+Congress’s Bipartisan Infrastructure Law established the National Broadband Map to work with States to improve high-speed internet access to citizens.</li>
+<li>
+North Carolina (NC) engaged the community through their NC OneMap portal and state SDI, providing integrated State and local geospatial data to test and map actual service levels, identifying 115,000 additional homes and businesses lacking high speed internet.</li>
+<li>
+The result was increased service delivery that meets both the Federal intent and the actual needs of citizens and businesses.</li>
+<li>
+The NSDI enables data access and sharing across Federal, State, local, and private sectors.</li>
+</ul>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Screenshot of the FCC National Broadband Map and NC Broadband Grants map showing data integration." height="22"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<h2 id="heading-10">Why the NSDI?</h2>
+<ul><li>
+Emergencies large and small, including wildfires, floods, hurricanes, tornadoes, and earthquakes don’t respect administrative or political boundaries.</li>
+<li>
+Roads, bridges, dams, electric and gas lines, telecom, sewer, water, and stormwater each have connection points that cross, or at least connect at, artificial administrative boundaries we’ve set up...cities, counties, states, even national boundaries.</li>
+<li>
+We need to coordinate and collaborate across those boundaries. The data needs to facilitate that coordination and collaboration.</li>
+<li>
+Everyday activities like getting an ambulance or fire truck to the right location or delivering packages or pizza to the right address, requires many people to work across our administrative boundaries.</li>
+<li>
+How do we bring all these data together?</li>
+<li>
+Our administrative boundaries, funding mechanisms, public policies and governance structures are set up in stovepipes</li>
+<li>
+The NSDI is a mechanism to bring these data together to enable us to meet challenges of today and tomorrow.</li>
+<li>
+Rethinking how to work together better.</li>
+<li>
+Developing a national strategy that we&#39;re about to publish and developing several NSDI pilot projects that will help us learn more about how to work together more effectively across administrative boundaries.</li>
+</ul>
+<p><strong>Delivering the NSDI requires us to have complete, consistent and standardized across the administrative boundaries...nationwide.</strong></p>
+
+<h2 id="heading-11">NC and the NSDI</h2>
+<ol><li>
+Local and state governments use key national/NSDI data layers and contribute key content into nationwide layers.</li>
+<li>
+Mature states like NC have an important role in contributing their experiences to establishing nationwide best practices (e.g., data governance) to help all this work better together.</li>
+<li>
+Data Collection and Maintenance</li>
+<li>
+Data Sharing and Coordination</li>
+<li>
+Standards Compliance</li>
+<li>
+Infrastructure Development (including Applications and Tools)</li>
+<li>
+Capacity Building and Training</li>
+</ol>
+<p>Local/regional/states are all beneficiaries and contributors to the NSDI data (primarily through the state SDI),</p>
+
+<h2 id="heading-12">National Spatial Data Infrastructure Now and into the Future</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Diagram showing &#39;NSDI Today&#39; on the left and &#39;NSDI 2035&#39; on the right, connected by an arrow with the text &#39;What is the roadmap to get from here to there?&#39;"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-11">
+<h2 id="section-11">The NSDI Today</h2>
+<ol><li>
+National, private sector, non-profit, academic, Federal, State, Tribal and Local datasets</li>
+<li>
+Global Standards Framework</li>
+<li>
+Tools and Applications</li>
+<li>
+Policy and Governance</li>
+</ol>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Diagram showing relationships between Standards, Geospatial Data Act of 2018, FGDC, NSGIC, and state coordinating councils, State Spatial Data Infrastructures (SDIs), and State, Local and National Datasets."    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>Significant progress has been made on implementing the NSDI however much work remains.</p>
+
+</section>
+<section aria-labelledby="section-12">
+<h2 id="section-12">Slide 19</h2>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Comments for Slide 19 - RJ0">
+<table>
+<caption>Comments for Slide 19 - RJ0</caption><thead><tr><th scope="col">RJ0</th><th scope="col">spell out acronyms</th></tr>
+</thead><tbody><tr><td colspan="2">Roberts, Sally J, 2024-04-02T15:20:46.857</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Comments for Slide 19 - DA0 0">
+<table>
+<caption>Comments for Slide 19 - DA0 0</caption><thead><tr><th scope="col">DA0 0</th><th scope="col">Updated</th></tr>
+</thead><tbody><tr><td colspan="2">DuBan, Elizabeth A, 2024-04-03T19:33:34.343</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Comments for Slide 19 - RJ1">
+<table>
+<caption>Comments for Slide 19 - RJ1</caption><thead><tr><th scope="col">RJ1</th><th scope="col">acronym</th></tr>
+</thead><tbody><tr><td colspan="2">Roberts, Sally J, 2024-04-02T15:20:53.763</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Comments for Slide 19 - DA1 0">
+<table>
+<caption>Comments for Slide 19 - DA1 0</caption><thead><tr><th scope="col">DA1 0</th><th scope="col">Updated</th></tr>
+</thead><tbody><tr><td colspan="2">DuBan, Elizabeth A, 2024-04-03T19:33:37.046</td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-13">
+<h2 id="section-13">NSDI 2035</h2>
+<ol><li>
+AI-driven Action</li>
+<li>
+Global Interoperability</li>
+<li>
+Self Updating Maps</li>
+<li>
+Intelligent Search and Discovery</li>
+<li>
+Immersive Visualization</li>
+<li>
+Geospatial Knowledge and Insights</li>
+</ol>
+<p>Geospatial knowledge available to everyone. Location information integrated in A/I and available in everyday applications (e.g., Siri)</p>
+
+<p>“Geospatially informed NOT geospatial centric”</p>
+
+</section>
+<section aria-labelledby="section-14">
+<h2 id="section-14">How are we going to get there?</h2>
+<ol><li>
+Together</li>
+<li>
+Wait for it to happen</li>
+<li>
+Hope</li>
+<li>
+Develop a shared vision and plan to get there</li>
+<li>
+A and D</li>
+</ol>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="A chalkboard with the words &#39;Pop Quiz!&#39; written on it." height="22"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-15">
+<h2 id="section-15">Vision 2035: Advancing the US National Spatial Data Infrastructure – A Strategic Plan for Innovation and Collaboration</h2>
+<p>2025 - 2035</p>
+
+</section>
+<section aria-labelledby="section-16">
+<h2 id="section-16">NSDI Strategic Plan Development Process</h2>
+<ul><li>
+Drafted initial set of goals based on stakeholder engagement</li>
+<li>
+Solicited feedback from over 800 individuals and organizations (e.g., NGAC) through conferences (e.g., Esri FedUC and UC, URISA, Tribal GIS, NSGIC), webinars, meetings and one on one engagements to include many of you</li>
+<li>
+Refined the initial draft</li>
+<li>
+Aligned it with United Nations Group of Experts on Global Geographic Information Management (UN GGIM) Integrated Geospatial information Framework (IGIF)</li>
+<li>
+Integrated input from stakeholders and GeoGov Summit into actions in draft implementation plan</li>
+</ul>
+</section>
+<section aria-label="Draft NSDI Goals and Objectives (part 1)">
+<h2 id="section-17">Draft NSDI Goals and Objectives</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Table of Contents displaying sections: Introduction, Executive Summary, Vision, Mission, Core Values, Goals and Objectives, Use Cases, Future Outlook and Trends, Moving Forward, Suggested Improvements." height="22"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-18">
+<h2 id="section-18">NSDI Vision and Mission Statement</h2>
+<h3 id="heading-13">Vision</h3>
+<p>A seamlessly interconnected national geospatial ecosystem.</p>
+
+<h3 id="heading-14">Mission</h3>
+<p>Deliver highly responsive, timely, and dependable public and private geospatial data, applications and services that provide knowledge on-demand and actionable insights to address local, regional, national, and global challenges.</p>
+
+</section>
+<section aria-label="Draft NSDI Goals and Objectives (part 2)">
+<h2 id="section-19">Draft NSDI Goals and Objectives</h2>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Draft NSDI Goals and Objectives">
+<table>
+<caption>Draft NSDI Goals and Objectives</caption><thead><tr><th scope="col"><strong>Goals</strong></th><th scope="col" colspan="3"><strong>Objectives</strong></th></tr>
+</thead><tbody><tr><td>Governance: Implement National Governance and Collaboration</td><td>1.1 Governance and Institutions:</td><td>1.2 Policy and Legal:</td><td>1.3 Financial:</td></tr>
+<tr><td>Data and Technology: Strengthen/Adapt the Infrastructure and Leverage Advanced Technology</td><td>2.1 Data:</td><td>2.2 Innovation:</td><td>2.3 Standards: 2.4 Infrastructure</td></tr>
+<tr><td>People: Building a Skilled and Inclusive Geospatial Workforce for a Sustainable Future.</td><td>3.1. Partnerships:</td><td>3.2 Capacity and Education:</td><td>3.3 Communication and Engagement:</td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-20">
+<h2 id="section-20">Priority National Datasets</h2>
+<ul><li>
+Parcels</li>
+<li>
+Addresses</li>
+<li>
+Buildings/Structures</li>
+<li>
+Imagery</li>
+<li>
+Utilities</li>
+<li>
+Hydrography</li>
+<li>
+Land Use</li>
+<li>
+Roads and trails</li>
+<li>
+Boundaries</li>
+</ul>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="United States Census Bureau logo" width="190" height="71"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="USGS science for a changing world logo" width="291" height="124"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="FGDC.GOV FEDERAL GEOGRAPHIC DATA COMMITTEE logo" width="220" height="93"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-21">
+<h2 id="section-21">Draft NSDI Goal 1: Governance</h2>
+<p><strong>Objective 1.1 Governance and Institutions:</strong> Establish a dynamic, inclusive, and collaborative governance and coordination structure where all sectors develop, contribute to, and implement a shared vision for the NSDI with a commitment to working together for the benefit of the Nation.</p>
+
+<p><strong>Objective 1.2 Policy and Legal:</strong> Refine the policy and legal framework to enable the NSDI.</p>
+
+<p><strong>Objective 1.3 Financial:</strong> Identify and meet financial and other resource needs necessary for implementing the NSDI Strategic Plan.</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="" width="190" height="71"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="" width="291" height="124"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-22">
+<h2 id="section-22">Draft NSDI Goal 2: Data and Technology</h2>
+<p><strong>Objective 2.1 Data:</strong> Evaluate, improve, monitor, and advance the Nation&#39;s geospatial data portfolio and supporting infrastructure.</p>
+
+<p><strong>Objective 2.2 Innovation:</strong> Prepare for, embrace, and promote rapid adoption of advancements in technology.</p>
+
+<p><strong>Objective 2.3 Standards:</strong> Create and maintain national standards that promote global interoperability and data sharing. Policies, strategies, and standards are key to a stable market.</p>
+
+<p><strong>Objective 2.4 Infrastructure:</strong> Create an integrated geospatial platform, connecting systems of data with a highly efficient searchable index based on common standards of practice and enabling use of advanced technologies.</p>
+
+</section>
+<section aria-labelledby="section-23">
+<h2 id="section-23">Draft NSDI Goal 3: People</h2>
+<p><strong>Objective 3.1 Partnerships:</strong> Foster multi-sectoral partnerships with tribal, federal, state, and local governments, private industry, academia, philanthropic, and non-profit organizations…</p>
+
+<p><strong>Objective 3.2 Capacity and Education:</strong> Access to a trained and educated geospatial workforce with the tools they need to deliver high-quality work.</p>
+
+<p><strong>Objective 3.3. Communication and Engagement:</strong>
+Strengthen awareness and understanding of the NSDI and its values.</p>
+
+</section>
+<section aria-labelledby="section-24">
+<h2 id="section-24">Next Steps</h2>
+<ul><li>
+Finalize draft plan</li>
+<li>
+Release for public comment (May)</li>
+<li>
+Adjudicate comments (June)</li>
+<li>
+Finalize Plan through FGDC (July)</li>
+<li>
+Develop implementation plan(s) (Today through ~ 2025)</li>
+<li>
+Implement (now through end of careers)!</li>
+</ul>
+</section>
+<section aria-labelledby="section-25">
+<h2 id="section-25">Opportunities to Work Together</h2>
+<ul><li>
+Input on NSDI Strategic Plan during public comment period</li>
+<li>
+Call for nominations for National Geospatial Advisory Committee</li>
+<li>
+Fill data gaps</li>
+<li>
+Update and maintain data you have</li>
+<li>
+Make your data available</li>
+<li>
+Tell your story</li>
+<li>
+Start thinking about your part in the strategic plan</li>
+<li>
+How can we achieve the vision of the NSDI in 2035?</li>
+<li>
+What actions are the responsibility of state and local governments?</li>
+<li>
+Other ideas?</li>
+</ul>
+</section>
+<section aria-labelledby="section-26">
+<h2 id="section-26">Questions?</h2>
+<p>FGDC.GOV</p>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+{
+  "document_id": "logo-imagery-screenshot-imagery-fca1",
+  "audited_at": "2026-03-10T22:05:17.990662Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.25,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The source document consists of 3 pages. Page 3 contains two primary sections: 'How to enroll Open Subscription Applications' and 'How to delete your account'. The output JSON's 'sections' array contains content from Page 1 and Page 2 only, ending after the 'How to update your profile' section. The entirety of Page 3 is missing from the structured content, despite the metadata correctly identifying a page count of 3 and a heading count of 9 (which should include the missing sections).",
+      "source_pdf_quote": "Entire Page 3 content, including headings: 'How to enroll Open Subscription Applications' and 'How to delete your account' and their respective steps.",
+      "output_quote": "The JSON 'sections' array ends at index 1, with the last subsection being 'How to update your profile'. No content from Page 3 is present.",
+      "location": "Page 3 of the source document."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is significantly different because the entire third page of the document is missing from the output. The source document contains three pages of instructions, but the JSON output terminates after the third subsection of the second page ('How to update your profile'). This constitutes a material divergence in the organization and completeness of the document.",
+      "source_pdf_quote": "Page 3 of 3 contains two main sections: 'How to enroll Open Subscription Applications' and 'How to delete your account'.",
+      "output_quote": "The JSON `sections` array contains only two elements, and the document ends after the 'How to update your profile' subsection of the second section.",
+      "location": "End of document, representing missing Page 3 content."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is severely compromised. Instructional steps from one section are interleaved with UI elements (buttons and links) from entirely different sections. For example, the 'Send Request' button, which belongs to the 'How to retrieve your username' section, is rendered inside the 'How to unlock your account' section. Conversely, buttons like 'SAVE' and 'CONFIRM' from the registration section are moved to the unlock section. This makes the guide's visual flow illo",
+      "source_pdf_quote": "In the source PDF (Page 1), 'How to unlock your account' Step 2 is 'Click “Trouble Signing On?”'. The 'Send Request' button is part of 'How to retrieve your username' Step 5.",
+      "output_quote": "In the HTML, the 'Send Request' button appears immediately after Step 2 of the 'How to unlock your account' section.",
+      "location": "How to unlock your account section"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images, specifically screenshots of the software interface used for instructional purposes, are missing in the HTML output. They have been replaced by solid green rectangular placeholders. This includes screenshots of the password change tab, profile information tab, and account deletion confirmation dialog. Additionally, the MyNCID logo is missing from the header.",
+      "source_pdf_quote": "The source PDF (Page 2) contains a large screenshot of the 'Password' tab and Page 3 contains a screenshot of the account deletion dialog.",
+      "output_quote": "The HTML output shows solid green rectangles in place of these screenshots.",
+      "location": "How to change your password, How to update your profile, and How to delete your account sections"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "A specific UI element block containing 'Forgot Username', 'Forgot Password', and 'Unlock Account' links is duplicated twice within the 'How to register' section of the HTML. This content does not belong in that section at all according to the source PDF, indicating a failure in content extraction and placement that leads to visual duplication.",
+      "source_pdf_quote": "The source PDF (Page 1) shows this block of links only in the 'How to unlock your account' and 'How to retrieve your username' sections.",
+      "output_quote": "The block of links appears twice within the 'How to register' section (after Step 4 and Step 5).",
+      "location": "How to register section"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The numbered lists in the source are incorrectly split into multiple separate list objects in the JSON. For example, the 6-step 'How to register' process is fragmented into four distinct list elements due to the placement of interstitial images and paragraphs. This breaks the structural continuity of the numbered steps. Additionally, Step 5 of 'How to register' is split across a list item, an image, and a separate paragraph element.",
+      "source_pdf_quote": "Page 1, 'How to register' section: A single continuous list numbering 1 through 6.",
+      "output_quote": "In `sections[0].subsections[0].elements`, the list is fragmented into separate `list` objects at indices 0 (Steps 1-2), 2 (Steps 3-4), 4 (Step 5), and 7 (Step 6).",
+      "location": "sections[0].subsections[0].elements"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.6681851584453646,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5013,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.25,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.5752895752895753,
+      "shingling_precision": 0.8514285714285714,
+      "duplication_ratio": 0.027955736750145604,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.94,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 69667,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

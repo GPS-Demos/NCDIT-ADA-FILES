@@ -1,0 +1,118 @@
+{
+  "document_id": "draft-addressnc-specifications-20210811-68610610",
+  "audited_at": "2026-03-10T21:59:57.444687Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.5930232558139534,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The conversion resulted in the loss of several full pages and significant sub-sections. Page 2 (the 'Contents' page) is entirely missing. Pages 6, 7, and 8, which contain the majority of the 'Appendix A - Fields' table, are absent. Additionally, the beginning of Appendix B on page 9, specifically the 'NC Counties' list, is missing entirely.",
+      "source_pdf_quote": "Page 2 (Contents), Page 6 (Fields Post_Code to StateFIPS), Page 7 (Fields CountyFIPS to USNG), Page 8 (Fields DDLat to UniqueID), and Page 9 (NC Counties domain list).",
+      "output_quote": "The output skips directly from the cover page content to the 'Preface' on page 3. The tables for Appendix A end at field index 10 (St_PosMod), omitting three full pages of subsequent fields. The 'NC Counties' list from page 9 is nowhere in the output.",
+      "location": "Contents (Page 2), Appendix A (Pages 6-8), Appendix B (Page 9)"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The tables in Appendix A and Appendix B are severely truncated. The 'Appendix A - Fields' table in the source contains approximately 47 data rows across pages 4-8; the output only contains 10 rows, a loss of roughly 79%. The 'Place Type' domain table in Appendix B contains 54 rows across pages 9-13; the output starts at 'Industrial – Manufacturing' (page 11), omitting the first 19 rows from pages 9 and 10, a loss of approximately 35%.",
+      "source_pdf_quote": "Appendix A - Fields table contains 47 rows (Add_Number through UniqueID). Place Type domain table contains 54 rows (Agricultural through Vacant).",
+      "output_quote": "Appendix A table in JSON only contains 10 rows (Add_Number through St_PosMod). Place Type table in JSON contains 35 rows (Industrial - Manufacturing through Vacant).",
+      "location": "Appendix A (Pages 4-8), Appendix B (Pages 9-13)"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Large portions of the appendices are missing. As noted in C4, the 'Appendix A - Fields' section lost approximately 80% of its content. The 'Appendix B - Domains' section is missing the entire 'NC Counties' sub-section and roughly 35% of the 'Place Type' table content.",
+      "source_pdf_quote": "Appendix A (fields on pages 5-8 like LSt_PreDir, St_Address, GEOID, Latitude, DateUpdate, etc.). Appendix B (NC Counties list on page 9 and Place Type attributes on pages 9-10 like Agricultural, Cemetery, Civic, and Commercial sub-types).",
+      "output_quote": "The output for Appendix A ends prematurely. The output for Appendix B omits the first two pages of its content.",
+      "location": "Appendix A (Pages 5-8), Appendix B (Pages 9-10)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The output JSON fails to represent the primary structural heading 'Appendix B - Domains' from page 9 of the source PDF. This is a major section heading (matching 'Appendix A - Fields' in style). Its omission leads to all subsequent content from Appendix B (Place Type tables and the Placement section) being incorrectly grouped under the 'Appendix A - Fields' section (Section 3). This is a significant failure in preserving the document's organizational structure.",
+      "source_pdf_quote": "Appendix B - Domains (Heading on page 9)",
+      "output_quote": "The heading is entirely absent from the JSON; the content that follows it in the PDF is nested inside Section 3 ('Appendix A - Fields').",
+      "location": "Between Appendix A tables and Domain Attribute tables, page 9"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The 'Placement' table on page 13 of the source PDF is a simple single-column list of options. However, in the output JSON ('Placement Options' table), the first data item 'Structure – Rooftop' is incorrectly identified as a header row ('cell_type': 'header'). This corrupts the table's structural meaning by mislabeling data as a column header.",
+      "source_pdf_quote": "Placement table on page 13 starting with 'Structure – Rooftop'.",
+      "output_quote": "\"cell_type\": \"header\", \"content\": [ { \"text\": \"Structure – Rooftop\" ... } ]",
+      "location": "Section 'Appendix A - Fields', 'Placement Options' table (element index 10), page 13"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly compromised by the omission of large sections of core content. Specifically, the majority of the field definition table from Appendix A (spanning PDF pages 5-8) and the entire 'NC Counties' table from Appendix B (PDF page 9) are missing from the HTML flow. A user cannot find the same information in the output as it has been truncated, moving directly from the first row of page 5 content ('St_PosMod') to the 'Domain Attribute Descriptions' ",
+      "source_pdf_quote": "The document structure proceeds from 'Appendix A - Fields' (pages 4-8) containing 50+ rows of field definitions, followed by 'Appendix B - Domains' starting with a grid of 'NC Counties' (page 9).",
+      "output_quote": "The HTML output shows 'Appendix A - Fields - Part 1' followed by 'Part 2' which contains only the single 'St_PosMod' row. It then skips directly to 'Domain Attribute Descriptions - Industrial to Preserved Open Space' (a subsection of Appendix B). All intervening fields and the NC Counties table are missing visually from the page flow.",
+      "location": "Sections 'Appendix A - Fields' and 'Appendix B - Domains', corresponding to PDF pages 5-9."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The tables in the HTML output are severely truncated. The main table in 'Appendix A - Fields' is split into parts, but 'Part 2' contains only one row from page 5 of the PDF, and then stops. Over 30 rows of data spanning pages 5, 6, 7, and 8 of the source PDF are absent. Furthermore, the 'NC Counties' table from page 9 is missing entirely. This constitutes a visual corruption of the data presentation where only a fraction of the table content is rendered.",
+      "source_pdf_quote": "Table rows from 'LSt_PreDir' to 'UniqueID' on PDF pages 5-8, and the 'NC Counties' grid on page 9.",
+      "output_quote": "The 'Part 2' table ends after the 'St_PosMod' row. No subsequent field rows or the NC Counties table appear in the screenshot before the next section begins.",
+      "location": "Appendix A and beginning of Appendix B, pages 5-9."
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.6679194630872484,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5012,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5930232558139534,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.5078587466829966,
+      "shingling_precision": 0.9753038024304195,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.9,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 97555,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

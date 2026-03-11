@@ -1,0 +1,112 @@
+{
+  "document_id": "208m-endpoint-reseller-price-list-686b18db",
+  "audited_at": "2026-03-10T21:53:44.647804Z",
+  "quality_score": 72,
+  "fidelity_composite": 0.7025,
+  "fidelity_content": 0.8837209302325582,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document exhibits severe structural failure regarding price list tables, which are the core content. While programmatic recall is high, indicating text was extracted, the fidelity report identifies that multiple vendors (Trellix, Sophos, CrowdStrike, Cisco) have tables truncated from dozens of rows down to just one or two, and four full pages of the Sophos price list are visually omitted despite remaining headers. This represents a catastrophic loss of utility for a price list document.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "Several tables in the output are significantly truncated compared to the source. 1. The Trellix price list table (element index 12) is captioned as 'Lines 10-29' but only contains 2 data rows (Lines 10 and 11), missing 18 rows from that specific page range alone. 2. The CrowdStrike 'Cost Proposal Form' table (element index 17) only contains 1 row, whereas the source on page 16 shows 9 distinct cost item rows. 3. The Cisco 'Cost Proposal Form' table (element index 21) only contains 1 row, whereas",
+      "source_pdf_quote": "Source Page 14 contains 20 rows (Lines 10-29). Source Page 16 contains 9 rows of cost items. Source Page 19 contains 8 rows of cost items.",
+      "output_quote": "Output element index 12 contains 2 rows. Output element index 17 contains 1 row. Output element index 21 contains 1 row.",
+      "location": "Trellix (index 12), CrowdStrike (index 17), and Cisco (index 21) sections."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Within the 'TRELLIX (Formerly MCAFEE)' section, substantial tabular content is omitted. The 'Additional Modules required or proposed...' table on page 10 (approx. 11 rows) and the 'Maintenance costs...' table on page 11 (approx. 10 rows) are entirely absent from the structured JSON output. This represents a loss of more than 25% of the information for that section.",
+      "source_pdf_quote": "Source Page 10: 'Additional Modules required or proposed...' table with 11 rows. Source Page 11: 'Maintenance costs, to include, per year' table with 10 rows.",
+      "output_quote": "The tables mentioned above are completely missing from the structured data in the Trellix section (elements 8-13).",
+      "location": "Trellix section (Pages 10-11 in source)."
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The output fails to capture significant tabular data across multiple sections. First, the table on page 13 of the source (Lines 1-9 of the Carahsoft Trellix Price List) is missing; the corresponding table in the output (table-4) begins at Line 10. Second, the 'Cost Proposal Form' table for CrowdStrike on page 14 is incomplete, containing only the first data row ('Cloud Subscription/ Licensing Fee') and omitting approximately eight other rows present in the source (e.g., 'Customization required/p",
+      "source_pdf_quote": "Table on page 13 (Lines 1-9); Table on page 14 (rows for 'Customization', 'Additional modules', etc.); Table on page 15 (Years 1-5 horizontal table).",
+      "output_quote": "table-4 (starts at Line 10); table-6 (contains only one data row); missing table for page 15.",
+      "location": "Carahsoft Trellix section (page 13); CrowdStrike section (pages 14-15)."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization is significantly compromised in the SHI (Sophos) Price List section. While the source PDF contains content across five pages (pages 5-9 of the original document), the converted HTML output only displays an image for the first page of this section (page 5) and then lists three empty 'SHI (Sophos) Price List (Continued)' headings with no content following them. This results in the complete visual omission of pages 6, 7, 8, and 9 of the Sophos price list, failing to faithful",
+      "source_pdf_quote": "The source PDF contains content for Sophos on pages 5 through 9, including Intercept X, Additional Modules, Technical Documentation, Installation Costs, and Support details.",
+      "output_quote": "The HTML screenshot shows 'SHI (Sophos) Price List (Continued)' headings followed by no content, skipping the material from PDF pages 6, 7, 8, and 9.",
+      "location": "SHI (Sophos) Price List section, starting around the middle of the HTML screenshot."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The tables for the Trellix (Formerly McAfee) section are severely misrendered and truncated. The source PDF (pages 13-15) lists 43 line items in a continuous price list. However, the HTML output splits these into separate tables that omit most of the rows. Specifically, the table for 'Lines 10-29' only displays rows 10 and 11, and the table for 'Lines 30-43' only displays row 30. Lines 1-9, 12-29, and 31-43 are missing entirely from the visual output, rendering the tables incomplete and useless ",
+      "source_pdf_quote": "PDF Pages 13, 14, and 15 show a complete table with line items 1 through 43.",
+      "output_quote": "The HTML screenshot tables 'Carahsoft Trellix Price List - Lines 10-29' and 'Carahsoft Trellix Price List - Lines 30-43' show only lines 10, 11, and 30 respectively.",
+      "location": "Carahsoft Trellix (Formerly McAfee) Price List (Continued) section."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "In the Broadcom (Symantec) section, a URL in the 'Training' row of the first table is broken. The hyphen used for a line-break in the source text was included in the 'href' and 'text' properties of the link, and the final word of the URL ('courses') was excluded from the link object entirely. This results in a broken link that would not function as intended.",
+      "source_pdf_quote": "https://www.symantec.com/services/education-services/training-courses",
+      "output_quote": "href: 'https://www.symantec.com/services/education-services/training-', text: 'https://www.symantec.com/services/education-services/training-'",
+      "location": "Broadcom (Symantec) section, first table, 'Training' row (page 3)."
+    }
+  ],
+  "action_items": [
+    "Verify if the high programmatic recall text for pages 6-9 is present but hidden or misrouted in the HTML",
+    "Manually reconstruct the Trellix, CrowdStrike, and Cisco price tables to include all omitted rows",
+    "Fix the broken training URL in the Broadcom/Symantec section"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7025,
+      "text_match": 0.6991150442477876,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7176,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7025,
+      "fidelity_content": 0.8837209302325582,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9356032568467801,
+      "shingling_precision": 0.5580573951434878,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 113792,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

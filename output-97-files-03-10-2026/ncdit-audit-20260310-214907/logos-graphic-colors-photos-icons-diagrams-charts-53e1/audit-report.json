@@ -1,0 +1,102 @@
+{
+  "document_id": "logos-graphic-colors-photos-icons-diagrams-charts-53e1",
+  "audited_at": "2026-03-10T22:21:59.975952Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6976744186046512,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "Page 2 of the source PDF, which contains the 'Contents' (Table of Contents), is entirely missing from the output elements. Although the output is semantically structured with headings, the text and information on the original TOC page itself were not preserved.",
+      "source_pdf_quote": "The entire content of Page 2, starting with 'Contents' and listing sections such as 'Secretary’s Message' and 'About NCDIT' with their corresponding page numbers.",
+      "output_quote": "The output skips from the cover page (Section 1) directly to the Secretary's Message (Section 2).",
+      "location": "Page 2, Table of Contents"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is broken in the section covering page 39. The pipeline created a synthetic H2 heading 'Additional Awards and Recognitions' which contains three profiles. The first profile ('Hung Nguyen') is correctly assigned H3. However, the next two siblings ('N.C. Department of Transportation, QAnywhere Project' and 'Joey Ennis, N.C. Department of Administration') are assigned H4. This implies they are sub-sections of the 'Hung Nguyen' profile, which is structurally incorrect as they a",
+      "source_pdf_quote": "The three headings 'Hung Nguyen...', 'N.C. Department of Transportation...', and 'Joey Ennis...' on page 39 are visually identical in style and hierarchy.",
+      "output_quote": "heading-65 (Hung Nguyen...) level: 3; heading-66 (N.C. Department of Transportation...) level: 4; heading-67 (Joey Ennis...) level: 4",
+      "location": "Additional Awards and Recognitions section, elements index 65-67"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "A significant number of meaningful images are missing from the HTML output. Specifically, throughout the 'Awards and Recognitions' section (PDF pages 33-40), numerous photos of award recipients and images of official certificates/awards are replaced by large green rectangular placeholders. Additionally, the illustrative icons for the 'Guiding Principles' on page 5 are absent in the HTML version, showing only the text labels. While some decorative cover elements are intentionally hidden, these mi",
+      "source_pdf_quote": "The source PDF contains several meaningful photos in the Awards section (e.g., page 33: NCDIT-Public Safety CIO Glenn Mack and Secretary Jim Weaver; page 40: FBI certificate). Page 5 contains circles with icons for guiding principles.",
+      "output_quote": "The HTML output shows large green blocks as placeholders where images should be (e.g., in the NASCIO and FBI recognition sections). The guiding principles list contains no icons.",
+      "location": "Sections: 'Vision, Mission and Priorities' and 'Awards and Recognitions'"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a data error in the population figure on page 21. The source PDF states the population is '10,777,959', whereas the output provides '10,77,959', missing a digit and significantly altering the reported value. Additionally, an external link was incorrectly added to the word 'communications' in Section 6 (page 7) where none exists in the source.",
+      "source_pdf_quote": "As a result, 99 percent (10,777,959) of the state’s population",
+      "output_quote": "As a result, 99 percent (10,77,959) of the state’s population",
+      "location": "Section 11, Goal: Foster a connected North Carolina, page 21"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "There are several issues with links. First, the link for 'Information Technology Strategy Board' on page 10 points to the wrong URL (the NCLDS board members page instead of the IT Strategy Board page). Second, active links in the source PDF for 'N.C.G.S. 116E' (p. 29) and 'NC OneMap' (p. 30) are missing in the output.",
+      "source_pdf_quote": "Links for 'N.C.G.S. 116E' (p. 29) and 'NC OneMap' (p. 30) exist in the source PDF.",
+      "output_quote": "The text for these entities is present but not wrapped in <a> tags. The link for 'Board' in the IT Strategy Board section (p. 10) uses the NCLDS URL: https://it.nc.gov/about/boards-commissions/nclds-board/members",
+      "location": "Sections 'Leverage data assets...' (p. 29-30) and 'Boards and Commissions' (p. 10)"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9608346507343296,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5663,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6976744186046512,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9392245895913378,
+      "shingling_precision": 0.9852523587066043,
+      "duplication_ratio": 0.0012930298372734149,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.92,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 153582,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

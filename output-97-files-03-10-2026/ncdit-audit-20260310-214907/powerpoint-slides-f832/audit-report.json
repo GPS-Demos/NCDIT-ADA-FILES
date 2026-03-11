@@ -1,0 +1,97 @@
+{
+  "document_id": "powerpoint-slides-f832",
+  "audited_at": "2026-03-10T22:31:49.623422Z",
+  "quality_score": 81,
+  "fidelity_composite": 0.8103,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant content loss (recall 0.81) corroborated by major fidelity findings regarding omitted infographic text and missing URLs. Structural integrity is compromised by a collapsed heading hierarchy where eleven slides were merged into a single section, and several critical visual data elements (maps and agency logos) are absent from the output.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are major text omissions in sections involving infographics. On page 10 ('The Geospatial Data Act'), the four paragraphs explaining the act's function (e.g., 'Formalizes governance structures...', 'Provides policy and guidance...') are missing from the text elements. On page 15 ('How is the NSDI Being Used?'), the categorical labels (Policy & Compliance, Assessment, etc.) and the sector labels (Agriculture, Hazards, etc.) are entirely omitted. Additionally, page 18 is missing the two URLs ",
+      "source_pdf_quote": "Formalizes governance structures for geospatial data including the Federal Geographic Data Committee (FGDC) and the National Geospatial Advisory Committee (NGAC) [Page 10 OCR]; NSDI Supports: Policy & Compliance, Assessment, Forecasting, Monitoring, Planning, Mapping, Modeling, Navigation, Early Warning. [Page 15 OCR]; broadbandmap.fcc.gov/home [Page 18 OCR]",
+      "output_quote": "[Text missing from corresponding sections in the JSON, represented only as generic image descriptions or left out entirely]",
+      "location": "Sections for page 10, 15, and 18"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is significantly flawed in Section 11. This single section object contains the content of 11 distinct slides (from Page 11 to Page 21). The slide titles within this section (e.g., 'Economic Value of Location', 'What does the NSDI consist of?') are rendered as heading level 2 elements inside the elements array. Since Section 11 itself is likely an H2 level section, these internal headings should be level 3 if they are subsections, or more appropriately, each slide should hav",
+      "source_pdf_quote": "The source document has distinct slides for 'Economic Value of Location' (p12), 'What does the NSDI consist of?' (p14), etc.",
+      "output_quote": "Section 11 contains multiple elements of type 'heading' with 'level': 2 (e.g., heading-3, heading-5, heading-6, heading-8, heading-10, heading-11, heading-12) nested within a single section object.",
+      "location": "Section index 11, elements with IDs heading-3 through heading-12"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images and graphics from the source PDF are missing or broken in the HTML rendering. Specifically, the grid of 32 agency logos on Slide 4 ('Who is the FGDC?'), the US map and NC Report Card graphic on Slide 8 ('NSGIC Maturity Assessment'), and the broadband maps on Slide 15 ('NSDI In Action Serving Citizens – North Carolina') are absent. These visuals provide essential context and data that are not fully captured by the accompanying text.",
+      "source_pdf_quote": "Slide 4 shows a grid of 32 agency logos; Slide 8 shows a US map and 'North Carolina Report Card' graphic; Slide 15 shows two map screenshots illustrating broadband data.",
+      "output_quote": "The HTML rendering displays empty green placeholder boxes or simply omits these graphics entirely under their respective sections.",
+      "location": "Sections: 'Who is the FGDC?', 'NSGIC Maturity Assessment', and 'NSDI In Action Serving Citizens – North Carolina'"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion mostly captures links correctly (e.g., the references on Slide 11), but it misses two government/educational URLs present as text on Slide 18 ('NSDI In Action Serving Citizens – North Carolina'). These URLs are clearly visible in the source and captured in OCR but are completely absent from the output text or as link elements.",
+      "source_pdf_quote": "broadbandmap.fcc.gov/home\nwww.nconemap.gov/pages/broadband",
+      "output_quote": "The text is missing from Section 11's corresponding content block for the 'NSDI In Action' slide.",
+      "location": "Page 18; Section 11, after 'heading-9'"
+    }
+  ],
+  "action_items": [
+    "Verify and restore missing text elements from infographics on slides 10 and 15.",
+    "Restructure Section 11 to provide unique headings for each of the 11 merged slides.",
+    "Insert missing map and logo visuals with appropriate alternative text for accessibility.",
+    "Capture and link the missing government/educational URLs on slide 18."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8103,
+      "text_match": 0.879281740997365,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8055,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8103,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8099604458827759,
+      "shingling_precision": 0.9615795090715048,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 82697,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

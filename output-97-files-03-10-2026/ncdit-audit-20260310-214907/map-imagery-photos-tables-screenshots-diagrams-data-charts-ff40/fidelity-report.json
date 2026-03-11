@@ -1,0 +1,152 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-ff40",
+  "composite_score": 0.521,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output contains repeated blocks of metadata/style instructions that do not exist in the source PDF. Specifically, the phrases 'Title is Avenir Next LT Pro Regular 24pt' and 'Subtitle is Avenir Next LT Pro Light 18pt' are included as paragraph elements at the start of sections 1 through 11. These lines appear to be artifacts from the provided OCR text rather than actual document content. Since they appear zero times in the source and 11 times in the output, this constitutes a major duplication and noise injection defect.",
+        "b_evidence_source": "The source PDF images do not contain the text 'Title is Avenir Next LT Pro Regular 24pt' or 'Subtitle is Avenir Next LT Pro Light 18pt'.",
+        "b_evidence_output": "\"text\": \"Title is Avenir Next LT Pro Regular 24pt\",\n\"text\": \"Subtitle is Avenir Next LT Pro Light 18pt\"",
+        "b_evidence_location": "Sections 1 through 11, initial elements.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is flat but functional. Section 1 utilizes a level 2 heading as the primary title element, and subsequent sections use titles defined in the section metadata which effectively serve as heading levels. There are no skips in hierarchy (e.g., H1 to H3) identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "There are no tables present in the source document to evaluate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The logical reading order and semantic grouping are corrupted in several sections. In Section 1, the central block of presentation text (Roy Cooper, James Weaver, Hope Morgan, etc.) is missing from text elements and relegated to image alt text at the end of the section. In Section 2, the heading 'What We're Doing' is omitted as text and placed in alt text. Most significantly, in Section 11, the reading order is reversed vertically: the bottom row of text labels is placed before the top row of icons, decoupling the labels from their respective graphics and reversing the expected top-to-bottom flow. Additionally, Section 13 omits the primary 'Questions?' text as an element, using it only as a section title.",
+        "b_evidence_source": "Page 11 shows a row of four icons above their corresponding labels (Census, NOAA, Elevation, Hydrography).",
+        "b_evidence_output": "In Section 11, paragraphs containing labels (e.g., '2020 CENSUS UPDATES AND ASSISTANCE') appear before all four icon images.",
+        "b_evidence_location": "Section 1, Section 2, Section 11, Section 13.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list on Page 3 is correctly converted. Notably, the pipeline inferred a nested list structure for the subsections under 'Accomplishments' by interpreting the visual indentation in the source, which is a high-fidelity structural representation.",
+        "b_evidence_source": "Page 3 contains a bulleted list where items under 'Accomplishments' are indented.",
+        "b_evidence_output": "\"items\": [\n  {\n    \"content\": [\n      { \"text\": \"Accomplishments\" ... }\n    ],\n    \"nested_list\": {\n      \"type\": \"list\",\n      \"list_type\": \"unordered\",\n      \"items\": [\n        { \"content\": [ { \"text\": \"Data Governance\" ... } ] } ...",
+        "b_evidence_location": "Section 3, element index 2.",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "URLs identified in the source PDF (Pages 2 and 13) are correctly captured as text within paragraphs. No fabricated or broken links were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5454545454545454,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output contains repeated blocks of metadata/style instructions that do not exist in the source PDF. Specifically, the phrases 'Title is Avenir Next LT Pro Regular 24pt' and 'Subtitle is Avenir Next LT Pro Light 18pt' are included as paragraph elements at the start of sections 1 through 11. These lines appear to be artifacts from the provided OCR text rather than actual document content. Since they appear zero times in the source and 11 times in the output, this constitutes a major duplication and noise injection defect.\",\n      \"b_evidence_source\": \"The source PDF images do not contain the text 'Title is Avenir Next LT Pro Regular 24pt' or 'Subtitle is Avenir Next LT Pro Light 18pt'.\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"Title is Avenir Next LT Pro Regular 24pt\\\",\\n\\\"text\\\": \\\"Subtitle is Avenir Next LT Pro Light 18pt\\\"\",\n      \"b_evidence_location\": \"Sections 1 through 11, initial elements.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is flat but functional. Section 1 utilizes a level 2 heading as the primary title element, and subsequent sections use titles defined in the section metadata which effectively serve as heading levels. There are no skips in hierarchy (e.g., H1 to H3) identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"There are no tables present in the source document to evaluate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The logical reading order and semantic grouping are corrupted in several sections. In Section 1, the central block of presentation text (Roy Cooper, James Weaver, Hope Morgan, etc.) is missing from text elements and relegated to image alt text at the end of the section. In Section 2, the heading 'What We're Doing' is omitted as text and placed in alt text. Most significantly, in Section 11, the reading order is reversed vertically: the bottom row of text labels is placed before the top row of icons, decoupling the labels from their respective graphics and reversing the expected top-to-bottom flow. Additionally, Section 13 omits the primary 'Questions?' text as an element, using it only as a section title.\",\n      \"b_evidence_source\": \"Page 11 shows a row of four icons above their corresponding labels (Census, NOAA, Elevation, Hydrography).\",\n      \"b_evidence_output\": \"In Section 11, paragraphs containing labels (e.g., '2020 CENSUS UPDATES AND ASSISTANCE') appear before all four icon images.\",\n      \"b_evidence_location\": \"Section 1, Section 2, Section 11, Section 13.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list on Page 3 is correctly converted. Notably, the pipeline inferred a nested list structure for the subsections under 'Accomplishments' by interpreting the visual indentation in the source, which is a high-fidelity structural representation.\",\n      \"b_evidence_source\": \"Page 3 contains a bulleted list where items under 'Accomplishments' are indented.\",\n      \"b_evidence_output\": \"\\\"items\\\": [\\n  {\\n    \\\"content\\\": [\\n      { \\\"text\\\": \\\"Accomplishments\\\" ... }\\n    ],\\n    \\\"nested_list\\\": {\\n      \\\"type\\\": \\\"list\\\",\\n      \\\"list_type\\\": \\\"unordered\\\",\\n      \\\"items\\\": [\\n        { \\\"content\\\": [ { \\\"text\\\": \\\"Data Governance\\\" ... } ] } ...\",\n      \"b_evidence_location\": \"Section 3, element index 2.\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"URLs identified in the source PDF (Pages 2 and 13) are correctly captured as text within paragraphs. No fabricated or broken links were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5454545454545454\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output has several major layout discrepancies. First, it includes technical metadata text (e.g., 'Title is Avenir Next LT Pro Regular 24pt', 'Subtitle is Avenir Next LT Pro Light 18pt') at the beginning of almost every section, which is not part of the source PDF's content. Second, an entire major section from page 2 of the PDF ('What We're Doing', including the grid of categories and the bottom row of logos/links) is completely missing from the HTML rendering, except for a single URL. Third, the collaboration sections (e.g., page 11) are visually cluttered with multiple inconsistently sized green blocks that disrupt the flow of information compared to the clean, icon-based layout of the source PDF.",
+        "b_evidence_source": "Page 2 of the PDF contains a 'What We're Doing' section with four tiles and a footer row with logos for 'nc ONE map', 'Annual Report', and 'NC Parcels Program'. Page 11 shows four circular icons with text labels in a single horizontal row.",
+        "b_evidence_output": "The HTML screenshot omits the 'What We're Doing' content entirely after the URL. Metadata labels like 'Title is Avenir Next LT Pro Regular 24pt' appear repeatedly. In the 'Intergovernmental Collaboration' section, the clean horizontal layout is replaced by vertically stacked text and multiple green boxes of varying dimensions.",
+        "b_evidence_location": "Throughout the document, specifically after the URL on page 2 and in the collaboration sections on pages 8-12.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "There are no tables present in the source PDF document, so this check is not applicable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful images and logos from the source are missing or replaced by generic green blocks in the HTML. Most notably, the 'nc ONE map' logo and other program logos from page 2 are absent. While decorative graphics (like the satellite image on page 1) may be hidden intentionally, the loss of program logos that accompany descriptive text reduces the visual fidelity and informational value of the conversion.",
+        "b_evidence_source": "PDF page 2 contains the 'nc ONE map' logo and various category icons. Pages 8-12 contain specific circular icons representing programs like 'Address NC' and 'Orthoimagery'.",
+        "b_evidence_output": "The HTML output for these sections either omits the images entirely (page 2) or replaces them with large green rectangular placeholders (pages 8-12).",
+        "b_evidence_location": "Page 2, and the Collaboration sections on pages 8-12.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no genuine body content duplication. While the document title appears at the very top and again in the content for page 1, this is acceptable as accessible navigation design. Technical metadata strings are repeated, but as they are not original body content, they do not qualify under this specific check.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output has several major layout discrepancies. First, it includes technical metadata text (e.g., 'Title is Avenir Next LT Pro Regular 24pt', 'Subtitle is Avenir Next LT Pro Light 18pt') at the beginning of almost every section, which is not part of the source PDF's content. Second, an entire major section from page 2 of the PDF ('What We're Doing', including the grid of categories and the bottom row of logos/links) is completely missing from the HTML rendering, except for a single URL. Third, the collaboration sections (e.g., page 11) are visually cluttered with multiple inconsistently sized green blocks that disrupt the flow of information compared to the clean, icon-based layout of the source PDF.\",\n      \"b_evidence_source\": \"Page 2 of the PDF contains a 'What We're Doing' section with four tiles and a footer row with logos for 'nc ONE map', 'Annual Report', and 'NC Parcels Program'. Page 11 shows four circular icons with text labels in a single horizontal row.\",\n      \"b_evidence_output\": \"The HTML screenshot omits the 'What We're Doing' content entirely after the URL. Metadata labels like 'Title is Avenir Next LT Pro Regular 24pt' appear repeatedly. In the 'Intergovernmental Collaboration' section, the clean horizontal layout is replaced by vertically stacked text and multiple green boxes of varying dimensions.\",\n      \"b_evidence_location\": \"Throughout the document, specifically after the URL on page 2 and in the collaboration sections on pages 8-12.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"There are no tables present in the source PDF document, so this check is not applicable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful images and logos from the source are missing or replaced by generic green blocks in the HTML. Most notably, the 'nc ONE map' logo and other program logos from page 2 are absent. While decorative graphics (like the satellite image on page 1) may be hidden intentionally, the loss of program logos that accompany descriptive text reduces the visual fidelity and informational value of the conversion.\",\n      \"b_evidence_source\": \"PDF page 2 contains the 'nc ONE map' logo and various category icons. Pages 8-12 contain specific circular icons representing programs like 'Address NC' and 'Orthoimagery'.\",\n      \"b_evidence_output\": \"The HTML output for these sections either omits the images entirely (page 2) or replaces them with large green rectangular placeholders (pages 8-12).\",\n      \"b_evidence_location\": \"Page 2, and the Collaboration sections on pages 8-12.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no genuine body content duplication. While the document title appears at the very top and again in the content for page 1, this is acceptable as accessible navigation design. Technical metadata strings are repeated, but as they are not original body content, they do not qualify under this specific check.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 0,
+  "total_major": 4,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

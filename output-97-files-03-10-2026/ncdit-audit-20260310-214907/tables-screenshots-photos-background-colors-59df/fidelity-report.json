@@ -1,0 +1,213 @@
+{
+  "document_id": "tables-screenshots-photos-background-colors-59df",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains text that is either present in the source document or is a permitted AI-generated addition (like the omission placeholders). I found no evidence of invented section content, fabricated introductions, or other hallmarks of hallucination.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "I verified the URLs found in the footnotes and Appendix B. All URLs correspond exactly to those printed in the source PDF. No other contact information (phone, email) was present to verify.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output is missing a significant portion of the document. Specifically, Sections 1.1, 1.2, 1.3, 2.1, 2.2, and the entirety of Section 3 are absent, replaced by a token budget omission placeholder. Additionally, Page 8 containing Table 2 (Study Group members) is missing entirely from the content stream.",
+        "b_evidence_source": "Table 2 – 2024 Study Group (Page 8); Section 3 (Pages 21-32).",
+        "b_evidence_output": "{\"_omitted\": \"15 sections omitted for token budget\"}",
+        "b_evidence_location": "Sections 1.1-1.3, 2.1-2.2, 3.1-3.3, Table 2.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Three significant table failures were identified. 1) Table 3 (Population Breakdown) on page 9 is missing entirely. 2) The Appendix B table, which should contain 100 counties, only contains the first 14 rows (over 80% missing). 3) The Appendix C table is severely truncated, showing only 4 entries out of dozens present in the source document (over 90% missing).",
+        "b_evidence_source": "Table 3 – Breakdown of North Carolina Population, 2020 (Page 9); Appendix B full list of 100 counties (Pages 46-48); Appendix C full list of standards (Pages 49-50).",
+        "b_evidence_output": "Appendix B table ends at Caldwell County (reading_order 23); Appendix C table contains only 4 rows (reading_order 23).",
+        "b_evidence_location": "Table 3, Appendix B, Appendix C.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "While there are massive structural omissions (C3), the sections that were successfully converted (Executive Summary, Methodology, Goals tables) are largely complete. Minor sentence losses might occur but do not meet the 25% threshold for the included sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "I found one instance of date truncation in the footnotes. Footnote 11 lists the date as 'August 5, 201' instead of 'August 5, 2013'. This is a character-level truncation that alters the information provided.",
+        "b_evidence_source": "NENA-STA-002.1-2013, August 5, 2013, p 8.",
+        "b_evidence_output": "NENA-STA-002.1-2013, August 5, 201, p 8.",
+        "b_evidence_location": "Footnotes, ID c0_c0_c1_11 (page 28 in source).",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6395348837209303,
+    "penalty_sum": 31,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains text that is either present in the source document or is a permitted AI-generated addition (like the omission placeholders). I found no evidence of invented section content, fabricated introductions, or other hallmarks of hallucination.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"I verified the URLs found in the footnotes and Appendix B. All URLs correspond exactly to those printed in the source PDF. No other contact information (phone, email) was present to verify.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output is missing a significant portion of the document. Specifically, Sections 1.1, 1.2, 1.3, 2.1, 2.2, and the entirety of Section 3 are absent, replaced by a token budget omission placeholder. Additionally, Page 8 containing Table 2 (Study Group members) is missing entirely from the content stream.\",\n      \"b_evidence_source\": \"Table 2 – 2024 Study Group (Page 8); Section 3 (Pages 21-32).\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"15 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"Sections 1.1-1.3, 2.1-2.2, 3.1-3.3, Table 2.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Three significant table failures were identified. 1) Table 3 (Population Breakdown) on page 9 is missing entirely. 2) The Appendix B table, which should contain 100 counties, only contains the first 14 rows (over 80% missing). 3) The Appendix C table is severely truncated, showing only 4 entries out of dozens present in the source document (over 90% missing).\",\n      \"b_evidence_source\": \"Table 3 – Breakdown of North Carolina Population, 2020 (Page 9); Appendix B full list of 100 counties (Pages 46-48); Appendix C full list of standards (Pages 49-50).\",\n      \"b_evidence_output\": \"Appendix B table ends at Caldwell County (reading_order 23); Appendix C table contains only 4 rows (reading_order 23).\",\n      \"b_evidence_location\": \"Table 3, Appendix B, Appendix C.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"While there are massive structural omissions (C3), the sections that were successfully converted (Executive Summary, Methodology, Goals tables) are largely complete. Minor sentence losses might occur but do not meet the 25% threshold for the included sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"I found one instance of date truncation in the footnotes. Footnote 11 lists the date as 'August 5, 201' instead of 'August 5, 2013'. This is a character-level truncation that alters the information provided.\",\n      \"b_evidence_source\": \"NENA-STA-002.1-2013, August 5, 2013, p 8.\",\n      \"b_evidence_output\": \"NENA-STA-002.1-2013, August 5, 201, p 8.\",\n      \"b_evidence_location\": \"Footnotes, ID c0_c0_c1_11 (page 28 in source).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 5,\n    \"critical_count\": 1,\n    \"major_count\": 3,\n    \"minor_count\": 1,\n    \"penalty_sum\": 41,\n    \"score\": 0.5232558139534884\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the output against the source PDF, focusing on repetitive elements like headers, footers, and text blocks. Content such as the 'Ritter Strategic Services, LLC' text on the cover page is correctly mapped only once as a paragraph element following the logo. The section titles and table data are not duplicated. The footnote numbering and contents are correctly assigned and do not repeat incorrectly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is consistent. Major sections like 'Executive Summary', '1. Introduction', and the Appendices are assigned H2 levels. The main document title is correctly identified at the top. The sub-sections (e.g., 1.4 Methodology) preserve their hierarchical relationship relative to the parent sections. No levels are skipped (e.g., jumping from H1 to H3).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The output preserves complex table structures very well. In Table 4 (Call Volume), headers and data rows are aligned. For the population table in Appendix B (Page 46), the multi-level header (Geographic Area, April 1 2020, and the spanning 'Population Estimate' header for 2020-2022) is correctly captured using 'colspan' and 'rowspan' properties in the JSON. Similarly, the 'Goal' tables in Section 4 correctly identify the goal description rows as spanning headers.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the source PDF page by page and section by section as defined in the Table of Contents. Footnotes are correctly associated with the end of the sections where they appear (e.g., footnotes for section 2 appear at the end of section 2). Graphical elements like the NC flag and logos are placed in the logical flow of the text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are handled correctly. The set of 10 goals in the Executive Summary is represented as a clean list structure. Bulleted items within the main text (e.g., the bullet points explaining what the 2024 Plan will do in Section 1.2) are also correctly identified as unordered lists.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output correctly captures external URLs found in footnotes (e.g., census.gov and it.nc.gov links) and within the Appendix. The link targets match the visible text in the PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the output against the source PDF, focusing on repetitive elements like headers, footers, and text blocks. Content such as the 'Ritter Strategic Services, LLC' text on the cover page is correctly mapped only once as a paragraph element following the logo. The section titles and table data are not duplicated. The footnote numbering and contents are correctly assigned and do not repeat incorrectly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is consistent. Major sections like 'Executive Summary', '1. Introduction', and the Appendices are assigned H2 levels. The main document title is correctly identified at the top. The sub-sections (e.g., 1.4 Methodology) preserve their hierarchical relationship relative to the parent sections. No levels are skipped (e.g., jumping from H1 to H3).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The output preserves complex table structures very well. In Table 4 (Call Volume), headers and data rows are aligned. For the population table in Appendix B (Page 46), the multi-level header (Geographic Area, April 1 2020, and the spanning 'Population Estimate' header for 2020-2022) is correctly captured using 'colspan' and 'rowspan' properties in the JSON. Similarly, the 'Goal' tables in Section 4 correctly identify the goal description rows as spanning headers.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the source PDF page by page and section by section as defined in the Table of Contents. Footnotes are correctly associated with the end of the sections where they appear (e.g., footnotes for section 2 appear at the end of section 2). Graphical elements like the NC flag and logos are placed in the logical flow of the text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are handled correctly. The set of 10 goals in the Executive Summary is represented as a clean list structure. Bulleted items within the main text (e.g., the bullet points explaining what the 2024 Plan will do in Section 1.2) are also correctly identified as unordered lists.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output correctly captures external URLs found in footnotes (e.g., census.gov and it.nc.gov links) and within the Appendix. The link targets match the visible text in the PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output maintains the visual organization of the source PDF. The document structure starts with the cover information, followed by a navigation area (corresponding to the Table of Contents), and then sections 1 through 5 and the Appendices in the correct order. The layout effectively translates the single-column PDF text and tables into a responsive HTML format.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "All tables from the source PDF, including those in the methodology section (Tables 1-2), the environment section (Tables 3-4), the Goals and Objectives section (Goals 1-10), and the extensive data tables in the Appendices and financial spreadsheets, are correctly rendered in the HTML. Columns are aligned, headers are distinct, and the content remains readable and accurately structured.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The meaningful technical diagram 'Figure 1 – Simplified NENA i3 NG911 Conceptual System Diagram' found on page 24 of the source PDF is entirely missing from the HTML output. While the caption text is present, the graphical information representing the system architecture is gone. Additionally, the photo of the North Carolina flag on the cover page is missing, though this is less critical than the technical diagram.",
+        "b_evidence_source": "Page 24 contains 'Figure 1 – Simplified NENA i3 NG911 Conceptual System Diagram' which is a complex technical flowchart.",
+        "b_evidence_output": "The HTML output shows the text caption for Figure 1, but no image or SVG diagram is rendered in that section.",
+        "b_evidence_location": "Section 3.2, page 24",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There are no instances of duplicated body content (paragraphs, sections, or tables) within the rendered HTML. Each element from the source PDF appears only once in the main body of the converted document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output maintains the visual organization of the source PDF. The document structure starts with the cover information, followed by a navigation area (corresponding to the Table of Contents), and then sections 1 through 5 and the Appendices in the correct order. The layout effectively translates the single-column PDF text and tables into a responsive HTML format.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"All tables from the source PDF, including those in the methodology section (Tables 1-2), the environment section (Tables 3-4), the Goals and Objectives section (Goals 1-10), and the extensive data tables in the Appendices and financial spreadsheets, are correctly rendered in the HTML. Columns are aligned, headers are distinct, and the content remains readable and accurately structured.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The meaningful technical diagram 'Figure 1 – Simplified NENA i3 NG911 Conceptual System Diagram' found on page 24 of the source PDF is entirely missing from the HTML output. While the caption text is present, the graphical information representing the system architecture is gone. Additionally, the photo of the North Carolina flag on the cover page is missing, though this is less critical than the technical diagram.\",\n      \"b_evidence_source\": \"Page 24 contains 'Figure 1 – Simplified NENA i3 NG911 Conceptual System Diagram' which is a complex technical flowchart.\",\n      \"b_evidence_output\": \"The HTML output shows the text caption for Figure 1, but no image or SVG diagram is rendered in that section.\",\n      \"b_evidence_location\": \"Section 3.2, page 24\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There are no instances of duplicated body content (paragraphs, sections, or tables) within the rendered HTML. Each element from the source PDF appears only once in the main body of the converted document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

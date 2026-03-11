@@ -1,0 +1,121 @@
+{
+  "document_id": "esrmo-newsletter-july-2021-686b1e10",
+  "audited_at": "2026-03-10T21:58:24.236998Z",
+  "quality_score": 75,
+  "fidelity_composite": 0.641,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.4545454545454546,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "While programmatic shingling recall is high (0.96), the LLM fidelity report identifies significant semantic and structural failures that make the document inaccessible. The total omission of textual content from the Page 4 infographic and the lack of proper heading hierarchies for major sections are major defects that violate accessibility standards, despite the pipeline's high confidence score.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Page 4 of the source document ('Phishing Fundamentals') is an information-heavy infographic containing several paragraphs of text explaining risks ('You have personal information stolen', etc.) and a 'How to Spot Phishing Attacks' checklist. The JSON output fails to transcribe any of this text semantically, capturing the entire page content as a single image element ('unlisted_4_phishing_infographic'). This results in the omission of 100% of the textual content for this section.",
+      "source_pdf_quote": "Page 4 of the source contains text explaining phishing risks: 'You have personal information stolen. In a lot of cases...', 'You lose control of your accounts. Let's say you're logged in...', 'You infect your device with malware. In more insidious...', and a checklist 'How to Spot Phishing Attacks' containing 6 bullet points.",
+      "output_quote": "Section 'Phishing Fundamentals' contains only a single image element: {\"type\": \"image\", \"src\": \"unlisted_4_phishing_infographic\", ...} and no semantic paragraph or list elements containing the source text.",
+      "location": "Section 'Phishing Fundamentals', Page 4"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "Several major sections in the document are missing their corresponding heading elements within the 'elements' array, even though they appear as titles in the subsection metadata. Specifically, 'Zero Trust and the New Normal of Cybersecurity' (Page 3), 'Phishing Fundamentals' (Page 4), and 'Training and Continued Learning Resources' (Page 5) do not have H2 tags. This is inconsistent with other sections like 'Cybersecurity Tips...' which correctly uses H2 (heading-6). Furthermore, page 4's primary",
+      "source_pdf_quote": "Zero Trust and the New Normal of Cybersecurity (Page 3); Phishing Fundamentals (Page 4); Training and Continued Learning Resources (Page 5)",
+      "output_quote": "The corresponding sections in the JSON array (Subsections 2, 4, and 5) lack a 'heading' type element representing these titles.",
+      "location": "sections[0].subsections[1, 3, 4]"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The entire content of Page 4, which includes several paragraphs of text, a sidebar with a list, and an image, has been collapsed into a single 'image' element. This completely destroys the reading order and logical structure of the page's content for screen readers and search engines.",
+      "source_pdf_quote": "Page 4 contains multiple paragraphs ('Like most scams...', 'You lose control of your accounts.', etc.) and a sidebar ('How to Spot Phishing Attacks').",
+      "output_quote": "The entire subsection for 'Phishing Fundamentals' contains only one image element: 'unlisted_4_phishing_infographic'.",
+      "location": "sections[0].subsections[3]"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is severely compromised because an entire section of content from the source PDF (Page 4, 'Phishing Fundamentals') is missing in the HTML output. The PDF presents a full-page article with multiple columns of text and a sidebar checklist. The HTML rendering collapses this entire page into a single heading and a placeholder text string, effectively removing all descriptive content and instructions from that section. This represents a significant deviation fr",
+      "source_pdf_quote": "PDF Page 4 contains an entire article with multiple sub-headings ('You have personal information stolen', 'You lose control of your accounts', 'You infect your device with malware') and a sidebar checklist titled 'How to Spot Phishing Attacks'.",
+      "output_quote": "The HTML screenshot for the 'Phishing Fundamentals' section shows only the main heading followed by the text: '[Infographic titled Phishing Fundamentals: What Happens When You Click?]', with no other text or content from that page rendered.",
+      "location": "Phishing Fundamentals section, page 4 of PDF / corresponding section in HTML."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images are missing from the HTML output. Specifically, the 'onion' layers graphic on page 2 (which illustrates the text's metaphor), the ISSA logo on page 3 (which identifies the source of the webinar), and most critically, the entire infographic content on page 4 is missing, replaced by a text placeholder. Furthermore, several illustrative stock photos on pages 2 and 5 are replaced by green placeholder boxes.",
+      "source_pdf_quote": "PDF Page 2 shows a graphic of digital layers ('onion'); Page 3 shows the ISSA logo; Page 4 is a full infographic with text content; Page 5 contains a stock photo in the Training section and a newspaper icon in the Newsletters section.",
+      "output_quote": "In the HTML, the ISSA logo is absent; the onion graphic and page 5 stock photos are replaced by green placeholder boxes; the page 4 infographic is replaced by the bracketed text '[Infographic titled Phishing Fundamentals: What Happens When You Click?]'.",
+      "location": "Pages 2, 3, 4, and 5"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Because Page 4 was converted entirely to an image, the bulleted list within the 'How to Spot Phishing Attacks' sidebar was not captured as a list structure. Additionally, while the 'Upcoming Events' on Page 5 was converted to a table (acceptable), the failure to capture the list on Page 4 is a defect.",
+      "source_pdf_quote": "Page 4 sidebar 'How to Spot Phishing Attacks' contains a list of 6 items.",
+      "output_quote": "No corresponding list structure exists in the 'Phishing Fundamentals' subsection.",
+      "location": "sections[0].subsections[3]"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Multiple links present in the source document are missing their 'href' attributes in the output, effectively rendering them as plain text. This includes the 'here' link for the Zero Trust webinar on Page 3, and the newsletter URLs (SAC, CIS, SANS) on Page 5.",
+      "source_pdf_quote": "To register for this free webinar, click here. (Page 3); SAC/CIS/SANS Newsletter URLs (Page 5)",
+      "output_quote": "Individual text spans for these links lack an 'href' property (e.g., the 'here' link in subsection 2).",
+      "location": "sections[0].subsections[1].elements[5] and sections[0].subsections[4]"
+    }
+  ],
+  "action_items": [
+    "Transcribe the text content of the Page 4 infographic into semantic HTML",
+    "Restore proper heading (H2) tags for all major article sections",
+    "Fix broken links by adding missing href attributes to newsletter URLs",
+    "Ensure images are correctly linked or provided with descriptive alt-text instead of green placeholders"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.641,
+      "text_match": 0.9706769639193918,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7506,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.641,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.4545454545454546,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9617407938785271,
+      "shingling_precision": 0.9797807551766139,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 90436,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

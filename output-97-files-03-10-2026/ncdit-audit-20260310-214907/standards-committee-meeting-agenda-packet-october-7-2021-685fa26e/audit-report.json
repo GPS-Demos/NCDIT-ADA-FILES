@@ -1,0 +1,96 @@
+{
+  "document_id": "standards-committee-meeting-agenda-packet-october-7-2021-685fa26e",
+  "audited_at": "2026-03-10T22:36:10.987640Z",
+  "quality_score": 77,
+  "fidelity_composite": 0.708,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.31818181818181823,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document shows significant structural and accessibility failures despite high content recall. The LLM fidelity structural score (0.318) is critically low, corroborating the major concerns regarding corrupted table colspans, significant reading order disruptions, and redundant content duplication (rendering same sections as both images and tables). These defects directly impact screen reader usability and violate accessibility standards.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output contains significant content duplication. Specifically, the Attendance Table (from page 2) and the Roll Call Vote Table (from page 4) are included twice: once as an 'image' element and once as a 'table' element. The text within these tables appears in both the extracted table structure and is described/represented by the subsequent image blocks, leading to redundant content in the reading stream.",
+      "source_pdf_quote": "The source PDF contains one instance of the Attendance Table on page 2 and one instance of the Roll Call Votes table on page 4.",
+      "output_quote": "The Attendance Table is present as an image in 'sections[0].subsections[0].elements[0]' and as a structured table in 'sections[0].subsections[0].elements[4]'. The Roll Call Votes table is present as an image in 'sections[0].subsections[0].elements[7]' and as a table in 'sections[0].subsections[0].elements[9]'.",
+      "location": "sections[0].subsections[0], element indices 0, 4, 7, and 9"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The structure of the 'Attendance' table in subsection 0 is corrupted. The first row, which contains the table title, is assigned a 'colspan' of 3 ('sections[0].subsections[0].elements[4].rows[0].cells[0].colspan'), whereas the actual table contains 4 columns as defined in the subsequent header row ('Committee Members', 'In Person', 'Via Teams', 'Not Present'). This mismatch breaks the table grid for screen reader users.",
+      "source_pdf_quote": "The Attendance table on page 2 spans 4 columns.",
+      "output_quote": "The cell in 'rows[0]' of the attendance table has '\"colspan\": 3' while the table has 4 columns.",
+      "location": "sections[0].subsections[0].elements[4], element index 4"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order for page 2 is significantly disrupted. In the source document, the page begins with the North Carolina 911 Board header/logo and the 'Meeting Attendees:' text, followed by the table. In the output, the image representing the table ('elements[0]') is placed at the very top of the subsection, before the logo ('elements[1]'), the page title/heading ('elements[2]'), and the lead-in text ('elements[3]').",
+      "source_pdf_quote": "Page 2 starts with header info ('Draft Minutes'), followed by 'Meeting Attendees:', then the table.",
+      "output_quote": "In 'subsections[0]', the table image ('elements[0]') precedes the heading ('elements[2]') and the paragraph ('elements[3]').",
+      "location": "sections[0].subsections[0], element indices 0-4"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There is a significant duplication of content in the 'Draft Minutes' section. The HTML output includes a large image that is a screenshot of the entire Page 2 from the PDF (containing the header block and the attendance table), immediately followed by the same information rendered again as structured text and an HTML table. This results in the 'Draft Minutes' header block and the entire Attendance table appearing twice in the body of the document.",
+      "source_pdf_quote": "Page 2 of the PDF contains one instance of the header block ('North Carolina 911 Board... Via Simultaneous Communication') and the Attendance table.",
+      "output_quote": "The HTML renders the content of Page 2 twice: once as an embedded image and a second time as structured text and an HTML table, both within the main body of the document.",
+      "location": "In the section titled 'North Carolina 911 Board Standards Committee Meeting Draft Minutes...'"
+    }
+  ],
+  "action_items": [
+    "Correct the colspan values in the Attendance table to match the 4-column header row.",
+    "Remove redundant image elements that duplicate the structured table and text content.",
+    "Restore logical reading order on Page 2, ensuring the header and title precede the table content."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.708,
+      "text_match": 0.9298324844368987,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7713,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.708,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.31818181818181823,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9770660340055358,
+      "shingling_precision": 0.8914141414141414,
+      "duplication_ratio": 0.003703703703703704,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 78404,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

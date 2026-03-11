@@ -1,0 +1,106 @@
+{
+  "document_id": "esrmo-newsletter-april-2024-686b1c64",
+  "audited_at": "2026-03-10T21:57:48.962055Z",
+  "quality_score": 78,
+  "fidelity_composite": 0.6943,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.2727272727272727,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document shows significant structural and accessibility failures, reflected in the extremely low structural fidelity score (0.27). Major concerns include the omission of a primary article title from the reading order and inconsistent heading hierarchy which would severely impact screen reader users. While programmatic recall is high, the logical organization is fundamentally flawed.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The titles of several articles are duplicated within the JSON structure. Specifically, for Subsections 1, 2, 3, 4, and 5, the article title text appears as the 'title' attribute of the subsection object and is immediately repeated as the first 'heading' element within the 'elements' array. In the source PDF, each of these titles appears only once as the header for its respective section. This duplication occurs for 'Malicious App Impersonates McAfee...', 'IT Leaders Can’t Stop AI...', 'New Malwa",
+      "source_pdf_quote": "Malicious App Impersonates McAfee to Distribute Malware via Text and Phone Calls",
+      "output_quote": "Subsection 'title': 'Malicious App Impersonates McAfee to Distribute Malware via Text and Phone Calls' AND elements[0]: {'type': 'heading', 'level': 2, 'text': 'Malicious App Impersonates McAfee to Distribute Malware \\nvia Text and Phone Calls'}",
+      "location": "subsections[1], page 2"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent and broken across the document. Major article headers that share identical formatting and structural significance in the source PDF are treated differently in the output. For example, while the 'Malicious App...' and 'IT Leaders...' headers are assigned H2 heading elements, the 'Apple Users Become...' header (the first article) is not assigned a heading element at all. Furthermore, sections like 'Upcoming Events' are missing heading elements despite being cl",
+      "source_pdf_quote": "Upcoming Events",
+      "output_quote": "{ \"title\": \"Upcoming Events\", \"elements\": [ { \"type\": \"image\", ... }, { \"type\": \"paragraph\", ... } ] }",
+      "location": "subsections[8], page 6"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is flawed due to the omission of the first article's title from the content flow. In 'subsections[0]', the heading 'Apple Users Become the Latest Targets of MFA Attacks' is completely absent from the 'elements' list, meaning it is skipped in a top-to-bottom reading of the element sequence. This is inconsistent with subsequent articles where the header is included (and duplicated) in the elements array.",
+      "source_pdf_quote": "Apple Users Become the Latest Targets of MFA Attacks",
+      "output_quote": "Subsection elements list starts with paragraph: 'A new string of multifactor authentication (MFA) attacks...'",
+      "location": "subsections[0], page 1"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "All meaningful images from the source PDF are present in the HTML rendering. Specifically: the 'target' graphic from page 1, the 'IT professionals' photo from page 3, the 'virus' illustration from page 5, the 'calendar/upcoming events' graphic from page 6, and the 'newspaper' icon in the newsletter section on page 5. The NCDIT logo and header banner from page 1 are also accounted for in the HTML header area. One image (the virus illustration) is present in the HTML but appears to be missing its ",
+      "source_pdf_quote": "Illustration of a red virus/cell on page 5 of the PDF.",
+      "output_quote": "A broken image placeholder appears in the HTML corresponding to the virus illustration position.",
+      "location": "Section: 'The Number of New Pieces of Malware Per Minute Has Quadrupled in Just One Year'"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Several links have been fabricated and injected into the text without a basis in the source document. While the URLs themselves often appear elsewhere in the PDF, the pipeline has incorrectly attached them to standard text that is not a link in the source. Notable examples include the link on 'the' in the CRO desk section, 'X' in the MFA article, 'cybersecurity' in the AI article, and 'access' in the Malware Loader article.",
+      "source_pdf_quote": "From the Desk of the State Chief Risk Officer – Torry Crass",
+      "output_quote": "{ \"href\": \"https://www.keepersecurity.com/en_GB/top-data-threats-insight-report\", \"text\": \"the\", \"title\": null, \"opens_new_window\": true }",
+      "location": "sections[0].elements[3], page 1"
+    }
+  ],
+  "action_items": [
+    "Restore the missing first article header to the logical reading order",
+    "Standardize all main article headers to H2 elements",
+    "Deduplicate header text that appears twice within subsections",
+    "Repair the image reference for the virus illustration on page 5",
+    "Verify and remove fabricated links on non-anchor text like 'the' or 'X'"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6943,
+      "text_match": 0.9883563192839285,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7782,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6943,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.2727272727272727,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9946080464537537,
+      "shingling_precision": 0.9950207468879668,
+      "duplication_ratio": 0.009784900885702235,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 79769,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

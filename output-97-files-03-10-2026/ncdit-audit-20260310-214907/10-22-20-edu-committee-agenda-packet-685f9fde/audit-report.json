@@ -1,0 +1,96 @@
+{
+  "document_id": "10-22-20-edu-committee-agenda-packet-685f9fde",
+  "audited_at": "2026-03-10T21:56:12.355758Z",
+  "quality_score": 79,
+  "fidelity_composite": 0.7432,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document exhibits high text recall (0.932) but suffers from significant structural and visual failures, resulting in a low visual score (0.5). The flattening of relational data in the attendee tables and the total omission of two complex technical diagrams on page 9 constitute major defects that cannot be auto-approved.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The majority of tables (Agenda, Roll Call Votes, Survey Results) are correctly converted with accurate header and row structures. however, the 'Meeting Attendees' tables on source page 2 (containing Committee Members, Guests, and Staff) were flattened into a single paragraph block in the output. This represents a significant loss of the original table's row/column structure and relational data (e.g., matching names to attendance status columns).",
+      "source_pdf_quote": "Table on page 2 containing Meeting Attendees (Committee Members, Guests, Staff) with columns for Phone, In Person, and Not in Attendance.",
+      "output_quote": "\"type\": \"paragraph\",\n          \"content\": [\n            {\n              \"text\": \"Meeting Attendees:\\nCommittee Members Phone In Person Not in Attendance Guests Phone In Person\\nJeryl Anderson X Doug Workman – Cary Police X\\nChuck Greene X Mike Reitz – Chatham Co. ECC X\\nGrayson Gusa X Ray Silance – Onslow Co. ECC X...\"",
+      "location": "Section \"September Draft 2020 Education Committee Minutes\", element index 3"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is generally well-preserved. However, Page 9 of the source PDF is an infographic-heavy page featuring text followed by two significant diagrams ('Major NG911 Program Areas' and 'NG9-1-1 Call Handling Solution Architecture'). In the HTML output, only the text and the headings are rendered; the actual diagrams are missing, which creates a major visual layout difference by removing the primary visual content and flow of that section. The visual flow of the do",
+      "source_pdf_quote": "Page 9 of the source PDF features two large diagrams: a four-step process chevron for 'Major NG911 Program Areas' and a complex technical schematic for 'NG9-1-1 Call Handling Solution Architecture'.",
+      "output_quote": "The 'Evolving to NG911' section in the HTML contains only the text bullets and the two section headings, but the content below 'Major NG911 Program Areas' and 'NG9-1-1 Call Handling Solution Architecture' is blank or missing.",
+      "location": "HTML section 'Evolving to NG911', corresponding to Source Page 9"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The HTML rendering fails to include two highly meaningful and complex technical diagrams from the source material. Page 9 contains a chevron diagram titled 'Major NG911 Program Areas' and a flowchart/architecture diagram titled 'NG9-1-1 Call Handling Solution Architecture'. Neither of these images are present in the HTML screenshot, despite their headers being included.",
+      "source_pdf_quote": "Source PDF Page 9 contains two meaningful graphics: a chevron diagram ('Major NG911 Program Areas') and an architecture diagram ('NG9-1-1 Call Handling Solution Architecture').",
+      "output_quote": "The HTML section 'Evolving to NG911' is missing both diagrams that appear on page 9 of the source.",
+      "location": "Section 'Evolving to NG911' (corresponding to Source Page 9)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Most lists are converted correctly (e.g., agenda, minutes, and training outlines). However, the bulleted list on source page 9 describing the benefits of evolving to NG9-1-1 was converted into a single block paragraph with newlines, losing its formal list structure.",
+      "source_pdf_quote": "Bulleted list on page 9: \nRemoves single points of failure in localities statewide\n- Geo redundant call processing...\nModernizes 911 call delivery...",
+      "output_quote": "\"type\": \"paragraph\",\n          \"content\": [\n            {\n              \"text\": \"Removes single points of failure in localities statewide\\nGeo redundant call processing with redundant and diverse networking\\nModernizes 911 call delivery...\"",
+      "location": "Section \"Evolving to NG911\", element index 1"
+    }
+  ],
+  "action_items": [
+    "Reconstruct the 'Meeting Attendees' table (Committee Members, Guests, Staff) with proper row/column headers.",
+    "Locate and insert the missing technical diagrams from page 9 with appropriate alt text.",
+    "Format the benefits section on page 9 as a structured <ul> list."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7432,
+      "text_match": 0.9324916283909066,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7875,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7432,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9317063570163354,
+      "shingling_precision": 0.9815467551316608,
+      "duplication_ratio": 0.03558447649196858,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 68064,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

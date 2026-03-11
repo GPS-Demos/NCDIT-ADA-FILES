@@ -1,0 +1,79 @@
+{
+  "document_id": "gicc-2020-census-nc-factsheet-20170809-686131e8",
+  "audited_at": "2026-03-10T21:59:42.680060Z",
+  "quality_score": 83,
+  "fidelity_composite": 0.8443,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While text recall is nearly perfect (0.995), the LLM fidelity signals identify two significant structural and visual defects: a break in heading hierarchy (skipping H2) which violates accessibility standards, and the total loss of a substantive infographic on Page 2. Given that false negatives are 3x more costly and the composite fidelity score (0.8443) sits below the high-confidence threshold of 0.85, these major findings require human intervention to ensure accessibility and informational completeness.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "Section 2 contains a break in heading hierarchy. The main title of the section ('Preparing for the Census – We Have Work To Do!') acts as a level 1 heading, but the subsequent subsection titles (e.g., 'Boundary Annexation Survey (BAS)', 'Local Update of Census Addresses (LUCA)') are assigned level 3 headings. This skips level 2 entirely, which is a structural defect according to accessibility standards.",
+      "source_pdf_quote": "The section title 'Preparing for the Census – We Have Work To Do!' and its subsections (BAS, LUCA, PSAP) are clearly major structural divisions on page 2.",
+      "output_quote": "\"title\": \"Preparing for the Census – We Have Work To Do!\" followed by \"type\": \"heading\", \"level\": 3, \"text\": \"Boundary Annexation Survey (BAS)\"",
+      "location": "Section 2, heading-5, element index 3"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "A significant infographic from Page 2 is missing in the HTML output. The source PDF contains a complex funnel-style infographic on the right side of the second page that illustrates how several programs (LUCA, SDRP, PSAP, GSS, BAS) contribute to 'Correct addresses', 'Correct boundaries', and 'Correct streets'. While some of these programs are discussed in the text, the visual relationship and specific summary labels like 'Correct streets' are lost. Other meaningful images, such as the NC map/fla",
+      "source_pdf_quote": "Infographic on page 2 showing a funnel with program labels (LUCA, SDRP, PSAP, GSS, BAS) and result labels ('Correct addresses', 'Correct boundaries', 'Correct streets').",
+      "output_quote": "The funnel infographic is entirely missing from the HTML rendering.",
+      "location": "Source PDF Page 2, right-hand side; HTML between the PSAP text section and the final paragraphs."
+    }
+  ],
+  "action_items": [
+    "Correct the heading structure to follow sequential levels (ensure H2 is used for subsection titles).",
+    "Manually insert the missing infographic from Page 2 or provide a robust text alternative for the relationship between LUCA, SDRP, PSAP, GSS, and BAS."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8443,
+      "text_match": 0.9326895768247656,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8325,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8443,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9951515151515151,
+      "shingling_precision": 0.877605558524853,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 74317,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

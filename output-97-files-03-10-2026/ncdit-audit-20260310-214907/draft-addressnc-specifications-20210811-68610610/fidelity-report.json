@@ -1,0 +1,213 @@
+{
+  "document_id": "draft-addressnc-specifications-20210811-68610610",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output does not contain any fabricated paragraphs or sentences. All text present in the JSON has a corresponding basis in the source document. AI-generated elements like table summaries and alt text are acceptable per the instructions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "There is no contact information (phone numbers, emails, or URLs) in the source document other than the implied references. The output contains no fabricated contact information.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The conversion resulted in the loss of several full pages and significant sub-sections. Page 2 (the 'Contents' page) is entirely missing. Pages 6, 7, and 8, which contain the majority of the 'Appendix A - Fields' table, are absent. Additionally, the beginning of Appendix B on page 9, specifically the 'NC Counties' list, is missing entirely.",
+        "b_evidence_source": "Page 2 (Contents), Page 6 (Fields Post_Code to StateFIPS), Page 7 (Fields CountyFIPS to USNG), Page 8 (Fields DDLat to UniqueID), and Page 9 (NC Counties domain list).",
+        "b_evidence_output": "The output skips directly from the cover page content to the 'Preface' on page 3. The tables for Appendix A end at field index 10 (St_PosMod), omitting three full pages of subsequent fields. The 'NC Counties' list from page 9 is nowhere in the output.",
+        "b_evidence_location": "Contents (Page 2), Appendix A (Pages 6-8), Appendix B (Page 9)",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables in Appendix A and Appendix B are severely truncated. The 'Appendix A - Fields' table in the source contains approximately 47 data rows across pages 4-8; the output only contains 10 rows, a loss of roughly 79%. The 'Place Type' domain table in Appendix B contains 54 rows across pages 9-13; the output starts at 'Industrial – Manufacturing' (page 11), omitting the first 19 rows from pages 9 and 10, a loss of approximately 35%.",
+        "b_evidence_source": "Appendix A - Fields table contains 47 rows (Add_Number through UniqueID). Place Type domain table contains 54 rows (Agricultural through Vacant).",
+        "b_evidence_output": "Appendix A table in JSON only contains 10 rows (Add_Number through St_PosMod). Place Type table in JSON contains 35 rows (Industrial - Manufacturing through Vacant).",
+        "b_evidence_location": "Appendix A (Pages 4-8), Appendix B (Pages 9-13)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Large portions of the appendices are missing. As noted in C4, the 'Appendix A - Fields' section lost approximately 80% of its content. The 'Appendix B - Domains' section is missing the entire 'NC Counties' sub-section and roughly 35% of the 'Place Type' table content.",
+        "b_evidence_source": "Appendix A (fields on pages 5-8 like LSt_PreDir, St_Address, GEOID, Latitude, DateUpdate, etc.). Appendix B (NC Counties list on page 9 and Place Type attributes on pages 9-10 like Agricultural, Cemetery, Civic, and Commercial sub-types).",
+        "b_evidence_output": "The output for Appendix A ends prematurely. The output for Appendix B omits the first two pages of its content.",
+        "b_evidence_location": "Appendix A (Pages 5-8), Appendix B (Pages 9-10)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "While there are massive omissions, the text that was successfully converted appears to maintain fidelity to the source in terms of meaning and information, with only minor acceptable OCR variations or reformatting.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5930232558139534,
+    "penalty_sum": 35,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output does not contain any fabricated paragraphs or sentences. All text present in the JSON has a corresponding basis in the source document. AI-generated elements like table summaries and alt text are acceptable per the instructions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"There is no contact information (phone numbers, emails, or URLs) in the source document other than the implied references. The output contains no fabricated contact information.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The conversion resulted in the loss of several full pages and significant sub-sections. Page 2 (the 'Contents' page) is entirely missing. Pages 6, 7, and 8, which contain the majority of the 'Appendix A - Fields' table, are absent. Additionally, the beginning of Appendix B on page 9, specifically the 'NC Counties' list, is missing entirely.\",\n      \"b_evidence_source\": \"Page 2 (Contents), Page 6 (Fields Post_Code to StateFIPS), Page 7 (Fields CountyFIPS to USNG), Page 8 (Fields DDLat to UniqueID), and Page 9 (NC Counties domain list).\",\n      \"b_evidence_output\": \"The output skips directly from the cover page content to the 'Preface' on page 3. The tables for Appendix A end at field index 10 (St_PosMod), omitting three full pages of subsequent fields. The 'NC Counties' list from page 9 is nowhere in the output.\",\n      \"b_evidence_location\": \"Contents (Page 2), Appendix A (Pages 6-8), Appendix B (Page 9)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables in Appendix A and Appendix B are severely truncated. The 'Appendix A - Fields' table in the source contains approximately 47 data rows across pages 4-8; the output only contains 10 rows, a loss of roughly 79%. The 'Place Type' domain table in Appendix B contains 54 rows across pages 9-13; the output starts at 'Industrial – Manufacturing' (page 11), omitting the first 19 rows from pages 9 and 10, a loss of approximately 35%.\",\n      \"b_evidence_source\": \"Appendix A - Fields table contains 47 rows (Add_Number through UniqueID). Place Type domain table contains 54 rows (Agricultural through Vacant).\",\n      \"b_evidence_output\": \"Appendix A table in JSON only contains 10 rows (Add_Number through St_PosMod). Place Type table in JSON contains 35 rows (Industrial - Manufacturing through Vacant).\",\n      \"b_evidence_location\": \"Appendix A (Pages 4-8), Appendix B (Pages 9-13)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Large portions of the appendices are missing. As noted in C4, the 'Appendix A - Fields' section lost approximately 80% of its content. The 'Appendix B - Domains' section is missing the entire 'NC Counties' sub-section and roughly 35% of the 'Place Type' table content.\",\n      \"b_evidence_source\": \"Appendix A (fields on pages 5-8 like LSt_PreDir, St_Address, GEOID, Latitude, DateUpdate, etc.). Appendix B (NC Counties list on page 9 and Place Type attributes on pages 9-10 like Agricultural, Cemetery, Civic, and Commercial sub-types).\",\n      \"b_evidence_output\": \"The output for Appendix A ends prematurely. The output for Appendix B omits the first two pages of its content.\",\n      \"b_evidence_location\": \"Appendix A (Pages 5-8), Appendix B (Pages 9-10)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"While there are massive omissions, the text that was successfully converted appears to maintain fidelity to the source in terms of meaning and information, with only minor acceptable OCR variations or reformatting.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 35,\n    \"score\": 0.5930232558139535\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the output JSON against the source PDF and did not find any instances of duplicated text blocks or sections. Each element present in the JSON appears only once in the corresponding sections of the PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The output JSON fails to represent the primary structural heading 'Appendix B - Domains' from page 9 of the source PDF. This is a major section heading (matching 'Appendix A - Fields' in style). Its omission leads to all subsequent content from Appendix B (Place Type tables and the Placement section) being incorrectly grouped under the 'Appendix A - Fields' section (Section 3). This is a significant failure in preserving the document's organizational structure.",
+        "b_evidence_source": "Appendix B - Domains (Heading on page 9)",
+        "b_evidence_output": "The heading is entirely absent from the JSON; the content that follows it in the PDF is nested inside Section 3 ('Appendix A - Fields').",
+        "b_evidence_location": "Between Appendix A tables and Domain Attribute tables, page 9",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The 'Placement' table on page 13 of the source PDF is a simple single-column list of options. However, in the output JSON ('Placement Options' table), the first data item 'Structure – Rooftop' is incorrectly identified as a header row ('cell_type': 'header'). This corrupts the table's structural meaning by mislabeling data as a column header.",
+        "b_evidence_source": "Placement table on page 13 starting with 'Structure – Rooftop'.",
+        "b_evidence_output": "\"cell_type\": \"header\", \"content\": [ { \"text\": \"Structure – Rooftop\" ... } ]",
+        "b_evidence_location": "Section 'Appendix A - Fields', 'Placement Options' table (element index 10), page 13",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "While there are grouping issues (as noted in S2), the sequential flow of information in the JSON (Preface -> Appendix A -> Appendix B tables -> References) follows the linear page order of the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The 'References' section on page 14 of the PDF contains a numbered list (1-8). The output JSON correctly identifies and renders this as an ordered list with the correct items and sequence.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "I found no evidence of broken, missing, or fabricated URLs. Citations in the text (like 'member listing1') are captured as plain text, which is appropriate given they do not appear as active hyperlinks in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5454545454545454,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the output JSON against the source PDF and did not find any instances of duplicated text blocks or sections. Each element present in the JSON appears only once in the corresponding sections of the PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The output JSON fails to represent the primary structural heading 'Appendix B - Domains' from page 9 of the source PDF. This is a major section heading (matching 'Appendix A - Fields' in style). Its omission leads to all subsequent content from Appendix B (Place Type tables and the Placement section) being incorrectly grouped under the 'Appendix A - Fields' section (Section 3). This is a significant failure in preserving the document's organizational structure.\",\n      \"b_evidence_source\": \"Appendix B - Domains (Heading on page 9)\",\n      \"b_evidence_output\": \"The heading is entirely absent from the JSON; the content that follows it in the PDF is nested inside Section 3 ('Appendix A - Fields').\",\n      \"b_evidence_location\": \"Between Appendix A tables and Domain Attribute tables, page 9\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The 'Placement' table on page 13 of the source PDF is a simple single-column list of options. However, in the output JSON ('Placement Options' table), the first data item 'Structure – Rooftop' is incorrectly identified as a header row ('cell_type': 'header'). This corrupts the table's structural meaning by mislabeling data as a column header.\",\n      \"b_evidence_source\": \"Placement table on page 13 starting with 'Structure – Rooftop'.\",\n      \"b_evidence_output\": \"\\\"cell_type\\\": \\\"header\\\", \\\"content\\\": [ { \\\"text\\\": \\\"Structure – Rooftop\\\" ... } ]\",\n      \"b_evidence_location\": \"Section 'Appendix A - Fields', 'Placement Options' table (element index 10), page 13\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"While there are grouping issues (as noted in S2), the sequential flow of information in the JSON (Preface -> Appendix A -> Appendix B tables -> References) follows the linear page order of the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The 'References' section on page 14 of the PDF contains a numbered list (1-8). The output JSON correctly identifies and renders this as an ordered list with the correct items and sequence.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"I found no evidence of broken, missing, or fabricated URLs. Citations in the text (like 'member listing1') are captured as plain text, which is appropriate given they do not appear as active hyperlinks in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5454545454545454\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the document is significantly compromised by the omission of large sections of core content. Specifically, the majority of the field definition table from Appendix A (spanning PDF pages 5-8) and the entire 'NC Counties' table from Appendix B (PDF page 9) are missing from the HTML flow. A user cannot find the same information in the output as it has been truncated, moving directly from the first row of page 5 content ('St_PosMod') to the 'Domain Attribute Descriptions' found later in Appendix B.",
+        "b_evidence_source": "The document structure proceeds from 'Appendix A - Fields' (pages 4-8) containing 50+ rows of field definitions, followed by 'Appendix B - Domains' starting with a grid of 'NC Counties' (page 9).",
+        "b_evidence_output": "The HTML output shows 'Appendix A - Fields - Part 1' followed by 'Part 2' which contains only the single 'St_PosMod' row. It then skips directly to 'Domain Attribute Descriptions - Industrial to Preserved Open Space' (a subsection of Appendix B). All intervening fields and the NC Counties table are missing visually from the page flow.",
+        "b_evidence_location": "Sections 'Appendix A - Fields' and 'Appendix B - Domains', corresponding to PDF pages 5-9.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables in the HTML output are severely truncated. The main table in 'Appendix A - Fields' is split into parts, but 'Part 2' contains only one row from page 5 of the PDF, and then stops. Over 30 rows of data spanning pages 5, 6, 7, and 8 of the source PDF are absent. Furthermore, the 'NC Counties' table from page 9 is missing entirely. This constitutes a visual corruption of the data presentation where only a fraction of the table content is rendered.",
+        "b_evidence_source": "Table rows from 'LSt_PreDir' to 'UniqueID' on PDF pages 5-8, and the 'NC Counties' grid on page 9.",
+        "b_evidence_output": "The 'Part 2' table ends after the 'St_PosMod' row. No subsequent field rows or the NC Counties table appear in the screenshot before the next section begins.",
+        "b_evidence_location": "Appendix A and beginning of Appendix B, pages 5-9.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The meaningful image from the source (the map of North Carolina on page 1) is correctly present in the HTML output. A large checkered pattern image appears below it in the HTML which is not in the source PDF; this appears to be a misrendering of the 'DRAFT' watermark. However, since the meaningful content image is present and visible, this check passes based on the provided criteria.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "No instances of duplicated body content (paragraphs, tables, or sections repeated in the main body) were found. The appearance of headings in the Table of Contents and the body is expected accessible design.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the document is significantly compromised by the omission of large sections of core content. Specifically, the majority of the field definition table from Appendix A (spanning PDF pages 5-8) and the entire 'NC Counties' table from Appendix B (PDF page 9) are missing from the HTML flow. A user cannot find the same information in the output as it has been truncated, moving directly from the first row of page 5 content ('St_PosMod') to the 'Domain Attribute Descriptions' found later in Appendix B.\",\n      \"b_evidence_source\": \"The document structure proceeds from 'Appendix A - Fields' (pages 4-8) containing 50+ rows of field definitions, followed by 'Appendix B - Domains' starting with a grid of 'NC Counties' (page 9).\",\n      \"b_evidence_output\": \"The HTML output shows 'Appendix A - Fields - Part 1' followed by 'Part 2' which contains only the single 'St_PosMod' row. It then skips directly to 'Domain Attribute Descriptions - Industrial to Preserved Open Space' (a subsection of Appendix B). All intervening fields and the NC Counties table are missing visually from the page flow.\",\n      \"b_evidence_location\": \"Sections 'Appendix A - Fields' and 'Appendix B - Domains', corresponding to PDF pages 5-9.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables in the HTML output are severely truncated. The main table in 'Appendix A - Fields' is split into parts, but 'Part 2' contains only one row from page 5 of the PDF, and then stops. Over 30 rows of data spanning pages 5, 6, 7, and 8 of the source PDF are absent. Furthermore, the 'NC Counties' table from page 9 is missing entirely. This constitutes a visual corruption of the data presentation where only a fraction of the table content is rendered.\",\n      \"b_evidence_source\": \"Table rows from 'LSt_PreDir' to 'UniqueID' on PDF pages 5-8, and the 'NC Counties' grid on page 9.\",\n      \"b_evidence_output\": \"The 'Part 2' table ends after the 'St_PosMod' row. No subsequent field rows or the NC Counties table appear in the screenshot before the next section begins.\",\n      \"b_evidence_location\": \"Appendix A and beginning of Appendix B, pages 5-9.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The meaningful image from the source (the map of North Carolina on page 1) is correctly present in the HTML output. A large checkered pattern image appears below it in the HTML which is not in the source PDF; this appears to be a misrendering of the 'DRAFT' watermark. However, since the meaningful content image is present and visible, this check passes based on the provided criteria.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"No instances of duplicated body content (paragraphs, tables, or sections repeated in the main body) were found. The appearance of headings in the Table of Contents and the body is expected accessible design.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 7,
+  "total_critical": 1,
+  "total_major": 6,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

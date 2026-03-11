@@ -1,0 +1,118 @@
+{
+  "document_id": "logo-tables-shading-watermark-photos-13a3",
+  "audited_at": "2026-03-10T22:11:34.230287Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "A significant portion of the RQI T-CPR Brochure (pages 18-33 of the source PDF) is missing from the output. Specifically, the content of pages 20, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32, and 33 is entirely absent. While the JSON captures the text from page 21 and the table from page 28, the intervening and subsequent pages of the brochure are skipped.",
+      "source_pdf_quote": "The source PDF contains a multi-page color brochure from page 18 to page 33 including sections like 'RQI Telecommunicator CPR Essentials Program' (p. 23), 'Cardiac Arrest Case Review' (p. 29), and 'BLS and Responder Education' (p. 31).",
+      "output_quote": "The output contains text from page 21 and one row of a table from page 28, but fails to include the content from the other 12 pages of this brochure section.",
+      "location": "Brochure section, starting at element index 11 (following the instructional overview text)."
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The table titled 'RQI Telecommunicator CPR Curriculum Overview Comparison' found on page 28 of the source PDF contains approximately 14 rows of data (comparing Essentials, Challenger, and Responder programs across various features like training hours, certification, etc.). However, in the JSON output, the corresponding table contains only one row of data ('T-CPR Training Hours'). This represents a loss of over 90% of the table's rows.",
+      "source_pdf_quote": "Table on page 28 of the PDF titled 'RQI Telecommunicator CPR Curriculum Overview Comparison' contains 14 rows: RQI T-CPR Course, Quarterly Continuing Education, Quarterly Simulation Skills Assessment..., Quarterly Individual Simulation Skills..., T-CPR Training Hours, Certificate of Completion..., T-CPR Performance Baseline..., Resuscitation Quality Improvement Planning, Designated RQI Quality Manager, RQI Learning Management System, FirstWatch T-CPR Analytics, Cardiac Arrest Case Review, AHA Re",
+      "output_quote": "The table in the JSON (captioned 'Curriculum Overview Comparison between Essentials, Challenger, and Responder Programs') contains only 1 row: 'T-CPR Training Hours: Total program training time.'",
+      "location": "Section 'Curriculum Overview Comparison', index 13"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is severely compromised in the RQI T-CPR Program Instructional Overview section (pages 7-17). In the source PDF, this section contains multiple clear, hierarchical headings (e.g., 'Who We Are', 'Program Overview', 'Accessibility', 'Program Goal', 'Program Description'). In the output (elements 10-12), these are all demoted to plain text within large paragraph blocks. This prevents screen reader users from navigating the document's primary content sections.",
+      "source_pdf_quote": "Section headings such as 'Who We Are' (page 8), 'Program Overview' (page 9), 'Accessibility' (page 9), 'Program Goal' (page 9), and 'Program Description' (page 10).",
+      "output_quote": "The headings are rendered as plain text strings within the content of paragraph elements (e.g., element index 10).",
+      "location": "Document Content section, element indices 10, 11, 12 (corresponding to PDF pages 8-16)."
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "There are two significant structural failures in table conversion. First, the Agenda table on page 1, which has clear 'Tab', 'Topic', and 'Presenter' columns, is converted into a plain text paragraph (element index 2). Second, the 'Curriculum Overview Comparison' table on page 28 is critically truncated. The source table contains 14 rows of feature comparison data across four columns; the output table (element index 13) contains only a single data row ('T-CPR Training Hours'), omitting nearly 93",
+      "source_pdf_quote": "The 'RQI Telecommunicator CPR Curriculum Overview Comparison' table on page 28 contains 14 data rows (RQI T-CPR Course, Quarterly Continuing Education, etc.).",
+      "output_quote": "The table at element index 13 contains only one data row: 'T-CPR Training Hours: Total program training time.'",
+      "location": "Curriculum Overview Comparison section, element index 13."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "While the primary logo is present, several meaningful informational graphics from the source PDF are missing in the HTML output. Specifically, the 'RQI T-CPR Program Instructional Overview' contains sample certificates (pages 16 and 17) and the 'Telecommunicator CPR Program' brochure contains informative diagrams and icons (the 'Resuscitation excellence' formula on page 19, the US map graphic on page 21, and sample credentials on page 31). These are not merely decorative but convey information a",
+      "source_pdf_quote": "The source PDF includes meaningful graphics: AHA T-CPR Course Completion Certificate (page 16), RQI T-CPR eCredential (page 17), 'Resuscitation excellence' icons (page 19), and US Map graphic for sudden cardiac arrest statistics (page 21).",
+      "output_quote": "The HTML output for these sections contains only the associated text; the diagrams, sample certificates, and map graphics are completely absent.",
+      "location": "RQI T-CPR Program Instructional Overview (pages 16-17) and Telecommunicator CPR Program brochure (pages 19, 21, 31)"
+    },
+    {
+      "description": "Low text recall (possible truncation): 39%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Throughout the RQI T-CPR Program Overview section (pages 10-16), numerous structural lists (Program Features, Learning Objectives, Topics Covered) are converted into plain text within paragraph blocks. While the list items are often preceded by bullet characters ('•' or '●'), the underlying structural list tags are missing in the JSON, which is a failure of structural fidelity.",
+      "source_pdf_quote": "List of goals on page 10 ('Increase the frequency...'), Learning Objectives on page 11, Topics Covered on pages 11-14.",
+      "output_quote": "These lists are merged into paragraph elements 10, 11, and 12 rather than using 'list' elements.",
+      "location": "Document Content section, element indices 10, 11, 12."
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.5512969745995568,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.4753,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.38789899952358264,
+      "shingling_precision": 0.9781355117731859,
+      "duplication_ratio": 0.006371993451706334,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 116110,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
