@@ -1,0 +1,102 @@
+{
+  "document_id": "smac-lidar-apr-10-2024-6860db7b",
+  "audited_at": "2026-03-11T19:31:18.104158Z",
+  "quality_score": 25,
+  "fidelity_composite": 0.7365,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Output appears mostly fabricated: shingling_precision=0.16. Only 16% of output text found in source.",
+  "decision_method": "hard_veto:V4",
+  "concerns": [
+    {
+      "description": "Low text precision (possible hallucination): 16%",
+      "severity": "critical",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output document fails to extract several critical pieces of text associated with the maps on pages 1 and 2. On Page 1, the map title 'April 9, 2024 NCEM Status' and the status legend (e.g., 'Dems in Que', 'Dems Processing...') are omitted. On Page 2, the map title 'North Carolina LiDAR Quality Level By Phase', the callout 'QL 1 data collection planned for early 2024', and the legend ('Phase & Quality', 'QL = Quality Level') are missing. These omissions constitute a significant portion of the",
+      "source_pdf_quote": "Page 1: 'April 9, 2024 NCEM Status' (Title), Legend (Status: Reprojected..., DEMs in Que, DEMs Processing..., DEMs Created...). Page 2: 'North Carolina LiDAR Quality Level By Phase' (Title), 'QL 1 data collection planned for early 2024' (Callout), Legend ('Phase & Quality', 'QL = Quality Level').",
+      "output_quote": "The text identified above is entirely missing from the paragraph, heading, and table elements of the output.",
+      "location": "Sections 1 and 2 (Pages 1 and 2)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Table 5 on page 3 is structurally corrupted. In the source document, the table follows a 3-column grid. However, in the output JSON, the rows have inconsistent column counts. Row 2 has 2 cells, Row 3 has 2 cells, and Row 4 has 3 cells. This indicates that the layout has been flattened into a linear sequence of rows rather than maintaining the original column alignment. For example, 'When the Acquisition phase...', 'Processing calibration...', and 'All products and deliverables...' should belong ",
+      "source_pdf_quote": "The table on Page 3 (Table 5) has a 3-column structure where 'When the Acquisition phase is actually conducted', 'Processing calibration...', and 'All products and deliverables...' align horizontally.",
+      "output_quote": "\"rows\": [\n            {\n              \"cells\": [\n                {\n                  \"cell_type\": \"header\",\n                  \"content\": [\n                    {\n                      \"text\": \"Table 5. The estimated delivery dates for the processing and classification and all products\"\n...},\n            {\n              \"cells\": [\n                {\n                  \"cell_type\": \"data\",\n                  \"content\": [\n                    {\n                      \"text\": \"When the Acquisition phase i",
+      "location": "Page 3, Table 5, Element Index 16"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "Table 5 from page 3 of the PDF is rendered twice in the HTML. The first occurrence is visually broken. In the source, the table has three main columns, with 'Delivery dates' spanning columns 2 and 3. In the first HTML instance, the table structure is corrupted: the first two rows only have two columns, while the data row has three, causing the data in column 2 ('November -December...') to be misaligned under the header for column 3 ('All products...'), and the data for column 3 ('February...') t",
+      "source_pdf_quote": "Table 5 (page 3) shows a 3-column structure where 'Delivery dates' is a header spanning the second ('Processing calibration...') and third ('All products and deliverables...') columns.",
+      "output_quote": "The first instance of Table 5 in the HTML renders the first two rows with 2 columns and the third row with 3 columns, causing data/header misalignment. For example, 'November -December...' is shifted into the second column under the third column's sub-header.",
+      "location": "In the HTML, first instance of Table 5 after the airplane diagram."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The entire 'Project Timeline' section, which includes an introductory paragraph, Table 5, and a 'Note' regarding quality control, is duplicated in the HTML output. It appears once after the NC LiDAR Elevation Data section and then again at the very bottom of the document.",
+      "source_pdf_quote": "The 'Project Timeline' section, containing Table 5 and the Note about Quality control, appears only once on page 3 of the source PDF.",
+      "output_quote": "The entire 'Project Timeline' section (text, Table 5, and Note) appears twice in the body of the rendered HTML.",
+      "location": "The section appears first after the airplane diagram and a second time at the end of the document."
+    }
+  ],
+  "action_items": [
+    "Output appears mostly fabricated: shingling_precision=0.16. Only 16% of output text found in source."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7365,
+      "text_match": 0.26979472140762467,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5623,
+      "ceiling": 0.25,
+      "ceiling_reason": "extreme_hallucination",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7365,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7885714285714286,
+      "shingling_precision": 0.16273584905660377,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 202,
+      "gemini_words": 202,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 349465,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

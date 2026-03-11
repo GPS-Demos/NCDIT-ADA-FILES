@@ -1,0 +1,96 @@
+{
+  "document_id": "20200522-board-agenda-685f9ca8",
+  "audited_at": "2026-03-11T18:41:43.750709Z",
+  "quality_score": 79,
+  "fidelity_composite": 0.7432,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "While programmatic shingling scores show high content preservation (0.949), the LLM fidelity signals identify three major structural and visual failures, specifically the corruption of the agenda table structure for items 7-13. The inconsistent rendering—where page 1 is a table and page 2 is flat text—violates structural integrity and accessibility standards, necessitating human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The document uses a 3-column layout (Tab, Topic, Presenter) for all agenda items across both pages. On Page 1, the pipeline correctly identifies and renders this as a table. However, on Page 2 (items 7-13), the structural organization is lost. Instead of continuing the table structure or starting a new one, the 3-column content is merged into single paragraph strings (e.g., merging item number, committee name, and presenters into one line). This is a major structural failure as the column data i",
+      "source_pdf_quote": "The content on Page 2 follows the same 3-column alignment as Page 1: '7. Education Committee Report.............................................Chuck Greene/Angie Turbeville'",
+      "output_quote": "The output renders this as a single paragraph: \"7. Education Committee Report.............................................Chuck Greene/Angie Turbeville\"",
+      "location": "Section 2, Element 5 (index for Page 2 content)"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly altered. In the source PDF, the agenda is a continuous list (items 1-13) with a consistent three-column visual alignment. In the HTML, items 1-6 are rendered inside a bordered table, while items 7-13 are rendered as plain text paragraphs, breaking visual consistency. Additionally, the centered logo on page 2 of the source PDF is positioned between items 11 and 12; in the HTML, this logo has been moved to appear before item 7, disrupting th",
+      "source_pdf_quote": "The agenda items 1-13 share a consistent column-aligned layout. Item 11 is followed by the logo, which is then followed by item 12.",
+      "output_quote": "Items 1-6 are in a table with a grey header; Items 7-13 are rendered as plain text below a large logo image which appears before item 7.",
+      "location": "Throughout the document, specifically the transition between item 6 and 7, and the placement of the logo image."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The 'NC DIT 911 Board' branding logo located at the top-left of the first page in the source PDF is missing from the header area of the HTML output. While a version of this logo appears later in the document, its omission from the primary document header is a defect in representing meaningful source images.",
+      "source_pdf_quote": "Top-left corner of Page 1: NC DIT 911 Board logo.",
+      "output_quote": "The top of the HTML document (header area) contains only text and is missing the logo image.",
+      "location": "Document header, corresponding to Page 1."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The list items on Page 2 (7-13) are rendered as flat paragraph elements rather than being contained within a semantic list structure. While the text numbering is preserved, the structural meaning of a list is lost.",
+      "source_pdf_quote": "Numbered list items 7 through 13 on page 2.",
+      "output_quote": "Individual 'type': 'paragraph' elements for each list item (elements 5-12 in section 2).",
+      "location": "Section 2, elements 5-12"
+    }
+  ],
+  "action_items": [
+    "Reconstruct the 3-column table structure for agenda items 7-13 to match the first page",
+    "Restore the missing header logo at the beginning of the document",
+    "Ensure items on page 2 are contained within proper semantic list or table structures for accessibility"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7432,
+      "text_match": 0.9544095665171898,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7924,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7432,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9494423791821561,
+      "shingling_precision": 0.9594290007513148,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 295,
+      "gemini_words": 295,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 223470,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

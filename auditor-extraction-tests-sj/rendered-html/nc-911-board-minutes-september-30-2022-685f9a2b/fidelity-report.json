@@ -1,0 +1,213 @@
+{
+  "document_id": "nc-911-board-minutes-september-30-2022-685f9a2b",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains text derived from the first two pages of the source PDF, specifically the meeting titles and roll call tables. I found no evidence of fabricated text or invented information in the provided elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output includes guest phone numbers (352-672-4039 and 919-869-4013) in the guest roll call table. These numbers match the source exactly. No other contact information is present in the output to evaluate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source document consists of 10 pages. The output only contains information from Page 1 and Page 2 (the headers and roll call tables). Pages 3 through 10, which contain the substantive minutes of the meeting (items 1 through 14), the vote roster table, and the adjournment, are entirely missing from the output.",
+        "b_evidence_source": "The source PDF contains 10 pages of content, including the meeting minutes (Pages 3-9) and the vote roster (Page 10).",
+        "b_evidence_output": "The output JSON ends after the guest roll call table (element 10) and a few images, representing only the first two pages of the source.",
+        "b_evidence_location": "Pages 3-10",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document contains a third table on Page 10 titled 'NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE'. This table is completely absent from the output JSON, resulting in a loss of all its data rows.",
+        "b_evidence_source": "Table titled 'NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE' on Page 10 containing voting records for board members.",
+        "b_evidence_output": "The output JSON contains only two tables (Board Roll Call and Guest Roll Call) and terminates before reaching the voting roster.",
+        "b_evidence_location": "Page 10",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Substantial text from the minutes is missing. While the roll call sections are present, the subsequent narrative sections detailing the meeting discussions (Items 1-14) are entirely omitted. This accounts for approximately 80% of the text content of the original document.",
+        "b_evidence_source": "Narrative text for items such as 'Call to Order', 'Executive Director Report', 'Funding Committee Report', etc., spanning pages 3 to 9.",
+        "b_evidence_output": "The output contains no text from these narrative sections.",
+        "b_evidence_location": "Pages 3-9",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "I examined the text in the headers and tables that were successfully converted. The wording, including names, titles, and organizations in the roll call lists, matches the source faithfully without meaning-altering changes.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5930232558139534,
+    "penalty_sum": 35,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains text derived from the first two pages of the source PDF, specifically the meeting titles and roll call tables. I found no evidence of fabricated text or invented information in the provided elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output includes guest phone numbers (352-672-4039 and 919-869-4013) in the guest roll call table. These numbers match the source exactly. No other contact information is present in the output to evaluate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source document consists of 10 pages. The output only contains information from Page 1 and Page 2 (the headers and roll call tables). Pages 3 through 10, which contain the substantive minutes of the meeting (items 1 through 14), the vote roster table, and the adjournment, are entirely missing from the output.\",\n      \"b_evidence_source\": \"The source PDF contains 10 pages of content, including the meeting minutes (Pages 3-9) and the vote roster (Page 10).\",\n      \"b_evidence_output\": \"The output JSON ends after the guest roll call table (element 10) and a few images, representing only the first two pages of the source.\",\n      \"b_evidence_location\": \"Pages 3-10\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document contains a third table on Page 10 titled 'NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE'. This table is completely absent from the output JSON, resulting in a loss of all its data rows.\",\n      \"b_evidence_source\": \"Table titled 'NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE' on Page 10 containing voting records for board members.\",\n      \"b_evidence_output\": \"The output JSON contains only two tables (Board Roll Call and Guest Roll Call) and terminates before reaching the voting roster.\",\n      \"b_evidence_location\": \"Page 10\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Substantial text from the minutes is missing. While the roll call sections are present, the subsequent narrative sections detailing the meeting discussions (Items 1-14) are entirely omitted. This accounts for approximately 80% of the text content of the original document.\",\n      \"b_evidence_source\": \"Narrative text for items such as 'Call to Order', 'Executive Director Report', 'Funding Committee Report', etc., spanning pages 3 to 9.\",\n      \"b_evidence_output\": \"The output contains no text from these narrative sections.\",\n      \"b_evidence_location\": \"Pages 3-9\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"I examined the text in the headers and tables that were successfully converted. The wording, including names, titles, and organizations in the roll call lists, matches the source faithfully without meaning-altering changes.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 35,\n    \"score\": 0.5930232558139535\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the output JSON against the source document. The output correctly follows the page-by-page flow. Repeated header information (such as 'North Carolina 911 Board Meeting Roll Call') appears in the output where it appears as a page header in the source, which is categorized as an acceptable change. No other blocks of text appear to be duplicated incorrectly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is significantly broken. Major section titles from the source document (e.g., 'Call to Order', 'Roll Call', '1. Chair’s Opening Remarks', '2. Ethics Awareness...') are all tagged as 'paragraph' types in the JSON instead of 'heading'. While some headers (like the document title and the roster section) are correctly identified as headings, the vast majority of the document's structure is flattened into paragraphs, making navigation difficult for screen readers.",
+        "b_evidence_source": "Call to Order – Secretary and Board Chairman Jim Weaver... (Page 3)\n1. Chair’s Opening Remarks – Chairman Weaver stated... (Page 3)\n5. Executive Director Report – (Page 3)",
+        "b_evidence_output": "{ \"type\": \"paragraph\", \"content\": [ { \"text\": \"**Call to Order** – Secretary and Board Chairman Jim Weaver...\" } ], \"reading_order\": 15 }\n{ \"type\": \"paragraph\", \"content\": [ { \"text\": \"1. **Chair’s Opening Remarks** – Chairman Weaver stated...\" } ], \"reading_order\": 17 }\n{ \"type\": \"paragraph\", \"content\": [ { \"text\": \"5. **Executive Director Report** –\" } ], \"reading_order\": 23 }",
+        "b_evidence_location": "sections[2], reading_order 15, 17, 23",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "In the 'Roster of Roll Call Votes' table at the end of the document, the structural organization is failed. The JSON identifies every row in the table as 'is_header_row: false', including the first row (the title) and the second row (the actual column headers such as 'NC 911 Board Members', '4. Consent Agenda', etc.). This prevents screen readers from correctly associating data cells with their headers.",
+        "b_evidence_source": "Roster of Roll Call Votes Table (Page 10)",
+        "b_evidence_output": "\"rows\": [ { \"cells\": [ { \"cell_type\": \"data\", \"content\": [ { \"text\": \"NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE...\" } ], ... } ], \"is_header_row\": false }, { \"cells\": [ { \"cell_type\": \"data\", \"content\": [ { \"text\": \"NC 911 Board Members\" }, { \"text\": \"4. Consent Agenda\" }, ... ] } ], \"is_header_row\": false } ]",
+        "b_evidence_location": "sections[9], reading_order 94",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the JSON follows the logical flow of the source document from top to bottom and page by page. The sequence of information matches the intended structure of the meeting minutes.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The document contains several numbered and lettered lists (e.g., items 4a-f, 5a-e, 8a-c). The JSON fails to capture these as semantic list elements. In some cases, such as the list under item 4 on page 3, the list is converted into a table. In other cases, such as item 5 on page 3 and page 4, the list items are rendered as separate, flat paragraphs. This loses the structural relationship between the list items and their parent heading.",
+        "b_evidence_source": "4. Consent Agenda... a) Minutes... b) NG 911 Reserve Fund... (Page 3)",
+        "b_evidence_output": "{ \"type\": \"table\", \"rows\": [ { \"cells\": [ { \"cell_type\": \"header\", \"content\": [ { \"text\": \"a) Minutes of Previous Meeting – August 26, 2022\" } ], ... } ] }, ... ] }",
+        "b_evidence_location": "sections[2], reading_order 21",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document contains active hyperlinks (e.g., 'Live Status Map' in item 5b on page 3). The output JSON fails to capture these links, providing only the text without any anchor or link tagging.",
+        "b_evidence_source": "NextGen 911 Migration Status – Live Status Map (Page 3, underlined blue text)",
+        "b_evidence_output": "{ \"text\": \"b) NextGen 911 Migration Status – Live Status Map – Ms. Harris advised...\" }",
+        "b_evidence_location": "sections[2], reading_order 25",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.4545454545454546,
+    "penalty_sum": 12,
+    "defect_count": 4,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the output JSON against the source document. The output correctly follows the page-by-page flow. Repeated header information (such as 'North Carolina 911 Board Meeting Roll Call') appears in the output where it appears as a page header in the source, which is categorized as an acceptable change. No other blocks of text appear to be duplicated incorrectly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is significantly broken. Major section titles from the source document (e.g., 'Call to Order', 'Roll Call', '1. Chair’s Opening Remarks', '2. Ethics Awareness...') are all tagged as 'paragraph' types in the JSON instead of 'heading'. While some headers (like the document title and the roster section) are correctly identified as headings, the vast majority of the document's structure is flattened into paragraphs, making navigation difficult for screen readers.\",\n      \"b_evidence_source\": \"Call to Order – Secretary and Board Chairman Jim Weaver... (Page 3)\\n1. Chair’s Opening Remarks – Chairman Weaver stated... (Page 3)\\n5. Executive Director Report – (Page 3)\",\n      \"b_evidence_output\": \"{ \\\"type\\\": \\\"paragraph\\\", \\\"content\\\": [ { \\\"text\\\": \\\"**Call to Order** – Secretary and Board Chairman Jim Weaver...\\\" } ], \\\"reading_order\\\": 15 }\\n{ \\\"type\\\": \\\"paragraph\\\", \\\"content\\\": [ { \\\"text\\\": \\\"1. **Chair’s Opening Remarks** – Chairman Weaver stated...\\\" } ], \\\"reading_order\\\": 17 }\\n{ \\\"type\\\": \\\"paragraph\\\", \\\"content\\\": [ { \\\"text\\\": \\\"5. **Executive Director Report** –\\\" } ], \\\"reading_order\\\": 23 }\",\n      \"b_evidence_location\": \"sections[2], reading_order 15, 17, 23\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"In the 'Roster of Roll Call Votes' table at the end of the document, the structural organization is failed. The JSON identifies every row in the table as 'is_header_row: false', including the first row (the title) and the second row (the actual column headers such as 'NC 911 Board Members', '4. Consent Agenda', etc.). This prevents screen readers from correctly associating data cells with their headers.\",\n      \"b_evidence_source\": \"Roster of Roll Call Votes Table (Page 10)\",\n      \"b_evidence_output\": \"\\\"rows\\\": [ { \\\"cells\\\": [ { \\\"cell_type\\\": \\\"data\\\", \\\"content\\\": [ { \\\"text\\\": \\\"NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE...\\\" } ], ... } ], \\\"is_header_row\\\": false }, { \\\"cells\\\": [ { \\\"cell_type\\\": \\\"data\\\", \\\"content\\\": [ { \\\"text\\\": \\\"NC 911 Board Members\\\" }, { \\\"text\\\": \\\"4. Consent Agenda\\\" }, ... ] } ], \\\"is_header_row\\\": false } ]\",\n      \"b_evidence_location\": \"sections[9], reading_order 94\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the JSON follows the logical flow of the source document from top to bottom and page by page. The sequence of information matches the intended structure of the meeting minutes.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The document contains several numbered and lettered lists (e.g., items 4a-f, 5a-e, 8a-c). The JSON fails to capture these as semantic list elements. In some cases, such as the list under item 4 on page 3, the list is converted into a table. In other cases, such as item 5 on page 3 and page 4, the list items are rendered as separate, flat paragraphs. This loses the structural relationship between the list items and their parent heading.\",\n      \"b_evidence_source\": \"4. Consent Agenda... a) Minutes... b) NG 911 Reserve Fund... (Page 3)\",\n      \"b_evidence_output\": \"{ \\\"type\\\": \\\"table\\\", \\\"rows\\\": [ { \\\"cells\\\": [ { \\\"cell_type\\\": \\\"header\\\", \\\"content\\\": [ { \\\"text\\\": \\\"a) Minutes of Previous Meeting – August 26, 2022\\\" } ], ... } ] }, ... ] }\",\n      \"b_evidence_location\": \"sections[2], reading_order 21\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document contains active hyperlinks (e.g., 'Live Status Map' in item 5b on page 3). The output JSON fails to capture these links, providing only the text without any anchor or link tagging.\",\n      \"b_evidence_source\": \"NextGen 911 Migration Status – Live Status Map (Page 3, underlined blue text)\",\n      \"b_evidence_output\": \"{ \\\"text\\\": \\\"b) NextGen 911 Migration Status – Live Status Map – Ms. Harris advised...\\\" }\",\n      \"b_evidence_location\": \"sections[2], reading_order 25\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 4,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 2,\n    \"penalty_sum\": 12,\n    \"score\": 0.4545454545454546\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output faithfully reproduces the visual organization of the source PDF. The meeting header, roll call tables, numbered minutes sections, and the 'Roster of Roll Call Votes' are all presented in the same relative order and structure. The transition from the PDF's multi-page format to a continuous HTML scroll is a standard layout adjustment and does not confuse meaning. A user can easily find the same information (e.g., specific committee reports or vote tallies) in the same logical locations as the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "All tables from the source PDF, including the 'NC 911 Board Meeting Roll Call' (pages 1-2) and the complex 'Roster of Roll Call Votes' (page 10), are correctly rendered as tables in the HTML. Borders are present, headers are distinct, and columns are properly aligned. The content remains readable and the relationship between rows and columns is preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The meaningful 'NC DIT 911 Board' logo present in the source PDF (pages 1, 2, and 10) is correctly rendered in the HTML output in the corresponding locations. The 'APPROVED BY NC 911 BOARD' watermarks and diagonal text are correctly hidden as decorative/accessibility improvements, which is allowed per the instructions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of duplicated body content. The document headings appear in the navigation area (TOC) and the body as intended for accessibility. No paragraphs, table rows, or list items are repeated in the main content flow.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output faithfully reproduces the visual organization of the source PDF. The meeting header, roll call tables, numbered minutes sections, and the 'Roster of Roll Call Votes' are all presented in the same relative order and structure. The transition from the PDF's multi-page format to a continuous HTML scroll is a standard layout adjustment and does not confuse meaning. A user can easily find the same information (e.g., specific committee reports or vote tallies) in the same logical locations as the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"All tables from the source PDF, including the 'NC 911 Board Meeting Roll Call' (pages 1-2) and the complex 'Roster of Roll Call Votes' (page 10), are correctly rendered as tables in the HTML. Borders are present, headers are distinct, and columns are properly aligned. The content remains readable and the relationship between rows and columns is preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The meaningful 'NC DIT 911 Board' logo present in the source PDF (pages 1, 2, and 10) is correctly rendered in the HTML output in the corresponding locations. The 'APPROVED BY NC 911 BOARD' watermarks and diagonal text are correctly hidden as decorative/accessibility improvements, which is allowed per the instructions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of duplicated body content. The document headings appear in the navigation area (TOC) and the body as intended for accessibility. No paragraphs, table rows, or list items are repeated in the main content flow.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 7,
+  "total_critical": 1,
+  "total_major": 4,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

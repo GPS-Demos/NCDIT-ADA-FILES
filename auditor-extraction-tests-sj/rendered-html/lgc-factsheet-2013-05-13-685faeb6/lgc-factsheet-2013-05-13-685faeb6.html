@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>Lgc Factsheet 2013 05 13 685Faeb6</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Checkbox / checklist lists */
+.checklist {
+    list-style: none;
+    padding-left: 0;
+}
+
+.checklist > li {
+    padding-left: 1.8em;
+    text-indent: -1.8em;
+    margin-bottom: var(--spacing-xs);
+}
+
+.checklist > li > span[aria-hidden="true"] {
+    display: inline-block;
+    width: 1.4em;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Lgc Factsheet 2013 05 13 685Faeb6</h1>
+    </header>
+    <nav aria-label="Table of Contents" class="document-nav">
+        <p class="nav-title"><strong>Contents</strong></p>
+        <ul>
+            <li><a href="#heading-1">Fact Sheet</a></li>
+            <li><a href="#heading-2">Local Government Committee</a></li>
+                <li><a href="#heading-3">What is the Local Government Committee or LGC?</a></li>
+                <li><a href="#heading-4">Who serves on the LGC?</a></li>
+                <li><a href="#heading-5">Who are the current representatives?</a></li>
+                <li><a href="#heading-6">What is CGIA’s role on the LGC?</a></li>
+                <li><a href="#heading-7">Does the LGC have a voice on the GICC?</a></li>
+                    <li><a href="#heading-8">What issues are appropriate to be raised before the GICC on behalf of local gove…</a></li>
+                    <li><a href="#heading-9">How can I raise an issue?</a></li>
+                    <li><a href="#heading-10">What are some issues that the LGC has raised on behalf of local government?</a></li>
+                    <li><a href="#heading-11">NC OneMap Initiative</a></li>
+                    <li><a href="#heading-12">Cost-Sharing for Geospatial Data Development and Acquisition</a></li>
+                    <li><a href="#heading-13">Statewide Ortho Project</a></li>
+                    <li><a href="#heading-14">Developing Best Practices for State and Local Data Sharing</a></li>
+                    <li><a href="#heading-15">Review of Proposed Standards and Policy Documents</a></li>
+                <li><a href="#heading-16">How does the LGC communicate with the local government GIS community in North Ca…</a></li>
+                <li><a href="#heading-17">What is the SMAC?</a></li>
+                <li><a href="#heading-18">Who are the LGC representatives on the SMAC</a></li>
+                <li><a href="#heading-19">How does the SMAC deal with issues that concern local government?</a></li>
+                <li><a href="#heading-20">What are the direct benefits to local governments from the GICC’s statewide coor…</a></li>
+        </ul>
+    </nav>
+    <main id="main-content" role="main">
+<section>
+<h1 id="heading-1">Fact Sheet</h1>
+<h1 id="heading-2">Local Government Committee</h1>
+<h2 id="heading-3">What is the Local Government Committee or LGC?</h2>
+<p>The LGC is one of the committees of the Geographic Information Coordinating Council. The LGC was established by legislation. It has two primary purposes:</p>
+
+<p>• To advise the GICC on issues, problems, and opportunities relating to GIS and geospatial information within local governments in North Carolina.
+• To inform local government users of geographic information about the status of GIS activities in the state, GIS efforts in state government, and the actions of the GICC.</p>
+
+<h2 id="heading-4">Who serves on the LGC?</h2>
+<p>The LGC is comprised of a single representative appointed by each of the following organizations.</p>
+
+<p>• Carolina Chapter of the Urban and Regional Information Systems Association (CURISA)
+• NC Chapter American Planning Association (APA-NC)
+• NC Local Government Information Systems Association (NCLGISA)
+• NC Property Mappers Association (NCPMA)
+• NC Association of County Commissioners (NCACC)
+• NC League of Municipalities (NCLM)
+• Association of Regional Council Executive Directors (ARCED)</p>
+
+<h2 id="heading-5">Who are the current representatives?</h2>
+<p>See the LGC Web Page for membership. http://ngicc.net/Committees/LocalGovernmentCommittee(LGC).aspx</p>
+
+<h2 id="heading-6">What is CGIA’s role on the LGC?</h2>
+<p>The NC Center for Geographic Information &amp; Analysis (CGIA) is designated by the legislation authorizing the GICC as staff to the GICC and its committees. In this role, CGIA provides administrative support and assistance in implementing the initiatives and programs of the GICC, the LGC and the other committees. Various CGIA staff are assigned to support the individual committees. Tom Tribble is designated as CGIA staff to the LGC.</p>
+
+<h2 id="heading-7">Does the LGC have a voice on the GICC?</h2>
+<p>Yes, the chair of the LGC serves on the GICC speaks on behalf of the LGC at GICC meetings. The six members of the LGC elect their chair. The LGC chair also serves on the GICC’s</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section>
+<p>Management and Operations Committee, which provides advice and support to the GICC on organizational and programmatic matters concerning policy, management, and operations of geographic information, geographic information systems (GIS) and related technology.</p>
+
+<p>In addition, the LGC appoints local government members to serve on several GICC committees, including the Technical Advisory Committee, the Statewide Mapping Advisory Committee (SMAC) and several of the SMAC subcommittees, including the Working Group for Roads and Transportation, the Working Group for Seamless Parcels, the Working Group for Orthophotography Planning and the NC Board on Geographic Names.</p>
+
+<h3 id="heading-8">What issues are appropriate to be raised before the GICC on behalf of local government?</h3>
+<p>Anything related to GIS and geographic information that is debated or discussed or of concern to local government can be presented to the GICC. For example, a debate that starts on the PMA list serve related to security or data access may evolve into a question or issue to be presented by the LGC to the GICC.</p>
+
+<h3 id="heading-9">How can I raise an issue?</h3>
+<p>Contact an LGC member – by email or phone – about your concern. Some of the examples described below were brought to the LGC by individual members of the NC GIS community.</p>
+
+<p>See the Local Government Committee page on the GICC website for a link to Email addresses and phone numbers for LGC members.</p>
+
+<h3 id="heading-10">What are some issues that the LGC has raised on behalf of local government?</h3>
+<p>• The NC Surveyors Law</p>
+
+<p>The LGC raised concerns about the potential effect of the NC Surveyors’ Law on GIS practices within local government, particularly whether certain practices involving the collection of geospatial data with GPS equipment constituted practicing surveying without a license. In response to the LGC’s concerns, the GICC appointed an ad hoc Committee to study the issue and make recommendations to the GICC. The LGC appointed three local government representatives to serve on the committee.</p>
+
+<p>Earlier, the National Council of Examiners for Engineering and Surveying (NCEES) adopted a Model Law and recommended its adoption by the various states. The NC Surveyors Law is not in accordance with the Model Law. The GICC’s ad hoc Committee recommended that the North Carolina Board of Examiners for Engineers and Surveyors (NCBELS) propose changes to the NC Surveyors’ Law that would bring the law into agreement with the national model law.</p>
+
+<p>Progress on Clarifying Geographic Data Collection by Local Governments</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section>
+<p>In 2010, the NC Board of Examiners for Engineers and Surveyors (NCBELS) and the NC Geographic Information Coordinating Council (GICC) requested advisory opinions from the NC Department of Justice concerning GIS data collection by local governments.</p>
+
+<p>The issue was whether certain GIS data collection activities of local governments (i.e., counties, cities, towns, and regional councils of governments) are included in, or exempt from, the North Carolina Engineering and Land Surveying Act: Chapter 89C of the General Statutes.</p>
+
+<p>In April 2010 the Department of Justice issued an advisory opinion that the collection of GIS data by an employee of the State of North Carolina, any political subdivision of the State or a municipality while engaged in that activity in the course of their employment does not constitute surveying without a license. In a second advisory opinion, the Department of Justice stated that this conclusion also applies to regional councils of governments, so long as those entities are authorized by resolution of their member governments. Therefore, the collection of GIS data by local governments does not violate Chapter 89C of the General Statutes since local governments are exempt via the government exemption.</p>
+
+<h3 id="heading-11">NC OneMap Initiative</h3>
+<p>The LGC played an active role in developing the vision of *NC OneMap*, a program that promotes statewide data sharing in partnerships with county, municipal, state and federal geospatial data providers. *NC OneMap* is not simply a map viewer but a comprehensive program that promotes geographic data sharing; data standards; data currency, maintenance, and accessibility; data documentation (i.e. metadata); and a statewide data inventory. The initial focus is on 37 priority data themes, many of which are high resolution data developed by local governments. In fact the LGC played a primary role in identifying and expanding the list of priority data themes.</p>
+
+<h3 id="heading-12">Cost-Sharing for Geospatial Data Development and Acquisition</h3>
+<p>In developing the implementation plan for *NC OneMap*, the LGC was instrumental in helping GICC members understand that local governments bear the largest financial burden for producing critical high-resolution datasets, including orthophotography and parcel boundaries.</p>
+
+<p>In recognition of this, the GICC and the *NC OneMap* program promotes cost-sharing for data development and acquisition at the local government level. Through the efforts of the GICC, CGIA and the National Geospatial Programs Office in NC, more than $1,200,000 has been distributed to local governments as cost share on local government aerial imagery projects.</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section>
+<h3 id="heading-13">Statewide Ortho Project</h3>
+<p>In 2010, the NC 911 Board funded the acquisition of 0.5-foot resolution (6-inch pixels, equivalent to mapping at 1 inch = 200 feet) for all 100 counties in North Carolina. LGC representatives serve on the Working Group for Orthopohtography Planning (WGOP), a subcommittee of the SMAC. The WGOP provided technical advice to the Statewide Ortho Project.</p>
+
+<p>The exciting outcome of this project is that consistent high resolution imagery is now available for the entire state for the first time ever. In addition to its value to emergency responders at all levels of government, the imagery serves as a fundamental data layer for numerous other applications by government and the private sector.</p>
+
+<p>The data were distributed to all 100 counties in the spring of 2011. The data are also available free to GIS users and the public as an image service and downloadable files from the NC OneMap Geospatial Portal.</p>
+
+<p>In 2011, the GICC adopted the North Carolina Orthoimagery Business Plan that outlines a four-year cycle for updating orthoimagery for all 100 counties. LGC appointments to the WGOP participated in the development of the plan. Subsequently, the NC 911 Board agreed to fund the program.</p>
+
+<h3 id="heading-14">Developing Best Practices for State and Local Data Sharing</h3>
+<p>County and municipal government agencies receive frequent requests for copies of locally produced geospatial data from many different state and federal government agencies. Duplicative requests for data pose a burden on local government agencies with limited staff and computer resources.</p>
+
+<p>The LGC presented a formal report to the GICC in 2006, which recommended that the GICC appoint a committee to develop specific recommendations and guidelines to resolve or alleviate this problem. The GICC agreed and established the State/Local Data Sharing Committee to accomplish exactly that. The committee has three local government representatives, including the Chair of the LGC and another GICC member from local government.</p>
+
+<h3 id="heading-15">Review of Proposed Standards and Policy Documents</h3>
+<p>LGC members are asked to review and comment on all proposed standards and other policy documents that are issued by the GICC. The LGC seeks input from its constituent members and the local government GIS community in various ways (see below).</p>
+
+<p>Water / Sewer Standard. In 2010, one of the LGC representatives to the SMAC requested that the Geographic Data Content Standard for Water Distribution and Sanitary Sewer Systems be updated. The SMAC established a subcommittee to review and revise</p>
+
+<p>4 – 5/13/2013</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section>
+<p>the standard. Several local government representatives served on the subcommittee. A revised standard was adopted by the GICC in 2011.</p>
+
+<h2 id="heading-16">How does the LGC communicate with the local government GIS community in North Carolina?</h2>
+<p>The LGC members seek input from the local government GIS community in various ways.</p>
+
+<p>• *LGC Alerts* – To promote improved communications between the LGC and the local government GIS community in North Carolina, the LGC initiated the “LGC ALERT” email program. When issues arise during meetings of the GICC, the LGC or the Statewide Mapping Advisory Committee, your representatives on the LGC will send an email with the subject “LGC ALERT” to various list serves, including the Carolina URISA, NCPMA, NCLGISA and NCGIS list serves. The emails address topics of critical interest to the local government GIS community in NC and may describe actions of the GICC; seek review of proposed standards or guidelines; or solicit input on the wide variety of issues that come before the GICC. LGC ALERT emails are brief, typically without attachments, but include a hot link to additional information at the LGC web site.</p>
+
+<p>• *GIS Advisory Team* – In 2005 the LGC established a GIS Advisory Team, now called the A Team, whose members provide recommendations and technical guidance to the LGC regarding issues of concern to the GIS community. The A Team serves as a link between the LGC and the GIS community. In response to requests for assistance, A Team members may simply respond with their personal opinions or they may solicit opinions from their network of GIS colleagues and summarize the collected opinions. A Team members from county and municipal government agencies and regional organizations are listed at the LGC web site.</p>
+
+<p>• *Professional Association Meetings* – The LGC members who represent professional associations (CURISA, NCLGISA and NCPMA), the NCACC and the NCLOM take advantage of regular association meetings and Board meetings to pass on information that comes out of the GICC and its committees and to seek advice from their professional colleagues on GIS issues of concern. GIS staff from Councils of Governments (COGs) and lead regional organizations regularly meet on the morning before the quarterly GICC meetings.</p>
+
+<p>• *Newsletters* – The LGC has agreed to prepare quarterly articles on LGC and GICC activities and explain how they impact the local GIS community. The articles will be submitted to the various newsletters produced by the professional associations that are represented on the LGC.</p>
+
+<p>The LGC continues to look for ways to better communicate with local government GIS professionals in North Carolina. We welcome suggestions on how to improve this dialogue so that the voice of local government GIS professionals is heard.</p>
+
+<p>5 – 5/13/2013</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section>
+<h2 id="heading-17">What is the SMAC?</h2>
+<p>The Statewide Mapping Advisory Committee (SMAC), like the LGC, is a committee of the GICC. The purpose of the SMAC is to work with data content standards, consolidate statewide mapping requirements, and seek financial support for cooperative programs. It advises the GICC on issues, problems, and opportunities relating to base and image mapping programs and geospatial information.</p>
+
+<p>Membership of the SMAC cross-cuts the GIS community and includes representatives from several state agencies as well as appointments made by the LGC and two other GICC committees, the State Government GIS Users Committee and the Federal Interagency Committee.</p>
+
+<h2 id="heading-18">Who are the LGC representatives on the SMAC</h2>
+<p>See the SMAC member list on the SMAC web page. http://ncgicc.net/Committees/StatewideMappingAdvisoryCommittee(SMAC).aspx</p>
+
+<h2 id="heading-19">How does the SMAC deal with issues that concern local government?</h2>
+<p>The SMAC is the place where knowledgeable GIS people roll up their sleeves and propose solutions to the problems that are raised. The solutions may include draft standards; written recommendations to the GICC; policy statements; and education and outreach initiatives. Often, special subcommittees are convened to address specific issues. The subcommittees may become permanent standing committees or ad hoc committees that are discontinued when their task is complete. The subcommittees are typically comprised of a mix of SMAC members and others in the GIS community who are invited to participate. Examples of subcommittees include:</p>
+
+<p>*Working Group for Roads and Transportation (WGRT)* – The WGRT exists to facilitate the sharing of roads data between regional planning organizations, local governments, state agencies, and the public. This valuable data set requires substantial production efforts by city and county GIS departments, NC Department of Transportation and others. The Working Group&#39;s goal is to put together a roads framework and facilitate maintenance of the data through agreements among state and local agencies. Its objectives are to identify incentives for local governments, use the NC OneMap GIS data inventory tool, collaborate with NC OneMap for data distribution, and establish an Internet service for all roads data. The WGRT includes several local government representatives, some appointed by the LGC.</p>
+
+<p>*Working Group for Seamless Parcels (WGSP)* – The purpose of the WGSP is to explore and develop guidelines, procedures, tools and standards for creating a statewide parcel dataset and to facilitate the sharing of parcel data between government agencies, the academic community, the private sector and the public. The WGSP will serve as a forum for discussion of parcel data issues by the stakeholders. The WGSP includes several local government representatives, some appointed by the LGC.</p>
+
+<p>*Working Group for Orthophotography Planning (WGOP)* – This Working Group is responsible for maintaining an inventory of the status of orthophotography (aerial</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section>
+<p>imagery) at the county level. It is charged with seeking sources of funding to assist counties and state agencies in acquiring high resolution imagery. The Working Group develops procedures for the distribution of aerial imagery within a network of state government agencies. Two local government representatives, appointed by the LGC, serve on the WGOP.</p>
+
+<p>• *NC Board on Geographic Names (BGN)* – The North Carolina BGN and the United States BGN work together to develop official names that are required-use on federal products and are adopted by other non-federal organizations for use in mapping projects and databases. The database that results through this process is known as the Geographic Names Information System, or GNIS. GNIS is a searchable database and is acknowledged by the GICC as the official North Carolina names repository. Many features in North Carolina, especially streams, are unnamed. The NC BGN and the US BGN welcome suggestions that can be advanced through the two-year process to adopt and record a feature name. Locally-accepted names are in the GNIS since the process involves input from people who live in that community. A local government representative, appointed by the LGC, serves on the BGN.</p>
+
+<p>• The SMAC recently convened an *ad hoc* committee to develop recommendations for “Best Practices for State and Local Data Sharing.” This was the result of an LGC request. The committee will include several local government representatives.</p>
+
+<h2 id="heading-20">What are the direct benefits to local governments from the GICC’s statewide coordination activities and the role of the LGC?</h2>
+<p>• An active voice in decisions on policies and directions on the use of GIS and geospatial information that directly affect local government.</p>
+
+<p>• Recognition by state and federal agencies of the critical role that local governments play in developing and managing many essential data sets.</p>
+
+<p>• Increased availability of cost share funds for the development or acquisition of aerial imagery and other data. More than $1,200,000 has been directly to local governments as cost share for aerial imagery acquisition between 2005 and 2008.</p>
+
+<p>• Changes in the directions of programs or in the design of geospatial data sets as a direct result of local government input. Examples include:</p>
+
+<p>○ In the 1990s, the State of North Carolina provided cost share funds to USGS to develop statewide imagery products, typically at one meter or lower resolution. Although this provided a valuable basemap for state applications, the imagery was of limited value to local governments. Through the efforts of the GICC and at the instigation of local government representatives on the GICC, the program has shifted direction to supporting the acquisition of high-resolution orthophotography to the benefit of local governments. In 2010, orthoimagery was acquired statewide and distributed to all 100 counties at no cost to local governments. In 2011, a statewide program to update orthoimagery for all 100 counties on a four-year cycle was implemented, funded by the NC 911 Board.</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section>
+<p>The State of North Carolina has funded the development of a high-resolution stream data set in 19 western counties. There are expectations that the program will be extended statewide. As a result of local government input into the requirements analysis and design of this dataset, the final product will be more suitable to local government applications. The Stream Mapping Advisory Committee, which includes LGC appointments, is working to implement a coordinated approach to mapping surface waters and watersheds across the State of North Carolina.</p>
+
+<p>These examples can be attributed to a growing environment of cooperation that is engendered by an effective statewide coordination structure – an active GICC that includes an engaged local government community that realizes the benefits of cooperation.</p>
+
+<p>The opportunity to contribute to the development and adoption of data standards. As data standards are increasingly adopted, local governments will benefit from obtaining consistent data from adjacent jurisdictions for use in regional or cross-county applications. The key point here is that accepted standards, while they benefit state and federal agencies, also benefit local governments that may need to present local geospatial data for regional applications in a way that is clear to local decision-makers and to the public.</p>
+
+<p>A reduction, hopefully, in duplicative requests for data from state and federal agencies.</p>
+
+<p>Improvements in access to state and federal data and data from adjacent county and city jurisdictions.</p>
+
+<p>Improved flow of information about guidelines, policies and legal issues that can affect individual GIS professionals and local government agencies.</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAC0lEQVR4nGNgQAYAAA4AAamRc7EAAAAASUVORK5CYII=" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,113 @@
+{
+  "document_id": "esrmo-newsletter-september-2021-686b1e03",
+  "audited_at": "2026-03-11T19:04:22.126240Z",
+  "quality_score": 79,
+  "fidelity_composite": 0.7255,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "While programmatic metrics show high text recall (0.973), the LLM fidelity report highlights several major structural and visual failures that compromise the document's accessibility and professional layout. The insertion of a logo into a paragraph and the omission of several primary section headings for major events create a disjointed reading experience that requires manual correction.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The output fails to include several key headings from page 4 of the source document. Specifically, '2021 N.C. Cybersecurity Awareness Symposium – October 6-7, 2021', 'Triangle InfoSecon Virtual Conference October 28-29, 2021', and 'PCI Webinars by Coalfire' are missing as text elements. While logos associated with these sections are present (elements 49, 50, 51), the accompanying text that defines the document structure and section hierarchy is omitted. This represents a significant break in the",
+      "source_pdf_quote": "2021 N.C. Cybersecurity Awareness Symposium – October 6-7, 2021 (Page 4)\nTriangle InfoSecon Virtual Conference October 28-29, 2021 (Page 4)\nPCI Webinars by Coalfire (Page 4)",
+      "output_quote": "The output skips these headings, starting Section 4 directly with the paragraph content 'October will be National Cybersecurity Awareness Month...' (index 41).",
+      "location": "Sections 4, Page 4"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization is significantly compromised in several ways. Firstly, the agency logo (NCDIT), which belongs in the document header, is incorrectly inserted into the middle of the first paragraph of the first article ('Phishing Attacks Have Increased...'). This disrupts the flow of text and intent of the header. Secondly, several section headings that were part of graphical elements in the source (Symposium, Triangle InfoSeCon, PCI Webinars, and Upcoming Events) have been stripped from ",
+      "source_pdf_quote": "The NCDIT logo is in the header of Page 1. The headings '2021 N.C. Cybersecurity Awareness Symposium...', 'Triangle InfoSeCon...', 'PCI Webinars by Coalfire', and 'UPCOMING EVENTS' precede their content on pages 4 and 5.",
+      "output_quote": "The NCDIT logo appears in the middle of the first paragraph of the 'Phishing Attacks...' article. The listed headings appear as a group at the very bottom of the HTML, after the disclaimer.",
+      "location": "Articles on Page 1, Page 4, and Page 5."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "While some images like the phishing laptop and the Lego office are present, several other meaningful images and logos are missing. The FEMA logo (page 3), the Symposium logo (page 4), the Triangle InfoSeCon logo (page 4), and the PCI DSS logo (page 4) are completely absent from the HTML output. Additionally, stock photos and icons that help define sections, such as the laptop image at the top of page 5 and the newsletter stack graphic, are also missing. The absence of these agency and certificat",
+      "source_pdf_quote": "Logos for FEMA (page 3), NC Cybersecurity Symposium (page 4), Triangle InfoSeCon (page 4), PCI DSS (page 4), and stock graphics (page 5).",
+      "output_quote": "The aforementioned logos and graphics do not appear in the HTML screenshot.",
+      "location": "Sections on pages 3, 4, and 5."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In the 'Upcoming Events' section on page 5, the output contains a text duplication and corruption error for the September 7 event. The source text reads 'September 7: Coalfire Webinar: Authentication and Access Control', while the output text reads '**September 7:** Coalfire Webinar: Authentication and Access Controlebinar: Authentication and Access Control'. The insertion of 'Controlebinar:' and the repeated phrase is an artifact not present in the source.",
+      "source_pdf_quote": "September 7: Coalfire Webinar: Authentication and Access Control",
+      "output_quote": "**September 7:** Coalfire Webinar: Authentication and Access Controlebinar: Authentication and Access Control",
+      "location": "Sections[4].elements[10] (Index 63)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The output fails to preserve the list structure for several bulleted lists found in the source. In multiple instances, the list items are merged into a single paragraph string or treated as individual paragraphs rather than being grouped within a list element. For example, on page 2 and page 3, lists are flattened into single content blocks.",
+      "source_pdf_quote": "• Staying Alert to Disaster-related Scams\n• Before Giving to a Charity\n• Staying Safe on Social Networking Sites\n• Avoiding Social Engineering and Phishing Attacks\n• Using Caution with Email Attachments (Page 2)",
+      "output_quote": "\"text\": \"• Staying Alert to Disaster-related Scams\\n• Before Giving to a Charity\\n• Staying Safe on Social Networking Sites\\n• Avoiding Social Engineering and Phishing Attacks\\n• Using Caution with Email Attachments\"",
+      "location": "reading_order: 23, Page 2"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to capture several active hyperlinks clearly visible in the source PDF. While some links on page 1 are correctly identified with markdown syntax, subsequent links (such as the IC3 URL on page 2, the FEMA email on page 3, and the resource URLs on page 5) are rendered as plain text without being made clickable or interactive.",
+      "source_pdf_quote": "www.ic3.gov (Page 2)\nNEP@fema.dhs.gov (Page 3)\nhttps://fedvte.usalearning.gov/ (Page 5)",
+      "output_quote": "\"text\": \"If you believe you have been a victim of cybercrime, file a complaint with the Federal Bureau of Investigation’s Internet Crime Complaint Center (IC3) at www.ic3.gov.\"",
+      "location": "reading_order: 24, Page 2"
+    }
+  ],
+  "action_items": [
+    "Restore missing H2/H3 headings for events on page 4.",
+    "Move the NCDIT logo from the paragraph text to the document header.",
+    "Fix the corrupted text string in the September 7 event entry.",
+    "Convert flattened text blocks back into semantic HTML lists."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7255,
+      "text_match": 0.969053022488137,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7878,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7255,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9726651480637813,
+      "shingling_precision": 0.9654676258992806,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1671,
+      "gemini_words": 1671,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 203914,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

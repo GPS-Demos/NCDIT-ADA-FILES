@@ -1,0 +1,84 @@
+{
+  "document_id": "gicc-smac-agenda-20210120-68839aac",
+  "audited_at": "2026-03-11T19:18:42.969328Z",
+  "quality_score": 91,
+  "fidelity_composite": 0.9045,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document demonstrates excellent content preservation with a content score of 1.0 and high shingling recall of 0.858. While structural issues (0.68) were identified regarding nested lists and heading hierarchies, these are classified as minor cosmetic defects that do not warrant a human review according to the specific routing instructions for documents with a composite fidelity score above 0.85.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The source document contains several clear section headers ('Welcome/Introductions', 'Framework+ Datasets', 'Working Groups', 'Regular Status Updates', 'Other Business'). While the document title is correctly identified as an H1, these major section headers are rendered as standard paragraph elements with bold text. This significantly flattens the document's semantic hierarchy, making it difficult for screen readers to navigate section by section.",
+      "source_pdf_quote": "Major sections such as 'Welcome/Introductions', 'Framework+ Datasets', and 'Working Groups' are visually distinct headers.",
+      "output_quote": "The output renders these as bold text within paragraphs, for example: 'reading_order': 4 contains 'Welcome/Introductions' and 'reading_order': 5 contains 'Framework+ Datasets'.",
+      "location": "Sections starting at elements index 4, 5, 6, 8, 9"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source document makes extensive use of nested bulleted lists for datasets and working groups. The JSON output fails to preserve these as semantic list structures (e.g., list/list-item objects). Instead, it merges multiple list items and their sub-bullets into single paragraph blocks, using ASCII characters (asterisks) to simulate bullets. This loses the structural meaning of the list.",
+      "source_pdf_quote": "Multiple nested lists under sections like 'Framework+ Datasets' and 'Working Groups'.",
+      "output_quote": "Multiple list items concatenated into a single string within a paragraph: '*   Orthoimagery - Ben Shelton\\n*   Cadastral - John Bridgers\\n*   Elevation – John Lay\\n    *   Updates on Contours...'",
+      "location": "Elements at reading_order 5 and 6"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains several functional hyperlinks (e.g., 'minutes', 'Join meeting') and explicit URLs. The JSON output fails to capture these as semantic links or include 'url' properties. They are rendered as plain text or italicized text, stripping the document of its interactive functionality.",
+      "source_pdf_quote": "Hyperlinks 'minutes' and 'Join meeting', and several .gov URLs throughout the document.",
+      "output_quote": "The text 'minutes' is just italicized and 'Join meeting' is plain text within the paragraphs, with no associated link data.",
+      "location": "Elements at reading_order 3, 4, 6, 11"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.9045,
+      "text_match": 0.8407541115122343,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.92,
+      "raw_score": 0.9088,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9045,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8576104746317512,
+      "shingling_precision": 0.8245476003147129,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 287,
+      "gemini_words": 287,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 209148,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

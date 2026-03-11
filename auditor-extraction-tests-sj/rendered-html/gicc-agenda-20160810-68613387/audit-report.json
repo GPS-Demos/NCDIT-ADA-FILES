@@ -1,0 +1,76 @@
+{
+  "document_id": "gicc-agenda-20160810-68613387",
+  "audited_at": "2026-03-11T19:09:13.751138Z",
+  "quality_score": 98,
+  "fidelity_composite": 0.9727,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document demonstrates high quality with a composite fidelity score of 0.9727 and strong programmatic alignment (0.982 recall/precision). Identified issues, specifically the flattening of a multi-level list and the rendering of hyperlinks as plain text, are categorized as minor cosmetic/structural defects that do not justify a human review cycle for a short agenda document.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source document contains a multi-level list within the second column of row 8 of the table ('8. Committee Reports'). In the JSON output, this list has been flattened into a single text block with newline characters and bullet characters ('•', 'o') instead of being structured as a semantic list or nested list items. This results in the loss of list item segmentation.",
+      "source_pdf_quote": "• Statewide Mapping Advisory Committee\r\no Vote: Standard for Parcel Data Content (Summary)\r\n• Local Government\r\no Vote: LGC Bylaws Revised\r\n• State Government GIS Users\r\n• Federal Interagency\r\n• Technical Advisory\r\n• Management & Operations",
+      "output_quote": "\"text\": \"8. Committee Reports\\n• Statewide Mapping Advisory Committee\\n  o Vote: Standard for Parcel Data Content (Summary)\\n• Local Government\\n  o Vote: LGC Bylaws Revised\\n• State Government GIS Users\\n• Federal Interagency\\n• Technical Advisory\\n• Management & Operations\"",
+      "location": "sections[0].elements[3] (Table), Row 8, Cell 1"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Several functional links present in the source document are missing in the output. The source PDF contains hyperlinks for 'Minutes' (Item 3), 'Standard for Parcel Data Content (Summary)' (Item 8), 'LGC Bylaws Revised' (Item 8), and the website URL at the bottom. The JSON output renders these as plain text strings without identifying them as links or providing the underlying URLs.",
+      "source_pdf_quote": "Minutes; Standard for Parcel Data Content (Summary); LGC Bylaws Revised; http://it.nc.gov/gicc",
+      "output_quote": "\"text\": \"3. Approval of Minutes of May 11th Meeting\"; \"text\": \"(New) GICC Website: http://it.nc.gov/gicc\"",
+      "location": "Table rows 3 and 8; paragraph at reading_order 6"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9727,
+      "text_match": 0.9817351598173516,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.95,
+      "raw_score": 0.9755,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9727,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9817351598173516,
+      "shingling_precision": 0.9817351598173516,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 188,
+      "gemini_words": 188,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 127429,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

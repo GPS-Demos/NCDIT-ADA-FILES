@@ -1,0 +1,105 @@
+{
+  "document_id": "20190726-board-agenda-685f9db9",
+  "audited_at": "2026-03-11T18:38:52.642922Z",
+  "quality_score": 76,
+  "fidelity_composite": 0.675,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "While programmatic signals show high text recall (0.93), the LLM fidelity report identifies significant structural and visual failures that impact accessibility and readability. The conversion of half an agenda table into plain text and the 'smashing' of financial data in the Consent Agenda into single cells are major defects that violate semantic integrity. Given the 3x cost of false negatives, these structural issues necessitate human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent. The document starts with a Level 1 heading for 'AGENDA', but then subsequent sections like 'AUGUST 2019 COMMITTEE MEETINGS' are assigned Level 3, skipping Level 2 entirely. This violates semantic structure requirements.",
+      "source_pdf_quote": "AUGUST 2019 COMMITTEE MEETINGS",
+      "output_quote": "{\n          \"type\": \"heading\",\n          \"level\": 3,\n          \"text\": \"AUGUST 2019 COMMITTEE MEETINGS\",\n          \"id\": null,\n          \"lang\": null,\n          \"reading_order\": 14\n        }",
+      "location": "Page 2, element index 14"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The document contains a continuous agenda list across two pages that uses a grid/tabular layout (Number, Topic, Presenter). The conversion correctly identifies this as a table for items 1-8 on Page 1, but fails to maintain the table structure for items 9-16 on Page 2, converting them instead into plain text paragraphs. This results in the loss of the relationship between the topics and their presenters.",
+      "source_pdf_quote": "Page 2 contains agenda items 9 through 16 aligned in columns for Number, Topic, and Presenter.",
+      "output_quote": "Items 9 through 15 are rendered as individual 'paragraph' type elements (e.g., '10. Finance Team Report Marsha Tapler (05)') rather than being included in a table structure similar to the first page.",
+      "location": "Page 2, elements index 5 to 11"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly altered. The NC DIT logo, which is a header element at the top left of page 1 in the source PDF, has been relocated to the middle of the document in the HTML output, appearing after item 8 of the agenda. Additionally, agenda items 9-16, which are presented in a clear two-column 'Topic' and 'Presenter' format on page 2 of the PDF, are rendered as simple single-line paragraphs in the HTML, losing the column-based structural intent of the ori",
+      "source_pdf_quote": "The source PDF shows a logo at the top left of page 1 and a structured two-column layout for agenda items 9-16 on page 2.",
+      "output_quote": "In the HTML screenshot, the logo is placed after the table for items 1-8, and items 9-16 are rendered as plain text paragraphs (e.g., '9. Funding Committee Report David Bone/Marsha Tapler (05)').",
+      "location": "Logo placement (after item 8) and Agenda items 9-16."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The agenda table is visually broken, specifically in row 5 ('Consent Agenda'). The source PDF uses complex alignment and indentation to associate specific fund names (e.g., 'NG 911 Fund', 'CMRS Fund') with their respective 'June 2019 Fund Balance' and 'June 2019 Disbursement' figures. In the HTML rendering, all text labels are smashed into a single 'Topic' cell, and all dollar values are smashed into a single 'Presenter' cell. This destroys the spatial relationship between the labels and the dat",
+      "source_pdf_quote": "Page 1, Item 5 shows sub-items a-f with financial figures aligned to labels (e.g., 'NG 911 Fund... Fund Balance $ 44,749,222').",
+      "output_quote": "The HTML table for item 5 contains a wall of text in the middle cell ('...b) NG 911 Fund June 2019 Fund Balance...') and a list of numbers in the right cell ('Pokey Harris (03) $ 44,749,222 -$ 21,114...').",
+      "location": "Table item 5, Page 1."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The document contains multiple lists. The committee meetings list on page 2 is converted into a single paragraph element with manual asterisks instead of a structured 'list' element. Additionally, the sub-items in the agenda (e.g., 5a, 5b) are merged into single text strings rather than being preserved as nested list items.",
+      "source_pdf_quote": "❖ August 08 – Education Committee\n❖ August 13 – Technology Committee (WebEx)\n❖ August 15 – Funding Committee\n❖ August TBD – Standards Committee",
+      "output_quote": "\"text\": \"Phillips Building Training Room, 109 East North Street, Raleigh\\n(Unless otherwise noted.)\\n* August 08 - Education Committee\\n* August 13 - Technology Committee (WebEx)\\n* August 15 - Funding Committee\\n* August TBD - Standards Committee\"",
+      "location": "Page 2, element index 15"
+    }
+  ],
+  "action_items": [
+    "Reconstruct the agenda table on page 2 to maintain Topic/Presenter columns",
+    "Fix the Consent Agenda table layout to correctly map fund names to their respective dollar values",
+    "Move the NC DIT logo to the document header",
+    "Remap heading levels to follow a logical H1 > H2 sequence"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.675,
+      "text_match": 0.9380073800738007,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7584,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.675,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9297732260424286,
+      "shingling_precision": 0.9463886820551005,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 358,
+      "gemini_words": 358,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 164179,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

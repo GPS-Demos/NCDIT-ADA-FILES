@@ -1,0 +1,174 @@
+{
+  "document_id": "20190416-nc-911-board-minutes-approved-687248c4",
+  "audited_at": "2026-03-11T18:38:00.278542Z",
+  "quality_score": 25,
+  "fidelity_composite": 0.2432,
+  "fidelity_content": 0.0,
+  "fidelity_structural": 0.2272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Output appears mostly fabricated: shingling_precision=0.17. Only 17% of output text found in source.",
+  "decision_method": "hard_veto:V4",
+  "concerns": [
+    {
+      "description": "Fabricated paragraphs or sentences",
+      "severity": "critical",
+      "analysis": "The output JSON contains content for a 'North Carolina 911 Board Meeting' held on 'Friday, April 26, 2019' in the form of meeting minutes. The source PDF provided is an agenda for a meeting held on 'Friday, January 18, 2019'. Nearly all paragraphs and sentences in the output are fabricated relative to the source document, describing events and discussions (e.g., the Durham gas explosion, GIS roadshows, and specific board motions) that do not appear in the source agenda.",
+      "source_pdf_quote": "AGENDA NORTH CAROLINA 911 BOARD MEETING Friday, January 18, 2019",
+      "output_quote": "North Carolina 911 Board Meeting MINUTES ... Friday, April 26, 2019",
+      "location": "Throughout the document"
+    },
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The output contains a specific URL (https://nconemap.maps.arcgis.com/apps/opsdashboard/index.html#/ca70ca087c084a35ab644ea0b693ffcb) that is not present in the source document. Additionally, the Conference Bridge number and ID present in the source are missing from the output.",
+      "source_pdf_quote": "Conference Bridge: 888-808-6929 ID 8153047#",
+      "output_quote": "https://nconemap.maps.arcgis.com/apps/opsdashboard/index.html#/ca70ca087c084a35ab644ea0b693ffcb",
+      "location": "Reading order index 74"
+    },
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output fails to include any of the actual content from the source January 18, 2019 Agenda. Both pages of the source document have been effectively omitted and replaced with content from a different document (the April 26 minutes).",
+      "source_pdf_quote": "Entire 2-page Agenda for Jan 18, 2019.",
+      "output_quote": "The output contains content for April 26, 2019.",
+      "location": "Entire document"
+    },
+    {
+      "description": "Low text precision (possible hallucination): 17%",
+      "severity": "critical",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The source document contains lists of financial data for four funds (NG 911, CMRS, PSAP, Grant) with multiple rows of data for November and December 2018. The output replaces these with a table of attendees (not in the source) and significantly truncated financial data for a different month (March 2019).",
+      "source_pdf_quote": "Section 4, b) through e) containing balance and disbursement rows for Nov and Dec 2018.",
+      "output_quote": "Table of 'Members Present' (reading order 2) and truncated March 2019 data (reading order 10-20).",
+      "location": "Section 1, Section 2"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The source document includes specific sub-items under '4. Consent Agenda' (items a-h) and '5. Executive Director Report' (items a-f). The output omits the content of these items (e.g., the specific 2018 orthoimagery reports in 4h) and replaces them with different sub-items (a-m in the output's section 5).",
+      "source_pdf_quote": "h) Orthoimagery September, October, and November 2018 Reports",
+      "output_quote": "[Item missing from section 4]",
+      "location": "Source page 2, output section 2"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is broken. The document starts with a Level 1 heading (element 1), but then skips to Level 4 headings (elements 7 and 23) without any intervening Level 2 or Level 3 headings to establish a logical hierarchy.",
+      "source_pdf_quote": "The source document uses a flat hierarchical structure for its main sections (1, 2, 3, 4, etc.).",
+      "output_quote": "Elements 1 (H1), 7 (H4), and 23 (H4).",
+      "location": "Sections 1 and 2, elements at reading_order 1, 7, and 23"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table structure in the output is completely fabricated relative to the source document. The source document contains a list/table for the agenda topics with columns 'Tab', 'Topic', and 'Presenter'. The output JSON contains a 3-column table (element 2) with headers 'Members Present', 'Staff Present', and 'Guests' containing names that do not appear in the source January 18 agenda.",
+      "source_pdf_quote": "The agenda list with headers 'Tab Topic Presenter'.",
+      "output_quote": "The table with cells 'Members Present', 'Staff Present', 'Guests'.",
+      "location": "Section 1, element at reading_order 2"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The output document represents the minutes from the April 26, 2019 meeting, whereas the source document is the agenda for the January 18, 2019 meeting. Consequently, the logical flow and reading order of the output are entirely disconnected from the source material provided.",
+      "source_pdf_quote": "Agenda for January 18, 2019.",
+      "output_quote": "Minutes for April 26, 2019.",
+      "location": "Entire document"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source PDF document is a two-page meeting agenda with a structured tabular layout. It uses three distinct columns labeled 'Tab', 'Topic', and 'Presenter' to organize the meeting schedule. The HTML output, however, is a conversion of a completely different document (Meeting Minutes from a different date). Visually, it ignores the tabular structure of the agenda, using a narrative text flow, adding a multi-column attendance table not found in the source, and including a table of contents sideb",
+      "source_pdf_quote": "The source PDF (Page 1) displays three columns ('Tab', 'Topic', 'Presenter') for the agenda items.",
+      "output_quote": "The HTML output shows a narrative text layout with an 'Contents' sidebar and a 'Members Present' table, entirely discarding the tabular agenda structure.",
+      "location": "Entire document"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The source PDF contains a prominent organizational logo in the header on page 1 ('NC DIT 911 Board'). This logo is a meaningful part of the document's branding and official letterhead. In the HTML output, this image is completely missing; the header consists only of text.",
+      "source_pdf_quote": "NC DIT 911 Board logo in the top-left corner of Page 1.",
+      "output_quote": "The HTML header contains text only, with no corresponding logo or image element.",
+      "location": "Document header"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "Because the documents are different, all dates and financial values differ. For example, the NG 911 Fund balance is listed as $27,867,858 and $40,483,294 in the source, but $42,891,816 in the output.",
+      "source_pdf_quote": "November 2018 Fund Balance $27,867,858",
+      "output_quote": "March 2019 Fund Balance $42,891,816",
+      "location": "Section 4b"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source document uses extensive alphanumeric lists (e.g., items 4a through 4h). The output JSON fails to use list structures, instead rendering these items as a mix of headings and individual paragraphs, which destroys the semantic relationship between the agenda items.",
+      "source_pdf_quote": "Item 4 with sub-items a), b), c)...",
+      "output_quote": "Individual paragraphs (elements 8, 9, 12, 15, 18, 21).",
+      "location": "Section 2, elements 8 through 21"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to include the WebEx link found in the source document header. Furthermore, it injects an external URL (reading order 74) regarding an 'NC NG911 deployment map' which is not present in the January 18 agenda.",
+      "source_pdf_quote": "20190111 NC 911 Board WebEx Link",
+      "output_quote": "https://nconemap.maps.arcgis.com/apps/opsdashboard/index.html#/ca70ca087c084a35ab644ea0b693ffcb",
+      "location": "Section 4, element at reading_order 74"
+    }
+  ],
+  "action_items": [
+    "Output appears mostly fabricated: shingling_precision=0.17. Only 17% of output text found in source."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.2432,
+      "text_match": 0.252748186283036,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.3393,
+      "ceiling": 0.25,
+      "ceiling_reason": "extreme_hallucination",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.2432,
+      "fidelity_content": 0.0,
+      "fidelity_structural": 0.2272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.5841184387617766,
+      "shingling_precision": 0.16689098250336473,
+      "duplication_ratio": 0.0103939526093909,
+      "word_count_ratio": 1.0,
+      "baseline_words": 2245,
+      "gemini_words": 2245,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 249180,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

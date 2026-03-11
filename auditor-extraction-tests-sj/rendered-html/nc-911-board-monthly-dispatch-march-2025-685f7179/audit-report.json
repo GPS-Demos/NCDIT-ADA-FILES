@@ -1,0 +1,87 @@
+{
+  "document_id": "nc-911-board-monthly-dispatch-march-2025-685f7179",
+  "audited_at": "2026-03-11T19:30:27.072696Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.9074,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity score is high (0.9074), the reported 100% loss of text content for the 'Eastern Region Report' section on page 3 and the structural breakdown of the call-to-action on page 24 require human intervention. Despite being labeled as minor by the initial signals, missing informational paragraphs and disrupted reading order in a government newsletter compromise document integrity and accessibility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The body text associated with 'The Eastern Region Report' on page 3 is entirely missing from the output. The headings 'In the Field...' and 'The Eastern Region Report' (reading_order 13 and 14) are present, but the paragraph starting with 'Kristen Falco has been meeting...' and ending with '...expansion of the County's EOC' is absent between the headings and the first image element (reading_order 15). This represents a 100% loss of the text content for this specific page/sub-section.",
+      "source_pdf_quote": "Kristen Falco has been meeting with several PSAPs to work on funding reconsideration requests and review financial planning tools. She visited the PSAPs in Wayne, Carteret, and Onslow Counties. She has also been working on eligibility requests, doing outreach for PSAPs working on CAD-to-CAD projects, and assisting with grant documentation management. Onslow County is in the middle of an EOC renovation. Telecommunicators continue to answer 911 calls as renovations take place on their building for",
+      "output_quote": "[Text is missing between reading_order 14 and 15]",
+      "location": "In the Field... The Eastern Region Report, page 3"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In the final section on page 24, the word 'Share' is omitted from the heading text. The source displays 'WANT TO Share WITH US?', but the output splits this into two headings ('WANT TO' and 'WITH US?') and treats the word 'Share' solely as a graphic/icon description in the alt text of a subsequent element, rather than including it in the heading text stream.",
+      "source_pdf_quote": "WANT TO Share WITH US?",
+      "output_quote": "WANT TO ... WITH US?",
+      "location": "WANT TO SHARE WITH US? section, page 24, elements 159-160"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "On page 24, the reading order is significantly disrupted. The source features a graphic heading 'WANT TO Share WITH US?'. In the output, 'WANT TO' (RO 159) and 'WITH US?' (RO 160) are identified as headings, but the central 'Share' element (an icon button) is moved to the very end of the page (RO 163), after the body paragraphs. This breaks the semantic integrity and intended logical flow of the call to action.",
+      "source_pdf_quote": "Page 24 header: 'WANT TO Share WITH US?' (where 'Share' is a central graphic icon).",
+      "output_quote": "RO 159: 'WANT TO'; RO 160: 'WITH US?'; [Paragraphs RO 161-162]; RO 163: 'Share icon button'.",
+      "location": "Section 24, Page 24, elements 159-163"
+    }
+  ],
+  "action_items": [
+    "Locate and restore the missing paragraph on page 3 starting with 'Kristen Falco has been meeting...'.",
+    "Fix the reading order on page 24 so the 'Want to Share With Us?' section follows a logical flow and includes the word 'Share' in the heading text."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9074,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8399,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 3
+    },
+    "signals": {
+      "fidelity_composite": 0.9074,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": 1.0,
+      "baseline_words": 2466,
+      "gemini_words": 2466,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 417555,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

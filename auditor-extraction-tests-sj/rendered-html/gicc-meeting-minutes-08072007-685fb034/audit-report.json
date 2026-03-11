@@ -1,0 +1,84 @@
+{
+  "document_id": "gicc-meeting-minutes-08072007-685fb034",
+  "audited_at": "2026-03-11T19:15:13.818514Z",
+  "quality_score": 92,
+  "fidelity_composite": 0.85,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "Content preservation is nearly perfect, with a programmatic shingling recall of 98.6% and a 1.0 content fidelity score. While structural issues exist—specifically regarding heading hierarchy inconsistencies, list semantics, and lack of active hyperlinks—these are classified as minor cosmetic defects that do not block approval for archival meeting minutes according to the routing guidelines.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The heading hierarchy shows significant inconsistencies and omissions. Major sections like 'PRESENT' and 'PROCEEDINGS' are correctly identified as H2. However, while 'Priority #2' (index 11) and 'Priority 3' (index 15) are correctly identified as H3, 'Priority #1' (index 8) is categorized as a plain paragraph, despite being semantically identical in the source. Furthermore, major sub-sections under 'Committee Reports' such as 'Statewide Mapping Advisory Committee (SMAC)', 'State Government GIS U",
+      "source_pdf_quote": "Priority #1—NC OneMap Implementation",
+      "output_quote": "{\n          \"type\": \"paragraph\",\n          \"content\": [\n            {\n              \"text\": \"Priority #1—NC OneMap Implementation\",\n              ...\n            }\n          ],\n          \"reading_order\": 8\n        }",
+      "location": "Status and Discussion of Priorities Before Council, Page 1, Element index 8"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The document contains several numbered lists. In two cases (indices 33-41 and 73-74), these are converted to individual paragraphs, losing list semantics but maintaining textual separation. However, in the 'Management and Operations Committee (M&O)' section on page 9, the introductory sentence is merged into the same paragraph as the first list item '(1)', which is a significant structural error. Additionally, numbered lists are represented as strings within paragraphs rather than proper list st",
+      "source_pdf_quote": "Mr. Johnson said the Management and Operations committee made three recommendations for Council consideration: [New Line] (1) To encourage that the use of funds in local government 911 be retained...",
+      "output_quote": "\"text\": \"Mr. Johnson said the Management and Operations committee made three recommendations for Council consideration: (1) To encourage that the use of funds in local government 911 be retained and local governments should seek opportunities to cost-share in the acquisition of updated orthophotography.\"",
+      "location": "Management and Operations Committee (M&O), Page 9, Element index 72"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains three URLs (www.ncstreams.net on p. 2, www.nconemap.net on p. 7, and www.ncgicc.org/ on p. 10). These are present in the output text but are not converted into clickable hyperlinks. Per the evaluation criteria, the absence of active links for visible URLs is considered a minor defect.",
+      "source_pdf_quote": "www.ncstreams.net\nwww.nconemap.net\nwww.ncgicc.org/",
+      "output_quote": "Index 12: \"www.ncstreams.net\"\nIndex 58: \"www.nconemap.net\"\nIndex 81: \"www.ncgicc.org/\"",
+      "location": "Elements 12, 58, 81"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.85,
+      "text_match": 0.9867291178766588,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.92,
+      "raw_score": 0.9171,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.85,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9857031453080323,
+      "shingling_precision": 0.9877572284449075,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 5213,
+      "gemini_words": 5213,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 139087,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

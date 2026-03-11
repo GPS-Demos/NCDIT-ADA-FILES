@@ -1,0 +1,97 @@
+{
+  "document_id": "esrmo-newsletter-march-2018-686b1f23",
+  "audited_at": "2026-03-11T19:02:29.153281Z",
+  "quality_score": 82,
+  "fidelity_composite": 0.817,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While programmatic shingling indicates high text preservation (0.955 recall), the LLM fidelity evaluation identifies significant structural and visual failures. The combination of multiple H1 tags, missing agency logos (ESRMO, FEMA), and the collapse of semantic lists into plain paragraphs violates core accessibility and fidelity requirements for government documents.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy contains two primary issues. First, there are two H1 tags (Index 0 and Index 37). Standard document structure should contain only one H1 for the document title; subsequent major sections (like the one on page 4) should be H2. Second, 'Upcoming SANS Webcasts:' is tagged as an H3 (Index 27) despite not being a subsection of the previous H2 ('GDPR is Coming Soon...', Index 11). Conceptually, the webcasts section is a top-level topic on its page and should be an H2. This consti",
+      "source_pdf_quote": "Page 3: Upcoming SANS Webcasts: (Subheading within its own box); Page 4: Hurricane Virtual Tabletop Exercise! (Major section heading)",
+      "output_quote": "Index 27: \"type\": \"heading\", \"level\": 3, \"text\": \"Upcoming SANS Webcasts:\"; Index 37: \"type\": \"heading\", \"level\": 1, \"text\": \"Hurricane Virtual Tabletop Exercise!\"",
+      "location": "Sections 3 and 4, indices 27 and 37"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images from the source PDF are missing in the HTML rendering. Specifically, the ESRMO logo (next to the NC DIT logo on page 1), the EU flag image (page 2), the FEMA logo (page 4), the 'WWW' mouse graphic (page 4), and the lightbulb 'My idea is...' graphic (page 4) are absent. While the highlighter image and NC DIT logo are present, the loss of agency logos (ESRMO, FEMA) and thematic graphics constitutes a significant visual defect.",
+      "source_pdf_quote": "The source PDF contains the ESRMO logo (page 1), EU Flag (page 2), FEMA logo (page 4), and a lightbulb 'My idea is...' graphic (page 4).",
+      "output_quote": "The HTML output does not contain the ESRMO logo, EU Flag, FEMA logo, or the lightbulb graphic.",
+      "location": "Throughout the document (specifically pages 1, 2, and 4)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The conversion fails to utilize proper list structures. On page 2, the nine bullet points for GDPR compliance are merged into a single paragraph (Index 14) with newlines and dashes. Similarly, the newsletter list on page 3, the webcasts list on page 3, and the resource links on page 4 are rendered as plain paragraph elements rather than semantic list items. This results in list items being incorrectly merged or losing their structural identity as list components.",
+      "source_pdf_quote": "Page 2: Bulleted list starting with 'Raise Awareness'; Page 4: Resource list starting with 'Department of Information Technology (DIT) Site'",
+      "output_quote": "Index 14: \"type\": \"paragraph\", \"content\": [ { \"text\": \"- **Raise Awareness**...\\n- **Assess Information**...\" } ]; Indices 45-48: Separate paragraphs instead of a list.",
+      "location": "Section 2 index 14; Section 4 indices 45-48"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains numerous functional URLs and email addresses. In the JSON output, these are represented purely as plain text strings within paragraph content. They are not tagged as links, making them non-functional/non-clickable in the semantic output. According to the check criteria, URLs clearly visible in the PDF that are not clickable in the output are considered missing links.",
+      "source_pdf_quote": "Numerous URLs such as https://it.nc.gov/statewide-resources/policies and email addresses like security@its.nc.gov",
+      "output_quote": "Index 7: \"text\": \"The new statewide security policies may be found at https://it.nc.gov/statewide-resources/policies.\"",
+      "location": "Throughout the document (e.g., indices 7, 15, 19, 24, 42, 49)"
+    }
+  ],
+  "action_items": [
+    "Correct heading levels to ensure only one H1 exists and sections are nested logically",
+    "Restore missing logos and thematic images with appropriate alt-text",
+    "Re-structure merged paragraphs back into semantic HTML lists",
+    "Wrap plain text URLs and emails in <a> tags to restore functionality"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.817,
+      "text_match": 0.9457615357927605,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8233,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.817,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9551506657323056,
+      "shingling_precision": 0.9365551992670637,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1501,
+      "gemini_words": 1501,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 160111,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

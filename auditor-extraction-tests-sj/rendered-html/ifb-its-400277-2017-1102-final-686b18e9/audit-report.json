@@ -1,0 +1,102 @@
+{
+  "document_id": "ifb-its-400277-2017-1102-final-686b18e9",
+  "audited_at": "2026-03-11T19:21:29.933334Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": null,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output document is missing a massive volume of the original content. Specifically, Page 4, Pages 7 through 12, and Pages 14 through 48 are entirely absent from the conversion. The output JSON explicitly contains a metadata property acknowledging that 42 sections were omitted, which represents a critical loss of content for a 61-page document.",
+      "source_pdf_quote": "The source document contains 61 pages of text, including full text for Section A (items 3-11 on Page 4), Sections B, C, D, E, F, and G.",
+      "output_quote": "The JSON sections contain gaps in reading_order (jumps from 3 to 5, 6 to 13, and 13 to 49) and includes the string: '\"_omitted\": \"42 sections omitted for token budget\"'.",
+      "location": "Throughout the document, missing reading_order indexes and page content."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Substantial content is missing within sections that are partially present in the output. Section A (Intent, Use, Duration, and Scope) only includes items 1 and 2, while items 3 through 11 (a full page of text) are omitted. Section C (Specifications) is missing points 1-15 and everything from point 20 onwards. These are major omissions within the logical structure of the document.",
+      "source_pdf_quote": "Section A (Intent, Use, Duration, and Scope) items 3 through 11 on page 4; Section C (Specifications) items 1 through 15 on pages 9 and 10.",
+      "output_quote": "Section A element ends abruptly at item 2 (reading_order 29); Section C elements only cover items 16-19 (reading_orders 131-137).",
+      "location": "Section A (Page 3-4), Section C (Page 9-13)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent across major document sections. Major sections (the Attachments) toggle between H1 and H2 levels without a logical structural reason. For example, Attachment A is assigned H1, while Attachments B, C, D, and E are H2, and then Attachments F and G return to H1. Top-level sections should consistently use the same heading level.",
+      "source_pdf_quote": "Major sections like Attachment A, Attachment B, Attachment F, and Attachment G are logically at the same hierarchical level in the document.",
+      "output_quote": "Attachment A (H1, reading_order 505), Attachment B (H2, reading_order 510), Attachment F (H1, reading_order 563), Attachment G (H1, reading_order 568).",
+      "location": "Throughout the document, specifically pages 49, 50, 59, and 60."
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Table D.1 on page 56 is structurally corrupted. In the source, the table has three columns: 'IT Enterprise Hardware Segment', 'IT Enterprise Hardware Sub-Segment', and 'Minimum Percentage Discount Off MSRP'. The 'Servers' segment spans three rows in the first column. In the output, the sub-segment names ('Software', 'Extended Warranties') from the second column have been shifted into the first column, and the second column is left empty. Additionally, the third column is missing entirely from th",
+      "source_pdf_quote": "Table D.1: Row 2 contains sub-segment 'Software' in the second column and part of the 'Servers' segment.",
+      "output_quote": "Row 2: cells[0]=\"Software\", cells[1]=\"\", Row 3: cells[0]=\"Extended Warranties\", cells[1]=\"\"",
+      "location": "Table D.1, Page 56, element index (reading_order) 536"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Several nested lists throughout the document have not been converted into structured list elements. Instead, they are rendered as plain text inside a paragraph block with newline characters (`\\n`) used to separate items. This loses the structural meaning of the list.",
+      "source_pdf_quote": "Page 6, Item 8: 'a. “This offer does not constitute a binding offer”, b. “This offer will be valid only if this offer is selected as a finalist or in the competitive range”, ...'",
+      "output_quote": "\"text\": \"8. **NON-RESPONSIVE OFFERS:** ... \\na. \\u201cThis offer does not constitute a binding offer\\u201d,\\nb. \\u201cThis offer will be valid only if this offer is selected as a finalist or in the competitive range\\u201d, ...\"",
+      "location": "Section B, Item 8, Page 6, element index (reading_order) 58"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9453903224729594,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5629,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9634964483030781,
+      "shingling_precision": 0.9500616122965173,
+      "duplication_ratio": 0.017184160197997525,
+      "word_count_ratio": 1.0,
+      "baseline_words": 32998,
+      "gemini_words": 32998,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 217721,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

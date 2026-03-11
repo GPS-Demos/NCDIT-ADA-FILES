@@ -1,0 +1,118 @@
+{
+  "document_id": "nc-911-board-minutes-september-30-2022-685f9a2b",
+  "audited_at": "2026-03-11T19:25:21.717213Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.5930232558139534,
+  "fidelity_structural": 0.4545454545454546,
+  "fidelity_visual": 1.0,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The source document consists of 10 pages. The output only contains information from Page 1 and Page 2 (the headers and roll call tables). Pages 3 through 10, which contain the substantive minutes of the meeting (items 1 through 14), the vote roster table, and the adjournment, are entirely missing from the output.",
+      "source_pdf_quote": "The source PDF contains 10 pages of content, including the meeting minutes (Pages 3-9) and the vote roster (Page 10).",
+      "output_quote": "The output JSON ends after the guest roll call table (element 10) and a few images, representing only the first two pages of the source.",
+      "location": "Pages 3-10"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The source document contains a third table on Page 10 titled 'NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE'. This table is completely absent from the output JSON, resulting in a loss of all its data rows.",
+      "source_pdf_quote": "Table titled 'NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE' on Page 10 containing voting records for board members.",
+      "output_quote": "The output JSON contains only two tables (Board Roll Call and Guest Roll Call) and terminates before reaching the voting roster.",
+      "location": "Page 10"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Substantial text from the minutes is missing. While the roll call sections are present, the subsequent narrative sections detailing the meeting discussions (Items 1-14) are entirely omitted. This accounts for approximately 80% of the text content of the original document.",
+      "source_pdf_quote": "Narrative text for items such as 'Call to Order', 'Executive Director Report', 'Funding Committee Report', etc., spanning pages 3 to 9.",
+      "output_quote": "The output contains no text from these narrative sections.",
+      "location": "Pages 3-9"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is significantly broken. Major section titles from the source document (e.g., 'Call to Order', 'Roll Call', '1. Chair’s Opening Remarks', '2. Ethics Awareness...') are all tagged as 'paragraph' types in the JSON instead of 'heading'. While some headers (like the document title and the roster section) are correctly identified as headings, the vast majority of the document's structure is flattened into paragraphs, making navigation difficult for screen readers.",
+      "source_pdf_quote": "Call to Order – Secretary and Board Chairman Jim Weaver... (Page 3)\n1. Chair’s Opening Remarks – Chairman Weaver stated... (Page 3)\n5. Executive Director Report – (Page 3)",
+      "output_quote": "{ \"type\": \"paragraph\", \"content\": [ { \"text\": \"**Call to Order** – Secretary and Board Chairman Jim Weaver...\" } ], \"reading_order\": 15 }\n{ \"type\": \"paragraph\", \"content\": [ { \"text\": \"1. **Chair’s Opening Remarks** – Chairman Weaver stated...\" } ], \"reading_order\": 17 }\n{ \"type\": \"paragraph\", \"content\": [ { \"text\": \"5. **Executive Director Report** –\" } ], \"reading_order\": 23 }",
+      "location": "sections[2], reading_order 15, 17, 23"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "In the 'Roster of Roll Call Votes' table at the end of the document, the structural organization is failed. The JSON identifies every row in the table as 'is_header_row: false', including the first row (the title) and the second row (the actual column headers such as 'NC 911 Board Members', '4. Consent Agenda', etc.). This prevents screen readers from correctly associating data cells with their headers.",
+      "source_pdf_quote": "Roster of Roll Call Votes Table (Page 10)",
+      "output_quote": "\"rows\": [ { \"cells\": [ { \"cell_type\": \"data\", \"content\": [ { \"text\": \"NORTH CAROLINA 911 BOARD MEETING ROLL CALL VOTE...\" } ], ... } ], \"is_header_row\": false }, { \"cells\": [ { \"cell_type\": \"data\", \"content\": [ { \"text\": \"NC 911 Board Members\" }, { \"text\": \"4. Consent Agenda\" }, ... ] } ], \"is_header_row\": false } ]",
+      "location": "sections[9], reading_order 94"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The document contains several numbered and lettered lists (e.g., items 4a-f, 5a-e, 8a-c). The JSON fails to capture these as semantic list elements. In some cases, such as the list under item 4 on page 3, the list is converted into a table. In other cases, such as item 5 on page 3 and page 4, the list items are rendered as separate, flat paragraphs. This loses the structural relationship between the list items and their parent heading.",
+      "source_pdf_quote": "4. Consent Agenda... a) Minutes... b) NG 911 Reserve Fund... (Page 3)",
+      "output_quote": "{ \"type\": \"table\", \"rows\": [ { \"cells\": [ { \"cell_type\": \"header\", \"content\": [ { \"text\": \"a) Minutes of Previous Meeting – August 26, 2022\" } ], ... } ] }, ... ] }",
+      "location": "sections[2], reading_order 21"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains active hyperlinks (e.g., 'Live Status Map' in item 5b on page 3). The output JSON fails to capture these links, providing only the text without any anchor or link tagging.",
+      "source_pdf_quote": "NextGen 911 Migration Status – Live Status Map (Page 3, underlined blue text)",
+      "output_quote": "{ \"text\": \"b) NextGen 911 Migration Status – Live Status Map – Ms. Harris advised...\" }",
+      "location": "sections[2], reading_order 25"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8742053789268641,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.547,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5930232558139534,
+      "fidelity_structural": 0.4545454545454546,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9812041116005874,
+      "shingling_precision": 0.8492628368073208,
+      "duplication_ratio": 0.054958921010571184,
+      "word_count_ratio": 1.0,
+      "baseline_words": 5920,
+      "gemini_words": 5920,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 163429,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
