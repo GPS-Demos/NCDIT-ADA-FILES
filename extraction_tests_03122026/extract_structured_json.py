@@ -60,7 +60,7 @@ VIDEO_PATTERNS = [
 ]
 
 # Directories
-DATA_FOLDER = Path("../data")
+DATA_FOLDER = Path("../output-96-files-03-10-2026/ncdit-audit-20260310-073415")
 OUTPUT_FOLDER = Path("output")
 REPORTS_FOLDER = OUTPUT_FOLDER / "_reports"
 
@@ -96,9 +96,12 @@ COHERENCE_CHECK_PROMPT = read_string_from_file("PROMPT_FOR_VALIDATE.md")
 
 
 def parse_test_file_list(md_path: Path) -> List[str]:
-    """Parse document IDs from the test files markdown table.
+    """Parse document IDs from the test files list.
 
-    Expects a markdown table with document names in the second column (| # | Document | ...).
+    Supports two formats:
+    1. Plain text: one document ID per line
+    2. Markdown table: document names in the second column (| # | Document | ...)
+
     Returns list of document IDs (folder names under data/).
     """
     if not md_path.exists():
@@ -107,25 +110,36 @@ def parse_test_file_list(md_path: Path) -> List[str]:
 
     text = md_path.read_text(encoding="utf-8")
     doc_ids = []
-    for line in text.splitlines():
-        line = line.strip()
-        if not line.startswith("|"):
-            continue
-        cols = [c.strip() for c in line.split("|")]
-        # cols[0] is empty (before first |), cols[1] is #, cols[2] is Document
-        if len(cols) < 3:
-            continue
-        # Skip header and separator rows
-        num_col = cols[1]
-        if not num_col or num_col.startswith("#") or num_col.startswith(":") or num_col.startswith("-"):
-            continue
-        try:
-            int(num_col)
-        except ValueError:
-            continue
-        doc_id = cols[2]
-        if doc_id:
-            doc_ids.append(doc_id)
+
+    # Detect format: if any non-empty line starts with |, treat as markdown table
+    lines = text.splitlines()
+    is_table = any(line.strip().startswith("|") for line in lines if line.strip())
+
+    if is_table:
+        for line in lines:
+            line = line.strip()
+            if not line.startswith("|"):
+                continue
+            cols = [c.strip() for c in line.split("|")]
+            if len(cols) < 3:
+                continue
+            num_col = cols[1]
+            if not num_col or num_col.startswith("#") or num_col.startswith(":") or num_col.startswith("-"):
+                continue
+            try:
+                int(num_col)
+            except ValueError:
+                continue
+            doc_id = cols[2]
+            if doc_id:
+                doc_ids.append(doc_id)
+    else:
+        # Plain text: one document ID per line
+        for line in lines:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                doc_ids.append(line)
+
     return doc_ids
 
 # Schema for structured output - uses anyOf for type-specific field validation
@@ -1505,7 +1519,7 @@ class PDFExtractor:
                 if pdf_path.exists():
                     pdf_files.append((doc_id, pdf_path))
                 else:
-                    # Try partial match (the markdown may have truncated names)
+                    # Try partial match (directory name may differ slightly)
                     matches = list(DATA_FOLDER.glob(f"{doc_id}*/source.pdf"))
                     if matches:
                         matched_id = matches[0].parent.name
@@ -1542,9 +1556,13 @@ class PDFExtractor:
         all_page_tasks = []
         pdf_info = {}  # Store PDF metadata for building results later
         for doc_id, pdf_path in pending_pdfs:
-            doc = pdfium.PdfDocument(str(pdf_path))
-            page_count = len(doc)
-            doc.close()
+            try:
+                doc = pdfium.PdfDocument(str(pdf_path))
+                page_count = len(doc)
+                doc.close()
+            except Exception as e:
+                print(f"  Warning: Skipping '{doc_id}' - failed to open PDF: {e}")
+                continue
             pdf_info[doc_id] = {
                 "pdf_path": pdf_path,
                 "pdf_filename": pdf_path.name,
