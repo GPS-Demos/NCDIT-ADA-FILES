@@ -1,0 +1,213 @@
+{
+  "document_id": "mostly-text-charts-tables-screenshots-maps-67fb",
+  "composite_score": 0.9797,
+  "risk_level": "LOW",
+  "routing_action": "AUTO_APPROVE",
+  "routing_reason": "Score 0.98 >= 0.85",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON faithfully reproduces the paragraphs and sentences found in the source PDF. There are no signs of fabricated section headings, introductory text, or body paragraphs that do not have a basis in the original document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All contact information, including URLs, email addresses, and phone numbers, were verified against the source PDF. The URLs for the Division of Broadband and Digital Equity, the NC 911 Board, and the various legal citations (such as the DOJ Memorandum) match the embedded links or text in the source. Contact details for vendors like United Language Group, Acolad, and the Statewide Term Contract Manager (Austin Kiziah) are also accurate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All main sections (1 through 9) and their respective subsections and action plan tables are present in the output JSON. While the physical Table of Contents page (page 2) is not rendered as text, its information is preserved in the semantic structure of the JSON, which is an expected normalization for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The output contains all 17 tables found in the source PDF. A row-by-row count was performed for each table, including the detailed action plan tables and the regional demographic data table in the appendix. In all cases, the number of data rows in the output matches the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "A significant omission was identified regarding the footnotes. The source PDF contains 11 distinct footnotes spread across several pages (pages 3, 4, 7, 11, 12, 37, 52). The output JSON only includes 3 footnotes in its global 'footnotes' array, and the missing footnote text (specifically footnotes 2, 3, 4, 5, 6, and 7) is not found within the paragraph elements of the sections they reference. Footnote 2, in particular, contains a critical definition of terms (LOTE and LEP) used throughout the document. The omission of over 50% of the unique footnote content constitutes a significant text omission.",
+        "b_evidence_source": "Footnotes on various pages, such as Footnote 2 on page 3: 'Languages Other than English (LOTE) is an alternative term to Limited English Proficient (LEP), the legal term denoting any person age 5 and older who self-reports as speaking English less than “very well” in the US Census Bureau American Community Survey (ACS)...'",
+        "b_evidence_output": "The 'footnotes' object in the JSON contains only three entries (c0_c0_c0_c0_c1_8, c0_c0_c0_c0_c1_9, c0_c0_c1_10), omitting the text for footnotes 2, 3, 4, 5, 6, and 7.",
+        "b_evidence_location": "Footnotes section, end of JSON; source references on pages 3, 4, 7, and 11.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Aside from the omitted footnotes, the text content shows high fidelity to the source. Wording in the definitions, action plans, and demographic analysis sections matches the source without meaningful changes.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9418604651162791,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON faithfully reproduces the paragraphs and sentences found in the source PDF. There are no signs of fabricated section headings, introductory text, or body paragraphs that do not have a basis in the original document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All contact information, including URLs, email addresses, and phone numbers, were verified against the source PDF. The URLs for the Division of Broadband and Digital Equity, the NC 911 Board, and the various legal citations (such as the DOJ Memorandum) match the embedded links or text in the source. Contact details for vendors like United Language Group, Acolad, and the Statewide Term Contract Manager (Austin Kiziah) are also accurate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All main sections (1 through 9) and their respective subsections and action plan tables are present in the output JSON. While the physical Table of Contents page (page 2) is not rendered as text, its information is preserved in the semantic structure of the JSON, which is an expected normalization for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The output contains all 17 tables found in the source PDF. A row-by-row count was performed for each table, including the detailed action plan tables and the regional demographic data table in the appendix. In all cases, the number of data rows in the output matches the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"A significant omission was identified regarding the footnotes. The source PDF contains 11 distinct footnotes spread across several pages (pages 3, 4, 7, 11, 12, 37, 52). The output JSON only includes 3 footnotes in its global 'footnotes' array, and the missing footnote text (specifically footnotes 2, 3, 4, 5, 6, and 7) is not found within the paragraph elements of the sections they reference. Footnote 2, in particular, contains a critical definition of terms (LOTE and LEP) used throughout the document. The omission of over 50% of the unique footnote content constitutes a significant text omission.\",\n      \"b_evidence_source\": \"Footnotes on various pages, such as Footnote 2 on page 3: 'Languages Other than English (LOTE) is an alternative term to Limited English Proficient (LEP), the legal term denoting any person age 5 and older who self-reports as speaking English less than “very well” in the US Census Bureau American Community Survey (ACS)...'\",\n      \"b_evidence_output\": \"The 'footnotes' object in the JSON contains only three entries (c0_c0_c0_c0_c1_8, c0_c0_c0_c0_c1_9, c0_c0_c1_10), omitting the text for footnotes 2, 3, 4, 5, 6, and 7.\",\n      \"b_evidence_location\": \"Footnotes section, end of JSON; source references on pages 3, 4, 7, and 11.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Aside from the omitted footnotes, the text content shows high fidelity to the source. Wording in the definitions, action plans, and demographic analysis sections matches the source without meaningful changes.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.9418604651162791\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The document's text and structural elements were carefully compared against the source PDF. No duplicated text blocks, paragraphs, or table rows were found. Each section and action plan item appears in the output exactly as many times as it does in the source document. A sentence split across pages 21 and 22 is correctly represented as sequential text elements without repetition.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy in the output correctly follows the source document's structure. Major sections are identified as H2, with subsections as H3, and further subdivisions as H4 and H5. There are no skipped levels (e.g., H1 to H3), and the nesting is logical and consistent throughout the 55-page document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The output contains numerous tables, primarily for the action plans. These tables maintain the correct column and row structure. The highly complex table on page 54 ('Language Rankings by Council of Government Regions') is accurately converted, with correct use of rowspans for the 'Language' and 'Avg. Rank' columns and colspans for the regional groupings.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order of the output follows the logical flow of the source PDF, starting from the cover page and proceeding through the table of contents (structure-only), main text sections, and appendices. Footnotes are correctly associated or placed at the end, which is standard for structural conversions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "All lists, including those with multiple levels of nesting (e.g., on pages 3-4), are correctly identified and structured. Ordered and unordered lists are appropriately tagged, and nested items are correctly placed within their parent items.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Hyperlinks present in the source document (including those in footnotes and the body text) are accurately captured in the output with correct destination URLs. No broken or fabricated links were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The document's text and structural elements were carefully compared against the source PDF. No duplicated text blocks, paragraphs, or table rows were found. Each section and action plan item appears in the output exactly as many times as it does in the source document. A sentence split across pages 21 and 22 is correctly represented as sequential text elements without repetition.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy in the output correctly follows the source document's structure. Major sections are identified as H2, with subsections as H3, and further subdivisions as H4 and H5. There are no skipped levels (e.g., H1 to H3), and the nesting is logical and consistent throughout the 55-page document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The output contains numerous tables, primarily for the action plans. These tables maintain the correct column and row structure. The highly complex table on page 54 ('Language Rankings by Council of Government Regions') is accurately converted, with correct use of rowspans for the 'Language' and 'Avg. Rank' columns and colspans for the regional groupings.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order of the output follows the logical flow of the source PDF, starting from the cover page and proceeding through the table of contents (structure-only), main text sections, and appendices. Footnotes are correctly associated or placed at the end, which is standard for structural conversions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"All lists, including those with multiple levels of nesting (e.g., on pages 3-4), are correctly identified and structured. Ordered and unordered lists are appropriately tagged, and nested items are correctly placed within their parent items.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Hyperlinks present in the source document (including those in footnotes and the body text) are accurately captured in the output with correct destination URLs. No broken or fabricated links were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output maintains the single-column visual organization of the source PDF. Content flow follows the same logical order (Title Page, Table of Contents, Sections 1 through 9). Formatting such as bold headings, bulleted lists, and numbered lists matches the source's intent and visual hierarchy. While fonts, margins, and colors differ as expected for an HTML conversion, the visual organization of information is preserved, allowing a user to find information in the same relative positions and sequence as the original.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The document contains numerous 'Action Items' tables throughout Sections 2-7 and a large ranking table in the Appendix (Page 54). In the HTML output, these are rendered as structured HTML tables with clearly defined rows and columns. The complex table on page 54, which contains 20 columns (Language, COGRs A-R, and Avg. Rank), is rendered correctly in the HTML, maintaining strict alignment and readability. No overlapping cell content, misaligned columns, or broken borders were observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present and correctly rendered in the HTML output. This includes the NCDIT logo on the title page (Page 1), the population density map of North Carolina showing Regional Councils (Page 52), and the two horizontal bar charts illustrating LOTE and LEP population data (Page 53). There are no missing images or broken image icons.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no visual duplication of body content in the HTML output. Each paragraph, list item, table, and image appears once in the logical sequence established by the PDF. The appearance of the document title and section headings in both the Table of Contents navigation area and the body of the document is a standard feature of accessible HTML design and does not constitute a content duplication defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output maintains the single-column visual organization of the source PDF. Content flow follows the same logical order (Title Page, Table of Contents, Sections 1 through 9). Formatting such as bold headings, bulleted lists, and numbered lists matches the source's intent and visual hierarchy. While fonts, margins, and colors differ as expected for an HTML conversion, the visual organization of information is preserved, allowing a user to find information in the same relative positions and sequence as the original.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The document contains numerous 'Action Items' tables throughout Sections 2-7 and a large ranking table in the Appendix (Page 54). In the HTML output, these are rendered as structured HTML tables with clearly defined rows and columns. The complex table on page 54, which contains 20 columns (Language, COGRs A-R, and Avg. Rank), is rendered correctly in the HTML, maintaining strict alignment and readability. No overlapping cell content, misaligned columns, or broken borders were observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present and correctly rendered in the HTML output. This includes the NCDIT logo on the title page (Page 1), the population density map of North Carolina showing Regional Councils (Page 52), and the two horizontal bar charts illustrating LOTE and LEP population data (Page 53). There are no missing images or broken image icons.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no visual duplication of body content in the HTML output. Each paragraph, list item, table, and image appears once in the logical sequence established by the PDF. The appearance of the document title and section headings in both the Table of Contents navigation area and the body of the document is a standard feature of accessible HTML design and does not constitute a content duplication defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 1,
+  "total_critical": 0,
+  "total_major": 1,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

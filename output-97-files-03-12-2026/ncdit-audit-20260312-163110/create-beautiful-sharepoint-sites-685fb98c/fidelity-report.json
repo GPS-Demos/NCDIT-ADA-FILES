@@ -1,0 +1,152 @@
+{
+  "document_id": "create-beautiful-sharepoint-sites-685fb98c",
+  "composite_score": 0.6,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output does not contain any duplicated text blocks from the source. While the final section placeholder mentions Page 11 (which is also converted in section 0), the actual content of the page is not repeated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy follows a logical structure within the converted sections, generally using H2 for page titles and H3 for subsections. Although the document title is only present in metadata and not as an H1 in the body, the hierarchy within the content itself is consistent and does not skip levels (e.g., H2 to H4).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "There are no tables in the source document or the output JSON.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is fundamentally broken because the first 10 pages of the 21-page source document are entirely missing from the start of the output. The JSON document begins with content from Page 11. A placeholder section is added at the end of the JSON noting that Pages 1-11 were unavailable, despite Page 11 being partially present at the start. This omission of the first half of the document is a material divergence from the source's intended organization.",
+        "b_evidence_source": "Pages 1 through 10 of the source document, including the Title Page, Overview, Why use SharePoint Online, and various design and best practice sections.",
+        "b_evidence_output": "The JSON starts directly with 'Best Practices from Microsoft' (Source Page 11) at element index 0. A section titled '[Pages 1-11 unavailable]' is placed at the end of the document.",
+        "b_evidence_location": "Sections 0 and 11, throughout the start of the document.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The lists present in the source (e.g., on pages 16-19) are correctly identified and converted into list structures in the JSON output. Although bulleted items on Page 11 were converted into a heading-and-paragraph format, this is a common normalization for accessibility and does not lose the meaning of the content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URLs and link descriptions present in the source (e.g., 'https://lookbook.microsoft.com' and 'Link to ... example') are preserved as text within the output paragraphs. No links are broken, missing from the converted pages, or fabricated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output does not contain any duplicated text blocks from the source. While the final section placeholder mentions Page 11 (which is also converted in section 0), the actual content of the page is not repeated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy follows a logical structure within the converted sections, generally using H2 for page titles and H3 for subsections. Although the document title is only present in metadata and not as an H1 in the body, the hierarchy within the content itself is consistent and does not skip levels (e.g., H2 to H4).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"There are no tables in the source document or the output JSON.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is fundamentally broken because the first 10 pages of the 21-page source document are entirely missing from the start of the output. The JSON document begins with content from Page 11. A placeholder section is added at the end of the JSON noting that Pages 1-11 were unavailable, despite Page 11 being partially present at the start. This omission of the first half of the document is a material divergence from the source's intended organization.\",\n      \"b_evidence_source\": \"Pages 1 through 10 of the source document, including the Title Page, Overview, Why use SharePoint Online, and various design and best practice sections.\",\n      \"b_evidence_output\": \"The JSON starts directly with 'Best Practices from Microsoft' (Source Page 11) at element index 0. A section titled '[Pages 1-11 unavailable]' is placed at the end of the document.\",\n      \"b_evidence_location\": \"Sections 0 and 11, throughout the start of the document.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The lists present in the source (e.g., on pages 16-19) are correctly identified and converted into list structures in the JSON output. Although bulleted items on Page 11 were converted into a heading-and-paragraph format, this is a common normalization for accessibility and does not lose the meaning of the content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URLs and link descriptions present in the source (e.g., 'https://lookbook.microsoft.com' and 'Link to ... example') are preserved as text within the output paragraphs. No links are broken, missing from the converted pages, or fabricated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output is missing a significant portion of the source document. Pages 1 through 10 of the PDF, which include the title slide and core content about SharePoint benefits and branding, are entirely absent from the rendered HTML. The output also includes an error message at the bottom explicitly stating that pages 1-11 could not be converted. This is a major visual organization failure as the content flow is truncated and incomplete compared to the source.",
+        "b_evidence_source": "Pages 1-10 of the source PDF, including the Title, Overview, Why use SharePoint Online, Improved Collaboration, Integrated with Microsoft 365, Improved Security, Creating an Aesthetically Pleasing Intranet, Branding Your Intranet, Creating a User-Friendly Navigation, and Layout and Design slides.",
+        "b_evidence_output": "The HTML output begins at the 'Best Practices from Microsoft' section (PDF page 11). At the end of the document, it states: '[Pages 1-11 unavailable] Content from pages 1-11 could not be converted.'",
+        "b_evidence_location": "Throughout the document; specifically the missing sections at the beginning and the error footer.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source PDF does not contain any tables; it is composed entirely of slides with text and images. Therefore, no table rendering issues exist.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Numerous meaningful images are missing or broken in the HTML output. The full-page SharePoint site screenshots on pages 16, 17, 18, and 19 of the PDF are replaced by large, bright green rectangular placeholders in the HTML. Furthermore, all images from the missing first 10 pages are absent, and the meaningful images from pages 14 (Employee Engagement), 15 (Stunning Sites), and 20 (Conclusion) are also missing from their respective sections in the HTML.",
+        "b_evidence_source": "The source PDF contains meaningful images on every page, most notably the site screenshots on pages 16-19 and AI-generated concept art on pages 1-10, 12, 13, 14, and 20.",
+        "b_evidence_output": "The HTML output displays solid green rectangles in the 'The Perspective', 'Crisis Communications', 'The Landing', and 'Engineering Onboarding' sections. Other sections like 'Conclusion' and 'Focus on Employee Engagement' have no images at all.",
+        "b_evidence_location": "Sections corresponding to pages 16, 17, 18, and 19 (green boxes) and throughout the document for missing images.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The HTML output does not show any signs of duplicated body content. While headings appear in the 'Contents' navigation and then again in the body, this is an intentional accessible design feature for navigation and is not considered a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output is missing a significant portion of the source document. Pages 1 through 10 of the PDF, which include the title slide and core content about SharePoint benefits and branding, are entirely absent from the rendered HTML. The output also includes an error message at the bottom explicitly stating that pages 1-11 could not be converted. This is a major visual organization failure as the content flow is truncated and incomplete compared to the source.\",\n      \"b_evidence_source\": \"Pages 1-10 of the source PDF, including the Title, Overview, Why use SharePoint Online, Improved Collaboration, Integrated with Microsoft 365, Improved Security, Creating an Aesthetically Pleasing Intranet, Branding Your Intranet, Creating a User-Friendly Navigation, and Layout and Design slides.\",\n      \"b_evidence_output\": \"The HTML output begins at the 'Best Practices from Microsoft' section (PDF page 11). At the end of the document, it states: '[Pages 1-11 unavailable] Content from pages 1-11 could not be converted.'\",\n      \"b_evidence_location\": \"Throughout the document; specifically the missing sections at the beginning and the error footer.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source PDF does not contain any tables; it is composed entirely of slides with text and images. Therefore, no table rendering issues exist.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Numerous meaningful images are missing or broken in the HTML output. The full-page SharePoint site screenshots on pages 16, 17, 18, and 19 of the PDF are replaced by large, bright green rectangular placeholders in the HTML. Furthermore, all images from the missing first 10 pages are absent, and the meaningful images from pages 14 (Employee Engagement), 15 (Stunning Sites), and 20 (Conclusion) are also missing from their respective sections in the HTML.\",\n      \"b_evidence_source\": \"The source PDF contains meaningful images on every page, most notably the site screenshots on pages 16-19 and AI-generated concept art on pages 1-10, 12, 13, 14, and 20.\",\n      \"b_evidence_output\": \"The HTML output displays solid green rectangles in the 'The Perspective', 'Crisis Communications', 'The Landing', and 'Engineering Onboarding' sections. Other sections like 'Conclusion' and 'Focus on Employee Engagement' have no images at all.\",\n      \"b_evidence_location\": \"Sections corresponding to pages 16, 17, 18, and 19 (green boxes) and throughout the document for missing images.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The HTML output does not show any signs of duplicated body content. While headings appear in the 'Contents' navigation and then again in the body, this is an intentional accessible design feature for navigation and is not considered a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 0,
+  "total_major": 3,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

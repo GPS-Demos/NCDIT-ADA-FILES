@@ -1,0 +1,172 @@
+{
+  "document_id": "seal-imagery-11ab",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The body text of the glossary terms and definitions matches the content of the source PDF. The pipeline has preserved the original text, including typos found in the source document (e.g., 'Failu–e', 'eve–t', 'North Carlina'). No invented body text or section headings were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output contains a fabricated URL (http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html) attached to the word 'network' in several definitions. This URL does not appear anywhere in the source PDF and appears to be an AI-generated 'enrichment' that is not part of the authoritative original document.",
+        "b_evidence_source": "Source PDF text for 'Access' (p. 4) and 'Address Resolution Protocol (ARP)' (p. 5) does not contain any URLs or hyperlinks related to techtarget.com.",
+        "b_evidence_output": "{\"href\": \"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html\", \"text\": \"network\"}",
+        "b_evidence_location": "Section A, 'Access' definition (page 4) and 'Address Resolution Protocol (ARP)' definition (page 5)",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "Page 2 of the source PDF, which contains the 'Table of Contents', is entirely missing from the output. While the document's structure is preserved in the JSON hierarchy, the actual content of the original TOC page (the list of entries and their page numbers) is absent.",
+        "b_evidence_source": "Page 2 of the source PDF contains the 'Table of Contents' spanning the entire page.",
+        "b_evidence_output": "The output jumps from the cover page content (page 1) to 'Purpose' (page 3) without representing page 2.",
+        "b_evidence_location": "Page 2",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document contains no actual data tables; it is structured as a list of glossary terms and definitions. Therefore, this check is not applicable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Individual definitions and sections (Purpose, Scope, History, and various alphabetized glossary sections) appear to be complete and faithful to the source text. Key lists and multi-paragraph definitions (e.g., FIPPs, PHI, OSI Layers) are fully represented.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "No minor text differences that alter meaning were found. The output correctly retains typos from the source document, indicating high fidelity to the OCR text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.41860465116279066,
+    "penalty_sum": 50,
+    "defect_count": 2,
+    "critical_count": 2,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The body text of the glossary terms and definitions matches the content of the source PDF. The pipeline has preserved the original text, including typos found in the source document (e.g., 'Failu–e', 'eve–t', 'North Carlina'). No invented body text or section headings were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output contains a fabricated URL (http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html) attached to the word 'network' in several definitions. This URL does not appear anywhere in the source PDF and appears to be an AI-generated 'enrichment' that is not part of the authoritative original document.\",\n      \"b_evidence_source\": \"Source PDF text for 'Access' (p. 4) and 'Address Resolution Protocol (ARP)' (p. 5) does not contain any URLs or hyperlinks related to techtarget.com.\",\n      \"b_evidence_output\": \"{\\\"href\\\": \\\"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html\\\", \\\"text\\\": \\\"network\\\"}\",\n      \"b_evidence_location\": \"Section A, 'Access' definition (page 4) and 'Address Resolution Protocol (ARP)' definition (page 5)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"Page 2 of the source PDF, which contains the 'Table of Contents', is entirely missing from the output. While the document's structure is preserved in the JSON hierarchy, the actual content of the original TOC page (the list of entries and their page numbers) is absent.\",\n      \"b_evidence_source\": \"Page 2 of the source PDF contains the 'Table of Contents' spanning the entire page.\",\n      \"b_evidence_output\": \"The output jumps from the cover page content (page 1) to 'Purpose' (page 3) without representing page 2.\",\n      \"b_evidence_location\": \"Page 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document contains no actual data tables; it is structured as a list of glossary terms and definitions. Therefore, this check is not applicable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Individual definitions and sections (Purpose, Scope, History, and various alphabetized glossary sections) appear to be complete and faithful to the source text. Key lists and multi-paragraph definitions (e.g., FIPPs, PHI, OSI Layers) are fully represented.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"No minor text differences that alter meaning were found. The output correctly retains typos from the source document, indicating high fidelity to the OCR text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 2,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 50,\n    \"score\": 0.4186046511627907\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The content appears to follow the source document without significant duplication. While some terms like 'STIG' appear defined in multiple places (e.g., as an acronym in the 'S' list and as a full entry later), this reflects the organization of the source PDF itself and is not a conversion defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document's structural hierarchy is inconsistent and corrupted in several places. While most alphabetical segments are correctly identified as top-level sections, others are incorrectly nested as elements (Level 3 headings) within the preceding section. Specifically, alphabetical segments 'H' and 'I' are nested within Section 'G' (Reading Order 13); Segment 'R' is nested within Section 'Q' (Reading Order 21); and Segment 'T' is nested within Section 'S' (Reading Order 22). This inconsistent usage of section containers vs. inner headings breaks the document's navigational structure.",
+        "b_evidence_source": "The source PDF treats H, I, R, and T as distinct, equivalent alphabetical headers to A, B, C, etc.",
+        "b_evidence_output": "Section 'G' (Reading Order 13) elements index 21 and 32 contain Level 3 headings for 'H' and 'I'. Section 'Q' (Reading Order 21) element index 6 contains Level 3 heading for 'R'. Section 'S' (Reading Order 22) element index 69 contains Level 3 heading for 'T'.",
+        "b_evidence_location": "Sections G, Q, and S; elements indices 21, 32 (Sec G), 6 (Sec Q), 69 (Sec S).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "There are no tables in the source document or the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "Despite the structural container issues noted in S2, the logical reading sequence of the glossary terms follows the alphabetical order of the source document faithfully.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Bullet and numbered lists throughout the document (e.g., APT characteristics, CJI categories, FIPPs principles) have been correctly identified and converted into list elements, preserving the meaning and structure of the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output contains fabricated hyperlinks that are not present in the source material. Specifically, the word 'network' in multiple definitions (such as 'Access' and 'OSI Layers') has been converted into a hyperlink to a definition on the third-party website TechTarget. Injected external links to non-authoritative sources constitute a defect.",
+        "b_evidence_source": "Page 4, Access definition: '...computer, information system or information network.' (No links present).",
+        "b_evidence_output": "Section 8, element 14: '...information system or information <a href=\"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html\">network</a>.'",
+        "b_evidence_location": "Section A, element 14; also Section OSI Layers (element 18).",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The content appears to follow the source document without significant duplication. While some terms like 'STIG' appear defined in multiple places (e.g., as an acronym in the 'S' list and as a full entry later), this reflects the organization of the source PDF itself and is not a conversion defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document's structural hierarchy is inconsistent and corrupted in several places. While most alphabetical segments are correctly identified as top-level sections, others are incorrectly nested as elements (Level 3 headings) within the preceding section. Specifically, alphabetical segments 'H' and 'I' are nested within Section 'G' (Reading Order 13); Segment 'R' is nested within Section 'Q' (Reading Order 21); and Segment 'T' is nested within Section 'S' (Reading Order 22). This inconsistent usage of section containers vs. inner headings breaks the document's navigational structure.\",\n      \"b_evidence_source\": \"The source PDF treats H, I, R, and T as distinct, equivalent alphabetical headers to A, B, C, etc.\",\n      \"b_evidence_output\": \"Section 'G' (Reading Order 13) elements index 21 and 32 contain Level 3 headings for 'H' and 'I'. Section 'Q' (Reading Order 21) element index 6 contains Level 3 heading for 'R'. Section 'S' (Reading Order 22) element index 69 contains Level 3 heading for 'T'.\",\n      \"b_evidence_location\": \"Sections G, Q, and S; elements indices 21, 32 (Sec G), 6 (Sec Q), 69 (Sec S).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"There are no tables in the source document or the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"Despite the structural container issues noted in S2, the logical reading sequence of the glossary terms follows the alphabetical order of the source document faithfully.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Bullet and numbered lists throughout the document (e.g., APT characteristics, CJI categories, FIPPs principles) have been correctly identified and converted into list elements, preserving the meaning and structure of the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output contains fabricated hyperlinks that are not present in the source material. Specifically, the word 'network' in multiple definitions (such as 'Access' and 'OSI Layers') has been converted into a hyperlink to a definition on the third-party website TechTarget. Injected external links to non-authoritative sources constitute a defect.\",\n      \"b_evidence_source\": \"Page 4, Access definition: '...computer, information system or information network.' (No links present).\",\n      \"b_evidence_output\": \"Section 8, element 14: '...information system or information <a href=\\\"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html\\\">network</a>.'\",\n      \"b_evidence_location\": \"Section A, element 14; also Section OSI Layers (element 18).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "total_defects": 4,
+  "total_critical": 2,
+  "total_major": 1,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

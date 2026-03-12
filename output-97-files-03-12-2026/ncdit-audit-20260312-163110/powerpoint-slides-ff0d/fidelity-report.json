@@ -1,0 +1,213 @@
+{
+  "document_id": "powerpoint-slides-ff0d",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output text has been verified against the source PDF for each provided section (slides 1-6 and 57-58). All headings, list items, and paragraph content correspond directly to the text found in the original document. No invented text or hallucinated information was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output contains one URL: 'https://aka.ms/NCDIT' in the final section. This matches the URL provided on slide 58 of the source PDF. No other contact information (emails, phone numbers, or addresses) is present in either the source or output sections provided.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source document contains 58 slides. The output JSON metadata correctly lists 'page_count: 58'. However, the 'sections' array only includes content from the first six slides and the last two slides. Content from slides 7 through 56 is missing, explicitly replaced by a placeholder object indicating omission for token budget. Since the objective is to evaluate if the output contains the same information as the source, the absence of approximately 86% of the document's pages constitutes a failure of this check.",
+        "b_evidence_source": "The source PDF contains content on slides 7 through 56, including sections like 'Copilot in Teams Overview' (Slide 7), 'How to Get Started...' (Slide 8), 'Standard Meeting' (Slide 13), 'Recap meetings' (Slide 29), and 'Tips & Tricks' (Slide 54).",
+        "b_evidence_output": "{\"_omitted\": \"31 sections omitted for token budget\"}",
+        "b_evidence_location": "In the 'sections' array, between the 'Art of Prompting' section and the 'Questions' section.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "There are three tables in the output. The table 'Include the right prompt ingredients' (derived from slide 4) captures the four elements and their descriptions correctly. The table 'Prompt Ingredients Example' (derived from slide 5) correctly maps the prompt parts to categories. The table 'Elements of a Great Prompt' (slide 6) has 6 data rows, matching the 6 rows in the source PDF table exactly. No rows are missing.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "For the sections included in the output (slides 1-6 and 57-58), the text preservation is accurate. Slide 3's points and definitions are fully captured, and Slide 6's table is fully preserved. The primary issue is the omission of entire pages (addressed in C3) rather than truncation within the provided sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "A detailed comparison of wording between the source PDF and the output was performed for the available sections. The text is found to be highly accurate. For example, the slightly incorrect phrasing 'Generational AI' on slide 3 is faithfully reproduced in the JSON exactly as it appears in the source. No changes were found that alter meaning.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output text has been verified against the source PDF for each provided section (slides 1-6 and 57-58). All headings, list items, and paragraph content correspond directly to the text found in the original document. No invented text or hallucinated information was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output contains one URL: 'https://aka.ms/NCDIT' in the final section. This matches the URL provided on slide 58 of the source PDF. No other contact information (emails, phone numbers, or addresses) is present in either the source or output sections provided.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source document contains 58 slides. The output JSON metadata correctly lists 'page_count: 58'. However, the 'sections' array only includes content from the first six slides and the last two slides. Content from slides 7 through 56 is missing, explicitly replaced by a placeholder object indicating omission for token budget. Since the objective is to evaluate if the output contains the same information as the source, the absence of approximately 86% of the document's pages constitutes a failure of this check.\",\n      \"b_evidence_source\": \"The source PDF contains content on slides 7 through 56, including sections like 'Copilot in Teams Overview' (Slide 7), 'How to Get Started...' (Slide 8), 'Standard Meeting' (Slide 13), 'Recap meetings' (Slide 29), and 'Tips & Tricks' (Slide 54).\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"31 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"In the 'sections' array, between the 'Art of Prompting' section and the 'Questions' section.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"There are three tables in the output. The table 'Include the right prompt ingredients' (derived from slide 4) captures the four elements and their descriptions correctly. The table 'Prompt Ingredients Example' (derived from slide 5) correctly maps the prompt parts to categories. The table 'Elements of a Great Prompt' (slide 6) has 6 data rows, matching the 6 rows in the source PDF table exactly. No rows are missing.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"For the sections included in the output (slides 1-6 and 57-58), the text preservation is accurate. Slide 3's points and definitions are fully captured, and Slide 6's table is fully preserved. The primary issue is the omission of entire pages (addressed in C3) rather than truncation within the provided sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"A detailed comparison of wording between the source PDF and the output was performed for the available sections. The text is found to be highly accurate. For example, the slightly incorrect phrasing 'Generational AI' on slide 3 is faithfully reproduced in the JSON exactly as it appears in the source. No changes were found that alter meaning.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output document correctly captures the content of each slide in individual sections. Text that repeats in the source (such as the ingredient questions on slides 4 and 5) is intentionally repeated in the corresponding sections of the JSON. No blocks of text appear more times in the output than they do in the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is well-maintained and normalized for a slide-based document. Each section title corresponds to the primary title of a slide (acting as an H2 level). Sub-headings, such as 'NC DIT Innovation Summit Follow-Up' on page 58, are correctly nested as H3. No heading levels are skipped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The document contains several complex visual layouts which have been effectively converted into tables. For example, the four ingredient boxes on slide 4 are rendered as a single 4-column table, and the mapping diagram on slide 5 is represented as a structured table linking ingredients to their descriptive questions. The 'Elements of a Great Prompt' table on slide 6 is also correctly rendered with its respective rows and columns. Headers and data cells are logically separated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the sequential page order of the PDF (1 through 58). Within individual sections (slides), the text flows logically from the title to body content, including the correct placement of associated tables and graphics.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The bulleted list on slide 2 ('Topics') is perfectly converted into an unordered list in the JSON. Other list-like structures, such as the examples on slide 3, are rendered as paragraphs with appropriate bolding, which preserves the structural meaning and accessibility of the original content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URLs provided in the source (e.g., https://aka.ms/NCDIT on slide 58) are correctly captured as text in the output. There are no broken, missing, or fabricated links identified in the provided snippets.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output document correctly captures the content of each slide in individual sections. Text that repeats in the source (such as the ingredient questions on slides 4 and 5) is intentionally repeated in the corresponding sections of the JSON. No blocks of text appear more times in the output than they do in the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is well-maintained and normalized for a slide-based document. Each section title corresponds to the primary title of a slide (acting as an H2 level). Sub-headings, such as 'NC DIT Innovation Summit Follow-Up' on page 58, are correctly nested as H3. No heading levels are skipped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The document contains several complex visual layouts which have been effectively converted into tables. For example, the four ingredient boxes on slide 4 are rendered as a single 4-column table, and the mapping diagram on slide 5 is represented as a structured table linking ingredients to their descriptive questions. The 'Elements of a Great Prompt' table on slide 6 is also correctly rendered with its respective rows and columns. Headers and data cells are logically separated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the sequential page order of the PDF (1 through 58). Within individual sections (slides), the text flows logically from the title to body content, including the correct placement of associated tables and graphics.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The bulleted list on slide 2 ('Topics') is perfectly converted into an unordered list in the JSON. Other list-like structures, such as the examples on slide 3, are rendered as paragraphs with appropriate bolding, which preserves the structural meaning and accessibility of the original content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URLs provided in the source (e.g., https://aka.ms/NCDIT on slide 58) are correctly captured as text in the output. There are no broken, missing, or fabricated links identified in the provided snippets.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML conversion follows the logical sequence of the source PDF presentation. The transition from a horizontal slide deck to a single-column scrolling web page is executed well. Section headings and thematic organization (e.g., prompting, meeting types, examples) match the source's intent. The content is easy to find and logically grouped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "Tables in the source PDF (e.g., 'Elements of a Great Prompt' on page 6 and the prompt ingredients diagram on page 4) are correctly rendered as structured HTML tables. They are legible, with clear column alignment and distinct headers. The grid of prompt cards on page 55 is also effectively converted into a set of distinct content blocks that preserve the visual organization.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Most meaningful images, including photos and UI screenshots from the Teams interface, are present in the HTML output. However, the functional QR code present on page 58 of the source PDF is missing from the final section of the HTML document. While the survey link text is present, the QR code image itself is a meaningful functional element that was not rendered.",
+        "b_evidence_source": "QR code image on page 58 providing a visual link to the survey.",
+        "b_evidence_output": "The QR code image is absent in the 'NC DIT Innovation Summit Follow-Up' section at the end of the HTML output.",
+        "b_evidence_location": "End of document, section 'NC DIT Innovation Summit Follow-Up'",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no unintended duplication of body content. While titles and section headings appear in both the Table of Contents and the body, this is intentional accessible design. Paragraphs and tables are not repeated within the body content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML conversion follows the logical sequence of the source PDF presentation. The transition from a horizontal slide deck to a single-column scrolling web page is executed well. Section headings and thematic organization (e.g., prompting, meeting types, examples) match the source's intent. The content is easy to find and logically grouped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"Tables in the source PDF (e.g., 'Elements of a Great Prompt' on page 6 and the prompt ingredients diagram on page 4) are correctly rendered as structured HTML tables. They are legible, with clear column alignment and distinct headers. The grid of prompt cards on page 55 is also effectively converted into a set of distinct content blocks that preserve the visual organization.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Most meaningful images, including photos and UI screenshots from the Teams interface, are present in the HTML output. However, the functional QR code present on page 58 of the source PDF is missing from the final section of the HTML document. While the survey link text is present, the QR code image itself is a meaningful functional element that was not rendered.\",\n      \"b_evidence_source\": \"QR code image on page 58 providing a visual link to the survey.\",\n      \"b_evidence_output\": \"The QR code image is absent in the 'NC DIT Innovation Summit Follow-Up' section at the end of the HTML output.\",\n      \"b_evidence_location\": \"End of document, section 'NC DIT Innovation Summit Follow-Up'\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no unintended duplication of body content. While titles and section headings appear in both the Table of Contents and the body, this is intentional accessible design. Paragraphs and tables are not repeated within the body content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

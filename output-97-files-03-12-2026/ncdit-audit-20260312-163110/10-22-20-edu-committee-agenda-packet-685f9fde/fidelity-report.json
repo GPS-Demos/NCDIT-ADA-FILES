@@ -1,0 +1,213 @@
+{
+  "document_id": "10-22-20-edu-committee-agenda-packet-685f9fde",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output text reflects content present in the source document, though much is missing. No entirely fabricated text or sentences that lack any basis in the source were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "There are no phone numbers, emails, or URLs in the output that are not present in the source PDF. The source has very little of this info and the JSON contains none.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "Large portions of the document are missing. Pages 4 through 11 are almost entirely absent from the JSON output. This includes Page 6 (Buncombe County Training), Page 7 (EMD Requirements), Page 9 (NG911 Infographic), and Page 10-11 (Survey Results).",
+        "b_evidence_source": "The source contains content on pages 4, 5, 6, 7, 8, 9, 10, and 11 which include significant sections such as 'Buncombe County 911 – December 2020 Training', 'Emergency Medical Dispatch (EMD)', 'Evolving to NG9-1-1 infographic', and numerous survey result tables.",
+        "b_evidence_output": "The JSON skips directly from content on Page 3 to content on Page 12 and 13. Sections for pages 4-11 are omitted.",
+        "b_evidence_location": "Sections following element index 'reading_order: 2' up to 'reading_order: 3'",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables that were successfully converted (Agenda on p1, Attendees on p2, Minutes vote on p3, and Survey on p12) contain the correct number of rows and data points. The tables on pages 10 and 11 are missing entirely, which is handled under C3.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The 'Agenda' (minutes) section is truncated. It includes content from pages 2 and 3 but stops after item 6b on page 3. All subsequent content from the minutes on pages 4 and 5 (item 6c Cybersecurity, item 7 Website, item 8 Info Aid, Adjournment) is missing.",
+        "b_evidence_source": "4. Approval of August Minutes... 5. UNC School of Government... 6. Training Eligibility Requests (a, b, c)... 7. Website... 8. Information Aid... Adjourn",
+        "b_evidence_output": "The list in JSON Section 1 stops at item 4. Items 5, 6a, and 6b are listed as text in Section 2. Item 6c (Cybersecurity) and all subsequent items are missing.",
+        "b_evidence_location": "Section 2, following item 6b (Onslow County)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "In Section 5, the pipeline merged the '2020 Education Committee Goals' with the '2021- Draft - Education Committee Goals' from page 13 into a single list of 8 items under the 2020 heading. This alters the meaning as draft goals for 2021 are now presented as approved goals from 2020.",
+        "b_evidence_source": "Two distinct sections on page 13: '2020 Education Committee Goals – APPROVED 12-06-19' and '2021- Draft - Education Committee Goals'. Each has 4 items.",
+        "b_evidence_output": "Section 5 title: '2020 Education Committee Goals – APPROVED 12-06-19' containing 8 items. Section 6 '2021- Draft - Education Committee Goals' is empty.",
+        "b_evidence_location": "JSON Section 5",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6395348837209303,
+    "penalty_sum": 31,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output text reflects content present in the source document, though much is missing. No entirely fabricated text or sentences that lack any basis in the source were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"There are no phone numbers, emails, or URLs in the output that are not present in the source PDF. The source has very little of this info and the JSON contains none.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"Large portions of the document are missing. Pages 4 through 11 are almost entirely absent from the JSON output. This includes Page 6 (Buncombe County Training), Page 7 (EMD Requirements), Page 9 (NG911 Infographic), and Page 10-11 (Survey Results).\",\n      \"b_evidence_source\": \"The source contains content on pages 4, 5, 6, 7, 8, 9, 10, and 11 which include significant sections such as 'Buncombe County 911 – December 2020 Training', 'Emergency Medical Dispatch (EMD)', 'Evolving to NG9-1-1 infographic', and numerous survey result tables.\",\n      \"b_evidence_output\": \"The JSON skips directly from content on Page 3 to content on Page 12 and 13. Sections for pages 4-11 are omitted.\",\n      \"b_evidence_location\": \"Sections following element index 'reading_order: 2' up to 'reading_order: 3'\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables that were successfully converted (Agenda on p1, Attendees on p2, Minutes vote on p3, and Survey on p12) contain the correct number of rows and data points. The tables on pages 10 and 11 are missing entirely, which is handled under C3.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The 'Agenda' (minutes) section is truncated. It includes content from pages 2 and 3 but stops after item 6b on page 3. All subsequent content from the minutes on pages 4 and 5 (item 6c Cybersecurity, item 7 Website, item 8 Info Aid, Adjournment) is missing.\",\n      \"b_evidence_source\": \"4. Approval of August Minutes... 5. UNC School of Government... 6. Training Eligibility Requests (a, b, c)... 7. Website... 8. Information Aid... Adjourn\",\n      \"b_evidence_output\": \"The list in JSON Section 1 stops at item 4. Items 5, 6a, and 6b are listed as text in Section 2. Item 6c (Cybersecurity) and all subsequent items are missing.\",\n      \"b_evidence_location\": \"Section 2, following item 6b (Onslow County)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"In Section 5, the pipeline merged the '2020 Education Committee Goals' with the '2021- Draft - Education Committee Goals' from page 13 into a single list of 8 items under the 2020 heading. This alters the meaning as draft goals for 2021 are now presented as approved goals from 2020.\",\n      \"b_evidence_source\": \"Two distinct sections on page 13: '2020 Education Committee Goals – APPROVED 12-06-19' and '2021- Draft - Education Committee Goals'. Each has 4 items.\",\n      \"b_evidence_output\": \"Section 5 title: '2020 Education Committee Goals – APPROVED 12-06-19' containing 8 items. Section 6 '2021- Draft - Education Committee Goals' is empty.\",\n      \"b_evidence_location\": \"JSON Section 5\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 31,\n    \"score\": 0.6395348837209303\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The logo for the NC 911 Board appears twice in the output sections, matching its repeated appearance as a header on both the agenda (Page 1) and the minutes (Page 2). Identical text strings for certain goals (e.g., 'Develop an information sharing program...') appear in the output because they are repeated in the source document under different headers. No unintentional duplication was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The output fails to establish a proper heading hierarchy. Major document titles such as 'Education Committee Meeting Agenda' and 'Education Committee Meeting' are assigned as Level 3 headings (H3), skipping Level 1 (H1) and Level 2 (H2) entirely. This flat, deeply-nested hierarchy violates accessibility standards where H1 should represent the document title.",
+        "b_evidence_source": "North Carolina 911 Board Education Committee Meeting Agenda (Page 1); North Carolina 911 Board Education Committee Meeting (Page 2)",
+        "b_evidence_output": "Section 1, Element index 1 ('Education Committee Meeting Agenda'); Section 1, Element index 6 ('Education Committee Meeting')",
+        "b_evidence_location": "Section 1",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The side-by-side tables for Committee Members and Guests on Page 2 have been consolidated into a single 7-column table in the output. While this is a linear representation of a complex layout, the structure preserves the logical relationship of the data and uses a header row internally to transition to the 'Staff' section. This is an acceptable structural transformation for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is significantly compromised. Most critically, content from pages 5 through 11 is entirely absent from the output, representing a massive structural omission. Furthermore, on Page 13, the list of '2021 Draft' goals has been moved before its correct heading (which now exists as an empty section later in the JSON), meaning the information does not flow logically according to the source's organization.",
+        "b_evidence_source": "Content from Page 5 (Adjourn) through Page 11 (Survey Responses); Page 13 Header '2021- Draft - Education Committee Goals' followed by its list of 4 items.",
+        "b_evidence_output": "The output sections jump from Page 4 minutes directly to Page 12 survey results. In Section 5, the 2021 items appear inside the 2020 section, followed by an empty Section 6 titled '2021- Draft - Education Committee Goals'.",
+        "b_evidence_location": "Sections 1-6",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "On Page 13, the output merges two distinct, independent numbered lists (the 2020 Approved Goals and the 2021 Draft Goals) into a single continuous list of 8 items. This loses the structural separation between approved items and draft items, fundamentally changing the meaning and organization of the goals as presented in the source document.",
+        "b_evidence_source": "Page 13 contains two separate lists: '2020 Education Committee Goals – APPROVED 12-06-19' with 4 items, and '2021- Draft - Education Committee Goals' with 4 items.",
+        "b_evidence_output": "Section 5 contains one 'list' element with 8 items total.",
+        "b_evidence_location": "Section 5",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document does not contain explicit hyperlinks, and none were incorrectly injected into the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.31818181818181823,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The logo for the NC 911 Board appears twice in the output sections, matching its repeated appearance as a header on both the agenda (Page 1) and the minutes (Page 2). Identical text strings for certain goals (e.g., 'Develop an information sharing program...') appear in the output because they are repeated in the source document under different headers. No unintentional duplication was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The output fails to establish a proper heading hierarchy. Major document titles such as 'Education Committee Meeting Agenda' and 'Education Committee Meeting' are assigned as Level 3 headings (H3), skipping Level 1 (H1) and Level 2 (H2) entirely. This flat, deeply-nested hierarchy violates accessibility standards where H1 should represent the document title.\",\n      \"b_evidence_source\": \"North Carolina 911 Board Education Committee Meeting Agenda (Page 1); North Carolina 911 Board Education Committee Meeting (Page 2)\",\n      \"b_evidence_output\": \"Section 1, Element index 1 ('Education Committee Meeting Agenda'); Section 1, Element index 6 ('Education Committee Meeting')\",\n      \"b_evidence_location\": \"Section 1\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The side-by-side tables for Committee Members and Guests on Page 2 have been consolidated into a single 7-column table in the output. While this is a linear representation of a complex layout, the structure preserves the logical relationship of the data and uses a header row internally to transition to the 'Staff' section. This is an acceptable structural transformation for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is significantly compromised. Most critically, content from pages 5 through 11 is entirely absent from the output, representing a massive structural omission. Furthermore, on Page 13, the list of '2021 Draft' goals has been moved before its correct heading (which now exists as an empty section later in the JSON), meaning the information does not flow logically according to the source's organization.\",\n      \"b_evidence_source\": \"Content from Page 5 (Adjourn) through Page 11 (Survey Responses); Page 13 Header '2021- Draft - Education Committee Goals' followed by its list of 4 items.\",\n      \"b_evidence_output\": \"The output sections jump from Page 4 minutes directly to Page 12 survey results. In Section 5, the 2021 items appear inside the 2020 section, followed by an empty Section 6 titled '2021- Draft - Education Committee Goals'.\",\n      \"b_evidence_location\": \"Sections 1-6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"On Page 13, the output merges two distinct, independent numbered lists (the 2020 Approved Goals and the 2021 Draft Goals) into a single continuous list of 8 items. This loses the structural separation between approved items and draft items, fundamentally changing the meaning and organization of the goals as presented in the source document.\",\n      \"b_evidence_source\": \"Page 13 contains two separate lists: '2020 Education Committee Goals – APPROVED 12-06-19' with 4 items, and '2021- Draft - Education Committee Goals' with 4 items.\",\n      \"b_evidence_output\": \"Section 5 contains one 'list' element with 8 items total.\",\n      \"b_evidence_location\": \"Section 5\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document does not contain explicit hyperlinks, and none were incorrectly injected into the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.31818181818181824\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The rendered HTML significantly deviates from the visual flow of the source document by omitting large sections of content. The source PDF contains 13 pages of material, including a detailed meeting agenda, minutes, training requirements, infographics, and survey results. The HTML output renders the first four pages, but then skips pages 5 through 11 entirely, jumping from meeting minute item 6b (Page 4) directly to the survey frequency results (Page 12). This represents a major failure in maintaining the visual organization and completeness of the information.",
+        "b_evidence_source": "The source PDF contains content on pages 5 (Adjournment), 6 (Priority Dispatch training), 7-8 (Statutory requirements), 9 (NG911 Infographic), and 10-11 (Detailed survey responses).",
+        "b_evidence_output": "The HTML screenshot shows a jump in the body content from '1. Onslow County: CAI Learning and Development...' (from page 4) directly to 'How often do you come to this website?' (from page 12).",
+        "b_evidence_location": "Main body content, following the meeting minutes section.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables that are rendered in the HTML (Agenda topics, Meeting Attendees, Approval Votes, and select Survey results) are visually intact. They maintain clear row and column separation, contain visible borders, and feature distinct headers. Although several tables from the source are missing due to the content omission noted in V1, the ones that are present are readable and professionally formatted.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The HTML output is missing several meaningful graphics present in the source. Specifically, the 'Priority Dispatch' logo (Page 6) and the entire suite of infographics on Page 9 ('Major NG911 Program Areas' and 'NG9-1-1 Call Handling Solution Architecture' diagrams) are absent. These diagrams are critical for visual understanding of the NG911 project, which is a key agenda item.",
+        "b_evidence_source": "Major NG911 Program Areas graphic and NG9-1-1 Call Handling Solution Architecture diagram on page 9; Priority Dispatch logo on page 6.",
+        "b_evidence_output": "The HTML output contains no images or diagrams corresponding to the NG911 infographics or the vendor training logo.",
+        "b_evidence_location": "Body content following the 'Infographic – Evolving to NG911' agenda item.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no visual duplication of body content blocks. While the NC DIT logo appears twice, this correctly reflects its placement in the source PDF on both the agenda and minutes titles. The section headings in the sidebar table of contents correctly link to the body content and do not constitute duplication. No paragraphs or tables are repeated in the body flow.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The rendered HTML significantly deviates from the visual flow of the source document by omitting large sections of content. The source PDF contains 13 pages of material, including a detailed meeting agenda, minutes, training requirements, infographics, and survey results. The HTML output renders the first four pages, but then skips pages 5 through 11 entirely, jumping from meeting minute item 6b (Page 4) directly to the survey frequency results (Page 12). This represents a major failure in maintaining the visual organization and completeness of the information.\",\n      \"b_evidence_source\": \"The source PDF contains content on pages 5 (Adjournment), 6 (Priority Dispatch training), 7-8 (Statutory requirements), 9 (NG911 Infographic), and 10-11 (Detailed survey responses).\",\n      \"b_evidence_output\": \"The HTML screenshot shows a jump in the body content from '1. Onslow County: CAI Learning and Development...' (from page 4) directly to 'How often do you come to this website?' (from page 12).\",\n      \"b_evidence_location\": \"Main body content, following the meeting minutes section.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables that are rendered in the HTML (Agenda topics, Meeting Attendees, Approval Votes, and select Survey results) are visually intact. They maintain clear row and column separation, contain visible borders, and feature distinct headers. Although several tables from the source are missing due to the content omission noted in V1, the ones that are present are readable and professionally formatted.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The HTML output is missing several meaningful graphics present in the source. Specifically, the 'Priority Dispatch' logo (Page 6) and the entire suite of infographics on Page 9 ('Major NG911 Program Areas' and 'NG9-1-1 Call Handling Solution Architecture' diagrams) are absent. These diagrams are critical for visual understanding of the NG911 project, which is a key agenda item.\",\n      \"b_evidence_source\": \"Major NG911 Program Areas graphic and NG9-1-1 Call Handling Solution Architecture diagram on page 9; Priority Dispatch logo on page 6.\",\n      \"b_evidence_output\": \"The HTML output contains no images or diagrams corresponding to the NG911 infographics or the vendor training logo.\",\n      \"b_evidence_location\": \"Body content following the 'Infographic – Evolving to NG911' agenda item.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no visual duplication of body content blocks. While the NC DIT logo appears twice, this correctly reflects its placement in the source PDF on both the agenda and minutes titles. The section headings in the sidebar table of contents correctly link to the body content and do not constitute duplication. No paragraphs or tables are repeated in the body flow.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 8,
+  "total_critical": 1,
+  "total_major": 6,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}
