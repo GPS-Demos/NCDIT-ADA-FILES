@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Extraction Quality Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .summary { background: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .metric { display: inline-block; margin-right: 30px; margin-bottom: 10px; }
+        .metric-value { font-size: 24px; font-weight: bold; color: #2196F3; }
+        .metric-label { color: #666; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #4CAF50; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .status-success { color: #4CAF50; }
+        .status-partial { color: #FF9800; }
+        .status-failed { color: #F44336; }
+        .score-high { color: #4CAF50; font-weight: bold; }
+        .score-medium { color: #FF9800; }
+        .score-low { color: #F44336; }
+        .note { background: #fff3cd; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .error-section { background: #ffebee; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #F44336; }
+        .warning-section { background: #fff8e1; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #FF9800; }
+        .error-text { color: #c62828; font-family: monospace; font-size: 0.9em; word-break: break-all; }
+        a { color: #1976D2; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>PDF Extraction Quality Report</h1>
+    <p>Generated: 2026-03-12T21:45:23.407725Z</p>
+
+    <div class="summary">
+        <div class="metric">
+            <div class="metric-value">100</div>
+            <div class="metric-label">PDFs Processed</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">1806</div>
+            <div class="metric-label">Total Pages</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">100.0%</div>
+            <div class="metric-label">Success Rate</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">9.7/10</div>
+            <div class="metric-label">Avg Coherence Score</div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>Metrics Explained:</strong>
+        <ul style="margin: 5px 0;">
+            <li><strong>Success Rate:</strong> Percentage of pages where extraction completed without errors (API failures, parsing issues)</li>
+            <li><strong>Confidence:</strong> Based on coherence score (1-10) from LLM quality assessment. High = 9-10, Medium = 7-8, Low = &lt;7</li>
+        </ul>
+    </div>
+
+    <h2>Quality Breakdown</h2>
+    <table>
+        <tr>
+            <th>Confidence Level</th>
+            <th>Page Count</th>
+            <th>Percentage</th>
+        </tr>
+        <tr>
+            <td class="score-high">High (9-10)</td>
+            <td>1670</td>
+            <td>92.5%</td>
+        </tr>
+        <tr>
+            <td class="score-medium">Medium (7-8)</td>
+            <td>87</td>
+            <td>4.8%</td>
+        </tr>
+        <tr>
+            <td class="score-low">Low (&lt;7)</td>
+            <td>49</td>
+            <td>2.7%</td>
+        </tr>
+    </table>
+
+    <div class="warning-section">
+        <h2 style="margin-top: 0; color: #e65100;">Low Confidence Pages (49)</h2>
+        <p>These pages have coherence scores below 7 and may need manual review:</p>
+        <table>
+            <tr>
+                <th>PDF</th>
+                <th>Page</th>
+                <th>Score</th>
+                <th>Issues</th>
+            </tr>
+            <tr>
+                <td>208m-endpoint-reseller-price-list-686b18db</td>
+                <td>5</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>911-education-committee-meeting-agenda-packet-03-25-2021-685f9fa9</td>
+                <td>30</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Garbled characters - nonsensical single letters and layout artifacts in the [LINK] section at the end of the document.</li></ul></td>
+            </tr>
+            <tr>
+                <td>esrmo-newsletter-april-2024-686b1c64</td>
+                <td>6</td>
+                <td class="score-low">3</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Duplicated content</li><li>Severely wrong reading order</li></ul></td>
+            </tr>
+            <tr>
+                <td>federalagencyhurricanecoordination-686132f8</td>
+                <td>6</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 16 through Row 26 have misaligned columns and excessive cells that do not match the header structure.</li></ul></td>
+            </tr>
+            <tr>
+                <td>gdac-legislative-report-may-2016-68610a4b</td>
+                <td>19</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>gicc-ncdot-florence-20181107-68614eed</td>
+                <td>3</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>gicc-tims-may-2016-686133f1</td>
+                <td>9</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>ifb-its-400277-2017-1102-final-686b18e9</td>
+                <td>56</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>logos-graphic-colors-table-screenshot-images-fc98</td>
+                <td>1</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - The content describes procedural steps involving buttons or links that were not captured, resulting in incomplete steps such as 'Click on:' and 'Click:'.</li></ul></td>
+            </tr>
+            <tr>
+                <td>map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1</td>
+                <td>45</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc</td>
+                <td>14</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>mostly-text-charts-tables-screenshots-maps-67fb</td>
+                <td>7</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Duplicated content</li><li>Severely wrong reading order</li></ul></td>
+            </tr>
+            <tr>
+                <td>mostly-text-charts-tables-screenshots-maps-67fb</td>
+                <td>15</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - missing cells, jumbled structure, misaligned columns</li></ul></td>
+            </tr>
+            <tr>
+                <td>nc-911-board-education-committee-meeting-agenda-packet-feb-685f9e81</td>
+                <td>2</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken table - rows 2 through 10 have misaligned columns and missing data cells relative to the header, and the staff table starting at row 11 lacks columns for Guests and In Person, causing structural jumbling.</li></ul></td>
+            </tr>
+            <tr>
+                <td>near-perfect-powerpoint-slides-by-accessibility-experts-47b0</td>
+                <td>18</td>
+                <td class="score-low">3</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>near-perfect-powerpoint-slides-by-accessibility-experts-47b0</td>
+                <td>23</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - missing cells, jumbled structure, misaligned columns</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-1793</td>
+                <td>11</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-1793</td>
+                <td>21</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - The table structure is jumbled with inconsistent column alignment and merged category/item rows that make the data unreadable.</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-f832</td>
+                <td>12</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Excessive empty image placeholders</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-f832</td>
+                <td>15</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-fed0</td>
+                <td>7</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-fed0</td>
+                <td>17</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-fed0</td>
+                <td>26</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-feef</td>
+                <td>3</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-feef</td>
+                <td>8</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-feef</td>
+                <td>12</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-fef1</td>
+                <td>20</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-fef5</td>
+                <td>24</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-ff0c</td>
+                <td>28</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - missing cells, jumbled structure, misaligned columns</li></ul></td>
+            </tr>
+            <tr>
+                <td>powerpoint-slides-ff0d</td>
+                <td>55</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li><li>Duplicated content</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>6</td>
+                <td class="score-low">3</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>9</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 3 is missing cells for the Microsoft column</li><li>Broken tables - Row 4 contains extraneous, out-of-place text ('Must Order 2 Parts', 'Black Model', pricing/warranty info) that does not align with the table structure</li><li>Broken tables - Row 5 is missing cells for the Microsoft column</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>10</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>11</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 1 header is misaligned with the data columns, and Row 2 contains jumbled content that does not align with the table structure.</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>13</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 1 (header row) does not align with the data rows; the structure attempts to merge multiple vendor-specific columns (Part Number + Price) into single cells, leading to misaligned or empty data in later rows.</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>15</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 6-8 have missing columns leading to misalignment where the 'Vendor Part Number' and 'Unit Price' data shifted into wrong headers</li><li>Broken tables - Row 10 is missing data columns compared to the header row</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>17</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>18</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 1 header is misaligned with the data columns in subsequent rows, causing a mismatch between the provided headers and the specific vendor values.</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>19</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>20</td>
+                <td class="score-low">3</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 1 header structure does not align with data rows; cells in the Microsoft column contain multiple data points (price + part number) compressed into single cells; rows 3, 5, and 7 are missing corresponding data content.</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>21</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 2 contains jumbled structure where Microsoft-specific product information is improperly merged into the table cell, and Row 3 lacks proper column alignment, causing a structural mismatch with the header.</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>22</td>
+                <td class="score-low">3</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - missing cells and misaligned columns resulting in incorrect data mapping for vendors (e.g., Row 2-5 column alignment is inconsistent with Row 7-10)</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>23</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 8 and Row 12-13 have misaligned columns and fragmented content that disrupts the table structure.</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>24</td>
+                <td class="score-low">3</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>broken tables - Row 3, 4, 6, 8, and 10 have misaligned columns and missing data due to the structure collapsing when content flows across rows</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>25</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>26</td>
+                <td class="score-low">6</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 13 contains jumbled/misaligned cell data where text is spilling into multiple lines and merging incorrect values</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>108</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>seal-imagery-table-with-shading-colored-text-672b</td>
+                <td>117</td>
+                <td class="score-low">4</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>broken tables</li></ul></td>
+            </tr>
+            <tr>
+                <td>tables-screenshots-photos-background-colors-59df</td>
+                <td>46</td>
+                <td class="score-low">5</td>
+                <td><ul style='margin: 0; padding-left: 20px;'><li>Broken tables - Row 2 header is misaligned with the data columns in Row 3 onwards, and the table structure fails to accurately represent the header labels 'April 1, 2020' and 'Population Estimate (as of July 1, 2022)'.</li></ul></td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>PDF Status Summary</h2>
+    <table>
+        <tr>
+            <th>Status</th>
+            <th>Count</th>
+            <th>PDF IDs</th>
+        </tr>
+        <tr>
+            <td class="status-success">Fully Successful</td>
+            <td>76</td>
+            <td>10-22-20-edu-committee-agenda-packet-685f9fde, 2019-20-smac-work-plan-685fadcf, 20190416-nc-911-board-minutes-approved-687248c4, 20190726-board-agenda-685f9db9, 20190814-nc-911-board-minutes-approved-685f9d99...</td>
+        </tr>
+        <tr>
+            <td class="status-partial">Partial Issues</td>
+            <td>24</td>
+            <td>208m-endpoint-reseller-price-list-686b18db, 911-education-committee-meeting-agenda-packet-03-25-2021-685f9fa9, esrmo-newsletter-april-2024-686b1c64, federalagencyhurricanecoordination-686132f8, gdac-legislative-report-may-2016-68610a4b...</td>
+        </tr>
+        <tr>
+            <td class="status-failed">Failed</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h2>Individual PDF Results</h2>
+    <table>
+        <tr>
+            <th>PDF ID</th>
+            <th>Pages</th>
+            <th>Successful</th>
+            <th>Avg Coherence</th>
+            <th>Confidence</th>
+        </tr>
+        <tr>
+            <td>10-22-20-edu-committee-agenda-packet-685f9fde</td>
+            <td>13</td>
+            <td>13</td>
+            <td>9.92</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>2019-20-smac-work-plan-685fadcf</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>20190416-nc-911-board-minutes-approved-687248c4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>20190726-board-agenda-685f9db9</td>
+            <td>2</td>
+            <td>2</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>20190814-nc-911-board-minutes-approved-685f9d99</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>20200522-board-agenda-685f9ca8</td>
+            <td>2</td>
+            <td>2</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>20200522-nc911-board-minutes-approved-685f9cb7</td>
+            <td>7</td>
+            <td>7</td>
+            <td>9.43</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>208m-endpoint-reseller-price-list-686b18db</td>
+            <td>17</td>
+            <td>17</td>
+            <td>8.88</td>
+            <td class="score-medium">Medium</td>
+        </tr>
+        <tr>
+            <td>911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9.67</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>911-board-technology-committee-agenda-june-9-2022-685fa07f</td>
+            <td>8</td>
+            <td>8</td>
+            <td>9.88</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>911-education-committee-meeting-agenda-packet-03-25-2021-685f9fa9</td>
+            <td>46</td>
+            <td>46</td>
+            <td>9.65</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>911-telecommunicators-resolution-mitchell-county-685f6fd1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>911-telecommunicators-resolution-rockingham-county-685f6ff5</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>agency-onboarding-68607a87</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>appenc-initialdatalayers-685fad7d</td>
+            <td>2</td>
+            <td>2</td>
+            <td>9.5</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>colored-text-logos-676a</td>
+            <td>4</td>
+            <td>4</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>create-beautiful-sharepoint-sites-685fb98c</td>
+            <td>21</td>
+            <td>21</td>
+            <td>9.9</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>cyber-incident-reporting-north-carolina-state-government-686b1b59</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9.33</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>draft-addressnc-specifications-20210811-68610610</td>
+            <td>14</td>
+            <td>14</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>draft-fy23-25-goals-and-priorities-685fc8b0</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9.33</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>esrmo-newsletter-april-2017-686b1f74</td>
+            <td>5</td>
+            <td>5</td>
+            <td>9.2</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>esrmo-newsletter-april-2024-686b1c64</td>
+            <td>6</td>
+            <td>6</td>
+            <td>8.17</td>
+            <td class="score-medium">Medium</td>
+        </tr>
+        <tr>
+            <td>esrmo-newsletter-december-2018-686b1ee1</td>
+            <td>5</td>
+            <td>5</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>esrmo-newsletter-january-2017-686b1f87</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>esrmo-newsletter-july-2021-686b1e10</td>
+            <td>5</td>
+            <td>5</td>
+            <td>9.4</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>esrmo-newsletter-march-2018-686b1f23</td>
+            <td>4</td>
+            <td>4</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>esrmo-newsletter-september-2021-686b1e03</td>
+            <td>5</td>
+            <td>5</td>
+            <td>9.6</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>federal-interagency-committee-agenda20190516-68614dc2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>federalagencyhurricanecoordination-686132f8</td>
+            <td>14</td>
+            <td>14</td>
+            <td>9.43</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>fillable-form-logo-imagery-bddf</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>fillable-form-logo-imagery-bdfc</td>
+            <td>2</td>
+            <td>2</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gdac-legislative-report-may-2016-68610a4b</td>
+            <td>19</td>
+            <td>19</td>
+            <td>9.68</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-2020-census-nc-factsheet-20170809-686131e8</td>
+            <td>2</td>
+            <td>2</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-agenda-05-19-2021-68611645</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-agenda-20160810-68613387</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-agenda-20200506-68839aed</td>
+            <td>1</td>
+            <td>1</td>
+            <td>9.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-goals-2021-2023-discussion-68612ed7</td>
+            <td>2</td>
+            <td>2</td>
+            <td>9.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-goals-and-strategic-direction-2021-23-685fd67f</td>
+            <td>15</td>
+            <td>15</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-lgc-censussurveyresults-20200506-68839ae8</td>
+            <td>16</td>
+            <td>16</td>
+            <td>9.88</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-meeting-minutes-02122003-685fb099</td>
+            <td>7</td>
+            <td>7</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-meeting-minutes-08072007-685fb034</td>
+            <td>10</td>
+            <td>10</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-mo-minutes-20191216-68614cc3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-ncdot-florence-20181107-68614eed</td>
+            <td>15</td>
+            <td>15</td>
+            <td>9.73</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-smac-agenda-20210120-68839aac</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>gicc-tims-may-2016-686133f1</td>
+            <td>24</td>
+            <td>24</td>
+            <td>9.67</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>ifb-its-400277-2017-1102-final-686b18e9</td>
+            <td>61</td>
+            <td>61</td>
+            <td>9.64</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>logo-imagery-graphic-colors-map-imagery-6e2e</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>logo-imagery-graphic-colors-map-imagery-f80b</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>logo-imagery-graphic-colors-map-imagery-tables-4807</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>logo-imagery-screenshot-imagery-fca1</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9.33</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>logo-tables-shading-watermark-photos-13a3</td>
+            <td>38</td>
+            <td>38</td>
+            <td>9.97</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>logos-graphic-colors-photos-icons-diagrams-charts-53de</td>
+            <td>28</td>
+            <td>28</td>
+            <td>9.82</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>logos-graphic-colors-photos-icons-diagrams-charts-53e1</td>
+            <td>43</td>
+            <td>43</td>
+            <td>9.98</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>logos-graphic-colors-table-screenshot-images-fc98</td>
+            <td>6</td>
+            <td>6</td>
+            <td>9.17</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>long-contract-many-pages-of-tables-6881</td>
+            <td>168</td>
+            <td>168</td>
+            <td>9.89</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>map-imagery-logo-imagery-4809</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>map-imagery-logo-imagery-f810</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1</td>
+            <td>46</td>
+            <td>46</td>
+            <td>9.87</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>map-imagery-photos-tables-screenshots-diagrams-data-charts-365a</td>
+            <td>38</td>
+            <td>38</td>
+            <td>9.97</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>map-imagery-photos-tables-screenshots-diagrams-data-charts-ff40</td>
+            <td>13</td>
+            <td>13</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc</td>
+            <td>48</td>
+            <td>48</td>
+            <td>9.77</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>map-imagery-photos-tables-screenshots-diagrams-data-charts-i-f7f6</td>
+            <td>55</td>
+            <td>55</td>
+            <td>9.91</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>memo-with-links-1334</td>
+            <td>2</td>
+            <td>2</td>
+            <td>9.5</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>mo-minutes-20160620-686133d2</td>
+            <td>6</td>
+            <td>6</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>mostly-text-charts-tables-screenshots-maps-67fb</td>
+            <td>55</td>
+            <td>55</td>
+            <td>9.62</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>multi-factor-authentication-report-december-2015-68613ee4</td>
+            <td>13</td>
+            <td>13</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>nc-911-board-education-committee-meeting-agenda-packet-feb-685f9e81</td>
+            <td>18</td>
+            <td>18</td>
+            <td>9.61</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>nc-911-board-meeting-agenda-aug-26-2022-685f9a31</td>
+            <td>2</td>
+            <td>2</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>nc-911-board-minutes-september-30-2022-685f9a2b</td>
+            <td>10</td>
+            <td>10</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>nc-911-board-monthly-dispatch-march-2025-685f7179</td>
+            <td>24</td>
+            <td>24</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d</td>
+            <td>4</td>
+            <td>4</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>ncom-update-gicc-05-15-2014-68612fe6</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>near-perfect-powerpoint-slides-by-accessibility-experts-47b0</td>
+            <td>60</td>
+            <td>60</td>
+            <td>9.75</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>near-perfect-powerpoint-slides-by-accessibility-experts-47b2</td>
+            <td>34</td>
+            <td>34</td>
+            <td>9.91</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>newsletter-with-many-images-and-formatted-text-117c</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9.67</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>newsletter-with-many-images-and-formatted-text-21fb</td>
+            <td>27</td>
+            <td>27</td>
+            <td>9.85</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-1793</td>
+            <td>25</td>
+            <td>25</td>
+            <td>9.28</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-f832</td>
+            <td>37</td>
+            <td>37</td>
+            <td>9.54</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-fed0</td>
+            <td>29</td>
+            <td>29</td>
+            <td>9.1</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-feef</td>
+            <td>25</td>
+            <td>25</td>
+            <td>9.24</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-fef1</td>
+            <td>21</td>
+            <td>21</td>
+            <td>9.71</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-fef5</td>
+            <td>25</td>
+            <td>25</td>
+            <td>9.72</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-ff0a</td>
+            <td>25</td>
+            <td>25</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-ff0c</td>
+            <td>30</td>
+            <td>30</td>
+            <td>9.6</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>powerpoint-slides-ff0d</td>
+            <td>58</td>
+            <td>58</td>
+            <td>9.72</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>scanned-from-paper-many-pages-of-tables-6878</td>
+            <td>38</td>
+            <td>38</td>
+            <td>9.87</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>scio-physical-and-environmental-protection-686b1b84</td>
+            <td>12</td>
+            <td>12</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>screenshot-images-11b5</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>seal-image-table-6870</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>seal-imagery-11ab</td>
+            <td>78</td>
+            <td>78</td>
+            <td>9.87</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>seal-imagery-table-with-shading-132c</td>
+            <td>21</td>
+            <td>21</td>
+            <td>9.95</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>seal-imagery-table-with-shading-colored-text-672b</td>
+            <td>123</td>
+            <td>123</td>
+            <td>8.67</td>
+            <td class="score-medium">Medium</td>
+        </tr>
+        <tr>
+            <td>smac-lidar-apr-10-2024-6860db7b</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>standards-committee-meeting-agenda-packet-october-7-2021-685fa26e</td>
+            <td>7</td>
+            <td>7</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>table-seal-imagery-diagram-1468</td>
+            <td>1</td>
+            <td>1</td>
+            <td>8.0</td>
+            <td class="score-medium">Medium</td>
+        </tr>
+        <tr>
+            <td>tables-screenshots-photos-background-colors-59df</td>
+            <td>50</td>
+            <td>50</td>
+            <td>9.84</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>text-background-colors-53e2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>text-some-colored-text-3638</td>
+            <td>3</td>
+            <td>3</td>
+            <td>10.0</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>wearencgov-broadbandinitiatives-685fc6d1</td>
+            <td>27</td>
+            <td>27</td>
+            <td>9.89</td>
+            <td class="score-high">High</td>
+        </tr>
+        <tr>
+            <td>wearencgov-presentation3-685fc6b2</td>
+            <td>19</td>
+            <td>19</td>
+            <td>9.95</td>
+            <td class="score-high">High</td>
+        </tr>
+    </table>
+</body>
+</html>
