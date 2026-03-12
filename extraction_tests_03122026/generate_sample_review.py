@@ -14,7 +14,7 @@ from extract_structured_json import render_content_item_html, CONTENT_CSS
 
 # Paths
 OUTPUT_FOLDER = Path("output")
-DATA_FOLDER = Path("../data")
+DATA_FOLDER = Path("../output-96-files-03-10-2026/ncdit-audit-20260310-073415")
 REPORTS_FOLDER = OUTPUT_FOLDER / "_reports"
 
 # Image settings (match main script)
