@@ -231,9 +231,290 @@ EXTRACTION_SCHEMA = {
                 },
                 "required": ["type", "fields"],
             },
+            # List: type, list_type, items (supports nested lists)
+            {
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string", "enum": ["list"]},
+                    "list_type": {
+                        "type": "string",
+                        "enum": ["ordered", "unordered"],
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "text": {"type": "string"},
+                                "children": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "text": {"type": "string"},
+                                        },
+                                        "required": ["text"],
+                                    },
+                                },
+                            },
+                            "required": ["text"],
+                        },
+                    },
+                },
+                "required": ["type", "list_type", "items"],
+            },
+            # Header/Footer: type, subtype, text
+            {
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string", "enum": ["header_footer"]},
+                    "subtype": {
+                        "type": "string",
+                        "enum": ["header", "footer"],
+                    },
+                    "text": {"type": "string"},
+                },
+                "required": ["type", "subtype", "text"],
+            },
+            # Link: type, text, url
+            {
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string", "enum": ["link"]},
+                    "text": {"type": "string"},
+                    "url": {"type": "string"},
+                },
+                "required": ["type", "text", "url"],
+            },
         ],
     },
 }
+
+
+def _esc(text: str) -> str:
+    """HTML-escape a string."""
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def render_content_item_html(item: Dict) -> str:
+    """Render a single extracted content item as an HTML fragment.
+
+    Handles all schema types: heading, paragraph, table, image, video,
+    form, list, header_footer, link.
+    """
+    item_type = item.get("type", "unknown")
+
+    if item_type == "heading":
+        level = item.get("level", 1)
+        text = _esc(item.get("text", ""))
+        return (
+            f'<div class="content-item">'
+            f'<div class="content-type">Heading (H{level})</div>'
+            f'<div><strong>{text}</strong></div>'
+            f'</div>'
+        )
+
+    if item_type == "paragraph":
+        text = _esc(item.get("text", ""))
+        return (
+            f'<div class="content-item">'
+            f'<div class="content-type">Paragraph</div>'
+            f'<div>{text}</div>'
+            f'</div>'
+        )
+
+    if item_type == "table":
+        cells = item.get("cells", [])
+        if not cells:
+            return (
+                '<div class="content-item">'
+                '<div class="content-type">Table (empty)</div>'
+                '</div>'
+            )
+        max_row = max((c.get("row_start", 0) + c.get("num_rows", 1)) for c in cells)
+        max_col = max((c.get("column_start", 0) + c.get("num_columns", 1)) for c in cells)
+        tbl = '<table class="extracted-table">'
+        for r in range(max_row):
+            tbl += "<tr>"
+            for c in range(max_col):
+                cell_text = ""
+                for cell in cells:
+                    if cell.get("row_start") == r and cell.get("column_start") == c:
+                        cell_text = _esc(cell.get("text", ""))
+                        break
+                tbl += f"<td>{cell_text}</td>"
+            tbl += "</tr>"
+        tbl += "</table>"
+        return (
+            f'<div class="content-item">'
+            f'<div class="content-type">Table ({len(cells)} cells)</div>'
+            f'{tbl}'
+            f'</div>'
+        )
+
+    if item_type == "image":
+        desc = _esc(item.get("description", "No description"))
+        caption = item.get("caption", "")
+        caption_html = f"<div><em>{_esc(caption)}</em></div>" if caption else ""
+        return (
+            f'<div class="content-item">'
+            f'<div class="content-type">Image</div>'
+            f'<div>{desc}</div>'
+            f'{caption_html}'
+            f'</div>'
+        )
+
+    if item_type == "video":
+        url = _esc(item.get("url", ""))
+        return (
+            f'<div class="content-item">'
+            f'<div class="content-type">Video</div>'
+            f'<div><a href="{url}" target="_blank">{url}</a></div>'
+            f'</div>'
+        )
+
+    if item_type == "form":
+        form_title = _esc(item.get("title", "Untitled Form"))
+        fields = item.get("fields", [])
+        ftbl = '<table class="extracted-table"><tr><th>Label</th><th>Type</th><th>Value</th></tr>'
+        for field in fields:
+            label = _esc(field.get("label", ""))
+            ftype = _esc(field.get("field_type", "unknown"))
+            value = _esc(str(field.get("value") or "[empty]"))
+            ftbl += f"<tr><td>{label}</td><td>{ftype}</td><td>{value}</td></tr>"
+        ftbl += "</table>"
+        return (
+            f'<div class="content-item">'
+            f'<div class="content-type">Form: {form_title}</div>'
+            f'{ftbl}'
+            f'</div>'
+        )
+
+    if item_type == "list":
+        list_type = item.get("list_type", "unordered")
+        tag = "ol" if list_type == "ordered" else "ul"
+        items_html = ""
+        for li in item.get("items", []):
+            children_html = ""
+            children = li.get("children", [])
+            if children:
+                children_html = "<ul>"
+                for child in children:
+                    children_html += f"<li>{_esc(child.get('text', ''))}</li>"
+                children_html += "</ul>"
+            items_html += f"<li>{_esc(li.get('text', ''))}{children_html}</li>"
+        return (
+            f'<div class="content-item">'
+            f'<div class="content-type">List ({list_type})</div>'
+            f'<{tag}>{items_html}</{tag}>'
+            f'</div>'
+        )
+
+    if item_type == "header_footer":
+        subtype = item.get("subtype", "header")
+        label = "Header" if subtype == "header" else "Footer"
+        text = _esc(item.get("text", ""))
+        color = "#607D8B"
+        return (
+            f'<div class="content-item" style="border-left-color: {color}; background: #eceff1;">'
+            f'<div class="content-type">{label}</div>'
+            f'<div style="color: #546E7A; font-size: 0.9em;">{text}</div>'
+            f'</div>'
+        )
+
+    if item_type == "link":
+        text = _esc(item.get("text", ""))
+        url = item.get("url", "")
+        url_esc = _esc(url)
+        return (
+            f'<div class="content-item" style="border-left-color: #1976D2;">'
+            f'<div class="content-type">Link</div>'
+            f'<div><a href="{url_esc}" target="_blank">{text}</a></div>'
+            f'<div style="font-size: 0.8em; color: #999;">{url_esc}</div>'
+            f'</div>'
+        )
+
+    # Fallback for unknown types
+    return (
+        f'<div class="content-item">'
+        f'<div class="content-type">{_esc(item_type)}</div>'
+        f'<div>{_esc(json.dumps(item, default=str)[:500])}</div>'
+        f'</div>'
+    )
+
+
+# Shared CSS used by both per-document HTML and sample review HTML
+CONTENT_CSS = """
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
+    h1 { color: #333; border-bottom: 2px solid #2196F3; padding-bottom: 10px; }
+    h2 { color: #555; margin-top: 30px; }
+    .page-section { margin: 20px 0; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa; }
+    .page-header { font-size: 1.1em; font-weight: bold; color: #333; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #ddd; }
+    .content-item { margin-bottom: 10px; padding: 8px; border-left: 3px solid #2196F3; background: #f5f5f5; }
+    .content-type { font-weight: bold; color: #666; font-size: 0.85em; text-transform: uppercase; margin-bottom: 4px; }
+    table.extracted-table { border-collapse: collapse; width: 100%; font-size: 0.9em; }
+    table.extracted-table th, table.extracted-table td { border: 1px solid #ddd; padding: 4px 8px; }
+    table.extracted-table th { background: #e0e0e0; }
+    .meta { color: #888; font-size: 0.9em; margin-bottom: 15px; }
+    ol, ul { margin: 4px 0; padding-left: 24px; }
+    a { color: #1976D2; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+"""
+
+
+def generate_document_html(result: Dict, output_path: Path):
+    """Generate a full HTML document from a single PDF's extracted JSON.
+
+    Args:
+        result: The full extraction result dict for one PDF (with pages array).
+        output_path: Path to write the .html file.
+    """
+    pdf_id = result.get("pdf_id", "unknown")
+    total_pages = result.get("total_pages", 0)
+    timestamp = result.get("extraction_timestamp", "")
+    metrics = result.get("quality_metrics", {})
+    coherence = metrics.get("avg_coherence_score", "N/A")
+
+    pages_html = ""
+    for page in result.get("pages", []):
+        page_num = page.get("page_number", "?")
+        error = page.get("error")
+        content = page.get("content", [])
+        val = page.get("validation", {})
+        page_coherence = val.get("coherence_score", "N/A")
+
+        if error:
+            content_html = f'<p style="color: #c62828;">Extraction error: {_esc(error)}</p>'
+        elif not content:
+            content_html = '<p style="color: #999;">No content extracted</p>'
+        else:
+            content_html = "\n".join(render_content_item_html(item) for item in content)
+
+        pages_html += f"""
+    <div class="page-section">
+        <div class="page-header">Page {page_num} <span style="font-weight: normal; color: #888;">(coherence: {page_coherence}/10)</span></div>
+        {content_html}
+    </div>
+"""
+
+    html = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{_esc(pdf_id)} - Extracted Content</title>
+    <style>{CONTENT_CSS}</style>
+</head>
+<body>
+    <h1>{_esc(pdf_id)}</h1>
+    <div class="meta">
+        Pages: {total_pages} | Avg Coherence: {coherence}/10 | Extracted: {timestamp}
+    </div>
+{pages_html}
+</body>
+</html>"""
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html)
 
 
 def _render_single_page(args: Tuple[str, int]) -> bytes:
@@ -451,6 +732,15 @@ class PDFExtractor:
             elif item_type == "video":
                 url = item.get("url", "")
                 parts.append(f"[VIDEO: {url}]\n")
+            elif item_type == "list":
+                list_type = item.get("list_type", "unordered")
+                parts.append(f"[LIST ({list_type})]")
+                for idx, li in enumerate(item.get("items", []), 1):
+                    prefix = f"  {idx}." if list_type == "ordered" else "  -"
+                    parts.append(f"{prefix} {li.get('text', '')}")
+                    for child in li.get("children", []):
+                        parts.append(f"    - {child.get('text', '')}")
+                parts.append("")
             elif item_type == "form":
                 form_title = item.get("title", "Untitled Form")
                 parts.append(f"[FORM: {form_title}]")
@@ -460,6 +750,13 @@ class PDFExtractor:
                     value = field.get("value", "")
                     parts.append(f"  - {label} ({field_type}): {value or '[empty]'}")
                 parts.append("")
+            elif item_type == "header_footer":
+                subtype = item.get("subtype", "header").upper()
+                parts.append(f"[{subtype}] {item.get('text', '')}\n")
+            elif item_type == "link":
+                text = item.get("text", "")
+                url = item.get("url", "")
+                parts.append(f"[LINK: {text} -> {url}]\n")
         return "\n".join(parts)
 
     def parse_json_response(self, response_text: str) -> Tuple[List[Dict], bool, str]:
@@ -546,6 +843,57 @@ class PDFExtractor:
 
         doc.close()
         return video_links
+
+    def extract_hyperlinks_from_page(self, pdf_path: Path, page_num: int) -> List[Dict]:
+        """Extract all non-video hyperlinks from a PDF page using PyMuPDF.
+
+        Returns a list of dicts with keys: url, text, bbox.
+        The 'text' is extracted from the text under the link's bounding box.
+        Video links are excluded (handled separately by extract_video_links_from_page).
+        """
+        doc = fitz.open(str(pdf_path))
+        page = doc[page_num]
+        links = page.get_links()
+
+        hyperlinks = []
+        for link in links:
+            uri = link.get("uri", "")
+            if not uri:
+                continue
+
+            # Skip video links - those are handled by extract_video_links_from_page
+            is_video = any(
+                re.search(pattern, uri, re.IGNORECASE)
+                for pattern in VIDEO_PATTERNS
+            )
+            if is_video:
+                continue
+
+            # Get the display text under the link's bounding box
+            link_rect = link.get("from")
+            display_text = ""
+            bbox = None
+            if link_rect:
+                display_text = page.get_text("text", clip=link_rect).strip()
+                bbox = {
+                    "x0": link_rect.x0,
+                    "y0": link_rect.y0,
+                    "x1": link_rect.x1,
+                    "y1": link_rect.y1,
+                }
+
+            # Use URL as fallback display text if none found
+            if not display_text:
+                display_text = uri
+
+            hyperlinks.append({
+                "url": uri,
+                "text": display_text,
+                "bbox": bbox,
+            })
+
+        doc.close()
+        return hyperlinks
 
     def extract_images_from_pdf_page(self, pdf_path: Path, page_num: int) -> List[Dict]:
         """Extract embedded images from a PDF page using PyMuPDF.
@@ -819,6 +1167,9 @@ class PDFExtractor:
             # Extract video links from PDF
             video_links = self.extract_video_links_from_page(pdf_path, page_num)
 
+            # Extract hyperlinks from PDF using PyMuPDF (non-video links)
+            pymupdf_hyperlinks = self.extract_hyperlinks_from_page(pdf_path, page_num)
+
             # Get page height for position matching
             doc = fitz.open(str(pdf_path))
             page_height = doc[page_num].rect.height
@@ -829,8 +1180,14 @@ class PDFExtractor:
                 gemini_images, pymupdf_images, video_links, page_height
             )
 
-            # Combine all content: text content + images + videos
-            combined_content = other_content + merged_images + video_items
+            # Build link items from PyMuPDF hyperlinks
+            link_items = [
+                {"type": "link", "text": h["text"], "url": h["url"]}
+                for h in pymupdf_hyperlinks
+            ]
+
+            # Combine all content: text content + images + videos + links
+            combined_content = other_content + merged_images + video_items + link_items
 
             # Post-process content (deduplication, character normalization)
             result["content"], post_process_stats = self._post_process_content(combined_content)
@@ -858,11 +1215,21 @@ class PDFExtractor:
         """Flatten extracted content to plain text for comparison."""
         texts = []
         for item in content:
-            if item.get("type") == "paragraph":
+            item_type = item.get("type")
+            if item_type == "paragraph":
                 texts.append(item.get("text", ""))
-            elif item.get("type") == "table":
+            elif item_type == "table":
                 for cell in item.get("cells", []):
                     texts.append(cell.get("text", ""))
+            elif item_type == "list":
+                for li in item.get("items", []):
+                    texts.append(li.get("text", ""))
+                    for child in li.get("children", []):
+                        texts.append(child.get("text", ""))
+            elif item_type == "header_footer":
+                texts.append(item.get("text", ""))
+            elif item_type == "link":
+                texts.append(item.get("text", ""))
         return " ".join(texts)
 
     def _calculate_text_similarity(self, text1: str, text2: str) -> float:
@@ -1025,6 +1392,34 @@ class PDFExtractor:
                         if normalized_text != original_text:
                             item[field] = normalized_text
                             stats["characters_normalized"] += 1
+
+            elif item_type == "list":
+                for li in item.get("items", []):
+                    original_text = li.get("text", "")
+                    normalized_text = self._normalize_ocr_characters(original_text)
+                    if normalized_text != original_text:
+                        li["text"] = normalized_text
+                        stats["characters_normalized"] += 1
+                    for child in li.get("children", []):
+                        original_text = child.get("text", "")
+                        normalized_text = self._normalize_ocr_characters(original_text)
+                        if normalized_text != original_text:
+                            child["text"] = normalized_text
+                            stats["characters_normalized"] += 1
+
+            elif item_type == "header_footer":
+                original_text = item.get("text", "")
+                normalized_text = self._normalize_ocr_characters(original_text)
+                if normalized_text != original_text:
+                    item["text"] = normalized_text
+                    stats["characters_normalized"] += 1
+
+            elif item_type == "link":
+                original_text = item.get("text", "")
+                normalized_text = self._normalize_ocr_characters(original_text)
+                if normalized_text != original_text:
+                    item["text"] = normalized_text
+                    stats["characters_normalized"] += 1
 
         # Step 2: Deduplicate consecutive paragraphs
         content = self._deduplicate_consecutive_paragraphs(content)
@@ -1222,6 +1617,10 @@ class PDFExtractor:
             output_path = OUTPUT_FOLDER / f"{pdf_id}.json"
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(result, f, indent=2, ensure_ascii=False)
+
+            # Generate per-document HTML immediately after JSON
+            html_path = OUTPUT_FOLDER / f"{pdf_id}.html"
+            generate_document_html(result, html_path)
 
             all_results.append(result)
 
