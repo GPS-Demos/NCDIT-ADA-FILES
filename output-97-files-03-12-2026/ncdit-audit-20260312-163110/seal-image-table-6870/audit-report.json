@@ -1,0 +1,82 @@
+{
+  "document_id": "seal-image-table-6870",
+  "audited_at": "2026-03-12T19:42:27.246171Z",
+  "quality_score": 91,
+  "quality_grade": "Good",
+  "fidelity_composite": 1.0,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the LLM fidelity signals are perfect (1.0), the programmatic analysis flagged a major concern regarding fabricated tables (0 in baseline vs 2 in output). Due to the 'partial_disagree' status on a major structural issue and the 3x cost penalty for false negatives, human verification is required to determine if these tables are hallucinations or legitimate visual structures missed by the baseline extraction.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Fabricated tables: baseline has 0 tables but output has 2",
+      "severity": "major",
+      "analysis": "baseline_tables=0, gemini_tables=2",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Inspect the HTML output to see if the two detected tables represent actual document content or are structural hallucinations.",
+    "Compare the HTML table content against the source PDF to ensure data integrity."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 1.0,
+      "text_match": 0.9879569892473118,
+      "content_completeness": 0.9845070422535211,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.9114,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 1.0,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9837259100642398,
+      "shingling_precision": 0.9922246220302375,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9845070422535211,
+      "baseline_words": 710,
+      "gemini_words": 699,
+      "table_count_ratio": 999.0,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 9548,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

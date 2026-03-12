@@ -1,0 +1,152 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1",
+  "composite_score": 0.6,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The content throughout the document is unique and corresponds to the progression of the source PDF. No duplicated paragraphs or sections were found in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is severely flattened in the output. Major sections and their subsections are represented as top-level sibling objects in the 'sections' array instead of using the 'subsections' property to reflect logical nesting. For example, under the heading 'NC Hydrography Issue, Gaps, and Recommendations' (index 8), subsections like 'Polyline Issues' (index 9) and 'Stream Segmentation' (index 10) are listed as siblings rather than children. This pattern continues throughout the issue analysis section, breaking the document's navigational structure for accessibility tools.",
+        "b_evidence_source": "Table of Contents (Page 2) shows 'Polyline Issues' nested under 'NC Hydrography Issue...' and 'Stream Segmentation' nested under 'Polyline Issues'.",
+        "b_evidence_output": "The JSON sections array contains 'NC Hydrography Issue, Gaps, and Recommendations' (index 8), 'Polyline Issues' (index 9), and 'Stream Segmentation' (index 10) as sibling sections with empty 'subsections' arrays.",
+        "b_evidence_location": "Sections 8, 9, and 10",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The tables that are present in the conversion (Table 1, Table 1010, and the Gap Analysis Summary) are structurally correct, with appropriate columns and rows that match the source. While several tables are missing entirely (Tables 4, 7, 8, 9), this is a completeness issue rather than a structural corruption of the rendered tables.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is materially disrupted by omissions and improper placement of content. Firstly, two major sections, 'Stewardship and Maintenance' (Page 42) and 'Additional Considerations' (Page 43), are entirely missing from the output. Secondly, a placeholder section for missing pages 11-21 ('Content from pages 11-21 could not be converted') is placed at the very end of the JSON (index 22) instead of appearing between the 'ATLAS Project' (Page 11) and 'Table 1010' (Page 21) sections where the data loss actually occurred.",
+        "b_evidence_source": "The source document includes sections 'Stewardship and Maintenance' (p. 42) and 'Additional Considerations' (p. 43) following the technical recommendations.",
+        "b_evidence_output": "The output jumps from 'Z Enabled Features' (index 20) to 'Gap Analysis Summary' (index 21), omitting the intermediate sections. The placeholder for missing pages is placed last at index 22.",
+        "b_evidence_location": "Sections 21 and 22",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The lists found on Page 30 (EDH Stream/river collection specifications) are correctly converted, maintaining the nested structure and relationship between terms and definitions as seen in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Several active links in the source document are not preserved in the conversion. On page 15, references to 'Elevation-Derived Hydrography Acquisition Specifications' and 'READ Rules' appear in blue underlined text in the PDF, indicating hyperlinks to external documentation. In the JSON output, these are rendered as plain text without any hyperlink properties.",
+        "b_evidence_source": "The 3DHP will collect hydrography data to meet the following specification documents: Elevation-Derived Hydrography Acquisition Specifications and Representation, Extraction, Attribution, and Delineation (READ Rules). (Page 15, blue underlined text)",
+        "b_evidence_output": "text\": \"The 3DHP will collect hydrography data to meet the following specification documents: Elevation-Derived Hydrography Acquisition Specifications and Representation, Extraction, Attribution, and Delineation (READ Rules).\"",
+        "b_evidence_location": "Section index 0, element following heading-9 (Wait, heading-9 is Z-Enabled, Page 15 is index 0 in the ISSUE section block - actually Section index 0, '3DHP' text block)",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 11,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The content throughout the document is unique and corresponds to the progression of the source PDF. No duplicated paragraphs or sections were found in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is severely flattened in the output. Major sections and their subsections are represented as top-level sibling objects in the 'sections' array instead of using the 'subsections' property to reflect logical nesting. For example, under the heading 'NC Hydrography Issue, Gaps, and Recommendations' (index 8), subsections like 'Polyline Issues' (index 9) and 'Stream Segmentation' (index 10) are listed as siblings rather than children. This pattern continues throughout the issue analysis section, breaking the document's navigational structure for accessibility tools.\",\n      \"b_evidence_source\": \"Table of Contents (Page 2) shows 'Polyline Issues' nested under 'NC Hydrography Issue...' and 'Stream Segmentation' nested under 'Polyline Issues'.\",\n      \"b_evidence_output\": \"The JSON sections array contains 'NC Hydrography Issue, Gaps, and Recommendations' (index 8), 'Polyline Issues' (index 9), and 'Stream Segmentation' (index 10) as sibling sections with empty 'subsections' arrays.\",\n      \"b_evidence_location\": \"Sections 8, 9, and 10\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The tables that are present in the conversion (Table 1, Table 1010, and the Gap Analysis Summary) are structurally correct, with appropriate columns and rows that match the source. While several tables are missing entirely (Tables 4, 7, 8, 9), this is a completeness issue rather than a structural corruption of the rendered tables.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is materially disrupted by omissions and improper placement of content. Firstly, two major sections, 'Stewardship and Maintenance' (Page 42) and 'Additional Considerations' (Page 43), are entirely missing from the output. Secondly, a placeholder section for missing pages 11-21 ('Content from pages 11-21 could not be converted') is placed at the very end of the JSON (index 22) instead of appearing between the 'ATLAS Project' (Page 11) and 'Table 1010' (Page 21) sections where the data loss actually occurred.\",\n      \"b_evidence_source\": \"The source document includes sections 'Stewardship and Maintenance' (p. 42) and 'Additional Considerations' (p. 43) following the technical recommendations.\",\n      \"b_evidence_output\": \"The output jumps from 'Z Enabled Features' (index 20) to 'Gap Analysis Summary' (index 21), omitting the intermediate sections. The placeholder for missing pages is placed last at index 22.\",\n      \"b_evidence_location\": \"Sections 21 and 22\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The lists found on Page 30 (EDH Stream/river collection specifications) are correctly converted, maintaining the nested structure and relationship between terms and definitions as seen in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Several active links in the source document are not preserved in the conversion. On page 15, references to 'Elevation-Derived Hydrography Acquisition Specifications' and 'READ Rules' appear in blue underlined text in the PDF, indicating hyperlinks to external documentation. In the JSON output, these are rendered as plain text without any hyperlink properties.\",\n      \"b_evidence_source\": \"The 3DHP will collect hydrography data to meet the following specification documents: Elevation-Derived Hydrography Acquisition Specifications and Representation, Extraction, Attribution, and Delineation (READ Rules). (Page 15, blue underlined text)\",\n      \"b_evidence_output\": \"text\\\": \\\"The 3DHP will collect hydrography data to meet the following specification documents: Elevation-Derived Hydrography Acquisition Specifications and Representation, Extraction, Attribution, and Delineation (READ Rules).\\\"\",\n      \"b_evidence_location\": \"Section index 0, element following heading-9 (Wait, heading-9 is Z-Enabled, Page 15 is index 0 in the ISSUE section block - actually Section index 0, '3DHP' text block)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 1,\n    \"penalty_sum\": 11,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output correctly mirrors the visual organization and flow of the source PDF. The document title, cover image, table of contents, and all subsequent sections follow the linear order established in the original document. Responsive layout differences such as single-column text are expected and do not disrupt the intended flow of information. Headings are appropriately nested, and visual elements such as tables and images are placed logically relative to their associated text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "All tables present in the source PDF, including the 'ATLAS_Hydrography_v2 feature table' on page 12, various domain tables on page 13, and the attribute tables on pages 18-21, are rendered accurately in the HTML. The complex Gap Analysis Summary table on pages 45-46, which includes many checkboxes, is correctly transformed into a readable HTML table that preserves the alignment and selection status (checkboxes) of the original content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF have been successfully migrated to the HTML output. This includes the cover topographic map, technical schema diagrams (Figures 2 and 4), numerous map comparisons and annotated aerial photos (e.g., Figures 1, 10, 14, 21), and the survey result charts (bar and pie charts) throughout the document. All images are rendered clearly and in their correct locations.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of body content duplication in the HTML output. Sections, paragraphs, and tables appear only once in the main content area. The presence of section headings in both the navigation/TOC area and the body of the document is a standard accessible design feature and is not considered duplication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output correctly mirrors the visual organization and flow of the source PDF. The document title, cover image, table of contents, and all subsequent sections follow the linear order established in the original document. Responsive layout differences such as single-column text are expected and do not disrupt the intended flow of information. Headings are appropriately nested, and visual elements such as tables and images are placed logically relative to their associated text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"All tables present in the source PDF, including the 'ATLAS_Hydrography_v2 feature table' on page 12, various domain tables on page 13, and the attribute tables on pages 18-21, are rendered accurately in the HTML. The complex Gap Analysis Summary table on pages 45-46, which includes many checkboxes, is correctly transformed into a readable HTML table that preserves the alignment and selection status (checkboxes) of the original content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF have been successfully migrated to the HTML output. This includes the cover topographic map, technical schema diagrams (Figures 2 and 4), numerous map comparisons and annotated aerial photos (e.g., Figures 1, 10, 14, 21), and the survey result charts (bar and pie charts) throughout the document. All images are rendered clearly and in their correct locations.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of body content duplication in the HTML output. Sections, paragraphs, and tables appear only once in the main content area. The presence of section headings in both the navigation/TOC area and the body of the document is a standard accessible design feature and is not considered duplication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 0,
+  "total_major": 2,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

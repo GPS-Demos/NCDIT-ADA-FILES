@@ -1,0 +1,213 @@
+{
+  "document_id": "federalagencyhurricanecoordination-686132f8",
+  "composite_score": 0.7228,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.72 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output was reviewed for any text, headings, or content that does not appear in the source PDF. All titles, headers, and bullet points in the JSON correspond directly to the content found on the slides of the source document. No fabricated introductions, conclusions, or menu items were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output contains one URL ('http://arcg.is/2kqc0h9') on Slide 7 and a date ('2/9/2017') on the title slide. Both were verified against the source PDF and are accurate. No other contact information (phones, emails, addresses) is present or was fabricated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source PDF contains 14 slides. The JSON output contains 13 sections. Slide 12 and 13 both share the title 'Hatteras Inlet Satellite-Derived Bathy' and have been merged into a single section (reading_order 12) containing both images. This is an acceptable merging of sequential content with identical headings. All other pages/slides are accounted for.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source PDF contains two primary tables (Slide 6 and Slide 8). However, the conversion process did not identify or extract these as table objects (table_count is 0). Since no tables exist in the output to compare row counts against, the complete failure to extract the tabular data is evaluated under C5 (Significant text omission).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The conversion failed to extract the text content from the tables on Slide 6 and Slide 8. On Slide 6, the 'Post-Matthew Ground Truth Locations' table contains approximately 23 rows of coordinate and location data, which constitutes the vast majority of the slide's information. Similarly, on Slide 8, the data table for 'Elevation Difference and Volume' was not extracted. This results in a loss of significantly more than 25% of the text content for these sections.",
+        "b_evidence_source": "Slide 6 contains a detailed table of 'Post-Matthew Ground Truth Locations' with columns for Longitude, Latitude, Location, State, District, and Overwash info. Slide 8 contains a data table with columns Section, Volume Change, MHW Volume Change, Shoreline Change, etc.",
+        "b_evidence_output": "The text and data from these tables are entirely absent from Section 6 and Section 8 of the JSON output.",
+        "b_evidence_location": "Sections 6 and 8 (Pages 6 and 8)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Apart from the major omissions noted in C5, the text that was successfully extracted (titles, bullet points, headers) was compared for accuracy. No changes in wording that alter meaning (such as altered dates, numbers, or modal verbs) were found. The semantic content of the extracted text remains faithful to the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9418604651162791,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output was reviewed for any text, headings, or content that does not appear in the source PDF. All titles, headers, and bullet points in the JSON correspond directly to the content found on the slides of the source document. No fabricated introductions, conclusions, or menu items were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output contains one URL ('http://arcg.is/2kqc0h9') on Slide 7 and a date ('2/9/2017') on the title slide. Both were verified against the source PDF and are accurate. No other contact information (phones, emails, addresses) is present or was fabricated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source PDF contains 14 slides. The JSON output contains 13 sections. Slide 12 and 13 both share the title 'Hatteras Inlet Satellite-Derived Bathy' and have been merged into a single section (reading_order 12) containing both images. This is an acceptable merging of sequential content with identical headings. All other pages/slides are accounted for.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source PDF contains two primary tables (Slide 6 and Slide 8). However, the conversion process did not identify or extract these as table objects (table_count is 0). Since no tables exist in the output to compare row counts against, the complete failure to extract the tabular data is evaluated under C5 (Significant text omission).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The conversion failed to extract the text content from the tables on Slide 6 and Slide 8. On Slide 6, the 'Post-Matthew Ground Truth Locations' table contains approximately 23 rows of coordinate and location data, which constitutes the vast majority of the slide's information. Similarly, on Slide 8, the data table for 'Elevation Difference and Volume' was not extracted. This results in a loss of significantly more than 25% of the text content for these sections.\",\n      \"b_evidence_source\": \"Slide 6 contains a detailed table of 'Post-Matthew Ground Truth Locations' with columns for Longitude, Latitude, Location, State, District, and Overwash info. Slide 8 contains a data table with columns Section, Volume Change, MHW Volume Change, Shoreline Change, etc.\",\n      \"b_evidence_output\": \"The text and data from these tables are entirely absent from Section 6 and Section 8 of the JSON output.\",\n      \"b_evidence_location\": \"Sections 6 and 8 (Pages 6 and 8)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Apart from the major omissions noted in C5, the text that was successfully extracted (titles, bullet points, headers) was compared for accuracy. No changes in wording that alter meaning (such as altered dates, numbers, or modal verbs) were found. The semantic content of the extracted text remains faithful to the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.9418604651162791\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "There are two instances of content duplication in the output. First, in Section 7, the title 'Post-Matthew Data Production Status Map' appears as the section title and is then repeated as a paragraph element in the content, whereas it only appears once on the corresponding source page (Page 7). Second, in Section 12, the text 'ENVI Relative Depth Image and Danger Area Boundary (in black)' is duplicated; it appears both as the caption for the second image and as a standalone paragraph immediately following it, while only appearing once on the source page (Page 13).",
+        "b_evidence_source": "Page 7: 'Post-Matthew Data Production Status Map'\nPage 13: 'ENVI Relative Depth Image and Danger Area Boundary (in black)'",
+        "b_evidence_output": "Section 7: title field and element index 2.\nSection 12: image 2 caption and element index 2.",
+        "b_evidence_location": "Sections 7 and 12",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is well-maintained. Slide titles are correctly identified as top-level section titles, and internal slide headers (e.g., Page 5 'Key Biscayne, FL to VA/MD Border') are correctly nested as lower-level headings (H3) without skipping levels.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document contains several data tables, most notably on Page 6 (Ground Truth Locations) and Page 8 (Elevation Difference and Volume Change). These tables have clear row/column structures. However, the output fails to extract any of these as structured table objects (`type: 'table'`). Instead, the content is captured entirely within image elements, resulting in a total loss of the document's tabular structure.",
+        "b_evidence_source": "Page 6: Table with columns 'Longitude', 'Latitude', 'Location', 'State'.\nPage 8: Table with columns 'Section', 'Volume Change', 'Shoreline Change'.",
+        "b_evidence_output": "Section 6 and Section 8 only contain image and paragraph elements; no table elements are present.",
+        "b_evidence_location": "Sections 6 and 8",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order generally follows the logical sequence of the slides. Internal elements within slides, such as lists and captions, are placed in a reasonable order that maintains the meaning of the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The lists on pages 2, 4, 5, 7, and 9 are correctly identified and converted into unordered list structures in the JSON output, preserving the bulleted hierarchy of the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URL present on Page 7 ('http://arcg.is/2kqc0h9') is correctly captured as text. While not explicitly tagged as a hyperlink in the metadata, it is not broken or missing.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"There are two instances of content duplication in the output. First, in Section 7, the title 'Post-Matthew Data Production Status Map' appears as the section title and is then repeated as a paragraph element in the content, whereas it only appears once on the corresponding source page (Page 7). Second, in Section 12, the text 'ENVI Relative Depth Image and Danger Area Boundary (in black)' is duplicated; it appears both as the caption for the second image and as a standalone paragraph immediately following it, while only appearing once on the source page (Page 13).\",\n      \"b_evidence_source\": \"Page 7: 'Post-Matthew Data Production Status Map'\\nPage 13: 'ENVI Relative Depth Image and Danger Area Boundary (in black)'\",\n      \"b_evidence_output\": \"Section 7: title field and element index 2.\\nSection 12: image 2 caption and element index 2.\",\n      \"b_evidence_location\": \"Sections 7 and 12\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is well-maintained. Slide titles are correctly identified as top-level section titles, and internal slide headers (e.g., Page 5 'Key Biscayne, FL to VA/MD Border') are correctly nested as lower-level headings (H3) without skipping levels.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document contains several data tables, most notably on Page 6 (Ground Truth Locations) and Page 8 (Elevation Difference and Volume Change). These tables have clear row/column structures. However, the output fails to extract any of these as structured table objects (`type: 'table'`). Instead, the content is captured entirely within image elements, resulting in a total loss of the document's tabular structure.\",\n      \"b_evidence_source\": \"Page 6: Table with columns 'Longitude', 'Latitude', 'Location', 'State'.\\nPage 8: Table with columns 'Section', 'Volume Change', 'Shoreline Change'.\",\n      \"b_evidence_output\": \"Section 6 and Section 8 only contain image and paragraph elements; no table elements are present.\",\n      \"b_evidence_location\": \"Sections 6 and 8\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order generally follows the logical sequence of the slides. Internal elements within slides, such as lists and captions, are placed in a reasonable order that maintains the meaning of the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The lists on pages 2, 4, 5, 7, and 9 are correctly identified and converted into unordered list structures in the JSON output, preserving the bulleted hierarchy of the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URL present on Page 7 ('http://arcg.is/2kqc0h9') is correctly captured as text. While not explicitly tagged as a hyperlink in the metadata, it is not broken or missing.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output converts the slide-based layout into a single-column scrolling format. While this is a significant change from the original fixed-layout PDF, the chronological order of information is maintained. The headers, bullet points, and the one successful image follow the sequence of the source document. Normal differences in layout like these are expected for HTML conversion.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "Page 6 of the source PDF contains a large, multi-column table titled 'Post-Matthew Ground Truth Locations'. In the HTML rendering, this table is completely absent. The section heading appears, followed by a pixelated image placeholder, but no tabular data is present in the document. This prevents the user from accessing the data points provided in the source.",
+        "b_evidence_source": "Table with columns 'Longitude', 'Latitude', 'Location', 'State', etc., on page 6.",
+        "b_evidence_output": "The section 'Post-Matthew Ground Truth Locations' contains only a pixelated image placeholder and no table.",
+        "b_evidence_location": "Post-Matthew Ground Truth Locations, page 6",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Multiple meaningful images are broken or missing in the HTML rendering. Specifically, the maps and charts on pages 5, 7, 8, 9, 11, 12, 13, and 14 are rendered as pixelated gray-and-white placeholders or solid green boxes. These images are central to the content of the presentation, showing survey areas, data production status, and bathymetric imagery. While the image on page 4 rendered correctly, the failure of the majority of other images is a significant defect.",
+        "b_evidence_source": "Meaningful maps and charts on pages 5, 7, 8, 9, 11, 12, 13, and 14 (e.g., '2016 Post-Matthew Operations Overview' map on page 5).",
+        "b_evidence_output": "Pixelated gray/white placeholders or solid green boxes in place of maps and charts throughout the document.",
+        "b_evidence_location": "Various sections from page 5 to 14",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "No instances of duplicated body content (paragraphs, tables, or sections) were observed in the HTML output. The document follows the source content once without repetition.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output converts the slide-based layout into a single-column scrolling format. While this is a significant change from the original fixed-layout PDF, the chronological order of information is maintained. The headers, bullet points, and the one successful image follow the sequence of the source document. Normal differences in layout like these are expected for HTML conversion.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"Page 6 of the source PDF contains a large, multi-column table titled 'Post-Matthew Ground Truth Locations'. In the HTML rendering, this table is completely absent. The section heading appears, followed by a pixelated image placeholder, but no tabular data is present in the document. This prevents the user from accessing the data points provided in the source.\",\n      \"b_evidence_source\": \"Table with columns 'Longitude', 'Latitude', 'Location', 'State', etc., on page 6.\",\n      \"b_evidence_output\": \"The section 'Post-Matthew Ground Truth Locations' contains only a pixelated image placeholder and no table.\",\n      \"b_evidence_location\": \"Post-Matthew Ground Truth Locations, page 6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Multiple meaningful images are broken or missing in the HTML rendering. Specifically, the maps and charts on pages 5, 7, 8, 9, 11, 12, 13, and 14 are rendered as pixelated gray-and-white placeholders or solid green boxes. These images are central to the content of the presentation, showing survey areas, data production status, and bathymetric imagery. While the image on page 4 rendered correctly, the failure of the majority of other images is a significant defect.\",\n      \"b_evidence_source\": \"Meaningful maps and charts on pages 5, 7, 8, 9, 11, 12, 13, and 14 (e.g., '2016 Post-Matthew Operations Overview' map on page 5).\",\n      \"b_evidence_output\": \"Pixelated gray/white placeholders or solid green boxes in place of maps and charts throughout the document.\",\n      \"b_evidence_location\": \"Various sections from page 5 to 14\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"No instances of duplicated body content (paragraphs, tables, or sections) were observed in the HTML output. The document follows the source content once without repetition.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 5,
+  "total_critical": 0,
+  "total_major": 4,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

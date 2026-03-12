@@ -1,0 +1,213 @@
+{
+  "document_id": "scanned-from-paper-many-pages-of-tables-6878",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains section headings like '[Pages 1-11 unavailable]' and table captions like 'ArcGIS Pricing Page 33'. These are acceptable AI-generated labels for missing content and accessibility purposes. The actual textual content present appears to be derived from the source document, albeit poorly structured.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The source document is a price list containing part numbers, descriptions, and prices. No contact information (phones, emails, URLs) exists in the source, and none has been fabricated in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source document contains 38 pages of content (labeled Page 2 of 39 through Page 39 of 39). The output JSON explicitly states that pages 1-21 are unavailable and only begins providing content from Page 22 of 39 onwards. This is a complete omission of more than 50% of the document's pages.",
+        "b_evidence_source": "Source PDF contains pages 2 through 39 (38 images).",
+        "b_evidence_output": "The output JSON contains headings: '[Pages 1-11 unavailable]' and '[Pages 11-21 unavailable]'. Actual content starts with 'Page 22 of 39'.",
+        "b_evidence_location": "Sections list, beginning of document",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables in the output are severely malformed and incomplete. In most instances, multiple tables from a source page are condensed into a single data cell containing a truncated text blob of the row data. For example, the table 'ArcGIS Pricing Page 33' attempts to combine several distinct pricing tables for Site Scan, ArcGIS Velocity, etc., into an unstructured format, omitting numerous rows in the process.",
+        "b_evidence_source": "Source Page 32 (Page 33 of 39) contains multiple tables for ArcGIS Image Dedicated, ArcGIS Image Dedicated Dynamic, etc.",
+        "b_evidence_output": "Output element index 22 ('ArcGIS Pricing Page 33') contains only a few lines of concatenated text in one cell, missing many specific row entries and structural integrity.",
+        "b_evidence_location": "Section 1, element index 22",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within the sections that were attempted, the text is heavily truncated. Paragraphs representing page content end in ellipses ('...'), indicating that the conversion process cut off significant portions of the text for each page. For instance, Page 22's content in the first paragraph cuts off mid-sentence.",
+        "b_evidence_source": "Source Page 21 (Page 22 of 39) contains numerous part numbers including 154845, 154851, 161433, 161459, etc.",
+        "b_evidence_output": "Paragraph 1 in the JSON ends with: '154845 ArcGIS GIS Server Standard Staging Server Up to Four Cores Upgrade from ArcGIS GIS...'",
+        "b_evidence_location": "Section 1, first paragraph element",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Where text is present and not truncated, the data (part numbers, prices) accurately reflects the OCR of the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5930232558139534,
+    "penalty_sum": 35,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains section headings like '[Pages 1-11 unavailable]' and table captions like 'ArcGIS Pricing Page 33'. These are acceptable AI-generated labels for missing content and accessibility purposes. The actual textual content present appears to be derived from the source document, albeit poorly structured.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The source document is a price list containing part numbers, descriptions, and prices. No contact information (phones, emails, URLs) exists in the source, and none has been fabricated in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source document contains 38 pages of content (labeled Page 2 of 39 through Page 39 of 39). The output JSON explicitly states that pages 1-21 are unavailable and only begins providing content from Page 22 of 39 onwards. This is a complete omission of more than 50% of the document's pages.\",\n      \"b_evidence_source\": \"Source PDF contains pages 2 through 39 (38 images).\",\n      \"b_evidence_output\": \"The output JSON contains headings: '[Pages 1-11 unavailable]' and '[Pages 11-21 unavailable]'. Actual content starts with 'Page 22 of 39'.\",\n      \"b_evidence_location\": \"Sections list, beginning of document\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables in the output are severely malformed and incomplete. In most instances, multiple tables from a source page are condensed into a single data cell containing a truncated text blob of the row data. For example, the table 'ArcGIS Pricing Page 33' attempts to combine several distinct pricing tables for Site Scan, ArcGIS Velocity, etc., into an unstructured format, omitting numerous rows in the process.\",\n      \"b_evidence_source\": \"Source Page 32 (Page 33 of 39) contains multiple tables for ArcGIS Image Dedicated, ArcGIS Image Dedicated Dynamic, etc.\",\n      \"b_evidence_output\": \"Output element index 22 ('ArcGIS Pricing Page 33') contains only a few lines of concatenated text in one cell, missing many specific row entries and structural integrity.\",\n      \"b_evidence_location\": \"Section 1, element index 22\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within the sections that were attempted, the text is heavily truncated. Paragraphs representing page content end in ellipses ('...'), indicating that the conversion process cut off significant portions of the text for each page. For instance, Page 22's content in the first paragraph cuts off mid-sentence.\",\n      \"b_evidence_source\": \"Source Page 21 (Page 22 of 39) contains numerous part numbers including 154845, 154851, 161433, 161459, etc.\",\n      \"b_evidence_output\": \"Paragraph 1 in the JSON ends with: '154845 ArcGIS GIS Server Standard Staging Server Up to Four Cores Upgrade from ArcGIS GIS...'\",\n      \"b_evidence_location\": \"Section 1, first paragraph element\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Where text is present and not truncated, the data (part numbers, prices) accurately reflects the OCR of the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 35,\n    \"score\": 0.5930232558139535\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output duplicates the entire content of pages 22 through 32. Each page's text block appears first as a paragraph element and is then repeated in its entirety inside a table element within the same section. This results in the same information being presented twice in the structured reading order.",
+        "b_evidence_source": "The source document text for page 22 starting '00234464.25 Page 22 of 39' only appears once in the document flow.",
+        "b_evidence_output": "The text block starting '00234464.25 Page 22 of 39 June 12, 2025 17 ArcGIS GIS Server Staging Server...' appears in section[0].elements[0] (paragraph) and is duplicated in section[0].elements[11] (table cell content).",
+        "b_evidence_location": "Section 1, element indices 0 and 11 (representing Page 22).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The output fails to preserve the document's heading hierarchy. No 'heading' type elements are present in the JSON. The primary section title is incorrectly assigned from a sub-header on page 17 of the source, and content for the first 21 pages (which are provided in the source PDF) is omitted from the structured content, relegated instead to 'unavailable' placeholder sections at the end of the JSON.",
+        "b_evidence_source": "The source document has clear hierarchical headings such as 'ArcGIS Desktop and Extensions' (Page 2) and 'ArcGIS Desktop - Concurrent Use - Maintenance Prices' (Page 2).",
+        "b_evidence_output": "The output lacks internal heading elements. The first section title 'ArcGIS GIS Server Staging Server from ArcGIS GIS Server Staging Server Upgrade - Perpetual License Prices' is misidentified. Pages 1-21 are missing from the primary section.",
+        "b_evidence_location": "Throughout the document, specifically the start of Section 1 and the order of Sections 1, 2, and 3.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document consists entirely of 5-column pricing tables. The JSON output fails to maintain this structural organization. In the first set of table elements (indices 11-20), an entire page of tabular data is collapsed into a single data cell, losing all row and column relationships. In later elements (e.g., index 21 onwards), while some rows are defined, the grid structure is ignored, with data from multiple columns concatenated into single strings.",
+        "b_evidence_source": "The table on Page 22 with columns: Section, Part Number, Description, Previous Price, 2025 Price.",
+        "b_evidence_output": "Section 1, element index 11 is a table with a single data cell containing a concatenated block of text: '154849 ArcGIS GIS Server Advanced Staging Server Up to Four Cores Upgrade from ArcGIS GIS Server Standard Staging Server $11,137.00 $11,431.00...'",
+        "b_evidence_location": "Section 1, element indices 11 through 27.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is significantly disrupted. First, the content of pages 1-21 is missing from the start and moved to the end as 'unavailable' markers. Second, for the converted pages (22-32), the duplication of content (listing all text blocks as paragraphs first, then repeating them as table elements) creates a disjointed and repetitive reading experience that does not match the logical flow of the source document.",
+        "b_evidence_source": "The document flows logically page-by-page from Page 1 through Page 39.",
+        "b_evidence_output": "The JSON presents a sequence of paragraphs for pages 22-32, then repeats the entire sequence using table elements for the same pages. Additionally, the first 21 pages of the source are placed after page 32 in the JSON section order.",
+        "b_evidence_location": "The sequence of elements within Section 1 and the overall order of Sections 1, 2, and 3.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The source document is comprised of tables and headers and does not contain list elements. The output correctly reflects this by not generating list elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "No links are present in the source PDF pages provided, and no fabricated links were detected in the JSON output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.09090909090909094,
+    "penalty_sum": 20,
+    "defect_count": 4,
+    "critical_count": 0,
+    "major_count": 4,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output duplicates the entire content of pages 22 through 32. Each page's text block appears first as a paragraph element and is then repeated in its entirety inside a table element within the same section. This results in the same information being presented twice in the structured reading order.\",\n      \"b_evidence_source\": \"The source document text for page 22 starting '00234464.25 Page 22 of 39' only appears once in the document flow.\",\n      \"b_evidence_output\": \"The text block starting '00234464.25 Page 22 of 39 June 12, 2025 17 ArcGIS GIS Server Staging Server...' appears in section[0].elements[0] (paragraph) and is duplicated in section[0].elements[11] (table cell content).\",\n      \"b_evidence_location\": \"Section 1, element indices 0 and 11 (representing Page 22).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The output fails to preserve the document's heading hierarchy. No 'heading' type elements are present in the JSON. The primary section title is incorrectly assigned from a sub-header on page 17 of the source, and content for the first 21 pages (which are provided in the source PDF) is omitted from the structured content, relegated instead to 'unavailable' placeholder sections at the end of the JSON.\",\n      \"b_evidence_source\": \"The source document has clear hierarchical headings such as 'ArcGIS Desktop and Extensions' (Page 2) and 'ArcGIS Desktop - Concurrent Use - Maintenance Prices' (Page 2).\",\n      \"b_evidence_output\": \"The output lacks internal heading elements. The first section title 'ArcGIS GIS Server Staging Server from ArcGIS GIS Server Staging Server Upgrade - Perpetual License Prices' is misidentified. Pages 1-21 are missing from the primary section.\",\n      \"b_evidence_location\": \"Throughout the document, specifically the start of Section 1 and the order of Sections 1, 2, and 3.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document consists entirely of 5-column pricing tables. The JSON output fails to maintain this structural organization. In the first set of table elements (indices 11-20), an entire page of tabular data is collapsed into a single data cell, losing all row and column relationships. In later elements (e.g., index 21 onwards), while some rows are defined, the grid structure is ignored, with data from multiple columns concatenated into single strings.\",\n      \"b_evidence_source\": \"The table on Page 22 with columns: Section, Part Number, Description, Previous Price, 2025 Price.\",\n      \"b_evidence_output\": \"Section 1, element index 11 is a table with a single data cell containing a concatenated block of text: '154849 ArcGIS GIS Server Advanced Staging Server Up to Four Cores Upgrade from ArcGIS GIS Server Standard Staging Server $11,137.00 $11,431.00...'\",\n      \"b_evidence_location\": \"Section 1, element indices 11 through 27.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is significantly disrupted. First, the content of pages 1-21 is missing from the start and moved to the end as 'unavailable' markers. Second, for the converted pages (22-32), the duplication of content (listing all text blocks as paragraphs first, then repeating them as table elements) creates a disjointed and repetitive reading experience that does not match the logical flow of the source document.\",\n      \"b_evidence_source\": \"The document flows logically page-by-page from Page 1 through Page 39.\",\n      \"b_evidence_output\": \"The JSON presents a sequence of paragraphs for pages 22-32, then repeats the entire sequence using table elements for the same pages. Additionally, the first 21 pages of the source are placed after page 32 in the JSON section order.\",\n      \"b_evidence_location\": \"The sequence of elements within Section 1 and the overall order of Sections 1, 2, and 3.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The source document is comprised of tables and headers and does not contain list elements. The output correctly reflects this by not generating list elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"No links are present in the source PDF pages provided, and no fabricated links were detected in the JSON output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 4,\n    \"critical_count\": 0,\n    \"major_count\": 4,\n    \"minor_count\": 0,\n    \"penalty_sum\": 20,\n    \"score\": 0.09090909090909091\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output exhibits extreme visual organization issues. Approximately half of the document (PDF pages 2 through 20) is missing entirely from the rendered content. The remaining pages are drastically rearranged and mislabeled: content from PDF pages 21-32 is presented as a continuous unformatted text block at the start, while subsequent content (PDF pages 33-38) is presented in structured blocks but with page headers that are incremented incorrectly (e.g., PDF page 33 content appears under the HTML heading 'ArcGIS Pricing Page 34'). This fragmentation and loss of content flow constitutes a major layout failure.",
+        "b_evidence_source": "The source PDF contains 39 pages of structured price tables, starting with part 52384 on page 2.",
+        "b_evidence_output": "The HTML screenshot begins with part 154849 (from PDF page 21) and fails to include any content from PDF pages 2-20. It also includes error messages like '[Pages 11-21 unavailable]' near the bottom of the page.",
+        "b_evidence_location": "Throughout the document, specifically at the start of the content and the page transition markers.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "A significant portion of the tabular data from the source PDF is misrendered in the HTML. Specifically, the content corresponding to PDF pages 21 through 32 is rendered as plain text paragraphs without any table structure (no columns, borders, or clear header-to-cell mapping). This makes the data difficult to parse and is a failure to represent the source's tabular organization.",
+        "b_evidence_source": "PDF page 21 shows a clear 5-column table for 'ArcGIS GIS Server Staging Server from ArcGIS GIS Server Staging Server Upgrade - Perpetual License Prices'.",
+        "b_evidence_output": "The HTML screenshot renders this same data as plain text lines: '154849 ArcGIS GIS Server Advanced Staging Server Up to Four Cores Upgrade from ArcGIS GIS Server Standard Staging Server $11,137.00 $11,431.00'.",
+        "b_evidence_location": "Initial text block in the HTML output, preceding the section labeled 'ArcGIS Pricing Page 33'.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF pages provided are purely text-based price lists and do not contain any meaningful images, logos, or diagrams. Consequently, no images are expected in the HTML output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "Despite the severe layout and rendering issues, no content within the body of the HTML output appears to be duplicated. Each line item and section is represented once, even if incorrectly formatted or placed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output exhibits extreme visual organization issues. Approximately half of the document (PDF pages 2 through 20) is missing entirely from the rendered content. The remaining pages are drastically rearranged and mislabeled: content from PDF pages 21-32 is presented as a continuous unformatted text block at the start, while subsequent content (PDF pages 33-38) is presented in structured blocks but with page headers that are incremented incorrectly (e.g., PDF page 33 content appears under the HTML heading 'ArcGIS Pricing Page 34'). This fragmentation and loss of content flow constitutes a major layout failure.\",\n      \"b_evidence_source\": \"The source PDF contains 39 pages of structured price tables, starting with part 52384 on page 2.\",\n      \"b_evidence_output\": \"The HTML screenshot begins with part 154849 (from PDF page 21) and fails to include any content from PDF pages 2-20. It also includes error messages like '[Pages 11-21 unavailable]' near the bottom of the page.\",\n      \"b_evidence_location\": \"Throughout the document, specifically at the start of the content and the page transition markers.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"A significant portion of the tabular data from the source PDF is misrendered in the HTML. Specifically, the content corresponding to PDF pages 21 through 32 is rendered as plain text paragraphs without any table structure (no columns, borders, or clear header-to-cell mapping). This makes the data difficult to parse and is a failure to represent the source's tabular organization.\",\n      \"b_evidence_source\": \"PDF page 21 shows a clear 5-column table for 'ArcGIS GIS Server Staging Server from ArcGIS GIS Server Staging Server Upgrade - Perpetual License Prices'.\",\n      \"b_evidence_output\": \"The HTML screenshot renders this same data as plain text lines: '154849 ArcGIS GIS Server Advanced Staging Server Up to Four Cores Upgrade from ArcGIS GIS Server Standard Staging Server $11,137.00 $11,431.00'.\",\n      \"b_evidence_location\": \"Initial text block in the HTML output, preceding the section labeled 'ArcGIS Pricing Page 33'.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF pages provided are purely text-based price lists and do not contain any meaningful images, logos, or diagrams. Consequently, no images are expected in the HTML output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"Despite the severe layout and rendering issues, no content within the body of the HTML output appears to be duplicated. Each line item and section is represented once, even if incorrectly formatted or placed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 9,
+  "total_critical": 1,
+  "total_major": 8,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

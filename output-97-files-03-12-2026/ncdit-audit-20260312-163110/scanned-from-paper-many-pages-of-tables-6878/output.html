@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>ArcGIS License Pricing</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>ArcGIS License Pricing</h1>
+    </header>
+    <main id="main-content" role="main">
+<section aria-labelledby="section-1">
+<h2 id="section-1">ArcGIS GIS Server Staging Server from ArcGIS GIS Server Staging Server Upgrade - Perpetual License Prices</h2>
+<p>00234464.25 Page 22 of 39 June 12, 2025 17 ArcGIS GIS Server Staging Server from ArcGIS GIS Server Staging Server Upgrade - Perpetual License Prices 154849 ArcGIS GIS Server Advanced Staging Server Up to Four Cores Upgrade from ArcGIS GIS Server Standard Staging Server $11,137.00 $11,431.00 154855 ArcGIS GIS Server Advanced Staging Server Additional Cores Upgrade from ArcGIS GIS Server Standard Staging Server $2,834.00 $2,931.00 154847 ArcGIS GIS Server Advanced Staging Server Up to Four Cores Upgrade from ArcGIS GIS Server Basic Staging Server $16,706.00 $17,194.00 154853 ArcGIS GIS Server Advanced Staging Server Additional Cores Upgrade from ArcGIS GIS Server Basic Staging Server $4,201.00 $4,348.00 154845 ArcGIS GIS Server Standard Staging Server Up to Four Cores Upgrade from ArcGIS GIS...</p>
+
+<p>00234464.25 Page 23 of 39 June 12, 2025 161454 ArcGIS GeoEvent Server Additional Core (up to 32 per server) Staging Server Maintenance $725.00 $750.00 161478 ArcGIS GeoEvent Server Additional Core (more than 32 per Server) Staging Server Maintenance $350.00 $360.00 18 ArcGIS GeoEvent Server Staging Server - Subscription Prices 160967 ArcGIS GeoEvent Server Up to Four Cores Staging Server Annual Subscription $6,717.00 $6,937.00 160877 ArcGIS GeoEvent Server Additional Core (up to 32 per server) Staging Server Annual Subscription $1,686.00 $1,744.00 160892 ArcGIS GeoEvent Server Additional Core (more than 32 per server) Staging Server Annual Subscription $855.00 $880.00 18 ArcGIS Image Server Staging Server - Perpetual License Prices 160598 ArcGIS Image Server Up to Four Cores Staging Server...</p>
+
+<p>00234464.25 Page 24 of 39 June 12, 2025 168145 ArcGIS Notebook Server Advanced Additional Core (up to 32 per Server) Staging Server Annual Subscription $1,686.00 $1,744.00 168146 ArcGIS Notebook Server Advanced Additional Core (more than 32 per Server) Staging Server Annual Subscription $855.00 $880.00 18 ArcGIS Mission Server Staging Server - Perpetual License Prices 172558 ArcGIS Mission Server Up to Four Cores Staging Server Perpetual License $11,235.00 $11,626.00 172559 ArcGIS Mission Server Additional Core (up to 32 per Server) Staging Server Perpetual License $2,834.00 $2,931.00 172560 ArcGIS Mission Server Additional Core (more than 32 per Server) Staging Server Perpetual License $1,466.00 $1,515.00 18 ArcGIS Mission Server Staging Server - Maintenance Prices 172570 ArcGIS Mission S...</p>
+
+<p>00234464.25 Page 25 of 39 June 12, 2025 177528 ArcGIS Workflow Manager Server Advanced Up to Four Cores Staging Server Perpetual License $17,097.00 $17,683.00 177530 ArcGIS Workflow Manager Server Advanced Additional Core (up to 32 per Server) Staging Server Perpetual License $4,275.00 $4,421.00 177529 ArcGIS Workflow Manager Server Advanced Additional Core (more than 32 per Server) Staging Server Perpetual License $2,135.00 $2,199.00 18 ArcGIS Workflow Manager Server Advanced Staging Server - Maintenance Prices 177588 ArcGIS Workflow Manager Server Advanced Up to Four Cores Staging Server Maintenance $4,375.00 $4,525.00 177590 ArcGIS Workflow Manager Server Advanced Additional Core (up to 32 per Server) Staging Server Maintenance $1,090.00 $1,125.00 177589 ArcGIS Workflow Manager Server A...</p>
+
+<p>00234464.25 Page 26 of 39 June 12, 2025 19 ArcGIS Raster Analytics on Kubernetes Staging Server - Annual Subscription Prices 187474 ArcGIS Raster Analytics on Kubernetes up to 64 vCPUs Staging Annual Subscription (Includes ArcGIS Image Services) $48,847.00 $48,847.00 187475 ArcGIS Raster Analytics on Kubernetes up to 64 Additional vCPUs Staging Annual Subscription $36,635.00 $36,635.00 19 ArcGIS Notebook Services Advanced on Kubernetes Staging Server - Annual Subscription Prices 193554 ArcGIS Notebook Services Advanced on Kubernetes Staging Annual Subscription N/A $9,770.00 ArcGIS Enterprise - Premium Organizational Capabilities - Optional Capability Extensions - Staging ArcGIS Indoors for ArcGIS Enterprise 20 ArcGIS Indoors Maps - Staging Annual Subscription Prices 188525 ArcGIS Indoors M...</p>
+
+<p>00234464.25 Page 27 of 39 June 12, 2025 166896 ArcGIS Enterprise Professional (formerly Standard) User Type Annual Subscription $2,150.00 $2,150.00 166897 ArcGIS Enterprise Professional Plus (formerly Advanced) User Type Annual Subscription $4,104.00 $4,104.00 22 ArcGIS Enterprise on Kubernetes User Types - Annual Subscription Prices 183686 ArcGIS Enterprise on Kubernetes Viewer User Type Annual Subscription $123.00 $123.00 183687 ArcGIS Enterprise on Kubernetes Creator User Type Annual Subscription $684.00 $684.00 22 ArcGIS Enterprise User Type Extensions - Perpetual License Prices 182315 Location Sharing User Type Extension for ArcGIS Enterprise Perpetual License $323.00 $323.00 187645 ArcGIS Advanced Editing User Type Extension for ArcGIS Enterprise Perpetual License $3,127.00 $3,127.00...</p>
+
+<p>00234464.25 Page 28 of 39 June 12, 2025 166991 ArcGIS Image Analyst for ArcGIS Enterprise Creator or Professional User Type Perpetual License $2,687.00 $2,687.00 174914 ArcGIS Aviation Airports for ArcGIS Enterprise Professional or Professional Plus User Type Perpetual License $5,374.00 $5,374.00 185559 ArcGIS Bathymetry for ArcGIS Enterprise Professional or Professional Plus User Type Perpetual License $5,374.00 $5,374.00 180803 ArcGIS Aviation Charting for ArcGIS Enterprise Professional or Professional Plus User Type Perpetual License $10,747.00 $10,747.00 166995 ArcGIS Pipeline Referencing (Location Referencing) for ArcGIS Enterprise Professional or Professional Plus User Type Perpetual License $10,747.00 $10,747.00 174918 ArcGIS Defense Mapping for ArcGIS Enterprise Professional or Pro...</p>
+
+<p>00234464.25 Page 29 of 39 June 12, 2025 174919 ArcGIS Defense Mapping for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 174917 ArcGIS Production Mapping for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 180802 ArcGIS Roads and Highways (Location Referencing) for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 178809 ArcGIS Maritime for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 180350 ArcGIS Indoors for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 22 ArcGIS Pro Extensions for ArcGIS Enterprise - Annual Subscription Prices 166941 ArcGIS 3D Analyst for A...</p>
+
+<p>00234464.25 Page 30 of 39 June 12, 2025 173380 ArcGIS Runtime Analysis Extension for ArcGIS Enterprise Maintenance $220.00 $220.00 173377 ArcGIS Runtime Analysis Extension for ArcGIS Enterprise Annual Subscription $215.00 $215.00 ArcGIS Online User Types, User Type Extensions, Apps, and Extensions 23 ArcGIS Online User Types - Annual Subscription Prices 153147 ArcGIS Online Viewer User Type Annual Subscription $123.00 $123.00 153148 ArcGIS Online Creator User Type Annual Subscription $684.00 $684.00 165531 ArcGIS Online Contributor (formerly Editor) User Type Annual Subscription $245.00 $245.00 165533 ArcGIS Online Mobile Worker User Type Annual Subscription $391.00 $391.00 165536 ArcGIS Online Professional (formerly Standard) User Type Annual Subscription $2,150.00 $2,150.00 165537 ArcGIS...</p>
+
+<p>00234464.25 Page 31 of 39 June 12, 2025 165567 ArcGIS Production Mapping for ArcGIS Online Professional or Professional Plus User Type Annual Subscription $4,250.00 $4,250.00 165569 ArcGIS Pipeline Referencing (Location Referencing) for ArcGIS Online Professional or Professional Plus User Type Annual Subscription $4,250.00 $4,250.00 180725 ArcGIS Roads and Highways (Location Referencing) for ArcGIS Online Professional or Professional Plus User Type Annual Subscription $4,250.00 $4,250.00 180347 ArcGIS Indoors for ArcGIS Online Professional or Professional Plus User Type Annual Subscription $4,250.00 $4,250.00 23 ArcGIS Runtime Extensions for ArcGIS Online 23 ArcGIS Runtime Analysis Extension - Annual Subscription Price 173340 ArcGIS Runtime Analysis Extension for ArcGIS Online Annual Subsc...</p>
+
+<p>00234464.25 Page 32 of 39 June 12, 2025 159169 ArcGIS Hub Premium Additional ArcGIS Online Credits $98.00 $118.00 159171 ArcGIS Hub Premium Unlimited ArcGIS Online Community Population Less than 1,000,000 Annual Subscription $39,078.00 $40,250.00 159173 ArcGIS Hub Premium Unlimited ArcGIS Online Community Population Greater than 1,000,000 Annual Subscription $78,155.00 $80,499.00 ArcGIS Velocity - US Region 27 ArcGIS Velocity - US Region - Annual Subscription Prices 165630 ArcGIS Velocity Standard US Region Annual Subscription $19,539.00 $20,125.00 165627 ArcGIS Velocity Advanced US Region Annual Subscription $43,962.00 $45,281.00 173315 ArcGIS Velocity Dedicated US Region Annual Subscription $87,924.00 $90,562.00 173317 ArcGIS Velocity Dedicated Compute Units US Region Annual Subscription...</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="17 | ArcGIS GIS Server St">
+<table>
+<caption>17 | ArcGIS GIS Server St</caption><thead><tr><th scope="col" colspan="5">17 | ArcGIS GIS Server St</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="21">154849 ArcGIS GIS Server Advanced Staging Server Up to Four Cores Upgrade from ArcGIS GIS Server Standard Staging Server $11,137.00 $11,431.00 154855 ArcGIS GIS Server Advanced Staging Server Additional Cores Upgrade from ArcGIS GIS Server Standard Staging Server $2,834.00 $2,931.00 154847 ArcGIS GIS Server Advanced Staging Server Up to Four Cores Upgrade from ArcGIS GIS Server Basic Staging Server $16,706.00 $17,194.00 154853 ArcGIS GIS Server Advanced Staging Server Additional Cores Upgrade from ArcGIS GIS Server Basic Staging Server $4,201.00 $4,348.00 154845 ArcGIS GIS Server Standard Staging Server Up to Four Cores Upgrade from ArcGIS GIS...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="161454 | ArcGIS GeoEvent Serv | $725.00 | $750.00">
+<table>
+<caption>161454 | ArcGIS GeoEvent Serv | $725.00 | $750.00</caption><thead><tr><th scope="col" colspan="5">161454 | ArcGIS GeoEvent Serv | $725.00 | $750.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="27">161478 ArcGIS GeoEvent Server Additional Core (more than 32 per Server) Staging Server Maintenance $350.00 $360.00 18 ArcGIS GeoEvent Server Staging Server - Subscription Prices 160967 ArcGIS GeoEvent Server Up to Four Cores Staging Server Annual Subscription $6,717.00 $6,937.00 160877 ArcGIS GeoEvent Server Additional Core (up to 32 per server) Staging Server Annual Subscription $1,686.00 $1,744.00 160892 ArcGIS GeoEvent Server Additional Core (more than 32 per server) Staging Server Annual Subscription $855.00 $880.00 18 ArcGIS Image Server Staging Server - Perpetual License Prices 160598 ArcGIS Image Server Up to Four Cores Staging Server...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="168145 | ArcGIS Notebook Serv | $1,686.00 | $1,744.00">
+<table>
+<caption>168145 | ArcGIS Notebook Serv | $1,686.00 | $1,744.00</caption><thead><tr><th scope="col" colspan="5">168145 | ArcGIS Notebook Serv | $1,686.00 | $1,744.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="26">168146 ArcGIS Notebook Server Advanced Additional Core (more than 32 per Server) Staging Server Annual Subscription $855.00 $880.00 18 ArcGIS Mission Server Staging Server - Perpetual License Prices 172558 ArcGIS Mission Server Up to Four Cores Staging Server Perpetual License $11,235.00 $11,626.00 172559 ArcGIS Mission Server Additional Core (up to 32 per Server) Staging Server Perpetual License $2,834.00 $2,931.00 172560 ArcGIS Mission Server Additional Core (more than 32 per Server) Staging Server Perpetual License $1,466.00 $1,515.00 18 ArcGIS Mission Server Staging Server - Maintenance Prices 172570 ArcGIS Mission S...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="177528 | ArcGIS Workflow Mana | $17,097.00 | $17,683.00">
+<table>
+<caption>177528 | ArcGIS Workflow Mana | $17,097.00 | $17,683.00</caption><thead><tr><th scope="col" colspan="5">177528 | ArcGIS Workflow Mana | $17,097.00 | $17,683.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="26">177530 ArcGIS Workflow Manager Server Advanced Additional Core (up to 32 per Server) Staging Server Perpetual License $4,275.00 $4,421.00 177529 ArcGIS Workflow Manager Server Advanced Additional Core (more than 32 per Server) Staging Server Perpetual License $2,135.00 $2,199.00 18 ArcGIS Workflow Manager Server Advanced Staging Server - Maintenance Prices 177588 ArcGIS Workflow Manager Server Advanced Up to Four Cores Staging Server Maintenance $4,375.00 $4,525.00 177590 ArcGIS Workflow Manager Server Advanced Additional Core (up to 32 per Server) Staging Server Maintenance $1,090.00 $1,125.00 177589 ArcGIS Workflow Manager Server A...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="19 | ArcGIS Raster Analyt">
+<table>
+<caption>19 | ArcGIS Raster Analyt</caption><thead><tr><th scope="col" colspan="5">19 | ArcGIS Raster Analyt</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="36">187474 ArcGIS Raster Analytics on Kubernetes up to 64 vCPUs Staging Annual Subscription (Includes ArcGIS Image Services) $48,847.00 $48,847.00 187475 ArcGIS Raster Analytics on Kubernetes up to 64 Additional vCPUs Staging Annual Subscription $36,635.00 $36,635.00 19 ArcGIS Notebook Services Advanced on Kubernetes Staging Server - Annual Subscription Prices 193554 ArcGIS Notebook Services Advanced on Kubernetes Staging Annual Subscription N/A $9,770.00 ArcGIS Enterprise - Premium Organizational Capabilities - Optional Capability Extensions - Staging ArcGIS Indoors for ArcGIS Enterprise 20 ArcGIS Indoors Maps - Staging Annual Subscription Prices 188525 ArcGIS Indoors M...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="166896 | ArcGIS Enterprise Pr | $2,150.00 | $2,150.00">
+<table>
+<caption>166896 | ArcGIS Enterprise Pr | $2,150.00 | $2,150.00</caption><thead><tr><th scope="col" colspan="5">166896 | ArcGIS Enterprise Pr | $2,150.00 | $2,150.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="29">166897 ArcGIS Enterprise Professional Plus (formerly Advanced) User Type Annual Subscription $4,104.00 $4,104.00 22 ArcGIS Enterprise on Kubernetes User Types - Annual Subscription Prices 183686 ArcGIS Enterprise on Kubernetes Viewer User Type Annual Subscription $123.00 $123.00 183687 ArcGIS Enterprise on Kubernetes Creator User Type Annual Subscription $684.00 $684.00 22 ArcGIS Enterprise User Type Extensions - Perpetual License Prices 182315 Location Sharing User Type Extension for ArcGIS Enterprise Perpetual License $323.00 $323.00 187645 ArcGIS Advanced Editing User Type Extension for ArcGIS Enterprise Perpetual License $3,127.00 $3,127.00...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="166991 | ArcGIS Image Analyst | $2,687.00 | $2,687.00">
+<table>
+<caption>166991 | ArcGIS Image Analyst | $2,687.00 | $2,687.00</caption><thead><tr><th scope="col" colspan="5">166991 | ArcGIS Image Analyst | $2,687.00 | $2,687.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="25">174914 ArcGIS Aviation Airports for ArcGIS Enterprise Professional or Professional Plus User Type Perpetual License $5,374.00 $5,374.00 185559 ArcGIS Bathymetry for ArcGIS Enterprise Professional or Professional Plus User Type Perpetual License $5,374.00 $5,374.00 180803 ArcGIS Aviation Charting for ArcGIS Enterprise Professional or Professional Plus User Type Perpetual License $10,747.00 $10,747.00 166995 ArcGIS Pipeline Referencing (Location Referencing) for ArcGIS Enterprise Professional or Professional Plus User Type Perpetual License $10,747.00 $10,747.00 174918 ArcGIS Defense Mapping for ArcGIS Enterprise Professional or Pro...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="174919 | ArcGIS Defense Mappi | $2,750.00 | $2,750.00">
+<table>
+<caption>174919 | ArcGIS Defense Mappi | $2,750.00 | $2,750.00</caption><thead><tr><th scope="col" colspan="5">174919 | ArcGIS Defense Mappi | $2,750.00 | $2,750.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="26">174917 ArcGIS Production Mapping for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 180802 ArcGIS Roads and Highways (Location Referencing) for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 178809 ArcGIS Maritime for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 180350 ArcGIS Indoors for ArcGIS Enterprise Professional or Professional Plus User Type Maintenance $2,750.00 $2,750.00 22 ArcGIS Pro Extensions for ArcGIS Enterprise - Annual Subscription Prices 166941 ArcGIS 3D Analyst for A...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="173380 | ArcGIS Runtime Analy | $220.00 | $220.00">
+<table>
+<caption>173380 | ArcGIS Runtime Analy | $220.00 | $220.00</caption><thead><tr><th scope="col" colspan="5">173380 | ArcGIS Runtime Analy | $220.00 | $220.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="31">173377 ArcGIS Runtime Analysis Extension for ArcGIS Enterprise Annual Subscription $215.00 $215.00 ArcGIS Online User Types, User Type Extensions, Apps, and Extensions 23 ArcGIS Online User Types - Annual Subscription Prices 153147 ArcGIS Online Viewer User Type Annual Subscription $123.00 $123.00 153148 ArcGIS Online Creator User Type Annual Subscription $684.00 $684.00 165531 ArcGIS Online Contributor (formerly Editor) User Type Annual Subscription $245.00 $245.00 165533 ArcGIS Online Mobile Worker User Type Annual Subscription $391.00 $391.00 165536 ArcGIS Online Professional (formerly Standard) User Type Annual Subscription $2,150.00 $2,150.00 165537 ArcGIS...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="165567 | ArcGIS Production Ma | $4,250.00 | $4,250.00">
+<table>
+<caption>165567 | ArcGIS Production Ma | $4,250.00 | $4,250.00</caption><thead><tr><th scope="col" colspan="5">165567 | ArcGIS Production Ma | $4,250.00 | $4,250.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="34">165569 ArcGIS Pipeline Referencing (Location Referencing) for ArcGIS Online Professional or Professional Plus User Type Annual Subscription $4,250.00 $4,250.00 180725 ArcGIS Roads and Highways (Location Referencing) for ArcGIS Online Professional or Professional Plus User Type Annual Subscription $4,250.00 $4,250.00 180347 ArcGIS Indoors for ArcGIS Online Professional or Professional Plus User Type Annual Subscription $4,250.00 $4,250.00 23 ArcGIS Runtime Extensions for ArcGIS Online 23 ArcGIS Runtime Analysis Extension - Annual Subscription Price 173340 ArcGIS Runtime Analysis Extension for ArcGIS Online Annual Subsc...</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="159169 | ArcGIS Hub Premium A | $98.00 | $118.00">
+<table>
+<caption>159169 | ArcGIS Hub Premium A | $98.00 | $118.00</caption><thead><tr><th scope="col" colspan="5">159169 | ArcGIS Hub Premium A | $98.00 | $118.00</th></tr>
+</thead><tbody><tr><td colspan="5" rowspan="21">159171 ArcGIS Hub Premium Unlimited ArcGIS Online Community Population Less than 1,000,000 Annual Subscription $39,078.00 $40,250.00 159173 ArcGIS Hub Premium Unlimited ArcGIS Online Community Population Greater than 1,000,000 Annual Subscription $78,155.00 $80,499.00 ArcGIS Velocity - US Region 27 ArcGIS Velocity - US Region - Annual Subscription Prices 165630 ArcGIS Velocity Standard US Region Annual Subscription $19,539.00 $20,125.00 165627 ArcGIS Velocity Advanced US Region Annual Subscription $43,962.00 $45,281.00 173315 ArcGIS Velocity Dedicated US Region Annual Subscription $87,924.00 $90,562.00 173317 ArcGIS Velocity Dedicated Compute Units US Region Annual Subscription...</td></tr>
+<tr><td>159169 ArcGIS Hub Premium Additional ArcGIS Online Credits $98.00 $118.00</td></tr>
+<tr><td>159171 ArcGIS Hub Premium Unlimited ArcGIS Online Community Population Less than 1,000,000 Annual Subscription $39,078.00 $40,250.00</td></tr>
+<tr><td>159173 ArcGIS Hub Premium Unlimited ArcGIS Online Community Population Greater than 1,000,000 Annual Subscription $78,155.00 $80,499.00</td></tr>
+<tr><td>ArcGIS Velocity - US Region</td></tr>
+<tr><td>27 ArcGIS Velocity - US Region - Annual Subscription Prices</td></tr>
+<tr><td>165630 ArcGIS Velocity Standard US Region Annual Subscription $19,539.00 $20,125.00</td></tr>
+<tr><td>165627 ArcGIS Velocity Advanced US Region Annual Subscription $43,962.00 $45,281.00</td></tr>
+<tr><td>173315 ArcGIS Velocity Dedicated US Region Annual Subscription $87,924.00 $90,562.00</td></tr>
+<tr><td>173317 ArcGIS Velocity Dedicated Compute Units US Region Annual Subscription $24,424.00 $25,156.00</td></tr>
+<tr><td>165628 ArcGIS Velocity Advanced Storage Units US Region Annual Subscription $3,908.00 $4,030.00</td></tr>
+<tr><td>173318 ArcGIS Velocity Dedicated Storage Units US Region Annual Subscription $9,770.00 $10,063.00</td></tr>
+<tr><td>165629 ArcGIS Velocity Advanced Item Units US Region Annual Subscription $11,724.00 $12,090.00</td></tr>
+<tr><td>Site Scan for ArcGIS</td></tr>
+<tr><td>28 Site Scan for ArcGIS - Annual Subscription Prices</td></tr>
+<tr><td>173632 Site Scan Single Access USA Hosted Annual Subscription $489.00 $504.00</td></tr>
+<tr><td>173625 Site Scan Single Operator USA Hosted Annual Subscription $4,885.00 $5,032.00</td></tr>
+<tr><td>180568 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 25,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $14,654.00 $15,143.00</td></tr>
+<tr><td>174920 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 50,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $24,424.00 $25,205.00</td></tr>
+<tr><td>174931 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 100,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $39,078.00 $40,250.00</td></tr>
+<tr><td>174932 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 150,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $56,174.00 $57,932.00</td></tr>
+<tr><td>174933 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 200,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $75,712.00 $78,057.00</td></tr>
+<tr><td>174934 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 300,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $102,578.00 $105,704.00</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="ArcGIS Pricing Page 33">
+<table>
+<caption>ArcGIS Pricing Page 33</caption><tbody><tr><td>174935 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 500,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $161,193.00 $166,078.00</td></tr>
+<tr><td>174936 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 750,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $222,251.00 $228,992.00</td></tr>
+<tr><td>174937 Site Scan for ArcGIS USA Hosted Custom Annual Subscription not to exceed 1,000,000 Images per year Initial allocation includes 10 Site Scan Single Operator Term Licenses and 50 Site Scan Single Access Term Licenses Additional licenses can be increased upon request. $275,982.00 $284,286.00</td></tr>
+<tr><td>ArcGIS Image Dedicated</td></tr>
+<tr><td>29 ArcGIS Image Dedicated Tiled - Subscription Prices</td></tr>
+<tr><td>165600 ArcGIS Image Dedicated Tiled Imagery Server Annual Subscription $16,000.00 $16,000.00</td></tr>
+<tr><td>165605 ArcGIS Image Dedicated Tiled Imagery Additional Server Annual Subscription $8,000.00 $8,000.00</td></tr>
+<tr><td>165606 ArcGIS Image Dedicated Tiled Imagery Server 90 Day License $6,000.00 $6,000.00</td></tr>
+<tr><td>165607 ArcGIS Image Dedicated Tiled Imagery Additional Server 90 Day License $3,000.00 $3,000.00</td></tr>
+<tr><td>29 ArcGIS Image Dedicated Dynamic - Subscription Prices</td></tr>
+<tr><td>165608 ArcGIS Image Dedicated Dynamic Imagery Server Annual Subscription $28,000.00 $28,000.00</td></tr>
+<tr><td>165609 ArcGIS Image Dedicated Dynamic Imagery Additional Server Annual Subscription $14,000.00 $14,000.00</td></tr>
+<tr><td>165612 ArcGIS Image Dedicated Dynamic Imagery Server 90 Day License $10,500.00 $10,500.00</td></tr>
+<tr><td>165613 ArcGIS Image Dedicated Dynamic Imagery Additional Server 90 Day License $5,250.00 $5,250.00</td></tr>
+<tr><td>165615 ArcGIS Image Dedicated Service Prepaid Plan $5,000.00 $5,000.00</td></tr>
+<tr><td>29 ArcGIS Image Dedicated Processor - Annual Subscription Prices</td></tr>
+<tr><td>181807 ArcGIS Image Dedicated Processor Annual Subscription $5,000.00 $5,000.00</td></tr>
+<tr><td>29 ArcGIS Image Dedicated Dynamic- Upgrade - Annual Subscription Prices</td></tr>
+<tr><td>185470 ArcGIS Image Dedicated Dynamic Imagery Server Upgrade from ArcGIS Image Dedicated Tiled Imagery Server Annual Subscription $28,000.00 $28,000.00</td></tr>
+<tr><td>185471 ArcGIS Image Dedicated Dynamic Imagery Additional Server Upgrade from ArcGIS Image Dedicated Tiled Imagery Additional Server Annual Subscription $14,000.00 $14,000.00</td></tr>
+<tr><td>ArcGIS GeoAnalytics Engine</td></tr>
+<tr><td>30 ArcGIS GeoAnalytics Engine</td></tr>
+<tr><td>172172 ArcGIS GeoAnalytics Engine Connected Prepaid Plan; 10,000 hours $17,097.00 $17,097.00</td></tr>
+<tr><td>172181 ArcGIS GeoAnalytics Engine Connected 5,000 Additional Hours $8,549.00 $8,549.00</td></tr>
+<tr><td>183061 ArcGIS GeoAnalytics Engine Disconnected Unlimited Prepaid Subscription Plan $146,540.00 $146,540.00</td></tr>
+<tr><td>Business Analyst</td></tr>
+<tr><td>Business Analyst - US State Data Bundle Options</td></tr>
+<tr><td>31 ArcGIS Business Analyst Pro</td></tr>
+<tr><td>31 ArcGIS Business Analyst Pro for ArcGIS Enterprise - Perpetual License Prices</td></tr>
+<tr><td>182034 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US State Data Bundle Perpetual License $9,439.00 $9,439.00</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="ArcGIS Pricing Page 34">
+<table>
+<caption>ArcGIS Pricing Page 34</caption><tbody><tr><td>182073 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US State Data Bundle and MPI Data Perpetual License $15,938.00 $15,938.00</td></tr>
+<tr><td>31 ArcGIS Business Analyst Pro for ArcGIS Enterprise - Maintenance Prices</td></tr>
+<tr><td>182079 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US State Data Bundle Maintenance $9,175.00 $9,175.00</td></tr>
+<tr><td>182083 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US State Data Bundle and MPI Data Maintenance $15,460.00 $15,460.00</td></tr>
+<tr><td>31 ArcGIS Business Analyst Pro for ArcGIS Enterprise - Annual Subscription Prices</td></tr>
+<tr><td>182035 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US State Data Bundle Annual Subscription $8,367.00 $8,367.00</td></tr>
+<tr><td>182074 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US State Data Bundle and MPI Data Annual Subscription $14,112.00 $14,112.00</td></tr>
+<tr><td>31 ArcGIS Business Analyst Pro for ArcGIS Online - Annual Subscription Prices</td></tr>
+<tr><td>182086 ArcGIS Business Analyst Pro for ArcGIS Online with US State Data Bundle Annual Subscription $8,367.00 $8,367.00</td></tr>
+<tr><td>182090 ArcGIS Business Analyst Pro for ArcGIS Online with US State Data Bundle and MPI Data Annual Subscription $14,112.00 $14,112.00</td></tr>
+<tr><td>31 ArcGIS Business Analyst Desktop</td></tr>
+<tr><td>31 ArcGIS Business Analyst Desktop - Single and Concurrent Use - Maintenance Prices</td></tr>
+<tr><td>154658 ArcGIS Business Analyst Desktop with US State Data Bundle Single Use Maintenance $9,175.00 $9,175.00</td></tr>
+<tr><td>155753 ArcGIS Business Analyst Desktop with US State Data Bundle Concurrent Use Maintenance $9,415.00 $9,415.00</td></tr>
+<tr><td>31 ArcGIS Business Analyst Desktop with MPI Data - Single and Concurrent Use - Maintenance Prices</td></tr>
+<tr><td>154662 ArcGIS Business Analyst Desktop with US State Data Bundle with MPI Data Single Use Maintenance $15,460.00 $15,460.00</td></tr>
+<tr><td>155757 ArcGIS Business Analyst Desktop with US State Data Bundle with MPI Data Concurrent Use Maintenance $15,895.00 $15,895.00</td></tr>
+<tr><td>Business Analyst - US Regional Data Bundle Options</td></tr>
+<tr><td>32 ArcGIS Business Analyst Pro</td></tr>
+<tr><td>32 ArcGIS Business Analyst Pro for ArcGIS Enterprise - Perpetual License Prices</td></tr>
+<tr><td>182032 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US Regional Data Bundle Perpetual License $15,130.00 $15,130.00</td></tr>
+<tr><td>182071 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US Regional Data Bundle and MPI Data Perpetual License $23,089.00 $23,089.00</td></tr>
+<tr><td>32 ArcGIS Business Analyst Pro for ArcGIS Enterprise - Maintenance Prices</td></tr>
+<tr><td>182078 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US Regional Data Bundle Maintenance $14,705.00 $14,705.00</td></tr>
+<tr><td>182082 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US Regional Data Bundle and MPI Data Maintenance $22,390.00 $22,390.00</td></tr>
+<tr><td>32 ArcGIS Business Analyst Pro for ArcGIS Enterprise - Annual Subscription Prices</td></tr>
+<tr><td>182033 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US Regional Data Bundle Annual Subscription $13,395.00 $13,395.00</td></tr>
+<tr><td>182072 ArcGIS Business Analyst Pro for ArcGIS Enterprise with US Regional Data Bundle and MPI Data Annual Subscription $20,410.00 $20,410.00</td></tr>
+<tr><td>32 ArcGIS Business Analyst Pro for ArcGIS Online - Annual Subscription Prices</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="ArcGIS Pricing Page 35">
+<table>
+<caption>ArcGIS Pricing Page 35</caption><tbody><tr><td>182085 ArcGIS Business Analyst Pro for ArcGIS Online with US Regional Data Bundle Annual Subscription $13,395.00 $13,395.00</td></tr>
+<tr><td>182089 ArcGIS Business Analyst Pro for ArcGIS Online with US Regional Data Bundle and MPI Data Annual Subscription $20,410.00 $20,410.00</td></tr>
+<tr><td>32 ArcGIS Business Analyst Desktop</td></tr>
+<tr><td>32 ArcGIS Business Analyst Desktop - Single and Concurrent Use - Maintenance Prices</td></tr>
+<tr><td>154657 ArcGIS Business Analyst Desktop with US Regional Data Bundle Single Use Maintenance $14,705.00 $14,705.00</td></tr>
+<tr><td>155752 ArcGIS Business Analyst Desktop with US Regional Data Bundle Concurrent Use Maintenance $15,090.00 $15,090.00</td></tr>
+<tr><td>32 ArcGIS Business Analyst Desktop with MPI Data - Single and Concurrent Use - Maintenance Prices</td></tr>
+<tr><td>154661 ArcGIS Business Analyst Desktop with US Regional Data Bundle with MPI Data Single Use Maintenance $22,390.00 $22,390.00</td></tr>
+<tr><td>155756 ArcGIS Business Analyst Desktop with US Regional Data Bundle with MPI Data Concurrent Use Maintenance $23,010.00 $23,010.00</td></tr>
+<tr><td>Developer Technology</td></tr>
+<tr><td>33 ArcGIS Runtime Deployment Licenses - Perpetual License Prices</td></tr>
+<tr><td>154141 ArcGIS Runtime Basic 50 Pack Single Use Deployment Perpetual License $5,227.00 $5,227.00</td></tr>
+<tr><td>154142 ArcGIS Runtime Standard 25 Pack Single Use Deployment Perpetual License $7,840.00 $7,840.00</td></tr>
+<tr><td>154143 ArcGIS Runtime Advanced 5 Pack Single Use Deployment Perpetual License $7,840.00 $7,840.00</td></tr>
+<tr><td>33 ArcGIS Runtime Deployment Licenses - Maintenance Prices</td></tr>
+<tr><td>154145 ArcGIS Runtime Basic 50 Pack Single Use Deployment Maintenance $1,100.00 $1,100.00</td></tr>
+<tr><td>154146 ArcGIS Runtime Standard 25 Pack Single Use Deployment Maintenance $1,650.00 $1,650.00</td></tr>
+<tr><td>154147 ArcGIS Runtime Advanced 5 Pack Single Use Deployment Maintenance $1,650.00 $1,650.00</td></tr>
+<tr><td>33 ArcGIS Runtime Extension Licenses - Perpetual License Prices</td></tr>
+<tr><td>154144 ArcGIS Runtime Analysis Extension 5 Pack Single Use Deployment Perpetual License $5,227.00 $5,227.00</td></tr>
+<tr><td>165591 ArcGIS Runtime Advanced Editing Extension 5 Pack Single Use Deployment Perpetual License $6,000.00 $6,000.00</td></tr>
+<tr><td>33 ArcGIS Runtime Extension Licenses - Maintenance Prices</td></tr>
+<tr><td>154148 ArcGIS Runtime Analysis Extension 5 Pack Single Use Deployment Maintenance $1,100.00 $1,100.00</td></tr>
+<tr><td>191675 ArcGIS Runtime Advanced Editing Extension 5 Pack Single Use Deployment Maintenance $2,000.00 $2,000.00</td></tr>
+<tr><td>33 ArcGIS Developer Bundle - Annual Subscription Prices</td></tr>
+<tr><td>165598 ArcGIS Developer Bundle Annual Subscription $4,885.00 $4,885.00</td></tr>
+<tr><td>191179 ArcGIS Developer Bundle One-Time Migration from ArcGIS Developer Enterprise Annual Subscription $4,201.00 $4,201.00</td></tr>
+<tr><td>191180 ArcGIS Online Professional User Type One-Time Migration from ArcGIS Developer Professional Annual Subscription $1,759.00 $1,759.00</td></tr>
+<tr><td>191261 ArcGIS Online Professional Plus User Type Migration from ArcGIS Developer Premium or Enterprise Annual Subscription $3,224.00 $3,224.00</td></tr>
+<tr><td>ArcGIS StreetMap Premium</td></tr>
+<tr><td>34 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise and Online - North America</td></tr>
+<tr><td>34 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise - North America - Annual Subscription Pricing</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="ArcGIS Pricing Page 36">
+<table>
+<caption>ArcGIS Pricing Page 36</caption><tbody><tr><td>189908 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise USA Annual Subscription $5,862.00 $5,862.00</td></tr>
+<tr><td>189909 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Canada Annual Subscription $4,690.00 $4,690.00</td></tr>
+<tr><td>189910 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Mexico Annual Subscription $4,690.00 $4,690.00</td></tr>
+<tr><td>189911 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise USA State Annual Subscription $1,954.00 $1,954.00</td></tr>
+<tr><td>189912 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Canadian Province Annual Subscription $1,954.00 $1,954.00</td></tr>
+<tr><td>189907 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise North America (USA, Canada, and Mexico) Annual Subscription $11,724.00 $11,724.00</td></tr>
+<tr><td>189913 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Map Display + Geocoding USA Annual Subscription $2,931.00 $2,931.00</td></tr>
+<tr><td>189914 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Map Display + Geocoding Canada Annual Subscription $2,345.00 $2,345.00</td></tr>
+<tr><td>189915 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Map Display + Geocoding Mexico Annual Subscription $2,345.00 $2,345.00</td></tr>
+<tr><td>189916 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Map Display + Geocoding USA State Annual Subscription $977.00 $977.00</td></tr>
+<tr><td>189917 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Map Display + Geocoding Canadian Province Annual Subscription $977.00 $977.00</td></tr>
+<tr><td>189918 ArcGIS StreetMap Premium for ArcGIS Pro Enterprise Map Display + Geocoding North America Annual Subscription $5,862.00 $5,862.00</td></tr>
+<tr><td>34 ArcGIS StreetMap Premium for ArcGIS Pro Online - North America - Annual Subscription Pricing</td></tr>
+<tr><td>189890 ArcGIS StreetMap Premium for ArcGIS Pro Online USA Annual Subscription $5,862.00 $5,862.00</td></tr>
+<tr><td>189891 ArcGIS StreetMap Premium for ArcGIS Pro Online Canada Annual Subscription $4,690.00 $4,690.00</td></tr>
+<tr><td>189892 ArcGIS StreetMap Premium for ArcGIS Pro Online Mexico Annual Subscription $4,690.00 $4,690.00</td></tr>
+<tr><td>189893 ArcGIS StreetMap Premium for ArcGIS Pro Online USA State Annual Subscription $1,954.00 $1,954.00</td></tr>
+<tr><td>189894 ArcGIS StreetMap Premium for ArcGIS Pro Online Canadian Province Annual Subscription $1,954.00 $1,954.00</td></tr>
+<tr><td>189889 ArcGIS StreetMap Premium for ArcGIS Pro Online North America (USA, Canada, and Mexico) Annual Subscription $11,724.00 $11,724.00</td></tr>
+<tr><td>189895 ArcGIS StreetMap Premium for ArcGIS Pro Online Map Display + Geocoding USA Annual Subscription $2,931.00 $2,931.00</td></tr>
+<tr><td>189896 ArcGIS StreetMap Premium for ArcGIS Pro Online Map Display + Geocoding Canada Annual Subscription $2,345.00 $2,345.00</td></tr>
+<tr><td>189897 ArcGIS StreetMap Premium for ArcGIS Pro Online Map Display + Geocoding Mexico Annual Subscription $2,345.00 $2,345.00</td></tr>
+<tr><td>189898 ArcGIS StreetMap Premium for ArcGIS Pro Online Map Display + Geocoding USA State Annual Subscription $977.00 $977.00</td></tr>
+<tr><td>189899 ArcGIS StreetMap Premium for ArcGIS Pro Online Map Display + Geocoding Canadian Province Annual Subscription $977.00 $977.00</td></tr>
+<tr><td>189900 ArcGIS StreetMap Premium for ArcGIS Pro Online Map Display + Geocoding North America Annual Subscription $5,862.00 $5,862.00</td></tr>
+<tr><td>34 ArcGIS StreetMap Premium Enterprise</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="ArcGIS Pricing Page 37">
+<table>
+<caption>ArcGIS Pricing Page 37</caption><tbody><tr><td>34 ArcGIS StreetMap Premium Enterprise - USA State - Annual Subscription Prices</td></tr>
+<tr><td>189846 ArcGIS StreetMap Premium Enterprise USA State Up to Four Cores Annual Subscription $24,424.00 $24,424.00</td></tr>
+<tr><td>189847 ArcGIS StreetMap Premium Enterprise USA State Two Additional Cores Annual Subscription $9,770.00 $9,770.00</td></tr>
+<tr><td>189853 ArcGIS StreetMap Premium Enterprise Map Display + Geocoding USA State Up to Four Cores Annual Subscription $12,212.00 $12,212.00</td></tr>
+<tr><td>189854 ArcGIS StreetMap Premium Enterprise Map Display + Geocoding USA State Two Additional Cores Annual Subscription $4,885.00 $4,885.00</td></tr>
+<tr><td>34 ArcGIS StreetMap Premium Enterprise - USA - Annual Subscription Prices</td></tr>
+<tr><td>189842 ArcGIS StreetMap Premium Enterprise USA Up to Four Cores Annual Subscription $73,270.00 $73,270.00</td></tr>
+<tr><td>189843 ArcGIS StreetMap Premium Enterprise USA Two Additional Cores Annual Subscription $29,308.00 $29,308.00</td></tr>
+<tr><td>189848 ArcGIS StreetMap Premium Enterprise Map Display + Geocoding USA Up to Four Cores Annual Subscription $36,635.00 $36,635.00</td></tr>
+<tr><td>189849 ArcGIS StreetMap Premium Enterprise Map Display + Geocoding USA Two Additional Cores Annual Subscription $14,654.00 $14,654.00</td></tr>
+<tr><td>34 ArcGIS StreetMap Premium Enterprise - North America (United States, Canada, and Mexico) - Annual Subscription Prices</td></tr>
+<tr><td>189840 ArcGIS StreetMap Premium Enterprise North America Up to Four Cores Annual Subscription $146,540.00 $146,540.00</td></tr>
+<tr><td>189841 ArcGIS StreetMap Premium Enterprise North America Two Additional Cores Annual Subscription $58,616.00 $58,616.00</td></tr>
+<tr><td>189858 ArcGIS StreetMap Premium Enterprise Map Display + Geocoding North America Up to Four Cores Annual Subscription $73,270.00 $73,270.00</td></tr>
+<tr><td>189859 ArcGIS StreetMap Premium Enterprise Map Display + Geocoding North America Two Additional Cores Annual Subscription $29,308.00 $29,308.00</td></tr>
+<tr><td>State and Local Government Public Safety Named Users*</td></tr>
+<tr><td>35 *The Public Safety Named Users are available to State and Local Government Public Safety Agencies only. Specifically, law enforcement, emergency management, fire, emergency medical services, or dispatch. These agencies must qualify under Esri Public Safety Agency Program. Participation and purchase must be approved by the Esri Public Safety Team.</td></tr>
+<tr><td>153407 State and Local Public Safety Named User Program ArcGIS Online Viewer User Type in Continually Staffed Environment Annual Subscription $63.00 $63.00</td></tr>
+<tr><td>153408 State and Local Public Safety Named User Program ArcGIS Online Creator User Type in Continually Staffed Environment Annual Subscription $350.00 $350.00</td></tr>
+<tr><td>168618 State and Local Public Safety Named User Program Online Annual Contributor (formerly Editor) User Type in Continually Staffed Environment Annual Subscription $125.00 $125.00</td></tr>
+<tr><td>168619 State and Local Public Safety Named User Program Online Annual Mobile Worker User Type in a Continually Staffed Environment Annual Subscription $200.00 $200.00</td></tr>
+<tr><td>157503 State and Local Public Safety Named User Program Enterprise Creator User Type in Continually Staffed Environment Annual Subscription $350.00 $350.00</td></tr>
+<tr><td>168626 State and Local Public Safety Named User Program ArcGIS Enterprise Contributor (formerly Editor) User Type in Continually Staffed Environment Annual Subscription $125.00 $125.00</td></tr>
+<tr><td>168627 State and Local Public Safety Named User Program ArcGIS Enterprise Mobile Worker User Type in Continually Staffed Environment Annual Subscription $200.00 $200.00</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="ArcGIS Pricing Page 38">
+<table>
+<caption>ArcGIS Pricing Page 38</caption><tbody><tr><td>157500 State and Local Public Safety Named User Program ArcGIS Online Viewer User Type in Surge Environment Annual Subscription $188.00 $188.00</td></tr>
+<tr><td>157501 State and Local Public Safety Named User Program ArcGIS Online Creator User Type in Surge Environment Annual Subscription $1,050.00 $1,050.00</td></tr>
+<tr><td>157505 State and Local Public Safety Named User Program Enterprise Creator User Type in Surge Environment Annual Subscription $1,050.00 $1,050.00</td></tr>
+<tr><td>168620 State and Local Public Safety Named User Program Online Annual Contributor (formerly Editor) User Type in a Surge Staffed Environment Annual Subscription $375.00 $375.00</td></tr>
+<tr><td>168621 State and Local Public Safety Named User Program Online Annual Mobile Worker User Type in Surge Staffed Environment Annual Subscription $600.00 $600.00</td></tr>
+<tr><td>168628 State and Local Public Safety Named User Program ArcGIS Enterprise Contributor (formerly Editor) User Type in Surge Staffed Environment Annual Subscription $375.00 $375.00</td></tr>
+<tr><td>168629 State and Local Public Safety Named User Program ArcGIS Enterprise Mobile Worker User Type in Surge Staffed Environment Annual Subscription $600.00 $600.00</td></tr>
+<tr><td>Training - 2025 Prices</td></tr>
+<tr><td>36 Instructor-Led Training and Solutions- 2025 Prices</td></tr>
+<tr><td>96246 Public Training Class (per day - per student) $1,010.00 $1,010.00</td></tr>
+<tr><td>183412 Private Instructor Led Online Training Per Day per Class of 15 Students $9,965.00 $9,965.00</td></tr>
+<tr><td>183413 Private Instructor Led Training at Esri Site Per Day per Class of 15 Students $11,035.00 $11,035.00</td></tr>
+<tr><td>96247 Private Instructor Led Training at Client Site (per day - up to 15 students) *Client-site prices are only valid for events that are two or more consecutive days. All client-site one-day classes will be subject to additional travel expenses. $12,240.00 $12,240.00</td></tr>
+<tr><td>88994 Additional Students per Day per Class *Approval from Esri required $765.00 $765.00</td></tr>
+<tr><td>143262 Client Coaching Online (Per day - Up to 15 students) $8,445.00 $8,445.00</td></tr>
+<tr><td>115949 Client Coaching at Esri Site (Per day - Up to 15 students) $9,350.00 $9,350.00</td></tr>
+<tr><td>115950 Client Coaching at Client Site (Per day - Up to 15 students) *Client-site prices are only valid for events that are two or more consecutive days. All client-site one-day classes will be subject to additional travel expenses. $10,370.00 $10,370.00</td></tr>
+<tr><td>162891 Mobile Lab $2,715.00 $2,715.00</td></tr>
+<tr><td>36 Adoption Strategy Packages and Workshops- 2025 Prices</td></tr>
+<tr><td>187392 Adoption Strategy Base Service Package $10,720.00 $11,255.00</td></tr>
+<tr><td>184466 Adoption Strategy Extended Service Package $31,700.00 $31,700.00</td></tr>
+<tr><td>189544 Adoption Strategy Private 1 Day Online Workshop $12,720.00 $13,420.00</td></tr>
+<tr><td>189530 Adoption Strategy Private 1 Day Workshop at Esri Site $13,685.00 $14,440.00</td></tr>
+<tr><td>189541 Adoption Strategy Private 1 Day Workshop at Client Site *Client-site prices are only valid for events that are two or more consecutive days. All client-site one-day workshops will be subject to additional travel expenses. $14,745.00 $15,555.00</td></tr>
+<tr><td>36 Abridged Classes - 2025 Prices</td></tr>
+<tr><td>183417 Private Instructor Led Online 1-Day Class Abridged From 2 Days per Class of 15 Students $14,950.00 $14,950.00</td></tr>
+<tr><td>183418 Private Instructor Led Training at Esri Site 1 Day Class Abridged From 2 Days per Class of 15 Students $16,550.00 $16,550.00</td></tr>
+<tr><td>183419 Private Instructor Led Training at Client Site 1 Day Class Abridged From 2 Days per Class of 15 Students *Client-site prices are only valid for events that are two or more consecutive days. All client-site one-day classes will be subject to additional travel expenses. $18,360.00 $18,360.00</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="ArcGIS Pricing Page 39">
+<table>
+<caption>ArcGIS Pricing Page 39</caption><tbody><tr><td>183414 Private Instructor Led Online 2 Day Class Abridged From 3 Days per Class of 15 Students $22,425.00 $22,425.00</td></tr>
+<tr><td>183415 Private Instructor Led Training at Esri Site 2 Day Class Abridged From 3 Days per Class of 15 Students $24,825.00 $24,825.00</td></tr>
+<tr><td>183416 Private Instructor Led Training at Client Site 2 Day Class Abridged From 3 Days per Class of 15 Students $27,540.00 $27,540.00</td></tr>
+<tr><td>36 Esri Pre-Paid Training - 2025 Prices</td></tr>
+<tr><td>174382 Esri Training Pass per Day - One Year Term $1,010.00 $1,010.00</td></tr>
+<tr><td>36 Esri E-Learning in the Customer&#39;s Learning Management System - 2025 Prices</td></tr>
+<tr><td>154953 Esri E-Learning Content (SCORM Format) License $88,275.00 $88,275.00</td></tr>
+<tr><td>36 Esri Academy LMS Integration Subscription - 2025 Prices</td></tr>
+<tr><td>175922 Plan 1 - up to 50 users $15,720.00 $15,720.00</td></tr>
+<tr><td>175923 Plan 2 - up to 100 users $18,865.00 $18,865.00</td></tr>
+<tr><td>175925 Plan 3 - up to 150 users $22,005.00 $22,005.00</td></tr>
+<tr><td>175926 Plan 4 - up to 200 users $25,150.00 $25,150.00</td></tr>
+<tr><td>175927 Plan 5 - up to 250 users $28,295.00 $28,295.00</td></tr>
+<tr><td>175928 Plan 6 - up to 300 users $31,440.00 $31,440.00</td></tr>
+<tr><td>175929 Plan 7 - up to 400 users $34,585.00 $34,585.00</td></tr>
+<tr><td>175930 Plan 8 - up to 500 users $37,720.00 $37,720.00</td></tr>
+<tr><td>175912 Plan 9 - up to 600 users $40,865.00 $40,865.00</td></tr>
+<tr><td>175913 Plan 10 - up to 750 users $44,010.00 $44,010.00</td></tr>
+<tr><td>175914 Plan 11 - up to 1,000 users $47,155.00 $47,155.00</td></tr>
+<tr><td>36 Technical Certification - 2025 Prices</td></tr>
+<tr><td>191976 Foundation Certification Exam Voucher N/A $275.00</td></tr>
+<tr><td>191977 Associate Certification Exam Voucher N/A $275.00</td></tr>
+<tr><td>191978 Professional Certification Exam Voucher N/A $275.00</td></tr>
+<tr><td>Support and Services</td></tr>
+<tr><td>All items below are for Premium Support &amp; may be subject to escalation on January 1st of each calendar year</td></tr>
+<tr><td>37 Premium Support Services - 2025 Prices</td></tr>
+<tr><td>117208 Premium Support Domestic Annual Subscription Unlimited Incidents Two (2) Authorized Callers $54,700.00 $54,700.00</td></tr>
+<tr><td>134062 Premium Support Domestic Annual Subscription Unlimited Incidents One (1) Additional Authorized Caller $14,200.00 $14,200.00</td></tr>
+<tr><td>136727 Premium Support Domestic Annual Subscription Up To 10 Incidents $21,400.00 $21,400.00</td></tr>
+<tr><td>Professional Services - 2025 Prices</td></tr>
+<tr><td>All items below are for Professional Services &amp; may be subject to escalation on January 1st of each calendar year</td></tr>
+<tr><td>38 Advantage Program - 2025 Prices</td></tr>
+<tr><td>97719 Advantage Program Additional Advisor Hours (100) $31,700.00 $31,700.00</td></tr>
+<tr><td>187083 Advantage Program Additional Advisor Hours (25) $7,925.00 $7,925.00</td></tr>
+<tr><td>97720 Advantage Program Additional Learning and Service Credits (100) $71,800.00 $71,800.00</td></tr>
+<tr><td>103032 Advantage Program Additional Learning and Service Credits (50) $35,900.00 $35,900.00</td></tr>
+<tr><td>187082 Advantage Program Additional Learning and Service Credits (25) $17,950.00 $17,950.00</td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">[Pages 1-11 unavailable]</h2>
+<p>Content from pages 1-11 could not be converted. This section may be available after retry.</p>
+
+</section>
+<section aria-labelledby="section-3">
+<h2 id="section-3">[Pages 11-21 unavailable]</h2>
+<p>Content from pages 11-21 could not be converted. This section may be available after retry.</p>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>
