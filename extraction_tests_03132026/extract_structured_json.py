@@ -1,7 +1,7 @@
 """
 PDF Structured JSON Extraction Tool with Quality Verification
 
-This script processes all PDFs in the pdfs/ folder, extracts structured JSON
+This script processes all PDFs in the pdf-downloads/ folder, extracts structured JSON
 (paragraphs, tables, images) using Gemini, and verifies extraction quality.
 
 Usage:
@@ -60,12 +60,12 @@ VIDEO_PATTERNS = [
 ]
 
 # Directories
-DATA_FOLDER = Path("../output-96-files-03-10-2026/ncdit-audit-20260310-073415")
+DATA_FOLDER = Path("./pdf-downloads")
 OUTPUT_FOLDER = Path("output")
 REPORTS_FOLDER = OUTPUT_FOLDER / "_reports"
 
 # Test file list - if set, only process these document IDs
-TEST_FILE_LIST = Path("NC ADA 100 Test files.md")
+TEST_FILE_LIST = None
 
 
 # Suppress Google GenAI warning about non-text parts (thought_signature)
@@ -95,52 +95,6 @@ EXTRACTION_PROMPT = read_string_from_file("PROMPT_FOR_EXTRACT.md")
 COHERENCE_CHECK_PROMPT = read_string_from_file("PROMPT_FOR_VALIDATE.md")
 
 
-def parse_test_file_list(md_path: Path) -> List[str]:
-    """Parse document IDs from the test files list.
-
-    Supports two formats:
-    1. Plain text: one document ID per line
-    2. Markdown table: document names in the second column (| # | Document | ...)
-
-    Returns list of document IDs (folder names under data/).
-    """
-    if not md_path.exists():
-        print(f"Warning: Test file list not found at {md_path}, processing all PDFs")
-        return []
-
-    text = md_path.read_text(encoding="utf-8")
-    doc_ids = []
-
-    # Detect format: if any non-empty line starts with |, treat as markdown table
-    lines = text.splitlines()
-    is_table = any(line.strip().startswith("|") for line in lines if line.strip())
-
-    if is_table:
-        for line in lines:
-            line = line.strip()
-            if not line.startswith("|"):
-                continue
-            cols = [c.strip() for c in line.split("|")]
-            if len(cols) < 3:
-                continue
-            num_col = cols[1]
-            if not num_col or num_col.startswith("#") or num_col.startswith(":") or num_col.startswith("-"):
-                continue
-            try:
-                int(num_col)
-            except ValueError:
-                continue
-            doc_id = cols[2]
-            if doc_id:
-                doc_ids.append(doc_id)
-    else:
-        # Plain text: one document ID per line
-        for line in lines:
-            line = line.strip()
-            if line and not line.startswith("#"):
-                doc_ids.append(line)
-
-    return doc_ids
 
 # Schema for structured output - uses anyOf for type-specific field validation
 # Each content type only allows its specific fields to reduce token usage and prevent field confusion
@@ -1501,36 +1455,12 @@ class PDFExtractor:
     def _get_pdf_files(self) -> List[Tuple[str, Path]]:
         """Get list of (doc_id, pdf_path) tuples to process.
 
-        Reads source.pdf from data/{doc_id}/ folders. If a test file list
-        is configured, only returns PDFs matching that list.
+        Reads source.pdf from data/{doc_id}/ folders.
         """
-        # Parse test file list for filtering
-        target_ids = []
-        if TEST_FILE_LIST:
-            target_ids = parse_test_file_list(TEST_FILE_LIST)
-            if target_ids:
-                print(f"Filtering to {len(target_ids)} documents from test file list")
-
         pdf_files = []
-        if target_ids:
-            # Only look for specific document IDs
-            for doc_id in target_ids:
-                pdf_path = DATA_FOLDER / doc_id / "source.pdf"
-                if pdf_path.exists():
-                    pdf_files.append((doc_id, pdf_path))
-                else:
-                    # Try partial match (directory name may differ slightly)
-                    matches = list(DATA_FOLDER.glob(f"{doc_id}*/source.pdf"))
-                    if matches:
-                        matched_id = matches[0].parent.name
-                        pdf_files.append((matched_id, matches[0]))
-                    else:
-                        print(f"  Warning: PDF not found for '{doc_id}'")
-        else:
-            # Process all PDFs in data folder
-            for source_pdf in sorted(DATA_FOLDER.glob("*/source.pdf")):
-                doc_id = source_pdf.parent.name
-                pdf_files.append((doc_id, source_pdf))
+        for source_pdf in sorted(DATA_FOLDER.glob("*/source.pdf")):
+            doc_id = source_pdf.parent.name
+            pdf_files.append((doc_id, source_pdf))
 
         return pdf_files
 
