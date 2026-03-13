@@ -1,6 +1,7 @@
 # Full Pipeline: JSON → ADA-Compliant HTML → Auditor
 
-First, run_extract_structured_json.py 
+New pipeline in: /usr/local/google/home/stonejiang/NCDIT-ADA-FILES/extraction_tests_simplied_html_generator/render_json.py
+First, run extract_structured_json.py 
 
 All commands run from `google/backend/`.
 
@@ -62,3 +63,6 @@ cat "$DOC_ROOT/<document-slug>/audit-report.json" | python -m json.tool
 
 Get combined analysis
 /usr/local/google/home/stonejiang/ada-compliance-engine/google/analysis.py
+
+
+Get the full dir at: /usr/local/google/home/stonejiang/NCDIT-ADA-FILES/extraction_tests_03122026
