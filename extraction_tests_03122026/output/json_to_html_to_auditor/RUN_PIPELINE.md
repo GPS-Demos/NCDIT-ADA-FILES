@@ -1,5 +1,7 @@
 # Full Pipeline: JSON → ADA-Compliant HTML → Auditor
 
+First, run_extract_structured_json.py 
+
 All commands run from `google/backend/`.
 
 ```bash
@@ -57,3 +59,6 @@ Per-document reports:
 ```bash
 cat "$DOC_ROOT/<document-slug>/audit-report.json" | python -m json.tool
 ```
+
+Get combined analysis
+/usr/local/google/home/stonejiang/ada-compliance-engine/google/analysis.py
