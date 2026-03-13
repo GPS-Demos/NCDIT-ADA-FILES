@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>BNY Business Update</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>BNY Business Update</h1>
+    </header>
+    <nav aria-label="Table of Contents" class="document-nav">
+        <details>
+        <summary>Contents (24 items)</summary>
+        <ul>
+                    <li><a href="#heading-1">BNY
+Business Update</a></li>
+                    <li><a href="#heading-2">BNY: A Trusted Partner to Help You Achieve Your Ambitions</a></li>
+                    <li><a href="#heading-3">Scale</a></li>
+                    <li><a href="#heading-4">Expertise</a></li>
+                    <li><a href="#heading-5">Resilience</a></li>
+                    <li><a href="#heading-6">GLOBAL REACH AND SCALE</a></li>
+                    <li><a href="#heading-7">BREADTH OF OUR CLIENT FRANCHISE3</a></li>
+                    <li><a href="#heading-8">The Power of
+Real-Time Payments</a></li>
+                    <li><a href="#heading-9">CLIENT PROFILE</a></li>
+                    <li><a href="#heading-10">Challenges:</a></li>
+                    <li><a href="#heading-11">Outcomes:</a></li>
+                    <li><a href="#heading-12">Securities
+Finance
+Services</a></li>
+                    <li><a href="#heading-13">AGENCY SECURITIES LENDING</a></li>
+                    <li><a href="#heading-14">PRINCIPAL LENDING*</a></li>
+                    <li><a href="#heading-15">SPONSORED MEMBER PROGRAM*</a></li>
+                    <li><a href="#heading-16">SECURED LOANS</a></li>
+                    <li><a href="#heading-17">AGENCY INVESTMENT PRODUCT*</a></li>
+                    <li><a href="#heading-18">Agency Securities Lending Overview</a></li>
+                    <li><a href="#heading-19">FOOTPRINT</a></li>
+                    <li><a href="#heading-20">Enterprise Risk Management Structure</a></li>
+                    <li><a href="#heading-21">CREDIT (BORROWER) RISK</a></li>
+                    <li><a href="#heading-22">COUNTERPARTY CREDIT RISK
+(NON-CASH COLLATERAL)</a></li>
+                    <li><a href="#heading-23">MARKET RISK
+(CASH COLLATERAL INVESTMENT)</a></li>
+                    <li><a href="#heading-24">BUSINESS &amp; OPERATIONAL RISK</a></li>
+        </ul>
+        </details>
+    </nav>
+    <main id="main-content" role="main">
+<section aria-labelledby="section-1">
+<h2 id="section-1">Slide 1</h2>
+<p>Information Classification: PUBLIC</p>
+
+<p>February 2025</p>
+
+<p>Prepared for the North Carolina Supplemental Retirement
+System Board of Trustees Quarterly Meeting</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAOklEQVR4nGNgyOgAIRVbfAiiBoJI10C8UmprwFQKEaeGBlxKqaEBv1LKNBCjlFwNxCulhgZikgmpGgBcapahUlfqTQAAAABJRU5ErkJggg==" alt="BNY logo" width="16" height="16"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">Slide 2: BNY: A Trusted Partner to Help You Achieve Your Ambitions</h2>
+<h3 id="heading-2">BNY: A Trusted Partner to Help You Achieve Your Ambitions</h3>
+<p>See important disclosures and disclaimers in Appendix (Footnotes 1, 2, 3).</p>
+
+<h3 id="heading-3">Scale</h3>
+<p>A global financial services company
+touching approximately one-fifth of
+the world’s investable assets</p>
+
+<h3 id="heading-4">Expertise</h3>
+<p>A comprehensive platform and deep
+expertise to help you uncover
+new opportunities</p>
+
+<h3 id="heading-5">Resilience</h3>
+<p>Innovating and delivering solutions across
+the financial lifecycle, while remaining
+resilient through change</p>
+
+<h3 id="heading-6">GLOBAL REACH AND SCALE</h3>
+<p><strong>$52.1T</strong></p>
+
+<p>in assets under custody
+and / or administration<sup>1</sup></p>
+
+<p><strong>$2.1T</strong></p>
+
+<p>in assets under
+management<sup>2</sup></p>
+
+<p><strong>100+</strong></p>
+
+<p>markets servicing
+clients</p>
+
+<p><strong>$3.8B</strong></p>
+
+<p>Annual technology
+investment in 2024<sup>18</sup></p>
+
+<p><strong>&gt;50K</strong></p>
+
+<p>Employees
+serving you
+globally</p>
+
+<h3 id="heading-7">BREADTH OF OUR CLIENT FRANCHISE3</h3>
+<p><strong>91%</strong></p>
+
+<p>of the Fortune
+100 Companies</p>
+
+<p><strong>92%</strong></p>
+
+<p>of the top 100
+investment managers
+worldwide</p>
+
+<p><strong>94%</strong></p>
+
+<p>of S&amp;P top 100
+banks worldwide</p>
+
+<p><strong>94%</strong></p>
+
+<p>of Top 100 largest
+U.S. retirement funds</p>
+
+<p><strong>98%</strong></p>
+
+<p>of Top 50 Life/Health
+Insurance Companies</p>
+
+</section>
+<section aria-labelledby="section-3">
+<h2 id="section-3">Slide 3: The Power of  Real-Time Payments</h2>
+<h3 id="heading-8">The Power of
+Real-Time Payments</h3>
+<p>C A S E  S T U D Y</p>
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALEAAAAmCAYAAACLSno+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEwUlEQVR4nO3d707bMBAA8DzDEJr4syRNx5+mbEIaG5Qy8Wh9gn1gaLRpkbZ9QKwtSNNeMMsFQUsbp/b5zk7SfDhpMGgc+xfvcnE8x3GcuFTx/qu9CLpJdGJn+wTR9k+4YzbOy9Ff7yy1E8bEOsqiDopM+Bexs3PMixjCPTXXX+4Fvp1wjpg2Njoax3RqxCTR6PIing0Wf3+lqLq4NgYy/bAQwSm+T/xOjZg8OBFjgGARp7iQkJtnZsazcTH7jKNoYh9mVRAHeXmhJuLFgWNHrNFe/4tc2yDfR/XzwgW9ff07/jB6jMME88btrX2kZUacDmBH0HYCxCpAdBGnkLVzVXrA2Z/txO3+JIUM0R5O49awwLOzbaSrQjgbEyGWAUKFOMXGkB+7J/hz9zJvcp/+EA6mL5DnY79ooG0jRSMjRKySH1O0HZ0fZ13Ql/jzFqdTsy/aUTbkNN0YPsTOpACgSUBJhn9WTMQqkCnavqnRdm+hneiZPbcOPfsiHE2EiGfpxkMc9qfrgTjtdETd1ARiiB2JBwxU/YXFN/+ZHjLHXn3Bvv5GezBeCfkFdDJzO1dX1Ua8eVxcxOmxLs31FzateG4n+nffqCGGgLKbLOTnaA3HsdfrVQ+x6k1IwFydUD1H6v7iOgdhf0qlTRnfTDCqIn7JnaOHuNW/rw5iXzGdcD+aR5xXP6bur8Znc4ClnoSKECcR3OAQvwI9YMidjSLeIJw1GBGnxxZA5uivpkb9mGfsxH/ZQqQVwnQD8meKdEO1I2AmVQ1MIX7lP3vMiNNBD81d9IHGwwqZcJUWE+X/wFFO2Q01O4+mT6BNITYR+eUfc4iz2sGFmHMs1JefrviBKCJFPF/ZOOgj6s62wS6GJ9vhBhBDuOd6/aUyFjuIyg11G6QQJxF+p0srRHGQ3BCWDnET8tC3PIixNVWIrUt8f6kCahKnFeqA5RCnkPv8kJ+qG9MkhbkrB+L5gLt2SsRuVw+yKcQQVPmxsDxJhLglWFtBjjg5TjvKKdHZxpoLOW8QEIjh93QX4JhATDEuPmKZqQrixvU9O95DWNfci/k7izuoVrG5Xf1zxlRZsJB068d4wBKIJ3xpBDwZ9Ho/zV7xJmI36+0GDcQbzOUsKkzYx9KOx4tYtEQTG7BeOdRZ3mlyUGCBexP54iQl4nSmK9wDBprx8dB5sBziFmGN+Ggwjreif+Y7Sb+DcDPM0oMHTcTYdqwz4q3oTn/WTV95+ksDySZizHEbiykFAWITkKuEGBbB4+Am6UL/kRZuGREvHZsI8a7GvhDrhDhEpBHhcBy7Nzn13RoxDWIIn/FGrwqIVR5qwKy7983wK0s2EJO8pkSIGHtRrQNiuPGSqi5EjOlC0RC7SMDciOHGsUa8jDj3RdHBJN77VcIXRW3F0kMPasQOz01emRGHo+wbuf2R5MKcGvEC4oAfMYRPXD8uK+LD+c1Tktm49cPi28xVQbzUdibEEJQzchkRP+fBUFIr3EYpZUWcuRUrI2JYDrrOiA+iP/ZhVgmx8DUlTsSO3r7CZUdsHWWVEIte1jSBGEJng5MacY14absmG4ghdPPjGvEaIhZu5WoJsW79uEa8BojhkS/sChSo/v8UphAn4RPsm1YixP8BbCqodsA1mtEAAAAASUVORK5CYII=" alt="Conduent logo" width="177" height="38"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>How an innovative real-time payments solution can drive
+impact when people need it most.</p>
+
+<h3 id="heading-9">CLIENT PROFILE</h3>
+<ul><li>
+A global technology-led process solutions company</li>
+<li>
+Delivers digital business solutions and services on behalf of their clients to
+create better outcomes for millions of people</li>
+<li>
+Works with Fortune 100 companies, and government and transportation
+agencies</li>
+</ul>
+<h3 id="heading-10">Challenges:</h3>
+<ul><li>
+Natural disasters and crises often cause residents to lose critical access to
+finances, ATMs or post offices.</li>
+<li>
+Conduent needed a trusted and innovative provider to integrate the
+payment capabilities of digital payment options, such as ACH direct
+deposit, Zelle®,<sup>1</sup> instant payments over the RTP® Network<sup>2</sup> and
+the FedNow® Service,<sup>3</sup> as well as chip-enabled, prepaid debit cards.</li>
+</ul>
+<h3 id="heading-11">Outcomes:</h3>
+<ul><li>
+BNY worked in tandem with Conduent to
+create the Rapid Assistance Solution, which
+aims to help individuals and families gain swift
+access to resources during a natural disaster.</li>
+<li>
+Government agencies and non-profits can
+leverage Conduent’s Rapid Assistance
+Solution to provide faster relief to those
+impacted by crises.</li>
+<li>
+By distributing critical relief funds quickly and
+securely, agencies can help individuals and
+families gain faster access to housing, food
+and emergency expenses when they are
+needed most.</li>
+</ul>
+<sup id="fnref-1"><a href="#fn-1" role="doc-noteref" aria-label="Footnote 1">[1]</a></sup>
+<sup id="fnref-2"><a href="#fn-2" role="doc-noteref" aria-label="Footnote 2">[2]</a></sup>
+<sup id="fnref-3"><a href="#fn-3" role="doc-noteref" aria-label="Footnote 3">[3]</a></sup>
+</section>
+<section aria-labelledby="section-4">
+<h2 id="section-4">Slide 4: Securities Finance Services</h2>
+<h3 id="heading-12">Securities
+Finance
+Services</h3>
+<p>We provide tools to source or
+deploy liquidity through our robust
+agency, principal and sponsored
+member solutions.</p>
+
+<p>*Not available in all jurisdictions</p>
+
+<h3 id="heading-13">AGENCY SECURITIES LENDING</h3>
+<p>Our agency lending program enables clients to utilize long
+assets to generate incremental revenue based on the intrinsic
+value of the long assets and/or the client’s collateral guidelines.</p>
+
+<h3 id="heading-14">PRINCIPAL LENDING*</h3>
+<p>Through Borrow+, clients can finance short strategies
+by using cash and securities held at BNY as collateral to
+borrow securities.</p>
+
+<h3 id="heading-15">SPONSORED MEMBER PROGRAM*</h3>
+<p>Our Sponsored Member Program helps to provide clients
+with access to Fixed Income Clearing Corporation’s cleared
+repo program. Eligible clients may participate in the product
+as either a Cash Investor (purchasing U.S. Treasury collateral)
+or a Collateral Provider (selling U.S. Treasury securities).</p>
+
+<h3 id="heading-16">SECURED LOANS</h3>
+<p>Expand financing options with our secured loan program to
+assist clients with their liquidity or leverage strategies.</p>
+
+<h3 id="heading-17">AGENCY INVESTMENT PRODUCT*</h3>
+<p>AIP allows clients to leverage BNY’s expertise in managing
+short-term cash investments while following the client’s
+investment guidelines.</p>
+
+</section>
+<section aria-labelledby="section-5">
+<h2 id="section-5">Slide 5: Agency Securities Lending Overview</h2>
+<h3 id="heading-18">Agency Securities Lending Overview</h3>
+<p>Strong, Tenured Industry Leader Committed to the Business</p>
+
+<h3 id="heading-19">FOOTPRINT</h3>
+<ul><li>
+Industry&#39;s largest program, with <strong>$5.3 trillion</strong> in
+lendable assets and <strong>$558 billion</strong> on loan<sup>1,2</sup></li>
+<li>
+With <strong>20.5%</strong> of the industry on loan volume and
+<strong>11.2%</strong> of the industry lendable, BNY captures
+more than its share of the market<sup>1,2</sup></li>
+<li>
+<strong>372</strong> global client relationships<sup>2</sup></li>
+<li>
+Active lending in <strong>34</strong> local markets<sup>3</sup></li>
+<li>
+<strong>6</strong> global trading desks (New York, Pittsburgh,
+Toronto, London, Hong Kong and Singapore)</li>
+<li>
+Providing securities lending services <strong>since 1977</strong></li>
+</ul>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Value Proposition">
+<table>
+<caption>Value Proposition</caption><thead><tr><th scope="col" colspan="2"><strong>VALUE PROPOSITION</strong></th></tr>
+</thead><tbody><tr><th scope="row"><strong>DEPTH OF RESOURCES</strong></th><td>Unique industry position as the largest agent lender
+leads to ongoing capital investment in technology
+and resiliency</td></tr>
+<tr><th scope="row"><strong>SAFETY AND STABILITY</strong></th><td>The Federal Reserve&#39;s 2024 bank stress tests once
+again show the resiliency of our business model and
+strength of our balance sheet</td></tr>
+<tr><th scope="row"><strong>CLIENT RETURNS</strong></th><td>We focus on generating strong performance for our
+clients through the combination of spread, utilization
+and duration of loans</td></tr>
+<tr><th scope="row"><strong>TRANSPARENCY</strong></th><td>Detailed client reporting accessible 24/7</td></tr>
+</tbody></table>
+</div>
+
+<sup id="fnref-1"><a href="#fn-1" role="doc-noteref" aria-label="Footnote 1">[1]</a></sup>
+<sup id="fnref-2"><a href="#fn-2" role="doc-noteref" aria-label="Footnote 2">[2]</a></sup>
+<sup id="fnref-3"><a href="#fn-3" role="doc-noteref" aria-label="Footnote 3">[3]</a></sup>
+</section>
+<section aria-labelledby="section-6">
+<h2 id="section-6">Slide 6: Enterprise Risk Management Structure</h2>
+<h3 id="heading-20">Enterprise Risk Management Structure</h3>
+<p>A Conservative, Independent Corporate Risk Oversight</p>
+
+<h3 id="heading-21">CREDIT (BORROWER) RISK</h3>
+<ul><li>
+Independent approval</li>
+<li>
+Ongoing periodic review</li>
+<li>
+Review of regulatory findings</li>
+<li>
+Review of research by ratings agencies
+and independent analysts</li>
+<li>
+Multiple points of contact with borrowers
+provides greater transparency</li>
+</ul>
+<h3 id="heading-22">COUNTERPARTY CREDIT RISK
+(NON-CASH COLLATERAL)</h3>
+<ul><li>
+Ensures that collateral risks are identified, quantified,
+risk managed and governed effectively</li>
+<li>
+Develops and monitors risk reporting for
+collateralized exposures, which include appropriate
+risk metrics vis-à-vis established limits</li>
+<li>
+Identifies, measures and limits wrong-way risk, which
+exists when there is a positive correlation between
+the risk of the collateral posted by a counterparty and
+the credit of the counterparty</li>
+<li>
+Regular stress testing / scenario analysis</li>
+</ul>
+<h3 id="heading-23">MARKET RISK
+(CASH COLLATERAL INVESTMENT)</h3>
+<ul><li>
+Monitors complex wide issuer concentrations</li>
+<li>
+Conducts stress tests to test NAVs under different
+market and default/downgrade scenarios</li>
+<li>
+Tracks counterparty, maturity profile and market
+risk metrics</li>
+<li>
+Conducts ABCP and ABS issuer credit research and
+monitoring, new issuer reviews &amp; recommendations
+to counterparty credit committee</li>
+</ul>
+<h3 id="heading-24">BUSINESS &amp; OPERATIONAL RISK</h3>
+<ul><li>
+Assess, analyze &amp; monitor operational risk</li>
+<li>
+Robust business acceptance process and
+governance structure</li>
+<li>
+Review key business process changes and
+new products</li>
+<li>
+Regular stress testing / scenario analysis</li>
+<li>
+Monitor regulatory changes</li>
+<li>
+Continuously update policies &amp; procedures</li>
+</ul>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAAAlCAYAAAA0ubnLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEpklEQVR4nO3d3W7aMBQH8DzBpG1qt24SIbCVElppU9fvVnuKPQ+vMK1VIXS31VZgz5jmuINCGif2OT5OnHDxvyjtiGP/cA52YJ7nebEz6ZzE3qer8tI+j73WsX67dw6Rx7vA95V/rHes4BzXxs45bUy72OOKvqkASlfwrnXeZQL5iBcvZOvUDl7AEFzYBewj4UKenqMCKF3Euz4D8OF9Hih+vPDvsG18c6DfRuyxXi1f0BVA6TJeFWBUvAFiZsPipc+GvHDbK30xiB7KR1kHvHmDR8WbHjROvJDgFNdGlauQeH5T5clwGB/c/RPZnUzLB+oyXl8CzAReSOubHbyir5nqX9/oC8OL90bTJWBIGE3j7Z935WN1Da/s8m4KL8QWXo/Q5o9fJO1CwoX4YTZeAXgyWwMMGUzm8UHyeOloXcErw2USr+qlmYw3SQvZ37I2Ys+5eyk7z+cfBhmAl5CjWdz5XTJkXbyUY72+wl06ufEKHAprzSbwQrD1aZAuQ1jWkVd+mE6leNNlRev2vt54Ia2zauKFbBes/5rCSwHc/t9G7BvA4jFcf2D311wJ8FNZMROpLV5IVfEWlQ8m8WL6YZEtwrl7hVeYlw/CzKoKeAl5PIu70bzZeG28YVsDl3NJNY03uOQ5B1naJyrjk/0LqHF1AS+yl+D3h0P38bY1L3ey5+HCKwZZgs40XpuAO2eqYyT/JRbvWn2cxDMF2RZe/7s+3CBnpuDEC3n/1Q5eMQbI+td0O4rw9gmz78uyYh6HN8RNkKoulRVd4rjxQmzhhRc263lo3bWX/wfhyBzg59UK5Ju8KuK1cWOOStJLU1x4IbDTV1Zf6uCFUOrfovTGyWz8Q3FGrgpe6OSWxq2Kunixl+ZgZTGfE68YC8PlQ6Bc5+rhhXDhXWQ/KSv2R3/dwLs64IF09weP9x1hXfTDkR28EOz6b1b04arj3Y/u2QGL2jiZ5UPZDUJVw6s68Lp4YVbH1pbLWxst4IUYgXvIi9cK2nHBOnFV8S7RSQYBg1cAROzwQWBGtIU3INa/vtJ6Lh5vGKnvuumjfYh3hpFaY6uOVwYAi1fgINyaaAOvaCOyzGmj6lx1vL07/d22YrDzeCdSBEvBCwgwgYFHv2nKQEDBK86beW2ViheCOSYNbj7ecGQOLpQFA+r2cRnbw10Dd5aR8SLLhybjNYE2HM/MbRWXgRczMGkIVLyQgBlwnfAOCHUugCXvprmMN31sE3jF+TOWD3XB25/g0PZuC9ZpN3hpeCkfzWkCXpgxderYfmTxQ5uNx5vkbW+DNxPvyieJ8wK7YcH1H3toy8SLvVRz4YVw1L+u4827hwFq4NDmLGsCr1jyQgSWuyj1ZXq5zDReAdhw/esyXvFJ4TTY5LH+uELf5VD1TYpF0ovvHHhFfxgE7Cre7nXqexuSsqBX9izrMt50u7nwbhNu4KkL3gXazzfMn0FrAt6sr2XiwgsxVf+6iDe8reAM6yrerK1hbrwQzC5gHfCWDrJOeGXt5sZrYv13g7eheIu+wZEdL+IYG7wNxyu+p0HhRmobeCEBoX82eGuOF2ZYWAbL/sbC8vGKPiL9Hw9O4X0EQY50ue9lg+IAAAAASUVORK5CYII=" alt="Pie chart illustrating Risk Management Structure: Credit (Borrower) Risk, Counterparty Credit Risk, Cash Collateral, Market Risk, and Business &amp; Operational Risk" width="175" height="37"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section aria-labelledby="section-7">
+<h2 id="section-7">Slide 7</h2>
+<img src="data:image/png;base64,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" alt="" role="presentation" width="334" height="72"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

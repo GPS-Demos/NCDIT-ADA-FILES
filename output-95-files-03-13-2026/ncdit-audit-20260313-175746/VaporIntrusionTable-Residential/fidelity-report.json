@@ -1,0 +1,152 @@
+{
+  "document_id": "VaporIntrusionTable-Residential",
+  "composite_score": 0.2815,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output duplicates the subtitle paragraph and the footnotes list within the first section. The subtitle 'Not To Be Used for Structures Frequented or Occupied By Children' and the ordered list containing the two footnotes appear twice sequentially in the JSON object for the first section, whereas they only appear once at the top/bottom of each page in the source.",
+        "b_evidence_source": "Not To Be Used for Structures Frequented or Occupied By Children [and footnotes at bottom of page]",
+        "b_evidence_output": "Repeated content blocks: paragraph (index 0 and 2) and list (index 1 and 3) are identical within section 'DIVISION OF WASTE MANAGEMENT...'",
+        "b_evidence_location": "sections[0].elements",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy in the JSON follows a logical sequence from H1 (document title) to H2 (section titles). While the structure of the data tables is missing, the heading levels provided do not skip steps or nest incorrectly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document is primarily composed of extensive data tables spanning the first six pages. The output JSON reports a 'table_count' of 0 and fails to extract any table structure or data, representing a complete failure of the structural conversion for the core content of the document.",
+        "b_evidence_source": "Large data tables on pages 1 through 6 containing columns for CAS No., Contaminant, GWSL, SGSL, and IASL concentrations.",
+        "b_evidence_output": "table_count: 0",
+        "b_evidence_location": "root",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The output fails to maintain the reading order of the document by skipping the entirety of pages 1 through 11, which contain the primary data. Instead, it provides a placeholder section stating the content is unavailable. This is a material divergence from the source's structure and intended information flow.",
+        "b_evidence_source": "12-page document with data tables on pages 1-6.",
+        "b_evidence_output": "Section titled '[Pages 1-11 unavailable]' with text 'Content from pages 1-11 could not be converted.'",
+        "b_evidence_location": "sections[1]",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The footnotes at the bottom of the pages (labeled 1 and 2) were correctly identified as an ordered list. Although they were duplicated (captured in S1), the list structure itself is a faithful representation of those specific items.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "No links were present in the source document, and none were incorrectly injected into the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.31818181818181823,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output duplicates the subtitle paragraph and the footnotes list within the first section. The subtitle 'Not To Be Used for Structures Frequented or Occupied By Children' and the ordered list containing the two footnotes appear twice sequentially in the JSON object for the first section, whereas they only appear once at the top/bottom of each page in the source.\",\n      \"b_evidence_source\": \"Not To Be Used for Structures Frequented or Occupied By Children [and footnotes at bottom of page]\",\n      \"b_evidence_output\": \"Repeated content blocks: paragraph (index 0 and 2) and list (index 1 and 3) are identical within section 'DIVISION OF WASTE MANAGEMENT...'\",\n      \"b_evidence_location\": \"sections[0].elements\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy in the JSON follows a logical sequence from H1 (document title) to H2 (section titles). While the structure of the data tables is missing, the heading levels provided do not skip steps or nest incorrectly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document is primarily composed of extensive data tables spanning the first six pages. The output JSON reports a 'table_count' of 0 and fails to extract any table structure or data, representing a complete failure of the structural conversion for the core content of the document.\",\n      \"b_evidence_source\": \"Large data tables on pages 1 through 6 containing columns for CAS No., Contaminant, GWSL, SGSL, and IASL concentrations.\",\n      \"b_evidence_output\": \"table_count: 0\",\n      \"b_evidence_location\": \"root\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The output fails to maintain the reading order of the document by skipping the entirety of pages 1 through 11, which contain the primary data. Instead, it provides a placeholder section stating the content is unavailable. This is a material divergence from the source's structure and intended information flow.\",\n      \"b_evidence_source\": \"12-page document with data tables on pages 1-6.\",\n      \"b_evidence_output\": \"Section titled '[Pages 1-11 unavailable]' with text 'Content from pages 1-11 could not be converted.'\",\n      \"b_evidence_location\": \"sections[1]\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The footnotes at the bottom of the pages (labeled 1 and 2) were correctly identified as an ordered list. Although they were duplicated (captured in S1), the list structure itself is a faithful representation of those specific items.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"No links were present in the source document, and none were incorrectly injected into the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.3181818181818182\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The source document is a structured report consisting almost entirely of dense data tables spanning pages 1 through 6. The HTML output fails to render any of this core content, instead displaying a system error message stating that 'Pages 1-11 unavailable'. This represents a complete failure of visual organization as the primary information of the document is absent, and the visual flow does not match the source's intent.",
+        "b_evidence_source": "The source PDF contains 6 pages organized as multi-column data tables for screening concentrations.",
+        "b_evidence_output": "[Pages 1-11 unavailable] Content from pages 1-11 could not be converted. This section may be available after retry.",
+        "b_evidence_location": "Entire document body",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source PDF is a table-heavy document. These tables are not rendered in the HTML output. Because the conversion engine failed to process the pages containing the tables, a sighted user cannot read or understand the data intended for those pages.",
+        "b_evidence_source": "Source PDF pages 1-6 show complex tables with headers such as 'Ground Water Screening Level (GWSL)' and 'CAS No.'",
+        "b_evidence_output": "The HTML output contains no tables, only text paragraphs and an error message.",
+        "b_evidence_location": "Pages 1-6",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF contains no meaningful images, logos, or charts; it is composed of text and tables. Therefore, no meaningful images are missing from the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The HTML output visually duplicates the document subtitle ('Not To Be Used for Structures Frequented or Occupied By Children') and the footnotes (numbered 1 and 2). This block of text appears twice in immediate succession at the top of the rendered page.",
+        "b_evidence_source": "The subtitle and footnotes appear once per relevant page in the source PDF.",
+        "b_evidence_output": "The text starting with 'Not To Be Used for Structures Frequented or Occupied By Children' and ending with 'N = Non-Carcinognic' is repeated twice at the top of the HTML output.",
+        "b_evidence_location": "Top of the HTML page",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.25,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The source document is a structured report consisting almost entirely of dense data tables spanning pages 1 through 6. The HTML output fails to render any of this core content, instead displaying a system error message stating that 'Pages 1-11 unavailable'. This represents a complete failure of visual organization as the primary information of the document is absent, and the visual flow does not match the source's intent.\",\n      \"b_evidence_source\": \"The source PDF contains 6 pages organized as multi-column data tables for screening concentrations.\",\n      \"b_evidence_output\": \"[Pages 1-11 unavailable] Content from pages 1-11 could not be converted. This section may be available after retry.\",\n      \"b_evidence_location\": \"Entire document body\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source PDF is a table-heavy document. These tables are not rendered in the HTML output. Because the conversion engine failed to process the pages containing the tables, a sighted user cannot read or understand the data intended for those pages.\",\n      \"b_evidence_source\": \"Source PDF pages 1-6 show complex tables with headers such as 'Ground Water Screening Level (GWSL)' and 'CAS No.'\",\n      \"b_evidence_output\": \"The HTML output contains no tables, only text paragraphs and an error message.\",\n      \"b_evidence_location\": \"Pages 1-6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF contains no meaningful images, logos, or charts; it is composed of text and tables. Therefore, no meaningful images are missing from the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The HTML output visually duplicates the document subtitle ('Not To Be Used for Structures Frequented or Occupied By Children') and the footnotes (numbered 1 and 2). This block of text appears twice in immediate succession at the top of the rendered page.\",\n      \"b_evidence_source\": \"The subtitle and footnotes appear once per relevant page in the source PDF.\",\n      \"b_evidence_output\": \"The text starting with 'Not To Be Used for Structures Frequented or Occupied By Children' and ending with 'N = Non-Carcinognic' is repeated twice at the top of the HTML output.\",\n      \"b_evidence_location\": \"Top of the HTML page\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.25\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 6,
+  "total_critical": 0,
+  "total_major": 6,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

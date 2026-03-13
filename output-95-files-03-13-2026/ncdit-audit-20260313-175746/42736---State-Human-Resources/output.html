@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>REQUEST FOR TECHNICAL CHANGE</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>REQUEST FOR TECHNICAL CHANGE</h1>
+    </header>
+    <nav aria-label="Table of Contents" class="document-nav">
+        <p class="nav-title"><strong>Contents</strong></p>
+        <ul>
+                <li><a href="#heading-1">REQUEST FOR TECHNICAL CHANGE</a></li>
+                <li><a href="#heading-2">3 25 NCAC 01C .0402 PERMANENT AND TIME-LIMITED APPOINTMENT</a></li>
+                <li><a href="#heading-3">3 25 NCAC 01C .1004 REDUCTION IN FORCE</a></li>
+                <li><a href="#heading-4">3 25 NCAC 01D .0101 COMPENSATION PHILOSOPHY AND PLAN</a></li>
+                <li><a href="#heading-5">3 25 NCAC 01D .0102 SALARY RANGES STRUCTURES</a></li>
+        </ul>
+    </nav>
+    <main id="main-content" role="main">
+<section>
+<p>Jason Thomas
+Commission Counsel
+Date submitted to agency: December 22, 2016</p>
+
+<p>AGENCY: State Human Resources Commission</p>
+
+<p>RULE CITATION: 25 NCAC 01</p>
+
+<p><strong>DEADLINE FOR RECEIPT: Wednesday, January 11, 2017</strong></p>
+
+<p><strong><em><u>NOTE WELL:</u></em></strong><strong><em> </em></strong><strong><em>This request extends several pages. Please be sure you have reached the end of the
+document.</em></strong></p>
+
+<p>The Rules Review Commission staff has completed its review of this rule prior to the
+Commission&#39;s next meeting. The Commission has not yet reviewed this rule and therefore there
+has not been a determination as to whether the rule will be approved. You may call this office to
+inquire concerning the staff recommendation.</p>
+
+<p>In reviewing these rules, the staff determined that the following technical changes need to be
+made. Approval of any rule is contingent upon making technical changes as set forth in G.S.
+150B-21.10.</p>
+
+<p><em>General Comments and Requests:</em></p>
+
+<p><em>Please delete the header “Permanent Amendment for Publication in the NCAC” that
+appears at the top of each page.</em></p>
+
+<p><em>On occasion, these Rules use more than one term for a single concept or are ambiguous
+or unclear. These technical change requests offer suggestions as to how such
+inconsistent terminology and ambiguous or unclear provisions might be made consistent
+or clarified. These requests seek only to clarify the apparent intent of these Rules and not
+to alter their meaning.</em></p>
+
+<p>Please retype the rule accordingly and resubmit it to our office at 1711 New Hope Church Road,
+Raleigh, North Carolina 27609.</p>
+
+</section>
+<section>
+<p>Jason Thomas
+Commission Counsel
+Date submitted to agency: December 22, 2016</p>
+
+<p>AGENCY: State Human Resources Commission</p>
+
+<p>RULE CITATION: 25 NCAC 01C .0402</p>
+
+<p><strong>DEADLINE FOR RECEIPT: Wednesday, January 11, 2017</strong></p>
+
+<p><strong><em><u>NOTE WELL:</u></em></strong><strong><em> </em></strong><strong><em>This request extends several pages. Please be sure you have reached the end of the
+document.</em></strong></p>
+
+<p>The Rules Review Commission staff has completed its review of this rule prior to the
+Commission&#39;s next meeting. The Commission has not yet reviewed this rule and therefore there
+has not been a determination as to whether the rule will be approved. You may call this office to
+inquire concerning the staff recommendation.</p>
+
+<p>In reviewing these rules, the staff determined that the following technical changes need to be
+made. Approval of any rule is contingent upon making technical changes as set forth in G.S.
+150B-21.10.</p>
+
+<p><em>Lines 4-16 – please consider revising this Rule as follows:</em></p>
+
+<ul><li>
+(a) An appointment to an established position shall be a permanent appointment if:<ol><li>
+(1) the requirements of the probationary period have been satisfied in accordance with G.S.
+126-1.1, or</li>
+<li>
+(2) a time-limited appointment extends beyond three years of continuous employment.</li>
+</ol></li>
+<li>
+(b) An appointment to an established position shall be a time-limited appointment if it is an appointment to:<ol><li>
+(1) a permanent position that is vacant due to the incumbent&#39;s leave of absence and the
+replacement employee&#39;s services will be needed for a period of one year or less, or</li>
+<li>
+(2) a time-limited position. If an employee is retained in a time-limited position beyond three
+years, the employee shall be designated as having a permanent appointment.</li>
+</ol></li>
+</ul>
+<p>Please retype the rule accordingly and resubmit it to our office at 1711 New Hope Church Road,
+Raleigh, North Carolina 27609.</p>
+
+</section>
+<section>
+<p>1 25 NCAC 01C .0402 is amended as published in 31:05 NCR 390 as follows:
+2</p>
+
+<h2 id="heading-2">3 25 NCAC 01C .0402 PERMANENT AND TIME-LIMITED APPOINTMENT</h2>
+<p>4 (a) A permanent appointment is an appointment to a permanent established position. A permanent appointment shall
+5 be given when the following conditions have been met:</p>
+
+<ul><li>
+6 (1) the requirements of the probationary period have been <del>satisfied,</del> <u>satisfied in accordance with G.S.</u></li>
+<li>
+7 <u>126-1.1, or</u></li>
+<li>
+8 <del>(2) an employee in a trainee appointment has completed all training and experience requirements and</del></li>
+<li>
+9 <del>completed 24 months of continuous employment in a position subject to the State Human</del></li>
+<li>
+10 <del>Resources Act, or</del></li>
+<li>
+11 <del>(3)</del><u>(2)</u> a time-limited appointment extends beyond three years of continuous employment.</li>
+</ul>
+<p>12 (b) A time-limited appointment is an appointment that has a limited duration to:</p>
+
+<ul><li>
+13 (1) a permanent position that is vacant due to the incumbent&#39;s leave of absence and when the</li>
+<li>
+14 replacement employee&#39;s services will be needed for a period of one year or less, <u>or</u></li>
+<li>
+15 (2) a time-limited position. If an employee is retained in a time-limited position beyond three years,</li>
+<li>
+16 the employee shall be designated as having a permanent appointment.</li>
+</ul>
+<p>17
+18 <em>History Note: Authority G.S. 126-4;</em>
+19 <em>Eff. February 1, 1976;</em>
+20 <em>Amended Eff. October 1, 2004; August 1, 1995; January 1, 1989; June 1, 1983; July 1, 1979;</em>
+21 <em>Pursuant to G.S. 150B-21.3A, rule is necessary without substantive public interest Eff. October</em>
+22 <em>28, 2014;</em>
+23 <em>Amended Eff. </em><em><u>February 1, 2017;</u></em><em> April 1, 2015.</em></p>
+
+</section>
+<section>
+<p>Jason Thomas
+Commission Counsel
+Date submitted to agency: December 22, 2016</p>
+
+<p>AGENCY: State Human Resources Commission</p>
+
+<p>RULE CITATION: 25 NCAC 01C .1004</p>
+
+<p><strong>DEADLINE FOR RECEIPT: Wednesday, January 11, 2017</strong></p>
+
+<p><strong><em><u>NOTE WELL:</u></em></strong><strong><em> </em></strong><strong><em>This request extends several pages. Please be sure you have reached the end of the
+document.</em></strong></p>
+
+<p>The Rules Review Commission staff has completed its review of this rule prior to the
+Commission&#39;s next meeting. The Commission has not yet reviewed this rule and therefore there
+has not been a determination as to whether the rule will be approved. You may call this office to
+inquire concerning the staff recommendation.</p>
+
+<p>In reviewing these rules, the staff determined that the following technical changes need to be
+made. Approval of any rule is contingent upon making technical changes as set forth in G.S.
+150B-21.10.</p>
+
+<p><em>Lines 3, 12, 22, 25, and 29 – please choose either “reduction in force” or “reduction-in
+force” and use that spelling consistently throughout your rules.</em></p>
+
+<p><em>Lines 12, and 17 – choose either “guideline” or “guidelines” and use that term consistently
+throughout your rules. “Guidelines” (plural) is recommended.</em></p>
+
+<p><em>Line 24 – what does “benefits available” mean? If accurate, consider replacing “available”
+with “described in the agency’s reduction-in-force guidelines.”</em></p>
+
+<p><em>Line 29 – replace “policy” with “guidelines” if this refers to the guidelines required in (b)(1)
+of this Rule.</em></p>
+
+<p>Please retype the rule accordingly and resubmit it to our office at 1711 New Hope Church Road,
+Raleigh, North Carolina 27609.</p>
+
+</section>
+<section>
+<p>1
+1 25 NCAC 01C .1004 is amended <u>with changes</u> as published in 31:05 NCR 390 as follows:
+2</p>
+
+<h2 id="heading-3">3 25 NCAC 01C .1004 REDUCTION IN FORCE</h2>
+<p>4 (a) A State government agency may separate an employee whenever it is necessary due to shortage of funds or
+5 work, abolishment of a position, or other material change in duties or organization. Retention of employees in
+6 classes affected shall be based on systematic consideration of all the following factors: type of appointment, relative
+7 efficiency, actual or potential adverse impact on the diversity of the workforce, and length of service. No <del>temporary,</del>
+8 <u>temporary or probationary,</u> <del>probationary</del> State employee as defined in G.S. 126-1.1 or <del>trainee in their initial 24</del>
+9 <del>months of training</del> shall be retained where an employee with a permanent appointment shall be separated in the
+10 same or related class.
+11 (b) Agency Responsibilities:</p>
+
+<ul><li>
+12 (1) Each agency shall develop a written guideline for reduction in force that meets its particular needs
+13 with potential reductions being considered on a fair and systematic basis in accordance with
+14 factors defined in the <del>reduction-in-force policy</del> <u>State Reduction In Force Policy</u> located <del>in Section</del>
+15 <del>11 of the State Human Resources Manual</del> on the Office of State Human Resources website at
+16 <del>http://www.oshr.nc.gov/Guide/Policies/policies.htm.</del> <u>http://oshr.nc.gov/policies-</u></li>
+</ul>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Agency Responsibilities Table">
+<table>
+<caption>Agency Responsibilities Table</caption><tbody><tr><td>17</td><td><u>forms/separation/reduction-in-force-policy.</u> Each agency&#39;s guidelines shall be <u>reviewed and</u></td></tr>
+</tbody></table>
+</div>
+
+<ul><li>
+18 <u>approved by the Office of State Human Resources and</u> filed with the Office of State Human
+19 Resources as a public record; and
+20 (2) The employing agency shall notify the employee in writing of separation as soon as possible and
+21 in any case not less than 30 calendar days prior to the effective date of separation. The written
+22 notification shall include the reasons for the reduction in force, expected date of separation, the
+23 employee&#39;s eligibility for priority reemployment consideration, applicable appeal rights, and other
+24 benefits available.</li>
+</ul>
+<p>25 (c) Appeals: An employee may appeal the reduction in force separation only on the grounds listed in the State
+26 Employee Grievance <del>policy,</del> <u>Policy,</u> located <del>in Section seven of the State Human Resources Manual</del> on the Office of
+27 State Human Resources website at <a href="http://www.oshr.nc.gov/Guide/Policies/policies.htm" target="_blank" rel="noopener noreferrer" class="external-link">http://www.oshr.nc.gov/Guide/Policies/policies.htm<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a><del>.</del> <a href="http://oshr.nc.gov/policies-" target="_blank" rel="noopener noreferrer" class="external-link">http://oshr.nc.gov/policies-<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a></p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Appeals URL Table">
+<table>
+<caption>Appeals URL Table</caption><tbody><tr><td>28</td><td><u>forms/discipline-appeals-grievances/employee-grievance-policy.</u></td></tr>
+</tbody></table>
+</div>
+
+<p>29 (d) The agency shall analyze any application of its reduction-in-force policy to determine its impact on equal
+30 employment opportunity in accordance with the Equal Employment Opportunities Commission&#39;s (EEOC) Uniform
+31 Guidelines on Employee Selection Procedures in the code of federal regulations at 29 C.F.R. part 1607, section 6A,
+32 which is hereby incorporated by reference including any subsequent amendments and editions. These guidelines are
+33 available for free on the EEOC website at <a href="http://www.eeoc.gov/laws/regulations/index.cfm" target="_blank" rel="noopener noreferrer" class="external-link">http://www.eeoc.gov/laws/regulations/index.cfm<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a>.
+34 (e) <del>Severance Salary Continuation:</del> Severance salary continuation shall be administered in accordance with <del>25</del>
+35 <del>NCAC 01D .2701.</del> <u>25 NCAC 01D .2700.</u> <del>Pursuant to G.S. 126-8.5, the Office of State Budget and Management is</del>
+36 <del>responsible for determining whether severance continuation is applicable. Prior approval shall be received from the</del>
+37 <del>Office of State Budget and Management before severance salary continuation is paid.</del></p>
+
+</section>
+<section>
+<p>2
+1
+2 <em>History Note: Authority G.S. 126-4(2);</em>
+3 <em>Eff. February 1, 1976;</em>
+4 <em>Amended Eff. May1, 1980; January 1, 2980;</em>
+5 <em>Emergency Amendment (a) Eff. March 16, 1981 for a Period of 77 Days to Expire on June 1,</em>
+6 <em>1981;</em>
+7 <em>Emergency Amendment (a) Made Permanent with Change Eff. April 8, 1981;</em>
+8 <em>Amended Eff. December 1, 1995; March 1, 1994; November 1, 1990; March 1, 1987;</em>
+9 <em>Recodified from 25 NCAC 01D .0504 Eff. December 29, 2003;</em>
+10 <em>Amended Eff. October 1, 2009; March 1, 2005;</em>
+11 <em>Pursuant to G.S. 150B-21.3A, rule is necessary without substantive public interest Eff. October</em>
+12 <em>28, 2014;</em>
+13 <em>Amended Eff. </em><em><u>February 1, 2017;</u></em><em> April 1, 2015.</em></p>
+
+</section>
+<section>
+<p>Jason Thomas
+Commission Counsel
+Date submitted to agency: December 22, 2016</p>
+
+<p>AGENCY: State Human Resources Commission</p>
+
+<p>RULE CITATION: 25 NCAC 01D .0101</p>
+
+<p><strong>DEADLINE FOR RECEIPT: Wednesday, January 11, 2017</strong></p>
+
+<p><strong><em><u>NOTE WELL:</u></em></strong><strong><em> </em></strong><strong><em>This request extends several pages. Please be sure you have reached the end of the
+document.</em></strong></p>
+
+<p>The Rules Review Commission staff has completed its review of this rule prior to the
+Commission&#39;s next meeting. The Commission has not yet reviewed this rule and therefore there
+has not been a determination as to whether the rule will be approved. You may call this office to
+inquire concerning the staff recommendation.</p>
+
+<p>In reviewing these rules, the staff determined that the following technical changes need to be
+made. Approval of any rule is contingent upon making technical changes as set forth in G.S.
+150B-21.10.</p>
+
+<p><em>Line 3 – consider deleting “Philosophy and” in light of the comments regarding Paragraph
+(a), below. General statements of philosophy or aspirations are not rules.</em></p>
+
+<p><em>Lines 4-12 – delete Paragraph (a) entirely. If elements of this paragraph help inform the
+meaning of “appropriately compensate,” incorporate them as suggested below.</em></p>
+
+<p><em>Line 13 – replace “A compensation plan shall be maintained” with “The State Human
+Resources Commission shall maintain a compensation plan” if that is what is intended.</em></p>
+
+<p><em>Line 14 – what does “appropriately compensate” mean? If you mean compensation that
+will “encourage exceptional performance and maintain labor market competitiveness
+within the boundaries of financial resources” then say so, perhaps adding a sentence in
+line 14 as follows:</em></p>
+
+<p>“Appropriate compensation” shall mean compensation that encourages exceptional performance and
+maintains labor market competitiveness within the limits of financial resources.</p>
+
+<p><em>Line 16 – add “provided that” or “however,” before “such”</em></p>
+
+<p>Please retype the rule accordingly and resubmit it to our office at 1711 New Hope Church Road,
+Raleigh, North Carolina 27609.</p>
+
+</section>
+<section>
+<p>1 25 NCAC 01D .0101 is amended as published in 31:05 NCR 391 as follows:
+2</p>
+
+<h2 id="heading-4">3 25 NCAC 01D .0101 COMPENSATION PHILOSOPHY AND PLAN</h2>
+<p>4 (a) <u>The State of North Carolina is committed to attracting and retaining a diverse workforce of high performing</u>
+5 <u>employees with the competencies, knowledge, skills, abilities and dedication needed to consistently meet</u>
+6 <u>continually evolving strategic goals.</u> It is the policy of the state to compensate its employees <del>at a level sufficient to</del>
+7 <del>encourage excellence of performance and to maintain the labor market competitiveness necessary to recruit and</del>
+8 <del>retain a competent work force.</del> <u>to encourage exceptional performance and to maintain labor market competitiveness</u>
+9 <u>within the boundaries of financial resources.</u> <del>To this end, and in accordance with the State Human Resources Act,</del>
+10 <del>the State Human Resources Commission shall conduct annual compensations surveys to determine the percent of</del>
+11 <del>funds appropriated for salary increases to be reserved for a general increase for all state employees and the percent</del>
+12 <del>to be reserved for performance-based increases for eligible employees.</del>
+13 (b) A compensation plan <del>is</del> <u>shall be</u> maintained <del>which provides</del> <u>by providing</u> a salary rate structure or structures
+14 adequate to appropriately compensate all positions subject to the State Human Resources Act. This structure <u>or</u>
+15 <u>structures</u> may be revised <del>in composition, or the total structure moved upward or downward,</del> in response to labor
+16 market trends and to legislative actions affecting salaries; such action is dependent on the availability of funds.
+17
+18 <em>History Note: Authority G.S. 126-4;</em>
+19 <em>Eff. February 1, 1976;</em>
+20 <em>Amended Eff. January 1, 1990;</em>
+21 <em>Pursuant to G.S. 150B-21.3A, rule is necessary without substantive public interest Eff. December</em>
+22 <em>20, </em><em><del>2015.</del></em><em><u>2015;</u></em>
+23 <em><u>Amended Eff. February 1, 2017.</u></em></p>
+
+</section>
+<section>
+<p>Jason Thomas
+Commission Counsel
+Date submitted to agency: December 22, 2016</p>
+
+<p>AGENCY: State Human Resources Commission</p>
+
+<p>RULE CITATION: 25 NCAC 01D .0102</p>
+
+<p><strong>DEADLINE FOR RECEIPT: Wednesday, January 11, 2017</strong></p>
+
+<p><strong><em><u>NOTE WELL:</u></em></strong><strong><em> </em></strong><strong><em>This request extends several pages. Please be sure you have reached the end of the
+document.</em></strong></p>
+
+<p>The Rules Review Commission staff has completed its review of this rule prior to the
+Commission&#39;s next meeting. The Commission has not yet reviewed this rule and therefore there
+has not been a determination as to whether the rule will be approved. You may call this office to
+inquire concerning the staff recommendation.</p>
+
+<p>In reviewing these rules, the staff determined that the following technical changes need to be
+made. Approval of any rule is contingent upon making technical changes as set forth in G.S.
+150B-21.10.</p>
+
+<p><em>Lines 4-10 – consider revising as follows:</em></p>
+
+<p>(a) The salary structures in the compensation plan maintained pursuant to Rule .0101 of this
+Section shall include all positions subject to the State Human Resources Act. Each such position
+shall be assigned to a pay grade with an associated salary range based on similar employment in
+the defined labor market. Each pay grade shall be assigned a minimum, midpoint, and maximum
+salary rate that is competitive with rates in the external labor market, consistent with the state&#39;s
+ability to pay and the hierarchy within state government employment. The minimum and
+maximum salary rates shall be the lowest and highest salaries paid for a job assigned to that pay
+grade.</p>
+
+<p><em>Line 9 – what does “maintain internal equity” mean? The proposed draft, above, suggests
+“employment hierarchy” but it is not clear what the Commission intends by “maintain
+internal equity.”</em></p>
+
+<p><em>Line 16 – replace “are commensurate with” with “shall be based on”</em></p>
+
+<p><em>Line 16 – add “and the” before “content”</em></p>
+
+<p><em>Line 17 – replace “job” with “employment” because that appears to be the term typically
+used in these rules.</em></p>
+
+<p><em>Line 17 – replace “are” with “shall be” and delete the comma after “quartiles”</em></p>
+
+<p><em>Line 18 – replace “determining” with “placing” and delete “placement”</em></p>
+
+<p><em>Line 18 – replace “salary” with “salaries”</em></p>
+
+<p><em>Line 19 – Is this approval to be in writing? Who may request such an approval?</em></p>
+
+</section>
+<section>
+<p>Jason Thomas
+Commission Counsel
+Date submitted to agency: December 22, 2016</p>
+
+<p>Please retype the rule accordingly and resubmit it to our office at 1711 New Hope Church Road,
+Raleigh, North Carolina 27609.</p>
+
+</section>
+<section>
+<p>1 25 NCAC 01D .0102 is amended as published in 31:05 NCR 391 as follows:
+2</p>
+
+<h2 id="heading-5">3 25 NCAC 01D .0102 SALARY RANGES STRUCTURES</h2>
+<p>4 (a) <u>The salary structures provide a framework to set and manage compensation in a fair and consistent manner</u>
+5 <u>relative to the market for all positions subject to the State Human Resources Act.</u> Each <del>classified</del> position is assigned
+6 to a pay grade with an associated salary range <del>that provides,</del> based on similar employment in the defined labor
+7 market: <u>market. Each pay grade is constructed with a</u> minimum, <del>intermediate</del> <u>midpoint</u> and maximum salary rates
+8 that are competitive with rates in the external labor market consistent with the state&#39;s ability to pay; and proper
+9 relationships within state government employment to maintain internal equity. <u>The minimum and maximum</u>
+10 <u>represent the lowest and highest salary that may be paid for a job assigned to that pay grade.</u>
+11 <del>(b) Based on labor market demands, salary rates for some classifications may be approved above the standard rates.</del>
+12 <del>When a higher salary range (i.e., both the minimums and maximums are raised) is needed to recruit employees to</del>
+13 <del>certain areas of the state, the higher range(s) will be known as geographic differentials. When only the entry rates</del>
+14 <del>(and not the maximums) need to be higher, the higher rates will be known as special entry rates. Special entry rates</del>
+15 <del>may be approved on a geographic basis also.</del>
+16 <u>(b) Employee salaries are commensurate with all applicable pay factors, responsibilities, requirements, content and</u>
+17 <u>scope of job in relation to the salary range established for that position. Salary ranges are divided into quartiles, to</u>
+18 <u>aid in determining employee and potential employee salary placement within the prescribed salary range. As</u>
+19 <u>relevant labor markets change, salary rates may be adjusted with approval by the State Human Resources</u>
+20 <u>Commission.</u>
+21 <del>(c) When geographic differentials are in effect, all salary administration policies are applied as if the classification</del>
+22 <del>were at the higher grade. Provisions for applying special entry rates are included in each policy.</del>
+23
+24 <em>History Note: Authority G.S. 126-4;</em>
+25 <em>Eff. February 1, 1976;</em>
+26 <em>Amended Eff. January 1, 1990;</em>
+27 <em>Pursuant to G.S. 150B-21.3A, rule is necessary without substantive public interest Eff. December</em>
+28 <em>20, </em><em><del>2015.</del></em><em><u>2015;</u></em>
+29 <em><u>Amended Eff. </u></em><em><u>February 1, 2017.</u></em></p>
+
+<p>Jason Thomas</p>
+
+<p>Commission Counsel</p>
+
+<p>Date submitted to agency: December 22, 2016</p>
+
+</section>
+<section>
+<p>AGENCY:	State Human Resources Commission</p>
+
+<p>RULE CITATION:	25 NCAC 01D .1001</p>
+
+<p><strong>DEADLINE FOR RECEIPT: Wednesday, January 11, 2017</strong></p>
+
+<p><strong><em><u>NOTE WELL: This request extends several pages. Please be sure you have reached the end of the </u></em></strong><strong><em>document.</em></strong></p>
+
+<p>The Rules Review Commission staff has completed its review of this rule prior to the Commission&#39;s next meeting. The Commission has not yet reviewed this rule and therefore there has not been a determination as to whether the rule will be approved. You may call this office to inquire concerning the staff recommendation.</p>
+
+<p>In reviewing these rules, the staff determined that the following technical changes need to be made. Approval of any rule is contingent upon making technical changes as set forth in G.S. 150B-21.10.</p>
+
+<p><em>Line 4 – replace “is” with “shall mean”</em></p>
+
+<p><em>Line 5 – replace “who reinstate must” with “who are reinstated shall”</em></p>
+
+<p><em>Line 7 – replace the “is” after “employee” with “shall be”</em></p>
+
+<p><em>Line 8 – add “that” after “provided” and replace “class” with “classification”</em></p>
+
+<p>Please retype the rule accordingly and resubmit it to our office at 1711 New Hope Church Road, Raleigh, North Carolina 27609.</p>
+
+</section>
+<section aria-label="Permanent Amendment for Publication in the NCAC (part 1)">
+<h2 id="section-1">Permanent Amendment for Publication in the NCAC</h2>
+<ol><li>
+25 NCAC 01D .1001 is amended as published in 31:05 NCR 393 as follows:</li>
+<li>
+</li>
+<li>
+<strong>25 NCAC 01D .1001	</strong><strong><del>DEFINITION</del></strong><strong><u> REINSTATEMENT</u></strong></li>
+<li>
+<del>Reinstatement is: </del><u>is the return to state employment from an extended leave of absence or after a break in service as </u></li>
+<li>
+<u>defined in 25 NCAC 01D .0114 from a state agency. Employees who reinstate must meet the minimum </u></li>
+<li>
+<u>qualifications, or their equivalent, as set forth in the class specification of the position to which they are reinstated. If </u></li>
+<li>
+<u>reinstatement is from leave without pay as defined in 25 NCAC 01E .1100, the employee is automatically qualified </u></li>
+<li>
+<u>provided employment is in the same classification or in a lower class in the same field of work.</u></li>
+<li>
+<del>(1)	the reemployment with a permanent, permanent trainee or time-limited permanent appointment </del></li>
+<li>
+<del>after a break in service of a former employee with a full-time or part-time (20 hours or more) </del></li>
+<li>
+<del>permanent, permanent trainee or time-limited permanent appointment. The agency head shall </del></li>
+<li>
+<del>determine the appointment type based on the Probationary/Trainee/Permanent Appointment and </del></li>
+<li>
+<del>Career Status Rules. The agency head may, based on qualifications and previous work history, </del></li>
+<li>
+<del>offer reemployment with a probationary appointment; however, if the employee has priority </del></li>
+<li>
+<del>reemployment consideration as a result of reduction in force, the conditions outlined in the rule on </del></li>
+<li>
+<del>Priority Reemployment Consideration (25 NCAC 1D .0510) shall be met; or</del></li>
+<li>
+<del>(2)	the reemployment of an employee from leave without pay; or</del></li>
+<li>
+<del>(3)	the return to a nonpolicy-making position of an employee who transferred to or occupied a </del></li>
+<li>
+<del>position designated as policy-making exempt. Reemployment shall be with a permanent </del></li>
+<li>
+<del>appointment.</del></li>
+<li>
+</li>
+<li>
+<em>History Note:	Authority G.S. 126-4;</em></li>
+<li>
+<em>Eff. February 1, 1976;</em></li>
+<li>
+<em>Amended Eff. December 1, 1995; August 1, 1995; March 1, 1992; October 1, 1978;</em></li>
+<li>
+<em>Pursuant to G.S. 150B-21.3A, rule is necessary without substantive public interest Eff. December </em></li>
+<li>
+<em>20, </em><em><del>2015</del></em><em><u>.2015;</u></em></li>
+<li>
+<em><u>Amended Eff. February 1, 2017.</u></em></li>
+<li>
+25 NCAC 01D .2701 is readopted as published in 31:05 NCR 394 as follows:</li>
+<li>
+</li>
+<li>
+<strong>25 NCAC 01D .2701	SEVERANCE SALARY CONTINUATION POLICY</strong></li>
+<li>
+In accordance with G.S. 126-8.5, severance salary continuation shall be paid to eligible employees as defined in 25 </li>
+<li>
+NCAC 01D .2702 in accordance with the rules in this Section. Severance pay shall be subject to available funding </li>
+<li>
+and approval by the Office of State Budget and Management.</li>
+<li>
+</li>
+<li>
+<em>History Note:	Authority G.S. 126-4(10); 126-8.5;</em></li>
+<li>
+<em>Eff. October 1, 1985;</em></li>
+<li>
+<em>Amended Eff. October 1, 1995; September 1, 1991; November 1, 1990; November 1, 1988;</em></li>
+<li>
+<em>Recodified from 25 NCAC 01D .0509 Eff. December 29, 2003;</em></li>
+<li>
+<em>Amended Eff. February 1, 2016; March 1, 2009.</em></li>
+<li>
+<em><u>Readopted Eff. February 1, 2017.</u></em></li>
+</ol>
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">Permanent Readoption for Publication in the NCAC</h2>
+</section>
+<section>
+<p>Jason Thomas</p>
+
+<p>Commission Counsel</p>
+
+<p>Date submitted to agency: December 22, 2016</p>
+
+<p>AGENCY:	State Human Resources Commission</p>
+
+<p>RULE CITATION:	25 NCAC 01D .2702</p>
+
+<p><strong>DEADLINE FOR RECEIPT: Wednesday, January 11, 2017</strong></p>
+
+<p><strong><em><u>NOTE WELL: This request extends several pages. Please be sure you have reached the end of the </u></em></strong><strong><em>document.</em></strong></p>
+
+<p>The Rules Review Commission staff has completed its review of this rule prior to the Commission&#39;s next meeting. The Commission has not yet reviewed this rule and therefore there has not been a determination as to whether the rule will be approved. You may call this office to inquire concerning the staff recommendation.</p>
+
+<p>In reviewing these rules, the staff determined that the following technical changes need to be made. Approval of any rule is contingent upon making technical changes as set forth in G.S. 150B-21.10.</p>
+
+<p><em>Line 16 – replace “are not” with “shall not be”</em></p>
+
+<p><em>Line 18 – delete the comma after “separated” and add a comma after “force” if this is what </em><em>is meant.</em></p>
+
+<p><em>Line 20 add a comma after “126-8.5”</em></p>
+
+<p><em>Lines 25, 27 and 30 – add “set forth” after “requirements”</em></p>
+
+<p><em>Lines 28-29 – is the phrase “the same as other employees” redundant? If so, delete it.</em></p>
+
+<p>Please retype the rule accordingly and resubmit it to our office at 1711 New Hope Church Road, Raleigh, North Carolina 27609.</p>
+
+</section>
+<section aria-label="Permanent Amendment for Publication in the NCAC (part 2)">
+<h2 id="section-3">Permanent Amendment for Publication in the NCAC</h2>
+<ol><li>
+25 NCAC 01D .2702 is amended as published in 31:05 NCR 394 as follows:</li>
+<li>
+</li>
+<li>
+<strong>25 NCAC 01D .2702	SEVERANCE SALARY CONTINUATION ELIGIBILITY</strong></li>
+<li>
+(a) The following type of employee who has been reduced in force and who does not obtain employment in another </li>
+<li>
+position in State government or any other position that is funded in whole or in part by the State by the effective date </li>
+<li>
+of the separation shall be eligible for severance salary continuation:</li>
+<li>
+(1)	full-time and part-time (half-time or more) permanent employees;</li>
+<li>
+<del>(2)	trainee employees with 12 or more months of continuous State service;</del></li>
+<li>
+<del>(3)	trainee employees who obtained career status with no &#34;break in service,&#34; as defined in Rule .0114 </del></li>
+<li>
+<del>of this Subchapter, prior to entering a trainee appointment;</del></li>
+<li>
+<del>(4)</del><u>(2)</u>	time-limited employees with 36 or more months of continuous State service; and</li>
+<li>
+<del>(5)</del><u>(3)</u>	employees in exempt policymaking or exempt managerial positions as defined in G.S. 126-5(b) </li>
+<li>
+are eligible for severance salary continuation if the position is abolished as result of a reduction in </li>
+<li>
+force.</li>
+<li>
+<del>(b) </del><del>Trainee employees with less than 12 continuous months of service, time-limited </del><u>Time</u>-limited employees with </li>
+<li>
+less than 36 continuous months of service, probationary, and temporary employees are not eligible for severance </li>
+<li>
+salary continuation.</li>
+<li>
+(c) An employee who is separated, or who has received written notification of separation due to reduction in force </li>
+<li>
+and who applies for or begins receiving retirement benefits based on early retirement, service retirement, long term </li>
+<li>
+disability, or a discontinued service retirement as provided by G.S. 126-8.5 shall not be eligible for severance salary </li>
+<li>
+continuation. An employee who is eligible for early or service retirement may elect to delay retirement and receive </li>
+<li>
+severance salary continuation.</li>
+<li>
+(d) An employee who is reemployed from any retired status with the State and who is subsequently terminated as a </li>
+<li>
+result of reduction in force shall be eligible for severance salary continuation if the employee meets the eligibility </li>
+<li>
+requirements in Paragraph (a) of this Rule.</li>
+<li>
+(e) An employee who is receiving workers&#39; compensation or short-term disability payments is eligible for severance </li>
+<li>
+salary continuation if the employee meets the eligibility requirements in Paragraph (a) of the Rule.</li>
+<li>
+(f) An employee on leave with or without pay shall be separated on the effective date of the reduction in force, the </li>
+<li>
+same as other employees, and shall be eligible to receive severance salary continuation if the employee meets the </li>
+<li>
+eligibility requirements in Paragraph (a) of this Rule.</li>
+<li>
+</li>
+<li>
+<em>History Note:	Authority G.S. 126-4(10); 126-8.5;</em></li>
+<li>
+<em>Eff. February 1, </em><em><del>2016.</del></em><em><u>2016;</u></em></li>
+<li>
+<em><u>Amended Eff. February 1, 2017.</u></em></li>
+</ol>
+</section>
+<section>
+<p>Jason Thomas</p>
+
+<p>Commission Counsel</p>
+
+<p>Date submitted to agency: December 22, 2016</p>
+
+<p>AGENCY:	State Human Resources Commission</p>
+
+<p>RULE CITATION:	25 NCAC 01O .0108</p>
+
+<p><strong>DEADLINE FOR RECEIPT: Wednesday, January 11, 2017</strong></p>
+
+<p><strong><em><u>NOTE WELL: This request extends several pages. Please be sure you have reached the end of the </u></em></strong><strong><em>document.</em></strong></p>
+
+<p>The Rules Review Commission staff has completed its review of this rule prior to the Commission&#39;s next meeting. The Commission has not yet reviewed this rule and therefore there has not been a determination as to whether the rule will be approved. You may call this office to inquire concerning the staff recommendation.</p>
+
+<p>In reviewing these rules, the staff determined that the following technical changes need to be made. Approval of any rule is contingent upon making technical changes as set forth in G.S. 150B-21.10.</p>
+
+<p><em>Line 4 – Add “The” before “Rules”.</em></p>
+
+<p><em>Line 5 – add a comma after “time-limited”</em></p>
+
+<p>Please retype the rule accordingly and resubmit it to our office at 1711 New Hope Church Road, Raleigh, North Carolina 27609.</p>
+
+</section>
+<section aria-label="Permanent Amendment for Publication in the NCAC (part 3)">
+<h2 id="section-4">Permanent Amendment for Publication in the NCAC</h2>
+<ol><li>
+25 NCAC 01O .0108 is amended as published in 31:05 NCR 394 as follows:</li>
+<li>
+</li>
+<li>
+<strong>25 NCAC 01O .0108	PERFORMANCE MANAGEMENT COVERED EMPLOYEES</strong></li>
+<li>
+(a) Rules in this Subchapter shall apply to the following:</li>
+<li>
+(1)	probationary, time-limited and permanent employees; and</li>
+<li>
+(2)	employees appointed to exempt policy-making positions, exempt managerial positions, confidential </li>
+<li>
+<del>secretary, confidential assistant, and all chief deputy </del><del>positions; and</del><u> positions.</u></li>
+<li>
+<del>(3)	employees in trainee classifications.</del></li>
+<li>
+(b) Rules in this Subchapter shall not apply to temporary employees.</li>
+<li>
+</li>
+<li>
+<em>History Note:	Authority G.S. 126-4;</em></li>
+<li>
+<em>Eff. April 1, </em><em><del>2016.</del></em><em><u>2016;</u></em></li>
+<li>
+<em><u>Amended Eff. February 1, 2017.</u></em></li>
+</ol>
+</section>
+<section aria-labelledby="section-5">
+<h2 id="section-5">[Pages 11-21 unavailable]</h2>
+<p>Content from pages 11-21 could not be converted. This section may be available after retry.</p>
+
+</section>
+<section aria-labelledby="section-6">
+<h2 id="section-6">[Pages 21-31 unavailable]</h2>
+<p>Content from pages 21-31 could not be converted. This section may be available after retry.</p>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

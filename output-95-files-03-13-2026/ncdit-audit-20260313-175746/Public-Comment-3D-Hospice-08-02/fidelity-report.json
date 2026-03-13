@@ -1,0 +1,213 @@
+{
+  "document_id": "Public-Comment-3D-Hospice-08-02",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains a section at the end titled '[Pages 1-11 unavailable]' which includes an explanatory paragraph about missing content. However, per the task instructions, section labels and pipeline-added placeholders used for document structure/accessibility are not considered defects. No other fabricated body text or headings were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "I verified all URLs and references in the output against the source PDF. The URLs provided (e.g., nctracks.nc.gov, dma.ncdhhs.gov, etc.) are present in the original document. No fabricated phone numbers or addresses were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The converted document is missing the first 10 pages of the source material. The body of the JSON begins with the final line of page 10 and continues onto page 11. Consequently, the entire Table of Contents (pages 1-3), Section 1.0 (page 4), Section 2.0 (pages 5-6), Section 3.0 (pages 7-8), Section 4.0 (page 8), and Section 5.1/5.2 (page 9-10) are absent from the output.",
+        "b_evidence_source": "The source PDF contains pages 1-42, including a 3-page Table of Contents and Sections 1.0 through 5.2.2.3.",
+        "b_evidence_output": "The JSON document begins its textual representation with 'The provider(s) shall submit to NC DMA the following:', which corresponds to the bottom of source page 10. All preceding content is missing.",
+        "b_evidence_location": "Sections 1.0 through 5.2, pages 1-10",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "I compared the 'Revision Information' tables and 'Revenue Code' tables in the JSON against the source PDF. The tables present in the JSON (starting from page 28) contain the correct number of rows and data as seen in the source document. Although the document is missing its first 10 pages, there are no tables in those specific missing pages (other than the TOC, which is handled as a list/structural omission under C3).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "While whole pages are missing (handled in C3), the sections that were converted (from page 11 onwards) appear to be largely complete and match the source text structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The very first paragraph in the JSON, 'The provider(s) shall submit to NC DMA the following:', is marked with 'strikethrough: true'. In the source PDF (bottom of page 10 and top of page 11), this text is not struck through. While the document contains many legit strikeouts (being a draft), this particular line is part of the active policy text.",
+        "b_evidence_source": "The provider(s) shall submit to NC DMA the following:",
+        "b_evidence_output": "\"text\": \"The provider(s) shall submit to NC DMA the following:\", \"strikethrough\": true",
+        "b_evidence_location": "Section 5.2.2.4, first paragraph of output, page 11",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6976744186046512,
+    "penalty_sum": 26,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains a section at the end titled '[Pages 1-11 unavailable]' which includes an explanatory paragraph about missing content. However, per the task instructions, section labels and pipeline-added placeholders used for document structure/accessibility are not considered defects. No other fabricated body text or headings were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"I verified all URLs and references in the output against the source PDF. The URLs provided (e.g., nctracks.nc.gov, dma.ncdhhs.gov, etc.) are present in the original document. No fabricated phone numbers or addresses were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The converted document is missing the first 10 pages of the source material. The body of the JSON begins with the final line of page 10 and continues onto page 11. Consequently, the entire Table of Contents (pages 1-3), Section 1.0 (page 4), Section 2.0 (pages 5-6), Section 3.0 (pages 7-8), Section 4.0 (page 8), and Section 5.1/5.2 (page 9-10) are absent from the output.\",\n      \"b_evidence_source\": \"The source PDF contains pages 1-42, including a 3-page Table of Contents and Sections 1.0 through 5.2.2.3.\",\n      \"b_evidence_output\": \"The JSON document begins its textual representation with 'The provider(s) shall submit to NC DMA the following:', which corresponds to the bottom of source page 10. All preceding content is missing.\",\n      \"b_evidence_location\": \"Sections 1.0 through 5.2, pages 1-10\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"I compared the 'Revision Information' tables and 'Revenue Code' tables in the JSON against the source PDF. The tables present in the JSON (starting from page 28) contain the correct number of rows and data as seen in the source document. Although the document is missing its first 10 pages, there are no tables in those specific missing pages (other than the TOC, which is handled as a list/structural omission under C3).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"While whole pages are missing (handled in C3), the sections that were converted (from page 11 onwards) appear to be largely complete and match the source text structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The very first paragraph in the JSON, 'The provider(s) shall submit to NC DMA the following:', is marked with 'strikethrough: true'. In the source PDF (bottom of page 10 and top of page 11), this text is not struck through. While the document contains many legit strikeouts (being a draft), this particular line is part of the active policy text.\",\n      \"b_evidence_source\": \"The provider(s) shall submit to NC DMA the following:\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"The provider(s) shall submit to NC DMA the following:\\\", \\\"strikethrough\\\": true\",\n      \"b_evidence_location\": \"Section 5.2.2.4, first paragraph of output, page 11\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 26,\n    \"score\": 0.6976744186046512\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The content in the document does not appear to be structurally duplicated beyond what is present in the source document (e.g., repeating table headers across page breaks).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is flawed in the appendices. Top-level appendix titles such as 'Attachment A: Claims-Related Information' and 'Attachment B: Physician Face-to-Face Encounter...' are assigned level H3. Their sub-sections (e.g., 'A. Claim Type', 'B. International Classification...') are also assigned level H3. This creates a flat hierarchy where major sections and their sub-sections are at the same level, which breaks the logical document structure for navigation.",
+        "b_evidence_source": "Attachment A: Claims-Related Information (Page 31); Attachment B: Physician Face-to-Face Encounter... (Page 38).",
+        "b_evidence_output": "The output contains multiple H3 headings for both the main attachment titles and their sub-sections (e.g., heading-37, heading-38, heading-39).",
+        "b_evidence_location": "Sections starting from index 'heading-37' and 'heading-54'.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The table structure is corrupted in several places, primarily across page breaks. In Attachment A, the table describing revenue code 0652 is split into two separate tables. The first part ends abruptly at '(the hours may', and the second part starts as a new table with 'be split); AND' as its own row. Additionally, the Revision Information tables are fragmented, resulting in the continuation of text from one page becoming an orphaned row in a new table on the next page (e.g., the transition from Page 29 to Page 30).",
+        "b_evidence_source": "Attachment A revenue code table (Pages 31-32); Revision Information table (Pages 29-30).",
+        "b_evidence_output": "The output splits the 0652 entry into two distinct table elements. Similarly, 'Revision Information Table 3' starts with an orphan row containing text that should belong to the final row of the previous table.",
+        "b_evidence_location": "Attachment A (after element index 998) and Section 8.0 (Revision Information Table 3).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "There is a catastrophic failure in the reading order and completeness of the document. The first 11 pages of the source document, which include Sections 1.0 through 5.2, are omitted from the main sequence of the output. Instead, a placeholder section is added at the very end of the JSON titled '[Pages 1-11 unavailable]' which states that the content could not be converted. This fundamentally breaks the document's logical flow and structural fidelity.",
+        "b_evidence_source": "Sections 1.0 (Description of the Procedure), 2.0 (Eligibility Requirements), 3.0 (When Covered), 4.0 (When Not Covered), and 5.0-5.2 (Requirements/PA).",
+        "b_evidence_output": "The output begins with Section 5.3 and contains a final section stating 'Content from pages 1-11 could not be converted.'",
+        "b_evidence_location": "Start of document and the final section element.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The lists observed in the converted sections (5.3 onwards) generally maintain their nesting and itemization correctly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The links found in the converted portions of the document are accurately captured and linked to the correct URLs.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.31818181818181823,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The content in the document does not appear to be structurally duplicated beyond what is present in the source document (e.g., repeating table headers across page breaks).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is flawed in the appendices. Top-level appendix titles such as 'Attachment A: Claims-Related Information' and 'Attachment B: Physician Face-to-Face Encounter...' are assigned level H3. Their sub-sections (e.g., 'A. Claim Type', 'B. International Classification...') are also assigned level H3. This creates a flat hierarchy where major sections and their sub-sections are at the same level, which breaks the logical document structure for navigation.\",\n      \"b_evidence_source\": \"Attachment A: Claims-Related Information (Page 31); Attachment B: Physician Face-to-Face Encounter... (Page 38).\",\n      \"b_evidence_output\": \"The output contains multiple H3 headings for both the main attachment titles and their sub-sections (e.g., heading-37, heading-38, heading-39).\",\n      \"b_evidence_location\": \"Sections starting from index 'heading-37' and 'heading-54'.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The table structure is corrupted in several places, primarily across page breaks. In Attachment A, the table describing revenue code 0652 is split into two separate tables. The first part ends abruptly at '(the hours may', and the second part starts as a new table with 'be split); AND' as its own row. Additionally, the Revision Information tables are fragmented, resulting in the continuation of text from one page becoming an orphaned row in a new table on the next page (e.g., the transition from Page 29 to Page 30).\",\n      \"b_evidence_source\": \"Attachment A revenue code table (Pages 31-32); Revision Information table (Pages 29-30).\",\n      \"b_evidence_output\": \"The output splits the 0652 entry into two distinct table elements. Similarly, 'Revision Information Table 3' starts with an orphan row containing text that should belong to the final row of the previous table.\",\n      \"b_evidence_location\": \"Attachment A (after element index 998) and Section 8.0 (Revision Information Table 3).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"There is a catastrophic failure in the reading order and completeness of the document. The first 11 pages of the source document, which include Sections 1.0 through 5.2, are omitted from the main sequence of the output. Instead, a placeholder section is added at the very end of the JSON titled '[Pages 1-11 unavailable]' which states that the content could not be converted. This fundamentally breaks the document's logical flow and structural fidelity.\",\n      \"b_evidence_source\": \"Sections 1.0 (Description of the Procedure), 2.0 (Eligibility Requirements), 3.0 (When Covered), 4.0 (When Not Covered), and 5.0-5.2 (Requirements/PA).\",\n      \"b_evidence_output\": \"The output begins with Section 5.3 and contains a final section stating 'Content from pages 1-11 could not be converted.'\",\n      \"b_evidence_location\": \"Start of document and the final section element.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The lists observed in the converted sections (5.3 onwards) generally maintain their nesting and itemization correctly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The links found in the converted portions of the document are accurately captured and linked to the correct URLs.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.31818181818181823\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output exhibits a severe failure in visual organization and completeness. Sections 1.0 through 5.2 of the source PDF (pages 4-10) are entirely missing from the rendered body content. The HTML document body starts abruptly at Section 5.3 'Admission to Hospice'. Furthermore, the HTML displays explicit placeholder messages stating that pages are unavailable, which disrupts the visual flow and structure compared to the source document.",
+        "b_evidence_source": "The source PDF contains body content starting at Section 1.0 'Description of the Procedure, Product, or Service' on page 4, continuing through Section 5.2 'Prior Approval Requirements' on page 10.",
+        "b_evidence_output": "The HTML body content begins immediately with Section '5.3 Admission to Hospice'. At the bottom of the rendered output, placeholder text appears stating: '[Pages 1-11 unavailable] Content for page(s) 1-11 is not available.'",
+        "b_evidence_location": "Beginning of the body content and end of the document.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "While simple tables in Section 8.0 and Attachment A are rendered correctly, the most complex table in the document—the 'ACTIVITIES OF DAILY LIVING' grid in Attachment C (page 41)—is completely missing from the HTML output. Instead of the grid, the HTML displays a failure message. A missing table constitutes a major visual rendering defect.",
+        "b_evidence_source": "In the source PDF on page 41, there is a complex multi-column grid titled 'ACTIVITIES OF DAILY LIVING' used for tracking hospice services.",
+        "b_evidence_output": "The HTML rendering of Attachment C is empty of its form content and grid, displaying only the text: '[Pages 37-38 unavailable] Content for page(s) 37-38 is not available.'",
+        "b_evidence_location": "Attachment C: Hospice-PCS Coordination Form (DMA-3165), page 41.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "A review of the source PDF confirms there are no meaningful images, logos, or diagrams. The document is entirely composed of text, tables, and form structures. Therefore, no images are missing from the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The rendered HTML content was scanned for repeated body content blocks, such as identical paragraphs or tables appearing multiple times within the body. No such duplications were found. Heading elements correctly appear in both the navigation/TOC area and the main body as intended for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output exhibits a severe failure in visual organization and completeness. Sections 1.0 through 5.2 of the source PDF (pages 4-10) are entirely missing from the rendered body content. The HTML document body starts abruptly at Section 5.3 'Admission to Hospice'. Furthermore, the HTML displays explicit placeholder messages stating that pages are unavailable, which disrupts the visual flow and structure compared to the source document.\",\n      \"b_evidence_source\": \"The source PDF contains body content starting at Section 1.0 'Description of the Procedure, Product, or Service' on page 4, continuing through Section 5.2 'Prior Approval Requirements' on page 10.\",\n      \"b_evidence_output\": \"The HTML body content begins immediately with Section '5.3 Admission to Hospice'. At the bottom of the rendered output, placeholder text appears stating: '[Pages 1-11 unavailable] Content for page(s) 1-11 is not available.'\",\n      \"b_evidence_location\": \"Beginning of the body content and end of the document.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"While simple tables in Section 8.0 and Attachment A are rendered correctly, the most complex table in the document—the 'ACTIVITIES OF DAILY LIVING' grid in Attachment C (page 41)—is completely missing from the HTML output. Instead of the grid, the HTML displays a failure message. A missing table constitutes a major visual rendering defect.\",\n      \"b_evidence_source\": \"In the source PDF on page 41, there is a complex multi-column grid titled 'ACTIVITIES OF DAILY LIVING' used for tracking hospice services.\",\n      \"b_evidence_output\": \"The HTML rendering of Attachment C is empty of its form content and grid, displaying only the text: '[Pages 37-38 unavailable] Content for page(s) 37-38 is not available.'\",\n      \"b_evidence_location\": \"Attachment C: Hospice-PCS Coordination Form (DMA-3165), page 41.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"A review of the source PDF confirms there are no meaningful images, logos, or diagrams. The document is entirely composed of text, tables, and form structures. Therefore, no images are missing from the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The rendered HTML content was scanned for repeated body content blocks, such as identical paragraphs or tables appearing multiple times within the body. No such duplications were found. Heading elements correctly appear in both the navigation/TOC area and the main body as intended for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 7,
+  "total_critical": 1,
+  "total_major": 5,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

@@ -1,0 +1,213 @@
+{
+  "document_id": "14B-NCAC-16-.1401",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output content accurately reflects the sections and text found in the source PDF. No paragraphs or sentences were fabricated; all body text and headings can be traced back to the original document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output contains an email address string that is a concatenation of two distinct email addresses from the source. In the source, one email is struck through and another is underlined as an amendment. The conversion process merged them into a single, invalid email address string. According to the criteria, any mismatch in contact information (including merged strings that create a new, non-existent entity) is a critical failure.",
+        "b_evidence_source": "PPSASL-Photos@ncdoj.gov (struck through) and PPSASL-Photos@ncdps.gov (underlined)",
+        "b_evidence_output": "PPSASL-Photos@ncdoj.govPPSASL-Photos@ncdps.gov",
+        "b_evidence_location": "List item (2), page 1",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All paragraphs (a) through (e), the list items (1)-(6), the header, and the history note are present in the output. No pages or major sections are missing.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document does not contain any tables.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The sections are complete in terms of text content. While formatting is lost, the actual words from each section are captured.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The document is a legal amendment where strikethrough and underline markings are used to denote changes in law. The output fails to preserve or mark these distinctions, instead presenting both the deleted text and the new text as a single continuous string (e.g., in the title, paragraph (a), and list item (3)). This significantly alters the legal meaning of the text, as it merges defunct requirements with current ones into confusing, run-on sentences. For example, in list item (3), it merges a 48-month county search requirement with a 60-month state search requirement without distinction.",
+        "b_evidence_source": "Strikethrough on '~~appropriate governmental authority... 74C-8.1(a);~~' followed by underline on '_reporting service designated... 60 months;_' ",
+        "b_evidence_output": "\"...search from the appropriate governmental authority... 74C-8.1(a);reporting service designated... for any state where the applicant has resided within the preceding 60 months;\"",
+        "b_evidence_location": "List item (3), page 1",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output content accurately reflects the sections and text found in the source PDF. No paragraphs or sentences were fabricated; all body text and headings can be traced back to the original document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output contains an email address string that is a concatenation of two distinct email addresses from the source. In the source, one email is struck through and another is underlined as an amendment. The conversion process merged them into a single, invalid email address string. According to the criteria, any mismatch in contact information (including merged strings that create a new, non-existent entity) is a critical failure.\",\n      \"b_evidence_source\": \"PPSASL-Photos@ncdoj.gov (struck through) and PPSASL-Photos@ncdps.gov (underlined)\",\n      \"b_evidence_output\": \"PPSASL-Photos@ncdoj.govPPSASL-Photos@ncdps.gov\",\n      \"b_evidence_location\": \"List item (2), page 1\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All paragraphs (a) through (e), the list items (1)-(6), the header, and the history note are present in the output. No pages or major sections are missing.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document does not contain any tables.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The sections are complete in terms of text content. While formatting is lost, the actual words from each section are captured.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The document is a legal amendment where strikethrough and underline markings are used to denote changes in law. The output fails to preserve or mark these distinctions, instead presenting both the deleted text and the new text as a single continuous string (e.g., in the title, paragraph (a), and list item (3)). This significantly alters the legal meaning of the text, as it merges defunct requirements with current ones into confusing, run-on sentences. For example, in list item (3), it merges a 48-month county search requirement with a 60-month state search requirement without distinction.\",\n      \"b_evidence_source\": \"Strikethrough on '~~appropriate governmental authority... 74C-8.1(a);~~' followed by underline on '_reporting service designated... 60 months;_' \",\n      \"b_evidence_output\": \"\\\"...search from the appropriate governmental authority... 74C-8.1(a);reporting service designated... for any state where the applicant has resided within the preceding 60 months;\\\"\",\n      \"b_evidence_location\": \"List item (3), page 1\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output document was reviewed for duplicated content. Each section, paragraph, and list item appears exactly once, matching the source document. While some phrases in list item (3) appear twice (e.g., 'reporting service designated by the Board pursuant to G.S. 74C-8.1(a)'), this is a faithful representation of the source where the text is present once in a struck-out format and again as replacement text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document title '14B NCAC 16 .1401 APPLICATION/ARMED ARMORED CAR SERVICE GUARD FIREARM REGISTRATION PERMIT' is correctly identified and assigned as an H2 heading. Since it is the primary section title in the document body, this level is appropriate for structural hierarchy. No heading levels are skipped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document does not contain any tables. The output correctly reflects this by not including any table structures.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the output follows the logical top-to-bottom flow of the source PDF. It begins with the introductory amendment statement, followed by the rule title, the primary paragraph (a), the numbered requirements list (1-6), paragraphs (b) through (e), and finally the history notes. This matches the intended sequence of the authoritative document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The numbered list (1) through (6) under subsection (a) is correctly identified as an ordered list. All six items are preserved as distinct list elements. While the internal formatting (strikethroughs and underlines for edits) is flattened into plain text, the list structure itself remains intact.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The email addresses and legal citations in the document are rendered as plain text within their respective blocks. No incorrect, broken, or fabricated hyperlinks were injected into the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output document was reviewed for duplicated content. Each section, paragraph, and list item appears exactly once, matching the source document. While some phrases in list item (3) appear twice (e.g., 'reporting service designated by the Board pursuant to G.S. 74C-8.1(a)'), this is a faithful representation of the source where the text is present once in a struck-out format and again as replacement text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document title '14B NCAC 16 .1401 APPLICATION/ARMED ARMORED CAR SERVICE GUARD FIREARM REGISTRATION PERMIT' is correctly identified and assigned as an H2 heading. Since it is the primary section title in the document body, this level is appropriate for structural hierarchy. No heading levels are skipped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document does not contain any tables. The output correctly reflects this by not including any table structures.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the output follows the logical top-to-bottom flow of the source PDF. It begins with the introductory amendment statement, followed by the rule title, the primary paragraph (a), the numbered requirements list (1-6), paragraphs (b) through (e), and finally the history notes. This matches the intended sequence of the authoritative document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The numbered list (1) through (6) under subsection (a) is correctly identified as an ordered list. All six items are preserved as distinct list elements. While the internal formatting (strikethroughs and underlines for edits) is flattened into plain text, the list structure itself remains intact.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The email addresses and legal citations in the document are rendered as plain text within their respective blocks. No incorrect, broken, or fabricated hyperlinks were injected into the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The source PDF is a legal document showing proposed amendments, using strikethroughs to indicate deletions and underlines to indicate additions. The HTML output completely removes these visual formatting cues. This results in a document where deleted and added text are merged together without distinction (e.g., 'APPLICATION/ARMED ARMORED CAR' and the concatenated email addresses). This loss of visual organization significantly alters the meaning and readability of the document, as the intent of the 'flow' is to show changes, which is lost in the flattened HTML version.",
+        "b_evidence_source": "Visual strikethrough on 'ARMED' in the title; strikethrough on 'PPSASL-Photos@ncdoj.gov' in list item (2); strikethroughs and underlines in list item (3).",
+        "b_evidence_output": "The text 'ARMED ARMORED CAR' appears without formatting; the text 'PPSASL-Photos@ncdoj.govPPSASL-Photos@ncdps.gov' appears as a single string; item (3) contains a jumbled block of text mixing old and new versions without visual separation.",
+        "b_evidence_location": "Throughout the document, specifically the main title, list item (2) (page 1, line 10), and list item (3) (page 1, lines 11-16).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source document contains no tables, and thus none are rendered in the HTML.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source document does not contain any meaningful images, logos, or charts.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "Due to the failure to process strikethrough formatting, the HTML output duplicates content segments within the body text where the source PDF shows a word/phrase being replaced. In list item (3), the phrase 'reporting service designated by the Board pursuant to G.S. 74C-8.1(a)' appears twice in succession because the first (deleted) instance and the second (added) instance are rendered identically. Similarly, the email address section in item (2) shows two consecutive email strings without a space.",
+        "b_evidence_source": "Item (3) on lines 14-16 shows the phrase 'reporting service designated by the Board pursuant to G.S. 74C-8.1(a)' twice—once struck out and once underlined.",
+        "b_evidence_output": "\"...pursuant to G.S. 74C-8.1(a);reporting service designated by the Board pursuant to G.S. 74C-8.1(a)...\"",
+        "b_evidence_location": "List item (3) in the HTML body.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The source PDF is a legal document showing proposed amendments, using strikethroughs to indicate deletions and underlines to indicate additions. The HTML output completely removes these visual formatting cues. This results in a document where deleted and added text are merged together without distinction (e.g., 'APPLICATION/ARMED ARMORED CAR' and the concatenated email addresses). This loss of visual organization significantly alters the meaning and readability of the document, as the intent of the 'flow' is to show changes, which is lost in the flattened HTML version.\",\n      \"b_evidence_source\": \"Visual strikethrough on 'ARMED' in the title; strikethrough on 'PPSASL-Photos@ncdoj.gov' in list item (2); strikethroughs and underlines in list item (3).\",\n      \"b_evidence_output\": \"The text 'ARMED ARMORED CAR' appears without formatting; the text 'PPSASL-Photos@ncdoj.govPPSASL-Photos@ncdps.gov' appears as a single string; item (3) contains a jumbled block of text mixing old and new versions without visual separation.\",\n      \"b_evidence_location\": \"Throughout the document, specifically the main title, list item (2) (page 1, line 10), and list item (3) (page 1, lines 11-16).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source document contains no tables, and thus none are rendered in the HTML.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source document does not contain any meaningful images, logos, or charts.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"Due to the failure to process strikethrough formatting, the HTML output duplicates content segments within the body text where the source PDF shows a word/phrase being replaced. In list item (3), the phrase 'reporting service designated by the Board pursuant to G.S. 74C-8.1(a)' appears twice in succession because the first (deleted) instance and the second (added) instance are rendered identically. Similarly, the email address section in item (2) shows two consecutive email strings without a space.\",\n      \"b_evidence_source\": \"Item (3) on lines 14-16 shows the phrase 'reporting service designated by the Board pursuant to G.S. 74C-8.1(a)' twice—once struck out and once underlined.\",\n      \"b_evidence_output\": \"\\\"...pursuant to G.S. 74C-8.1(a);reporting service designated by the Board pursuant to G.S. 74C-8.1(a)...\\\"\",\n      \"b_evidence_location\": \"List item (3) in the HTML body.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 3,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

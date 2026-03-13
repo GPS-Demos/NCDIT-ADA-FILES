@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>Fire and Rescue Commission</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Fire and Rescue Commission</h1>
+    </header>
+    <nav aria-label="Table of Contents" class="document-nav">
+        <details>
+        <summary>Contents (36 items)</summary>
+        <ul>
+                <li><a href="#heading-1">Fire and Rescue Commission</a></li>
+                <li><a href="#heading-2">Welcome, Call to Order, Invocation</a></li>
+                <li><a href="#heading-3">Ethics Statement</a></li>
+                <li><a href="#heading-4">Approval of Agenda </a></li>
+                <li><a href="#heading-5">Approval of Minutes </a></li>
+                <li><a href="#heading-6">Reappointments – Harley Cook</a></li>
+                <li><a href="#heading-7">Board Reports</a></li>
+                    <li><a href="#heading-8">Certification Board Update – Kevin Gordon, Chair, Certification Board</a></li>
+                    <li><a href="#heading-9">VSWCF – Cloyce Anders</a></li>
+                    <li><a href="#heading-10">Certified Fire Investigator Board Update – Freddy Johnson</a></li>
+                <li><a href="#heading-11">OLD BUSINESS</a></li>
+                    <li><a href="#heading-12">Fayetteville Technical Community College Appeal – Harley Cook</a></li>
+                <li><a href="#heading-13">AGENCY REPORTS</a></li>
+                    <li><a href="#heading-14">Department of Insurance – Rick McIntyre</a></li>
+                    <li><a href="#heading-16">Wayne Bailey – Commission, Training and Inspections – See attachment</a></li>
+                    <li><a href="#heading-17">Rob Roegner – RPD &amp; Logistics</a></li>
+                    <li><a href="#heading-18">NCSFA – Tim Bradley – See Attachment</a></li>
+                    <li><a href="#heading-19">NCAR&amp;EMS – Joel Faircloth – See Attachment</a></li>
+                    <li><a href="#heading-20">NCAFC – Kevin Gordon</a></li>
+                    <li><a href="#heading-21">NCCCS – Winfield Abee </a></li>
+                    <li><a href="#heading-22">NCFRI </a></li>
+                    <li><a href="#heading-23">NC Forestry – Greg Hicks</a></li>
+                <li><a href="#heading-24">Quarterly Report</a></li>
+                <li><a href="#heading-25">Commission Staff</a></li>
+                    <li><a href="#heading-26">Training Staff</a></li>
+                    <li><a href="#heading-27">Inspections Staff</a></li>
+                <li><a href="#heading-28">NCSFA 2nd Quarter Report</a></li>
+                <li><a href="#heading-29">Introduce Any Past Presidents</a></li>
+                <li><a href="#heading-30">Introduce Any Board</a></li>
+                <li><a href="#heading-31">Introduce Any Staff</a></li>
+                <li><a href="#heading-32">Scholarship and Grants</a></li>
+                <li><a href="#heading-33">Conference Update</a></li>
+                <li><a href="#heading-34">Bylaw Changes to Be Mailed Out on or Before June 30th</a></li>
+                    <li><a href="#heading-35">Legislative Issues for 2016</a></li>
+                <li><a href="#heading-36">LGERS Update</a></li>
+                <li><a href="#heading-37">New Benefits for 2016</a></li>
+        </ul>
+        </details>
+    </nav>
+    <main id="main-content" role="main">
+<section>
+<p><strong>Pinecroft Sedgefield Fire Department, Greensboro
+April12, 2016</strong></p>
+
+<p>Attendees: Harley Cook, Chairman Cloyce Anders
+Phil Welch Jerry Laws
+Josh Smith Freddy Johnson
+Bill Rogers Kevin Gordon
+Matt Davis Rick McIntyre, Executive Director
+Walter Gardner Robert Poe</p>
+
+<h2 id="heading-2">Welcome, Call to Order, Invocation</h2>
+<p>Chairman Harley Cook called the meeting to order at 10:00 a.m. and asked Carnie 
+Hedgepeth to give the Invocation.</p>
+
+<h2 id="heading-3">Ethics Statement</h2>
+<p>Chairman Harley Cook presented the Ethics Awareness and Conflict of Interest reminder as 
+required by the North Carolina State Ethics Commission. There were no conflicts reported 
+at this time.</p>
+
+<p>Insurance Commissioner Wayne Goodwin presented David Wray with a plaque for his 
+years of service on the Commission.</p>
+
+<p>Chair Harley Cook introduced new Commission Member Jerry Laws.</p>
+
+<h2 id="heading-4">Approval of Agenda </h2>
+<p>Kevin Gordon asked that the Non Response Agenda Item be removed. Motion was made by 
+Kevin Gordon to accept the Agenda with the changes, seconded by Bill Rogers. Motion 
+carried.</p>
+
+<h2 id="heading-5">Approval of Minutes </h2>
+<p>Motion was made by Bill Rogers, seconded by Walter Gardner to approve the minutes of 
+the January 2016 meeting. Motion carried.</p>
+
+<h2 id="heading-6">Reappointments – Harley Cook</h2>
+<p>Kevin Gordon made a motion to reappoint Ben Smith to the Certification Board 
+representing the NC Association of Fire Chiefs the motion was seconded by Josh Smith. 
+Motion carried.</p>
+
+<p>Chair Harley Cook appointed Lee Newcomb to fill the Commission Chair appointment on 
+the CFI Board. </p>
+
+<h2 id="heading-7">Board Reports</h2>
+<h3 id="heading-8">Certification Board Update – Kevin Gordon, Chair, Certification Board</h3>
+<p>Non -Traditional delivery – Rob Roegner</p>
+
+<p>Fire Officer 1 pilot began April 8, 2016. 
+Driver Operator will go live January 1, 2017 and Mobile Water Supply will be added to the 
+Driver Operator certification program. Those who are qualified to teach EVD, Driver 
+Operator Pumps and Aeriel will be able to teach the Mobile Water Supplies after the 
+Requalification. </p>
+
+<p>Chapter 19 TR Machinery and Ag finalized and the requalifications will begin April 11, 
+2016. The Course will be available July 1, 2016. VMR and Ag Instructors must take the 
+Requalification to teach the new program. </p>
+
+<p>FIT – Pilots is going on at Gaston County. The program will go live July 1, 2016.</p>
+
+<p>The Certification Board placed a moratorium on letters of warning until a new process can 
+be developed. </p>
+
+<p>Kannapolis and North Lenoir Fire Department were approved to deliver certification 
+programs. </p>
+
+<p>Certification Board has discussed Rapid Intervention Crew Standard and held a conference 
+call April 5, 2016 and recommended to create an Alternative Standard Certification for 
+NFPA 1407. A RIC task force has been created and will meet today after the Commission 
+meeting to work on the details with start date of July 1, 2016. The task force will revamp 
+the program and begin Requalifications January 1. 
+Josh Smith made a motion to accept the March Certification Board report. The motion was 
+seconded by Bill Rogers. Motion passed</p>
+
+<h3 id="heading-9">VSWCF – Cloyce Anders</h3>
+<p>Cloyce thanked Commissioner Wayne Goodwin, Rick McIntyre and Tim Bradley for the 
+assistance. They are always supportive. Cloyce stated there will not be a rate change July 
+1, 2016. </p>
+
+<h3 id="heading-10">Certified Fire Investigator Board Update – Freddy Johnson</h3>
+<p>Chairman, Freddy Johnson thanked the Commission quickly filling the position vacated by 
+Henry Sermons. 
+Freddy reviewed the April Meeting minutes. The CFIB is currently working to update the 
+Arson Investigator application and recertification application. </p>
+
+<h2 id="heading-11">OLD BUSINESS</h2>
+<h3 id="heading-12">Fayetteville Technical Community College Appeal – Harley Cook</h3>
+<p>Robert Croom, attorney from the Attorney General’s Office, reviewed the appeal request 
+from FTCC. </p>
+
+<p>Fayetteville Technical Community College (FTCC) is appealing the decision to suspend the 
+College’s Delivery Agency Status. They are requesting a letter of warning be issued in 
+place of the suspension. </p>
+
+<p>Larry Sullivan, attorney for FTCC, stated that it did look like the college didn’t take the 
+situation seriously. However, it was just the opposite. The college feels the email sent four 
+days before the meeting wasn’t enough notice. The college also believes that the email 
+didn’t give a clear explanation that FTCCC was in violation or that disciplinary action was 
+even possible. The college took immediate steps to correct the situation including ending 
+the contract with instructor.</p>
+
+<p>Dr. Keene spoke to the Commission, stating that he was very upset and surprised about the 
+suspension. He immediately called his staff and asked for explanation for you how this 
+happened. This situation has allowed them to create a renewed commitment to the 
+certification program and the policies use to administer them. They have taken steps to 
+prevent any future issues.</p>
+
+<p>After much discussion Kevin Gordon made a motion to accept the attorney’s request for a 
+letter of warning and to remove the suspension their delivery agency status. The motion 
+was seconded by Phil Welch. Motion passed. </p>
+
+<h2 id="heading-13">AGENCY REPORTS</h2>
+<h3 id="heading-14">Department of Insurance – Rick McIntyre</h3>
+<h4 id="heading-15">Meg Langston – Injury Prevention </h4>
+<p>Prevention Programs and Grants:
+Updates:</p>
+
+<ul><li>
+Volunteer Fire Department Grants are being processed and will be announced on 
+May 16th. </li>
+<li>
+Invoices are due for the Rescue Grants by April 30. </li>
+<li>
+Smoke Alarms are on order. As soon as they are processed through the state system 
+they should be arriving. We hope to be able to start distributing alarms by May 1. If 
+a fire department needs smoke alarms please contact Angie Gregg.</li>
+<li>
+Unfortunately there have been a number of fatal fires recently. Angie and staff are 
+working to provide rapid response to these areas. Angie tries to keep track of all 
+fatalities. If you have a fatality in your area and she has not reached out please </li>
+</ul>
+<p>contact our office. These are sometimes hard to track and we are interested in 
+providing assistance. </p>
+
+<ul><li>
+Child Passenger Safety Conference will be May 4-6, 2016. </li>
+<li>
+Safe Kids Injury Prevention Conference will be May 24-26. This conference is open 
+to everyone and will provide information on how to start many ISO credit programs. </li>
+<li>
+We continue to offer Child Passenger Safety Class. Please look for those on 
+www.buckleupnc.org. Scholarships are available for many of these classes to help 
+with expense of travel. </li>
+<li>
+Please use regional field staff if you need any assistance with injury prevention 
+programs. They are eager to partner and are a valuable resource. </li>
+</ul>
+<h3 id="heading-16">Wayne Bailey – Commission, Training and Inspections – See attachment</h3>
+<h3 id="heading-17">Rob Roegner – RPD &amp; Logistics</h3>
+<p>Fire Officer, Driver Operator and Marine Firefighter are scheduled to be rewritten and 
+released in 2016. </p>
+
+<h3 id="heading-18">NCSFA – Tim Bradley – See Attachment</h3>
+<h3 id="heading-19">NCAR&amp;EMS – Joel Faircloth – See Attachment</h3>
+<p>NC Association of Rescue &amp; EMS
+Fire &amp; Rescue Commission Report
+04/12/2016</p>
+
+<p>Scholarship on-line Application System closed out March 31, 2016 and announcements of 
+awards should go out May 15, 2016. </p>
+
+<p>High Angle Rescue School Unit 1 &amp; 3 at Stone Mountain State Park was held April 1-3, 2016. </p>
+
+<p>Directors Meeting May 14, 2016 Starting at 9 in Asheville at Buncombe County Emergency 
+Services Training Facility. 20 Canoe Lane, Woodfin, NC 28804. </p>
+
+<p>Convention will be held in Hickory September 8-10, 2016. In conjunction with our annual 
+meeting we hosted rescue and BLS competitions, as well and rescue and EMS classes. 
+Please mark your calendars and information is available on line.</p>
+
+<p>Reminder for departments to be sure to update their rosters anytime someone is added to 
+their departments so that no one will lose benefits. </p>
+
+<h3 id="heading-20">NCAFC – Kevin Gordon</h3>
+<p>Mid Winter Conference had a record attendance.</p>
+
+<p>The 2016 Fire Prevention School had a record attendance. 
+Executive Development will be in September and October 2017 in Charlotte.
+2017 Mid Winter Conference will be February 1 – 5, 2017</p>
+
+<h3 id="heading-21">NCCCS – Winfield Abee </h3>
+<p>15,623 records have been transferred for 2016 to date. 2016 total records was 12,000. 
+NCCCS will have a new President effective July 1 will be Dr. James Williamson</p>
+
+<h3 id="heading-22">NCFRI </h3>
+<p>The NCSFRI is partnering NCAFC and hosting the Instructors during the Mid-Winter 
+Conference was a huge success. The member renewal has ended with a membership of 500 
+plus members. </p>
+
+<h3 id="heading-23">NC Forestry – Greg Hicks</h3>
+<p>Total number of fires January to present 1466 with 7212 acres burned. That is a 10 year 
+increase of 618 fires and 3629 acres burned. </p>
+
+<p>Walter Gardner reminded everyone of the SEI statement has to be in by Friday April 15, 
+2016. </p>
+
+<p>Next meeting will be July 12, 2106 at the Pinecroft Sedgefield Fire Department with a start 
+time of 10:00 a.m.</p>
+
+<p>With no other business to be addressed today, the meeting was adjourned ta 11:40 a.m.</p>
+
+<p>Respectfully submitted,
+Kim Williams</p>
+
+<h2 id="heading-24">Quarterly Report</h2>
+<h2 id="heading-25">Commission Staff</h2>
+<p><u>Regional Exams</u>
+Staff conducted regional exams at Cape Fear Community College, Raleigh Office, 
+Buncombe County.
+<u>Audits</u>
+Staff audited New Bern High School, West Craven High School, Wayne Community 
+College, West Bladen High School, East Bladen High School, North Topsail Beach Fire 
+Department, Parkway Fire Department, Atwell Fire Department, Red Oak Volunteer Fire 
+Department, Bakertown Volunteer Fire Department, Morrisville Fire Department, Garner 
+Magnet High School, North Mecklenburg Rescue Squad for Central Piedmont 
+Community College, Cape Fear Community College, Wilmington Fire Department, D. H. 
+Conley High School, Robeson Community College, Monticello Fire Department, 
+Fontana Dam Weekend School, New Bern High School, West Craven High School, 
+Wayne Community College, West Bladen High School, East Bladen High School, and 
+North Topsail Beach Fire Department, at Parkway Fire Department, Atwell Fire 
+Department.
+<u>5 Year Site Visits</u>
+Staff conducted five year site visits at Washington Fire &amp; Rescue, Durham Fire 
+Department, and Burlington Fire Department, Durham Tech, Guilford Tech.
+<u>Annual Visits</u>
+Staff conducted annual site visits at Pitt Community College, Pamlico Community 
+College, Cape Fear Community College, Beaufort Community College, Vance Granville 
+Community College, Orange Rural Fire Department, Mebane Fire Department, High 
+Point Fire Department, and Burke Community College, Bladen Community College, 
+Costal Carolina Community College, Sampson Community College, Goldsboro High 
+School and Sharpsburg Fire Department, Concord High School.</p>
+
+<p><u>New Delivery Agency Visits (Initial)</u>
+Staff performed a delivery agency initial site visit at North Lenoir Fire and Rescue, 
+Trenton High School, and Currituck County High School.
+<u>LODD</u>
+Staff assisted with line of duty deaths with Pine Level Fire Department, Siler City Fire 
+Department, NC Air Guard, Badin Lake Fire Department, Brasstown Fire Department, 
+Locke Fire Department, Bakertown Volunteer Fire Department, Gates County Rescue 
+and EMS.
+<u>Other</u>
+Staff attended the Mid-Winter Chief’s and NC Society of Fire &amp; Rescue Instructors 
+Conference held in Concord and managed the conference’s AV equipment.
+Staff assisted Commission Staff with teaching the <em>Surviving an Audit </em>class for School 
+Directors and Instructors at the Mid-Winter Chief’s &amp; NC Society of Fire &amp; Rescue 
+Instructors Conference held in Concord.</p>
+
+<p>Staff finalized the Pitt Community College investigation report on a NCFRC’s Policy and 
+Procedures violation for the Certification Board’s Discipline Committee.</p>
+
+<p>Staff attended Commission Staff’s Skype meeting.</p>
+
+<p>Staff attended Princeton Volunteer Fire Department’s awards banquet.
+Staff updated Indoctrination and Firefighter Q-School PowerPoints.</p>
+
+<p>Staff met with the new school director for Greenville Fire &amp; Rescue and reviewed and 
+informed them of their upcoming five year site visit.
+Staff met with a new school director at Concord Fire Department.
+Staff met with the new high school academy teacher at Sun Valley High School. 
+Staff conducted test validation at Charlotte Fire Department.
+Staff conducted qualification testing at King Fire Department.
+Staff attended the Eastern Rally Skills USA Leadership Contest and Lenoir Community 
+College.
+Staff attended the North Carolina Fire &amp; Rescue Certification Board meeting.
+Staff met with the school director for Roanoke Chowan Community College to review 
+and inform them of their upcoming five year site visit.
+Staff met with the new IMC at Goldsboro High School.
+Staff had physical performed at Garner Fire Department.
+Staff attended meeting at the Raleigh Office with IT for bad questions reporting 
+systems.
+Staff assisted with coverage at the office for Kim Williams while she was on vacation.
+Staff attended Fire Life Safety Educators conference.
+Staff met with new school director at Richmond Community College.
+Staff attended the North Carolina Breathing Equipment School.
+Staff completed all outstanding IFSAC work and submitted.
+Staff sent out 60 day five year packets to Central Carolina Community College, 
+Davidson Community College, and Chapel Hill Fire Department.
+Staff met with Wake Tech about setting up Apperson Machines for grading of tests.
+Staff attended Fire Officer 3 class.
+Staff conducted HazMat Technician testing at Mitchell Community College. 
+Staff participated in a conference call with the NFPA 1001 Technical Committee. </p>
+
+<h3 id="heading-26">Training Staff</h3>
+<p>Staff attended Mid-Winter Chiefs and Instructors Conference in Concord.
+Staff delivered Introduction to Advanced Rope Rescue course at Mid-Winter Chiefs and 
+Instructors Conference in Concord.
+Staff continued to label, inventory and prepare new rope rescue equipment.
+Staff picked up 9,200 feet of life safety rope from Raleigh office.
+Staff labeled and prepared rope logs for all life safety rope.
+Staff attended Ocean Technology Systems, Guardian Full Face Mask service and 
+maintenance technician certification course.
+Staff delivered Technical Rescuer Qualification course in Conover, NC.</p>
+
+<p>Staff attended the Fire Investigation Technician committee meeting held in Raleigh.
+Jonathan Sowers was appointed as the Piedmont Director for the NC Society of 
+Fire/Rescue Instructors.
+Staff participated in Q-School held at Cape Fear Community College and Asheville.
+Staff conducted a TR Trench Qualification at Ft. Bragg Fire Department.
+Staff picked up and inventoried new trailer and equipment for the Fire Service course 
+props trailer.
+Staff continued to manage purchases as it relates to the federal grant that was received. 
+Pricing and ordering for the Tec Gen personal protective ensembles and additional 
+rescue equipment was secured.
+Staff held initial meetings for the High School FF program. Developed daily schedule, 
+announcement, budget, and receiving bids.
+Staff conducted first week of the Fire Officer III program in Sandhills Community 
+College.
+Bruce Hodges completed his two-week Chemistry of Hazardous Materials course.
+Attended the six day NFA Fire Cause Determination for Company Officers held at the 
+Raleigh Office
+Conducted a Live Fire Awareness class for Enka-Candler Fire Department
+Participated in Instructor Q-School held in Asheville
+Conducted a Technical Rescuer Qualification class at the Asheville Training Center with 
+six students.
+Picked up and placed in service the new rope rescue equipment that was received from 
+the federal grant.
+Fabricated and built the storage system for the new High Angle Rescue Trailer. All the 
+wood materials were donated. The
+Assisted with Q school in Asheville, NC.
+Taught at Breathing Equipment School and had 56 students complete.
+Took an online Physics of Rope Rescue Course.
+Delivered a Technical Rescuer Qualification Course in Asheville.
+Training Staff delivered multiple NFA courses in February.
+Worked on developing the IFB for the Hazardous Materials Technician courses that will 
+be conducted during the year.
+Staff attended and passed the Chemistry of Hazardous Materials course and the 
+Hazardous Materials Technician course.
+Training staff prepared for the High Angle Rescue School at Stone Mountain. 
+Approximately 80 people are registered to attend.
+Attended the Hazardous Materials committee meeting for the State Emergency 
+Response Commission.
+Assisted the NCSHP with developing and reviewing their hazardous materials response 
+criteria for the hazardous materials response section and selecting new members.
+Helped conduct several interviews related to an instructor related issue in Randolph 
+County which will lead to a report with findings.
+Staff developed the processes to adhere to new purchasing and contracting rules. An 
+IFB was submitted along with using Temporary Solutions to help conduct Haz Mat 
+Technician courses.
+Staff attended the 6 day NFA Arson Investigation program held in Raleigh.</p>
+
+<p>Staff attended staff meeting.</p>
+
+<p>Staff had Haz-Mat equipment transferred.</p>
+
+<p>Staff conducted Live Fire Qualifications</p>
+
+<p>Staff conducted an Art of Reading Smoke class at Rowan-Cabarrus CC</p>
+
+<p>Staff participated in Q-School held at Randolph CC</p>
+
+<p>Staff participated in the monthly NC Emergency Management Web EOC drill</p>
+
+<p>Staffed the State EOC for both day and night shift for Winter Storm Jonas.</p>
+
+<p>Staff completed dive Instructor prep course.</p>
+
+<p>Staff began dive instructor program.</p>
+
+<p>Staff continued to assist with Dive Rescue Program development.</p>
+
+<p>Staff conducted site visit for Chiefs/instructors conference advanced rope program.</p>
+
+<p>Staff prepared for Storm Jonas SERT activities.</p>
+
+<p>Staff prepared for Liquefied Petroleum Live Fire training Qualification which was 
+cancelled due to weather.</p>
+
+<p>Staff assisted with Public Safety Diver scenario site preplan.</p>
+
+<p>Staff attended Western Association of Rescue Squads Meeting and training at the 
+Buncombe County Training center.</p>
+
+<p>Staff picked up New Rope Rescue equipment from Chapanoke office.</p>
+
+<p>Staff picked up new trailer and associated equipment for the eastern-based training lab. 
+Over the next few months, the equipment will be mounted, shelves built, and trailer 
+marked prior to being placed in service.</p>
+
+<p>Staff scheduled four technician courses (one in each region) and a direct delivery 
+course in Statesville. Developing course instructors and other logistical needs currently.</p>
+
+<p>Staff began Inventory and labeling of new equipment.</p>
+
+<p>Staff submitted 2016 AFG grant. Grant is for almost $350,000 worth of equipment to 
+establish three mobile fire/rescue training labs.</p>
+
+<p>Staff attended RRT contract review and award meeting. Assisted in the review of seven 
+RRT contracts that were submitted to NCEM for award for each of the seven RRT’s.</p>
+
+<p>Staff established testing dates and times for Q Schools in the East and West and 
+assigned appropriate staff.</p>
+
+<p>Staff attended regional association meetings and reported on current events within the 
+office.</p>
+
+<h3 id="heading-27">Inspections Staff</h3>
+<p>Inspection staff met with the IT staff at Dobbs to work on updating the 9S computer 
+program. We reviewed the worked that had been completed. We have made plans to 
+for the next meeting to be a complete run through of the entire program so hopefully in 
+early February we can begin using the program
+Inspection staff reviewed and processed 7 rating surveys and processed 2 county wide 
+9S inspections.
+Inspection staff conducted two different workshops at the Piedmont Fire Expo in 
+Winston Salem. The workshops were on changes in the Grading Schedule and How to 
+prepare for Water Haul Inspection. There were 15 people in attendance. 
+Inspection staff met with the Fire Marshal and GIS person in Moore County to discuss 
+some mapping issues.
+Inspection staff met with some of the town officials in Norwood to discuss the possibility 
+of the Town merging with one of the rural departments and what would be involved if 
+they wanted to procced. 
+Inspection staff met with Fire District 13 to discuss some water supply issues the district 
+has in a new residential development.
+Inspection staff attended the Fire Commission Meeting in Archdale and gave a report of 
+the Inspections section.
+Inspection staff assisted with an unannounced inspection in Red Springs. During this 
+inspection it was found that the department was not meeting the 9S standards. The 
+department had been on probation for the last 12 months. It was recommend that this 
+department be put to a class 10.
+Inspection staff conducted a rating inspection in Chapel Hill. At the time of this report 
+the inspection has not been completed. 
+Inspection staff worked with the new inspector on preparing him on doing is first rating 
+inspection
+Inspection staff conducted a follow up inspection to Mill Spring Fire Department in Polk 
+County and the removed the failures from the fire department.
+Inspection staff conducted a hydrant survey for Waynesville and Waynesville Rural FD 
+in Haywood County. The fire district improved from a PPC of 5 and 5/9E to a PPC of 4 
+and 4/9E.
+Inspection staff attended the Standards Committee meeting for the NC 911 Board via 
+video conference.
+Inspection staff conducted a NCRRS Ratings Class in Franklin Macon County. There 
+were 45 students in attendance, 2 counties and 11 fire departments represented. The </p>
+
+<p>class was requested by Southwestern Community College and was held at the Jerry 
+Sutton Public Safety Campus.
+Inspection staff met with the local building and fire inspection staff to explain the 
+community risk section for the pre-survey. 
+Inspection staff conducted a hydrant survey for Woodfin and Woodfin Rural FD in 
+Buncombe County. At the time of the report the survey was not complete.
+Inspection staff conducted an unannounced inspection on the Valmead Fire Department 
+in Caldwell County due to complaints. Upon completion of the inspection the 
+department had 2 failures. 1. Not meeting the minimum response. 2. Low on personnel 
+with only 8 firefighters with 36 hours of training. The actions to correct this by the 
+department are; the department is to send there structure responses to the inspector 
+monthly, the department needs to complete training records for the personnel with the 
+training that is conducted.
+Inspection staff attended the Western North Carolina Association of Firefighters meeting 
+held at Reynolds Fire Department in Buncombe County.
+Inspection staff assisted ISO staff with 21 mapping questions from various locations 
+across the state.
+Inspection staff fielded numerous questions from fire chiefs, fire marshals, and local 
+governments concerning fire department ratings, mapping, and 9S inspections, etc.
+Inspection staff completed the NCVIP Interim Review. 
+Inspections staff completed and processed a Method 1 Survey for the Town of 
+Garysburg and Garysburg Rural FD in Northampton County during the week of January 
+4, 2016.</p>
+
+<p>Inspections staff completed and processed a Method 1 Survey for the Town of Aulander 
+and Aulander Rural FD in Bertie County during the week of January 11, 2016.</p>
+
+<p>Inspections staff met with the Sharpsburg Fire Department in Nash County on January 
+15, 2016 to answer questions regarding their upcoming inspection.</p>
+
+<p>Inspections staff is continuing to work on obtaining water system data for Nash County 
+in preparation for upcoming surveys in the spring of 2016.</p>
+
+<p>Inspections staff taught a Ratings Class for the College of the Albemarle on January 16, 
+2015 in Elizabeth City. There were 17 attendees representing three counties and four 
+departments. Counties represented were Dare, Currituck, and Chowan. The 
+departments in attendance were Corolla Fire Department, Lower Currituck Fire 
+Department, Duck Fire Department, and Center Hill Crossroads Fire Department. </p>
+
+<p>Inspection staff assisted Richard Bolyard in Risk Management with information on the 
+hydrant system regarding a property at 8550 Shipyard Boulevard in Mann’s Harbor, NC.</p>
+
+<p>Inspections staff completed a field survey on the Macon Fire Department in Warren 
+County during the week of January 25, 2016.</p>
+
+<p>Inspection staff completed a hydrant method survey on Pollocksville Fire Department in Jones County.</p>
+
+<p>Inspection staff attended a meeting with the Chief of Pender EMS and Fire and Pender County Fire Marshal to discuss results of their last inspection and how to improve.</p>
+
+<p>Inspection staff completed a hydrant method survey on Rhems Volunteer Fire Department in Craven County.</p>
+
+<p>Inspection staff completed a 9S inspection on a new department Onslow County Fire and Rescue in Onslow County. Department passed inspection.</p>
+
+<p>Inspection Staff Completed a County Wide 9S Inspection of 9 departments in Moore County NC and having one department placed on probation for tracking purposes.</p>
+
+<p>Eagle Springs FD – Chief had not attended Chief’s 101 since being elected in June 2015</p>
+
+<p>Inspection Staff attended a consultation meeting with Moore County Fire Marshal to discuss needed fire flows of Fire Departments for future growth of residential and commercial building.</p>
+
+<p>Inspection Staff attended a meeting with Goldston FD to discuss the related issues with the departments’ failures from an October 9S inspection. Inspection Staff assisted the new Fire Chief with understanding the noted failures and procedures to correct those items.</p>
+
+<p>Inspection Staff prepared for a SERT Level III and then a Level II standby per protocol for Winter Storm Jonas.</p>
+
+<p>Inspections Staff meet with the Buncombe County Communications department to update the communications section of the ratings.</p>
+
+<p>Inspections Staff meet with the water department for Ashville Water Authority to get information on the water system which has 53 different pressure zones and 3 treatment plants.</p>
+
+<p>Inspection Staff attended a meeting with the Robeson County commissioners and the public about areas over 6 miles in an unprotected area of the county.</p>
+
+<p>Inspections Staff taught an NCRRS Class in Transylvania County that had 43 people from 3 counties and 12 different departments.</p>
+
+<p>Inspections staff conducted a Method 1 NCRRS Survey visit for the Town of Faith, Rowan County. The Faith Fire Insurance District, which incorporates the municipal limits of the Town of Faith, is served by the Faith Fire Department. The Faith Fire Department is a combination “On-Duty” &amp; “On-Call” fire department serving in Rowan County. The Method 1 survey conducted, utilizes existing pressure hydrants as the primary source of water for fire suppression efforts.</p>
+
+<p>Inspections staff reviewed Gulledge VFD of Anson County for the purpose of updating the department, which had been previously deemed deficient, in the NC 9S Inspection program. Currently the department has completed the requirements and has passed their NC 9S classification.</p>
+
+<p>Inspections staff reviewed Peachland VFD, of Anson County for the purpose of updating the department, which had been previously deemed deficient, in the NC 9S Inspection program. Currently the department has completed the requirements and has passed their NC 9S classification.</p>
+
+<p>Inspections staff conducted a Method 1 NCRRS Survey visit for the Town of Dobson, Surry County. The Dobson Fire Insurance District, which incorporates the municipal limits of the Town of Dobson, is served by the Dobson Fire Department. The Dobson Fire Department is an “On-Call” fire department serving in south central Surry County. The Method 1 survey conducted, utilizes existing pressure hydrants as the primary source of water for fire suppression efforts.</p>
+
+<p>Inspections staff attended and participated in the ‘2016 North Carolina Association of Fire Chiefs Mid-Winter Conference’. Inspections staff provided classes detailing areas of interest noticed during NCRRS survey visits conducted since utilizing the updated survey requirements which went into effect in 2014. Classes were also provided for interested personnel detailing the requirements of the NC 9S Inspection Program as well as the full NCRRS survey program.</p>
+
+<p>During the course of the convention, Inspections Staff made themselves available for question and answer sessions for many conference attendees. Inspections staff fielded many questions, concerning the NC 9S Inspection Program as well as the NCRR Survey Program, while at the conference. Inspections staff appreciated the less formal atmosphere for contacts made by many fire fighters, fire officers and others during the conference.</p>
+
+<p>Inspections staff conducted a Method 1 NCRRS Survey visit for the Town of Newton &amp; Newton Rural FD, Catawba County. The Newton Fire Insurance District, incorporates the municipal limits of the Town of Newton &amp; the Newton Rural FD serves area surrounding the town. Both Fire Insurance Districts are served by the Newton Fire Department. The Newton Fire Department is a “On-Duty” fire department serving in south central Catawba County. The Method 1 survey conducted, utilizes existing pressure hydrants as the primary source of water for their fire suppression efforts.</p>
+
+<p>Inspections staff worked to verify 21 different property locations, within North Carolina fire insurance and response districts, in an effort to assist ISO in their evaluation to determine correct property insurance classifications.</p>
+
+<p>Inspection staff attended the NC 911 Board Standards Committee meeting in Raleigh and participated on several discussion on where the system are going and where they need to be in the future.</p>
+
+<p>Inspection staff conducted a hydrant survey for Robbinsville and Robbinsville Rural Fire District in Graham County. The survey is not complete at the time of this report.</p>
+
+<p>Inspection staff conducted a 9S inspection to Stecoah Fire and Rescue Department in Graham County. No issues were found.</p>
+
+<p>Inspection staff made updates to the slide presentation for the NCRRS class and started working on the handouts for the calls to get all the information updated for future classes.</p>
+
+<p>Inspection staff met with the Burke County Firefighters Association and training officers on training documentation for ratings surveys.</p>
+
+<p>Inspection staff conducted a NCRRS class at the Fontana Public Safety College in Graham County. There were 13 students in attendance from 6 different fire departments and 6 different counties.</p>
+
+<p>Inspection staff conducted a follow-up inspection to Sunny View Fire Department in Polk County. The department was on a failure for not meeting the minimum response and low on personnel. All structure responses were reviewed and personnel training reviewed for 36 hours of training. All issues were resolved.</p>
+
+<p>Inspection staff completed a hydrant method 1 survey on Cove City Fire Department in Craven County.</p>
+
+<p>Inspections staff processed a Method 1 Survey for the Macon Rural FD in Warren County during the week of February 1, 2016.</p>
+
+<p>Inspections staff met with the Griffins Fire Department in Martin County on February 8, 2016 to answer questions regarding an upcoming apparatus purchase.</p>
+
+<p>Inspections staff is continuing to work on obtaining water system data for Nash County in preparation for upcoming surveys in the spring of 2016.</p>
+
+<p>Inspections staff entered water system data for the City of Rocky Mount and the Town of Bailey Water Systems in Nash County in preparation for upcoming inspections.</p>
+
+<p>Inspection staff met with the Rolesville Fire Department on February 11, 2016 to answer questions regarding proposed substation locations.</p>
+
+<p>Inspections staff completed field surveys on Kitty Hawk Fire Department and Duck Fire Department in Dare County during the week of February 15, 2016.</p>
+
+<p>Inspections staff worked with Robert Boyce, Fire Marshal with Pasquotank County on questions regarding staffing and rostering on hiring county fire personnel.</p>
+
+<p>Inspection staff met with Chris Wright, Fire Marshal with Vance County on February 22, 2016 to answer questions regarding the survey process.</p>
+
+<p>Inspection staff met with the IT staff at Dobbs to work on updating the 9S computer program. We made a complete run through of the entire program. The new program went into full production February 8th and at this time we have had very few issues with the program. The next phase will be for developing the reports we need obtain from the data collected.</p>
+
+<p>Inspection staff completed the rating inspection of the Town of Chapel Hill, the department improved from a class 3 to a class 2.</p>
+
+<p>Inspection staff our newest inspector on his first rating inspection in Bladenboro in Bladen County. At the time of this report the inspection is not completed.</p>
+
+<p>Inspection staff met with the Town Manager and the Fire Chief of the Town of Red Springs in Roberson County. The meeting was to review some of the departments records related to the Department being put to a class 10.</p>
+
+<p>Inspection Staff performed a Method 3 Ratings Survey of Bladenboro and Bladenboro Rural FD in Bladen County. The purpose of this survey was to bring the departments existing insurance classification current though the latest processes. Bladenboro FD had not been rated under the current rating system.</p>
+
+<p>Inspection Staff performed a 9S Inspection at Whitehouse FD in Robeson County, with Whitehouse FD passing the inspection and receiving approval for their newly opened Sub Station.</p>
+
+<p>Inspection Staff began the training process of processing Bladenboro FD survey, working through the elements of water, fire and communications.</p>
+
+<p>Inspection Staff performed a method 1 survey of Gumtree FD in Davidson County along with the Emergency Communications and Davidson Water Inc. and for other upcoming Inspections of Davidson County.</p>
+
+<p>Inspections staff attended the Fire and Life Safety Conference and conducted a presentation on the Community Risk Section to educators on how they can help with the new ratings system by education their communities on fire prevention.</p>
+
+<p>Inspections staff conducted a Method 1 NCRRS Survey visit for the Town of Holden Beach and Tri Beach FD, Brunswick County. The Holden Beach Fire Insurance District incorporates the municipal limits of the Town of Holden Beach and the Tri Beach FD encompasses area in rural Brunswick County, North and East of the Town of Holden Beach. The Tri Beach Vol. Fire Department is a Combination fire department serving both the Town of Holden Beach as well as Tri Beach FD of Brunswick County. The Method 1 survey conducted, utilizes existing pressure hydrants as the primary source of water for fire suppression efforts.</p>
+
+<p>Inspections staff conducted Method 1 &amp; 3 NCRRS Surveys for the Town of Wingate and the Ames FD of Union County. Both fire insurance districts are served by the Wingate Volunteer Fire Department. The Method 1 survey conducted for the Town of Wingate utilized existing pressure hydrants as the primary source of water for fire suppression efforts. The Method 3 survey combined a pressure hydrant and Tanker Shuttle grading visit for the Ames FD in Union County. The Wingate VFD, Inc., is a combination “OnCall” and “On Duty” fire department serving in Union County, along the Central &amp; Eastern portions of Union County.</p>
+
+<p>Inspections staff participated as a Judge in the 2016 Iredell County Fire and Life Safety Quiz Bowl held at Mitchell Community College in Statesville, NC. The competition consists of a round-robin type panel of students from county 4th &amp; 5th grades answering questions pertaining to Fire and Life Safety issues. There were 32 teams participating from Iredell County with teams from American Renascence School placing both 1st and 2nd in the competitions.</p>
+
+<p>Inspections staff conducted a Method 1 NCRRS Survey visit for the Bakers FD, Union County. The Bakers Fire Insurance District serves area West, Northwest and Southwest of the City of Monroe. The Fire Insurance District is served by the Bakers Volunteer Fire Department which is a combination fire department serving in Union County. The Method 1 survey conducted utilized existing pressure hydrants as the primary source of water for their fire suppression efforts.</p>
+
+<p>Inspection staff completed a hydrant method survey on Yaupon Beach Fire Department in Brunswick County.</p>
+
+<p>Inspection Staff met with Fire Chief of LaGrange Fire Department in Lenoir County to discuss the grading process and some map issues.</p>
+
+<p>Inspection staff attended Lenoir County Fire Association Meeting and discussed the Community Risk section of the grading schedule.</p>
+
+<p>Inspection staff completed a water haul survey on Castoria Fire Department in Greene County.</p>
+
+<p>Inspection staff met with Kenansville Town Manager and the Fire Chief to discuss how the department can improve.</p>
+
+<p>Inspections staff completed a re-inspection of the Windsor FD on February 24, 2016 as the twelve-month probationary period had ended due to retrogression.</p>
+
+<p>Inspections staff processed Method 1 surveys for Kitty Hawk FD and Duck FD the week of February 22, 2016</p>
+
+<p>Inspections staff completed a Method 1 survey on St. James FD in Brunswick County the week of February 29, 2016.</p>
+
+<p>Inspection staff completed a Method 1 and 3 survey on the Rolesville and Rolesville Rural Fire Districts the week of March 14, 2016.</p>
+
+<p>Inspections staff completed a Method 1 survey on the Avon FD the week of March 21, 2016.</p>
+
+<p>Inspection staff conducted a hydrant survey for Sunset Harbor Zion Hill Fire Department in Brunswick County. The department had 2 9S failures during the inspection consisting of low on communications equipment and not meeting the minimum response. The Chief will be ordering pagers and will send the inspector documentation when the equipment is put in service. Also he will be send reports to the inspector monthly of structure and fire alarm responses.</p>
+
+<p>Inspection staff participated in the monthly radio test of VIPER radio equipment.</p>
+
+<p>Inspection staff conducted a hydrant survey for the City of Morganton and Carbon City Fire District. The survey is not complete at the time of this report.</p>
+
+<p>Inspection staff conducted a NCRRS Ratings class at the McDowell Fire and Rescue College in Marion. 24 students attended the class.</p>
+
+<p>Inspection staff attended the NC 911 Board Standards Committee meeting via video conference.</p>
+
+<p>Inspection staff assisted 2 departments in McDowell County with their upcoming inspections. And also assisted departments that are having their 9S inspections.</p>
+
+<p>Inspection staff assisted numerous departments with their upcoming inspections answering questions concerning the inspection by phone and emails.</p>
+
+<p>Inspection staff made 13 ISO inquiries for mapping.</p>
+
+<p>Inspection Staff continues to update the NCRRS slide presentation.</p>
+
+<p>Inspection staff is working with Angie Gregg and the American Red Cross for a smoke detector canvass in a community in McDowell County after 5 fire deaths in the last 3 months.</p>
+
+<p>Inspection Staff attended a quarterly working Staff meeting in Brunswick County and completed a method 1 ratings survey of Sunset Beach Fire Department.</p>
+
+<p>Inspection Staff worked with Senior Field Inspector for three eight (8) hours days to complete the necessary documenting of Sunset Beach Fire Departments ratings survey.</p>
+
+<p>Inspection Staff Completed a County wide 9S Inspection of Columbus County visiting thirteen (13) departments over a two week visit. During this inspection of department eleven (11) department passed the basic requirements of the 9S inspection. Two departments failed to meet the requirements of a 9S inspection.</p>
+
+<p>ST James FD - Low on Personnel, No Training Records, Failed to meet minimum response.</p>
+
+<p>Brunswick FD - Failed to meet the response requirements.</p>
+
+<p>Inspection Staff audited the training records and documentation of the South Lexington FD in Davidson County to verify the members that were added in the 2015 calendar year were in fact participating in training and meeting the necessary bench marks established during a 9S failure previously.</p>
+
+<p>During the time of February to March – Inspection Staff assisted 11 departments with ratings questions and or concerns about current ratings and scheduling to begin the ratings process. Inspection Staff also completed and entire audit of departments with 9S failures in the Piedmont and Western Piedmont Inspection districts, noting and tracking these agencies who are reporting monthly.</p>
+
+<p>Inspection staff reviewed and processed 12 rating surveys.</p>
+
+<p>Inspection staff completed the rating inspection for the Southport Fire Department, the department improved from a class 4 to a class 3.</p>
+
+<p>Inspection staff met with the Fire Chief of the Asheboro Fire Department to discuss the location of an additional station and discussed the effect the new station might have on the departments rating.</p>
+
+<p>Inspection staff met with the new Fire Chief of the Vance County Fire Department to discuss the department’s last rating and discussed the relocating the current station so they might be able to close the sub-station.</p>
+
+<p>Inspection staff met with the County Manager and staff to discuss fire protection for Vance County. The staff had a number of questions concerning staffing and rating of the fire districts.</p>
+
+<p>Inspection staff met with the Fire Chief of the Elon Fire Department to discuss their upcoming rating inspection.</p>
+
+<p>Inspection staff taught a rating class in Forsyth County and there were 22 people in attendance from 11 different departments.</p>
+
+<p>Inspection staff trained with the new inspector on doing the paperwork dealing with a rating inspection. Also went over all of the failures he had on his to do list.</p>
+
+<p>Inspection staff begin working on updating the pre-survey forms that are sent out for rating inspections.</p>
+
+<p>Inspection Staff Conducted a method 1 survey of the Boiling Springs Lakes FD in Brunswick County and meet with the County Fire marshal and GIS Person to get all the Departments maps updated.</p>
+
+<p>Inspections Staff Conducted a Method 1 survey of the Gumtree FD in Davidson/Forsyth County.</p>
+
+<p>Inspections staff meet with the Attorney General’s Office about the ratings inspection and the situation in Red Springs.</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Inspection for March 2016">
+<table>
+<caption>Inspection for March 2016</caption><thead><tr><th scope="col" colspan="3"><strong>Year to Date</strong></th></tr>
+<tr><td>&nbsp;</td><th scope="col"><strong>Districts</strong></th><th scope="col"><strong>Departments</strong></th></tr>
+</thead><tbody><tr><td>9S Only</td><td>24</td><td>21</td></tr>
+<tr><td>Surveys <sub>(all methods)</sub></td><td>35</td><td>22</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Year to Date 2016 Failures">
+<table>
+<caption>Year to Date 2016 Failures</caption><thead><tr><td>&nbsp;</td><th scope="col"><strong>Number of Failures</strong></th></tr>
+</thead><tbody><tr><td>Non-Response</td><td>3</td></tr>
+<tr><td>Low Personnel</td><td>2</td></tr>
+<tr><td>Not Completed Chief 101</td><td>1</td></tr>
+<tr><td>No Training Records</td><td>1</td></tr>
+</tbody></table>
+</div>
+
+<h2 id="heading-28">NCSFA 2nd Quarter Report</h2>
+<p>April, 2016</p>
+
+<h2 id="heading-29">Introduce Any Past Presidents</h2>
+<h2 id="heading-30">Introduce Any Board</h2>
+<h2 id="heading-31">Introduce Any Staff</h2>
+<h2 id="heading-32">Scholarship and Grants</h2>
+<p>Scholarships and grant applications have been received and are being evaluated. There are 15 scholarships per region awarded each year. The scholarships include $2,000 Associate’s, $8,000 Bachelor’s and $10,000 Master’s Degree awards.</p>
+
+<p>We also have (8) $500 training grants available per region. There are 3 from the Eastern, and one each from the Piedmont and Western.</p>
+
+<p>The electronic submission due date for the scholarship and grant applications was March 15.</p>
+
+<p>Out of 612 attempts we had 226 successful applications for scholarships, and out of 27 grant attempts we had 4 eligible grant applications.</p>
+
+<p>The application numbers include:</p>
+
+<p>From the East we received 64 eligible applications and 2 eligible grant apps.</p>
+
+<p>From the West we received 76 eligible applications and 0 eligible grants.</p>
+
+<p>From the Piedmont 86 eligible applications and 2 eligible grant apps.</p>
+
+<h2 id="heading-33">Conference Update</h2>
+<p>The 2016 SAFRE Conference is being held in Charlotte this year August 10th – 13th. Registration is now available on-line. This is the 128th annual conference of NCSFA. This year SAFRE expands the exhibit floor from 150,000 to 200,000 square feet with close to 200 companies and agencies sharing information and displaying products. The Board, working with representatives from the Charlotte Fire Department and other local fire service representatives, has put together a fantastic week of programs and events.</p>
+
+<p>New classes, both hands on (H.O.T.) and classroom, highlight training during the week, including a pre-conference session Monday and Tuesday and ongoing classes and workshops during the week. H.O.T. classes held at the Charlotte Fire Academy and local regional training facilities will provide realistic application of real life training needs. During the conference we’ll have keynote speakers at both the Thursday and Friday general sessions. Renowned fire service speaker Bobby Halton, Editor of Fire Engineering Magazine will be there Thursday to deliver the keynote address at the NCSFA Conference Opening on “Service-Honor-Advocacy”, with Dr. Denis Onieal, Deputy US Fire Administrator there on Friday to kick off the NC Association of Fire Chief’s business session with “Attitude Reflects Leadership”. In addition to the opening, keynote speakers, and business sessions, we’ll have our memorial service Thursday afternoon just prior to the opening of the exhibits.</p>
+
+<p>In addition to the conference and exhibits, the extracurricular activities planned are phenomenal. You can take a short walk and visit downtown Charlotte and all it has to offer, tour the NASCAR Hall of Fame, or go to a Minor League Baseball Game. Friday night we’ll be hosting a Queen City Firefighter Fest at the Hall of Fame adjacent to the conference center. For entertainment there will be renowned singing artist Beth Spangler performing, as well as pipe and drum bands from across the State. This is a new event for Friday night at conference, and we’re excited about it. After the banquet Saturday night attendees of the banquet will have open access to a party at the NASCAR Hall of Fame.</p>
+
+<h2 id="heading-34">Bylaw Changes to Be Mailed Out on or Before June 30th</h2>
+<p>The NCSFA Board will be mailing out suggested bylaw changes June 30th for consideration and vote at the annual conference this year. The changes have been reviewed and vetted over a period of a year, and have been reviewed by our legal firm. When the bylaw recommendations are mailed out they will include complete wording and an explanation and justification.</p>
+
+<p>Some of the changes include:</p>
+
+<ul><li>
+- Clean up some grammatical issues and make the document gender neutral</li>
+<li>
+- Correct the voting process to make the bylaws current with how we have done elections the last several years. This essentially eliminates the use of delegate cards</li>
+<li>
+- Change the terms of regionals board members representing the three regions to three year terms instead of three individual annual terms. This is essentially the practice that has existed for the past many years anyway. There is also a new section added to allow regions to remove their representatives if they are not serving properly in a fair and consistent manner.</li>
+<li>
+- Change the terms of all Board members to 3 years, and make the move of 2nd VP to 1st VP automatic, which is consistent with the other Executive positions.</li>
+<li>
+- Require any candidate running for an elected position to make notification of intent to seek office by April 1st, so the election is fair and advertised well ahead of the conference meeting. This insures people know who is running so they can plan to come and vote if they desire.</li>
+<li>
+- Corrects wording concerning regions to make them consistent and to make it clear that the regional board members are elected by the NCSFA members in the regions.</li>
+<li>
+- Adds sections that allow the removal of any Board member by the membership in a fair and advertised manner.</li>
+</ul>
+<p>Remember, these changes if approved would not take place until 2017 and would not be in effect for the 2016 conference.</p>
+
+<h3 id="heading-35">Legislative Issues for 2016</h3>
+<ol><li>
+(1) LODD Beneficiaries to Receive F&amp;R Pension Benefits</li>
+<li>
+(2) Change Local Relief Fund Board Appointment Procedure</li>
+<li>
+(3) Add “Fire Marshal” to “Fire Department” Definition</li>
+<li>
+(4) Oppose Fireworks Legislation (HB 367)</li>
+<li>
+(5) Presumptive Cancer (HB 666) not eligible for this session</li>
+<li>
+(6) Suicide Prevention Study (If HB 83 is eligible and comes up)</li>
+<li>
+(7) Special Arson Prosecutor</li>
+<li>
+(8) Watch Eliminating Safety Inspections (SB 200)</li>
+</ol>
+<h2 id="heading-36">LGERS Update</h2>
+<p>The NCSFA has gotten some criticism lately for not getting involved with the General Assembly of the retirement board in changes to the Local Government Employee Retirement System (LGERS) involving the calculation formulas for left over sick leave at retirement. Here are the facts:</p>
+
+<ul><li>
+- This issue was never brought to the General Assembly for us to be involved.</li>
+<li>
+- It was never brought to the LGERS Board for their decision.</li>
+<li>
+- There was a contested case a few years back and the NC Department of Justice ruled that the Treasurers Office had not been determining additional service credit from unused sick leave correctly. State law requires sick must be earned under a duly adopted sick leave policy and, the NC DOJ, ruled a sick leave day must be determined by the employer’s sick leave policy.</li>
+<li>
+- The policy nor State law ever changed.</li>
+<li>
+- This was communicated to every Human Resource Department in NC whose unit of local government is a member of LGERS.</li>
+<li>
+- NCSFA did discuss the issue with the Treasurer’s Office and were advised every Human Resource office had been notified.</li>
+<li>
+- The NCSFA cannot and should not discuss retirement calculations with individuals nor explain this process. It is an issue between the individual, their Human Resource Officer, and the Treasurer’s office. Imagine the problems that may be encountered if we offered or explained it incorrectly and someone retired too early, or were expecting a certain amount and got much less.</li>
+<li>
+- This is an issue that the departments need to work with the Treasurer’s office on, and NCSFA did not miss or ignore any changes to the LGERS laws or rules.</li>
+</ul>
+<p>We will continue to work with the Treasurer’s Office asking them to better explain the rules, but it would be inappropriate for us to be involved with explaining it ourselves.</p>
+
+<h2 id="heading-37">New Benefits for 2016</h2>
+</section>
+<section aria-labelledby="section-1">
+<h2 id="section-1">[Pages 21-22 unavailable]</h2>
+<p>Content from pages 21-22 could not be converted. This section may be available after retry.</p>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

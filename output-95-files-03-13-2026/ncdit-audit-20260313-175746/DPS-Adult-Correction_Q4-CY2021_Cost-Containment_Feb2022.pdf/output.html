@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>Medical Cost Containment Report for Adult Corrections (FY 2021-22, Q2)</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Medical Cost Containment Report for Adult Corrections (FY 2021-22, Q2)</h1>
+    </header>
+    <nav aria-label="Table of Contents" class="document-nav">
+        <p class="nav-title"><strong>Contents</strong></p>
+        <ul>
+                    <li><a href="#heading-1">ATTACHMENT A
+PAYMENT AND CLAIMS DATA BY PROVIDER (October – December 2021)</a></li>
+                    <li><a href="#heading-2">SCHEDULED AND EMERGENT SERVICES BY HOSPITAL (October – December 2021)</a></li>
+                    <li><a href="#heading-3">SCHEDULED AND EMERGENT ADMISSIONS BY HOSPITAL (October – December 2021)</a></li>
+        </ul>
+    </nav>
+    <main id="main-content" role="main">
+<section aria-labelledby="section-1">
+<h2 id="section-1">MEMORANDUM</h2>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAAAAACy3qJfAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAMklEQVR4nGNgGAjwH7cEHimsorh04DQHjwwZANUwoGsgIv///0dX958Bq/f+U99NhAAAqUkV6yynME8AAAAASUVORK5CYII=" alt="North Carolina Department of Public Safety Logo" width="24" height="20"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+<p>Roy Cooper, Governor
+Eddie M. Buffaloe, Jr., Secretary
+Timothy D. Moose, Chief Deputy Secretary
+Todd E. Ishee, Commissioner
+Brandeshawn Harris, Assistant Commissioner</p>
+
+<p><strong>TO: </strong>Joint Legislative Oversight Committee on Justice and Public Safety,
+Chairs, Senate Appropriations Committee on Justice and Public Safety
+Chairs, House Appropriations Committee on Justice and Public Safety</p>
+
+<p><strong>FROM: </strong>Eddie M. Buffaloe, Jr., Secretary
+Timothy D. Moose, Chief Deputy Secretary
+Todd E. Ishee, Commissioner of Prisons</p>
+
+<p><strong>RE: </strong>Medical Cost Containment Report for Adult Corrections (FY 2021-22, Q2)</p>
+
+<p><strong>DATE: </strong>February 25, 2022</p>
+
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">N.C.G.S. 143B-707.3</h2>
+<p>...
+
+(c) The Department of Public Safety shall report quarterly to the Joint Legislative Oversight Committee on Justice and Public Safety and the chairs of the House of Representatives and Senate Appropriations Committees on Justice and Public Safety on:</p>
+
+<ul><li>
+(1) The percentage of the total inmates requiring hospitalization or hospital services who receive that treatment at each hospital.</li>
+<li>
+(2) through (4) Repealed by Session Laws 2016-94, s. 17C.2A, effective July 1, 2016.</li>
+<li>
+(4a) The volume of scheduled and emergent services listed by hospital and, of that volume, the number of those services that are provided by contracted and noncontracted providers.</li>
+<li>
+(4b) The volume of scheduled and emergent admissions listed by hospital and, of that volume, the percentage of those services that are provided by contracted and noncontracted providers.</li>
+<li>
+(5) The volume of inpatient medical services provided to Medicaid-eligible inmates, the cost of treatment, the estimated savings of paying the nonfederal portion of Medicaid for the services, and the length of time between the date the claim was filed and the date the claim was paid.</li>
+<li>
+(5a) The status of the implementation of the claims processing system and efforts to address the backlog of unpaid claims.</li>
+<li>
+(6) The hospital utilization, including the amount paid to individual hospitals, the number of inmates served, the number of claims, and whether the hospital was a contracted or noncontracted facility.</li>
+<li>
+(7) The total cost and volume for the previous fiscal quarter for emergency room visits originating from Central Prison and NCCIW Hospitals to UNC Hospitals, UNC Rex Healthcare, and WakeMed Hospital.</li>
+<li>
+(8) The total payments for Medicaid and nonMedicaid eligible inmates to UNC Hospitals, UNC Rex Healthcare, and WakeMed Hospital, including the number of days between the date the claim was filed and the date the claim was paid.</li>
+<li>
+(9) A list of hospitals under contract.</li>
+<li>
+(10) The reimbursement rate for contracted providers. The Department shall randomly audit high-volume contracted providers to ensure adherence to billing at the contracted rate.</li>
+</ul>
+<p>Reports submitted on August 1 shall include totals for the previous fiscal year for all the information requested.</p>
+
+</section>
+<section aria-labelledby="section-3">
+<h2 id="section-3">Overview</h2>
+<p>The Department of Public Safety (DPS) is responsible for providing constitutionally-mandated healthcare to the offender population, which includes medical, mental health and dental care. The Health Services section provides routine outpatient care in 55 facilities across the state and inpatient care at Central Prison Healthcare Complex and North Carolina Correctional Institute for Women. DPS also provides emergent and urgent care as necessary in all facilities. External providers are consulted when the clinical presentation requires services beyond the scope of the facility.</p>
+
+<p>A contracted facility has signed a contract to provide medical care at a negotiated rate above the legislative rate of 70% of billed charges or twice the Medicaid rate. A non-contracted facility agrees to charge at the legislatively-mandated rate.</p>
+
+<p>Unless otherwise indicated, the data in this report is for the period of October 1, 2021 and December 31, 2021.</p>
+
+</section>
+<section aria-labelledby="section-4">
+<h2 id="section-4">(1) The percentage of total inmates requiring hospitalization or hospital services who receive that treatment at each hospital.</h2>
+<p>Attachment A provides the facility/provider, the amount paid and the volume and percentage of claims. It includes all external, contracted, and non-contracted services for the quarter.</p>
+
+</section>
+<section aria-labelledby="section-5">
+<h2 id="section-5">(4a) The volume of scheduled and emergent services listed by hospital and, of that volume, the number of those services that are provided by contracted and noncontracted providers.</h2>
+<p>During the quarter, there were 1,593 episodes that required treatment at a community hospital. Of those episodes, 544 were at contract hospitals, while 1,049 were at non-contract hospitals. Attachment B provides the volume by hospital.</p>
+
+</section>
+<section aria-labelledby="section-6">
+<h2 id="section-6">(4b) The volume of scheduled and emergent admissions listed by hospital and, of that volume, the percentage of those services that are provided by contracted and noncontracted providers.</h2>
+<p>Attachment C shows the scheduled and emergent admissions for the quarter. This includes 376 admissions from emergent services and 32 scheduled admissions. Contact hospitals provided 50.25% of the services, and non-contract hospitals provided 49.75% of the services.</p>
+
+</section>
+<section aria-labelledby="section-7">
+<h2 id="section-7">(5) The volume of inpatient medical services provided to Medicaid-eligible inmates, the cost of treatment, the estimated savings of paying the nonfederal portion of Medicaid for the services, and the length of time between the date the claim was filed and the date the claim was paid.</h2>
+<p>During the quarter, 105 cases were identified as eligible for Medicaid. Based upon the <em>State Auditor&#39;s May 2012 Financial Related Audit Report</em>, the average savings of each case would be $18,181.81. Using the methods applied in the audit, the estimated savings for the quarter would be approximately $1,909,090.05. Information regarding the length of time between the date the claim was filed and the date the claim was paid is not available to DPS. Once the application is completed, it is processed at the county level and then sent to DHHS for payment.</p>
+
+</section>
+<section aria-labelledby="section-8">
+<h2 id="section-8">(5a) The status of the implementation of the claims processing system and efforts to address the backlog of unpaid claims.</h2>
+<p>The third-party claims management vendor began processing claims for DPS on August 1, 2021. There currently is no backlog of claims, and the vendor pays all qualified bills within 30 days of submission.</p>
+
+</section>
+<section aria-labelledby="section-9">
+<h2 id="section-9">(6) The hospital utilization, including the amount paid to individual hospitals, the number of inmates served, the number of claims, and whether the hospital was a contracted or noncontracted facility.</h2>
+<p>Attachment A includes these data points.</p>
+
+</section>
+<section aria-labelledby="section-10">
+<h2 id="section-10">(7) The total cost and volume for emergency room visits originating from Central Prison and NCCIW Hospitals to UNC Hospitals, UNC Rex Healthcare, and WakeMed Hospital.</h2>
+<p>Table 1 shows the cost and volume for emergency room visits UNC Hospitals, UNC Rex Healthcare, and WakeMed Hospital.</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Table 1. Volume and Cost by Hospital">
+<table>
+<caption>Table 1. Volume and Cost by Hospital</caption><thead><tr><th scope="col"><strong>Facility</strong></th><th scope="col"><strong>Provider Name</strong></th><th scope="col"><strong>Volume of Claims</strong></th><th scope="col"><strong>Cost</strong></th><th scope="col"><strong>Paid</strong></th></tr>
+</thead><tbody><tr><td>CENTRAL PRISON</td><td>UNIV OF NC HOSPITALS</td><td>3</td><td>$2,812.00</td><td>$2,456.49</td></tr>
+<tr><td>CENTRAL PRISON</td><td>UNC REX HEALTHCARE</td><td>26</td><td>$68,442.00</td><td>$29,261.49</td></tr>
+<tr><td>CENTRAL PRISON</td><td>WAKEMED</td><td>84</td><td>$143,885.12</td><td>$19,865.27</td></tr>
+<tr><td>NC CI WOMEN</td><td>UNIV OF NC HOSPITALS</td><td>3</td><td>$5,257.00</td><td>$2,078.22</td></tr>
+<tr><td>NC CI WOMEN</td><td>UNC REX HEALTHCARE</td><td>7</td><td>$17,741.00</td><td>$7,553.52</td></tr>
+<tr><td>NC CI WOMEN</td><td>WAKEMED</td><td>141</td><td>$269,417.12</td><td>$48,187.80</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td><strong>264</strong></td><td><strong>$507,554.24</strong></td><td><strong>$109,402.79</strong></td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-11">
+<h2 id="section-11">(8) The total payments for Medicaid and non-Medicaid eligible inmates to UNC Hospitals, UNC Rex Healthcare, and WakeMed Hospital, including the number of days between the date the claim was filed and the date the claim was paid.</h2>
+<p>Table 2 shows the total payments to Medicaid and non-Medicaid eligible inmates, the average days for payment of claims and the total claims for the quarter.</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Table 2. Average Days for Payment of Claims">
+<table>
+<caption>Table 2. Average Days for Payment of Claims</caption><thead><tr><th scope="col"><strong>Provider</strong></th><th scope="col"><strong>Total Payment</strong></th><th scope="col"><strong>Average Days from Submission to Payment</strong></th><th scope="col"><strong>Number of Claims</strong></th></tr>
+</thead><tbody><tr><td>UNIV OF NC HOSPITALS</td><td>$4,333,960.41</td><td>8.47</td><td>1,588</td></tr>
+<tr><td>NC HEART AND VASCULAR</td><td>$561,178.93</td><td>30.48</td><td>225</td></tr>
+<tr><td>WAKEMED</td><td>$404,283.09</td><td>15.34</td><td>119</td></tr>
+<tr><td><strong>TOTAL</strong></td><td><strong>$5,299,422.43</strong></td><td><strong>18.00</strong></td><td><strong>1,932</strong></td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-12">
+<h2 id="section-12">(9) A list of hospitals under contract.</h2>
+<p>As of December 31, 2021, DPS has contracted with 23 health care systems across the state. The systems are listed below.</p>
+
+<ul><li>
+Ashe Memorial Hospital</li>
+<li>
+Blue Ridge Regional Hospital</li>
+<li>
+Blue Ridge Healthcare System</li>
+<li>
+Caldwell Memorial Hospital</li>
+<li>
+Catawba Valley Medical Center</li>
+<li>
+Chatham Hospital Inc</li>
+<li>
+CHS Blue Ridge Morganton</li>
+<li>
+CHS Blue Ridge Valdese</li>
+<li>
+First Health Richmond Memorial</li>
+<li>
+Halifax Memorial Hospital</li>
+<li>
+High Point Regional Hospital</li>
+<li>
+Kindred Hospital Greensboro</li>
+<li>
+Montgomery Memorial Hospital</li>
+<li>
+Moore Regional Hospital</li>
+<li>
+Nash General Hospital</li>
+<li>
+New Hanover Regional Hospital</li>
+<li>
+Pender Memorial Hospital</li>
+<li>
+Randolph Hospital, Inc</li>
+<li>
+Rex Healthcare</li>
+<li>
+University of NC Hospitals</li>
+<li>
+Vidant Medical Center</li>
+<li>
+Vidant – Heritage, Outer Banks, Beaufort</li>
+<li>
+Vidant - Bertie, Chowan, Duplin, Roanoke Chowan</li>
+</ul>
+<p>During the quarter, additional onsite clinics began at Central Prison Healthcare Complex (CPHC) and provided services for 1,452 patients. These outpatient specialty clinics included podiatry, orthopedics, orthotics, audiology, nephrology, ophthalmology, optometry, and telemedicine. NCCIW clinics provided services for 574 patients during the same timeframe. The surgical center at CPHC performed 98 outpatient surgical procedures, and 134 MRI studies were performed in the mobile MRI unit at CPHC.</p>
+
+</section>
+<section aria-labelledby="section-13">
+<h2 id="section-13">(10) The reimbursement rate for contracted providers. The Department shall randomly audit high-volume contracted providers to ensure adherence to billing at the contracted rate.</h2>
+<p>Table 3 includes the reimbursement rate for contracted providers as of December 31, 2021. During the quarter, DPS audited 108 claims of contracted providers that were over $100,000. The audit found 89% of claims were paid according to the provider’s contracted rate. The denied claims included Medicaid-eligible offenders, duplicates, or billing errors.</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Table 3. Reimbursement Rates – Audit Results">
+<table>
+<caption>Table 3. Reimbursement Rates – Audit Results</caption><thead><tr><th scope="col"><strong>Provider Name</strong></th><th scope="col"><strong>Reimbursement Rate</strong></th></tr>
+</thead><tbody><tr><td>CHS BLUE RIDGE MORGANTON</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>MH BLUE RIDGE MED CENTER</td><td>70% of billed or 2X Medicaid (lesser of)</td></tr>
+<tr><td>MH MISSION HOSP MCDOWELL</td><td>70% of billed or 2X Medicaid (lesser of)</td></tr>
+<tr><td>MH MISSION HOSPITAL LLP</td><td>70% of billed or 2X Medicaid (lesser of)</td></tr>
+<tr><td>CATAWBA VALLEY MEDICAL CENTER</td><td>Outpatient: 70% of billed or 2X Medicaid
+Inpatient: 31% of billed charges</td></tr>
+<tr><td>ROANOKE CHOWAN HOSPITAL</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>EAST CAROLINA HEALTH CHOWAN</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>BERTI MEMORIAL HOSPITAL</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>HERITAGE HOSPITAL</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>THE OUTER BANKS HOSPITAL INC</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>PITT COUNTY MEMORIAL HOSPITAL</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>BEAUFORT HOSPITAL</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>DUPLIN GENERAL HOSPITAL</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>HALIFAX REGIONAL MEDICAL CENTER</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>FIRSTHEALTH</td><td>62% of billed or 2.6X Medicaid (lesser of)</td></tr>
+<tr><td>KINDRED HOSPITAL GREENSBORO</td><td>53% of billed charges</td></tr>
+<tr><td>CALDWELL MEMORIAL HOSPITAL</td><td>2.4X Medicare</td></tr>
+<tr><td>UNIV OF NC HOSPITALS</td><td>2.4X Medicare</td></tr>
+<tr><td>CHATHAM HOSPITAL</td><td>2.4X Medicare</td></tr>
+<tr><td>NOVANT NEW HANOVER REGIONAL MED CTR</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>REX HOSPITALS INC</td><td>2.4X Medicare</td></tr>
+<tr><td>NEW HANOVER REGIONAL MED CTR</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>PENDER MEMORIAL HOSPITAL</td><td>70% of billed or 2X Medicare (lesser of)</td></tr>
+<tr><td>&nbsp;</td><td><strong>Totals</strong></td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-14">
+<h2 id="section-14">ATTACHMENT A: PAYMENT AND CLAIMS DATA BY PROVIDER</h2>
+<h3 id="heading-1">ATTACHMENT A
+PAYMENT AND CLAIMS DATA BY PROVIDER (October – December 2021)</h3>
+<div class="table-responsive" role="region" tabindex="0" aria-label="PAYMENT AND CLAIMS DATA BY PROVIDER (October – December 2021)">
+<table>
+<caption>PAYMENT AND CLAIMS DATA BY PROVIDER (October – December 2021)</caption><thead><tr><th scope="col"><strong>Facility/Provider</strong></th><th scope="col"><strong>Contracted
+Y/N</strong></th><th scope="col"><strong>Amount Paid</strong></th><th scope="col"><strong>Volume
+of Claims</strong></th><th scope="col"><strong>Inmate
+Volume</strong></th><th scope="col"><strong>% of Total
+Inmates</strong></th></tr>
+</thead><tbody><tr><td>UNC FACULTY PHYSICIANS</td><td>Y</td><td>$1,179,865.22</td><td>2,666</td><td>1,083</td><td>10.739%</td></tr>
+<tr><td>UNIV OF NC HOSPITALS</td><td>Y</td><td>$4,333,960.41</td><td>1,733</td><td>1,115</td><td>11.056%</td></tr>
+<tr><td>DYNAMIC PHYSIATRY PLLC</td><td>N</td><td>$91,653.54</td><td>852</td><td>30</td><td>0.297%</td></tr>
+<tr><td>DHP OF NORTH CAROLINA PC</td><td>N</td><td>$344.40</td><td>2</td><td>2</td><td>0.020%</td></tr>
+<tr><td>ALAMANCE REGIONAL MEDICAL</td><td>N</td><td>$117.94</td><td>2</td><td>2</td><td>0.020%</td></tr>
+<tr><td>RANDOLPH HOSPITAL INC</td><td>Y</td><td>$588.30</td><td>2</td><td>1</td><td>0.010%</td></tr>
+<tr><td>PH MEDICAL GROUP MIDLANDS</td><td>N</td><td>$0.00</td><td>1</td><td>1</td><td>0.010%</td></tr>
+<tr><td>GRAHAM H WILSON DDS PA</td><td>N</td><td>$892.50</td><td>1</td><td>1</td><td>0.010%</td></tr>
+<tr><td>RALEIGH EYE AND FACE PLASTIC SURGERY</td><td>N</td><td>$0.00</td><td>1</td><td>1</td><td>0.010%</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td><strong>$20,996,427.09</strong></td><td><strong>21056</strong></td><td><strong>10085</strong></td><td><strong>100.000%</strong></td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-15">
+<h2 id="section-15">ATTACHMENT B</h2>
+<h3 id="heading-2">SCHEDULED AND EMERGENT SERVICES BY HOSPITAL (October – December 2021)</h3>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Scheduled and Emergent Services by Hospital">
+<table>
+<caption>Scheduled and Emergent Services by Hospital</caption><thead><tr><th scope="col"><strong>Contract Hospitals</strong></th><th scope="col"><strong>Admit</strong></th><th scope="col"><strong>ER Only</strong></th><th scope="col"><strong>Totals</strong></th><th scope="col"><strong>Non-Contract Hospital</strong></th><th scope="col"><strong>Admit</strong></th><th scope="col"><strong>ER Only</strong></th><th scope="col"><strong>Totals</strong></th></tr>
+</thead><tbody><tr><td>1ST HEALTH-MOORE REG</td><td>10</td><td>8</td><td>18</td><td>ALBEMARLE HOSPITAL</td><td>2</td><td>10</td><td>12</td></tr>
+<tr><td>BEAUFORT COUNTY HOSP</td><td>4</td><td>28</td><td>32</td><td>ANNIE PENN MEMORIAL</td><td>4</td><td>20</td><td>24</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>182</strong></td><td><strong>362</strong></td><td><strong>544</strong></td><td><strong>Total</strong></td><td><strong>194</strong></td><td><strong>855</strong></td><td><strong>1049</strong></td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-16">
+<h2 id="section-16">ATTACHMENT C</h2>
+<h3 id="heading-3">SCHEDULED AND EMERGENT ADMISSIONS BY HOSPITAL (October – December 2021)</h3>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Scheduled and Emergent Admissions by Hospital">
+<table>
+<caption>Scheduled and Emergent Admissions by Hospital</caption><thead><tr><th scope="col"><strong>Contract Hospitals</strong></th><th scope="col"><strong>Offenders</strong></th><th scope="col"><strong>Non-Contract Hospitals</strong></th><th scope="col"><strong>Offenders</strong></th></tr>
+</thead><tbody><tr><td>1ST HEALTH-MOORE REG</td><td>10</td><td>ALBEMARLE HOSPITAL</td><td>2</td></tr>
+<tr><td>BEAUFORT COUNTY HOSP</td><td>4</td><td>ANNIE PENN MEMORIAL</td><td>4</td></tr>
+<tr><td><strong>Total Contract</strong></td><td><strong>205</strong></td><td><strong>Total Non-Contract</strong></td><td><strong>203</strong></td></tr>
+<tr><td><strong>GRAND TOTAL</strong></td><td colspan="2">&nbsp;</td><td><strong>408</strong></td></tr>
+</tbody></table>
+</div>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

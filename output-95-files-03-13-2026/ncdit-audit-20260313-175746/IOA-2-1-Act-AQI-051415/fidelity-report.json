@@ -1,0 +1,91 @@
+{
+  "document_id": "IOA-2-1-Act-AQI-051415",
+  "composite_score": 0.5,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "Several significant sections from the source PDF are entirely missing in the HTML output. Specifically, all content from Page 4 (sections including 'WHERE TO FIND AQI FORECASTS AND REPORTS', 'SEASONAL PATTERNS OF OZONE AND PARTICULATE MATTER', 'MATERIALS', 'WARMUP', and 'Teacher Tips') is absent. Additionally, the 'EXTENSIONS' and 'RESOURCES' sections from Page 7 are missing. The order of sections has also been changed; 'WRAP UP AND ACTION' and 'ASSESSMENT' (from Page 7) now appear before 'PART C' (from Page 6). This constitutes a major failure in visual organization and layout fidelity.",
+        "b_evidence_source": "Page 4 contains instructional sections: 'WHERE TO FIND AQI FORECASTS AND REPORTS', 'SEASONAL PATTERNS OF OZONE AND PARTICULATE MATTER', 'MATERIALS', 'WARMUP', and 'Teacher Tips'. Page 7 contains 'EXTENSIONS' and 'RESOURCES'.",
+        "b_evidence_output": "These sections are completely absent from the rendered HTML screenshot. The flow jumps from 'THE AQI COLOR CODES' directly to 'THE ACTIVITY'.",
+        "b_evidence_location": "Between the 'THE AQI COLOR CODES' section and 'THE ACTIVITY' section, and at the end of the document.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables present in the HTML (AQI and Health Messages, PM2.5 and Ozone Measurements, Table Comparing Forecast and Actual AQI, and Calculating AQI) are correctly structured with visible cell boundaries and distinct headers. Although the background colors used in the PDF tables are not reproduced, the textual content and tabular structure are preserved and fully readable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The 'IT'S OUR AIR' program logo, which appears consistently in the header of every page in the source PDF and is a central brand element, is completely missing from the HTML output. While decorative elements like the sticky notes are also missing (which is acceptable), the omission of the primary logo is a failure to include a meaningful image.",
+        "b_evidence_source": "The 'IT'S OUR AIR' logo appears in the top-left or top-right corner of every page in the source PDF (e.g., page 2 header).",
+        "b_evidence_output": "The logo is not present anywhere in the HTML output; the header area only contains text and a background banner.",
+        "b_evidence_location": "Document header area.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "No unintended visual duplication of body content was observed. While the 'PM2.5 and Ozone Measurements and the AQI' table appears twice in the HTML, this reflects its multiple appearances in the source PDF (once in the main background section on page 3 and again as a reference on student page 13). Repetition in the Table of Contents vs. headings is expected design.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"Several significant sections from the source PDF are entirely missing in the HTML output. Specifically, all content from Page 4 (sections including 'WHERE TO FIND AQI FORECASTS AND REPORTS', 'SEASONAL PATTERNS OF OZONE AND PARTICULATE MATTER', 'MATERIALS', 'WARMUP', and 'Teacher Tips') is absent. Additionally, the 'EXTENSIONS' and 'RESOURCES' sections from Page 7 are missing. The order of sections has also been changed; 'WRAP UP AND ACTION' and 'ASSESSMENT' (from Page 7) now appear before 'PART C' (from Page 6). This constitutes a major failure in visual organization and layout fidelity.\",\n      \"b_evidence_source\": \"Page 4 contains instructional sections: 'WHERE TO FIND AQI FORECASTS AND REPORTS', 'SEASONAL PATTERNS OF OZONE AND PARTICULATE MATTER', 'MATERIALS', 'WARMUP', and 'Teacher Tips'. Page 7 contains 'EXTENSIONS' and 'RESOURCES'.\",\n      \"b_evidence_output\": \"These sections are completely absent from the rendered HTML screenshot. The flow jumps from 'THE AQI COLOR CODES' directly to 'THE ACTIVITY'.\",\n      \"b_evidence_location\": \"Between the 'THE AQI COLOR CODES' section and 'THE ACTIVITY' section, and at the end of the document.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables present in the HTML (AQI and Health Messages, PM2.5 and Ozone Measurements, Table Comparing Forecast and Actual AQI, and Calculating AQI) are correctly structured with visible cell boundaries and distinct headers. Although the background colors used in the PDF tables are not reproduced, the textual content and tabular structure are preserved and fully readable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The 'IT'S OUR AIR' program logo, which appears consistently in the header of every page in the source PDF and is a central brand element, is completely missing from the HTML output. While decorative elements like the sticky notes are also missing (which is acceptable), the omission of the primary logo is a failure to include a meaningful image.\",\n      \"b_evidence_source\": \"The 'IT'S OUR AIR' logo appears in the top-left or top-right corner of every page in the source PDF (e.g., page 2 header).\",\n      \"b_evidence_output\": \"The logo is not present anywhere in the HTML output; the header area only contains text and a background banner.\",\n      \"b_evidence_location\": \"Document header area.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"No unintended visual duplication of body content was observed. While the 'PM2.5 and Ozone Measurements and the AQI' table appears twice in the HTML, this reflects its multiple appearances in the source PDF (once in the main background section on page 3 and again as a reference on student page 13). Repetition in the Table of Contents vs. headings is expected design.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 0,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}
