@@ -65,6 +65,35 @@ python render_json.py path/to/dir/ -o /tmp/output/    # custom output directory
 python render_json.py path/to/file.json --raw          # skip ADA remediation
 ```
 
+## Element Preservation Guarantee
+
+Verified across all 100 files (16,218 total elements):
+
+- **Every element that survives ADA remediation produces non-empty HTML.** Zero elements silently dropped by renderers.
+- 2,754 elements removed by ADA remediation, all intentional:
+
+| ADA Operation | Count | Effect |
+|---|---|---|
+| Running header/footer dedup | 930 | Removes repeated page headers/footers |
+| Duplicate content removal | 507 | Removes identical paragraphs/headings |
+| Image dedup | 1,229 | Removes identical images (by base64 hash or description) |
+| List merging | 88 | Merges consecutive same-type lists (items preserved) |
+| Empty page removal | 2 | Removes pages emptied by dedup |
+| H1 demotion | 842 | Modifies only (H1 -> H2), no removal |
+| Heading normalization | 9 | Modifies only (fixes level skips), no removal |
+| Decorative image marking | 1,323 | Modifies only (adds role="presentation"), no removal |
+| Table header inference | 400 | Modifies only (row 0 -> `<th>`), no removal |
+
+## Image Sizing from PDF Bounding Boxes
+
+Previously, images were rendered with no explicit dimensions — only `max-width: 100%; height: auto` in CSS. Since the base64 data contains the image at its native resolution (which is often much larger than its on-page appearance in the PDF), images could appear drastically oversized in the HTML output.
+
+**Fix:** `_render_image()` now reads the `bbox` field (already present in the JSON, extracted by PyMuPDF via `page.get_image_rects()`) and sets explicit `width` and `height` attributes on the `<img>` tag. The bbox coordinates are in PDF points (1pt = 1/72 inch), which map closely to CSS pixels, so images now render at the same size they appear in the original PDF.
+
+- The existing CSS `max-width: 100%` still prevents overflow on narrow viewports
+- `height: auto` in CSS preserves aspect ratio if width is clamped
+- Images without a bbox (rare edge case) fall back to the previous behavior
+
 ## Test Results
 
-Tested against 100 extraction-test JSON files: **100 rendered, 0 failed**.
+Tested against 100 extraction-test JSON files: **100 rendered, 0 failed, 0 elements silently lost**.

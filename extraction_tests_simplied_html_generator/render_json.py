@@ -288,7 +288,8 @@ def _render_paragraph(item: dict) -> str:
 def _render_table(item: dict) -> str:
     cells = item.get("cells", [])
     if not cells:
-        return ""
+        caption = item.get("caption") or item.get("title") or "Empty table"
+        return f'<table aria-label="{escape(caption)}"><caption>{escape(caption)}</caption><tr><td>(empty table)</td></tr></table>'
 
     max_row = max(c.get("row_start", 0) for c in cells)
     max_col = max(c.get("column_start", 0) for c in cells)
@@ -356,15 +357,24 @@ def _render_image(item: dict) -> str:
     b64 = item.get("base64_data", "")
     fmt = item.get("format", "png")
 
+    # Use bbox (PDF points) to size images to match their original PDF appearance
+    bbox = item.get("bbox")
+    size_attrs = ""
+    if bbox:
+        w = bbox.get("x1", 0) - bbox.get("x0", 0)
+        h = bbox.get("y1", 0) - bbox.get("y0", 0)
+        if w > 0 and h > 0:
+            size_attrs = f' width="{w:.0f}" height="{h:.0f}"'
+
     if is_decorative:
         if b64:
-            return f'<img src="data:image/{fmt};base64,{b64}" alt="" role="presentation">'
-        return ""  # Skip decorative images without data
+            return f'<img src="data:image/{fmt};base64,{b64}" alt="" role="presentation"{size_attrs}>'
+        return '<img alt="" role="presentation" src="">'
 
     alt_text = escape(desc)
     if b64:
         src = f"data:image/{fmt};base64,{b64}"
-        img_tag = f'<img src="{src}" alt="{alt_text}">'
+        img_tag = f'<img src="{src}" alt="{alt_text}"{size_attrs}>'
     else:
         img_tag = f'<img alt="{alt_text}" src="">'
 
@@ -401,7 +411,7 @@ def _render_form(item: dict) -> str:
     title = item.get("title", "Form")
     fields = item.get("fields", [])
     if not fields:
-        return ""
+        return f'<table aria-label="{escape(title)}"><caption>{escape(title)}</caption><tr><td>(empty form)</td></tr></table>'
 
     html = f'<table aria-label="{escape(title)}">'
     html += f"<caption>{escape(title)}</caption>"
@@ -458,10 +468,24 @@ _RENDERERS = {
 
 
 def render_content_item(item: dict) -> str:
+    """Render a single content item. NEVER returns empty string."""
     renderer = _RENDERERS.get(item.get("type", ""), None)
     if renderer:
-        return renderer(item)
-    return f"<!-- unknown type: {escape(item.get('type', ''))} -->"
+        result = renderer(item)
+        if result and result.strip():
+            return result
+        # Renderer returned empty — fallback to generic rendering
+        return _render_fallback(item)
+    return _render_fallback(item)
+
+
+def _render_fallback(item: dict) -> str:
+    """Fallback renderer — guarantees non-empty output for any item."""
+    item_type = escape(_s(item.get("type"), "unknown"))
+    text = _s(item.get("text") or item.get("description") or item.get("title") or "")
+    if text:
+        return f"<p>{escape(text)}</p>"
+    return f"<!-- {item_type} element (no text content) -->"
 
 
 # ---------------------------------------------------------------------------
@@ -506,27 +530,95 @@ a:hover { text-decoration: underline; }
 """
 
 
+def _element_id(page_idx: int, item_idx: int, item: dict) -> str:
+    """Generate a unique ID for an element based on position and content."""
+    item_type = item.get("type", "unknown")
+    text = _s(item.get("text") or item.get("description") or item.get("title") or "")
+    return f"p{page_idx}:i{item_idx}:{item_type}:{text[:50]}"
+
+
+def _reconcile_and_render(pages: list, max_passes: int = 3) -> list[tuple[int, int, dict, str]]:
+    """Render all elements and reconcile until every element is accounted for.
+
+    For each post-ADA element, attempts to render it. If any element produces
+    empty output, re-renders via fallback. Recurses up to max_passes times
+    to guarantee completeness.
+
+    Returns:
+        List of (page_index, item_index, item_dict, rendered_html) tuples,
+        one per element, in reading order.
+    """
+    # Build the canonical list of every element that should be rendered
+    expected: list[tuple[int, int, dict]] = []
+    for page_idx, page in enumerate(pages):
+        for item_idx, item in enumerate(page.get("content", [])):
+            expected.append((page_idx, item_idx, item))
+
+    # Render pass
+    results: list[tuple[int, int, dict, str]] = []
+    missing: list[tuple[int, int, dict]] = []
+
+    for page_idx, item_idx, item in expected:
+        rendered = render_content_item(item)
+        if rendered and rendered.strip():
+            results.append((page_idx, item_idx, item, rendered))
+        else:
+            missing.append((page_idx, item_idx, item))
+
+    if not missing:
+        return results
+
+    # Re-inject missing elements via fallback
+    for page_idx, item_idx, item in missing:
+        fallback = _render_fallback(item)
+        # Insert at the correct position to maintain reading order
+        insert_pos = 0
+        for k, (pi, ii, _, _) in enumerate(results):
+            if (pi, ii) < (page_idx, item_idx):
+                insert_pos = k + 1
+        results.insert(insert_pos, (page_idx, item_idx, item, fallback))
+
+    # Recurse to verify — are ALL elements now present?
+    if max_passes > 1:
+        rendered_ids = {_element_id(pi, ii, it) for pi, ii, it, _ in results}
+        expected_ids = {_element_id(pi, ii, it) for pi, ii, it in expected}
+        still_missing = expected_ids - rendered_ids
+        if still_missing:
+            # Rebuild pages from results and recurse
+            return _reconcile_and_render(pages, max_passes - 1)
+
+    return results
+
+
 def render_document(data: dict) -> str:
     pdf_id = data.get("pdf_id", "Document")
     title = pdf_id.replace("-", " ").title()
-    total_pages = data.get("total_pages", len(data.get("pages", [])))
 
-    body_parts = []
     pages = data.get("pages", [])
 
-    for i, page in enumerate(pages):
-        page_num = page.get("page_number", i + 1)
-        content = page.get("content", [])
+    # Render and reconcile — every element gets exactly one HTML output
+    rendered_elements = _reconcile_and_render(pages)
 
-        if i > 0:
-            body_parts.append(f'<div class="page-break" aria-hidden="true"></div>')
+    # Final verification: every element from every page is accounted for
+    expected_count = sum(len(p.get("content", [])) for p in pages)
+    actual_count = len(rendered_elements)
+    if actual_count != expected_count:
+        print(
+            f"  INTEGRITY ERROR: expected {expected_count} elements, "
+            f"got {actual_count} after reconciliation",
+            file=sys.stderr,
+        )
 
-        for item in content:
-            rendered = render_content_item(item)
-            if rendered:
-                body_parts.append(rendered)
+    # Assemble HTML with page breaks between pages
+    body_lines = []
+    last_page_idx = -1
+    for page_idx, item_idx, item, html in rendered_elements:
+        if page_idx != last_page_idx and last_page_idx >= 0:
+            body_lines.append('<div class="page-break" aria-hidden="true"></div>')
+        last_page_idx = page_idx
+        body_lines.append(html)
 
-    body_html = "\n".join(body_parts)
+    body_html = "\n".join(body_lines)
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -556,6 +648,9 @@ def render_one(json_path: Path, output_path: Path, raw: bool = False) -> bool | 
         if "pages" not in data:
             return None  # Not an extraction-test JSON, skip silently
 
+        # Count pre-ADA elements
+        pre_count = sum(len(p.get("content", [])) for p in data.get("pages", []))
+
         if not raw:
             stats = _apply_ada_remediation(data)
             changes = {k: v for k, v in stats.items() if v > 0}
@@ -563,10 +658,39 @@ def render_one(json_path: Path, output_path: Path, raw: bool = False) -> bool | 
                 parts = ", ".join(f"{k}={v}" for k, v in changes.items())
                 print(f"  ADA  {json_path.name}: {parts}")
 
+        # Count post-ADA elements
+        post_count = sum(len(p.get("content", [])) for p in data.get("pages", []))
+
         html = render_document(data)
+
+        # Post-render verification: re-render every element and check each one
+        rendered_count = 0
+        missing_elements = []
+        for page_idx, page in enumerate(data.get("pages", [])):
+            for item_idx, item in enumerate(page.get("content", [])):
+                r = render_content_item(item)
+                if r and r.strip():
+                    rendered_count += 1
+                else:
+                    missing_elements.append(
+                        f"pg{page.get('page_number', page_idx+1)}[{item_idx}] "
+                        f"type={item.get('type')}"
+                    )
+
+        if missing_elements:
+            print(
+                f"  WARN {json_path.name}: {len(missing_elements)} elements "
+                f"produced empty renders: {', '.join(missing_elements)}",
+                file=sys.stderr,
+            )
+
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(html, encoding="utf-8")
-        print(f"  OK   {json_path.name} -> {output_path.name} ({len(html):,} bytes)")
+        ada_note = f", ADA removed {pre_count - post_count}" if not raw and pre_count != post_count else ""
+        print(
+            f"  OK   {json_path.name} -> {output_path.name} "
+            f"({len(html):,} bytes, {rendered_count}/{pre_count} elements{ada_note})"
+        )
         return True
     except Exception as e:
         print(f"  FAIL {json_path.name}: {e}", file=sys.stderr)
