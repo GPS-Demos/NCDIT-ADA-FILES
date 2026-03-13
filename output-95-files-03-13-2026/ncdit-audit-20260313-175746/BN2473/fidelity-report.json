@@ -1,0 +1,213 @@
+{
+  "document_id": "BN2473",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains two specific blocks of text that are not present in the source document: 'Content from pages 21-31 could not be converted. This section may be available after retry.' and '13 sections omitted for token budget'. However, according to the 'Acceptable Changes' section of the instructions, section labels and technical placeholders added by the pipeline are expected and not considered defects. The rest of the content provided in the JSON matches the source material.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "I verified the contact information for the form preparer (Sybil H. Argintar) and various URLs provided in the footnotes against the source document. The phone number (828) 230-3773 and the email sybil.argintar@yahoo.com on page 61 match the source exactly. All checked URLs in the footnotes also match the source material. No fabricated contact information was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output JSON is missing a massive portion of the source document. Specifically, Sections 3 through 10 are replaced by a placeholder stating '13 sections omitted for token budget'. This encompasses the majority of the nomination form, including the physical description (Section 7), the statement of significance (Section 8), and the bibliography (Section 9). Additionally, an explicit section at the end of the array indicates that pages 21-31 are unavailable. While footnotes for these pages are present at the end of the JSON, the actual textual content from pages 4 through 60 is almost entirely absent from the 'sections' array.",
+        "b_evidence_source": "The source document contains 11 numbered sections across 63 pages of text, plus maps and photos. Sections 3 (p. 1) through 10 (p. 59) contain the primary historical and architectural data of the nomination.",
+        "b_evidence_output": "The JSON sections array contains only Sections 1, 2, and parts of 11 (Additional Documentation). It includes placeholders: '{\"_omitted\": \"13 sections omitted for token budget\"}' and 'Content from pages 21-31 could not be converted.'",
+        "b_evidence_location": "JSON 'sections' array, between element indices for Section 2 and 'Additional Documentation', and at the end of the array.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document consists of a narrative form and does not contain any traditional data tables. Therefore, this check is not applicable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Significant text omissions exist, but since they consist of entire sections and multiple consecutive pages being dropped, they are categorized under C3 (Missing Sections). The sections that are present (Sections 1 and 2) are complete.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text that was successfully converted (Sections 1, 2, and the Photo Log) was compared against the source. The wording, dates, and identifiers (e.g., '143 – 225 High Top Colony Road', 'May 2020') match the source perfectly. No instances were found where reformatting changed the meaning of the text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains two specific blocks of text that are not present in the source document: 'Content from pages 21-31 could not be converted. This section may be available after retry.' and '13 sections omitted for token budget'. However, according to the 'Acceptable Changes' section of the instructions, section labels and technical placeholders added by the pipeline are expected and not considered defects. The rest of the content provided in the JSON matches the source material.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"I verified the contact information for the form preparer (Sybil H. Argintar) and various URLs provided in the footnotes against the source document. The phone number (828) 230-3773 and the email sybil.argintar@yahoo.com on page 61 match the source exactly. All checked URLs in the footnotes also match the source material. No fabricated contact information was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output JSON is missing a massive portion of the source document. Specifically, Sections 3 through 10 are replaced by a placeholder stating '13 sections omitted for token budget'. This encompasses the majority of the nomination form, including the physical description (Section 7), the statement of significance (Section 8), and the bibliography (Section 9). Additionally, an explicit section at the end of the array indicates that pages 21-31 are unavailable. While footnotes for these pages are present at the end of the JSON, the actual textual content from pages 4 through 60 is almost entirely absent from the 'sections' array.\",\n      \"b_evidence_source\": \"The source document contains 11 numbered sections across 63 pages of text, plus maps and photos. Sections 3 (p. 1) through 10 (p. 59) contain the primary historical and architectural data of the nomination.\",\n      \"b_evidence_output\": \"The JSON sections array contains only Sections 1, 2, and parts of 11 (Additional Documentation). It includes placeholders: '{\\\"_omitted\\\": \\\"13 sections omitted for token budget\\\"}' and 'Content from pages 21-31 could not be converted.'\",\n      \"b_evidence_location\": \"JSON 'sections' array, between element indices for Section 2 and 'Additional Documentation', and at the end of the array.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document consists of a narrative form and does not contain any traditional data tables. Therefore, this check is not applicable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Significant text omissions exist, but since they consist of entire sections and multiple consecutive pages being dropped, they are categorized under C3 (Missing Sections). The sections that are present (Sections 1 and 2) are complete.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text that was successfully converted (Sections 1, 2, and the Photo Log) was compared against the source. The wording, dates, and identifiers (e.g., '143 – 225 High Top Colony Road', 'May 2020') match the source perfectly. No instances were found where reformatting changed the meaning of the text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output JSON was reviewed for any instances of duplicated text blocks or sections. No redundant content was found; each section corresponds to a unique part of the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy in the output JSON is incorrect. According to the instructions, H1 should be the document title. In the output, the document title 'NATIONAL REGISTER OF HISTORIC PLACES' is assigned Level 3 (H3) and is nested as a subheading within the first section titled 'NORTH CAROLINA STATE HISTORIC PRESERVATION OFFICE'. Furthermore, the district name 'High Top Colony Historic District' is also set to Level 3. This constitutes incorrect nesting and level assignment for the primary document titles.",
+        "b_evidence_source": "NATIONAL REGISTER OF HISTORIC PLACES (p. 1, main title); High Top Colony Historic District (p. 1, subject title)",
+        "b_evidence_output": "{ \"type\": \"heading\", \"level\": 3, \"text\": \"NATIONAL REGISTER OF HISTORIC PLACES\", \"id\": \"heading-1\" } ... { \"type\": \"heading\", \"level\": 3, \"text\": \"High Top Colony Historic District\", \"id\": \"heading-2\" }",
+        "b_evidence_location": "Section 1, element indices 1 and 2",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "On page 3 of the source PDF, there is a clear table under the heading 'Number of Resources within Property' which lists resource categories (buildings, sites, etc.) and counts for 'Contributing' and 'Noncontributing' items. The output JSON metadata explicitly states a 'table_count' of 0, indicating that this tabular structure was not recognized or preserved by the pipeline.",
+        "b_evidence_source": "The table on page 3 containing columns for 'Contributing', 'Noncontributing', and resource types ('buildings', 'sites', 'structures', 'objects', 'Total').",
+        "b_evidence_output": "\"table_count\": 0",
+        "b_evidence_location": "Metadata and Section 5 (implied by page 3 of source)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order of the document is maintained correctly. The output follows the logical flow of the source PDF, beginning with the cover sheet, followed by the numbered sections of the NPS form, and concluding with the additional documentation and maps.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list in the 'Additional Documentation' section (p. 61) is correctly identified and converted into a structured list in the JSON. The 'Photo Log' on page 62 is rendered as a series of paragraphs, which is an acceptable representation of its linear format in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output JSON contains various URLs within the footnotes section (e.g., footnotes 17, 21, 88, 89, 93, 177). These links were cross-referenced with the source document and found to be accurately extracted without any evidence of broken or fabricated URLs.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5454545454545454,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output JSON was reviewed for any instances of duplicated text blocks or sections. No redundant content was found; each section corresponds to a unique part of the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy in the output JSON is incorrect. According to the instructions, H1 should be the document title. In the output, the document title 'NATIONAL REGISTER OF HISTORIC PLACES' is assigned Level 3 (H3) and is nested as a subheading within the first section titled 'NORTH CAROLINA STATE HISTORIC PRESERVATION OFFICE'. Furthermore, the district name 'High Top Colony Historic District' is also set to Level 3. This constitutes incorrect nesting and level assignment for the primary document titles.\",\n      \"b_evidence_source\": \"NATIONAL REGISTER OF HISTORIC PLACES (p. 1, main title); High Top Colony Historic District (p. 1, subject title)\",\n      \"b_evidence_output\": \"{ \\\"type\\\": \\\"heading\\\", \\\"level\\\": 3, \\\"text\\\": \\\"NATIONAL REGISTER OF HISTORIC PLACES\\\", \\\"id\\\": \\\"heading-1\\\" } ... { \\\"type\\\": \\\"heading\\\", \\\"level\\\": 3, \\\"text\\\": \\\"High Top Colony Historic District\\\", \\\"id\\\": \\\"heading-2\\\" }\",\n      \"b_evidence_location\": \"Section 1, element indices 1 and 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"On page 3 of the source PDF, there is a clear table under the heading 'Number of Resources within Property' which lists resource categories (buildings, sites, etc.) and counts for 'Contributing' and 'Noncontributing' items. The output JSON metadata explicitly states a 'table_count' of 0, indicating that this tabular structure was not recognized or preserved by the pipeline.\",\n      \"b_evidence_source\": \"The table on page 3 containing columns for 'Contributing', 'Noncontributing', and resource types ('buildings', 'sites', 'structures', 'objects', 'Total').\",\n      \"b_evidence_output\": \"\\\"table_count\\\": 0\",\n      \"b_evidence_location\": \"Metadata and Section 5 (implied by page 3 of source)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order of the document is maintained correctly. The output follows the logical flow of the source PDF, beginning with the cover sheet, followed by the numbered sections of the NPS form, and concluding with the additional documentation and maps.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list in the 'Additional Documentation' section (p. 61) is correctly identified and converted into a structured list in the JSON. The 'Photo Log' on page 62 is rendered as a series of paragraphs, which is an acceptable representation of its linear format in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output JSON contains various URLs within the footnotes section (e.g., footnotes 17, 21, 88, 89, 93, 177). These links were cross-referenced with the source document and found to be accurately extracted without any evidence of broken or fabricated URLs.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5454545454545454\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output correctly reflects the visual organization of the source PDF. The document begins with the cover sheet's text and photographs, followed by the structured sections of the NPS Registration Form (Sections 1-6). The narrative description (Section 7) and statement of significance (Section 8) follow in sequence, maintaining the logical flow of the original document. The flattened single-column layout for form fields (e.g., checkbox selections) is an expected conversion behavior and does not confuse the meaning or intent of the original layout.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source document contains form-style tables, most notably the 'Number of Resources within Property' section on page 4. In the HTML, this is rendered as text lines where 'Contributing' and 'Noncontributing' counts are paired with their labels (buildings, sites, structures, objects, total). This representation is clear and retains the data relationships found in the original table format. No cells are overlapping, and the data remains legible and correctly aligned.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present in the HTML output. This includes the two property photographs from the cover page (10 Grey Eagle Road and 42 Hoot Owl Road), the scanned signature image on page 2, the 'Location Map' from page 65, and the 'Boundary Map' from page 66. Each image appears in its corresponding location within the document flow and renders correctly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The HTML output was reviewed for visual duplication of body content. No paragraphs, form sections, or inventory items are repeated. The document title and section headers appear appropriately within the body content, following the structure of the source PDF. The coordinate list appearing both in the text of Section 10 and as part of the Location Map image at the end of the document correctly mirrors the source material and is not a conversion error.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output correctly reflects the visual organization of the source PDF. The document begins with the cover sheet's text and photographs, followed by the structured sections of the NPS Registration Form (Sections 1-6). The narrative description (Section 7) and statement of significance (Section 8) follow in sequence, maintaining the logical flow of the original document. The flattened single-column layout for form fields (e.g., checkbox selections) is an expected conversion behavior and does not confuse the meaning or intent of the original layout.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source document contains form-style tables, most notably the 'Number of Resources within Property' section on page 4. In the HTML, this is rendered as text lines where 'Contributing' and 'Noncontributing' counts are paired with their labels (buildings, sites, structures, objects, total). This representation is clear and retains the data relationships found in the original table format. No cells are overlapping, and the data remains legible and correctly aligned.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present in the HTML output. This includes the two property photographs from the cover page (10 Grey Eagle Road and 42 Hoot Owl Road), the scanned signature image on page 2, the 'Location Map' from page 65, and the 'Boundary Map' from page 66. Each image appears in its corresponding location within the document flow and renders correctly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The HTML output was reviewed for visual duplication of body content. No paragraphs, form sections, or inventory items are repeated. The document title and section headers appear appropriately within the body content, following the structure of the source PDF. The coordinate list appearing both in the text of Section 10 and as part of the Location Map image at the end of the document correctly mirrors the source material and is not a conversion error.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

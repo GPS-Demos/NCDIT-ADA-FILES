@@ -1,0 +1,213 @@
+{
+  "document_id": "42736---State-Human-Resources",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output includes invented section headings and content used as placeholders for missing data. Specifically, section elements 19 and 20 contain the text '[Pages 11-21 unavailable]' and '[Pages 21-31 unavailable]' along with descriptive paragraphs explaining the conversion failure. None of this text exists in the source document.",
+        "b_evidence_source": "The source document is a continuous series of government forms and rules with no placeholder text regarding conversion availability.",
+        "b_evidence_output": "\"[Pages 11-21 unavailable]\", \"Content from pages 11-21 could not be converted. This section may be available after retry.\", \"[Pages 21-31 unavailable]\", \"Content from pages 21-31 could not be converted. This section may be available after retry.\"",
+        "b_evidence_location": "Sections 19 and 20",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "Mailing addresses and URLs were checked throughout the converted text. Addresses like '1711 New Hope Church Road' and URLs like 'http://www.oshr.nc.gov/Guide/Policies/policies.htm' accurately reflect the content on the pages that were converted (e.g., page 5).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source document contains 37 pages. The JSON output includes content from pages 1 through 11 and pages 31 through 37. All information contained on pages 12 through 30 is entirely absent from the output. This missing content includes technical change requests and rule text for 25 NCAC 01D .0105, .0112, .0114, .0201, .0301, .0401, .0608, and .0901.",
+        "b_evidence_source": "Pages 12 through 30 of the PDF.",
+        "b_evidence_output": "The output transitions directly from page 11 content (Rule .0102) to page 31 content (RTC for .1001), skipping approximately 19 pages of legal requirements.",
+        "b_evidence_location": "Between Section 10 and Section 11",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Tables present in the output (e.g., in section 4 derived from page 5) capture the intended URL fragments from the source text. While converting text blocks into tables is a formatting choice, it does not result in the loss of material rows relative to that choice.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The sections that are present in the output (covering pages 1-11 and 31-37) appear to be largely complete and faithful to the paragraph-level content of the source document, including correctly identified strike-through and underline formatting.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text in the converted sections was reviewed against the source for accuracy in wording and meaning. Key legal terms and values in the converted pages match the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.41860465116279066,
+    "penalty_sum": 50,
+    "defect_count": 2,
+    "critical_count": 2,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output includes invented section headings and content used as placeholders for missing data. Specifically, section elements 19 and 20 contain the text '[Pages 11-21 unavailable]' and '[Pages 21-31 unavailable]' along with descriptive paragraphs explaining the conversion failure. None of this text exists in the source document.\",\n      \"b_evidence_source\": \"The source document is a continuous series of government forms and rules with no placeholder text regarding conversion availability.\",\n      \"b_evidence_output\": \"\\\"[Pages 11-21 unavailable]\\\", \\\"Content from pages 11-21 could not be converted. This section may be available after retry.\\\", \\\"[Pages 21-31 unavailable]\\\", \\\"Content from pages 21-31 could not be converted. This section may be available after retry.\\\"\",\n      \"b_evidence_location\": \"Sections 19 and 20\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"Mailing addresses and URLs were checked throughout the converted text. Addresses like '1711 New Hope Church Road' and URLs like 'http://www.oshr.nc.gov/Guide/Policies/policies.htm' accurately reflect the content on the pages that were converted (e.g., page 5).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source document contains 37 pages. The JSON output includes content from pages 1 through 11 and pages 31 through 37. All information contained on pages 12 through 30 is entirely absent from the output. This missing content includes technical change requests and rule text for 25 NCAC 01D .0105, .0112, .0114, .0201, .0301, .0401, .0608, and .0901.\",\n      \"b_evidence_source\": \"Pages 12 through 30 of the PDF.\",\n      \"b_evidence_output\": \"The output transitions directly from page 11 content (Rule .0102) to page 31 content (RTC for .1001), skipping approximately 19 pages of legal requirements.\",\n      \"b_evidence_location\": \"Between Section 10 and Section 11\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Tables present in the output (e.g., in section 4 derived from page 5) capture the intended URL fragments from the source text. While converting text blocks into tables is a formatting choice, it does not result in the loss of material rows relative to that choice.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The sections that are present in the output (covering pages 1-11 and 31-37) appear to be largely complete and faithful to the paragraph-level content of the source document, including correctly identified strike-through and underline formatting.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text in the converted sections was reviewed against the source for accuracy in wording and meaning. Key legal terms and values in the converted pages match the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 2,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 50,\n    \"score\": 0.4186046511627907\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "No instances of duplicated content blocks were found where a single block from the source was repeated multiple times in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document lacks an H1 heading level in the body. The first structural heading elements (such as 'REQUEST FOR TECHNICAL CHANGE') are assigned H2, skipping the mandatory H1 root level for the body content. This represents a broken hierarchy for screen reader navigation.",
+        "b_evidence_source": "REQUEST FOR TECHNICAL CHANGE (Page 1)",
+        "b_evidence_output": "type: heading, level: 2, text: REQUEST FOR TECHNICAL CHANGE",
+        "b_evidence_location": "Section 1, element 2 (index 1)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "On page 5, text lines containing physical line numbers (e.g., lines 17 and 28) have been converted into tables. These are not tables in the source document; they are parts of standard paragraphs or list items. This structural corruption fragments text and breaks semantic continuity.",
+        "b_evidence_source": "Page 5, line 17: forms/separation/reduction-in-force-policy. Each agency's guidelines shall be reviewed and",
+        "b_evidence_output": "type: table, rows: [ { cells: [ { content: [ { text: 17 } ] }, { content: [ { text: forms/separation/reduction-in-force-policy. Each agency's guidelines shall be reviewed and } ] } ] } ]",
+        "b_evidence_location": "Section 5, element 5",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is severely compromised by massive content loss and reordering. Pages 12 through 30 of the source are missing from the document's sequential flow, with placeholder error messages ('Pages unavailable') placed at the very end (reading order 19 and 20). Section 11 (Page 11) is immediately followed by Section 12 (Page 31).",
+        "b_evidence_source": "The source document continues from Page 11 (Rule .0102) to Page 12 (Rule .0105 technical changes).",
+        "b_evidence_output": "Section 11 ends with Page 11 content; Section 12 begins with Page 31 content (Rule .1001).",
+        "b_evidence_location": "Between Section 11 and Section 12",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are incorrectly converted by splitting individual lines of a single list item into multiple separate list items based on source line numbers. For example, on Page 3, line 7 is a continuation of the list item (1) that begins on line 6, but the output treats it as a second, independent list item.",
+        "b_evidence_source": "Page 3, lines 6-7: 6 (1) the requirements... satisfied in accordance with G.S. 7 126-1.1, or",
+        "b_evidence_output": "Element 4 (list) contains Item 1: '6 (1) the requirements...' and Item 2: '7 126-1.1, or'",
+        "b_evidence_location": "Section 3, element 4",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "A critical URL on page 5 is broken during conversion. Because the text was split across a list element and a subsequent table element, the link object in element 4 only contains a truncated portion of the URL ('http://oshr.nc.gov/policies-'), rendering it a broken/non-functional link.",
+        "b_evidence_source": "Page 5, line 16-17: http://oshr.nc.gov/policies-forms/separation/reduction-in-force-policy",
+        "b_evidence_output": "href: http://oshr.nc.gov/policies-",
+        "b_evidence_location": "Section 5, element 4",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.2272727272727273,
+    "penalty_sum": 17,
+    "defect_count": 5,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"No instances of duplicated content blocks were found where a single block from the source was repeated multiple times in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document lacks an H1 heading level in the body. The first structural heading elements (such as 'REQUEST FOR TECHNICAL CHANGE') are assigned H2, skipping the mandatory H1 root level for the body content. This represents a broken hierarchy for screen reader navigation.\",\n      \"b_evidence_source\": \"REQUEST FOR TECHNICAL CHANGE (Page 1)\",\n      \"b_evidence_output\": \"type: heading, level: 2, text: REQUEST FOR TECHNICAL CHANGE\",\n      \"b_evidence_location\": \"Section 1, element 2 (index 1)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"On page 5, text lines containing physical line numbers (e.g., lines 17 and 28) have been converted into tables. These are not tables in the source document; they are parts of standard paragraphs or list items. This structural corruption fragments text and breaks semantic continuity.\",\n      \"b_evidence_source\": \"Page 5, line 17: forms/separation/reduction-in-force-policy. Each agency's guidelines shall be reviewed and\",\n      \"b_evidence_output\": \"type: table, rows: [ { cells: [ { content: [ { text: 17 } ] }, { content: [ { text: forms/separation/reduction-in-force-policy. Each agency's guidelines shall be reviewed and } ] } ] } ]\",\n      \"b_evidence_location\": \"Section 5, element 5\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is severely compromised by massive content loss and reordering. Pages 12 through 30 of the source are missing from the document's sequential flow, with placeholder error messages ('Pages unavailable') placed at the very end (reading order 19 and 20). Section 11 (Page 11) is immediately followed by Section 12 (Page 31).\",\n      \"b_evidence_source\": \"The source document continues from Page 11 (Rule .0102) to Page 12 (Rule .0105 technical changes).\",\n      \"b_evidence_output\": \"Section 11 ends with Page 11 content; Section 12 begins with Page 31 content (Rule .1001).\",\n      \"b_evidence_location\": \"Between Section 11 and Section 12\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are incorrectly converted by splitting individual lines of a single list item into multiple separate list items based on source line numbers. For example, on Page 3, line 7 is a continuation of the list item (1) that begins on line 6, but the output treats it as a second, independent list item.\",\n      \"b_evidence_source\": \"Page 3, lines 6-7: 6 (1) the requirements... satisfied in accordance with G.S. 7 126-1.1, or\",\n      \"b_evidence_output\": \"Element 4 (list) contains Item 1: '6 (1) the requirements...' and Item 2: '7 126-1.1, or'\",\n      \"b_evidence_location\": \"Section 3, element 4\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"A critical URL on page 5 is broken during conversion. Because the text was split across a list element and a subsequent table element, the link object in element 4 only contains a truncated portion of the URL ('http://oshr.nc.gov/policies-'), rendering it a broken/non-functional link.\",\n      \"b_evidence_source\": \"Page 5, line 16-17: http://oshr.nc.gov/policies-forms/separation/reduction-in-force-policy\",\n      \"b_evidence_output\": \"href: http://oshr.nc.gov/policies-\",\n      \"b_evidence_location\": \"Section 5, element 4\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 5,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 2,\n    \"penalty_sum\": 17,\n    \"score\": 0.2272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output is missing a substantial portion of the source PDF's content. Specifically, the document is interrupted by placeholders stating '[Pages 11–21 unavailable]' and '[Pages 21–31 unavailable]'. This means that rules and technical change requests corresponding to pages 12 through 31 of the PDF (including sections 25 NCAC 01D .0105, .0112, .0114, .0201, .0301, .0401, .0608, .0901, and .1001) are entirely absent from the rendered HTML. This is a major failure of visual organization and completeness, as a user cannot find the majority of the document's information.",
+        "b_evidence_source": "Complete 37-page PDF document containing multiple rules and technical change requests (e.g., 25 NCAC 01D .0105 on page 13, 25 NCAC 01D .0201 on page 21).",
+        "b_evidence_output": "The HTML output contains placeholder text: '[Pages 11–21 unavailable]' and '[Pages 21–31 unavailable]' in place of the document's content.",
+        "b_evidence_location": "End of HTML body, following the section for rule 25 NCAC 01D .0102.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source PDF does not contain any formal bordered tables. It uses structured lists and outlines to present rule text and change requests. These structures are successfully converted into indented HTML lists that preserve the logical layout and readability. No visual corruption of alignment or structure was observed in the rendered sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF is a text-based government document with no meaningful images, logos, charts, or diagrams. Consequently, there are no missing or broken images in the HTML output. The absence of decorative headers or page borders is an intentional accessibility improvement.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of body content being visually duplicated in the HTML output. While section headings appear in both the Table of Contents and the body, this is an expected accessibility feature. Within the body text itself, each rule and technical change request is rendered only once, corresponding to its appearance in the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output is missing a substantial portion of the source PDF's content. Specifically, the document is interrupted by placeholders stating '[Pages 11–21 unavailable]' and '[Pages 21–31 unavailable]'. This means that rules and technical change requests corresponding to pages 12 through 31 of the PDF (including sections 25 NCAC 01D .0105, .0112, .0114, .0201, .0301, .0401, .0608, .0901, and .1001) are entirely absent from the rendered HTML. This is a major failure of visual organization and completeness, as a user cannot find the majority of the document's information.\",\n      \"b_evidence_source\": \"Complete 37-page PDF document containing multiple rules and technical change requests (e.g., 25 NCAC 01D .0105 on page 13, 25 NCAC 01D .0201 on page 21).\",\n      \"b_evidence_output\": \"The HTML output contains placeholder text: '[Pages 11–21 unavailable]' and '[Pages 21–31 unavailable]' in place of the document's content.\",\n      \"b_evidence_location\": \"End of HTML body, following the section for rule 25 NCAC 01D .0102.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source PDF does not contain any formal bordered tables. It uses structured lists and outlines to present rule text and change requests. These structures are successfully converted into indented HTML lists that preserve the logical layout and readability. No visual corruption of alignment or structure was observed in the rendered sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF is a text-based government document with no meaningful images, logos, charts, or diagrams. Consequently, there are no missing or broken images in the HTML output. The absence of decorative headers or page borders is an intentional accessibility improvement.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of body content being visually duplicated in the HTML output. While section headings appear in both the Table of Contents and the body, this is an expected accessibility feature. Within the body text itself, each rule and technical change request is rendered only once, corresponding to its appearance in the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 8,
+  "total_critical": 2,
+  "total_major": 4,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

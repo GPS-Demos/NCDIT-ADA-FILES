@@ -1,0 +1,116 @@
+# Batch Status: ncdit-audit-20260313-175746
+
+- **Total PDFs**: 104
+- **Succeeded**: 77
+- **Failed**: 27
+- **Timeout**: 1200s
+- **Routing**: {'human_review': 16, 'auto_approve': 44, 'reject': 35, 'timeout': 9}
+
+## Results
+
+| Document                                                     | Status | Routing         | Score |
+| ------------------------------------------------------------ | ------ | --------------- | ----- |
+| 02-20-25-SRB-BOT-BNY-Slides                                  |     OK | human_review    |    81 |
+| 03020104Final                                                |     OK | human_review    |    60 |
+| 0501.3.1---Propane-Regulator-Vent-Locations                  |     OK | auto_approve    |   100 |
+| 10A-NCAC-22B-0102                                            |     OK | auto_approve    |    97 |
+| 10DraftMinsForSpecialInvestSubcommitteemeeting03092015       |     OK | auto_approve    |    97 |
+| 14B-NCAC-16-.1401                                            |     OK | reject          |    40 |
+| 15-DHR-01234                                                 |     OK | auto_approve    |    99 |
+| 16-DOJ-09260                                                 |     OK | auto_approve    |    98 |
+| 17-APRFY2015.pdf                                             |     OK | reject          |    40 |
+| 2010booklet                                                  |   FAIL | timeout         |     0 |
+| 2013-NCDOT-Annual-Erosion-and-Sedimentation-Control-Report-FINAL |     OK | human_review    |    78 |
+| 2018-Leadership-Council-Bylaws                               |   FAIL | reject          |    15 |
+| 2019-Governors-Awards-of-Distinction-Recipients              |     OK | auto_approve    |    95 |
+| 2020-North-Piedmont-CRV-PREA-Report                          |   FAIL | timeout         |     0 |
+| 2025-07-24-WRCAgendaPackage.pdf                              |   FAIL | timeout         |     0 |
+| 41883---21-Ncac-61-.0102                                     |     OK | auto_approve    |    98 |
+| 42583---10A-Ncac-13J                                         |     OK | auto_approve    |    99 |
+| 42736---State-Human-Resources                                |     OK | reject          |    40 |
+| 80-20-70-30-Plan-for-Active-Employees-who-are-Medicare-Primary… |     OK | human_review    |    80 |
+| 93.599-2020                                                  |     OK | auto_approve    |    98 |
+| AFS-02-2014-pubgaurdianshipadhoc                             |     OK | auto_approve    |    94 |
+| AfricanAmerican_-HealthDisparities_2.4.26_Spanish_web.pdf    |     OK | auto_approve    |    86 |
+| Amendment-3_19-IFB-629789028-SME_Prexaco_Executed.pdf        |     OK | reject          |    66 |
+| Approved-Temporary-Rules-April-2023-Special-Meeting.pdf      |     OK | auto_approve    |    96 |
+| BN2473                                                       |     OK | reject          |    40 |
+| BP-Brochure.pdf                                              |     OK | human_review    |    79 |
+| Benefits-Offices                                             |   FAIL | reject          |    15 |
+| CE_AquaNC_WIF-2046_Wyntree_Willow-Hill-PFAS-Well-Improvements_240411.pdf |   FAIL | reject          |    15 |
+| CSS-21-26a                                                   |   FAIL | reject          |    15 |
+| CSS_21_39                                                    |     OK | auto_approve    |   100 |
+| Cosmetic-Arts-Board-BD-307-2025-27                           |   FAIL | reject          |    15 |
+| DHHS-58-2023                                                 |     OK | auto_approve    |    93 |
+| DNCR-9-2025                                                  |     OK | auto_approve    |    98 |
+| DPS-Adult-Correction_Q4-CY2021_Cost-Containment_Feb2022.pdf  |     OK | reject          |    30 |
+| Dental-Fee-Scedule-FQHC-2-10-22.pdf                          |   FAIL | reject          |     3 |
+| Department-of-Insurance-petition-for-rulemaking-02.13.2023   |     OK | human_review    |    60 |
+| Disaster-Nutrition-Assistance-Programs-Brochure-(FNS-483)    |     OK | auto_approve    |    87 |
+| ER-21-1295                                                   |   FAIL | timeout         |     0 |
+| FAEP-03-2007a4                                               |   FAIL | reject          |    15 |
+| FNS-Weekly-Timeliness-aug16-aug22                            |   FAIL | reject          |    15 |
+| FY-Evergreen-Farm-USGS-Map-HPO-EDITS                         |     OK | human_review    |    87 |
+| Fall-2001-Archaeological-Plan                                |     OK | auto_approve    |   100 |
+| Firsthealth_Moore_Regional_Hospital_Hoke_Campus_2025Q2.pdf   |     OK | auto_approve    |    88 |
+| Florence-2022-Q2-QPR                                         |     OK | reject          |    40 |
+| Form-0300-for-Notice-of-Text-April-2020-2021-09-01           |     OK | auto_approve    |    90 |
+| GRA-2008-0060                                                |     OK | auto_approve    |   100 |
+| General-Permit---Poultry-2019                                |     OK | reject          |    28 |
+| Goodman-92761-MY1-2009                                       |     OK | reject          |    20 |
+| Governor-Proclaims-Child-Abuse-Prevention-Month-2024         |     OK | human_review    |    60 |
+| HPO                                                          |     OK | reject          |    20 |
+| Heat-Health-Alert-System-FAQs-Spanish.pdf                    |   FAIL | reject          |    15 |
+| I-H-S--Home-Health-Fee-Schedule---January-2021               |   FAIL | reject          |     3 |
+| IOA-2-1-Act-AQI-051415                                       |     OK | human_review    |    55 |
+| Infant-and-Child-Enrollment-Form-2023.pdf                    |   FAIL | reject          |     3 |
+| Item-F---LSLR-Preliminary-Funding-Scenario-FINAL-12-3-25     |     OK | auto_approve    |    97 |
+| Joint-Communication-Bulletin-J357---Department-of-Health-and… |     OK | auto_approve    |   100 |
+| Joint-DMH-DHB-Consumer-Call-Presentation---March-2023        |     OK | reject          |    40 |
+| Jul16-Jul20-2018                                             |     OK | auto_approve    |    98 |
+| Linen-Room-Attendant                                         |     OK | auto_approve    |    98 |
+| LoflinDairy_95008_MY1_2012                                   |   FAIL | reject          |     3 |
+| Log-of-Perm-Rules-December-2012                              |     OK | human_review    |    80 |
+| Log-of-Temporary-Rules-March-2019                            |     OK | auto_approve    |    99 |
+| MCAC-NC-Medicaid-Public-Hearing-1115-Waiver-(10Dec2021)      |     OK | auto_approve    |    91 |
+| Memo-Guidance-for-Maintenance-and-Construction-Activities_20241023.pdf |     OK | human_review    |    82 |
+| NC-401(k)-Plan-Hardship-Distributions                        |     OK | auto_approve    |    88 |
+| NC-Draft-Phase-2-VW-Mitigation-Plan-2021                     |   FAIL | reject          |     3 |
+| NC-Medicaid-Q-A-11-ES-US                                     |     OK | reject          |    40 |
+| NC-Register-Volume-04-Issue-21                               |   FAIL | timeout         |     0 |
+| NC-Resilient-Communities-Funding-Forum---Grant-Project-Planning-Worksheet |     OK | auto_approve    |    99 |
+| NC1099NRS-12                                                 |     OK | auto_approve    |    95 |
+| NCFRC-Meeting-Minutes-2016-April                             |     OK | reject          |    40 |
+| NGV-2008-9110                                                |     OK | reject          |    40 |
+| October-15-2020-HBR-Alert                                    |   FAIL | reject          |     3 |
+| PENC-Letter-to-Board-3.22.17.pdf                             |     OK | human_review    |    79 |
+| PPPLEP-One-Pager-English-WEB                                 |     OK | auto_approve    |   100 |
+| PSAP-Cybersecurity-Remediation-Initiative                    |     OK | auto_approve    |    92 |
+| ParentChild+                                                 |     OK | auto_approve    |    94 |
+| Public-Comment-3D-Hospice-08-02                              |     OK | reject          |    40 |
+| Quality-of-Life-3rd-Quarter-2015                             |   FAIL | reject          |    15 |
+| Residential-Child-Care-Facility-Inquiry-Form                 |     OK | auto_approve    |    92 |
+| RetirementStudyCommissionInformation                         |     OK | auto_approve    |   100 |
+| Rrc---Approved-Temp-Rules-October-2016                       |     OK | auto_approve    |   100 |
+| Rulemaking-Coordinator-List-10-21-2021                       |     OK | auto_approve    |   100 |
+| SPA-Guidelines.pdf                                           |     OK | auto_approve    |   100 |
+| SYNC-Archive-01-8-2013                                       |   FAIL | reject          |    15 |
+| School-Business---Finance-Officers-Newsletter-2017           |   FAIL | timeout         |     0 |
+| Setback-Temperature-Control                                  |     OK | auto_approve    |    89 |
+| Short-Form-148-2020                                          |     OK | human_review    |    82 |
+| Shrimp-FMP-Amendment-1final                                  |   FAIL | timeout         |     0 |
+| Signage---Wear-a-Mask---English                              |     OK | auto_approve    |    89 |
+| Transcript-Stakeholder-Update-on-Tailored-Plan-Design        |     OK | human_review    |    88 |
+| UT-to-Rush-Fork_100068_MY0_2022                              |   FAIL | timeout         |     0 |
+| VaporIntrusionTable-Residential                              |     OK | reject          |    17 |
+| Vaya-DMA-MCO-2018-7                                          |   FAIL | timeout         |     0 |
+| Vote-in-Honor-of-a-Vet-Form.pdf                              |     OK | auto_approve    |    94 |
+| WRC---No-Wake-Zone-Onslow-County                             |     OK | human_review    |    87 |
+| WeeklyHRIReport-August31-September6.pdf                      |     OK | reject          |    20 |
+| WorkforceDevelopmentBoards                                   |     OK | human_review    |    81 |
+| X-Earthquake-Websites                                        |     OK | auto_approve    |    96 |
+| Xyrem-Policy-254-C-03-2020-v2.pdf                            |     OK | auto_approve    |    93 |
+| copy-fees.pdf                                                |   FAIL | reject          |    15 |
+| fscw-36-2006                                                 |     OK | auto_approve    |    93 |
+| phy-admin-drug-program-PDF-05.05.2020                        |   FAIL | reject          |     3 |
+| updateltr-302                                                |     OK | auto_approve    |    99 |

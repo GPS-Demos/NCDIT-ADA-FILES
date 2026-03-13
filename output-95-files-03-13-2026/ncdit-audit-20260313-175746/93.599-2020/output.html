@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>CHAFEE EDUCATION AND TRAINING VOUCHERS PROGRAM (ETV)</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>CHAFEE EDUCATION AND TRAINING VOUCHERS PROGRAM (ETV)</h1>
+    </header>
+    <main id="main-content" role="main">
+<section aria-labelledby="section-1">
+<h2 id="section-1">93.599 CHAFEE EDUCATION AND TRAINING VOUCHERS PROGRAM (ETV)</h2>
+<p><strong>APRIL 2020
+
+93.599 CHAFEE EDUCATION AND TRAINING VOUCHERS PROGRAM (ETV)</strong></p>
+
+<p><strong>State Project/Program: N. C. LINKS PROGRAM – EDUCATION AND TRAINING VOUCHERS (ETV)</strong></p>
+
+<p><strong>U. S. DEPARTMENT OF HEALTH AND HUMAN SERVICES
+ADMINISTRATION FOR CHILDREN AND FAMILIES</strong></p>
+
+<p><strong>Federal Authorization: </strong>Social Security Act, Title IV-E, Sections 474 and 477 as amended by P.L. 106-169, the Foster Care Independence Act of 1999. Program instructions and procedures are outlined in ACYF-CB-PI-03-36</p>
+
+<p><strong>N. C. Department of Health and Human Services
+Division of Social Services</strong></p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Agency Contacts">
+<table>
+<caption>Agency Contacts</caption><thead><tr><th scope="col"><strong><u>Agency Contact Person – Program / Financial:</u></strong></th><th scope="col"><strong><u>N. C. DHHS Confirmation Reports:</u></strong></th></tr>
+</thead><tbody><tr><td>Erin Conner, MSW
+Social Services Program Coordinator,
+(919)527-6351
+<a href="mailto:erin.conner@dhhs.nc.gov" class="email-link">erin.conner@dhhs.nc.gov</a>
+
+Agency Contact Person – Financial:
+
+Kathy Sommese
+Section Chief
+(919)527-6415
+<a href="mailto:Kathy.Sommese@dhhs.nc.gov" class="email-link">Kathy.Sommese@dhhs.nc.gov</a></td><td>SFY 2020 audit confirmation reports for payments made to Counties, Local Management Entities (LMEs), Managed Care Organizations (MCOs), Boards of Education, Councils of Government, District Health Departments and DHSR Grant Subrecipients will be available by mid-October at the following web address: <a href="https://www.ncdhhs.gov/about/administrative-offices/office-controller/audit-confirmation-reports" target="_blank" rel="noopener noreferrer" class="external-link">https://www.ncdhhs.gov/about/administrative-offices/office-controller/audit-confirmation-reports<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a> At this site, click on the link entitled “Audit Confirmation Reports (State Fiscal Year 2019-2020). Additionally, audit confirmation reports for Nongovernmental entities receiving financial assistance from DHHS are found at the same website except select “Non-Governmental Audit Confirmation Reports (State Fiscal Years 2018-2020).</td></tr>
+</tbody></table>
+</div>
+
+<p><strong>The Auditor should </strong><strong><u>not</u></strong><strong> consider the Supplement to be “safe harbor” for identifying audit procedures to apply in a particular engagement, but the Auditor should be prepared to justify departures from the suggested procedures. The Auditor </strong><strong><u>can</u></strong><strong> consider the Supplement a “safe harbor” for identification of compliance requirements to be tested if the Auditor performs reasonable procedures to ensure that the requirements in the Supplement are current. The grantor agency may elect to review audit working papers to determine that audit tests are adequate.</strong></p>
+
+<section aria-labelledby="section-2">
+<h3 id="section-2">I. PROGRAM OBJECTIVES</h3>
+<p>To provide resources to States and eligible Indian Tribes to make available vouchers for post-secondary training and education, to youth who are likely to age out of foster care or who have been adopted or left for kinship guardianship from the public foster care system after age 16, or who were in foster care on or after their 17th birthday.</p>
+
+</section>
+<section aria-labelledby="section-3">
+<h3 id="section-3">II. PROGRAM PROCEDURES</h3>
+<p>The State completes the annual CFS-101 that provides an estimate of annual funds. The Administration of Children and Families (ACF) awards funds to states depending upon funding availability. These funds require a twenty-percent match which may consist of State funds or allowable in-kind match.</p>
+
+<p>Subrecipients submit an annual contract proposal to the State and funds are awarded. Subrecipients acquire their grant award via the N. C. DHHS Office of Procurement and Contracting procedures referenced at
+<a href="http://www.pandc.nc.gov/documents/Procurement_Manual_5_8_2013_interactive.pdf" target="_blank" rel="noopener noreferrer" class="external-link">http://www.pandc.nc.gov/documents/Procurement_Manual_5_8_2013_interactive.pdf<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a>.
+Funds are distributed to the subrecipient on a monthly basis upon submission of a DSS-1571 invoice to the State.</p>
+
+<p>Eligible youth are required to apply for funding by completing the subrecipient application on line. Eligibility is determined by the NC State LINKS Program and communicated to the subrecipient. Funds are distributed to eligible applicants depending upon need and funding availability up to $5,000 per year and upon verification of their enrollment in a post-secondary or vocational institution. Funds may be used for cost of attendance and other allowable expenses.</p>
+
+<p>Subrecipients are monitored by the NC State LINKS Program in accordance to the NC Department of Health and Human Services, Division of Social Services Subrecipient Monitoring Plan – Contracts, found at: NC Sub-Recipient Monitoring Plan.</p>
+
+</section>
+<section aria-labelledby="section-4">
+<h3 id="section-4">III. COMPLIANCE REQUIREMENTS</h3>
+<blockquote>
+<p>The Type of Compliance Requirements can be found in Section B in the link: 2020 Agency Matrix for Federal Programs. This matrix incorporates the OMB Compliance Supplement “Part 2 - Matrix of Compliance Requirement.” A State Agency may have added a compliance requirement that the OMB matrix in Part 2 has a “N” (Not Applicable).</p>
+</blockquote>
+
+<p><strong>Crosscutting Requirements: The compliance requirements in the Division of Social Services “Crosscutting Requirements” in Section D (Supplement #DSS-0) are applicable to this grant.</strong></p>
+
+<section aria-labelledby="section-5">
+<h4 id="section-5">A. ACTIVITIES ALLOWED OR UNALLOWED</h4>
+<p>Funds may be used to provide vouchers for post-secondary education and training to youth who are/were in foster at age 17 otherwise eligible for services under the State’s or Tribe’s Chafee Foster Care Independence Program. Vouchers may also be provided to youth who leave foster care for adoption or kinship guardianship after age 16, or who are still in foster care on or after their 17th birthday. Vouchers can be provided to youth up to the age of 23, as long as they are participating in the program at age 21 and are making satisfactory progress toward completing their course of study or training. Vouchers provided to individuals may be available for the cost of attending an institution of higher education (as defined in section 472 of the Higher Education Act) and shall not exceed the lesser of $5,000 per grant year or the total cost of attendance as defined in section 472 of the Higher Education Act.</p>
+
+<p>No more than ten percent (10%) of the federal grant is dedicated to the administration of these funds. That portion of the funds is distributed between salaries and other administrative costs. The remainder of the funds may only be used for cash vouchers for the eligible students to pay for allowable expenses that are included in their cost of attendance. Vouchers are directly paid to third party vendors.</p>
+
+<p><strong>Recommended Audit Procedures:</strong></p>
+
+<p>Determine that students receiving Educational Training Vouchers are eligible for these funds by meeting all the criteria in section C, below;</p>
+
+<p>Documentation of vouchers from Foster Care to Success specifies that the student is eligible for ETV and that any expenditure is allowable under the principles of the Act.</p>
+
+<p>Documentation of administrative expenditures from Foster Care to Success is allowable under the budget.</p>
+
+</section>
+<section aria-labelledby="section-6">
+<h4 id="section-6">B. ALLOWABLE COSTS/COST PRINCIPLES</h4>
+<p>Funds provided to the subrecipient for administration may only be used for salaries, annual audit expenses, web-based application, case management services, mentoring services, marketing and promotional materials, insurance, equipment, and supplies.</p>
+
+<p>Funds provided to or on behalf of applicants may be used for:</p>
+
+<ul><li>
+Tuition and fees;</li>
+<li>
+On-campus room and board or a housing and food allowance for off-campus students;</li>
+<li>
+Allowances for books, supplies, transportation, loan fees, and, if applicable dependent care;</li>
+<li>
+Costs related to a disability;</li>
+<li>
+Miscellaneous expenses, including rental or purchase of a personal computer;</li>
+<li>
+Reasonable costs associated with eligible study-abroad programs.</li>
+</ul>
+<p>All grantees that expend State funds (including federal funds passed through the N. C. Department of Health and Human Services) are required to comply with the cost principles described in the N. C. Administrative Code at 09 NCAC 03M .0201.</p>
+
+</section>
+<section aria-labelledby="section-7">
+<h4 id="section-7">E. ELIGIBILITY</h4>
+<p>Applicants are eligible for up to $5,000 in financial assistance to attend a qualifying educational or vocational training institution which provides post-secondary coursework. The award is based on the total cost of attendance less other federal grants and scholarships. The award may not exceed $5,000.</p>
+
+<ul><li>
+Applicant is now between 18 and 20 years of age. If now 21 to 23 years of age, must have received ETV funds prior to 21st birthday and;</li>
+<li>
+Applicant was in foster care on or after his/her 17th birthday or was adopted from foster care on or after his/her 16th birthday or placed in a relative guardianship on or after his/her 16th birthday and;</li>
+<li>
+Applicant is attending a qualifying institution of post-secondary learning. Full time students qualify for up to $5,000 a year for all the above expenses; students attending part time qualify for up to $2,500 per year in tuition/fees, books, supplies, transportation and dependent-care expenses and;</li>
+<li>
+Applicant is either a U. S. Citizen or is a qualified resident alien.</li>
+<li>
+Applicant does not have more than $10,000 in personal reserves.</li>
+</ul>
+</section>
+<section aria-labelledby="section-8">
+<h4 id="section-8">G. MATCHING, LEVEL OF EFFORT, EARMARKING</h4>
+<ol><li>
+Matching: The Federal government will pay 80% of the total amount of funds expended by DSS up to \the amount Chafee ETV funds allocated to NC. DSS must provide matching contributions to cover the additional 20% of the costs. This is a mandatory grant requirement. DSS is responsible for certifying the 20% match by documenting the required amount spent on the eligible foster care population.</li>
+<li>
+Level of Effort: Not Applicable</li>
+<li>
+Earmarking: Not Applicable</li>
+</ol>
+</section>
+<section aria-labelledby="section-9">
+<h4 id="section-9">H. PERIOD OF PERFORMANCE</h4>
+<p>Federal grants are provided to the State for the Federal Fiscal Year October 1 through September 30. Funds are awarded to subrecipients on a State Fiscal Year July 1 through June 30.</p>
+
+</section>
+<section aria-labelledby="section-10">
+<h4 id="section-10">I. PROCUREMENT AND SUSPENSION AND DEBARMENT</h4>
+<p>All grantees that expend federal funds (received either directly from a federal agency or passed through the N. C. Department of Health and Human Services) are required to conform to federal agency codifications of the grants management common rule accessible on the Internet at <a href="http://www.whitehouse.gov/omb/" target="_blank" rel="noopener noreferrer" class="external-link">http://www.whitehouse.gov/omb/<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a>.</p>
+
+<p>All grantees that expend State funds (including federal funds passed through the N. C. Department of Health and Human Services) are required to comply with the procurement standards described in the North Carolina General Statutes and the North Carolina Administrative Code, which are identified in the State of North Carolina Agency Purchasing Manual accessible on the Internet at <a href="http://www.pandc.nc.gov/documents/Procurement_Manual_5_8_2013_interactive.pdf" target="_blank" rel="noopener noreferrer" class="external-link">http://www.pandc.nc.gov/documents/Procurement_Manual_5_8_2013_interactive.pdf<span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"> (opens in new window)</span></a>.</p>
+
+<p>Nongovernmental subrecipients shall maintain written Procurement policies that are followed in procuring the goods and services required to administer the program.</p>
+
+</section>
+<section aria-labelledby="section-11">
+<h4 id="section-11">L. REPORTING</h4>
+<p>This program is required to submit an annual CFS-101 report and form SF-425 to the Administration of Children and Families (ACF).</p>
+
+</section>
+<section aria-labelledby="section-12">
+<h4 id="section-12">M. SUBRECIPIENT MONITORING</h4>
+<p>Subrecipients are monitored by the NC State LINKS Program in accordance to the NC Department of Health and Human Services, Division of Social Services Subrecipient Monitoring Plan – Contracts, found at: NC Sub-Recipient Monitoring Plan.</p>
+
+</section>
+</section>
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

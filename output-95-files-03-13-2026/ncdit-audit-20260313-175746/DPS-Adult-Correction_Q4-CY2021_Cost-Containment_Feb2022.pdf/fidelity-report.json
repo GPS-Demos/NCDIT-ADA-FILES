@@ -1,0 +1,213 @@
+{
+  "document_id": "DPS-Adult-Correction_Q4-CY2021_Cost-Containment_Feb2022.pdf",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output follows the structure of the source document faithfully. All sections and paragraphs in the JSON correspond to content found in the source PDF. No fabricated headings or body text were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output does not include the contact information from the footer of the first page (address, phone, fax, URL), which is an acceptable omission. No contact information was fabricated in the metadata or body.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output has significant gaps where entire pages of data from the source document are missing. Attachment A in the source document spans pages 6 through 13. The JSON output for Attachment A only represents a handful of rows from pages 6, 12, and 13, entirely omitting the content of pages 7, 8, 9, 10, and 11.",
+        "b_evidence_source": "Pages 7, 8, 9, 10, and 11 of the source PDF, containing hundreds of data rows for Attachment A.",
+        "b_evidence_output": "The JSON representation of Attachment A (element index 14) only contains 10 rows including the total, skipping the data from pages 7-11.",
+        "b_evidence_location": "Attachment A, pages 7-11",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "All tables in the appendices (Attachments A, B, and C) are severely truncated. Attachment A has approximately 215 data rows in the source but only 9 in the JSON (>95% missing). Attachment B has approximately 58 rows in the source but only 2 in the JSON (>95% missing). Attachment C has approximately 58 rows in the source but only 2 in the JSON (>95% missing). This constitutes a major failure in preserving the document's information.",
+        "b_evidence_source": "Attachment A (pages 6-13) has ~215 rows; Attachment B (page 14) has ~58 rows; Attachment C (page 15) has ~58 rows.",
+        "b_evidence_output": "Attachment A table (element 14) has 9 data rows; Attachment B table (element 15) has 2 data rows; Attachment C table (element 16) has 2 data rows.",
+        "b_evidence_location": "Attachment A (element 14), Attachment B (element 15), Attachment C (element 16)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The text paragraphs within the main body of the memorandum and report sections (pages 1-5) are well preserved. The massive omissions within the attachment sections are primarily table data, which is captured under checks C3 and C4.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text and data that were successfully converted are accurate. Sample checks of names, dates, and financial figures from Table 1, Table 2, and the beginning/end of Attachment A show consistency between the source and the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output follows the structure of the source document faithfully. All sections and paragraphs in the JSON correspond to content found in the source PDF. No fabricated headings or body text were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output does not include the contact information from the footer of the first page (address, phone, fax, URL), which is an acceptable omission. No contact information was fabricated in the metadata or body.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output has significant gaps where entire pages of data from the source document are missing. Attachment A in the source document spans pages 6 through 13. The JSON output for Attachment A only represents a handful of rows from pages 6, 12, and 13, entirely omitting the content of pages 7, 8, 9, 10, and 11.\",\n      \"b_evidence_source\": \"Pages 7, 8, 9, 10, and 11 of the source PDF, containing hundreds of data rows for Attachment A.\",\n      \"b_evidence_output\": \"The JSON representation of Attachment A (element index 14) only contains 10 rows including the total, skipping the data from pages 7-11.\",\n      \"b_evidence_location\": \"Attachment A, pages 7-11\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"All tables in the appendices (Attachments A, B, and C) are severely truncated. Attachment A has approximately 215 data rows in the source but only 9 in the JSON (>95% missing). Attachment B has approximately 58 rows in the source but only 2 in the JSON (>95% missing). Attachment C has approximately 58 rows in the source but only 2 in the JSON (>95% missing). This constitutes a major failure in preserving the document's information.\",\n      \"b_evidence_source\": \"Attachment A (pages 6-13) has ~215 rows; Attachment B (page 14) has ~58 rows; Attachment C (page 15) has ~58 rows.\",\n      \"b_evidence_output\": \"Attachment A table (element 14) has 9 data rows; Attachment B table (element 15) has 2 data rows; Attachment C table (element 16) has 2 data rows.\",\n      \"b_evidence_location\": \"Attachment A (element 14), Attachment B (element 15), Attachment C (element 16)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The text paragraphs within the main body of the memorandum and report sections (pages 1-5) are well preserved. The massive omissions within the attachment sections are primarily table data, which is captured under checks C3 and C4.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text and data that were successfully converted are accurate. Sample checks of names, dates, and financial figures from Table 1, Table 2, and the beginning/end of Attachment A show consistency between the source and the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output does not contain duplicated blocks of text. While section titles are reflected in the section metadata and sometimes as headers within the section (e.g., Attachment A), this is a common artifact of structured conversion and does not constitute a defect in content duplication as per the provided criteria.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is logical. The section titles act as the primary organizational level (H2 equivalent), and internal headings (e.g., 'ATTACHMENT A' at level 3) follow this hierarchy correctly without skipping levels.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The tables in Attachment A, Attachment B, and Attachment C are severely truncated and incomplete. For instance, Attachment A spans 8 pages (pages 6-13) in the source PDF with hundreds of rows, but the output table contains only 10 rows. Attachment B and C also feature significant truncation, representing only a few sample rows instead of the full dataset. Additionally, Attachment B (which consists of two side-by-side tables with different row counts in the source) has been merged into a single 8-column table in a way that further obscures its original structural organization. This loss of rows and merging of disparate tables constitutes a failure of structural fidelity.",
+        "b_evidence_source": "The tables in Attachment A (p. 6-13), Attachment B (p. 14), and Attachment C (p. 15) contain full lists of providers and hospitals totaling hundreds of entries.",
+        "b_evidence_output": "The tables in Section 14 (Attachment A), Section 15 (Attachment B), and Section 16 (Attachment C) are truncated to 10, 3, and 4 rows respectively.",
+        "b_evidence_location": "Sections 14, 15, and 16; element type 'table'.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order of the document flows logically from the memorandum to the statutory requirements, overview, specific data sections, and finally the attachments, matching the source PDF sequence.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are converted accurately. The list in section (9) correctly captures the 23 healthcare systems. The list in section (c) preserves the numbering within the content of the list items, which is acceptable for maintaining fidelity to the source's legal citations.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output does not contain any injected or fabricated links. No URL text from the source was converted into broken or incorrect hyperlinks.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output does not contain duplicated blocks of text. While section titles are reflected in the section metadata and sometimes as headers within the section (e.g., Attachment A), this is a common artifact of structured conversion and does not constitute a defect in content duplication as per the provided criteria.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is logical. The section titles act as the primary organizational level (H2 equivalent), and internal headings (e.g., 'ATTACHMENT A' at level 3) follow this hierarchy correctly without skipping levels.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The tables in Attachment A, Attachment B, and Attachment C are severely truncated and incomplete. For instance, Attachment A spans 8 pages (pages 6-13) in the source PDF with hundreds of rows, but the output table contains only 10 rows. Attachment B and C also feature significant truncation, representing only a few sample rows instead of the full dataset. Additionally, Attachment B (which consists of two side-by-side tables with different row counts in the source) has been merged into a single 8-column table in a way that further obscures its original structural organization. This loss of rows and merging of disparate tables constitutes a failure of structural fidelity.\",\n      \"b_evidence_source\": \"The tables in Attachment A (p. 6-13), Attachment B (p. 14), and Attachment C (p. 15) contain full lists of providers and hospitals totaling hundreds of entries.\",\n      \"b_evidence_output\": \"The tables in Section 14 (Attachment A), Section 15 (Attachment B), and Section 16 (Attachment C) are truncated to 10, 3, and 4 rows respectively.\",\n      \"b_evidence_location\": \"Sections 14, 15, and 16; element type 'table'.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order of the document flows logically from the memorandum to the statutory requirements, overview, specific data sections, and finally the attachments, matching the source PDF sequence.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are converted accurately. The list in section (9) correctly captures the 23 healthcare systems. The list in section (c) preserves the numbering within the content of the list items, which is acceptable for maintaining fidelity to the source's legal citations.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output does not contain any injected or fabricated links. No URL text from the source was converted into broken or incorrect hyperlinks.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output correctly replicates the visual organization of the source PDF. The memorandum header structure (TO, FROM, RE, DATE), numbered sections, and attachments are presented in the same order and hierarchy. The addition of a Table of Contents sidebar is an expected functional enhancement for HTML and does not constitute a layout defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "All tables, including the complex side-by-side tables in Attachments B and C (Source PDF pages 14-15), are rendered correctly in the HTML. Table headers are distinct, borders are maintained where appropriate, and the data alignment remains faithful to the original. The large table in Attachment A is also correctly rendered in a structured format.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The primary North Carolina Department of Public Safety (DPS) logo from page 1 of the source PDF is present and correctly rendered in the HTML header. Decorative elements like the state seal in the mailing address block are omitted, which is consistent with accessibility standards for such conversions. Handwritten signatures are omitted in favor of text, which is typical for accessible document conversion and does not constitute a missing meaningful image defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of visual content duplication in the body of the HTML document. Section headings appearing in both the Table of Contents/navigation area and the main document body is an intentional accessible design feature and is not considered a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output correctly replicates the visual organization of the source PDF. The memorandum header structure (TO, FROM, RE, DATE), numbered sections, and attachments are presented in the same order and hierarchy. The addition of a Table of Contents sidebar is an expected functional enhancement for HTML and does not constitute a layout defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"All tables, including the complex side-by-side tables in Attachments B and C (Source PDF pages 14-15), are rendered correctly in the HTML. Table headers are distinct, borders are maintained where appropriate, and the data alignment remains faithful to the original. The large table in Attachment A is also correctly rendered in a structured format.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The primary North Carolina Department of Public Safety (DPS) logo from page 1 of the source PDF is present and correctly rendered in the HTML header. Decorative elements like the state seal in the mailing address block are omitted, which is consistent with accessibility standards for such conversions. Handwritten signatures are omitted in favor of text, which is typical for accessible document conversion and does not constitute a missing meaningful image defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of visual content duplication in the body of the HTML document. Section headings appearing in both the Table of Contents/navigation area and the main document body is an intentional accessible design feature and is not considered a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}
