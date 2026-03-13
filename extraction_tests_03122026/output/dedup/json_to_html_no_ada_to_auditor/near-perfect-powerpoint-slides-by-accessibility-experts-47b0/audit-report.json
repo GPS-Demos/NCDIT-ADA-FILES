@@ -1,0 +1,89 @@
+{
+  "document_id": "near-perfect-powerpoint-slides-by-accessibility-experts-47b0",
+  "audited_at": "2026-03-13T02:29:57.241692Z",
+  "quality_score": 81,
+  "fidelity_composite": 0.8978,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity composite score is high (0.8978), the structural score (0.727) and programmatic shingling precision (0.658) corroborate significant structural failures. Specifically, the merging of multiple distinct tables into a single fictionalized structure on page 8 and the omission of critical contact information (email and website) on page 60 represent functional defects rather than cosmetic issues. Given the 3x cost penalty for false negatives, these integrity issues require human remediation.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "In the 'Get in touch' section on Page 60, several lines of text are missing. The source document contains four distinct lines of contact info: the company name, website, phone number, and email. The JSON output only includes the company name ('Ablr') and the phone number ('Call: 833-294-2257'). The website ('Web: www.ablr360.com') and email address ('Email: kim.casey@ablr360.com') are entirely omitted. Additionally, the footer text 'Scan QR code to Ablr contact page' is missing. This constitutes",
+      "source_pdf_quote": "Web: www.ablr360.com\nEmail: kim.casey@ablr360.com\nScan QR code to Ablr contact page",
+      "output_quote": "[Text missing between reading_order 373 and 375, and after 375]",
+      "location": "Section 'Get in touch', Page 60"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The table structure is corrupted in several locations. On page 8, the source contains several distinct tables for different 'Schedules' (D, E, F, G, H, I). The output (element index 43) merges these into a single fictional two-column table with injected headers ('Field', 'Value') not present in the source. On page 29, the 'Weekdays/Weekend' table (element index 194) fails to preserve the column spans of the header row (where 'Weekdays' should span 5 columns and 'Weekend' should span 2), resultin",
+      "source_pdf_quote": "Page 8 contains separate tables for Schedule D, E, F, G, H, and I. Page 29 contains a table with 'Weekdays' spanning 5 columns and 'Weekend' spanning 2 columns.",
+      "output_quote": "Element index 43: A single table with headers 'Field' and 'Value' containing data from multiple schedules. Element index 194: Row 1 has two cells with 'colspan: 1', failing to align with the 7 columns in Row 2.",
+      "location": "Sections for Page 8 (element 43) and Page 29 (element 194)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "There are missing links in the output. On page 23, the list items 'Create an accessible color palette', 'Color Contrast Analyser', and 'Tanaguru contrast finder' are active hyperlinks in the source document. In the output (element index 146), these are rendered as plain text without the required link metadata or clickable attributes.",
+      "source_pdf_quote": "Page 23: Links 'Create an accessible color palette', 'Color Contrast Analyser', and 'Tanaguru contrast finder'.",
+      "output_quote": "Element index 146: 'Create an accessible color palette at the beginning of the project', 'Use Color Contrast Analyser to spot check', 'Use Tanaguru contrast finder to adjust colors'.",
+      "location": "Section for Page 23 (element 146)"
+    }
+  ],
+  "action_items": [
+    "Separate the merged tables on page 8 to reflect the source 'Schedules'.",
+    "Manually insert the missing website and email text on page 60.",
+    "Correct table headers and column spans for the table on page 29.",
+    "Convert plain text resource links on page 23 into active hyperlinks."
+  ],
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.8978,
+      "text_match": 0.7365288197556679,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8127,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8978,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8488700564971752,
+      "shingling_precision": 0.6575492341356673,
+      "duplication_ratio": 0.006866059817945384,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1823,
+      "gemini_words": 1823,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 355402,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

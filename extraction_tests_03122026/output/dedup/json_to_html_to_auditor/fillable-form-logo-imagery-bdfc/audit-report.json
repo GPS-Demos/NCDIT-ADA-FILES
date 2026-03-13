@@ -1,0 +1,76 @@
+{
+  "document_id": "fillable-form-logo-imagery-bdfc",
+  "audited_at": "2026-03-13T01:29:32.316926Z",
+  "quality_score": 93,
+  "fidelity_composite": 0.9182,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document demonstrates excellent content preservation with a 1.0 content score and strong programmatic recall (0.939). While the structural score (0.727) is lower due to reading order shifts for branding elements and a list-to-table conversion on page 2, these are classified as minor defects that do not compromise the integrity or usability of the primary form data. Per the guidance, a composite score above 0.85 with converging signals and only minor findings supports automatic approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The reading order for the branding logos and footers diverges materially from the source document. In the source PDF, the HurriUp and LGC logos are located in the header at the top of the pages. In the output, these logos (reading_order 12 and 19) are placed at the very end of their respective sections. Furthermore, on page 2, the QR code (footer element) is placed before the logos (header elements) in the reading order sequence.",
+      "source_pdf_quote": "Logos (HurriUp/LGC) are located at the top of both Page 1 and Page 2. QR codes are in the bottom left footer.",
+      "output_quote": "Section 1: Logo image (reading_order 12) appears after all list items. Section 2: QR code (reading_order 18) appears before Logos (reading_order 19), both at the end of the section.",
+      "location": "Sections 1 and 2, elements with reading_order 12, 13, 18, and 19."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The checklist items under the 'Emergency Operations Coordination' section on page 2 are converted into a table structure (reading_order 16). This is inconsistent with the treatment of similar checklists on page 1, which were correctly identified as lists. Converting a simple list of checkboxed items into a two-column 'Field/Value' table significantly changes the structural representation of that content.",
+      "source_pdf_quote": "Page 2: Emergency Operations Coordination section containing 4 checkboxed list items.",
+      "output_quote": "Section 2, element 16: 'type': 'table', 'caption': 'Emergency Operations Coordination'.",
+      "location": "Section 2, reading_order 16"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.9182,
+      "text_match": 0.9188944268237426,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.92,
+      "raw_score": 0.9323,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9182,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9388888888888889,
+      "shingling_precision": 0.8997338065661047,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 133,
+      "gemini_words": 133,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 331097,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

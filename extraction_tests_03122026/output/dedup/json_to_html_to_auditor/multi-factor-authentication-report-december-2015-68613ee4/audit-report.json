@@ -1,0 +1,105 @@
+{
+  "document_id": "multi-factor-authentication-report-december-2015-68613ee4",
+  "audited_at": "2026-03-13T02:22:00.883861Z",
+  "quality_score": 83,
+  "fidelity_composite": 0.8256,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant content and structural failures that the programmatic signals did not fully capture, despite a shingling recall of 0.913. The LLM fidelity report identifies a major omission of over 30 department names (constituting 60% of a section) and the corruption of a project status table. Given the low structural score (0.5) and the 3x cost penalty for false negatives, this document requires human intervention to restore critical data.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Two significant text omissions were identified. First, in the 'Potential Participants' section (page 8), the output fails to include the approximately 30 department names listed as sub-items under the eight main categories (e.g., VPN Administrator Access). This constitutes a loss of over 60% of the section's content, which is a MAJOR defect. Second, in the 'Introduction' section (page 5), the descriptive sub-bullets defining types of authentication (e.g., 'Something you know...', 'Something you ",
+      "source_pdf_quote": "1. VPN (Administrator Access) o Department of Information Technology o Department of Public Safety o Department of Revenue o Department of Human and Health Services o Department of Natural and Cultural Resources o Department of Administration o Department of Transportation",
+      "output_quote": "1. VPN (Administrator Access)",
+      "location": "Section 'Potential Participants', Page 8, reading_order 52"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table structure for the MFA Project status on page 10 is corrupted. In the output's 'Plan' section, the first table (element 79) is structurally inconsistent: the first four rows contain 2 columns, while the fifth row contains 3 columns. This results in misaligned data and a broken table structure compared to the visual alignment in the source.",
+      "source_pdf_quote": "The Project Status list on page 10 showing '5. Procurement Phase Pending Jan 2016' as a single entry area.",
+      "output_quote": "The table with index 79 has rows with differing cell counts (e.g., Row 1 has 2 cells, Row 5 has 3 cells: '5. Procurement Phase', 'Pending', 'Jan 2016').",
+      "location": "Plan section, page 10, element index 79"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The list structure is significantly degraded. On page 8, under 'Potential Participants', the source contains a complex nested list (numbered items with multiple bullet points under each). The output (element 52) renders this as a flat list of 8 items, completely omitting all nested bullet points and their associated content. Similarly, the sub-bullets under 'Types of authentication include' on page 5 are missing from the list in element 27.",
+      "source_pdf_quote": "1. VPN (Administrator Access) o Department of Information Technology o Department of Public Safety ... [and so on for 8 numbered items with bullets]",
+      "output_quote": "A flat list of 8 items containing only the numbered headings (e.g., 'VPN (Administrator Access)', 'Payment Card Industry Servers'). All indented bullet points are absent from the structure.",
+      "location": "Potential Participants section, page 8, element index 52"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "A minor content fidelity issue exists in the 'Legislative Request' section on page 5, where the reference URL was omitted. This results in a broken sentence: 'See for reference.' instead of 'See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf for reference.' Additionally, the missing sub-bullets in the Introduction (noted in C5) serve as a second minor content omission that alters the level of detail available to the reader.",
+      "source_pdf_quote": "See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf for reference.",
+      "output_quote": "See [reading_order 19] ... for reference. [reading_order 21]",
+      "location": "Section 'Legislative Request', Page 5, reading_order 19-21"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "A significant government URL present in the source is missing from the output. On page 5, the text 'See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf for reference.' is split into two elements (19 and 21), and the link itself (index 20 in the logical sequence) is absent.",
+      "source_pdf_quote": "http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf",
+      "output_quote": "The text around the link exists ('See' in element 19 and 'for reference.' in element 21), but the URL and link element are missing.",
+      "location": "Legislative Request section, page 5, between element 19 and 21"
+    }
+  ],
+  "action_items": [
+    "Restore the list of 30+ department names under the 'Potential Participants' section",
+    "Reconstruct the MFA Project status table on page 10 to ensure column alignment",
+    "Fix nested bullet points on pages 5 and 8",
+    "Re-insert the missing URL: http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8256,
+      "text_match": 0.9405792084919811,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.826,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8256,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9132870266636791,
+      "shingling_precision": 0.9695528068506185,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1356,
+      "gemini_words": 1356,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 575890,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

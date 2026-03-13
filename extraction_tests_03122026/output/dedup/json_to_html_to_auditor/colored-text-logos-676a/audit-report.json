@@ -1,0 +1,96 @@
+{
+  "document_id": "colored-text-logos-676a",
+  "audited_at": "2026-03-13T01:09:44.349941Z",
+  "quality_score": 85,
+  "fidelity_composite": 0.8938,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score is high (0.89), specific evidence reveals the loss of 18 nested list items across two key sections, representing a significant content omission (C5). This is corroborated by the programmatic shingling recall of 0.883, which confirms missing text. Given the high cost of auto-approving documents with material content loss, human review is necessary to restore the missing sub-bullets and correct the broken heading hierarchy.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The conversion failed to capture any nested list items (sub-bullets) across multiple sections. Specifically, in the 'Partnership Engagements' section on page 2, the four sub-bullets under DHS and the one sub-bullet under conferences are missing. In the 'Measuring Success' section on pages 3 and 4, all sub-items (a, b, c) for metrics 4 through 10 are completely omitted. This constitutes a loss of 18 list items, which is more than 25% of the content in those specific sections.",
+      "source_pdf_quote": "Page 2: Sub-bullets under 'Participated in several ongoing efforts with DHS including:' (Communications Section Task Force, etc.). Page 3-4: Sub-items under Metrics 4, 5, 6, 7, 8, 9, 10 (e.g., 'a. Accomplished.', 'a. SAFECOM P25 CAP TF...', etc.)",
+      "output_quote": "The nested_list fields for these items (reading_order 24, 37, 47) are null, and the corresponding text is absent from the JSON content.",
+      "location": "Sections: 'Partnership Engagements/Economic Development' (page 2, reading_order 24) and 'Measuring Success' (pages 3-4, reading_order 37 and 47)."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a structural break in the final bullet point of page 1. The sentence fragment ending in 'This' is truncated in the list item and continues as a new paragraph on page 2. While the information is preserved, the sentence flow is interrupted.",
+      "source_pdf_quote": "Page 1: '...focused on the mission. This tool had 3130...'",
+      "output_quote": "reading_order 13, item 6: '...focused on the mission. This'; reading_order 19: 'tool had 3130 unique visitors...'",
+      "location": "Responder Engagements list, last item (page 1, element 13)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The source document contains sub-sections under 'Accomplishments' (Responder Engagements, Industry Engagements, Partnership Engagements) which are visually identical in hierarchy (italicized blue text). In the JSON output, 'Responder Engagements' is assigned Heading Level 3 (reading_order 12), while 'Industry Engagements' (reading_order 21) and 'Partnership Engagements/Economic Development' (reading_order 23) are promoted to Heading Level 2. This breaks the hierarchy as these sub-sections are no",
+      "source_pdf_quote": "Visual hierarchy on pages 1 and 2 shows 'Responder Engagements', 'Industry Engagements', and 'Partnership Engagements' as sub-sections of 'Accomplishments'.",
+      "output_quote": "Responder Engagements (level: 3, reading_order: 12), Industry Engagements (level: 2, reading_order: 21), Partnership Engagements/Economic Development (level: 2, reading_order: 23).",
+      "location": "Accomplishments section, pages 1-2"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There are several issues with list conversion. 1) The ordered list (1-10) in the 'Measuring Success' section on pages 3 and 4 is converted into an unordered list. 2) More critically, nested list items (sub-bullets and sub-numbers) are entirely missing or their structure is collapsed. For example, the sub-bullets under 'Participated in several ongoing efforts with DHS including:' on page 2 are missing. Similarly, the sub-items (a, b, c) for metrics 4, 5, 6, 7, 8, 9, and 10 in the 'Measuring Succe",
+      "source_pdf_quote": "Ordered list items 1-10 under 'Measuring Success' (page 3-4); Sub-bullets under DHS efforts (page 2); Sub-items (a, b, c) for metrics 4-10 (page 3-4).",
+      "output_quote": "Items under reading_order 37 and 47 are 'list_type': 'unordered' and lack any nested content (e.g., SIEC chair, SAFECOM P25, etc.).",
+      "location": "Sections 'Partnership Engagements' (page 2) and 'Measuring Success' (pages 3-4)"
+    }
+  ],
+  "action_items": [
+    "Restore the 18 missing nested list items (sub-bullets and sub-numbers) in 'Partnership Engagements' and 'Measuring Success'",
+    "Fix the heading hierarchy consistency for 'Responder Engagements', 'Industry Engagements', and 'Partnership Engagements'",
+    "Rejoin the truncated sentence fragment bridging page 1 and page 2"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8938,
+      "text_match": 0.9321937321937321,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8544,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8938,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8826544375505799,
+      "shingling_precision": 0.9876245095079987,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 525,
+      "gemini_words": 525,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 283660,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

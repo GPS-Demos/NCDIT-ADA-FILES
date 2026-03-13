@@ -1,0 +1,122 @@
+{
+  "document_id": "esrmo-newsletter-january-2017-686b1f87",
+  "audited_at": "2026-03-12T22:42:05.739799Z",
+  "quality_score": 74,
+  "fidelity_composite": 0.6217,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.25,
+  "routing": "human_review",
+  "reasoning": "The document shows a significant divergence between programmatic text recall (0.90) and structural fidelity (0.62). Multiple major defects were identified, including the omission of all external URLs, missing title/date metadata, and content duplication in the disclaimer section, which require manual correction to meet accessibility and quality standards.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output fails to include critical text within multiple sections. Specifically, all external URLs provided in the document have been omitted. This includes the three newsletter URLs on page 1, the two CEB partnership URLs on page 3, and all four resource URLs in the 'Resources to Remember' section on page 3. In the final section, the omission of URLs constitutes more than 50% of the intended content for those list items.",
+      "source_pdf_quote": "Cybersecurity and Risk Management Site: http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management\\nESRMO SharePoint Site: https://ncconnect.sharepoint.com/sites/it_ext/esrmo_ext/default.aspx\\nState of NC Cybersecurity Incident Reporting Site: https://it.nc.gov/cybersecurity-situation-report\\nHomeland Security Information Network (HSIN) Site: https://hsin.dhs.gov",
+      "output_quote": "\"text\": \"Cybersecurity and Risk Management Site:\" (Element 37)\\n\"text\": \"ESRMO SharePoint Site:\" (Element 39)\\n\"text\": \"State of NC Cybersecurity Incident Reporting Site:\" (Element 41)\\n\"text\": \"Homeland Security Information Network (HSIN) Site:\" (Element 43)",
+      "location": "Resources to Remember, Page 3, elements 37-43"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy in the output is logical (H1 followed by H2 and H3). However, the primary document title 'Monthly Cybersecurity Newsletter' and the date 'January 2017' visible at the top of Page 1 are entirely missing from the structural elements of the JSON. Per the requirement that H1 should be the document title, the current H1 ('Enterprise Security and Risk Management Office (ESRMO)') is actually the organization name/secondary header, which indicates a shift in the hierarchy due to th",
+      "source_pdf_quote": "Monthly Cybersecurity Newsletter (Page 1 top)",
+      "output_quote": "The first element in the sections is a heading (level 1) with text 'Enterprise Security and Risk Management Office (ESRMO)'.",
+      "location": "Section index 0, reading_order 3"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly altered. In the source PDF, the 'NC Information Technology' logo and the 'This year I will...' notepad image are located at the very top and side of the first section ('From the Desk of...'). In the HTML output, these images have been moved much further down the page, appearing only after several other sections (after the 'SANS OUCH! Newsletter' section). This breaks the visual flow and context of the introductory message. Additionally, se",
+      "source_pdf_quote": "Page 1 shows the NC logo and 'This year I will' image at the top of the document, adjacent to the opening text.",
+      "output_quote": "The images appear in the middle of the document, specifically after the 'SANS OUCH! Newsletter' section heading and text.",
+      "location": "Main body content area, following the newsletter descriptions."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images and logos from the source PDF are missing in the HTML output. These include the 'PCI DSS COMPLIANT' logo (page 2), the red 'Learn' keyboard image (page 2), the 'CEB' logo (page 2), and the lightbulb 'My idea is...' graphic (page 3). These are not decorative; they provide branding and thematic context to the newsletter sections.",
+      "source_pdf_quote": "Page 2: PCI DSS logo, Keyboard 'Learn' image, CEB logo. Page 3: 'My idea is...' lightbulb graphic.",
+      "output_quote": "None of these four distinct images are present in the HTML screenshot.",
+      "location": "Corresponding sections on pages 2 and 3."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The disclaimer text for the SECURITYsense Newsletter is visually duplicated in the body of the HTML. It appears first as plain text preceded by the label 'Table: Disclaimer:' and is immediately followed by the exact same text inside a gray styled box. This is a duplication of actual body content, not a navigational element.",
+      "source_pdf_quote": "Disclaimer text starting with 'The SECURITYsense newsletter is a licensed product...' appears once in a box on page 1.",
+      "output_quote": "The text block is repeated twice in the HTML: once as text following 'Table: Disclaimer:' and once inside a gray box.",
+      "location": "Following the SECURITYsense Newsletter section."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There is a structural failure in list conversion on Page 3. In the source, the first bullet point under the CEB access instructions contains two nested sub-bullets identifying specific councils ('Information Risk Leadership Council' and 'Enterprise Architecture Leadership Council'). In the JSON output, these items are missing, and the list is rendered as a flat three-item list without the necessary nested structural detail.",
+      "source_pdf_quote": "Information Risk Leadership Council – irec.executiveboard.com / Enterprise Architecture Leadership Council – eaec.executiveboard.com (Page 3, CEB instructions)",
+      "output_quote": "The list item at index 34 only contains the text 'Visit the partnership website listed below:' with a null nested_list.",
+      "location": "Section index 2, reading_order 34"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to capture numerous critical URLs that are clearly visible and integral to the source document's structure. Specifically, the URLs for the three newsletters on Page 1, the two CEB council websites on Page 3, and the four 'Resources to Remember' links at the end of Page 3 are missing from the text content and were not converted into link elements.",
+      "source_pdf_quote": "Multiple URLs including: https://ncconnect.sharepoint.com/sites/it_ext/esrmo_ext/Documents/Newsletters/SECURITYsense, http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-tips-newsletters, etc.",
+      "output_quote": "Paragraphs and headings (e.g., reading_order 37, 39, 41, 43) contain only the labels but omit the subsequent URL strings found in the PDF.",
+      "location": "Multiple locations (Page 1 and Page 3)"
+    }
+  ],
+  "action_items": [
+    "Restore the missing primary title 'Monthly Cybersecurity Newsletter' and date as the H1 element.",
+    "Recover and link all omitted URLs in the 'Resources to Remember' and newsletter sections.",
+    "Remove duplicated disclaimer text.",
+    "Correct the nested list hierarchy for the CEB access instructions.",
+    "Re-integrate missing branding and thematic images to their correct positions."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6217,
+      "text_match": 0.9420627802690583,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7357,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6217,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.25,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9039586919104992,
+      "shingling_precision": 0.9835205992509364,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 656,
+      "gemini_words": 656,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 326727,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

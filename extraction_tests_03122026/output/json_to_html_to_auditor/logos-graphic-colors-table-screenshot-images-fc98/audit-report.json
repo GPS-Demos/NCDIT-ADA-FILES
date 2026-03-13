@@ -1,0 +1,126 @@
+{
+  "document_id": "logos-graphic-colors-table-screenshot-images-fc98",
+  "audited_at": "2026-03-12T23:20:35.124965Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.4545454545454546,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The source document consists of 6 pages. The JSON output only contains content corresponding to pages 1, 2, and 3. Page 4 ('Change default MFA enrollment method:'), Page 5 ('Delete MFA method:'), and Page 6 ('Enroll MFA via an application that requires MFA') are entirely missing from the semantic JSON.",
+      "source_pdf_quote": "Page 4 Title: 'Change default MFA enrollment method:'; Page 5 Title: 'Delete MFA method:'; Page 6 Title: 'Enroll MFA via an application that requires MFA'",
+      "output_quote": "The JSON sections end after element index 55, which corresponds to the end of Page 3 content.",
+      "location": "Pages 4, 5, and 6"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "In Section 1 (Page 1), several lists are significantly truncated. The login URL 'https://myncid.nc.gov/' is missing from step 1 of the Email, Text Message, and Phone Call procedures. Additionally, the button labels within the procedural steps (e.g., 'ADD ENROLLMENT', 'ADD', 'NEXT', 'SUBMIT') which appear as colored boxes in the source are entirely omitted from the text content of these list items, rendering the instructions incomplete.",
+      "source_pdf_quote": "Page 1: '1. Login to https://myncid.nc.gov/'; '3. Click on: ADD ENROLLMENT'; '4. Select “Email” and click: ADD'; '5. ... and click: NEXT'; '6. ... and click: SUBMIT'",
+      "output_quote": "Section 1, list items 4, 7, 10: Item 1: 'Login to '; Item 3: 'Click on: '; Item 4: 'Select “Email” and click: '; Item 5: '... and click: '; Item 6: '... and click: '",
+      "location": "Page 1, lists for Email, Text Message, and Phone Call sections."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "Throughout the document, specifically on Page 1 and Page 6, the reading order is materially disrupted. Instructions that require clicking a button (represented as an image in the source) have had those button images moved to the end of the section/page block in the JSON (e.g., reading_order 15-21 on Page 1). This leaves instructions like 'Click on: ' or 'Select “Email” and click: ' truncated and illogical for the reader, as the relevant visual anchor is separated from its context by subsequent u",
+      "source_pdf_quote": "Instructions on Page 1 (e.g., '3. Click on: [ADD ENROLLMENT button]') are followed immediately by the visual button label.",
+      "output_quote": "List items (reading_order 4) end with 'Click on: ' while the associated button images are placed much later in the reading order (reading_order 15-21).",
+      "location": "sections[0], elements 3 and 15-21"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "There are several structural list failures: 1. On Page 4, the two instruction lists (containing 10 steps total) are completely omitted from the JSON. 2. On Page 2, a continuous numbered list (1-9) has been fragmented into four separate list structures in the output. 3. All numbered lists throughout the document have been converted to unordered lists, losing their sequential identifiers.",
+      "source_pdf_quote": "Page 4 contains two numbered lists (1-5 each) providing instructions for changing default MFA methods. Page 2 contains a single list numbered 1-9.",
+      "output_quote": "sections[3] (Page 4) omits the instruction steps entirely. sections[1] (Page 2) fragments the list into separate blocks (reading_order 28, 29, 30, 31).",
+      "location": "sections[1] and sections[3]"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The instructional flow of the document is significantly compromised. In the source PDF, button images and icons are integrated directly into the steps (e.g., 'Click on: [button image]'). In the HTML output, these images are often missing from their respective locations, leaving trailing colons followed by empty space. In some sections, these images are clumped together at the end of the section, while in others they are entirely absent or replaced by placeholder text like '[edit icon]'. This sig",
+      "source_pdf_quote": "Page 1, Email Step 3: 'Click on: [ADD ENROLLMENT button image]'. Page 3, Email Step 2: 'In your profile page, click on [edit icon image] next to your email.'",
+      "output_quote": "The HTML screenshot shows 'Click on:' followed by nothing in the 'Email', 'Text Message', and 'Phone Call' sections. In the 'Modify MFA' section, it shows 'In your profile page, click on [edit icon] next to your email.' as plain text.",
+      "location": "Sections: 'Email', 'Text Message', 'Phone Call', 'Modify MFA enrollment...', 'Change default MFA enrollment method:'"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images and icons from the source PDF are missing in the HTML output. Specifically, the 'Set as default' radio button/circle and the 'Make as default' checkbox on Page 4 are completely absent. The 'trash' icon from Page 5, Step 3 is also missing. Additionally, some buttons like 'CHANGE' and 'SUBMIT' from the 'For an existing MFA method' section on Page 4 do not appear in the HTML rendering at all, not even in the clustered image blocks.",
+      "source_pdf_quote": "Page 4 shows a radio button image for 'Set as default' and a checkbox image for 'Make as default'. Page 5 shows a trash icon image in Step 3.",
+      "output_quote": "The HTML screenshot for the corresponding sections does not show these icons or images.",
+      "location": "Sections: 'Change default MFA enrollment method:', 'Delete MFA method:'"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "On page 4 of the source, there are two subheadings: 'For an existing MFA method' and 'For a new MFA method'. In the JSON output, these are categorized as items within an unordered list (reading_order 60) rather than being tagged as H3 headings. This breaks the logical hierarchy of the section.",
+      "source_pdf_quote": "Visual subheadings 'For an existing MFA method' and 'For a new MFA method' preceding numbered lists on Page 4.",
+      "output_quote": "{\"content\": [{\"text\": \"For an existing MFA method\"}]}, {\"content\": [{\"text\": \"For a new MFA method\"}]}",
+      "location": "sections[3], element index 1, reading_order 60"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The primary government portal URL 'https://myncid.nc.gov/', which appears as the first step in almost every instruction set in the source, is consistently missing from the JSON text string. It is truncated entirely, leaving only 'Login to '.",
+      "source_pdf_quote": "1. Login to https://myncid.nc.gov/ (found on pages 1, 2, 3, 4, 5).",
+      "output_quote": "{\"text\": \"Login to \"}",
+      "location": "Multiple list items, e.g., sections[0], element 3, item 1"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8510223953261927,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5419,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.4545454545454546,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8183520599250936,
+      "shingling_precision": 0.8864097363083164,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 204,
+      "gemini_words": 204,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 580869,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "document_id": "gicc-goals-and-strategic-direction-2021-23-685fd67f",
+  "audited_at": "2026-03-13T00:58:20.042589Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8978,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score (0.8978) and word recall (0.938) are strong, the documented omission of approximately 85% of the text in the final contact section is a significant defect. The loss of official agency handles and the primary 'it.nc.gov' URL undermines the document's utility, and the inconsistent heading hierarchy (reflected in a lower structural score of 0.72) requires manual remediation for accessibility compliance. Given that false negatives are 3x more costly, human intervention is necessary to restore the missing contact metadata.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "Section 15 (corresponding to Page 15) is missing approximately 85% of its text content. The source document includes specific contact handles (@NCDIT, @BroadbandIO, @ncicenter, NCDIT, NC DIT), the agency name (NC Department of Information Technology), and a URL (it.nc.gov). The JSON output only preserves the heading 'Let's Connect!' and various image icons, omitting all identifying text for the contact methods.",
+      "source_pdf_quote": "The source contains text labels for social media and web contact: '@NCDIT', '@BroadbandIO', '@ncicenter', 'NCDIT', 'NC Department of Information Technology', 'NC DIT', and 'it.nc.gov'.",
+      "output_quote": "Section 15 contains only the heading \"Let's Connect!\" and several image elements, with no mention of the handles or URL.",
+      "location": "Section 15, Page 15"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The heading hierarchy is inconsistently applied across slides. Main slide titles are tagged as Level 1 headings in most sections (e.g., Sections 4, 6, 7), but switch to Level 2 headings in others (e.g., Sections 5, 12, 13) for identical structural elements. Additionally, the footer refrain text is inconsistently tagged as a Level 2 heading in some sections (Section 4, 6, 10) and as a paragraph in others (Section 5, 7, 8, etc.). This breaks the semantic structure and predictability of the documen",
+      "source_pdf_quote": "Slide titles like 'Goal 1.1...' (Page 4) and 'Goal 1.2...' (Page 5) are structural equivalents.",
+      "output_quote": "In Section 4, element index 12 is tagged as heading level 1 ('text': \"Goal 1.1...\"). In Section 5, element index 16 is tagged as heading level 2 ('text': \"Goal 1.2...\"). Similar inconsistencies exist between Section 11 (H1) and Section 12 (H2).",
+      "location": "Sections 4, 5, 11, and 12."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source PDF on page 15 contains several contact details, including the URL 'it.nc.gov'. This URL is completely missing from the output JSON. While several handles (e.g., @NCDIT) are also missing, the omission of a standard government URL is a significant oversight in link/contact accessibility.",
+      "source_pdf_quote": "The URL 'it.nc.gov' is clearly visible on the bottom right of the 'Let’s Connect!' slide (Page 15).",
+      "output_quote": "Section 15 contains only a heading and an image; the URL text and potential link are entirely omitted.",
+      "location": "Section 15, Page 15."
+    }
+  ],
+  "action_items": [
+    "Restore the missing contact information and URL in the final 'Let's Connect' section.",
+    "Normalize heading levels for slide titles to ensure semantic consistency for screen readers."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8978,
+      "text_match": 0.8614664029295864,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8405,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8978,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.938295165394402,
+      "shingling_precision": 0.9755291005291006,
+      "duplication_ratio": 0.14406595790844,
+      "word_count_ratio": 1.0,
+      "baseline_words": 596,
+      "gemini_words": 596,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 238938,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

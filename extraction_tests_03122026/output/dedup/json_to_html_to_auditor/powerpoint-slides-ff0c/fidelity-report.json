@@ -1,0 +1,213 @@
+{
+  "document_id": "powerpoint-slides-ff0c",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output text for the sections provided (Pages 1, 2, 3, 4, 5, 10, 14, 27, 28, 29, 30) appears to be derived directly from the source PDF. I examined the headings and body text, including the walkthrough for 'Amanda' and the 'Customer Needs' data, and found no fabricated content or invented sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The source document contains one email address: 'annadockum@microsoft.com' on Page 1. The output omits this email address rather than fabricating a new one. No other contact information (phone numbers, URLs) is present in the sections provided, and no fabricated information was detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "Several pages from the source PDF are entirely missing from the conversion result. Specifically, Pages 6, 7, 8, and 9 (Intelligent Collaboration details), Pages 11, 12, and 13 (Organization benefits and Rich Engagements header), and the majority of the 'Places' features and meeting protections on Pages 15 through 26 are absent. The reading order indices in the JSON also show significant gaps (e.g., from index 56 to 108, and 195 to 321).",
+        "b_evidence_source": "The source PDF contains 30 pages of content, including section headers and detailed feature slides.",
+        "b_evidence_output": "The output JSON contains an '_omitted' block and gaps in reading_order, leaving out content from approximately 20 pages (6-9, 11-13, 15-26).",
+        "b_evidence_location": "Throughout the document array.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables present in the output (Pages 4, 5, 10, 14, 27, and 28) generally maintain the correct row count compared to their source representations. For example, the 'Customer Needs' table on Page 4 and the 'AI capabilities' table on Page 28 contain all the primary data rows seen in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within the sections that were successfully converted, there are significant omissions. The email address 'annadockum@microsoft.com' is missing from Page 1. Additionally, one of the three references at the bottom of Page 4 ('Microsoft Work Trend Index: Annual Report, 2023') is missing. Several explanatory footnotes from the bottom of slides (e.g., Page 17, 21, 25) are also absent.",
+        "b_evidence_source": "annadockum@microsoft.com; Microsoft Work Trend Index: Annual Report, 2023",
+        "b_evidence_output": "The email address is missing from the paragraph elements of the first section. The 2023 reference is missing from the paragraph elements at index 38-39.",
+        "b_evidence_location": "Section 1 (Page 1) and Section for Page 4 (index 38-39).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The table 'AI capabilities across licenses' from Page 28 has a structural defect. The rows contain 5 cells while the header only defines 4. This results in a misalignment where the checkmark symbols (indicating availability) are shifted one column to the right. For example, in the first data row ('AI-based noise suppression'), the checkmark intended for the 'Microsoft Teams' column is placed in the third cell, aligning it with 'Microsoft Teams Premium'. This effectively changes the meaning of the technical comparison.",
+        "b_evidence_source": "Source Page 28 table: 'AI-based noise suppression' is checked for 'Microsoft Teams'.",
+        "b_evidence_output": "Row 1: [\"AI capabilities...\", \"AI-based noise suppression\", \"\\u2713\", \"\", \"\"]. Index 2 (3rd cell) aligns with 'Microsoft Teams Premium'.",
+        "b_evidence_location": "Section for Page 28, table element at index 332.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6395348837209303,
+    "penalty_sum": 31,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output text for the sections provided (Pages 1, 2, 3, 4, 5, 10, 14, 27, 28, 29, 30) appears to be derived directly from the source PDF. I examined the headings and body text, including the walkthrough for 'Amanda' and the 'Customer Needs' data, and found no fabricated content or invented sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The source document contains one email address: 'annadockum@microsoft.com' on Page 1. The output omits this email address rather than fabricating a new one. No other contact information (phone numbers, URLs) is present in the sections provided, and no fabricated information was detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"Several pages from the source PDF are entirely missing from the conversion result. Specifically, Pages 6, 7, 8, and 9 (Intelligent Collaboration details), Pages 11, 12, and 13 (Organization benefits and Rich Engagements header), and the majority of the 'Places' features and meeting protections on Pages 15 through 26 are absent. The reading order indices in the JSON also show significant gaps (e.g., from index 56 to 108, and 195 to 321).\",\n      \"b_evidence_source\": \"The source PDF contains 30 pages of content, including section headers and detailed feature slides.\",\n      \"b_evidence_output\": \"The output JSON contains an '_omitted' block and gaps in reading_order, leaving out content from approximately 20 pages (6-9, 11-13, 15-26).\",\n      \"b_evidence_location\": \"Throughout the document array.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables present in the output (Pages 4, 5, 10, 14, 27, and 28) generally maintain the correct row count compared to their source representations. For example, the 'Customer Needs' table on Page 4 and the 'AI capabilities' table on Page 28 contain all the primary data rows seen in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within the sections that were successfully converted, there are significant omissions. The email address 'annadockum@microsoft.com' is missing from Page 1. Additionally, one of the three references at the bottom of Page 4 ('Microsoft Work Trend Index: Annual Report, 2023') is missing. Several explanatory footnotes from the bottom of slides (e.g., Page 17, 21, 25) are also absent.\",\n      \"b_evidence_source\": \"annadockum@microsoft.com; Microsoft Work Trend Index: Annual Report, 2023\",\n      \"b_evidence_output\": \"The email address is missing from the paragraph elements of the first section. The 2023 reference is missing from the paragraph elements at index 38-39.\",\n      \"b_evidence_location\": \"Section 1 (Page 1) and Section for Page 4 (index 38-39).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The table 'AI capabilities across licenses' from Page 28 has a structural defect. The rows contain 5 cells while the header only defines 4. This results in a misalignment where the checkmark symbols (indicating availability) are shifted one column to the right. For example, in the first data row ('AI-based noise suppression'), the checkmark intended for the 'Microsoft Teams' column is placed in the third cell, aligning it with 'Microsoft Teams Premium'. This effectively changes the meaning of the technical comparison.\",\n      \"b_evidence_source\": \"Source Page 28 table: 'AI-based noise suppression' is checked for 'Microsoft Teams'.\",\n      \"b_evidence_output\": \"Row 1: [\\\"AI capabilities...\\\", \\\"AI-based noise suppression\\\", \\\"\\\\u2713\\\", \\\"\\\", \\\"\\\"]. Index 2 (3rd cell) aligns with 'Microsoft Teams Premium'.\",\n      \"b_evidence_location\": \"Section for Page 28, table element at index 332.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 31,\n    \"score\": 0.6395348837209303\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output JSON was checked for redundant text sections. The conversion process has correctly extracted the text from each slide once. Footers and repeated document metadata (like the copyright line found in the OCR for some pages) are not duplicated across the structural elements of the JSON.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is well-maintained and follows a logical structure for a presentation. Slide titles are appropriately assigned as H1. Section titles (e.g., 'RICH ENGAGEMENTS' on Page 14 or 'PROTECTION & MANAGEMENT' on Page 27) are assigned as H2, correctly acting as parent headers for the subsequent slide content. Sub-headings within slides (e.g., 'Intelligent monitoring' on Page 27) use H3. The nesting is consistent and accessible.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The table structure on Page 28 ('AI capabilities across licenses') is corrupted. In the source document, the table uses spanning rows to define sections ('AI capabilities deeply embedded in Teams', 'Meeting Experience', 'Other capabilities') that should encompass all columns. The output JSON fails to identify these as spanning rows (colspan is 1) and incorrectly merges data from the next row into the remaining columns of the header row. For instance, in JSON row 2 (index 1), the first cell contains the header 'AI capabilities...', while the second cell incorrectly contains 'AI-based noise suppression' from the following source row. This misaligns the entire table grid.",
+        "b_evidence_source": "Slide 28 table 'AI capabilities across licenses' contains section header rows spanning 4 columns (e.g., 'AI capabilities deeply embedded in Teams').",
+        "b_evidence_output": "The JSON table (reading_order 332) misidentifies these headers as single-cell data entries and merges them with data from subsequent rows (e.g., row index 1, cell index 1: 'AI-based noise suppression').",
+        "b_evidence_location": "Page 28, Table element index 1 (reading_order 332)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order across the document follows the logical progression of the slides. On complex slides with multiple callouts (like Page 10), the reading order is grouped logically by component, and while it slightly differs from the numerical sequence of the callouts in the visual layout, it effectively preserves the narrative flow and is optimized for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The document contains list-like structures within tables (Slide 28). These have been correctly represented as sequential rows, preserving the visual hierarchy and meaning of the sub-points.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output was verified for broken or missing links. No links were incorrectly injected. While some text elements (like an email address on Slide 1) are missing from the content, there are no instances of visible URLs in the source that were failed to be converted into clickable links in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output JSON was checked for redundant text sections. The conversion process has correctly extracted the text from each slide once. Footers and repeated document metadata (like the copyright line found in the OCR for some pages) are not duplicated across the structural elements of the JSON.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is well-maintained and follows a logical structure for a presentation. Slide titles are appropriately assigned as H1. Section titles (e.g., 'RICH ENGAGEMENTS' on Page 14 or 'PROTECTION & MANAGEMENT' on Page 27) are assigned as H2, correctly acting as parent headers for the subsequent slide content. Sub-headings within slides (e.g., 'Intelligent monitoring' on Page 27) use H3. The nesting is consistent and accessible.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The table structure on Page 28 ('AI capabilities across licenses') is corrupted. In the source document, the table uses spanning rows to define sections ('AI capabilities deeply embedded in Teams', 'Meeting Experience', 'Other capabilities') that should encompass all columns. The output JSON fails to identify these as spanning rows (colspan is 1) and incorrectly merges data from the next row into the remaining columns of the header row. For instance, in JSON row 2 (index 1), the first cell contains the header 'AI capabilities...', while the second cell incorrectly contains 'AI-based noise suppression' from the following source row. This misaligns the entire table grid.\",\n      \"b_evidence_source\": \"Slide 28 table 'AI capabilities across licenses' contains section header rows spanning 4 columns (e.g., 'AI capabilities deeply embedded in Teams').\",\n      \"b_evidence_output\": \"The JSON table (reading_order 332) misidentifies these headers as single-cell data entries and merges them with data from subsequent rows (e.g., row index 1, cell index 1: 'AI-based noise suppression').\",\n      \"b_evidence_location\": \"Page 28, Table element index 1 (reading_order 332)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order across the document follows the logical progression of the slides. On complex slides with multiple callouts (like Page 10), the reading order is grouped logically by component, and while it slightly differs from the numerical sequence of the callouts in the visual layout, it effectively preserves the narrative flow and is optimized for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The document contains list-like structures within tables (Slide 28). These have been correctly represented as sequential rows, preserving the visual hierarchy and meaning of the sub-points.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output was verified for broken or missing links. No links were incorrectly injected. While some text elements (like an email address on Slide 1) are missing from the content, there are no instances of visible URLs in the source that were failed to be converted into clickable links in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully maintains the visual organization of the original PowerPoint presentation. While the layout has been adapted for a single-column, responsive web format, the sequence of information remains identical to the source PDF. Complex slide layouts, such as the circular diagram on page 3 and the Venn diagram on page 11, have been logically decomposed into structured text blocks and lists that preserve their original meaning and relationships. Sighted users can easily find information in the same relative positions across both documents.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The document contains a complex table on page 28 ('AI capabilities across licenses'). In the HTML output, this is rendered as a clean, accessible HTML table. Row groupings (AI capabilities, Meeting Experience, Other capabilities) are correctly implemented, headers are visually distinct, and the checkmark symbols are accurately rendered and aligned within their respective columns. The table is fully legible and understandable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present in the HTML output. This includes logos (Microsoft, Teams), illustrative icons in the 'Customer Needs' and 'Smart place to work' sections, all UI screenshots of Microsoft Teams and Copilot features, and the QR code on the final page. Decorative background graphics and abstract color blobs have been intentionally excluded to improve accessibility, which is the correct behavior for this conversion.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A thorough visual audit of the HTML output confirms there is no duplication of body content. Each slide's heading and primary text block appears exactly once in the document flow. The table of contents at the start of the HTML (if present) correctly points to sections without duplicating the body content itself.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully maintains the visual organization of the original PowerPoint presentation. While the layout has been adapted for a single-column, responsive web format, the sequence of information remains identical to the source PDF. Complex slide layouts, such as the circular diagram on page 3 and the Venn diagram on page 11, have been logically decomposed into structured text blocks and lists that preserve their original meaning and relationships. Sighted users can easily find information in the same relative positions across both documents.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The document contains a complex table on page 28 ('AI capabilities across licenses'). In the HTML output, this is rendered as a clean, accessible HTML table. Row groupings (AI capabilities, Meeting Experience, Other capabilities) are correctly implemented, headers are visually distinct, and the checkmark symbols are accurately rendered and aligned within their respective columns. The table is fully legible and understandable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present in the HTML output. This includes logos (Microsoft, Teams), illustrative icons in the 'Customer Needs' and 'Smart place to work' sections, all UI screenshots of Microsoft Teams and Copilot features, and the QR code on the final page. Decorative background graphics and abstract color blobs have been intentionally excluded to improve accessibility, which is the correct behavior for this conversion.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A thorough visual audit of the HTML output confirms there is no duplication of body content. Each slide's heading and primary text block appears exactly once in the document flow. The table of contents at the start of the HTML (if present) correctly points to sections without duplicating the body content itself.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

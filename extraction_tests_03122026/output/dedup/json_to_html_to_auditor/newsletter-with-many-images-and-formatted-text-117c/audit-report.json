@@ -1,0 +1,113 @@
+{
+  "document_id": "newsletter-with-many-images-and-formatted-text-117c",
+  "audited_at": "2026-03-13T02:35:08.528038Z",
+  "quality_score": 78,
+  "fidelity_composite": 0.7092,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant structural and content fidelity issues, including the injection of header elements into the middle of body text and the omission of critical URL and social media information. These major findings, identified by the LLM fidelity evaluation despite a high programmatic word count ratio, represent a significant failure in logical reading order and accessibility compliance.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There is a significant omission of text in the sections on page 3. Specifically, all URLs in the 'Training & Continuing Learning Resources' section are missing. In the 'Additional Cybersecurity Newsletters' section, the SANS OUCH! URL is missing, the SAC newsletter link text is missing, and all the social media platform names and URLs ('X', 'Facebook', 'LinkedIn', 'it.nc.gov/CyberSecureNC', 'Stay Safe Online') are missing from the final paragraph. This represents a loss of more than 50% of the c",
+      "source_pdf_quote": "Training & Continuing Learning Resources section: https://fedvte.usalearning.gov/, https://teex.org, https://niccs.cisa.gov. Additional Cybersecurity Newsletters section: 'Read the SAC newsletters.', 'https://www.sans.org/newsletters/ouch', 'X (formerly known as Twitter), Facebook and LinkedIn', 'it.nc.gov/CyberSecureNC or Stay Safe Online'.",
+      "output_quote": "The output contains the section headings and surrounding text but omits all the aforementioned URLs and specific entity names. For example, Order 49 ends at 'SANS Institute.' omitting the URL. Orders 51-61 contain fragments like 'on ', ' (formerly known as Twitter), ', ' and ', etc., with the platform names missing.",
+      "location": "Sections 'Training & Continuing Learning Resources' and 'Additional Cybersecurity Newsletters' on page 3 (element indices 39-61)."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order of the images from the first page is incorrect. In the source PDF, the professional headshot of Bernice Bond is associated with the first article ('Bernice Bond Named...'). In the output JSON, this image (element 15) is placed after the heading (element 9) and the first three paragraphs (elements 10-12) of the second article ('Protect Yourself from Job Termination Scams'). This breaks the logical grouping of the content and places the illustration for the first story in the mid",
+      "source_pdf_quote": "The headshot of Bernice Bond is positioned next to the article 'Bernice Bond Named NCDIT Chief Information Security Officer' on page 1.",
+      "output_quote": "The image element (index 15) is placed after the heading 'Protect Yourself from Job Termination Scams' (index 9) and its accompanying paragraphs (indices 10-12).",
+      "location": "Section 1, element indices 9-15"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output exhibits a major layout failure where page-level header elements are injected into the middle of the body text. Specifically, the NCDIT logo and agency name, which appear in the top-left header of the source PDF, are missing from the top of the HTML and instead appear in the middle of a sentence in the 'Protect Yourself from Job Termination Scams' section. The logo is placed between 'it in-' and 'cludes', breaking the word 'includes' which was split across a page boundary in the ",
+      "source_pdf_quote": "The NCDIT logo is at the top left of Page 1. The word 'includes' is split as 'it in-' at the bottom of Page 1 and 'cludes' at the top of Page 2.",
+      "output_quote": "The NCDIT logo is missing from the header and appears in the body text after 'it in-' and before 'cludes details...'. The social media section is visually fragmented.",
+      "location": "Middle of 'Protect Yourself from Job Termination Scams' section (transition between PDF pages 1 and 2)."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images from the source PDF are missing in the HTML rendering. The shield icon that marks the 'Training & Continuing Learning Resources' section is absent (while a similar icon for the next section is present). More critically, the social media logos (X, Facebook, LinkedIn) are missing from the footer area. Their absence also appears to have caused the associated text labels ('X', 'Facebook', 'LinkedIn') to disappear from the visual output, leaving behind a broken sentence: 'on",
+      "source_pdf_quote": "Shield icon next to 'Training & Continuing Learning Resources' (Page 3); social media logos for X, Facebook, and LinkedIn (Page 3).",
+      "output_quote": "The shield icon is missing. The social media logos and their text labels are missing from the final paragraph.",
+      "location": "Training & Continuing Learning Resources section and the final paragraph of the document."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "On page 2 of the source PDF, there is a single list of seven red flags associated with phishing attacks, presented in a two-column format. The output JSON has split this into two distinct 'list' objects (reading_order 22 and 23) based on the column break, failing to preserve the structural integrity of the single list.",
+      "source_pdf_quote": "A single list of 7 bulleted points starting with 'An unusual sender address...' and ending with 'Going forward, be on your guard...'",
+      "output_quote": "The list is divided into two 'list' type elements at reading_order 22 (containing 3 items) and reading_order 23 (containing 4 items).",
+      "location": "Section 2, reading_order 22 and 23"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "There are numerous missing links in the output. Hyperlinks such as 'phishing' and 'Social engineering' on page 1 are converted to plain text without href attributes. More critically, multiple URL text strings and their associated links on page 3 (including the URLs for FedVTE, TEEX, NICCS, and the SANS OUCH! newsletter, as well as the text and links for 'X', 'Facebook', and 'LinkedIn') are completely omitted from the text content of the paragraphs.",
+      "source_pdf_quote": "Multiple links and URLs throughout the document, including 'https://fedvte.usalearning.gov/', 'X', 'Facebook', and 'LinkedIn' on page 3.",
+      "output_quote": "The text for these links is missing from the output paragraphs (e.g., reading_order 39, 51, 53, 55).",
+      "location": "Throughout the document, particularly in Section 3"
+    }
+  ],
+  "action_items": [
+    "Restore missing URL text and social media references on page 3",
+    "Fix the reading order to associate images with their respective articles",
+    "Remove header elements that were incorrectly parsed into the middle of the 'Job Termination Scams' section",
+    "Re-verify and tag all hyperlinks to ensure accessibility"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7092,
+      "text_match": 0.9493851873034029,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7762,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7092,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9224784662406224,
+      "shingling_precision": 0.9779086892488954,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 896,
+      "gemini_words": 896,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 432196,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

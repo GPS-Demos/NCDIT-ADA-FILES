@@ -1,0 +1,172 @@
+{
+  "document_id": "ifb-its-400277-2017-1102-final-686b18e9",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The converted text accurately reflects the section headers, instructions, and form labels found in the source PDF. No invented introductions, conclusions, or body paragraphs were identified. The table of contents accurately lists the sections present in the source, and supplemental text like table captions appears to be appropriately generated based on existing section headings.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All contact details, including the Procurement Officer's name (Debbie Patterson), email (debbie.patterson@nc.gov), and phone number (919-754-6619) match the source document perfectly across all pages where they appear. No other contact information or URLs were fabricated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output is missing a significant majority of the document. Specifically, page 4, pages 7 through 12, and pages 14 through 48 are absent. These pages contain critical information such as the IFB Scope, the remainder of the General Information section, the full Section C Specifications, and the entirety of Section G (Department of Information Technology Terms and Conditions). The output explicitly acknowledges this omission with a metadata placeholder. This constitutes a critical failure of content fidelity.",
+        "b_evidence_source": "The source document is 61 pages long, containing Sections A-G and Attachments A-G.",
+        "b_evidence_output": "The JSON output skips large blocks of content, noting: \"_omitted\": \"42 sections omitted for token budget\". Pages 4, 7-12, and 14-48 are missing entirely.",
+        "b_evidence_location": "Various locations between Page 3 and Page 49.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Multiple tables in the Attachments section are truncated, missing 100% of their intended data entry rows. While the headers are preserved, the functional part of the forms (blank rows for vendor input) is missing. Table D.2 (20 rows), Table D.3 (10 rows), and the Purchase Activity and Warranty Reports in Attachment G (20+ rows each) are all rendered as single header rows or single-row artifacts in the JSON.",
+        "b_evidence_source": "Table D.2 (Page 56) contains 20 entry rows; Table D.3 (Page 57) contains 10 entry rows; Attachment G (Page 60) contains 20 entry rows for the Purchase Activity and Warranty reports.",
+        "b_evidence_output": "Table D.2 (element index 393) rendered with 0 entry rows; Table D.3 (element index 397) rendered with 0 entry rows; Attachment G reports (element indices 434 and 436) rendered with 0 entry rows.",
+        "b_evidence_location": "Attachment D (pages 56-57) and Attachment G (page 60).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within the sections that were successfully included in the output (Section A, Section B, and most Attachments), the text content is intact. The significant loss of information is due to entire pages being dropped (C3) rather than text being missing from within the provided sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "In Table D.1 (Minimum Percentage Discounts), the alignment of sub-segments is incorrect. Because the 'Segment' cell (e.g., 'Servers') spans multiple rows in the source, the JSON incorrectly places the sub-segments (e.g., 'Software') into the 'Segment' column for subsequent rows. This alters the meaning of the table by categorizing sub-segments as top-level segments.",
+        "b_evidence_source": "Table D.1 (Page 56) shows 'Software' as a Sub-Segment of 'Servers'.",
+        "b_evidence_output": "In Table D.1 (element index 391), Row 3 places 'Software' in the first cell (IT Enterprise Hardware Segment), suggesting it is a standalone category.",
+        "b_evidence_location": "Attachment D, Page 56, Table D.1.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6395348837209303,
+    "penalty_sum": 31,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The converted text accurately reflects the section headers, instructions, and form labels found in the source PDF. No invented introductions, conclusions, or body paragraphs were identified. The table of contents accurately lists the sections present in the source, and supplemental text like table captions appears to be appropriately generated based on existing section headings.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All contact details, including the Procurement Officer's name (Debbie Patterson), email (debbie.patterson@nc.gov), and phone number (919-754-6619) match the source document perfectly across all pages where they appear. No other contact information or URLs were fabricated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output is missing a significant majority of the document. Specifically, page 4, pages 7 through 12, and pages 14 through 48 are absent. These pages contain critical information such as the IFB Scope, the remainder of the General Information section, the full Section C Specifications, and the entirety of Section G (Department of Information Technology Terms and Conditions). The output explicitly acknowledges this omission with a metadata placeholder. This constitutes a critical failure of content fidelity.\",\n      \"b_evidence_source\": \"The source document is 61 pages long, containing Sections A-G and Attachments A-G.\",\n      \"b_evidence_output\": \"The JSON output skips large blocks of content, noting: \\\"_omitted\\\": \\\"42 sections omitted for token budget\\\". Pages 4, 7-12, and 14-48 are missing entirely.\",\n      \"b_evidence_location\": \"Various locations between Page 3 and Page 49.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Multiple tables in the Attachments section are truncated, missing 100% of their intended data entry rows. While the headers are preserved, the functional part of the forms (blank rows for vendor input) is missing. Table D.2 (20 rows), Table D.3 (10 rows), and the Purchase Activity and Warranty Reports in Attachment G (20+ rows each) are all rendered as single header rows or single-row artifacts in the JSON.\",\n      \"b_evidence_source\": \"Table D.2 (Page 56) contains 20 entry rows; Table D.3 (Page 57) contains 10 entry rows; Attachment G (Page 60) contains 20 entry rows for the Purchase Activity and Warranty reports.\",\n      \"b_evidence_output\": \"Table D.2 (element index 393) rendered with 0 entry rows; Table D.3 (element index 397) rendered with 0 entry rows; Attachment G reports (element indices 434 and 436) rendered with 0 entry rows.\",\n      \"b_evidence_location\": \"Attachment D (pages 56-57) and Attachment G (page 60).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within the sections that were successfully included in the output (Section A, Section B, and most Attachments), the text content is intact. The significant loss of information is due to entire pages being dropped (C3) rather than text being missing from within the provided sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"In Table D.1 (Minimum Percentage Discounts), the alignment of sub-segments is incorrect. Because the 'Segment' cell (e.g., 'Servers') spans multiple rows in the source, the JSON incorrectly places the sub-segments (e.g., 'Software') into the 'Segment' column for subsequent rows. This alters the meaning of the table by categorizing sub-segments as top-level segments.\",\n      \"b_evidence_source\": \"Table D.1 (Page 56) shows 'Software' as a Sub-Segment of 'Servers'.\",\n      \"b_evidence_output\": \"In Table D.1 (element index 391), Row 3 places 'Software' in the first cell (IT Enterprise Hardware Segment), suggesting it is a standalone category.\",\n      \"b_evidence_location\": \"Attachment D, Page 56, Table D.1.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 31,\n    \"score\": 0.6395348837209303\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output document was reviewed for duplicated text blocks. No instances were found where a paragraph, section, or specific block of text appears more times in the output than in the source PDF. Repeated headers (like 'Vendor Name' in Attachment D) are consistent with the source document's layout.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is generally logical. Major sections like 'Section A', 'Section B', and the various Attachments are assigned H1 or H2 levels. While there is minor inconsistency (e.g., Attachment A is level 1 while Attachment B is level 2), there are no instances of skipped levels (e.g., H1 directly to H3) that would break navigation. The levels used provide a functional outline for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The header table on Page 1 is defined as a 2-column table in the output. However, the rows containing 'Commodity Number', 'Description', and 'Requisition No.' are rendered as single-cell rows. In the source document, these items are aligned in the right-hand column (Column 2). By rendering them as single cells, the structural relationship and vertical alignment within the table are lost.",
+        "b_evidence_source": "Page 1, top table. Items 'Commodity Number: 204', 'Description: IT Infrastructure Solutions', and 'Requisition No.: N/A' are in the right-hand column.",
+        "b_evidence_output": "The element at reading_order 1 shows these items in rows with only a single cell (e.g., Row 4 cell count: 1), breaking the 2-column grid structure.",
+        "b_evidence_location": "Page 1, element reading_order 1",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the logical top-to-bottom, page-by-page flow of the original solicitation. Sections, tables, and attachments appear in the correct sequence as intended by the document author.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Several numbered lists in the source document have been converted to unordered lists in the output, resulting in the loss of numbering which is critical for referencing specific solicitation requirements.",
+        "b_evidence_source": "Page 3, Section A items 1 and 2. Page 5, Section B items 2, 3, 4, 5.",
+        "b_evidence_output": "The list at reading_order 18 and reading_order 31 are marked as 'list_type': 'unordered', and the original item numbers (1, 2, 2, 3, 4, 5) are missing from the text.",
+        "b_evidence_location": "Sections A and B, elements reading_order 18 and 31",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "All critical URLs and email addresses found in the source PDF (e.g., debbie.patterson@nc.gov, https://www.ips.state.nc.us/ips/) are correctly captured in the output text blocks.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output document was reviewed for duplicated text blocks. No instances were found where a paragraph, section, or specific block of text appears more times in the output than in the source PDF. Repeated headers (like 'Vendor Name' in Attachment D) are consistent with the source document's layout.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is generally logical. Major sections like 'Section A', 'Section B', and the various Attachments are assigned H1 or H2 levels. While there is minor inconsistency (e.g., Attachment A is level 1 while Attachment B is level 2), there are no instances of skipped levels (e.g., H1 directly to H3) that would break navigation. The levels used provide a functional outline for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The header table on Page 1 is defined as a 2-column table in the output. However, the rows containing 'Commodity Number', 'Description', and 'Requisition No.' are rendered as single-cell rows. In the source document, these items are aligned in the right-hand column (Column 2). By rendering them as single cells, the structural relationship and vertical alignment within the table are lost.\",\n      \"b_evidence_source\": \"Page 1, top table. Items 'Commodity Number: 204', 'Description: IT Infrastructure Solutions', and 'Requisition No.: N/A' are in the right-hand column.\",\n      \"b_evidence_output\": \"The element at reading_order 1 shows these items in rows with only a single cell (e.g., Row 4 cell count: 1), breaking the 2-column grid structure.\",\n      \"b_evidence_location\": \"Page 1, element reading_order 1\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the logical top-to-bottom, page-by-page flow of the original solicitation. Sections, tables, and attachments appear in the correct sequence as intended by the document author.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Several numbered lists in the source document have been converted to unordered lists in the output, resulting in the loss of numbering which is critical for referencing specific solicitation requirements.\",\n      \"b_evidence_source\": \"Page 3, Section A items 1 and 2. Page 5, Section B items 2, 3, 4, 5.\",\n      \"b_evidence_output\": \"The list at reading_order 18 and reading_order 31 are marked as 'list_type': 'unordered', and the original item numbers (1, 2, 2, 3, 4, 5) are missing from the text.\",\n      \"b_evidence_location\": \"Sections A and B, elements reading_order 18 and 31\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"All critical URLs and email addresses found in the source PDF (e.g., debbie.patterson@nc.gov, https://www.ips.state.nc.us/ips/) are correctly captured in the output text blocks.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "total_defects": 5,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

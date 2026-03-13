@@ -1,0 +1,88 @@
+{
+  "document_id": "esrmo-newsletter-march-2018-686b1f23",
+  "audited_at": "2026-03-13T01:24:01.216649Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8785,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score (0.8785) and shingling recall (0.893) meet approval thresholds, the systematic omission of nearly all URLs and email addresses constitutes a significant functional defect for a newsletter. The evidence indicating that sentences 'end abruptly' where links should be suggests a structural content failure that exceeds mere cosmetic issues, triggering the 3x cost penalty for false negatives.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "There is a systematic and significant omission of text throughout the document. Nearly all hyperlinked URLs and email addresses are missing from the text content. Specifically, the output fails to include the URLs for the state policies (page 1), the GDPR info (page 2), the multiple newsletters and webcast links (page 3), and the FEMA contacts/resource links (page 4). For example, the list of resources on page 4 (reading order 54) provides the descriptions but omits the actual URLs, which consti",
+      "source_pdf_quote": "The output omits numerous URLs and emails, such as: 'https://it.nc.gov/statewide-resources/policies' (p. 1); 'douglas.kahn@fema.dhs.gov' (p. 4); and 'https://it.nc.gov/cybersecurity-situation-report' (p. 4).",
+      "output_quote": "Reading order 8: 'The new statewide security policies may be found at '. Reading order 44: '... send an email to Doug Kahn at'. Reading order 54: 'State of NC Cybersecurity Situation Report: '.",
+      "location": "Throughout the document; specifically reading orders 8, 18, 23, 26, 28, 30, 32, 42, 44, 46, 51, and 54."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion fails to capture almost all URLs and email addresses present in the source document. These links are clearly visible in the PDF text, but they are entirely omitted from the corresponding text blocks in the JSON output, often leaving sentences incomplete or ending abruptly at the point where the link should appear.",
+      "source_pdf_quote": "Multiple URLs and emails such as https://it.nc.gov/statewide-resources/policies (p. 1), https://www.eugdpr.org/key-changes.html (p. 2), and douglas.kahn@fema.dhs.gov (p. 4).",
+      "output_quote": "The text content simply ends or skips where the link should be: 'The new statewide security policies may be found at ' (reading_order 8), 'For more information, visit ' (reading_order 18), 'send an email to Doug Kahn at' (reading_order 44).",
+      "location": "Throughout the document (reading_order 8, 18, 23, 30, 32, 42, 44, 46, 51, 54)"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Multiple meaningful images and logos that are central to the document's identity and content are missing from the HTML output. This includes the ESRMO logo and branding from the page 1 header, the EU flag illustrative image from page 2, the 'Monthly Newsletter' banner and SANS icons from page 3, and the FEMA/DHS seals from page 4. Only two of the original images (the highlighter and the NC DIT logo) are present.",
+      "source_pdf_quote": "The source PDF contains several meaningful logos and icons: ESRMO logo (p1), EU flag (p2), 'Monthly Newsletter' banner (p3), SANS person icon and calendar icon (p3), FEMA/DHS seals (p4), and lightbulb icon (p4).",
+      "output_quote": "The rendered HTML is missing the ESRMO logo, EU flag, Newsletter banner, SANS icons, FEMA seals, and lightbulb icon.",
+      "location": "Throughout the document, specifically pages 1, 2, 3, and 4."
+    }
+  ],
+  "action_items": [
+    "Restore missing URLs for state policies, GDPR info, and FEMA resources.",
+    "Repair sentences that were truncated or left incomplete due to link omission.",
+    "Verify if missing logos and banners require alternative text for accessibility compliance."
+  ],
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.8785,
+      "text_match": 0.9185683401393226,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8446,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8785,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8932492408315814,
+      "shingling_precision": 0.9453646477132263,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1127,
+      "gemini_words": 1127,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 379260,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

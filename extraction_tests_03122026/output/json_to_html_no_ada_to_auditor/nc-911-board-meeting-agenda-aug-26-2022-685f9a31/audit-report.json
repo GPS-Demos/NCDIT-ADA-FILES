@@ -1,0 +1,113 @@
+{
+  "document_id": "nc-911-board-meeting-agenda-aug-26-2022-685f9a31",
+  "audited_at": "2026-03-13T01:43:26.083711Z",
+  "quality_score": 69,
+  "fidelity_composite": 0.6001,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.31818181818181823,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document suffers from significant content loss (shingling recall 0.638) and catastrophic structural failure (structural score 0.318). Multiple agenda items and their sub-items—specifically financial data in Item 4 and county lists in Item 9—are entirely missing, which prevents automatic approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are extensive omissions of sub-item content across the document. In Item 4, multiple lines of financial data (fund balances and disbursements) for sections b, c, d, and e are missing. Item 5 is missing its sub-items a) through f) entirely on page 1. Item 9 is missing its sub-items a), b), and c), including a bulleted list of counties. Item 13 is missing its sub-items a) through d). These omissions constitute a loss of more than 25% of the text within these respective sections.",
+      "source_pdf_quote": "4b) NG 911 Reserve Fund – June 2022 Fund balance $ 76,125,411 [etc]; 5a) Biennial Audit Status... 5f) Eastern Region PSAP Visits; 9a) PSAP Grant Program Progress Reports • Onslow County 911 [etc]; 13a) Training Course Request... 13d) General Committee Report",
+      "output_quote": "The JSON output contains the sub-item headers (e.g., 'b) NG 911 Reserve Fund –') but omits the detailed data or nested sub-items that follow them in the source.",
+      "location": "Items 4, 5, 9, 13 (Page 1 and Page 2)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table in Section 1 (reading_order 4) has significant structural defects. The header row defines 3 columns ('Tab', 'Topic', 'Presenter'). However, several subsequent data rows contain only one or two columns. Specifically, the 'Topic' and 'Presenter' data (e.g., 'Chair's Opening Remarks' and 'Jim Weaver') are merged into a single cell in the output, whereas they are distinct columns in the source. This results in a corrupted table structure where data is not aligned with its headers.",
+      "source_pdf_quote": "Tab Topic Presenter\n1. Chair’s Opening Remarks………………………….……………..….………….…Jim Weaver",
+      "output_quote": "Row 4, Cell 2: \"Chair's Opening Remarks.............................................................................Jim Weaver\"",
+      "location": "Section 1, element index 3 (reading_order 4)"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "In the source document, 'Call to Order' and 'Roll Call' appear before the 'Tab Topic Presenter' table header. In the output JSON, the pipeline has moved these two items inside the table, placing them below the 'Tab Topic Presenter' header. This misidentifies 'Call to Order' as a data row under the 'Tab' header, materially altering the intended structure and logic of the document.",
+      "source_pdf_quote": "Call to Order………………………………………..……………………..…….......Jim Weaver \nRoll Call…………………………………..………….…...…………...………....…Kristen Falco\nTab Topic Presenter",
+      "output_quote": "Rows 1-3 of the table: \nRow 1: Header (Tab, Topic, Presenter)\nRow 2: Call to Order...\nRow 3: Roll Call...",
+      "location": "Section 1, element index 3 (reading_order 4)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The conversion failed to preserve the nested list structure for several items on page 2. For Item 9 ('Grant Committee Report'), all sub-items (a, b, c) and their nested bullets (Onslow, Wilson, Polk, Chowan County 911) are missing from the JSON. Similarly, the sub-items for Item 13 ('Education Committee Report') are entirely absent. This represents a major failure in list conversion and structural fidelity.",
+      "source_pdf_quote": "9. Grant Committee Report...\n  a) PSAP Grant Program Progress Reports\n    • Onslow County 911\n    • Wilson County 911...\n13. Education Committee Report...\n  a) Training Course Request...",
+      "output_quote": "The list items for indices 4 and 8 in the second list only contain the top-level item text: \"9. Grant Committee Report...................................................................Jeff Shipp/Pokey Harris\" and \"13. Education Committee Report...................................................Chuck Greene/Angie Turbeville\"",
+      "location": "Section 2, element index 0 (reading_order 9)"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly altered from the source. The source PDF presents a structured agenda across two pages with a consistent three-column layout (Tab, Topic, Presenter) and a clear header/footer. The HTML output collapses this structure. It starts with a poorly aligned table for the first few items and then transitions into a simple bulleted list for the remainder of the document (Items 5-15). Additionally, the 'NC DIT 911 Board' logo, which serves as a header",
+      "source_pdf_quote": "The source PDF shows a consistent tabular layout for the agenda and a logo in the header and footer.",
+      "output_quote": "The HTML screenshot shows the agenda structure breaking into a bulleted list halfway through, with the logo placed arbitrarily between items 5 and 6.",
+      "location": "Throughout the document; logo placement between items 5 and 6."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The table rendering in the HTML is severely broken. For the initial items, the content intended for the Topic and Presenter columns is merged into the 'Tab' column (e.g., 'Call to Order...Jim Weaver'). In subsequent rows, the Presenter names are appended to the Topic text instead of occupying the dedicated 'Presenter' column shown in the HTML table headers. Most critically, the financial data formatted in columns under Item 4 (sub-items b, c, d, and e) is completely missing from the HTML output.",
+      "source_pdf_quote": "Item 4, sub-item b: 'June 2022 Fund balance $ 76,125,411' and other financial rows.",
+      "output_quote": "The HTML output shows '- b) NG 911 Reserve Fund –' followed immediately by '- c) CMRS Account', with all inner data rows missing.",
+      "location": "Page 1, Item 4; top of the HTML agenda table."
+    }
+  ],
+  "action_items": [
+    "Restore missing sub-items and financial data for Items 4, 5, 9, and 13.",
+    "Reconstruct the three-column table structure (Tab, Topic, Presenter) across the entire document.",
+    "Correct the reading order to ensure 'Call to Order' and 'Roll Call' are not nested inside the table headers.",
+    "Verify all county names and financial figures are present as per the source PDF."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6001,
+      "text_match": 0.7719298245614035,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6883,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6001,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.31818181818181823,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6378698224852071,
+      "shingling_precision": 0.9773345421577516,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 128,
+      "gemini_words": 128,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 430354,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

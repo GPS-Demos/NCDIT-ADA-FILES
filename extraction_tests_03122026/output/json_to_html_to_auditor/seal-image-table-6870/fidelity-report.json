@@ -1,0 +1,213 @@
+{
+  "document_id": "seal-image-table-6870",
+  "composite_score": 0.7244,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.72 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I carefully compared the output JSON against the source PDF. All text present in the output, excluding metadata and structural labels, has a direct basis in the source document. No fabricated paragraphs, sentences, or section headings were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All phone numbers, email addresses, and names in the output JSON match the source document exactly. No fabricated contact information or URLs were found in the conversion results. While some URLs are missing (noted in C5), no fake ones were added.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All three pages of the source document are represented in the output. The primary sections (Scope, Instructions, Authorized Vendors, History, etc.) are all present in the converted structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "I verified the row counts for all tables. The main information table on Page 1 (10 rows), the first History table on Page 2 (6 rows), and the second History table on Page 3 (6 rows) all match the row counts found in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "There are major text omissions where the pipeline failed to convert link text and URLs. In the 'Instructions' section on page 1, the name of the catalog ('ITS Service Catalog') is missing, leaving a nonsensical gap in the sentence. On page 2, the primary action text ('CLICK HERE') and the associated URL ('https://it.nc.gov/services/service-directory/telephony/cellular-telephone') are entirely missing from the paragraph, leaving it truncated.",
+        "b_evidence_source": "Customers will process all cellular requests through the ITS Service Catalog in which... [AND] To obtain contract information or access Vendor's website, CLICK HERE https://it.nc.gov/services/service-directory/telephony/cellular-telephone",
+        "b_evidence_output": "Customers will process all cellular requests through the [MISSING] in which... [AND] To obtain contract information or access Vendor's website, [TRUNCATED]",
+        "b_evidence_location": "Section 1, elements 9 and 11; Section 2, element 18",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "There is a date error in the History table on page 2. The source document lists the date as '2023-04-24', but the output JSON contains '2023-24-24', which is an invalid date. This represents a minor data quality defect resulting from an OCR error.",
+        "b_evidence_source": "2023-04-24 Website contract manager update - US Cellular.",
+        "b_evidence_output": "2023-24-24 Website contract manager update - US Cellular.",
+        "b_evidence_location": "Section 2, element 40, row index 3",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9302325581395349,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I carefully compared the output JSON against the source PDF. All text present in the output, excluding metadata and structural labels, has a direct basis in the source document. No fabricated paragraphs, sentences, or section headings were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All phone numbers, email addresses, and names in the output JSON match the source document exactly. No fabricated contact information or URLs were found in the conversion results. While some URLs are missing (noted in C5), no fake ones were added.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All three pages of the source document are represented in the output. The primary sections (Scope, Instructions, Authorized Vendors, History, etc.) are all present in the converted structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"I verified the row counts for all tables. The main information table on Page 1 (10 rows), the first History table on Page 2 (6 rows), and the second History table on Page 3 (6 rows) all match the row counts found in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"There are major text omissions where the pipeline failed to convert link text and URLs. In the 'Instructions' section on page 1, the name of the catalog ('ITS Service Catalog') is missing, leaving a nonsensical gap in the sentence. On page 2, the primary action text ('CLICK HERE') and the associated URL ('https://it.nc.gov/services/service-directory/telephony/cellular-telephone') are entirely missing from the paragraph, leaving it truncated.\",\n      \"b_evidence_source\": \"Customers will process all cellular requests through the ITS Service Catalog in which... [AND] To obtain contract information or access Vendor's website, CLICK HERE https://it.nc.gov/services/service-directory/telephony/cellular-telephone\",\n      \"b_evidence_output\": \"Customers will process all cellular requests through the [MISSING] in which... [AND] To obtain contract information or access Vendor's website, [TRUNCATED]\",\n      \"b_evidence_location\": \"Section 1, elements 9 and 11; Section 2, element 18\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"There is a date error in the History table on page 2. The source document lists the date as '2023-04-24', but the output JSON contains '2023-24-24', which is an invalid date. This represents a minor data quality defect resulting from an OCR error.\",\n      \"b_evidence_source\": \"2023-04-24 Website contract manager update - US Cellular.\",\n      \"b_evidence_output\": \"2023-24-24 Website contract manager update - US Cellular.\",\n      \"b_evidence_location\": \"Section 2, element 40, row index 3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.9302325581395349\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the entire document, specifically looking at section transitions and the history table which spans multiple pages. The content appears only once in the output, matching the source document. There is no evidence of duplicated paragraphs, sections, or list items.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The output maintains a logical heading hierarchy. H1 is used for the main department title, H2 for major sections like 'Scope', 'Authorized Vendors', and 'History:', and H3 for subsections like 'Instructions'. This reflects the logical structure of the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The first table (representing the contract information box on page 1) has a corrupted structure. The source presents this info in a two-column key-value layout. However, the output table has inconsistent column counts: rows 1-5 and 8 have two cells, while rows 6, 7, 9, and 10 have only one cell. This breaks the rectangular structure of the table and separates data (Email and Tel) from their contextual group (Contract Administrator/Program Manager).",
+        "b_evidence_source": "The information box on page 1 grouping 'Contract Administrator' labels with name, email, and phone.",
+        "b_evidence_output": "The 'table' element at reading_order 2 containing rows with varying cell counts (rows with 2 cells alternating with rows of 1 cell).",
+        "b_evidence_location": "Section 1, element index 1, reading_order 2",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is significantly disrupted by fragmented paragraphs and missing text content. In Section 1, a single paragraph from the source is split into elements 9 and 11, with the critical text 'ITS Service Catalog' (element 10) missing entirely. Similarly, in Section 2, element 18 is truncated, missing the text 'CLICK HERE' and the subsequent URL which are present in the source.",
+        "b_evidence_source": "Page 1: 'Customers will process all cellular requests through the ITS Service Catalog in which you can access...'; Page 2: 'To obtain contract information or access Vendor’s website, CLICK HERE https://it.nc.gov/services/service-directory/telephony/cellular-telephone'",
+        "b_evidence_output": "Section 1, element 9: 'Customers will process all cellular requests through the '; Section 2, element 18: 'To obtain contract information or access Vendor's website, '",
+        "b_evidence_location": "Section 1 (element 9/11) and Section 2 (element 18)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list of 'Authorized Vendors' on page 2 is not preserved as a list structure. Instead, the individual vendors (AT&T, T-Mobile, etc.) are converted into separate, flat paragraph elements, losing the semantic meaning of the grouped list.",
+        "b_evidence_source": "Page 2 list under 'Authorized Vendors': AT&T, T-Mobile, US Cellular, Verizon Wireless.",
+        "b_evidence_output": "Elements at reading_order 22, 23, 24, and 25 are separate paragraph types.",
+        "b_evidence_location": "Section 2, reading_order 22-25",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Several important links present in the source are missing from the output. The anchor text 'ITS Service Catalog' and 'CLICK HERE' are missing entirely from their respective sentences. Additionally, the explicit URL 'https://it.nc.gov/services/service-directory/telephony/cellular-telephone' on page 2 is missing from the element sequence.",
+        "b_evidence_source": "Links for 'ITS Service Catalog', 'CLICK HERE', and 'https://it.nc.gov/services/service-directory/telephony/cellular-telephone'",
+        "b_evidence_output": "The text content for these links is missing from the paragraphs in elements 9, 11, and 18.",
+        "b_evidence_location": "Section 1 and Section 2",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.4545454545454546,
+    "penalty_sum": 12,
+    "defect_count": 4,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the entire document, specifically looking at section transitions and the history table which spans multiple pages. The content appears only once in the output, matching the source document. There is no evidence of duplicated paragraphs, sections, or list items.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The output maintains a logical heading hierarchy. H1 is used for the main department title, H2 for major sections like 'Scope', 'Authorized Vendors', and 'History:', and H3 for subsections like 'Instructions'. This reflects the logical structure of the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The first table (representing the contract information box on page 1) has a corrupted structure. The source presents this info in a two-column key-value layout. However, the output table has inconsistent column counts: rows 1-5 and 8 have two cells, while rows 6, 7, 9, and 10 have only one cell. This breaks the rectangular structure of the table and separates data (Email and Tel) from their contextual group (Contract Administrator/Program Manager).\",\n      \"b_evidence_source\": \"The information box on page 1 grouping 'Contract Administrator' labels with name, email, and phone.\",\n      \"b_evidence_output\": \"The 'table' element at reading_order 2 containing rows with varying cell counts (rows with 2 cells alternating with rows of 1 cell).\",\n      \"b_evidence_location\": \"Section 1, element index 1, reading_order 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is significantly disrupted by fragmented paragraphs and missing text content. In Section 1, a single paragraph from the source is split into elements 9 and 11, with the critical text 'ITS Service Catalog' (element 10) missing entirely. Similarly, in Section 2, element 18 is truncated, missing the text 'CLICK HERE' and the subsequent URL which are present in the source.\",\n      \"b_evidence_source\": \"Page 1: 'Customers will process all cellular requests through the ITS Service Catalog in which you can access...'; Page 2: 'To obtain contract information or access Vendor’s website, CLICK HERE https://it.nc.gov/services/service-directory/telephony/cellular-telephone'\",\n      \"b_evidence_output\": \"Section 1, element 9: 'Customers will process all cellular requests through the '; Section 2, element 18: 'To obtain contract information or access Vendor's website, '\",\n      \"b_evidence_location\": \"Section 1 (element 9/11) and Section 2 (element 18)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list of 'Authorized Vendors' on page 2 is not preserved as a list structure. Instead, the individual vendors (AT&T, T-Mobile, etc.) are converted into separate, flat paragraph elements, losing the semantic meaning of the grouped list.\",\n      \"b_evidence_source\": \"Page 2 list under 'Authorized Vendors': AT&T, T-Mobile, US Cellular, Verizon Wireless.\",\n      \"b_evidence_output\": \"Elements at reading_order 22, 23, 24, and 25 are separate paragraph types.\",\n      \"b_evidence_location\": \"Section 2, reading_order 22-25\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Several important links present in the source are missing from the output. The anchor text 'ITS Service Catalog' and 'CLICK HERE' are missing entirely from their respective sentences. Additionally, the explicit URL 'https://it.nc.gov/services/service-directory/telephony/cellular-telephone' on page 2 is missing from the element sequence.\",\n      \"b_evidence_source\": \"Links for 'ITS Service Catalog', 'CLICK HERE', and 'https://it.nc.gov/services/service-directory/telephony/cellular-telephone'\",\n      \"b_evidence_output\": \"The text content for these links is missing from the paragraphs in elements 9, 11, and 18.\",\n      \"b_evidence_location\": \"Section 1 and Section 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 4,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 2,\n    \"penalty_sum\": 12,\n    \"score\": 0.45454545454545453\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output follows a single-column responsive layout, which is a standard and expected conversion from the fixed-layout PDF. A table of contents has been added at the top to facilitate navigation. While the state seal image has been moved from the header to a position within the body content (after the Instructions section), the overall visual organization and flow of information remain consistent with the source document's intent. The content is presented in the same logical order.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The contract information and history sections have been rendered as HTML tables. These tables have visible borders, clear row/column distinctions, and readable text. Although some data in the first table (Contract Administrator details) is shifted so that values like the email address appear in the label column, the information remains legible and understandable for a sighted user. There is no visual corruption, overlapping content, or missing borders that would impede comprehension.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The meaningful image from the source PDF, the North Carolina State Seal, is present in the HTML output. Although it has been relocated from the top header of page 1 to a position between the 'Instructions' and 'Please Note' sections, the image itself is rendered correctly and is not broken or missing.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is significant visual duplication of body content throughout the document. The conversion process has used the first row of each table as its visible caption, resulting in identical blocks of text appearing twice in immediate succession. This occurs for the main contract information table and both history tables. This is not TOC-to-body duplication, but a repetitive rendering of the same data within the body of the document itself.",
+        "b_evidence_source": "The source PDF lists history entries once, e.g., '2025-03-27 T-Mobile Contact Information updated changed from Dan Caffrey to Jason Jones'.",
+        "b_evidence_output": "In the HTML, this specific text appears twice: first as the table caption 'Table: 2025-03-27, T-Mobile Contact Information updated changed from Dan Caffrey to Jason Jones' and then immediately as the first row within that table.",
+        "b_evidence_location": "History section, starting after page 2 of the source document.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output follows a single-column responsive layout, which is a standard and expected conversion from the fixed-layout PDF. A table of contents has been added at the top to facilitate navigation. While the state seal image has been moved from the header to a position within the body content (after the Instructions section), the overall visual organization and flow of information remain consistent with the source document's intent. The content is presented in the same logical order.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The contract information and history sections have been rendered as HTML tables. These tables have visible borders, clear row/column distinctions, and readable text. Although some data in the first table (Contract Administrator details) is shifted so that values like the email address appear in the label column, the information remains legible and understandable for a sighted user. There is no visual corruption, overlapping content, or missing borders that would impede comprehension.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The meaningful image from the source PDF, the North Carolina State Seal, is present in the HTML output. Although it has been relocated from the top header of page 1 to a position between the 'Instructions' and 'Please Note' sections, the image itself is rendered correctly and is not broken or missing.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is significant visual duplication of body content throughout the document. The conversion process has used the first row of each table as its visible caption, resulting in identical blocks of text appearing twice in immediate succession. This occurs for the main contract information table and both history tables. This is not TOC-to-body duplication, but a repetitive rendering of the same data within the body of the document itself.\",\n      \"b_evidence_source\": \"The source PDF lists history entries once, e.g., '2025-03-27 T-Mobile Contact Information updated changed from Dan Caffrey to Jason Jones'.\",\n      \"b_evidence_output\": \"In the HTML, this specific text appears twice: first as the table caption 'Table: 2025-03-27, T-Mobile Contact Information updated changed from Dan Caffrey to Jason Jones' and then immediately as the first row within that table.\",\n      \"b_evidence_location\": \"History section, starting after page 2 of the source document.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 7,
+  "total_critical": 0,
+  "total_major": 4,
+  "total_minor": 3,
+  "programmatic_signals": null,
+  "corroboration": null
+}

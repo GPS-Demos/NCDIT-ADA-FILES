@@ -1,0 +1,84 @@
+{
+  "document_id": "gicc-2020-census-nc-factsheet-20170809-686131e8",
+  "audited_at": "2026-03-13T00:54:21.102396Z",
+  "quality_score": 94,
+  "fidelity_composite": 0.9141,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document displays high fidelity (0.9141) and strong programmatic scores (0.96 recall, 1.0 word count ratio), indicating that the vast majority of the content was preserved accurately. Although an email address was omitted in the contact section and a heading level was skipped, these defects are classified as minor and do not undermine the document's overall usability or accessibility for a factsheet. Following the scoring bands and convergence of signals, the document meets the threshold for automatic approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a textual omission in the contact information section at the end of the document on page 2. The email address 'Bob.Coats@osbm.nc.gov' is present in the source PDF between the department name and the phone number, but it is absent from the JSON output. This omission constitutes a difference in the information provided compared to the source.",
+      "source_pdf_quote": "Bob.Coats@osbm.nc.gov",
+      "output_quote": "[Omitted between reading_order 27 and 29]",
+      "location": "Section 2, contact block, following reading_order 27"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "In Section 2 (Page 2), the document title 'Preparing for the Census – We Have Work To Do!' is correctly identified as Heading Level 1 (element 19). However, the next heading in the structure, 'Bob Coats' (element 26), is assigned Heading Level 3. There is no Heading Level 2 present in Section 2 to bridge this gap, resulting in a skipped heading level which hinders screen reader navigation.",
+      "source_pdf_quote": "Page 2 of the PDF contains a primary header 'Preparing for the Census – We Have Work To Do!' and a contact section for 'Bob Coats'.",
+      "output_quote": "\"type\": \"heading\", \"level\": 1, \"text\": \"Preparing for the Census – We Have Work To Do!\" (reading_order 19) followed by \"type\": \"heading\", \"level\": 3, \"text\": \"Bob Coats\" (reading_order 26).",
+      "location": "Section 2, elements 19 and 26."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The contact email address 'Bob.Coats@osbm.nc.gov' clearly visible on the second page of the source PDF is entirely missing from the output JSON. There is a corresponding gap in the reading_order sequence (skipping index 28), which is where this contact link should have appeared between the liaison title and the phone number.",
+      "source_pdf_quote": "Bob.Coats@osbm.nc.gov",
+      "output_quote": "The text block for the email address is missing in the sequence between elements 27 and 29.",
+      "location": "Section 2, near reading_order 27-29."
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9141,
+      "text_match": 0.958697618329816,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.9,
+      "raw_score": 0.936,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9141,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9636363636363636,
+      "shingling_precision": 0.9538092381523695,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 332,
+      "gemini_words": 332,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 390907,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

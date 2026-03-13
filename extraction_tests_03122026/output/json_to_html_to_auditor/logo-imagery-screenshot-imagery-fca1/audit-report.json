@@ -1,0 +1,105 @@
+{
+  "document_id": "logo-imagery-screenshot-imagery-fca1",
+  "audited_at": "2026-03-12T23:12:32.227787Z",
+  "quality_score": 77,
+  "fidelity_composite": 0.7937,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "Low shingling recall (0.693) strongly corroborates major concerns regarding missing content, specifically omitted URLs and a missing delete confirmation dialog screenshot. Furthermore, the visual layout failure where button images are detached from their instructional text renders the step-by-step guide confusing and significantly compromises the document's utility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual layout of the document is significantly compromised by the extraction of instructional images (buttons and links) from their corresponding text flow. In the source PDF, images for buttons like 'SAVE', 'CONFIRM', 'Next', and 'Submit' are placed immediately following the instructional text (e.g., 'Click [button image]'). In the HTML output, the text instructions are grouped separately from these images. The button images are rendered in detached blocks after several sections of text, le",
+      "source_pdf_quote": "PDF Page 1, 'How to register' step 4: 'Click [SAVE button image]'; step 5: 'click [CONFIRM button image]'. PDF Page 1, 'How to unlock your account' step 5: 'click [Next button image]'; step 7: 'click: [Submit button image]'.",
+      "output_quote": "The HTML sections for 'How to register' and 'How to unlock your account' show these same sentences ending abruptly with 'Click' or 'click:', with the corresponding button images appearing much later in a separate group of image blocks.",
+      "location": "Sections 'How to register', 'How to unlock your account', and 'How to retrieve your username', page 1 of PDF."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "While most images and buttons have been captured (though poorly placed), at least one meaningful instructional image is entirely missing from the HTML output. Specifically, the screenshot of the 'delete' confirmation dialog box found on Page 3, which is critical for the 'How to delete your account' instructions, is not present in the rendered HTML screenshot.",
+      "source_pdf_quote": "PDF Page 3, 'How to delete your account' step 4 shows a screenshot of a dialog box containing the text 'Type \"delete\" to confirm', a text input field with the word 'delete' entered, and 'CANCEL' and 'DELETE' buttons.",
+      "output_quote": "The HTML output for the 'How to delete your account' section and the subsequent collection of image assets at the end of the document do not include this confirmation dialog screenshot.",
+      "location": "Section 'How to delete your account', PDF page 3."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There are several instances where text from the source is omitted, specifically URLs and button labels that were part of the instructions. In the sections 'How to reset your password', 'How to change your password', 'How to update your profile', 'How to enroll...', and 'How to delete...', the URL 'https://myncid.nc.gov/' is missing after the string 'Go to '. Additionally, button labels such as 'Submit', 'Reset', and 'SAVE' are missing in the respective 'Click' steps within the 'How to reset your",
+      "source_pdf_quote": "1. Go to https://myncid.nc.gov/ ; 6. Enter the OTP sent to you and click: Submit ; 8. Click on: Reset ; 5. Click on: SAVE ; 4. Edit the values that you want to update, click on: SAVE",
+      "output_quote": "\"text\": \"Go to \" (omitted in multiple sections); \"text\": \"Enter the OTP sent to you and click: \"; \"text\": \"Click on: \"; \"text\": \"Edit the values that you want to update, click on: \"",
+      "location": "sections[1].elements[1].items[0], sections[1].elements[1].items[5], sections[1].elements[1].items[7], sections[1].elements[3].items[4], sections[1].elements[5].items[3], sections[2].elements[1].items[0], sections[2].elements[3].items[0]"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source document uses numbered (ordered) lists for every section. The output fails to preserve the list type, marking all lists as 'unordered'. Additionally, many of the numbered lists are split into multiple separate list objects in the JSON due to the interference of image layout (e.g., 'How to register' is split into two lists at index 3 and 4). Furthermore, the actual numbers (1., 2., etc.) have been stripped from the text content.",
+      "source_pdf_quote": "Page 1, 'How to register' section contains a single numbered list from steps 1 to 6.",
+      "output_quote": "\"type\": \"list\", \"list_type\": \"unordered\", \"items\": ... (at element index 3 and 4)",
+      "location": "Sections 'How to register', 'How to unlock your account', element indices 3, 4, 7, 8, 9."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains several instances of the URL 'https://myncid.nc.gov/'. In the output, these are rendered as plain text strings within the list items. No semantic link elements or clickable URL objects were generated, making the links 'missing' from a functional/structural standpoint.",
+      "source_pdf_quote": "Page 1, Step 1: 'Go to https://myncid.nc.gov/'",
+      "output_quote": "\"text\": \"Go to https://myncid.nc.gov/\"",
+      "location": "Element index 3, 7, 11, 31, 34, 37, 55, 58"
+    }
+  ],
+  "action_items": [
+    "Reintegrate the missing delete confirmation screenshot",
+    "Reposition button images to appear immediately after their corresponding text instructions",
+    "Restore missing URL strings and button labels to the text steps",
+    "Convert unordered lists back to ordered lists and ensure structural continuity"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7937,
+      "text_match": 0.7534102833158446,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7702,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7937,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.693050193050193,
+      "shingling_precision": 0.825287356321839,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 101,
+      "gemini_words": 101,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 401949,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

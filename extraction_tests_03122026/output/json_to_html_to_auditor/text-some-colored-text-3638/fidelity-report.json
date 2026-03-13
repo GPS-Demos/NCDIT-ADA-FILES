@@ -1,0 +1,213 @@
+{
+  "document_id": "text-some-colored-text-3638",
+  "composite_score": 0.8103,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.81 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I have reviewed the output against the source document. Every paragraph and heading in the output corresponds to content found in the original PDF. There are no invented section headings or hallucinated body text. The document title in metadata is recognized as an acceptable AI addition.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output contains no fabricated contact information. The contact information from the source (email and URL) is missing from the output, which is addressed under C5, but no incorrect information was created.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages and major sections (Executive Summary, Vision, Mission, Accomplishments, Emergency Response, Program Management, Future, Contact) are present in the output. While some content within sections is missing, no entire section or page was dropped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document does not contain any tables; the lists are correctly identified as list structures.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "There are multiple significant omissions across three sections. First, the 'Contact' section is missing both the email address and the website URL, which constitute the primary information for that section. Second, the 'Partnership Engagements/Economic Development' section on page 2 is missing four nested sub-bullets (DHS efforts and conference presentations), representing over 35% of that section's content. Third, the 'Industry Engagements' section is missing one nested sub-bullet regarding Bridge4PS implementation.",
+        "b_evidence_source": "Section 'Contact': 'firsttech@nc.gov and www.ncbroadband.gov/firsttech/'. Section 'Partnership Engagements': 'o Communications Section Task Force...', 'o P25 Compliance Assessment Program...', 'o First Responder Resource Group participation', 'o IWCE Panel titled...'. Section 'Industry Engagements': 'o This led to tremendous collaboration efforts among responders...'",
+        "b_evidence_output": "The output elements for these areas are empty or missing the sub-bullet content entirely. In 'Contact' (reading_order 30-32), the text is just 'FirstTech can be reached at ' and ' and '.",
+        "b_evidence_location": "Contact section (page 3, element 30), Partnership Engagements section (page 2, element 18), Industry Engagements section (page 2, element 16)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text that is present in the output accurately matches the source wording and formatting, including dates and acronyms. No meaning-altering changes were found beyond the noted omissions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9418604651162791,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I have reviewed the output against the source document. Every paragraph and heading in the output corresponds to content found in the original PDF. There are no invented section headings or hallucinated body text. The document title in metadata is recognized as an acceptable AI addition.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output contains no fabricated contact information. The contact information from the source (email and URL) is missing from the output, which is addressed under C5, but no incorrect information was created.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages and major sections (Executive Summary, Vision, Mission, Accomplishments, Emergency Response, Program Management, Future, Contact) are present in the output. While some content within sections is missing, no entire section or page was dropped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document does not contain any tables; the lists are correctly identified as list structures.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"There are multiple significant omissions across three sections. First, the 'Contact' section is missing both the email address and the website URL, which constitute the primary information for that section. Second, the 'Partnership Engagements/Economic Development' section on page 2 is missing four nested sub-bullets (DHS efforts and conference presentations), representing over 35% of that section's content. Third, the 'Industry Engagements' section is missing one nested sub-bullet regarding Bridge4PS implementation.\",\n      \"b_evidence_source\": \"Section 'Contact': 'firsttech@nc.gov and www.ncbroadband.gov/firsttech/'. Section 'Partnership Engagements': 'o Communications Section Task Force...', 'o P25 Compliance Assessment Program...', 'o First Responder Resource Group participation', 'o IWCE Panel titled...'. Section 'Industry Engagements': 'o This led to tremendous collaboration efforts among responders...'\",\n      \"b_evidence_output\": \"The output elements for these areas are empty or missing the sub-bullet content entirely. In 'Contact' (reading_order 30-32), the text is just 'FirstTech can be reached at ' and ' and '.\",\n      \"b_evidence_location\": \"Contact section (page 3, element 30), Partnership Engagements section (page 2, element 18), Industry Engagements section (page 2, element 16)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text that is present in the output accurately matches the source wording and formatting, including dates and acronyms. No meaning-altering changes were found beyond the noted omissions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 1,\n    \"penalty_sum\": 11,\n    \"score\": 0.872093023255814\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The document title 'NC DIT’s FirstTech Annual Review 2020' appears at the top of each page in the source PDF. In the output JSON, this is repeated as a heading at the start of each section corresponding to a page. According to the evaluation rules, intentional repetition in the source (like a header on every page) should not be flagged as a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy in the output correctly reflects the source document. The document title is H1, major sections like 'Executive Summary' and 'Accomplishments' are H2, and subsections like 'Responder Engagements' are H3. No levels are skipped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document contains no tables; therefore, no structural corruption is possible.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order generally follows the logical flow of the source document from top to bottom, page by page. While some list items are detached from their parents due to page breaks (as discussed in S5), the overall sequence of sections remains accurate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The output fails to capture the nested list structures (sub-bullets) present on pages 2 and 3 of the source. Several sub-bullets are missing entirely (e.g., under 'Industry Engagements' and 'Partnership Engagements' on page 2). Furthermore, sub-bullets that appear on page 3 are detached from their parent list item on page 2 and rendered as a separate, flat unordered list (reading_order 21).",
+        "b_evidence_source": "Page 2: Sub-bullet under Industry Engagements item 4: 'o This led to tremendous collaboration efforts among responders during various emergencies, disasters, and events in 2020.' Page 3: Sub-bullets under Partnership Engagements item 5: 'o IEEE 5G Technologies...' and 'o DHS SAFECOM...'",
+        "b_evidence_output": "The list in section 1 (reading_order 16) and section 2 (reading_order 18) contain no nested_list entries. The page 3 sub-bullets are in a new list (reading_order 21) instead of being nested under item 5 of section 2.",
+        "b_evidence_location": "Sections 1 and 2, reading_order 16, 18, and 21",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The contact information provided at the end of the document (page 3) contains an email address and a URL. The output JSON fails to capture this text, resulting in fragmented paragraphs that omit the actual contact identifiers.",
+        "b_evidence_source": "FirstTech can be reached at firsttech@nc.gov and www.ncbroadband.gov/firsttech/",
+        "b_evidence_output": "Reading order 30: 'FirstTech can be reached at '; Reading order 32: ' and '",
+        "b_evidence_location": "Section 2, reading_order 30 and 32",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The document title 'NC DIT’s FirstTech Annual Review 2020' appears at the top of each page in the source PDF. In the output JSON, this is repeated as a heading at the start of each section corresponding to a page. According to the evaluation rules, intentional repetition in the source (like a header on every page) should not be flagged as a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy in the output correctly reflects the source document. The document title is H1, major sections like 'Executive Summary' and 'Accomplishments' are H2, and subsections like 'Responder Engagements' are H3. No levels are skipped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document contains no tables; therefore, no structural corruption is possible.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order generally follows the logical flow of the source document from top to bottom, page by page. While some list items are detached from their parents due to page breaks (as discussed in S5), the overall sequence of sections remains accurate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The output fails to capture the nested list structures (sub-bullets) present on pages 2 and 3 of the source. Several sub-bullets are missing entirely (e.g., under 'Industry Engagements' and 'Partnership Engagements' on page 2). Furthermore, sub-bullets that appear on page 3 are detached from their parent list item on page 2 and rendered as a separate, flat unordered list (reading_order 21).\",\n      \"b_evidence_source\": \"Page 2: Sub-bullet under Industry Engagements item 4: 'o This led to tremendous collaboration efforts among responders during various emergencies, disasters, and events in 2020.' Page 3: Sub-bullets under Partnership Engagements item 5: 'o IEEE 5G Technologies...' and 'o DHS SAFECOM...'\",\n      \"b_evidence_output\": \"The list in section 1 (reading_order 16) and section 2 (reading_order 18) contain no nested_list entries. The page 3 sub-bullets are in a new list (reading_order 21) instead of being nested under item 5 of section 2.\",\n      \"b_evidence_location\": \"Sections 1 and 2, reading_order 16, 18, and 21\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The contact information provided at the end of the document (page 3) contains an email address and a URL. The output JSON fails to capture this text, resulting in fragmented paragraphs that omit the actual contact identifiers.\",\n      \"b_evidence_source\": \"FirstTech can be reached at firsttech@nc.gov and www.ncbroadband.gov/firsttech/\",\n      \"b_evidence_output\": \"Reading order 30: 'FirstTech can be reached at '; Reading order 32: ' and '\",\n      \"b_evidence_location\": \"Section 2, reading_order 30 and 32\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML rendering contains significant visual layout failures. In the 'Partnership Engagements/Economic Development' section, three sub-bullets corresponding to 'On-going participation in several efforts with DHS including:' in the source PDF are completely missing from the HTML rendering. Additionally, the bullet nesting hierarchy is broken for the 'FirstTech staff presented...' section, where two of the three sub-bullets from the PDF are rendered as top-level bullets in the HTML. Most critically, the 'Contact' section is visually broken; the email address and URL present in the source are entirely absent in the HTML rendering, leaving blank spaces and an isolated 'and' conjunction.",
+        "b_evidence_source": "firsttech@nc.gov and www.ncbroadband.gov/firsttech/",
+        "b_evidence_output": "FirstTech can be reached at [empty space] and [empty space]",
+        "b_evidence_location": "Contact section, page 3",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source document contains no tables. Consequently, there are no table rendering issues to evaluate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source document does not contain any meaningful images, logos, or figures. The visual content is limited to text styling and bulleted lists.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "Aside from the expected Table of Contents at the top of the HTML page, which serves as a navigational aid, no body content or sections are visually duplicated in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML rendering contains significant visual layout failures. In the 'Partnership Engagements/Economic Development' section, three sub-bullets corresponding to 'On-going participation in several efforts with DHS including:' in the source PDF are completely missing from the HTML rendering. Additionally, the bullet nesting hierarchy is broken for the 'FirstTech staff presented...' section, where two of the three sub-bullets from the PDF are rendered as top-level bullets in the HTML. Most critically, the 'Contact' section is visually broken; the email address and URL present in the source are entirely absent in the HTML rendering, leaving blank spaces and an isolated 'and' conjunction.\",\n      \"b_evidence_source\": \"firsttech@nc.gov and www.ncbroadband.gov/firsttech/\",\n      \"b_evidence_output\": \"FirstTech can be reached at [empty space] and [empty space]\",\n      \"b_evidence_location\": \"Contact section, page 3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source document contains no tables. Consequently, there are no table rendering issues to evaluate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source document does not contain any meaningful images, logos, or figures. The visual content is limited to text styling and bulleted lists.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"Aside from the expected Table of Contents at the top of the HTML page, which serves as a navigational aid, no body content or sections are visually duplicated in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 0,
+  "total_major": 3,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

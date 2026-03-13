@@ -1,0 +1,76 @@
+{
+  "document_id": "fillable-form-logo-imagery-bddf",
+  "audited_at": "2026-03-13T00:50:26.545291Z",
+  "quality_score": 91,
+  "fidelity_composite": 0.9182,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document exceeds the high-quality threshold with a composite fidelity score of 0.9182 and perfect content and visual scores (1.0). While the structural score (0.727) is lower due to the conversion of checklists into tables on pages 2 and 3, the programmatic shingling recall (0.906) and word count ratio (1.0) confirm that no content was lost. Following the instruction to trust calibrated severity ratings, these structural inconsistencies are treated as minor and do not block approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The conversion significantly corrupts the document's structure by transforming multiple checklist sections (lists with checkboxes) into artificial table structures. On pages 2 and 3, the sections 'Documentation & Planning', 'Technology & Infrastructure', 'Data Management & Quality', and 'Emergency Response Tools & Maps' are all converted into tables with synthesized 'Field' and 'Value' headers and a string 'false' in the value column. Furthermore, a standalone list item on page 2 ('Know your Cit",
+      "source_pdf_quote": "Checklist sections on pages 2 and 3 (Documentation & Planning, Technology & Infrastructure, Data Management & Quality, Emergency Response Tools & Maps) and the 'Know your City/County contacts' list item.",
+      "output_quote": "Element indices 16, 19, 21, 30, and 32 are rendered as table types with synthesized 'Field' and 'Value' headers containing checklist text.",
+      "location": "Sections 2 and 3, pages 2 and 3; element indices 16, 19, 21, 30, 32"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "On pages 2 and 3, all checklists (bulleted items with checkboxes) are incorrectly converted into tables. This is inconsistent with Page 1, where checklists are correctly identified as list elements (indices 6 and 8). By converting lists to tables with artificial boolean values ('false'), the semantic meaning of the checklist is altered and structural fidelity is lost.",
+      "source_pdf_quote": "Checkbox checklists on pages 2 and 3 (e.g., 'Update Standard Operating Procedures', 'Maintain hardware, software, plotter').",
+      "output_quote": "These lists are converted to table structures (indices 19, 21, 30, 32) rather than list types, losing their semantic identity as checklist items.",
+      "location": "Sections 2 and 3, pages 2 and 3; element indices 19, 21, 30, 32"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.9182,
+      "text_match": 0.893030794165316,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.85,
+      "raw_score": 0.9149,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9182,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.90625,
+      "shingling_precision": 0.8801916932907349,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 263,
+      "gemini_words": 263,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 341049,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "document_id": "logos-graphic-colors-photos-icons-diagrams-charts-53e1",
+  "audited_at": "2026-03-13T01:57:11.388848Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8649,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score (0.86) is high, the shingling recall (0.924) confirms a ~7.6% loss of text, which specifically includes the omission of the agency's 'Guiding Principles' and key sidebars. The loss of three 'essential' technical flowcharts and diagrams constitutes a failure to preserve content-rich visual information, which is not merely cosmetic. Given the cost asymmetry where auto-approving a defective document is 3x more costly than a review, human intervention is required to restore mission-critical text and graphics.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "Several significant textual elements within sections are missing in the output. On Page 4 (About NCDIT), the prominent sidebar text describing the agency's 1,300 employees is omitted. On Page 5 (Vision, Mission and Priorities), the entire 'OUR GUIDING PRINCIPLES' list, which includes seven key organizational values (Collaboration, Innovation and Creativity, Transparency, Accountability, Agility, Integrity, Customer Focus), is completely missing from the output. Additionally, the date '2021/2022'",
+      "source_pdf_quote": "OUR GUIDING PRINCIPLES: Collaboration, Innovation and Creativity, Transparency, Accountability, Agility, Integrity, Customer Focus.",
+      "output_quote": "The list is entirely missing from the section corresponding to page 5.",
+      "location": "Vision, Mission and Priorities section, page 5, element index 24"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The heading hierarchy is generally maintained with page titles assigned as H1. However, there is a structural fragmentation error on page 3 where the single visual heading 'Secretary's Message' is split into two separate H1 elements ('Secretary's' and 'Message'). This breaks the semantic integrity of the section header.",
+      "source_pdf_quote": "Page 3 of the PDF contains a single heading 'Secretary's Message'.",
+      "output_quote": "The JSON output contains two separate heading elements for this title: element index 8 ('Secretary's') and element index 9 ('Message').",
+      "location": "Section 3 (Secretary's Message), page 3, elements 8 and 9."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source PDF contains numerous functional hyperlinks, including government URLs (e.g., 'NC.gov' on page 41), statute references (e.g., page 4, 12), and award titles (page 34). These are visually indicated in the PDF by blue, underlined text. However, these links are missing from the JSON output, which renders them as plain text without associated URL metadata or link tags.",
+      "source_pdf_quote": "The PDF contains functional hyperlinks for URLs and references, such as 'NC.gov' on page 41 and award titles like 'Collective Defense and Support...' on page 34.",
+      "output_quote": "The text is present in the JSON (e.g., elements 464, 471), but contains no hyperlink markup or URL metadata.",
+      "location": "Throughout document, notably on pages 4, 34, 41, and 42."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Several meaningful and content-rich images from the source PDF are missing in the HTML output. Specifically, the 'NC eLink Utility Modules' diagram on page 29, the 'governance structure for the N.C. Health Information Exchange Authority' flowchart on page 32, and the image of the FBI Certificate of Appreciation on page 40 are all absent. These are not merely decorative elements but provide essential visual information about systems and official recognitions described in the text. Additionally, t",
+      "source_pdf_quote": "The source PDF contains meaningful diagrams on page 29 ('NC eLink Utility Modules'), page 32 ('The governance structure for the N.C. Health Information Exchange Authority'), and an image of an official FBI certificate on page 40.",
+      "output_quote": "The HTML output for the corresponding sections ('DATA LINKING', 'HEALTH CARE', and 'FBI RECOGNIZES...') lacks these images. Furthermore, the header shows the text 'Logos Graphic Colors Photos Icons Diagrams Charts SSE1' instead of the department logo.",
+      "location": "Sections: Data Linking (p. 29), Health Care (p. 32), Awards and Recognitions (p. 40)."
+    }
+  ],
+  "action_items": [
+    "Manually restore the missing 'Guiding Principles' list and Page 4 sidebar text.",
+    "Recover and integrate the missing flowcharts and certificates from pages 29, 32, and 40.",
+    "Correct the H1 fragmentation on page 3 and re-link the government URLs and statute references."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8649,
+      "text_match": 0.9405393209900239,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8434,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8649,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9243800209570381,
+      "shingling_precision": 0.9580090497737557,
+      "duplication_ratio": 0.0005376087164293224,
+      "word_count_ratio": 1.0,
+      "baseline_words": 8544,
+      "gemini_words": 8544,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 496565,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

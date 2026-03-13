@@ -1,0 +1,102 @@
+{
+  "document_id": "gicc-lgc-censussurveyresults-20200506-68839ae8",
+  "audited_at": "2026-03-13T01:38:46.847114Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output document is missing a massive portion of the source content. Specifically, pages 4 through 14 (containing the survey data for Questions 1-10) are absent from the provided JSON, which contains a placeholder stating '11 sections omitted for token budget'. In a forensic audit, this represents a total failure to capture the document's core information.",
+      "source_pdf_quote": "Content for pages 4 through 14, which includes chart data and detailed responses for survey questions Q1 through Q10.",
+      "output_quote": "\"_omitted\": \"11 sections omitted for token budget\"",
+      "location": "Between Section index 3 and Section index 15 (reading order 40 to 240)"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are major text omissions within the sections that were converted. Page 2 is missing five of its ten bullet points (the entire nested list regarding survey questions). Page 16 (Contacts) is missing the actual email addresses, retaining only the headings. These omissions constitute a loss of more than 25% of the relevant content within those specific sections.",
+      "source_pdf_quote": "On Page 2: 'LGC and SGUC drafted 10 survey questions', 'Type of census-related data used', 'Scale of use', 'Decisions based on census-related data', 'Funding based on census-related data'. On Page 16: 'DABrannan@cabarruscounty.us', 'anna.verrill@nc.gov', 'tim.johnson@nc.gov'.",
+      "output_quote": "The list in Section 2 jumps from 'Following last GICC Meeting,' to 'Survey sent to various listservs...'. Section 16 contains headings but no paragraph text for emails.",
+      "location": "Section 2 (Page 2) and Section 16 (Page 16)"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The output significantly fails to preserve the logical flow of information on Page 16. The contact email addresses ('DABrannan@cabarruscounty.us', 'anna.verrill@nc.gov', 'tim.johnson@nc.gov') which are separate text blocks between headings in the source are entirely missing from the element sequence, breaking the structural organization of the page.",
+      "source_pdf_quote": "DABrannan@cabarruscounty.us\nanna.verrill@nc.gov\ntim.johnson@nc.gov",
+      "output_quote": "The element list for Page 16 (index 16) only contains heading elements and image placeholders, omitting the text nodes for the emails.",
+      "location": "Sections, Page 16, reading_order 266-271"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "On Page 2, the list conversion is incomplete and inaccurate. It omits the second main bullet point ('LGC and SGUC drafted 10 survey questions') and its four nested sub-bullets entirely. This fundamentally changes the structural meaning of the Survey Background section.",
+      "source_pdf_quote": "• LGC and SGUC drafted 10 survey questions\n  • Type of census-related data used\n  • Scale of use\n  • Decisions based on census-related data\n  • Funding based on census-related data",
+      "output_quote": "The list in section 1 jumps from 'Following last GICC Meeting,' directly to 'Survey sent to various listservs...'",
+      "location": "Sections, Page 2, element index 1 (reading_order 7)"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The source PDF contains critical data visualizations that represent the primary findings of the survey. Specifically, bar charts on pages 4, 5, 6, and 8, and a pie chart on page 10 are completely missing from the HTML output. In their place, the 'NC DIT' logo (the decorative graphic from the cover page) has been incorrectly inserted under each question heading. This is a major failure as the primary 'Results' of the survey are not visually present in the conversion.",
+      "source_pdf_quote": "The source PDF contains data charts on page 4 (Q1 bar chart), page 5 (Q2 bar chart), page 6 (Q3 bar chart), page 8 (Q5 bar chart), and page 10 (Q7 pie chart).",
+      "output_quote": "In the HTML screenshot, all survey charts are missing. Under headings like 'Q1: Which sector do you represent?' and 'Q2: What census-related data do you need...', the 'NC DIT' logo graphic is displayed instead of the actual data charts.",
+      "location": "Sections Q1, Q2, Q3, Q5, and Q7."
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9495904221802143,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5638,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9322610578410145,
+      "shingling_precision": 0.9675762439807384,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 259,
+      "gemini_words": 259,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 225786,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

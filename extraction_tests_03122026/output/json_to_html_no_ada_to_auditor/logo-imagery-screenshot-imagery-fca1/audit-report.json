@@ -1,0 +1,105 @@
+{
+  "document_id": "logo-imagery-screenshot-imagery-fca1",
+  "audited_at": "2026-03-13T01:13:09.008847Z",
+  "quality_score": 77,
+  "fidelity_composite": 0.7937,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document suffers from major visual layout failures where UI elements are decoupled from their instructional context, leaving several steps incomplete. These issues are corroborated by a low shingling recall (0.693) and a poor visual fidelity score (0.5), indicating significant alignment and content preservation errors that exceed the threshold for automatic approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "In the source PDF, instructional steps are visually integrated with the UI elements they describe. For instance, in the 'How to register' section, steps 4 and 5 contain the 'SAVE' and 'CONFIRM' buttons inline with the text. In the HTML output, these visual elements have been decoupled from their context. The instructional text is left incomplete (e.g., ending with 'Click' or 'click' without the corresponding button image), and all the illustrative images have been aggregated into a separate, dis",
+      "source_pdf_quote": "Page 1, 'How to register' section, steps 4 and 5 show the [SAVE] and [CONFIRM] buttons at the end of the sentences.",
+      "output_quote": "The HTML under 'How to register' shows 'Click' and 'click' at the end of steps 4 and 5, with the buttons entirely absent from these positions. The buttons appear much further down in a separate image cluster.",
+      "location": "Sections 'How to register', 'How to unlock your account', 'How to retrieve your username', and 'How to reset your password' on pages 1 and 2."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The HTML output exhibits visual content duplication. The 'Forgot Username / Forgot Password / Unlock Account' menu block is rendered twice within the central section of the document. Additionally, several button images (ADD GROUP, SAVE, DELETE MY ACCOUNT) are repeated as a standalone list at the very bottom of the document, following the final instructional section.",
+      "source_pdf_quote": "PDF Pages 1-3 contain the various button and menu UI elements once per relevant section.",
+      "output_quote": "The HTML screenshot shows the 'Forgot Username...' block appearing twice in succession in the middle 'image dump' area. At the very end of the document, the buttons 'ADD GROUP', 'SAVE', and 'DELETE MY ACCOUNT' are repeated.",
+      "location": "Middle and end of the HTML output document."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There are several instances on Page 2 (Section index 1 in the JSON) where the text of a list item ends abruptly, omitting the button label that appears in the source image. This is inconsistent with Page 1 (Section index 0), where the pipeline correctly appended the button text to the sentence. These omissions slightly alter the clarity of the instructions in the text flow, although the images themselves are captured elsewhere in the section.\n\nSpecific instances:\n1. 'How to reset your password',",
+      "source_pdf_quote": "Page 2, 'How to reset your password', step 8: '8. Click on: [Reset]'; Page 2, 'How to change your password', step 5: '5. Click on: [SAVE]'; Page 2, 'How to update your profile', step 4: '4. ...click on: [SAVE]'.",
+      "output_quote": "JSON element index 31, item 8: 'Click on: '; JSON element index 34, item 5: 'Click on: '; JSON element index 37, item 4: '...click on: '.",
+      "location": "Section index 1 (Page 2), elements 31, 34, and 37."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There are two structural defects regarding list conversion. First, all numbered lists in the source document have been converted to unordered lists ('list_type': 'unordered'), losing the sequential semantic meaning. Second, single logical lists are frequently split into multiple separate list objects. For instance, the 'How to register' procedure on page 1 is a single list of 6 steps, but the output splits it into two list elements (indices 3 and 4). The 'How to unlock your account' procedure is",
+      "source_pdf_quote": "Page 1, 'How to register' section contains a single numbered list (1-6). Page 1, 'How to unlock your account' section contains a single numbered list (1-7).",
+      "output_quote": "The 'How to register' list is split into element index 3 (items 1-2) and 4 (items 3-6). The 'How to unlock your account' list is split into element indices 7, 8, and 9. All are marked as 'unordered'.",
+      "location": "Sections 'How to register' and 'How to unlock your account', Page 1; also occurring in sections on pages 2 and 3."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The URL 'https://myncid.nc.gov/', which appears in step 1 of every procedure in the source document, is consistently missing from the output on pages 2 and 3. In several procedural sections, the text for step 1 is truncated to 'Go to ', with the URL omitted entirely.",
+      "source_pdf_quote": "Page 2, 'How to reset your password', Step 1: 'Go to https://myncid.nc.gov/'. Page 3, 'How to enroll...', Step 1: 'Go to https://myncid.nc.gov/'.",
+      "output_quote": "Element index 31, item 1 text is 'Go to '. Element index 55, item 1 text is 'Go to '.",
+      "location": "Page 2 (sections: 'How to reset your password', 'How to change your password', 'How to update your profile') and Page 3 (sections: 'How to enroll...', 'How to delete your account')."
+    }
+  ],
+  "action_items": [
+    "Reintegrate UI button labels/images into their corresponding instructional text blocks",
+    "Remove duplicated 'Forgot Username / Password' blocks and the trailing standalone button list",
+    "Restore missing URLs in Step 1 of all procedural sections",
+    "Fix list structure by merging split lists and changing list-type to ordered/numbered"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7937,
+      "text_match": 0.7534102833158446,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7702,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7937,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.693050193050193,
+      "shingling_precision": 0.825287356321839,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 101,
+      "gemini_words": 101,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 352192,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

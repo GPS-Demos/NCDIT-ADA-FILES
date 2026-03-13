@@ -1,0 +1,97 @@
+{
+  "document_id": "esrmo-newsletter-april-2024-686b1c64",
+  "audited_at": "2026-03-13T01:21:44.039594Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8649,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While the fidelity score of 0.8649 and high programmatic recall (0.917) suggest a pass, the qualitative evidence indicates a systemic failure to capture hyperlinked text, resulting in the loss of all webinar titles and several resource URLs. These are not merely cosmetic issues but represent significant content loss for a newsletter, making human intervention necessary to ensure the document's utility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The output document suffers from massive text omissions, specifically targeting text that serves as hyperlinks in the original PDF. On Page 3, the report title 'The Future of Defense: IT Leaders Brace for Unprecedented Cyber Threats' and the word 'phishing' are missing. On Page 5, the URLs for the 'Training and Continued Learning Resources' section (FedVTE, TEEX, NICCS, ICS-CERT) are absent. On Page 6, the titles for all six SANS Webinars are missing, as are the names of the social media platfor",
+      "source_pdf_quote": "April 16: SANS Webinar: Introduction to AI and Leveraging it in Cybersecurity; follow the N.C. Department of Information Technology on X (Formerly Known as Twitter), Facebook and LinkedIn; visit it.nc.gov/CyberSecureNC or Stay Safe Online; [URLs for Training resources on page 5]",
+      "output_quote": "April 16: SANS Webinar: [missing title]; Be sure to follow the N.C. Department of Information Technology on (Formerly Known as Twitter), and for more tips. Also visit or for additional information...; [missing URLs on page 5]",
+      "location": "Sections on Pages 5 and 6 (reading_order 63, 85, 93-103)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There is a systematic failure in list conversion where list items are truncated. In the 'Training and Continued Learning Resources' section, the URLs are omitted from the item text. In the 'Upcoming Events' section, the specific titles of the webinars are missing, leaving only the date and the prefix 'SANS Webinar:'.",
+      "source_pdf_quote": "April 16: SANS Webinar: Introduction to AI and Leveraging it in Cybersecurity; FedVTE: Free Online Training Environment: https://fedvte.usalearning.gov/",
+      "output_quote": "\"text\": \"April 16: SANS Webinar: \"; \"text\": \"FedVTE: Free Online Training Environment: \"",
+      "location": "Upcoming Events, Page 6, element 85; Training and Continued Learning Resources, Page 5, element 63"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Multiple links and URLs are missing from the output. In the 'Training Resources' list, all URLs accompanying the text are omitted. In the footer 'Connect' section on Page 6, the text representing hyperlinked entities (X, Facebook, LinkedIn, it.nc.gov/CyberSecureNC, Stay Safe Online) is entirely missing from the output paragraphs.",
+      "source_pdf_quote": "follow the N.C. Department of Information Technology on X (Formerly Known as Twitter), Facebook and LinkedIn... visit it.nc.gov/CyberSecureNC or Stay Safe Online",
+      "output_quote": "Be sure to follow the N.C. Department of Information Technology on  (Formerly Known as Twitter),  and  for more tips. Also visit  or  for additional information...",
+      "location": "Page 6 footer section, elements 93-103"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Several meaningful images from the source PDF are missing in the HTML rendering. Specifically, the photo of people with a tablet on page 3, the photo of a person using a laptop on page 5, the 'UPCOMING EVENTS' graphic on page 6, and the newspaper icon in the 'Cybersecurity Newsletters' box on page 5 are absent. While some logos and the target/virus graphics are present, the omission of these specific photos and graphics—which are identified as meaningful content types in the instructions—constit",
+      "source_pdf_quote": "The source PDF contains a photo of people with a tablet (page 3), a photo of a person with a laptop (page 5), a newspaper graphic (page 5), and an 'UPCOMING EVENTS' calendar graphic (page 6).",
+      "output_quote": "The HTML rendering is missing the photos in the 'IT Leaders Can’t Stop AI...' and 'Training and Continued Learning Resources' sections, as well as the newspaper icon and the 'UPCOMING EVENTS' graphic header.",
+      "location": "Sections: IT Leaders Can’t Stop AI..., Training and Continued Learning Resources, Cybersecurity Newsletters, and Upcoming Events."
+    }
+  ],
+  "action_items": [
+    "Verify and restore the missing titles for the six SANS Webinars on Page 6",
+    "Restore missing URLs for FedVTE, TEEX, NICCS, and ICS-CERT",
+    "Reinstate the 'The Future of Defense' report title on Page 3",
+    "Check the footer to ensure all 'Connect' social media text and links are present"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8649,
+      "text_match": 0.9424954131753177,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8438,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8649,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9170468685192866,
+      "shingling_precision": 0.9770216526734423,
+      "duplication_ratio": 0.00543834974214721,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1834,
+      "gemini_words": 1834,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 319376,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

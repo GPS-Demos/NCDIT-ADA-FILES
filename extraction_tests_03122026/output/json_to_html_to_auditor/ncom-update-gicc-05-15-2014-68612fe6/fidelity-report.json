@@ -1,0 +1,213 @@
+{
+  "document_id": "ncom-update-gicc-05-15-2014-68612fe6",
+  "composite_score": 0.7228,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.72 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output text is derived directly from the source document. I found no instances of hallucinated body text, invented section headings, or other fabricated narrative elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "No fabricated phone numbers, emails, or URLs were detected. While a URL from the source is missing in the output, no incorrect or invented contact information was added.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All three slides from the source PDF are represented within the sections of the JSON output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document contains no tables to evaluate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The output contains a major omission of content in Section 3 (Page 3). The source slide features detailed nested bullet points under 'Ongoing' and 'Upcoming' categories. The JSON output fails to capture any of these sub-points (e.g., 'Infrastructure buildout', 'EPA parcels project implementation', 'Elevation download', 'Website redesign'), losing more than 75% of the text for that slide. Additionally, the URL 'data.nconemap.com' is omitted from Slide 2.",
+        "b_evidence_source": "Slide 3 lists multiple sub-points: Infrastructure buildout (Replicate data between web servers, Replicate all map/image services between data centers, Replicate geodatabases between DB servers), EPA parcels project implementation, Elevation download from Geoportal imagery tab, Website redesign/integration (NC OneMap, Geoportal).",
+        "b_evidence_output": "\"items\": [ { \"content\": [ { \"text\": \"Ongoing\", ... } ] }, { \"content\": [ { \"text\": \"Upcoming\", ... } ] } ]",
+        "b_evidence_location": "Section 3, reading_order 13",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The existing text accurately mirrors the source wording, dates, and names without semantic alteration, outside of the large-scale omissions identified in C5.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9418604651162791,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output text is derived directly from the source document. I found no instances of hallucinated body text, invented section headings, or other fabricated narrative elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"No fabricated phone numbers, emails, or URLs were detected. While a URL from the source is missing in the output, no incorrect or invented contact information was added.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All three slides from the source PDF are represented within the sections of the JSON output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document contains no tables to evaluate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The output contains a major omission of content in Section 3 (Page 3). The source slide features detailed nested bullet points under 'Ongoing' and 'Upcoming' categories. The JSON output fails to capture any of these sub-points (e.g., 'Infrastructure buildout', 'EPA parcels project implementation', 'Elevation download', 'Website redesign'), losing more than 75% of the text for that slide. Additionally, the URL 'data.nconemap.com' is omitted from Slide 2.\",\n      \"b_evidence_source\": \"Slide 3 lists multiple sub-points: Infrastructure buildout (Replicate data between web servers, Replicate all map/image services between data centers, Replicate geodatabases between DB servers), EPA parcels project implementation, Elevation download from Geoportal imagery tab, Website redesign/integration (NC OneMap, Geoportal).\",\n      \"b_evidence_output\": \"\\\"items\\\": [ { \\\"content\\\": [ { \\\"text\\\": \\\"Ongoing\\\", ... } ] }, { \\\"content\\\": [ { \\\"text\\\": \\\"Upcoming\\\", ... } ] } ]\",\n      \"b_evidence_location\": \"Section 3, reading_order 13\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The existing text accurately mirrors the source wording, dates, and names without semantic alteration, outside of the large-scale omissions identified in C5.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.9418604651162791\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the output JSON against the source PDF for each page. Each text block (headings, paragraphs, list items) appears only once in the JSON output, corresponding to its single appearance in the source slides. There are no repeated sections or paragraphs.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document uses a logical heading hierarchy. The main slide titles ('NC OneMap Update', 'Data Releases', 'Tasks') are correctly assigned as H1. On page 2, 'Natural Heritage Program' is correctly nested as an H2 within the section. There are no skipped levels.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document contains no tables; it consists of text blocks and bulleted lists. Therefore, no table structure corruption is possible.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows a logical flow for the presentation slides, typically processing the side/top headers before the body content. For example, on slide 2, the sidebar information is read before the main bullet points, which is a standard and accessible approach to structured data interpretation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "On page 3, the list conversion is severely incomplete. The source contains a complex nested list structure under 'Ongoing' (including 'Infrastructure buildout' with three sub-items and 'EPA parcels project implementation') and under 'Upcoming' (including 'Elevation download...' and 'Website redesign...' with two sub-items). The JSON output only captures the top-level categories 'Ongoing' and 'Upcoming', omitting the entire substantive list of tasks. This is a major failure of structural fidelity for list conversion.",
+        "b_evidence_source": "Page 3 list content including: 'Infrastructure buildout', 'Replicate data between web servers', 'Replicate all map/image services...', 'Replicate geodatabases...', 'EPA parcels project implementation', 'Elevation download...', 'Website redesign/integration', 'NC OneMap', 'Geoportal'.",
+        "b_evidence_output": "\"items\": [\n            {\n              \"content\": [\n                {\n                  \"text\": \"Ongoing\",\n...",
+        "b_evidence_location": "Section 3, reading_order 13",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "On page 2, the sidebar includes the URL 'data.nconemap.com'. The output JSON identifies the label 'Geoportal Website:' but completely omits the actual URL string. This is a missing link/URL issue.",
+        "b_evidence_source": "Geoportal Website: data.nconemap.com",
+        "b_evidence_output": "\"text\": \"Geoportal Website:\"",
+        "b_evidence_location": "Section 2, reading_order 7",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the output JSON against the source PDF for each page. Each text block (headings, paragraphs, list items) appears only once in the JSON output, corresponding to its single appearance in the source slides. There are no repeated sections or paragraphs.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document uses a logical heading hierarchy. The main slide titles ('NC OneMap Update', 'Data Releases', 'Tasks') are correctly assigned as H1. On page 2, 'Natural Heritage Program' is correctly nested as an H2 within the section. There are no skipped levels.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document contains no tables; it consists of text blocks and bulleted lists. Therefore, no table structure corruption is possible.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows a logical flow for the presentation slides, typically processing the side/top headers before the body content. For example, on slide 2, the sidebar information is read before the main bullet points, which is a standard and accessible approach to structured data interpretation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"On page 3, the list conversion is severely incomplete. The source contains a complex nested list structure under 'Ongoing' (including 'Infrastructure buildout' with three sub-items and 'EPA parcels project implementation') and under 'Upcoming' (including 'Elevation download...' and 'Website redesign...' with two sub-items). The JSON output only captures the top-level categories 'Ongoing' and 'Upcoming', omitting the entire substantive list of tasks. This is a major failure of structural fidelity for list conversion.\",\n      \"b_evidence_source\": \"Page 3 list content including: 'Infrastructure buildout', 'Replicate data between web servers', 'Replicate all map/image services...', 'Replicate geodatabases...', 'EPA parcels project implementation', 'Elevation download...', 'Website redesign/integration', 'NC OneMap', 'Geoportal'.\",\n      \"b_evidence_output\": \"\\\"items\\\": [\\n            {\\n              \\\"content\\\": [\\n                {\\n                  \\\"text\\\": \\\"Ongoing\\\",\\n...\",\n      \"b_evidence_location\": \"Section 3, reading_order 13\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"On page 2, the sidebar includes the URL 'data.nconemap.com'. The output JSON identifies the label 'Geoportal Website:' but completely omits the actual URL string. This is a missing link/URL issue.\",\n      \"b_evidence_source\": \"Geoportal Website: data.nconemap.com\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"Geoportal Website:\\\"\",\n      \"b_evidence_location\": \"Section 2, reading_order 7\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the 'Tasks' section is significantly different and incomplete in the HTML output. In the source PDF (page 3), the 'Tasks' section includes a detailed hierarchy of sub-bullets under 'Ongoing' and 'Upcoming' headings, including specific tasks like 'Infrastructure buildout' and 'Website redesign/integration'. In the HTML rendering, only the top-level 'Ongoing' and 'Upcoming' bullets are present; all the nested content is missing. This fundamentally changes the visual flow and usefulness of that section.",
+        "b_evidence_source": "Slide 3 includes nested bullets under 'Ongoing' (Infrastructure buildout, EPA parcels project) and 'Upcoming' (Elevation download, Website redesign).",
+        "b_evidence_output": "The HTML 'Tasks' section only contains two bullets: 'Ongoing' and 'Upcoming'. All sub-bullets are missing.",
+        "b_evidence_location": "Tasks section, following slide 3 of source.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source document does not contain any tables. This check is not applicable but results in a pass as no broken tables are present.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF uses green checkmark icons on page 3 as meaningful status indicators for specific sub-tasks. In the HTML output, these icons are mostly missing. Only one large green checkmark icon appears, but it is misplaced at the bottom of the section and not associated with any specific text. Additionally, the URL text 'data.nconemap.com' which appeared on slide 2 is visually absent from the HTML rendering after the 'Geoportal Website:' label.",
+        "b_evidence_source": "Slide 3 shows three green checkmark icons next to completed tasks. Slide 2 includes the URL 'data.nconemap.com'.",
+        "b_evidence_output": "One large green checkmark icon is rendered at the bottom of the Tasks section without context. The URL text is missing from the 'Data Releases' section.",
+        "b_evidence_location": "Data Releases and Tasks sections.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "No body content (paragraphs, lists) is duplicated in the HTML output. The appearance of headings in the Table of Contents and again in the main body is expected accessible design behavior and not a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the 'Tasks' section is significantly different and incomplete in the HTML output. In the source PDF (page 3), the 'Tasks' section includes a detailed hierarchy of sub-bullets under 'Ongoing' and 'Upcoming' headings, including specific tasks like 'Infrastructure buildout' and 'Website redesign/integration'. In the HTML rendering, only the top-level 'Ongoing' and 'Upcoming' bullets are present; all the nested content is missing. This fundamentally changes the visual flow and usefulness of that section.\",\n      \"b_evidence_source\": \"Slide 3 includes nested bullets under 'Ongoing' (Infrastructure buildout, EPA parcels project) and 'Upcoming' (Elevation download, Website redesign).\",\n      \"b_evidence_output\": \"The HTML 'Tasks' section only contains two bullets: 'Ongoing' and 'Upcoming'. All sub-bullets are missing.\",\n      \"b_evidence_location\": \"Tasks section, following slide 3 of source.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source document does not contain any tables. This check is not applicable but results in a pass as no broken tables are present.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF uses green checkmark icons on page 3 as meaningful status indicators for specific sub-tasks. In the HTML output, these icons are mostly missing. Only one large green checkmark icon appears, but it is misplaced at the bottom of the section and not associated with any specific text. Additionally, the URL text 'data.nconemap.com' which appeared on slide 2 is visually absent from the HTML rendering after the 'Geoportal Website:' label.\",\n      \"b_evidence_source\": \"Slide 3 shows three green checkmark icons next to completed tasks. Slide 2 includes the URL 'data.nconemap.com'.\",\n      \"b_evidence_output\": \"One large green checkmark icon is rendered at the bottom of the Tasks section without context. The URL text is missing from the 'Data Releases' section.\",\n      \"b_evidence_location\": \"Data Releases and Tasks sections.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"No body content (paragraphs, lists) is duplicated in the HTML output. The appearance of headings in the Table of Contents and again in the main body is expected accessible design behavior and not a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 5,
+  "total_critical": 0,
+  "total_major": 4,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

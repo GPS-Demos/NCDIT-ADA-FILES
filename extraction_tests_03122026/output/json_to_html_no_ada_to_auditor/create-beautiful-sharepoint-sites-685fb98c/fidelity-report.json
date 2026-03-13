@@ -1,0 +1,213 @@
+{
+  "document_id": "create-beautiful-sharepoint-sites-685fb98c",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output document faithfully represents the text found in the source PDF for all visible sections. Section 17, which contains a screenshot of a SharePoint site, has its text content meticulously extracted, including breadcrumbs ('Crisis Management Home Awareness Services News'), team descriptions, and social media feed content (CDC and WHO tweets). No fabricated content was detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All URLs (lookbook.microsoft.com) and email addresses (e.g., globalsecurity@contoso.electronics.com) present in the output were verified against the text and images in the source PDF. No fabrications were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output document contains a placeholder explicitly stating that 15 sections were omitted. Comparing the source PDF (21 pages) to the provided JSON, it is clear that pages 4 through 16 and pages 18 through 19 are missing from the conversion result. This represents a significant loss of information from the original document.",
+        "b_evidence_source": "The content of slides 4-16 and 18-19, including sections such as 'Improved Collaboration', 'Integrated with Microsoft 365', 'Improved Security', 'Branding Your Intranet', and the 'The Perspective' / 'The Landing' examples.",
+        "b_evidence_output": "{\"_omitted\": \"15 sections omitted for token budget\"}",
+        "b_evidence_location": "Sections list, between elements corresponding to pages 3 and 17, and pages 17 and 20.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The table in the 'Crisis Communications' section (page 17) correctly identifies and transcribes the 2x2 grid of response team boxes shown in the source image. No data rows are missing.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The sections that are present in the output are highly detailed and capture the vast majority of the text from their respective source pages, including text embedded within images.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Several minor transcription errors were found in the 'Crisis Communications' section, particularly within the text extracted from images. In the 'Global Security' table cell, 'processes' is incorrectly written as 'crosses'. In the WHO social media section, the name 'Workplace from Facebook' is omitted from one sentence, and the word 'reducing' is incorrectly transcribed as 'risking' in another.",
+        "b_evidence_source": "1. 'procedures and processes' (Page 17, Global Security box)\n2. 'A huge thank you to Workplace from Facebook for enabling' (Page 17, WHO feed)\n3. 'removing harmful content & reducing misinformation' (Page 17, WHO feed)",
+        "b_evidence_output": "1. 'procedures and crosses'\n2. 'A huge thank you to for enabling'\n3. 'removing harmful content & risking misinformation'",
+        "b_evidence_location": "Section 'Crisis Communications' (Page 17), elements 94, 103.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6976744186046512,
+    "penalty_sum": 26,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output document faithfully represents the text found in the source PDF for all visible sections. Section 17, which contains a screenshot of a SharePoint site, has its text content meticulously extracted, including breadcrumbs ('Crisis Management Home Awareness Services News'), team descriptions, and social media feed content (CDC and WHO tweets). No fabricated content was detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All URLs (lookbook.microsoft.com) and email addresses (e.g., globalsecurity@contoso.electronics.com) present in the output were verified against the text and images in the source PDF. No fabrications were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output document contains a placeholder explicitly stating that 15 sections were omitted. Comparing the source PDF (21 pages) to the provided JSON, it is clear that pages 4 through 16 and pages 18 through 19 are missing from the conversion result. This represents a significant loss of information from the original document.\",\n      \"b_evidence_source\": \"The content of slides 4-16 and 18-19, including sections such as 'Improved Collaboration', 'Integrated with Microsoft 365', 'Improved Security', 'Branding Your Intranet', and the 'The Perspective' / 'The Landing' examples.\",\n      \"b_evidence_output\": \"{\\\"_omitted\\\": \\\"15 sections omitted for token budget\\\"}\",\n      \"b_evidence_location\": \"Sections list, between elements corresponding to pages 3 and 17, and pages 17 and 20.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The table in the 'Crisis Communications' section (page 17) correctly identifies and transcribes the 2x2 grid of response team boxes shown in the source image. No data rows are missing.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The sections that are present in the output are highly detailed and capture the vast majority of the text from their respective source pages, including text embedded within images.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Several minor transcription errors were found in the 'Crisis Communications' section, particularly within the text extracted from images. In the 'Global Security' table cell, 'processes' is incorrectly written as 'crosses'. In the WHO social media section, the name 'Workplace from Facebook' is omitted from one sentence, and the word 'reducing' is incorrectly transcribed as 'risking' in another.\",\n      \"b_evidence_source\": \"1. 'procedures and processes' (Page 17, Global Security box)\\n2. 'A huge thank you to Workplace from Facebook for enabling' (Page 17, WHO feed)\\n3. 'removing harmful content & reducing misinformation' (Page 17, WHO feed)\",\n      \"b_evidence_output\": \"1. 'procedures and crosses'\\n2. 'A huge thank you to for enabling'\\n3. 'removing harmful content & risking misinformation'\",\n      \"b_evidence_location\": \"Section 'Crisis Communications' (Page 17), elements 94, 103.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 26,\n    \"score\": 0.6976744186046512\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output was reviewed for any duplicated content, such as repeated paragraphs or sections not present in the original. No instances of duplicated content were found; each section corresponds to its unique page in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is consistent. H1 is used for the main title of each slide/page, and H2/H3 are used appropriately for sections identified within the screenshots or pages. There are no instances of skipped heading levels (e.g., H1 to H3).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "A table is used on page 17 (reading order 94) to represent the 'Response teams' grid found in the screenshot. The table correctly identifies the two rows and columns corresponding to the visual layout in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the logical flow of the presentation slides. Text extracted from screenshots is placed between the slide header and footer links, which matches the visual sequence of the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Several lists throughout the document are converted incorrectly. On pages 2, 3, 6, 7, 8, 10, 11, 12, 13, and 14, the source document presents a list of items consisting of a header and a descriptive paragraph. The output only includes the headers as list items and omits the descriptive paragraphs entirely. Additionally, on page 20, a single list from the source is fragmented into three separate list elements interleaved with paragraphs.",
+        "b_evidence_source": "The 'Overview' page contains four items, each with a header and a paragraph (e.g., 'Why Microsoft 365 Intranet is a Smart Choice' followed by 'Microsoft 365 SharePoint Online is a smart choice...'). The 'Conclusion' page has one list with three headers and paragraphs.",
+        "b_evidence_output": "The 'Overview' list (reading_order 6) only contains the headers. The 'Conclusion' section (reading_order 125-130) splits the content into three separate lists and paragraphs.",
+        "b_evidence_location": "Overview, page 2, element 6; Conclusion, page 20, elements 125-130",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output fails to identify and properly tag hyperlinks present in the source. On pages 15-19, the URL 'https://lookbook.microsoft.com' is frequently omitted or rendered as plain text. Similarly, phrases such as 'Link to Crisis Communications example' are rendered as plain paragraphs instead of functional links.",
+        "b_evidence_source": "https://lookbook.microsoft.com (appears on pages 15, 16, 17, 18, 19). 'Link to Crisis Communications example' (page 17).",
+        "b_evidence_output": "\"text\": \"Link to Crisis Communications example\"",
+        "b_evidence_location": "Crisis Communications, page 17, element 104",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9090909090909091,
+    "penalty_sum": 2,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output was reviewed for any duplicated content, such as repeated paragraphs or sections not present in the original. No instances of duplicated content were found; each section corresponds to its unique page in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is consistent. H1 is used for the main title of each slide/page, and H2/H3 are used appropriately for sections identified within the screenshots or pages. There are no instances of skipped heading levels (e.g., H1 to H3).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"A table is used on page 17 (reading order 94) to represent the 'Response teams' grid found in the screenshot. The table correctly identifies the two rows and columns corresponding to the visual layout in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the logical flow of the presentation slides. Text extracted from screenshots is placed between the slide header and footer links, which matches the visual sequence of the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Several lists throughout the document are converted incorrectly. On pages 2, 3, 6, 7, 8, 10, 11, 12, 13, and 14, the source document presents a list of items consisting of a header and a descriptive paragraph. The output only includes the headers as list items and omits the descriptive paragraphs entirely. Additionally, on page 20, a single list from the source is fragmented into three separate list elements interleaved with paragraphs.\",\n      \"b_evidence_source\": \"The 'Overview' page contains four items, each with a header and a paragraph (e.g., 'Why Microsoft 365 Intranet is a Smart Choice' followed by 'Microsoft 365 SharePoint Online is a smart choice...'). The 'Conclusion' page has one list with three headers and paragraphs.\",\n      \"b_evidence_output\": \"The 'Overview' list (reading_order 6) only contains the headers. The 'Conclusion' section (reading_order 125-130) splits the content into three separate lists and paragraphs.\",\n      \"b_evidence_location\": \"Overview, page 2, element 6; Conclusion, page 20, elements 125-130\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output fails to identify and properly tag hyperlinks present in the source. On pages 15-19, the URL 'https://lookbook.microsoft.com' is frequently omitted or rendered as plain text. Similarly, phrases such as 'Link to Crisis Communications example' are rendered as plain paragraphs instead of functional links.\",\n      \"b_evidence_source\": \"https://lookbook.microsoft.com (appears on pages 15, 16, 17, 18, 19). 'Link to Crisis Communications example' (page 17).\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"Link to Crisis Communications example\\\"\",\n      \"b_evidence_location\": \"Crisis Communications, page 17, element 104\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 2,\n    \"penalty_sum\": 2,\n    \"score\": 0.9090909090909091\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output faithfully converts a slide deck into a long-form web page. The visual organization of information matches the source slides. Sections are clearly demarcated with headings that correspond to slide titles. Content blocks (text and images) are presented in the same relative order as they appear in the source PDF. The transformation from a landscape slide layout to a vertical responsive HTML layout is executed correctly without confusing the meaning or visual flow of the information.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source PDF document contains no formal tables. Information is presented in bulleted lists and graphical layouts which have been correctly converted to HTML lists and image/text blocks.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present in the HTML output. This includes the complex title slide graphic, the conceptual illustrations on pages 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, and 20, the integration diagram on page 5, and the detailed SharePoint site mockups/screenshots on pages 15, 16, 17, 18, and 19. The images are rendered clearly and placed appropriately within their respective sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no visual duplication of body content. While titles and headings appear in the Table of Contents navigation at the top of the HTML page and again as section headers in the body, this is intentional accessible design. The primary content (paragraphs, lists, and images) is only rendered once in the output stream.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output faithfully converts a slide deck into a long-form web page. The visual organization of information matches the source slides. Sections are clearly demarcated with headings that correspond to slide titles. Content blocks (text and images) are presented in the same relative order as they appear in the source PDF. The transformation from a landscape slide layout to a vertical responsive HTML layout is executed correctly without confusing the meaning or visual flow of the information.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source PDF document contains no formal tables. Information is presented in bulleted lists and graphical layouts which have been correctly converted to HTML lists and image/text blocks.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present in the HTML output. This includes the complex title slide graphic, the conceptual illustrations on pages 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, and 20, the integration diagram on page 5, and the detailed SharePoint site mockups/screenshots on pages 15, 16, 17, 18, and 19. The images are rendered clearly and placed appropriately within their respective sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no visual duplication of body content. While titles and headings appear in the Table of Contents navigation at the top of the HTML page and again as section headers in the body, this is intentional accessible design. The primary content (paragraphs, lists, and images) is only rendered once in the output stream.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 0,
+  "total_minor": 3,
+  "programmatic_signals": null,
+  "corroboration": null
+}

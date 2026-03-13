@@ -1,0 +1,78 @@
+{
+  "document_id": "federal-interagency-committee-agenda20190516-68614dc2",
+  "audited_at": "2026-03-13T01:28:49.863128Z",
+  "quality_score": 88,
+  "fidelity_composite": 0.966,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity score is high (0.966), the loss of the primary WebEx URL is a significant functional defect for a meeting agenda. Shingling recall (0.881) confirms content loss in this very short document (36 words), corroborating the LLM finding that critical connectivity information was dropped during conversion.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The output misses the primary WebEx meeting URL. In the source, the URL is provided immediately after the 'WebEx:' label. In the output, element 5 contains 'WebEx:' and element 7 contains the meeting number/passcode, but the intervening content (the URL) is completely absent. This is a significant omission as it removes the primary method for remote access to the meeting. Based on the reading order gap (5 to 7), this content was dropped during conversion.",
+      "source_pdf_quote": "http://www.mymeetings.com/nc/join.php?sigKey=mymeetings&i=445085031&p=IndigoSnake&t=c",
+      "output_quote": "[The URL is missing from the elements list]",
+      "location": "WebEx section, between elements 5 and 7 (reading order gap)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "A critical link (the WebEx join URL) present in the source PDF is entirely missing from the output JSON. The element sequence jumps from reading_order 5 ('WebEx:') to reading_order 7 ('Meeting Number...'), omitting the URL content that exists between them in the source document.",
+      "source_pdf_quote": "http://www.mymeetings.com/nc/join.php?sigKey=mymeetings&i=445085031&p=IndigoSnake&t=c",
+      "output_quote": "The URL text and link are absent from the output; the reading order skips index 6.",
+      "location": "Between paragraph index 4 and paragraph index 5"
+    }
+  ],
+  "action_items": [
+    "Manually restore the missing WebEx URL between the 'WebEx:' label and the meeting number/passcode"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.966,
+      "text_match": 0.9125642909625276,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8821,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.966,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8808510638297873,
+      "shingling_precision": 0.9466463414634146,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 36,
+      "gemini_words": 36,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 363393,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

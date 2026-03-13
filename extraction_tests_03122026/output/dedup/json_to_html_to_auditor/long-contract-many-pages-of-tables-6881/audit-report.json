@@ -1,0 +1,102 @@
+{
+  "document_id": "long-contract-many-pages-of-tables-6881",
+  "audited_at": "2026-03-13T02:02:33.200005Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6395348837209303,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output omits a massive portion of the source document. Specifically, pages 4 through approximately 118 are missing, which include essential legal terms (Sections B through EE), the body of the Master Agreement (Attachment A), and several key attachments (B-1, B-2, C-1, D-1). The output explicitly notes that 115 sections were omitted due to token budget constraints, resulting in a catastrophic loss of content fidelity for a legal contract.",
+      "source_pdf_quote": "The source document contains Sections B through EE (pages 4-22) and multiple attachments spanning over 100 pages.",
+      "output_quote": "\"_omitted\": \"115 sections omitted for token budget\"",
+      "location": "Between sections at element index 43 and 55"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The section 'NC eProcurement System' is cut off mid-sentence after the introductory paragraph. The source document contains another full page of text (points 1 through 4) detailing the specific requirements for this system, meaning more than 25% of this individual section's content is missing.",
+      "source_pdf_quote": "NC eProcurement System: ... registration within two (2) business days... [followed by four numbered paragraphs of requirements].",
+      "output_quote": "\"text\": \"**NC eProcurement System:** State Agency (and other Purchasing Entities) purchases shall be conducted through the North Carolina eProcurement system (NCEP). See https://eprocurement.nc.gov for more information. The Contractor shall register for NCEP within two (2) business days of execution of this Addendum in order to receive an\"",
+      "location": "NC eProcurement System section, element index 65"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source document on page 24 contains a side-by-side (2-column) signature block, where the left column contains the details for the 'Participating Entity' and the right column contains the details for the 'Contractor'. In the HTML output, this layout is collapsed into a single vertical sequence of properties. Specifically, it lists 'Participating Entity' and 'Contractor' followed by two 'Signature' entries, two 'Name' entries, two 'Title' entries, and two 'Date' entries. This vertical serializ",
+      "source_pdf_quote": "Page 24 shows a 2-column signature block with 'Participating Entity' on the left and 'Contractor' on the right.",
+      "output_quote": "The HTML renders a single table 'Signature Section' where the values are listed sequentially: Participating Entity, Contractor, Signature, Signature, Name, Name, etc.",
+      "location": "Signature Section, Page 24"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In the 'Contractor Worker Location' table, the output fails to capture the contractor's representation regarding work performed outside the U.S. In the source, the 'No' checkbox is marked with an 'X', whereas the output leaves the value empty. This omission changes the meaning of a contractual representation.",
+      "source_pdf_quote": "Will the Contractor perform any work outside of the United States? ___ Yes _X_ No",
+      "output_quote": "The 'Value' cell for the question is empty (\"\").",
+      "location": "Contractor Worker Location table, element index 62"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "minor",
+      "analysis": "The table representing 'Contractor Utilization of Workers Outside the U.S.' (Section H on page 5) is misrendered in the HTML. In the source PDF, the user has explicitly selected 'No' (indicated by '_X_ No'). In the HTML output, the corresponding 'Value' cell for this field is empty ('&nbsp;'), failing to display the critical data selection present in the original document. While the table borders and alignment are intact, the failure to render the selection within the table structure constitutes",
+      "source_pdf_quote": "PDF page 5, Section H: 'Will the Contractor perform any work outside of the United States? __ Yes _X_ No'",
+      "output_quote": "HTML table 'Contractor Worker Location' shows: 'Will the Contractor perform any work outside of the United States? | &nbsp;'",
+      "location": "Contractor Worker Location table, Page 5"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9128909046619889,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5556,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6395348837209303,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9185608911636309,
+      "shingling_precision": 0.9505783385909569,
+      "duplication_ratio": 0.0324310432595126,
+      "word_count_ratio": 1.0,
+      "baseline_words": 41652,
+      "gemini_words": 41652,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 660181,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

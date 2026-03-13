@@ -1,0 +1,122 @@
+{
+  "document_id": "esrmo-newsletter-september-2021-686b1e03",
+  "audited_at": "2026-03-13T01:27:41.018463Z",
+  "quality_score": 77,
+  "fidelity_composite": 0.7051,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document displays significant fidelity and structural failures, including the systemic omission of text that serves as hyperlinks (omitting entity names like 'PhishLabs') and the complete absence of multiple meaningful logos and images. These issues, combined with garbled text artifacts and the loss of nested list structures, represent a failure in creating an accessible and faithful HTML conversion. Given the partial disagreement between signals and the 3x cost penalty for false negatives, human review is required.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output suffers from a systemic failure to capture text that serves as a hyperlink in the source document. This results in the complete omission of critical entity names, program titles, and standalone URLs throughout the document. Specifically, the following are missing: 'PhishLabs' and 'Business Email Compromise' on page 1; 'Ready.gov/September' (omitted twice) on page 2; 'National Exercise Program', 'webinar webpage', and 'nomination' on page 3; and a SharePoint URL on page 5. These omissi",
+      "source_pdf_quote": "Page 1: 'PhishLabs', 'Business Email Compromise'; Page 2: 'Ready.gov/September'; Page 3: 'National Exercise Program', 'webinar webpage', 'nomination'; Page 5: 'https://ncconnect.sharepoint.com/...'",
+      "output_quote": "The JSON output completely skips the elements that would correspond to reading_order indices 7, 12, 26, 29, 65, 68, 72, and 128, creating gaps in the text.",
+      "location": "Multiple sections across Pages 1, 2, 3, and 5."
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "An examination of the 'Upcoming Events' section on Page 5 reveals a duplication within a text element. Specifically, for the September 7 event, the phrase 'Authentication and Access Control' is repeated, and the word 'Webinar' appears to be garbled and merged ('Controlebinar'). This text only appears once in the source document.",
+      "source_pdf_quote": "September 7: Coalfire Webinar: Authentication and Access Control",
+      "output_quote": "September 7: Coalfire Webinar: Authentication and Access Controlebinar: Authentication and Access Control",
+      "location": "Section 5 (element index 131), Page 5"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the first page is significantly altered in the conversion. In the source PDF, the NCDIT logo is a primary header element located at the top of page 1. In the HTML output, this logo has been moved to the end of the first article, appearing after the final paragraph and link of that section. This reordering disrupts the intended visual hierarchy and branding flow of the newsletter.",
+      "source_pdf_quote": "NCDIT logo appears at the top of page 1, as part of the document header.",
+      "output_quote": "The NCDIT logo appears after the text 'https://www.phishlabs.com/blog/new-quarterly-threat-trends-intelligence-report-now-available/' at the bottom of the first section.",
+      "location": "Page 1, Header area"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Numerous meaningful images and logos from the source PDF are entirely missing in the HTML output. This includes institutional logos like the FEMA logo (page 3), event-specific branding like the Cybersecurity Symposium and Triangle InfoSeCon logos (page 4), and certification logos like PCI DSS (page 4). Furthermore, several illustrative images that provide context for articles (e.g., Preparedness Month, Hurricane Scams, Ransomware) are also absent. These are meaningful visual components of a news",
+      "source_pdf_quote": "FEMA logo (p. 3); Symposium logo (p. 4); Triangle InfoSeCon logo (p. 4); PCI DSS logo (p. 4); Illustrative photos/graphics on pages 2, 3, and 5.",
+      "output_quote": "None of the aforementioned logos or illustrative images are present in the HTML screenshot.",
+      "location": "Pages 2, 3, 4, and 5"
+    },
+    {
+      "description": "Fabricated paragraphs or sentences",
+      "severity": "minor",
+      "analysis": "The output contains a text artifact/duplication in the 'Upcoming Events' section on page 5. Specifically, for the September 7 entry, it includes the string 'Controlebinar: Authentication and Access Control' which repeats and garbles the legitimate heading 'Coalfire Webinar: Authentication and Access Control'. This extra, mangled text is not present in the source document and appears to be a hallucinated concatenation error.",
+      "source_pdf_quote": "September 7: Coalfire Webinar: Authentication and Access Control",
+      "output_quote": "**September 7**: Coalfire Webinar: Authentication and Access Controlebinar: Authentication and Access Control",
+      "location": "Page 5, Upcoming Events section, reading_order 131"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The bulleted lists on pages 2 and 3 are correctly converted. However, on Page 5, the 'Training and Continued Learning Resources' list is incomplete. In the source, each main bullet (e.g., FedVTE) has a nested sub-bullet containing a URL. The JSON output fails to capture these sub-items or their text, resulting in a loss of the list's nested structure and content.",
+      "source_pdf_quote": "Training and Continued Learning Resources\\n• FedVTE: Free Online Training Environment\\n  o https://fedvte.usalearning.gov/",
+      "output_quote": "{\"type\": \"list\", \"list_type\": \"unordered\", \"items\": [{\"content\": [{\"text\": \"FedVTE: Free Online Training Environment\", ...}]}]",
+      "location": "Section 5 (element index 125), Page 5"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Multiple functional links in the source document are missing semantic markup in the JSON output. Examples include 'at PhishLabs' (p1), 'National Exercise Program' (p3), and various 'here' links. Specifically, the linked text 'PhishLabs' on page 1 is omitted entirely between reading order elements 6 and 8, creating a gap in the sentence. While the explicit URLs are mostly preserved as text, the semantic and interactive nature of the document's links is lost.",
+      "source_pdf_quote": "...according to researchers at PhishLabs, a cybersecurity...",
+      "output_quote": "6: \"...according to researchers at \", 8: \", a cybersecurity...\"",
+      "location": "Section 1 (reading_order 6 and 8), Page 1"
+    }
+  ],
+  "action_items": [
+    "Restore missing text for all hyperlinks identified in the content omission report",
+    "Re-insert missing logos and images with appropriate alt-text for accessibility",
+    "Correct the 'Controlebinar' text artifact in the September 7 event entry",
+    "Fix the nested list structure in the Training and Continued Learning Resources section",
+    "Verify and restore the correct reading order for the NCDIT header logo"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7051,
+      "text_match": 0.932150870819532,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7705,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7051,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9032926071650446,
+      "shingling_precision": 0.9629139072847682,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1716,
+      "gemini_words": 1716,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 356977,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

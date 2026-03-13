@@ -1,0 +1,80 @@
+{
+  "document_id": "logo-imagery-graphic-colors-map-imagery-f80b",
+  "audited_at": "2026-03-12T23:09:41.185803Z",
+  "quality_score": 82,
+  "fidelity_composite": 0.825,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "While programmatic text recall is high (0.933), the visual fidelity score of 0.5 reflects significant defects in the rendering of map-specific elements. Specifically, the loss of color swatches in the legends and the omission of floating map annotations ('Data available February 2025') and scale bars make the document functionally incomplete for its intended purpose. Given the cost asymmetry of publishing a broken map, human intervention is necessary to restore these visual contexts.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The map legends from the PDF are rendered as HTML tables. While the text content is present and readable, the critical visual color indicators (color swatches) that link the text to the map regions are missing in the HTML tables (e.g., 'Phase & Quality' and 'Western NC Contractor Tile Extents'). This rendering omission makes the tables ineffective as map legends for a sighted user.",
+      "source_pdf_quote": "Page 1 and Page 2 contain map legends with color swatches (e.g., orange for Phase 1, light blue for Phase 2, etc.)",
+      "output_quote": "The HTML tables 'Table: Phase & Quality' and 'Table: Western NC Contractor Tile Extents' contain only text and lack any color indicators or swatches.",
+      "location": "Sections 1 and 2, tables for map legends"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful visual elements from the source PDF are missing in the HTML rendering. Specifically, on Page 1, two floating text boxes ('QL 1 data collection completed' and 'Data available February 2025') that appear over the map are absent. Additionally, the north arrow and scale bar for the primary map on Page 1 are missing, although they are present in the second map rendered from Page 2.",
+      "source_pdf_quote": "Page 1 map includes floating text boxes: 'QL 1 data collection completed' and 'Data available February 2025', plus a north arrow and scale bar.",
+      "output_quote": "The first map image and surrounding text in the HTML 'NC Light Detection and Ranging (LiDAR)...' section completely omit these text boxes, the north arrow, and the scale bar.",
+      "location": "Section 1, 'NC Light Detection and Ranging (LiDAR) Elevation Data 2024 Data Collection'"
+    }
+  ],
+  "action_items": [
+    "Manually restore color indicators to the legend tables to match the PDF source.",
+    "Add missing floating text boxes ('QL 1 data collection completed' and 'Data available February 2025') to the map view.",
+    "Recover and place the missing north arrow and scale bar for the Page 1 map."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.825,
+      "text_match": 0.9045454545454544,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8177,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.825,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9331770222743259,
+      "shingling_precision": 0.8776185226019846,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 133,
+      "gemini_words": 133,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 373338,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

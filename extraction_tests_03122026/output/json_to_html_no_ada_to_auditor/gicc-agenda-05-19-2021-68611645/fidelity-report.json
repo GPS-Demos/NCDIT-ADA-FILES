@@ -1,0 +1,213 @@
+{
+  "document_id": "gicc-agenda-05-19-2021-68611645",
+  "composite_score": 0.8978,
+  "risk_level": "LOW",
+  "routing_action": "AUTO_APPROVE",
+  "routing_reason": "Score 0.90 >= 0.85",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON faithfully represents the content of the source PDF. No paragraphs or sentences were fabricated. The document title and image alt text are acceptable AI-generated additions for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "There is no fabricated contact information. The only URL mentioned in the source is partially present in the labels, though the actual address is missing (handled under C5), but no incorrect or made-up information was inserted.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All major sections from the single-page source document (Header, Agenda Table, Dates, Committee Reports Table) are present in the JSON output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The output contains two tables. The first table (Agenda) contains 9 rows (1 header + 8 data), which matches the source exactly. The second table (Committee Reports) contains 6 rows, which also matches the source exactly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The website URL 'https://it.nc.gov/gicc' is completely omitted from the output. In the JSON, the paragraph with reading_order 6 contains the label 'GICC Website: ' but excludes the actual URL that follows it in the source. Furthermore, there is a gap in the reading_order sequence (skipping from 6 to 8), suggesting the link element was dropped during conversion. Since this is the only URL in the document and provides critical navigation info, its omission is a major defect.",
+        "b_evidence_source": "GICC Website: https://it.nc.gov/gicc",
+        "b_evidence_output": "GICC Website: ",
+        "b_evidence_location": "sections[0].elements[5] (reading_order 6)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Aside from the major omission of the URL, the rest of the text is accurate. Minor reformatting such as preserving bullet points as characters and normalizing whitespace is acceptable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9418604651162791,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON faithfully represents the content of the source PDF. No paragraphs or sentences were fabricated. The document title and image alt text are acceptable AI-generated additions for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"There is no fabricated contact information. The only URL mentioned in the source is partially present in the labels, though the actual address is missing (handled under C5), but no incorrect or made-up information was inserted.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All major sections from the single-page source document (Header, Agenda Table, Dates, Committee Reports Table) are present in the JSON output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The output contains two tables. The first table (Agenda) contains 9 rows (1 header + 8 data), which matches the source exactly. The second table (Committee Reports) contains 6 rows, which also matches the source exactly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The website URL 'https://it.nc.gov/gicc' is completely omitted from the output. In the JSON, the paragraph with reading_order 6 contains the label 'GICC Website: ' but excludes the actual URL that follows it in the source. Furthermore, there is a gap in the reading_order sequence (skipping from 6 to 8), suggesting the link element was dropped during conversion. Since this is the only URL in the document and provides critical navigation info, its omission is a major defect.\",\n      \"b_evidence_source\": \"GICC Website: https://it.nc.gov/gicc\",\n      \"b_evidence_output\": \"GICC Website: \",\n      \"b_evidence_location\": \"sections[0].elements[5] (reading_order 6)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Aside from the major omission of the URL, the rest of the text is accurate. Minor reformatting such as preserving bullet points as characters and normalizing whitespace is acceptable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.9418604651162791\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output does not contain any duplicated text blocks. Each section of the agenda, including the header, meeting information, agenda items, and committee reports, appears exactly once, matching the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document utilizes a logical heading hierarchy. H1 is used for the main title, H2 for the primary Agenda title/date, and H3 for secondary sections like 'Remaining 2021 GICC Quarterly Meeting Dates' and 'Committee Reports'. There are no skipped levels (e.g., H1 to H3).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The second table (Committee Reports) incorrectly identifies its first row of data as a header row. While the source has no specific column headers for this section, the conversion marked the first entry ('Statewide Mapping Advisory' / 'Paul Badr') as the header for the rest of the list. The first table (Agenda) is structured correctly with appropriate column headers.",
+        "b_evidence_source": "• Statewide Mapping Advisory Paul Badr",
+        "b_evidence_output": "{\"cells\": [{\"cell_type\": \"header\", \"content\": [{\"text\": \"• Statewide Mapping Advisory\"...}]}, {\"cell_type\": \"header\", \"content\": [{\"text\": \"Paul Badr\"...}]}], \"is_header_row\": true}",
+        "b_evidence_location": "Committee Reports section, reading_order 9",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order generally follows the logical flow of the source document. The logo has been moved to the end of the document (reading_order 10), which is a common and acceptable practice for enhancing accessibility. The main content follows the top-to-bottom flow of the original.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The committee report list was converted into a table format. This successfully preserves the association between each committee and its respective representative. The sub-items under Agenda Item 4 (a, b, c) are correctly preserved within the table cell content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URL 'https://it.nc.gov/gicc' which is explicitly present in the source document is missing from the corresponding paragraph in the output. This results in a missing link that was present in the authoritative source.",
+        "b_evidence_source": "GICC Website: https://it.nc.gov/gicc",
+        "b_evidence_output": "\"text\": \"GICC Website: \"",
+        "b_evidence_location": "Section 1, element with reading_order 6",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output does not contain any duplicated text blocks. Each section of the agenda, including the header, meeting information, agenda items, and committee reports, appears exactly once, matching the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document utilizes a logical heading hierarchy. H1 is used for the main title, H2 for the primary Agenda title/date, and H3 for secondary sections like 'Remaining 2021 GICC Quarterly Meeting Dates' and 'Committee Reports'. There are no skipped levels (e.g., H1 to H3).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The second table (Committee Reports) incorrectly identifies its first row of data as a header row. While the source has no specific column headers for this section, the conversion marked the first entry ('Statewide Mapping Advisory' / 'Paul Badr') as the header for the rest of the list. The first table (Agenda) is structured correctly with appropriate column headers.\",\n      \"b_evidence_source\": \"• Statewide Mapping Advisory Paul Badr\",\n      \"b_evidence_output\": \"{\\\"cells\\\": [{\\\"cell_type\\\": \\\"header\\\", \\\"content\\\": [{\\\"text\\\": \\\"• Statewide Mapping Advisory\\\"...}]}, {\\\"cell_type\\\": \\\"header\\\", \\\"content\\\": [{\\\"text\\\": \\\"Paul Badr\\\"...}]}], \\\"is_header_row\\\": true}\",\n      \"b_evidence_location\": \"Committee Reports section, reading_order 9\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order generally follows the logical flow of the source document. The logo has been moved to the end of the document (reading_order 10), which is a common and acceptable practice for enhancing accessibility. The main content follows the top-to-bottom flow of the original.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The committee report list was converted into a table format. This successfully preserves the association between each committee and its respective representative. The sub-items under Agenda Item 4 (a, b, c) are correctly preserved within the table cell content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URL 'https://it.nc.gov/gicc' which is explicitly present in the source document is missing from the corresponding paragraph in the output. This results in a missing link that was present in the authoritative source.\",\n      \"b_evidence_source\": \"GICC Website: https://it.nc.gov/gicc\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"GICC Website: \\\"\",\n      \"b_evidence_location\": \"Section 1, element with reading_order 6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the HTML document faithfully represents the source PDF. The primary content—the agenda header, the timed agenda table, the meeting dates, and the committee reports table—is presented in the same sequence and relative positions. While the NCGICC logo has been moved to the bottom of the document and a navigation sidebar has been added, these are standard adjustments for accessible HTML and do not disrupt the flow or meaning of the information. A user can easily find all information in the same relative order as the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "Both tables from the source PDF (the agenda table and the committee reports list) are rendered correctly in the HTML. The first table preserves the multi-column layout (TIME, AGENDA ITEM, GICC MEMBER or GUEST) with clear row separation. Sub-items for agenda item 4 are correctly contained within the appropriate cell. The second table correctly associates committee names with their respective members. Both are legible and structurally sound.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The NCGICC logo, which appears at the top of the source PDF, is present and correctly rendered at the bottom of the HTML page. No meaningful images are missing or broken.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no visual duplication of body content. The agenda items, meeting dates, and committee reports appear exactly once in the main content area. The appearance of headings in the table of contents sidebar as well as the main body is an intentional accessibility feature and not a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the HTML document faithfully represents the source PDF. The primary content—the agenda header, the timed agenda table, the meeting dates, and the committee reports table—is presented in the same sequence and relative positions. While the NCGICC logo has been moved to the bottom of the document and a navigation sidebar has been added, these are standard adjustments for accessible HTML and do not disrupt the flow or meaning of the information. A user can easily find all information in the same relative order as the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"Both tables from the source PDF (the agenda table and the committee reports list) are rendered correctly in the HTML. The first table preserves the multi-column layout (TIME, AGENDA ITEM, GICC MEMBER or GUEST) with clear row separation. Sub-items for agenda item 4 are correctly contained within the appropriate cell. The second table correctly associates committee names with their respective members. Both are legible and structurally sound.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The NCGICC logo, which appears at the top of the source PDF, is present and correctly rendered at the bottom of the HTML page. No meaningful images are missing or broken.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no visual duplication of body content. The agenda items, meeting dates, and committee reports appear exactly once in the main content area. The appearance of headings in the table of contents sidebar as well as the main body is an intentional accessibility feature and not a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 0,
+  "total_major": 2,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

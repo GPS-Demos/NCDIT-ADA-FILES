@@ -1,0 +1,121 @@
+{
+  "document_id": "gicc-agenda-20160810-68613387",
+  "audited_at": "2026-03-13T00:55:40.618165Z",
+  "quality_score": 74,
+  "fidelity_composite": 0.641,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.4545454545454546,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The fidelity composite score of 0.641 is in the low-moderate range, and the programmatic recall (0.834) corroborates significant content omission, specifically the loss of speaker names and voting items. The structural and visual scores (0.45 and 0.50) confirm major table corruption and a broken reading order, where the logo is moved to the end and committee sub-items are decoupled from their context.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "In the section for '8. Committee Reports', the output fails to include the names of the speakers (GICC MEMBER or GUEST column) associated with each sub-committee (Ryan Draughn, Kathryn Clifton, John Farley, Doug Newcomb, Dan Madding, Stan Duncan). Additionally, two specific voting items ('Vote: Standard for Parcel Data Content (Summary)' and 'Vote: LGC Bylaws Revised') are entirely omitted. This represents a substantial loss of informational content for this section.",
+      "source_pdf_quote": "Item 8 includes sub-points and speakers: 'Statewide Mapping Advisory Committee Ryan Draughn', 'o Vote: Standard for Parcel Data Content (Summary)', 'Local Government Kathryn Clifton', 'o Vote: LGC Bylaws Revised', 'State Government GIS Users John Farley', 'Federal Interagency Doug Newcomb', 'Technical Advisory Dan Madding', 'Management & Operations Stan Duncan'",
+      "output_quote": "The list element at reading_order 7 contains only the names of the committees: 'Statewide Mapping Advisory Committee', 'Local Government', 'State Government GIS Users', 'Federal Interagency', 'Technical Advisory', 'Management & Operations'. The names of the individuals and the voting sub-bullets are missing.",
+      "location": "Sections[0].elements[7] (list element following the table)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table structure is corrupted in row 8 ('Committee Reports'). In the source PDF, this row contains a nested list of committees in the second column and corresponding presenter names in the third column (e.g., Ryan Draughn, Kathryn Clifton). The JSON output represents row 8 as a single row with an empty third cell, and the presenters' names are entirely missing from the structure. This destroys the structural alignment between committees and their respective members provided in the original do",
+      "source_pdf_quote": "Agenda item 8 shows 'Committee Reports' with a list of committees in the second column and corresponding names like 'Ryan Draughn' and 'Kathryn Clifton' in the third column.",
+      "output_quote": "Row 8: { \"cell_type\": \"data\", \"content\": [ { \"text\": \"8. Committee Reports\" ... } ], ... }, { \"cell_type\": \"data\", \"content\": [ { \"text\": \"\" ... } ], ... }",
+      "location": "Table (reading_order 6), Row 8"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially broken. The sub-items for 'Committee Reports' (extracted as a separate list in element 7) are placed after the completion of the entire table (element 6). This means logically, these sub-items appear after agenda items 9, 10, and 11, disrupting the intended flow of the agenda. Additionally, the header logo is moved from the top of the document to the very last position (element 11).",
+      "source_pdf_quote": "Committee sub-items appear under agenda item 8, before items 9-11.",
+      "output_quote": "The list of committees (reading_order 7) appears after the table which contains items 9, 10, and 11 (reading_order 6).",
+      "location": "Sections elements, indices 6 and 7"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly altered in the conversion. In the source PDF, the committee reports (Item 8) are presented as a structured part of the main agenda table, with committee names in the middle column visually aligned with their respective presenters in the right column. In the HTML output, this organization is dismantled: the table row for Item 8 is left incomplete, and the list of committees is moved to a separate bulleted list below the table. This rearrang",
+      "source_pdf_quote": "Item 8 'Committee Reports' includes a nested list (e.g., 'Statewide Mapping Advisory Committee', 'Local Government') visually aligned with names in the third column ('Ryan Draughn', 'Kathryn Clifton').",
+      "output_quote": "The table row for Item 8 has an empty 'GICC MEMBER or GUEST' column, and the committee names are moved to a standalone bulleted list following the table, losing the visual association with the reporters.",
+      "location": "Item 8, middle of page 1 / main content area"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The table structure for Item 8 is visually broken. In the PDF, Item 8 contains multiple rows of sub-items (committees) aligned with corresponding members/guests. In the HTML, the table rendering fails for this section: the 'GICC MEMBER or GUEST' column for row 8 is empty, and the sub-items are extracted from the table and rendered as plain text bullet points below it. This breaks the row-column relationship established in the source, making the table data for this section unreadable as a table.",
+      "source_pdf_quote": "Table showing Item 8 with multiple sub-items in the middle column and corresponding names in the right column.",
+      "output_quote": "The HTML table shows row 8 with a blank third column, and the committee names appear as a separate list below the table structure. The reporter names (Draughn, Clifton, etc.) are entirely missing from this section of the rendered HTML.",
+      "location": "Main agenda table, item 8"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The nested list under 'Committee Reports' is converted incorrectly. The source contains sub-bulleted items (indicated by circles) for 'Vote' actions (e.g., 'Vote: Standard for Parcel Data Content'). These nested items are entirely omitted from the JSON list structure, resulting in a loss of the list's hierarchical meaning.",
+      "source_pdf_quote": "o Vote: Standard for Parcel Data Content (Summary)\no Vote: LGC Bylaws Revised",
+      "output_quote": "The 'nested_list' fields for all items in the committee list are null, and the 'Vote' text is missing.",
+      "location": "List (reading_order 7)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion fails to capture or preserve hyperlinks present in the source document. Text such as 'Minutes' and the 'Vote' items in the source are active blue links. Furthermore, the website URL at the bottom of the page ('http://it.nc.gov/gicc') is rendered as plain text within a paragraph rather than as a functional link object.",
+      "source_pdf_quote": "Minutes (blue link); http://it.nc.gov/gicc (blue link)",
+      "output_quote": "\"text\": \"3. Approval of Minutes of May 11th Meeting\"; \"text\": \"(New) GICC Website: http://it.nc.gov/gicc\"",
+      "location": "Table row index 3 and Paragraph (reading_order 10)"
+    }
+  ],
+  "action_items": [
+    "Restore missing speaker names and voting items within the Item 8 section",
+    "Reconstruct the table for Committee Reports to ensure alignment between committees and presenters",
+    "Fix the reading order so the logo and sub-items appear in their correct logical sequence",
+    "Reinstate active hyperlinks for document links and external URLs"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.641,
+      "text_match": 0.9013563501849567,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7352,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.641,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.4545454545454546,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8344748858447488,
+      "shingling_precision": 0.9798927613941019,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 150,
+      "gemini_words": 150,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 314071,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

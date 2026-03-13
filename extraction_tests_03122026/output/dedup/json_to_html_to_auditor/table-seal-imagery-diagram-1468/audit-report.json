@@ -1,0 +1,105 @@
+{
+  "document_id": "table-seal-imagery-diagram-1468",
+  "audited_at": "2026-03-13T03:00:42.807309Z",
+  "quality_score": 72,
+  "fidelity_composite": 0.6683,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "This document is a diagram-centric file that suffered catastrophic structural failure during conversion. The core network diagram was fragmented into over 50 blurry image snippets, losing its visual logic, and approximately 25% of the text content (labels and status within the diagram) was omitted entirely. Although the programmatic word count ratio is 1.0, the baseline word count of 19 is too small for that metric to be reliable, and the low shingling recall (0.67) corroborates significant content loss.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "A very large amount of text content located within the central diagram and the 'SSIDs' and 'VLANs & Subnets' list boxes has been entirely omitted as text elements. While the diagram is provided as images, the textual information contained within it—which constitutes more than 25% of the total text on the page—is not extracted into the semantic JSON structure. This includes network labels, status descriptions, and VLAN assignments.",
+      "source_pdf_quote": "Text labels: 'Guests', 'State Employees', 'Agency Networks', 'Internet Access', 'State Network', 'Employee – hidden', 'NCGovRoam – broadcast', 'NCGov Guest – broadcast', 'Access Point', 'XIQ', 'Data Center', 'Enterprise AD', 'NCID', 'Policy Servers (EDC & WDC)', 'Employee – 210, agency', 'NCGovRoam – 410, guest', 'NCGov Guest – 410, guest', etc.",
+      "output_quote": "The JSON output completely lacks these text strings in its text or list elements, representing the diagram only via image objects.",
+      "location": "Page 1, central diagram area"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output document contains massive duplication of visual information. The main diagram is captured in its entirety as an image in element index 2 (reading_order 3). Subsequently, the pipeline has extracted nearly 50 individual snippets of the same diagram (icons, text blocks, and small areas) as separate image elements (element indices 3 through 51). This results in the same information being presented multiple times in the structured output.",
+      "source_pdf_quote": "The source contains one integrated diagram containing various icons, text, and labels.",
+      "output_quote": "The output contains a main image (index 2) and 49 additional image elements (indices 3-51) which are cropped segments of the content already present in the main image.",
+      "location": "sections[0].elements[2] to sections[0].elements[51]"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order of the document is materially incorrect. In the source document, the logical flow is the SSID description list at the top, the network diagram in the center, and the administrative metadata table at the very bottom. The output JSON places the footer table (reading_order 2) before the network diagram (reading_order 3), disrupting the logical top-to-bottom flow of the document.",
+      "source_pdf_quote": "The administrative table (Date, Project, etc.) is located at the bottom of the page.",
+      "output_quote": "The table element (element index 1) is assigned 'reading_order': 2, while the main diagram image (element index 2) is assigned 'reading_order': 3.",
+      "location": "sections[0].elements[1] and sections[0].elements[2]"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source PDF features a highly structured network diagram where spatial positioning, grouping, and directional arrows are critical to understanding the information flow. In the HTML output, this visual organization is completely discarded. The diagram is decomposed into a linear vertical stack of text followed by isolated image fragments. This transformation from a two-dimensional schematic to a one-dimensional list destroys the intended logic and visual flow of the document.",
+      "source_pdf_quote": "A cohesive network diagram on page 1 showing relationships between users, access points, and various networks (Internet, Agency, State) using a specific spatial layout and arrows.",
+      "output_quote": "The HTML output presents the content as a vertical sequence: SSID text, then a metadata table, then a series of fragmented image slices (green/red blobs) stacked vertically without the original spatial context.",
+      "location": "Main body of the document, following the SSID text list."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The central meaningful image in the document—the network diagram—is broken. Instead of a single coherent graphic or an accessible reconstruction, the output provides a series of cropped, blurry image fragments (mostly showing the gradient edges of the 'cloud' elements). Critical meaningful components such as the laptop/user icons, server icons, and the directional arrows that define the network path are missing or rendered as unidentifiable slices.",
+      "source_pdf_quote": "Complex diagram containing icons for 'State Employees', 'Guests', 'Access Points', and 'Servers' connected by blue and red dashed arrows.",
+      "output_quote": "A series of approximately 20 individual image fragments showing only blurry green and red gradients, missing the icons and connective arrows that make the diagram meaningful.",
+      "location": "Lower half of the HTML document screenshot."
+    }
+  ],
+  "action_items": [
+    "Re-integrate the fragmented diagram elements into a single, high-quality image or accessible SVG",
+    "Manually extract and include the text labels and VLAN/SSID data that were omitted",
+    "Correct the reading order to place the administrative footer at the end of the document",
+    "Provide comprehensive alternative text for the network diagram to satisfy accessibility requirements"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6683,
+      "text_match": 0.794044665012407,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7235,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6683,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6708595387840671,
+      "shingling_precision": 0.9726443768996961,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 19,
+      "gemini_words": 19,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 409618,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

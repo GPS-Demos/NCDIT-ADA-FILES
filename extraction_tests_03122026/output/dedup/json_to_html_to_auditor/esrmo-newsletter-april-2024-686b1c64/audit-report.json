@@ -1,0 +1,96 @@
+{
+  "document_id": "esrmo-newsletter-april-2024-686b1c64",
+  "audited_at": "2026-03-13T01:19:01.922390Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8649,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score (0.8649) and programmatic recall (0.917) meet the threshold for auto-approval, the qualitative feedback indicates significant functional content loss. The truncation of webinar titles and the omission of resource URLs in a newsletter format represent moderate defects that impair the document's utility for the end-user. Given the cost asymmetry, these specific content omissions require human remediation.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "There are multiple instances of significant text omission throughout the document. On page 5, the list of 'Training and Continued Learning Resources' omits the actual URLs for all four items (e.g., FedVTE, TEEX). On page 6, the 'Upcoming Events' list items are truncated, omitting the specific titles of the webinars (e.g., 'Introduction to AI and Leveraging it in Cybersecurity' is missing from the April 16 entry). Additionally, the final paragraph on page 6 omits key identifiers including 'X', 'F",
+      "source_pdf_quote": "April 16: SANS Webinar: Introduction to AI and Leveraging it in Cybersecurity; FedVTE: Free Online Training Environment: https://fedvte.usalearning.gov/; follow the N.C. Department of Information Technology on X (Formerly Known as Twitter), Facebook and LinkedIn",
+      "output_quote": "April 16: SANS Webinar: ; FedVTE: Free Online Training Environment: ; follow the N.C. Department of Information Technology on (Formerly Known as Twitter), and",
+      "location": "Sections 5 and 6, elements with reading orders 63, 85, 93-103"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The lists on pages 5 and 6 are structurally identified as lists, but the content within the list items is severely truncated. For the training resources on page 5, the URLs associated with each item are missing. For the webinar list on page 6, the titles of the webinars are missing, leaving only the dates and the prefix 'SANS Webinar:'. This truncation prevents the meaning of the list items from being preserved.",
+      "source_pdf_quote": "Page 5 list: '• FedVTE: Free Online Training Environment: https://fedvte.usalearning.gov/' Page 6 list: 'April 16: SANS Webinar: Introduction to AI and Leveraging it in Cybersecurity'",
+      "output_quote": "Element 63, Item 1: 'FedVTE: Free Online Training Environment: ' Element 85, Item 1: 'April 16: SANS Webinar: '",
+      "location": "Training list (Page 5, element 63) and Webinar list (Page 6, element 85)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to capture multiple URLs and linked text elements clearly visible in the source. This includes the explicit URLs in the training and newsletter sections on page 5, and the webinar titles (which function as links) on page 6. Additionally, the call-to-action link 'View a list of upcoming SANS webcasts.' is completely missing from the conversion.",
+      "source_pdf_quote": "Explicit URLs on Page 5 (e.g., https://teex.org/, https://www.cisecurity.org/insights/newsletter). Text link on page 6: 'View a list of upcoming SANS webcasts.'",
+      "output_quote": "The text elements for these sections end prematurely, omitting the URLs and linked strings.",
+      "location": "Training list (Page 5), Newsletters section (Page 5, elements 70, 72), and Page 6 footer links."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "The source PDF on page 3 contains a significant photograph of two people (a man and a woman) looking at a tablet, positioned alongside the article 'IT Leaders Can’t Stop AI and Deepfake Scams...'. This image is completely missing from the HTML output. Other meaningful images (the MFA target graphic, the NCDIT logo, the virus graphic, the training laptop image, and the upcoming events calendar) are correctly present.",
+      "source_pdf_quote": "On page 3 of the PDF, there is a photograph of a man and a woman looking at a tablet next to the 'IT Leaders Can’t Stop AI...' article.",
+      "output_quote": "In the HTML rendered screenshot, the section 'IT Leaders Can’t Stop AI and Deepfake Scams as They Top the List of Most Frequent Attacks' contains only text; the accompanying photograph is missing.",
+      "location": "Page 3, 'IT Leaders Can’t Stop AI and Deepfake Scams...' section."
+    }
+  ],
+  "action_items": [
+    "Restore truncated webinar titles on page 6 to ensure events are identifiable.",
+    "Insert missing URLs for FedVTE, TEEX, and other training resources on page 5.",
+    "Check for the missing image on page 3 and ensure appropriate alt-text is provided."
+  ],
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.8649,
+      "text_match": 0.9424954131753177,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8438,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8649,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9170468685192866,
+      "shingling_precision": 0.9770216526734423,
+      "duplication_ratio": 0.00543834974214721,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1834,
+      "gemini_words": 1834,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 404048,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

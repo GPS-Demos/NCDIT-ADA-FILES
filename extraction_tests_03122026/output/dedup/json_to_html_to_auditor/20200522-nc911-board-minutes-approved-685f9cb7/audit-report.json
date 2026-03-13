@@ -1,0 +1,102 @@
+{
+  "document_id": "20200522-nc911-board-minutes-approved-685f9cb7",
+  "audited_at": "2026-03-13T00:59:37.597981Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6976744186046512,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "An evaluation of the phone numbers listed on page 3 revealed a critical discrepancy. The source document lists the phone number '910-564-4194', whereas the output contains '910-564-2194'. A single digit error in contact information is a critical failure.",
+      "source_pdf_quote": "910-564-4194",
+      "output_quote": "910-564-2194",
+      "location": "Phone Numbers table, Page 3, element index 13"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent and contains skips. The document title is correctly an H1 (reading_order 1). However, the major sections 1 through 5 (starting on page 3) are converted as paragraphs, whereas '6. Executive Director Report' (reading_order 36) is assigned H3, representing a skip from H1 to H3. Furthermore, on page 6, another H1 and H2 are introduced (reading_order 46, 47) for a table sub-header, which breaks the logical document flow and hierarchy for assistive technologies.",
+      "source_pdf_quote": "Major numbered sections like '1. Chair’s Opening Remarks' (p3) and '6. Executive Director Report' (p4).",
+      "output_quote": "'1. Chair’s Opening Remarks' is a paragraph (index 14); '6. Executive Director Report' is a Heading level 3 (index 36).",
+      "location": "Sections 1 and 6, element indices 14 and 36"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Several tables have corrupted structures or misidentified headers. In the 'ROLL CALL' table (reading_order 9), the title block is incorrectly identified as the header row, while the actual header row ('NC 911 BOARD MEMBERS', 'IN PERSON', etc.) is marked as a data row. In the 'ROLL CALL VOTE' table on page 4 (reading_order 35), the actual header row is entirely missing, and the first data row ('Bone, David...') is incorrectly marked as the header row. This misidentification severely impacts scree",
+      "source_pdf_quote": "ROLL CALL table header: 'NC 911 BOARD MEMBERS', 'IN PERSON', 'VIA MS TEAMS/PHONE', 'NOT PRESENT' (p2). ROLL CALL VOTE table header: 'NC 911 BOARD MEMBERS', '5. CONSENT AGENDA', '8 a.)...' (p4).",
+      "output_quote": "Element 9, row 1 (the actual header) is marked 'is_header_row: false'. Element 35, row 0 (data for Bone, David) is marked 'is_header_row: true' and the actual header is missing.",
+      "location": "Pages 2 and 4, element indices 9 and 35"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "Several tables are visually misrendered. Merged cells in the 'Roll Call' and 'GUESTS' tables are not correctly handled, resulting in 'N/A' values appearing only on a single row (e.g., 'Bone, David' in Roll Call, and 'Clewis, Amy' in Guests) instead of spanning all rows as in the PDF. Furthermore, the first instance of the 'ROLL CALL VOTE' table (following section 5) is missing its column headers in the HTML rendering, and its caption incorrectly uses data from the first row ('Table: Bone, David,",
+      "source_pdf_quote": "PDF Page 3, GUESTS table: 'N/A' spans all rows in the second column. PDF Page 4, ROLL CALL VOTE table: includes headers 'NC 911 BOARD MEMBERS', '5. CONSENT AGENDA', and '8 a.) FY 2021 PROPOSED PSAP DISTRIBUTION'.",
+      "output_quote": "HTML screenshot, 'Table: GUESTS': 'N/A' only appears for 'Clewis, Amy'. Table following section 5: 'ROLL CALL VOTE' table is missing column headers.",
+      "location": "Roll Call Vote table (after section 5) and GUESTS table (after section 4)"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a minor typo in the Roll Call Vote tables. The name 'Struble, Earl' is incorrectly transcribed as 'Sturble, Earl' in elements 35 and 49, even though it is correctly transcribed in the initial attendance table.",
+      "source_pdf_quote": "Struble, Earl",
+      "output_quote": "Sturble, Earl",
+      "location": "Roll Call Vote table, Page 4 (element index 35) and Page 6 (element index 49)"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9635954572407307,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5669,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6976744186046512,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9687226978857243,
+      "shingling_precision": 0.9641739130434782,
+      "duplication_ratio": 0.004314387544550741,
+      "word_count_ratio": 1.0,
+      "baseline_words": 2176,
+      "gemini_words": 2176,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 254240,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

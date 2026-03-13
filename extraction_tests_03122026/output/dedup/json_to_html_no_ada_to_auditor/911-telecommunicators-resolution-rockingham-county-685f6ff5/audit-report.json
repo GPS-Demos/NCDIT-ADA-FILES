@@ -1,0 +1,88 @@
+{
+  "document_id": "911-telecommunicators-resolution-rockingham-county-685f6ff5",
+  "audited_at": "2026-03-13T01:08:56.584663Z",
+  "quality_score": 78,
+  "fidelity_composite": 0.8047,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant structural and fidelity failures, most notably the duplication of the entire resolution's content and major text omissions within the signature block. The low visual score (0.5) corroborates these findings, suggesting the HTML rendering is fragmented and non-cohesive despite the programmatic word count ratio appearing normal.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "A significant portion of text is missing from the signature block area (element index 10 in the output). Specifically, the line 'ROCKINGHAM COUNTY BOARD OF COMMISSIONERS' appearing directly under Mark F. Richardson's title and the functional term 'ATTEST:' which precedes the clerk's signature are omitted. Calculating word counts for this specific block (17 words total in the source), the 6 omitted words represent approximately 35% of the section's text content, exceeding the 25% threshold for a ",
+      "source_pdf_quote": "ROCKINGHAM COUNTY BOARD OF COMMISSIONERS\n\nATTEST:",
+      "output_quote": "Missing from the signature table (element index 10)",
+      "location": "Signature block, end of page 1"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output significantly deviates from the visual organization of the source PDF. While the source is a single, cohesive document flow, the HTML rendering repeats the entire content twice and inserts an additional data table ('Board of Commissioners Signatures') in the middle. This fragmentation and repetition creates a visual flow that does not match the source's intent and confuses the document's structure.",
+      "source_pdf_quote": "The source PDF is a single-page resolution with a logical flow from the title through the preamble clauses to the signatures and seal.",
+      "output_quote": "The HTML screenshot shows the document text repeated twice (once as plain text at the top and again with images/formatting at the bottom), with a signature data table inserted between the two versions.",
+      "location": "Entire HTML document"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The HTML output contains genuine body content duplication. The entire text of the resolution, including all 'WHEREAS' clauses and the 'NOW, THEREFORE, BE IT RESOLVED' section, is printed twice within the body of the same page. This is not a table of contents or navigation landmark, but a repeated rendering of the document's core content.",
+      "source_pdf_quote": "The source PDF contains a single instance of the resolution text starting with 'WHEREAS, in September of 2021...' and ending with '...Standard Occupational Classification (SOC) catalog.'",
+      "output_quote": "The text block starting with 'WHEREAS, in September of 2021...' appears at the top of the HTML screenshot and is repeated again near the bottom of the screenshot.",
+      "location": "The first instance starts after the main heading; the second instance starts after the 'Board of Commissioners Signatures' table."
+    }
+  ],
+  "action_items": [
+    "Deduplicate the repeated body text of the resolution.",
+    "Restore the missing lines in the signature block to ensure legal/formal accuracy.",
+    "Correct the visual structure to match the single, cohesive flow of the source PDF."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8047,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7813,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 3
+    },
+    "signals": {
+      "fidelity_composite": 0.8047,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": 1.0,
+      "baseline_words": 242,
+      "gemini_words": 242,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 323093,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

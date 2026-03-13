@@ -1,0 +1,126 @@
+{
+  "document_id": "911-education-committee-meeting-agenda-packet-03-25-2021-685f9fa9",
+  "audited_at": "2026-03-13T00:28:24.394933Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.5813953488372092,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "A significant majority of the 46-page document is missing from the output. Entirely absent sections and pages include: Pages 6-8 (FCC NPRM Background and Fact Sheet), Pages 10-33 (the main body of the FCC NPRM, Appendix A, and Appendix B), Pages 35-36 (House Bill 213), and Pages 37-42 (Program Areas, Migration Process, NMAC flyer, and WA jobs report). This represents a loss of information for approximately 35 out of 46 pages.",
+      "source_pdf_quote": "Entire content of pages 6-8, 10-33, 35-42.",
+      "output_quote": "The JSON reading order and content skip from element index 96 (end of page 9 introduction) directly to 438 (page 34 content).",
+      "location": "Missing page ranges 6-8, 10-33, 35-42"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The broadcast spot detail table for the KXLY Invoice (Page 45-46) is missing the majority of its data. The source lists 15 individual spots across four line items, whereas the output JSON only identifies 4 spots (those related to Line 3 and Line 4), omitting 11 rows of financial and scheduling data from Line 1 and Line 2.",
+      "source_pdf_quote": "Details for 5 spots under Line 1 and 6 spots under Line 2 on Page 45.",
+      "output_quote": "The spot detail tables in the JSON (elements 591, 593, 595, 598) contain only 4 total entries.",
+      "location": "KXLY Invoice detail section, page 45-46"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The 'I. INTRODUCTION' section of the FCC NPRM (Page 9) is severely truncated. Para 1 is cut short after the word 'the', omitting several critical lines of text regarding the Commission's required actions and the scope of the rulemaking.",
+      "source_pdf_quote": "Commission to take action to help address the diversion of 911 fees... support the provision of 911 services.3",
+      "output_quote": "1. On December 27, 2020, the President signed the Don't Break Up the T-Band Act of 2020 as part of the Consolidated Appropriations Act, 2021.1 Section 902 of the new legislation requires the",
+      "location": "FCC NPRM section I. INTRODUCTION, Page 9, element 95"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The logical flow of the 'Training Class Eligibility' section is broken because the descriptive text for sub-item 1 (Cumberland County) is missing from the output. This results in the vote table for Cumberland County (reading_order 28) appearing immediately after the section header without context, which disrupts the intended narrative structure of the minutes.",
+      "source_pdf_quote": "1. Cumberland County – 'Priority Dispatch 2- Day Refresher Class for EMD, EFD and EPD' Ms. Turbeville gave a brief review of the training request put forward. Staff recommendation was to approve... The motion carried.",
+      "output_quote": "The text describing the Cumberland County training request is missing between element 26 (Training Class Eligibility) and element 28 (Vote Table).",
+      "location": "Minutes section, Page 3, between elements 26 and 28"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images and diagrams from the source PDF are missing in the HTML output. Specifically, the 'NC 911 Board NG9-1-1 Migration Process' flowchart and the 'NG9-1-1 Call Handling Solution Architecture' diagram on page 38 are completely absent. Additionally, the website screenshot on page 40, the Google Analytics line chart on page 41, and the photograph of the telecommunicator on page 41 are missing. These are not decorative elements; they represent key technical and marketing inform",
+      "source_pdf_quote": "Page 38: Two complex diagrams ('NC 911 Board NG9-1-1 Migration Process' and 'NG9-1-1 Call Handling Solution Architecture'); Page 41: 'Analytics' line chart and dispatcher photo.",
+      "output_quote": "The HTML rendered content under these headings is empty. For example, below the heading 'NC 911 Board NG9-1-1 Migration Process', no image or placeholder is rendered before the next heading.",
+      "location": "Sections 'NC 911 Board NG9-1-1 Migration Process', 'Analytics', and 'The Commercial' (pages 38 and 41)"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "Several data values in the KOMO contract table (Page 43) contain typos or truncation errors. Examples include the advertiser name 'Camp Murray' rendered as 'Camp Murra', the description 'MONDAY 10-11P' as 'MONDAY 10-1', 'M-F KOMO 4 NEWS' as 'M-F KOMO 4', and the sales office 'Seattle-Blue' as 'Seattle-BI'.",
+      "source_pdf_quote": "Camp Murray; MONDAY 10-11P; M-F KOMO 4 NEWS; Local-Seattle-Blue",
+      "output_quote": "Camp Murra; MONDAY 10-1; M-F KOMO 4; Local-Seattle-BI",
+      "location": "KOMO Contract table, page 43, elements 559, 561, 562"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "In the KXLY Invoice sections (e.g., reading_order 591, 593, 595, 598), the sub-headers for the individual 'Spots' (e.g., '#', 'Ch', 'Day') are misidentified as data cells within the table body rather than header cells. This obscures the structural relationship between the headers and the spot data.",
+      "source_pdf_quote": "Table headers for spots: '#', 'Ch', 'Day', 'Air Date', 'Air Time', etc.",
+      "output_quote": "The row containing 'Spots:', '#', 'Ch', etc., is marked as cell_type: 'data' in reading_order 591, 593, 595, and 598.",
+      "location": "KXLY Invoice sections, Page 45 and 46, elements 591, 593, 595, 598"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The numbered lists for the agenda (Page 2) and minutes items (Pages 3-5) have lost their numbering and sequence indicators, having been converted to unordered lists or plain paragraphs. This loses the sequential meaning of the items.",
+      "source_pdf_quote": "1. Chair Opening Remarks... 2. Roll Call... 3. Executive Director... (Page 2); 4. Approval of November Minutes... (Page 3)",
+      "output_quote": "Unordered list items without numbering in element 20 and element 24.",
+      "location": "Minutes/Agenda sections, Pages 2-3, elements 20 and 24"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9125855924486638,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5556,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5813953488372092,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8847178774186073,
+      "shingling_precision": 0.9578524836929252,
+      "duplication_ratio": 0.01098207959631569,
+      "word_count_ratio": 1.0,
+      "baseline_words": 17310,
+      "gemini_words": 17310,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 476367,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

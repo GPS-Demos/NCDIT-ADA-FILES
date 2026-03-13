@@ -1,0 +1,88 @@
+{
+  "document_id": "gdac-legislative-report-may-2016-68610a4b",
+  "audited_at": "2026-03-12T22:52:19.619334Z",
+  "quality_score": 86,
+  "fidelity_composite": 0.8978,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity composite score (0.8978) and programmatic recall (0.931) are high, Concern #1 contains a internal contradiction where it labels content loss as 'MINOR' but describes it as exceeding the 25% threshold for a 'major defect,' specifically citing missing legal text in Appendix A. This discrepancy between numerical scores and the qualitative evidence regarding legislative content integrity necessitates human verification.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "There are two major instances of text omission. 1) The 'Contents' section (Section 3) is missing approximately 75% of its entries, omitting almost all sub-headings and several top-level section titles. 2) 'Appendix A - Legislation' (Section 17) is missing significant portions of the legal text, including the descriptive paragraph for item (1), the entirety of items (2)a and (2)b, and the final URL link. This loss exceeds the 25% threshold for a major defect.",
+      "source_pdf_quote": "The full text of the Contents list on page 3 and Appendix A on page 18.",
+      "output_quote": "The truncated list in Section 3 and the incomplete list in Section 17.",
+      "location": "Contents (Section 3, page 3) and Appendix A - Legislation (Section 17, page 18)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The heading hierarchy is significantly broken throughout the document. Multiple H1 tags are used for section headers ('Challenges' in Section 15 and 'Appendix B' in Section 18), whereas H1 should be reserved for the document title. Additionally, the hierarchy is flat and inconsistent. For example, in Section 6, sub-headers like 'Completed Activities' and 'Planned Activities' are promoted to H2, making them peers of their parent section 'CJLEADS' (H2). In later sections (e.g., Section 7), similar",
+      "source_pdf_quote": "Page 15: Challenges (Major section title); Page 19: Appendix B - GDAC Portfolio (Appendix title).",
+      "output_quote": "Section 15: { \"type\": \"heading\", \"level\": 1, \"text\": \"Challenges\" }; Section 18: { \"type\": \"heading\", \"level\": 1, \"text\": \"Appendix B - GDAC Portfolio\" }.",
+      "location": "Sections 15 and 18, element index varies."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The URL link at the bottom of source page 18 is completely missing from the output. The text leading up to it is present in Section 17, but the URL itself (http://www.ncleg.net/EnactedLegislation/Statutes/PDF/BySection/Chapter_143B/GS_143B-1385.pdf) is omitted.",
+      "source_pdf_quote": "Page 18: http://www.ncleg.net/EnactedLegislation/Statutes/PDF/BySection/Chapter_143B/GS_143B-1385.pdf",
+      "output_quote": "The URL text is entirely missing from Section 17.",
+      "location": "Section 17, following reading order 190."
+    }
+  ],
+  "action_items": [
+    "Compare Appendix A (Section 17) against the source PDF to verify if legal text items (1), (2)a, and (2)b are missing.",
+    "Verify the Table of Contents for completeness.",
+    "Adjust heading hierarchy to ensure H1 is reserved for the document title and sub-sections are nested correctly."
+  ],
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.8978,
+      "text_match": 0.9594989053758209,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8622,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8978,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9310751799834769,
+      "shingling_precision": 0.9897127085685611,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 4262,
+      "gemini_words": 4262,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 351761,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "document_id": "draft-fy23-25-goals-and-priorities-685fc8b0",
+  "audited_at": "2026-03-13T00:38:52.731455Z",
+  "quality_score": 94,
+  "fidelity_composite": 0.9182,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document demonstrates high overall quality with a fidelity composite of 0.918 and perfect content preservation scores. The identified concerns regarding table column spanning and list semantics are categorized as minor structural defects that do not result in content loss or hallucinations, aligning with the criteria for auto-approval in high-scoring documents.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The table structures in the output are corrupted due to incorrect column spanning. In the source document, sub-goal headers (e.g., '1.1. Promote...', '1.2. Recommend...') span the entire width of the subsequent two-column data rows. In the JSON output, these header rows are defined with 'colspan: 1', but the following rows contain two distinct data cells. This creates a structurally inconsistent table where rows within the same table object have different total column widths (1 column vs 2 colum",
+      "source_pdf_quote": "Visual layout on pages 1, 2, and 3 where blue sub-goal rows (e.g., '1.1. Promote...') clearly span across two columns of data content below them.",
+      "output_quote": "\"colspan\": 1 in header rows (e.g., element index 6, row 0) followed by rows with two data cells.",
+      "location": "reading_order 6, 8, and 10"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The 'Committee Acronyms' section, which is presented as a list of definitions in the source PDF, has been converted into a single paragraph element in the output. While the text is preserved using newline characters, the semantic list structure is lost, and individual list items are merged into a single block of content.",
+      "source_pdf_quote": "List of acronyms on page 1: 'GICC – Geographic Information Coordinating Council', 'LGC- Local Government Committee', etc.",
+      "output_quote": "\"type\": \"paragraph\", \"content\": [ { \"text\": \"GICC – Geographic Information Coordinating Council\\nLGC- Local Government Committee\\nSGUC – State Government GIS Users Committee\\nFIC- Federal Interagency Committee\\nTAC – Technical Advisory Committee\\nSMAC – Statewide Mapping Advisory Committee\", ... } ]",
+      "location": "reading_order 4"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.9182,
+      "text_match": 0.9563892859909086,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.92,
+      "raw_score": 0.9406,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9182,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9740177439797212,
+      "shingling_precision": 0.9636363636363636,
+      "duplication_ratio": 0.018802966101694914,
+      "word_count_ratio": 1.0,
+      "baseline_words": 536,
+      "gemini_words": 536,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 452785,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

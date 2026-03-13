@@ -1,0 +1,97 @@
+{
+  "document_id": "gicc-2020-census-nc-factsheet-20170809-686131e8",
+  "audited_at": "2026-03-13T01:34:21.916393Z",
+  "quality_score": 83,
+  "fidelity_composite": 0.8297,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "The document displays significant structural and content-preservation failures that programmatic signals failed to capture due to the visual nature of the source. Specifically, the omission of an entire timeline and diagram labels on page 2 constitutes a major loss of information, while the broken heading hierarchy and inverted reading order represent substantial accessibility defects.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are major text omissions in the output. 1) The contact email address 'Bob.Coats@osbm.nc.gov' is missing from the contact section on page 2. 2) The entire textual content of the timeline on page 2 (milestones such as 'April 1: Census Day...', 'December 31: Deliver apportionment counts', etc.) is omitted and not captured in the alt text. 3) The labels within the funnel diagram on page 2 ('Correct addresses', 'Correct boundaries', 'Correct streets') are omitted. These represent a significant ",
+      "source_pdf_quote": "Bob.Coats@osbm.nc.gov; Timeline milestones: 'Key census activities start in 2015...', 'Estimate on-the-ground workloads...', 'April 1: Census Day...', 'December 31: Deliver apportionment counts', etc.; Funnel labels: 'Correct addresses', 'Correct boundaries', 'Correct streets'.",
+      "output_quote": "[Omitted]",
+      "location": "Page 2, Timeline graphic (top) and Contact section (bottom)."
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "In the second section (Page 2), the heading hierarchy skips a level. The main title 'Preparing for the Census – We Have Work To Do!' is correctly identified as an H1 (element 19). However, the next heading, 'Bob Coats' (element 26), is assigned as an H3. There is no H2 heading in between, resulting in a skip in the hierarchy which impairs navigation for screen readers.",
+      "source_pdf_quote": "Heading: 'Preparing for the Census – We Have Work To Do!' (Top of Page 2); Name: 'Bob Coats' (Footer of Page 2).",
+      "output_quote": "{\"type\": \"heading\", \"level\": 1, \"text\": \"Preparing for the Census – We Have Work To Do!\", \"reading_order\": 19}, ..., {\"type\": \"heading\", \"level\": 3, \"text\": \"Bob Coats\", \"reading_order\": 26}",
+      "location": "Section 2, elements 19 and 26"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order for Page 2 is significantly altered. In the source document, the timeline graphic 'Preparing for the Census - We Have Work To Do!' is positioned at the very top as a header graphic. In the JSON, this graphic (element 30) is placed at the end of the section, appearing after the contact information footer. This reordering moves a primary contextual anchor to the end of the text, disrupting the logical flow of information intended by the source.",
+      "source_pdf_quote": "Timeline graphic spanning the top width of Page 2 (2014-2021).",
+      "output_quote": "{\"type\": \"image\", \"src\": \"...\", \"alt\": \"Timeline of census activities...\", \"reading_order\": 30}",
+      "location": "Section 2, element 30 (appearing after element 29 footer text)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "There are issues with link accessibility and completeness. First, the email address 'Bob.Coats@osbm.nc.gov' visible in the source PDF footer is entirely missing from the JSON content (there is a gap between elements 27 and 29). Second, the phone number '(919) 807-4781' (element 29) is provided as plain text and is not rendered as a clickable link, which is a structural failure for actionable contact information.",
+      "source_pdf_quote": "Bob.Coats@osbm.nc.gov and (919) 807-4781 in the Page 2 blue footer box.",
+      "output_quote": "{\"text\": \"(919) 807-4781\", ... \"reading_order\": 29} [Email address missing]",
+      "location": "Section 2, elements 27-29"
+    }
+  ],
+  "action_items": [
+    "Restore missing timeline text and diagram labels from page 2",
+    "Correct the heading hierarchy to include H2 or demote current H3s",
+    "Adjust reading order so the timeline graphic appears at the top of the section rather than the end",
+    "Re-insert the missing contact email and ensure phone numbers are actionable links"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8297,
+      "text_match": 0.958697618329816,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8318,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8297,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9636363636363636,
+      "shingling_precision": 0.9538092381523695,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 332,
+      "gemini_words": 332,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 332052,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

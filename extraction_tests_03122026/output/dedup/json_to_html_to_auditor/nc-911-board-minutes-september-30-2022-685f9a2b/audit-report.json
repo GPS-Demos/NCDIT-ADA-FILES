@@ -1,0 +1,106 @@
+{
+  "document_id": "nc-911-board-minutes-september-30-2022-685f9a2b",
+  "audited_at": "2026-03-13T02:25:19.208810Z",
+  "quality_score": 77,
+  "fidelity_composite": 0.7422,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document suffers from significant content omissions in key sections, specifically missing sub-items in the Consent Agenda and Executive Director Report, which are critical for meeting minutes. These fidelity failures are compounded by major structural issues, including inconsistent heading hierarchies and incorrectly parsed lists, as well as content duplication where a table appears as both HTML and an image.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are two major omissions of content on page 3. First, the specific sub-items (a through f) for the '4. Consent Agenda' section are missing; the output only contains the introductory sentence and the concluding paragraph. Second, the first five sub-items (a through e) of the '5. Executive Director Report' section are entirely omitted. This missing text includes paragraphs about the Biennial Audit, NextGen 911 Migration, and the Richmond Community College degree program. This represents a los",
+      "source_pdf_quote": "Page 3, Section 4: 'a) Minutes of Previous Meeting – August 26, 2022\\nb) NG 911 Reserve Fund... f) Grant Project Updates per Reports'. Page 3, Section 5: 'a) Biennial Audit – Ms. Harris noted... e) Richmond Community College 911 Communications and Operations Associates Degree – The degree being created is the first in the State, country, and world. On October 4, an official'",
+      "output_quote": "Element 21 includes the heading for Section 4 but omits the sub-list. Element 24 includes the heading for Section 5, but the following text (Element 29) begins at the end of item 5e ('announcement will be made...'), skipping everything in between.",
+      "location": "Page 3, Sections 4 and 5 (Elements 21 and 24-29)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy in the output is inconsistent and skips levels. Top-level agenda items are assigned different heading levels: '7. Education Committee Report' is an H2 (reading_order 32), while '11. Standards Committee Report' (reading_order 60) and '12. Technology Committee Report' (reading_order 63) are H3. Additionally, multiple H1 tags are used for sub-headers that should be H2, such as 'North Carolina 911 Board Meeting Roll Call' (reading_order 9) and 'NORTH CAROLINA 911 BOARD MEETING'",
+      "source_pdf_quote": "7. Education Committee Report (Page 4); 11. Standards Committee Report (Page 7); 12. Technology Committee Report (Page 7).",
+      "output_quote": "{\"type\": \"heading\", \"level\": 2, \"text\": \"7. Education Committee Report\"}; {\"type\": \"heading\", \"level\": 3, \"text\": \"11. Standards Committee Report\"}; {\"type\": \"heading\", \"level\": 3, \"text\": \"12. Technology Committee Report\"}",
+      "location": "Sections array, elements at reading_order 32, 60, and 63."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The list conversion has significant failures. In section 5 (Executive Director Report), items a) through e) are entirely missing from the output list (reading_order 24), which only contains the section header. Additionally, in section 10. a), the introductory text is merged into the first list item rather than being treated as a separate header or paragraph. The list for 10. a) is also split into two separate list objects (reading_order 51 and 56) rather than being one continuous list.",
+      "source_pdf_quote": "5. Executive Director Report – a) Biennial Audit... b) NextGen 911 Migration... c) NextGen 911 GIS... d) PSAP Managers... e) Richmond Community College... (Page 3)",
+      "output_quote": "{\"type\": \"list\", ..., \"items\": [{\"content\": [{\"text\": \"5. Executive Director Report –\"}]}]}",
+      "location": "Sections array, element index 24 (reading_order 24)."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There is a significant duplication of body content at the beginning of the document. The 'NC 911 Board Members' roll call table from page 1 of the source PDF is rendered twice: first as a reconstructed HTML table, and immediately afterward as an image of the original PDF page. This results in the same set of board member names and attendance status appearing twice in the body of the document.",
+      "source_pdf_quote": "The roll call table starting with 'David Bone, Executive Director...' on page 1.",
+      "output_quote": "The content appears first as an HTML table labeled 'Table: NC 911 Board Members...' and then immediately follows as a screenshot of the original PDF page under the heading 'North Carolina 911 Board Meeting Roll Call'.",
+      "location": "Start of document body, following the Table of Contents."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains at least one explicit hyperlink: 'Live Status Map' in section 5b (Page 3). This link is not present in the output JSON. While the missing text itself is noted in S5, the failure to capture the link is a defect.",
+      "source_pdf_quote": "NextGen 911 Migration Status – Live Status Map (Page 3)",
+      "output_quote": "The text and link are missing from the output.",
+      "location": "Page 3 of source, omitted in output following reading_order 24."
+    }
+  ],
+  "action_items": [
+    "Restore missing sub-items in sections 4 and 5",
+    "Correct the heading hierarchy to ensure sequential and logical ordering (H1 for title, H2 for main items)",
+    "Reconstruct the lists in section 10 to be continuous and properly formatted",
+    "Remove the duplicate image of the roll call table while ensuring the HTML version is accurate",
+    "Insert the missing hyperlink in section 5b"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7422,
+      "text_match": 0.8642140122171446,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7719,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7422,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.955359765051395,
+      "shingling_precision": 0.8538057742782152,
+      "duplication_ratio": 0.05684619623538966,
+      "word_count_ratio": 1.0,
+      "baseline_words": 3026,
+      "gemini_words": 3026,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 383700,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

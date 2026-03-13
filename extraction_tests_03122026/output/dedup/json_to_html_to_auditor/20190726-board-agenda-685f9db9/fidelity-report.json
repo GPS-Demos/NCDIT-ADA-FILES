@@ -1,0 +1,213 @@
+{
+  "document_id": "20190726-board-agenda-685f9db9",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output content corresponds to text found in the source document. No fabricated body text or headings were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The document contains physical addresses (3514 Bush Street, 109 East North Street). These were accurately reflected in the output. No other contact info like phone numbers or emails exist in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "Both pages of the agenda are represented in the output document structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The main agenda on Page 1 and Page 2 is visually a table with three columns: Tab, Topic, and Presenter. The output converts the header correctly into a table element but then represents the actual content rows as a single-column unordered list. This structural failure results in the loss of approximately 100% of the data rows in the table structure and the total loss of the 'Tab' and 'Presenter' column data.",
+        "b_evidence_source": "The source contains a table with headers 'Tab', 'Topic', 'Presenter' and approximately 16 content rows (excluding sub-items).",
+        "b_evidence_output": "The output table only contains a header row. Content is moved to a separate list element, losing the tabular relationship.",
+        "b_evidence_location": "Page 1, elements with reading_order 3 and 4.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The conversion suffered critical data loss. All 'Presenter' names (the entire third column of the agenda) are missing. Furthermore, all sub-items (a, b, c, etc.) and specific financial figures listed under Item 5 (Consent Agenda) are entirely omitted. This excludes critical meeting information such as fund balances and disbursement amounts.",
+        "b_evidence_source": "Item 5 sub-items: 'b) NG 911 Fund June 2019 Fund Balance $ 44,749,222 ... June 2019 Disbursement -$ 21,114'. Also presenters like 'Eric Boyette (01)' or 'Pokey Harris (05)'.",
+        "b_evidence_output": "The list items only include the main topic heading: '5. Consent Agenda (Vote Required)' and '6. Executive Director Report'. Sub-items and presenters are absent.",
+        "b_evidence_location": "Page 1 and 2, sections[0] and sections[1] lists.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Excluding the massive omissions noted in C5, the remaining text generally matches the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output content corresponds to text found in the source document. No fabricated body text or headings were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The document contains physical addresses (3514 Bush Street, 109 East North Street). These were accurately reflected in the output. No other contact info like phone numbers or emails exist in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"Both pages of the agenda are represented in the output document structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The main agenda on Page 1 and Page 2 is visually a table with three columns: Tab, Topic, and Presenter. The output converts the header correctly into a table element but then represents the actual content rows as a single-column unordered list. This structural failure results in the loss of approximately 100% of the data rows in the table structure and the total loss of the 'Tab' and 'Presenter' column data.\",\n      \"b_evidence_source\": \"The source contains a table with headers 'Tab', 'Topic', 'Presenter' and approximately 16 content rows (excluding sub-items).\",\n      \"b_evidence_output\": \"The output table only contains a header row. Content is moved to a separate list element, losing the tabular relationship.\",\n      \"b_evidence_location\": \"Page 1, elements with reading_order 3 and 4.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The conversion suffered critical data loss. All 'Presenter' names (the entire third column of the agenda) are missing. Furthermore, all sub-items (a, b, c, etc.) and specific financial figures listed under Item 5 (Consent Agenda) are entirely omitted. This excludes critical meeting information such as fund balances and disbursement amounts.\",\n      \"b_evidence_source\": \"Item 5 sub-items: 'b) NG 911 Fund June 2019 Fund Balance $ 44,749,222 ... June 2019 Disbursement -$ 21,114'. Also presenters like 'Eric Boyette (01)' or 'Pokey Harris (05)'.\",\n      \"b_evidence_output\": \"The list items only include the main topic heading: '5. Consent Agenda (Vote Required)' and '6. Executive Director Report'. Sub-items and presenters are absent.\",\n      \"b_evidence_location\": \"Page 1 and 2, sections[0] and sections[1] lists.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Excluding the massive omissions noted in C5, the remaining text generally matches the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I reviewed the JSON output against the source PDF. Each text block appears only once, corresponding to its single appearance in the original document. There are no repeated paragraphs or duplicated list items.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is consistent. It starts with 'AGENDA' as H1, followed by the meeting details as H2. On the second page, 'AUGUST 2019 COMMITTEE MEETINGS' and 'AUGUST 2019 BOARD MEETING' are correctly identified as H2. No levels are skipped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document uses a 3-column layout for the agenda items with headers 'Tab', 'Topic', and 'Presenter'. The output captures a table structure containing only the header row. The actual agenda content is then extracted into a separate flat list, which causes the loss of the relationship between the topics and their respective presenters. Furthermore, all data from the 'Presenter' column (e.g., 'Eric Boyette (01)') is entirely missing from the structure of the agenda items.",
+        "b_evidence_source": "A table-like layout with columns: 'Tab', 'Topic', 'Presenter'.",
+        "b_evidence_output": "The table element (reading_order 3) contains only headers. The presenter names are not present in the subsequent list (reading_order 4).",
+        "b_evidence_location": "Section 1, element index 2 and 3",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order for the first page is incorrect. The logo for the 'NC DIT 911 Board', which appears at the very top of the source document, is assigned a reading_order of 6, placing it after the main agenda list (reading_order 4). In a logical flow for accessibility, the document header/logo should be processed first.",
+        "b_evidence_source": "Logo for 'NC DIT 911 Board' at the top left of page 1.",
+        "b_evidence_output": "The image element for the logo has \"reading_order\": 6, appearing at the end of the section after the agenda list.",
+        "b_evidence_location": "Section 1, element index 4",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The main agenda contains complex nested lists. For example, item 5 ('Consent Agenda') includes sub-items a-f and detailed financial data, and item 6 has sub-items a-e. The output flattens the agenda into a simple unordered list and completely omits all nested sub-items and their associated data. Only the top-level item text is preserved.",
+        "b_evidence_source": "Item 5 and 6 contain multiple sub-items (a, b, c...) and financial values like '$ 44,749,222'.",
+        "b_evidence_output": "\"text\": \"5. Consent Agenda (Vote Required)\" and \"text\": \"6. Executive Director Report\" - no sub-items are present in the list elements.",
+        "b_evidence_location": "Section 1, element index 3",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There are no URLs or links present in the source document, and none were incorrectly injected into the JSON output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.31818181818181823,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I reviewed the JSON output against the source PDF. Each text block appears only once, corresponding to its single appearance in the original document. There are no repeated paragraphs or duplicated list items.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is consistent. It starts with 'AGENDA' as H1, followed by the meeting details as H2. On the second page, 'AUGUST 2019 COMMITTEE MEETINGS' and 'AUGUST 2019 BOARD MEETING' are correctly identified as H2. No levels are skipped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document uses a 3-column layout for the agenda items with headers 'Tab', 'Topic', and 'Presenter'. The output captures a table structure containing only the header row. The actual agenda content is then extracted into a separate flat list, which causes the loss of the relationship between the topics and their respective presenters. Furthermore, all data from the 'Presenter' column (e.g., 'Eric Boyette (01)') is entirely missing from the structure of the agenda items.\",\n      \"b_evidence_source\": \"A table-like layout with columns: 'Tab', 'Topic', 'Presenter'.\",\n      \"b_evidence_output\": \"The table element (reading_order 3) contains only headers. The presenter names are not present in the subsequent list (reading_order 4).\",\n      \"b_evidence_location\": \"Section 1, element index 2 and 3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order for the first page is incorrect. The logo for the 'NC DIT 911 Board', which appears at the very top of the source document, is assigned a reading_order of 6, placing it after the main agenda list (reading_order 4). In a logical flow for accessibility, the document header/logo should be processed first.\",\n      \"b_evidence_source\": \"Logo for 'NC DIT 911 Board' at the top left of page 1.\",\n      \"b_evidence_output\": \"The image element for the logo has \\\"reading_order\\\": 6, appearing at the end of the section after the agenda list.\",\n      \"b_evidence_location\": \"Section 1, element index 4\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The main agenda contains complex nested lists. For example, item 5 ('Consent Agenda') includes sub-items a-f and detailed financial data, and item 6 has sub-items a-e. The output flattens the agenda into a simple unordered list and completely omits all nested sub-items and their associated data. Only the top-level item text is preserved.\",\n      \"b_evidence_source\": \"Item 5 and 6 contain multiple sub-items (a, b, c...) and financial values like '$ 44,749,222'.\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"5. Consent Agenda (Vote Required)\\\" and \\\"text\\\": \\\"6. Executive Director Report\\\" - no sub-items are present in the list elements.\",\n      \"b_evidence_location\": \"Section 1, element index 3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There are no URLs or links present in the source document, and none were incorrectly injected into the JSON output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.3181818181818182\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the agenda is severely compromised. The source PDF utilizes a multi-column structure and nested lists to present the agenda items, sub-items, and their respective presenters. In the HTML output, this is converted into a simplified bulleted list that omits the entire 'Presenter' column and all sub-agenda items (e.g., 1a-b, 5a-f, 6a-e). Consequently, critical visual information such as the detailed financial figures in the Consent Agenda and the names of presenters is completely absent from the visual flow. Additionally, a large logo is inserted into the middle of the list (between items 8 and 9), which disrupts the document's layout and flow compared to the original.",
+        "b_evidence_source": "Item 5: Consent Agenda (Vote Required) followed by sub-items a) through f) including financial figures (e.g., 'June 2019 Fund Balance $ 44,749,222'). Presenter columns list names like 'Eric Boyette (01)'.",
+        "b_evidence_output": "The HTML list shows '5. Consent Agenda (Vote Required)' immediately followed by '6. Executive Director Report'. No sub-items or financial data are rendered. Presenter names are missing from all list items.",
+        "b_evidence_location": "Main agenda list, items 1-16",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The document's primary data structure—the agenda table—is visually broken in the HTML rendering. Although the HTML includes a text label 'Table: Tab, Topic, Presenter', the content that follows is a single-column bulleted list rather than a table. This format fails to preserve the tabular relationship between topics and presenters. The entire 'Presenter' column is visually stripped from the output, making it impossible for a user to see who is responsible for each agenda item in the list.",
+        "b_evidence_source": "A tabular layout with headers 'Tab', 'Topic', and 'Presenter'. For example: '4. Telecommunicator Recognition... Tina Gardner (10)'.",
+        "b_evidence_output": "The HTML renders a bulleted list: '4. Telecommunicator Recognition – Tobin Wright, Martin County 911'. The 'Presenter' column content ('Tina Gardner (10)') is missing.",
+        "b_evidence_location": "Main agenda table, items 1-16",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The meaningful 'NC DIT 911 Board' logo is present in the HTML output, appearing both in the middle of the agenda list and at the bottom of the page.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no duplicated body content (paragraphs or tables) in the HTML rendering. While the logo appears twice, this corresponds to its placement on both pages of the source PDF. The document title appearing in the TOC and main body is expected accessible design.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the agenda is severely compromised. The source PDF utilizes a multi-column structure and nested lists to present the agenda items, sub-items, and their respective presenters. In the HTML output, this is converted into a simplified bulleted list that omits the entire 'Presenter' column and all sub-agenda items (e.g., 1a-b, 5a-f, 6a-e). Consequently, critical visual information such as the detailed financial figures in the Consent Agenda and the names of presenters is completely absent from the visual flow. Additionally, a large logo is inserted into the middle of the list (between items 8 and 9), which disrupts the document's layout and flow compared to the original.\",\n      \"b_evidence_source\": \"Item 5: Consent Agenda (Vote Required) followed by sub-items a) through f) including financial figures (e.g., 'June 2019 Fund Balance $ 44,749,222'). Presenter columns list names like 'Eric Boyette (01)'.\",\n      \"b_evidence_output\": \"The HTML list shows '5. Consent Agenda (Vote Required)' immediately followed by '6. Executive Director Report'. No sub-items or financial data are rendered. Presenter names are missing from all list items.\",\n      \"b_evidence_location\": \"Main agenda list, items 1-16\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The document's primary data structure—the agenda table—is visually broken in the HTML rendering. Although the HTML includes a text label 'Table: Tab, Topic, Presenter', the content that follows is a single-column bulleted list rather than a table. This format fails to preserve the tabular relationship between topics and presenters. The entire 'Presenter' column is visually stripped from the output, making it impossible for a user to see who is responsible for each agenda item in the list.\",\n      \"b_evidence_source\": \"A tabular layout with headers 'Tab', 'Topic', and 'Presenter'. For example: '4. Telecommunicator Recognition... Tina Gardner (10)'.\",\n      \"b_evidence_output\": \"The HTML renders a bulleted list: '4. Telecommunicator Recognition – Tobin Wright, Martin County 911'. The 'Presenter' column content ('Tina Gardner (10)') is missing.\",\n      \"b_evidence_location\": \"Main agenda table, items 1-16\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The meaningful 'NC DIT 911 Board' logo is present in the HTML output, appearing both in the middle of the agenda list and at the bottom of the page.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no duplicated body content (paragraphs or tables) in the HTML rendering. While the logo appears twice, this corresponds to its placement on both pages of the source PDF. The document title appearing in the TOC and main body is expected accessible design.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 7,
+  "total_critical": 1,
+  "total_major": 6,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

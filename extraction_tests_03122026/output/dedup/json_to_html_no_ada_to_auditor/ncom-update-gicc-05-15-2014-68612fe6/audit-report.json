@@ -1,0 +1,105 @@
+{
+  "document_id": "ncom-update-gicc-05-15-2014-68612fe6",
+  "audited_at": "2026-03-13T02:28:23.442853Z",
+  "quality_score": 69,
+  "fidelity_composite": 0.7228,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant content loss and structural failure, specifically the omission of approximately 75% of the content on Slide 3 (nested list items). This is strongly corroborated by an extremely low programmatic shingling recall of 0.404, which indicates that less than half of the source text was successfully preserved in the output. While the pipeline heuristic suggested auto-approval, the fidelity and programmatic signals demonstrate major defects that make the document unfit for immediate publication.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are significant omissions in the output. On Slide 2, the URL 'data.nconemap.com' associated with the 'Geoportal Website:' is missing. More critically, on Slide 3, all nested list items under 'Ongoing' and 'Upcoming' are absent. The source includes 10 detailed sub-bullets (e.g., 'Infrastructure buildout', 'EPA parcels project implementation', 'Website redesign/integration', etc.) that are completely missing from the JSON, representing more than 75% of the content for that slide.",
+      "source_pdf_quote": "On Slide 3: 'Infrastructure buildout', 'Replicate data between web servers', 'Replicate all map/image services between data centers', 'Replicate geodatabases between DB servers', 'EPA parcels project implementation', 'Elevation download from Geoportal imagery tab', 'Website redesign/integration', 'NC OneMap', 'Geoportal'. On Slide 2: 'data.nconemap.com'.",
+      "output_quote": "The list in section 3 only contains top-level items: 'Ongoing' and 'Upcoming'. Section 2 contains the paragraph 'Geoportal Website:' but excludes the URL.",
+      "location": "Sections 2 and 3, corresponding to Slides 2 and 3."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "On page 3 ('Tasks' slide), the source contains a complex three-level nested list. The JSON output fails to capture the nesting and, more significantly, loses almost all of the list content. It only includes the two top-level items ('Ongoing' and 'Upcoming'), omitting all sub-points such as 'Infrastructure buildout', 'EPA parcels project implementation', etc. This is a major failure in preserving the document's structure and meaning.",
+      "source_pdf_quote": "The nested list on page 3 includes items: Ongoing -> Infrastructure buildout -> Replicate data..., Replicate all map/image..., Replicate geodatabases...; EPA parcels project implementation; Upcoming -> Elevation download..., Website redesign... -> NC OneMap, Geoportal.",
+      "output_quote": "\"type\": \"list\", \"list_type\": \"unordered\", \"items\": [ { \"content\": [ { \"text\": \"Ongoing\" ... } ] }, { \"content\": [ { \"text\": \"Upcoming\" ... } ] } ]",
+      "location": "Page 3, Tasks section, Element Index 13"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output fails to render the visual hierarchy and complete content of the 'Tasks' section from Page 3 of the source PDF. In the PDF, the 'Tasks' section includes detailed sub-bullets under 'Ongoing' (Infrastructure buildout, EPA parcels project implementation) and 'Upcoming' (Elevation download, Website redesign/integration). In the HTML screenshot, only the top-level 'Ongoing' and 'Upcoming' bullets are visible, and all nested information is absent. Additionally, the 'Geoportal Website' ",
+      "source_pdf_quote": "Page 3 of the PDF shows nested bullets under 'Ongoing' (Infrastructure buildout, EPA parcels project implementation) and 'Upcoming' (Elevation download, Website redesign/integration). Page 2 shows 'data.nconemap.com'.",
+      "output_quote": "The HTML screenshot shows 'Tasks' with only two empty bullets for 'Ongoing' and 'Upcoming'. The URL 'data.nconemap.com' is missing after 'Geoportal Website:'.",
+      "location": "Sections 'Data Releases' and 'Tasks' on page 1 of the HTML output."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The source PDF on page 3 uses three small green checkmark icons to indicate the status of specific tasks. In the HTML output, these meaningful icons are missing from their relative positions in the text. Instead, a single, oversized green checkmark icon is placed at the bottom of the section, divorced from its original context, which changes the visual meaning of the document.",
+      "source_pdf_quote": "Three green checkmark icons positioned next to 'Replicate data...', 'Replicate all map...', and 'Replicate geodatabases...' on Page 3.",
+      "output_quote": "A single large green checkmark image appears at the bottom of the document, with no checkmarks appearing within the 'Tasks' list.",
+      "location": "End of 'Tasks' section on page 1 of the HTML output."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "On page 2, the source contains a URL: 'data.nconemap.com'. The JSON output includes the label 'Geoportal Website:' but completely omits the actual link/URL text that follows it.",
+      "source_pdf_quote": "Geoportal Website: data.nconemap.com",
+      "output_quote": "\"text\": \"Geoportal Website:\"",
+      "location": "Page 2, Element Index 7"
+    }
+  ],
+  "action_items": [
+    "Restore the 10 missing sub-bullets under 'Ongoing' and 'Upcoming' sections on page 3",
+    "Fix the nested list hierarchy to match the source document's structure",
+    "Re-insert the missing URL 'data.nconemap.com' on page 2",
+    "Correct the placement of the task status icons so they align with their specific items"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7228,
+      "text_match": 0.5526315789473685,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6941,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7228,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.40384615384615385,
+      "shingling_precision": 0.875,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 20,
+      "gemini_words": 20,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 381399,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "document_id": "map-imagery-logo-imagery-4809",
+  "audited_at": "2026-03-12T23:24:53.191393Z",
+  "quality_score": 74,
+  "fidelity_composite": 0.8443,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document displays significant structural and visual defects, notably a broken heading hierarchy (skipping from H2 to H4) and the omission of critical visual data. Both the LLM fidelity report and programmatic signals identify substantial content loss, with the shingling recall at only 35% and reports of missing map imagery and legend color indicators which are vital for interpreting the document.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy in the output document contains a skip. It begins with an H1 for the title and H2 for the date, but then proceeds to an H4 for 'Parcel Updates:'. According to the audit criteria, skipping a level (from H2 to H4 without an intervening H3) is a structural defect as it affects screen reader navigation.",
+      "source_pdf_quote": "The document contains headings for the title 'NC Parcels Project Status by County' and the section 'Parcel Updates:'.",
+      "output_quote": "{\"type\": \"heading\", \"level\": 2, \"text\": \"June 25, 2025\"}, {\"type\": \"heading\", \"level\": 4, \"text\": \"Parcel Updates:\"}",
+      "location": "Sections[0], elements at index 1 and 2 (reading_order 2 and 3)"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Multiple meaningful images from the source PDF are missing in the rendered HTML output. The primary visual content, the color-coded map of North Carolina counties, is absent and only represented by its alternative text description. The NCGICC logo is also missing. Additionally, the color-coded squares in the legend ('Parcel Updates') are missing, which are critical for visually interpreting the data presented in the source map.",
+      "source_pdf_quote": "The source PDF features a prominent color-coded map of North Carolina (center), an NCGICC logo (bottom right), and 10 color-coded square swatches in the 'Parcel Updates' legend (bottom left).",
+      "output_quote": "In the HTML screenshot, the map and logo are missing, replaced by text descriptions ('A map of North Carolina...', 'NCGICC logo'). The 'Parcel Updates' legend is rendered as a plain bulleted list without the color swatches.",
+      "location": "Main document body, following the 'Sources' section and within the 'Parcel Updates' list."
+    },
+    {
+      "description": "Low text recall (possible truncation): 35%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    }
+  ],
+  "action_items": [
+    "Re-insert missing visual elements including the map, logo, and legend color blocks",
+    "Correct the heading structure to follow a logical sequence (H1-H2-H3-H4)",
+    "Verify the full text content against the source PDF to address the low recall score"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8443,
+      "text_match": 0.513671875,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7394,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8443,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.3474240422721268,
+      "shingling_precision": 0.9850187265917603,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 33,
+      "gemini_words": 33,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 530245,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

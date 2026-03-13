@@ -1,0 +1,104 @@
+{
+  "document_id": "gicc-smac-agenda-20210120-68839aac",
+  "audited_at": "2026-03-13T01:06:08.398129Z",
+  "quality_score": 79,
+  "fidelity_composite": 0.8063,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document shows significant structural and content failure, corroborated by a low shingling recall (0.727) and a poor LLM structural score (0.72). Multiple sections have lost their nested sub-bullets, which contain essential information for a government agenda such as specific names for approval and URLs. Given the high cost of auto-approving a document with significant content omission, human review is required to restore the missing hierarchies and text.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output fails to capture almost all nested list items (sub-points) throughout the document. This results in significant information loss in multiple sections, exceeding the 25% threshold for those sections. Missing items include details for Elevation, Administrative/Governmental Units, NC Board on Geographic Names (specifically the list of names for approval), and the Metadata Committee update. Additionally, the footer containing URLs and the 'Join meeting' link text are omitted.",
+      "source_pdf_quote": "Updates on Contours and DEM QC and “sealing”; County Boundaries - Gary Thompson; Municipal Boundaries – Sarah Wray; SMAC Discussion and Approval; Simone Mountain; Stiles Mountain; Update on refresh of documents/tools on NC OneMap (www.nconemap.gov/pages/metadata); Adjustment to reflect the correct statutes and bring bylaws in line with those of other subcommittees; Join meeting; http://it.nc.gov/gicc",
+      "output_quote": "The nested list items associated with these points are missing; the corresponding 'nested_list' values in the JSON are null.",
+      "location": "Framework+ Datasets (reading_order 9); Working Groups (reading_order 11); Other Business (reading_order 17)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The conversion failed to capture any nested list structures. Multiple levels of sub-bullets present in the source document (under Elevation, Administrative/Governmental Units, NC Board on Geographic Names, Metadata Committee, and Other Business) are entirely missing from the output JSON. The lists are rendered as flat structures, resulting in significant structural and content loss.",
+      "source_pdf_quote": "Framework+ Datasets section: 'Elevation - John Lay' followed by sub-bullet 'Updates on Contours and DEM QC and “sealing”'. Working Groups section: 'NC Board on Geographic Names' followed by 'SMAC Discussion and Approval' which has sub-items 'Simone Mountain' and 'Stiles Mountain'.",
+      "output_quote": "The list at reading_order 9 contains 'Elevation - John Lay' but no nested items. The list at reading_order 11 contains 'NC Board on Geographic Names - Cam McNutt' but no nested items or sub-nested items.",
+      "location": "Sections 'Framework+ Datasets' (reading_order 9) and 'Working Groups' (reading_order 11)"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output fails to maintain the visual hierarchy and structure of the source document. All nested sub-bullets (e.g., those under 'Elevation', 'Administrative/Governmental Units', 'NC Board on Geographic Names', 'Metadata Committee', and 'Other Business') are completely missing from the rendering. Furthermore, the 'Framework+ Datasets' list is visually fragmented, with the first bullet separated from the subsequent ones. The '2021 Meetings' section, which appears as a vertical list in the P",
+      "source_pdf_quote": "Multiple nested sub-bullets (e.g., 'Updates on Contours and DEM QC and “sealing”', 'SMAC Discussion and Approval', 'Simone Mountain', etc.) and vertical list formatting for '2021 Meetings' and sub-items.",
+      "output_quote": "The HTML screenshot lacks all nested sub-bullets, and the '2021 Meetings' dates are rendered as a single line: 'Wed 4/14 Wed 7/14 Wed 10/13'.",
+      "location": "Throughout the document, specifically in the 'Framework+ Datasets', 'Working Groups', '2021 Meetings', and 'Other Business' sections."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a minor text omission in the first list item where the word 'minutes' is truncated, which slightly alters the specific meaning of the item.",
+      "source_pdf_quote": "Approval of October 14, 2020 minutes",
+      "output_quote": "Approval of October 14, 2020 ",
+      "location": "Welcome/Introductions section, reading_order 6"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Several hyperlinks present in the source document are missing from the output. The link 'Join meeting' is truncated from the end of the Web Conference line. The link 'minutes' is truncated from the end of the first agenda item. Additionally, a URL in the Metadata Committee sub-bullet is lost because the entire sub-bullet was omitted.",
+      "source_pdf_quote": "Web Conference: Join meeting (link). Approval of October 14, 2020 minutes (link). www.nconemap.gov/pages/metadata (link).",
+      "output_quote": "\"text\": \"**Location:** Meeting is through Web Conference only. No physical location.\\n**Phone:** No call-in number. Audio provided through Web Conference link.\\n**Web Conference:** \" (reading_order 3). \"text\": \"Approval of October 14, 2020 \" (reading_order 6).",
+      "location": "Introductory paragraphs and list items at reading_order 3 and 6."
+    }
+  ],
+  "action_items": [
+    "Restore all missing nested sub-bullets and their associated text across all agenda items.",
+    "Correct the list structure to reflect the hierarchical relationship of the original PDF.",
+    "Ensure all URLs and hyperlinked text (Join meeting, minutes) are correctly captured and formatted."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8063,
+      "text_match": 0.817095588235294,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7899,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8063,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7274959083469722,
+      "shingling_precision": 0.9318658280922432,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 109,
+      "gemini_words": 109,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 404619,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

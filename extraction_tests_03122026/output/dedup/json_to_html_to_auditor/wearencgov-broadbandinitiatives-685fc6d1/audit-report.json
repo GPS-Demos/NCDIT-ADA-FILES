@@ -1,0 +1,94 @@
+{
+  "document_id": "wearencgov-broadbandinitiatives-685fc6d1",
+  "audited_at": "2026-03-13T03:05:32.560807Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output is missing a massive portion of the source document. Specifically, content from pages 5 through 23 and page 25 is entirely absent, as indicated by a placeholder section in the JSON stating '20 sections omitted for token budget'. This includes crucial maps, common barriers to adoption, executive order details, technical assistance team information, and details on the homework gap.",
+      "source_pdf_quote": "The source document contains 27 pages of content, including maps (pp. 5, 11), barriers to adoption (pp. 10, 12), and program details (pp. 17-23, 25).",
+      "output_quote": "{\"_omitted\": \"20 sections omitted for token budget\"}",
+      "location": "sections[4]"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are significant text omissions within existing sections. On page 2 ('Broadband Technology Types'), all descriptive sub-bullets for the technology types (DSL, Cable, Fiber, etc.) are missing, resulting in a loss of over 50% of the text for that page. Additionally, on page 4, the source URL following 'Source: ' is completely missing.",
+      "source_pdf_quote": "Page 2 contains detailed descriptions under technology types (e.g., DSL sub-bullet: 'Speeds range from 1.5 Mbps to 80 Mbps'). Page 4 contains the source link: 'https://www.fcc.gov/research-reports/guides/household-broadband-guide'.",
+      "output_quote": "In section 2, the 'nested_list' for all technology types is null. In section 5 (page 4), the paragraph content for the source is just 'Source: '.",
+      "location": "Section 2 (Page 2) and Section 5 (Page 4)"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The HTML output fails to render nearly all of the meaningful imagery from the source PDF. This includes critical data maps (pages 5, 11, and 19), informational diagrams and infographics (pages 10, 12, 15, and 23), and data visualization grids (pages 6-9). In many cases, the HTML displays descriptive placeholders or alt-text (e.g., '[Two blue hexagon shapes...]', 'A pattern of home icons.', '[Abstract colorful wavy background...]') instead of the images themselves. This represents a significant l",
+      "source_pdf_quote": "The source PDF contains complex maps on pages 5, 11, and 19; data visualization grids on pages 6-9; and informational diagrams on pages 10, 12, 15, and 23.",
+      "output_quote": "The HTML output shows text placeholders such as 'A pattern of home icons.', 'Two blue hexagon shapes arranged horizontally...', and 'Abstract colorful wavy background with text overlay' where the meaningful content images should be.",
+      "location": "Sections corresponding to PDF pages 5-12, 15, 19, 21-23, and 27."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The list on Page 2 ('Broadband Technology Types') is converted incorrectly. The source contains a nested structure where each main bullet has several sub-bullets (e.g., under 'Digital Subscriber Line', it lists 'Runs over traditional...' and 'Speeds range from...'). The JSON output flattens this list, including only the top-level categories and entirely omitting the sub-bulleted information from the list structure.",
+      "source_pdf_quote": "• Digital Subscriber Line (DSL)\n- Runs over traditional copper phone lines, speed dependent technology and distance\n- Speeds range from 1.5 Mbps to 80 Mbps",
+      "output_quote": "{\n              \"content\": [\n                {\n                  \"text\": \"Digital Subscriber Line (DSL)\",\n...",
+      "location": "Section 2, reading_order 8"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8609741060419236,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5441,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8374812593703148,
+      "shingling_precision": 0.8858230256898192,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 533,
+      "gemini_words": 533,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 289751,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

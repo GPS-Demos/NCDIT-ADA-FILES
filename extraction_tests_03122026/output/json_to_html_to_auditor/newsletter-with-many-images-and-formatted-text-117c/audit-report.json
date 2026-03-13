@@ -1,0 +1,121 @@
+{
+  "document_id": "newsletter-with-many-images-and-formatted-text-117c",
+  "audited_at": "2026-03-12T23:56:07.228766Z",
+  "quality_score": 77,
+  "fidelity_composite": 0.7051,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant structural and content defects that preclude automatic approval. While programmatic recall is high (0.922), the LLM fidelity report identifies four major issues, including a broken reading order where a logo and images split a hyphenated word across pages ('it in- [LOGO] cludes') and the omission of critical hyperlinked text and URLs. These structural failures and content gaps represent a significant degradation of the source document's utility and accessibility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The conversion pipeline failed to extract several strings of text that were hyperlinked in the original PDF. This occurs specifically in the 'Additional Cybersecurity Newsletters' section and the following paragraph. The missing text segments correspond to gaps in the 'reading_order' indices (e.g., 47, 50, 52, 54, 56, 58, 60). This results in nonsensical fragments where key platform names and call-to-action links are missing, such as the names of social media platforms and specific instructional",
+      "source_pdf_quote": "Read the SAC newsletters. (Page 3); https://www.sans.org/newsletters/ouch (Page 3); follow the N.C. Department of Information Technology on X (formerly known as Twitter), Facebook and LinkedIn for more tips. Also visit it.nc.gov/CyberSecureNC or Stay Safe Online for... (Page 3)",
+      "output_quote": "Monthly security awareness newsletter provided for all state employees by KnowBe4. [MISSING TEXT] Note: (Index 46-48); SANS OUCH! Newsletter: Free monthly cybersecurity awareness newsletter provided by the SANS Institute. [MISSING TEXT] (Index 49); follow the N.C. Department of Information Technology on [MISSING TEXT] (formerly known as Twitter), [MISSING TEXT] and [MISSING TEXT] for more tips. Also visit [MISSING TEXT] or [MISSING TEXT] for additional information... (Index 51-61)",
+      "location": "Additional Cybersecurity Newsletters section and following paragraph, Page 3, elements 46-61"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is significantly disrupted on the first and second pages. Images 15 and 17, which belong to the first article ('Bernice Bond Named...'), are placed in the middle of a sentence in the second article ('Protect Yourself from Job Termination Scams'). Specifically, they interrupt the word 'includes' which is hyphenated between the bottom of page 1 (element 12: 'it in-') and the top of page 2 (element 20: 'cludes details'). This breaks the logical flow of the primary content.",
+      "source_pdf_quote": "The sentence 'The end goal is to persuade you to click on a malicious link or open an attachment, perhaps by claiming that it includes details...' spans the page break between page 1 and page 2.",
+      "output_quote": "The images (elements 15 and 17) are placed between the hyphenated parts of the word 'includes' (elements 12 and 20).",
+      "location": "Sections 1 and 2, elements 12, 15, 17, and 20"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the converted document is significantly degraded. The primary branding logo (NCDIT), which belongs in the header, has been incorrectly inserted into the middle of a sentence, splitting the word 'includes' ('it in- [LOGO] cludes') and disrupting the reading flow. Additionally, the social media and contact section at the end of the document is visually broken; it is rendered as a series of fragmented lines with 'and' and 'or' appearing on their own lines, and several tex",
+      "source_pdf_quote": "Page 1 footer/Page 2 header transition: '...claiming that it in- / cludes details...'. Page 3 footer section: 'Be sure to follow the N.C. Department of Information Technology on X (formerly known as Twitter), Facebook and LinkedIn for more tips. Also visit it.nc.gov/CyberSecureNC or Stay Safe Online for additional information...'",
+      "output_quote": "HTML body shows NCDIT logo placed between 'it in-' and 'cludes'. The final section shows fragmented lines: '...on', '(formerly known as Twitter),', 'and', 'for more tips. Also visit', 'or', 'for additional information...'.",
+      "location": "Transition between first and second articles, and the 'Additional Cybersecurity Newsletters' section footer."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images are missing or displaced. The NCDIT logo is absent from the document header where it is prominently featured in the source. Furthermore, the large thematic illustration of a hacker at a computer (Source Page 2) and the two iconographic graphics (shield and person icons on Page 3) are completely missing from the HTML output. While the small icons may be considered decorative, the page-width hacker illustration is a significant visual component of the original layout.",
+      "source_pdf_quote": "NCDIT logo in the header of Page 1. Large hacker illustration on Page 2. Shield/lock and person icons on Page 3.",
+      "output_quote": "The header area in HTML contains only text. The illustration and icons are entirely absent from the rendered body content.",
+      "location": "Header of page 1, body of page 2, and sidebars of page 3."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a minor text discrepancy likely caused by an OCR error. In the biography of Bernice Bond, the text states she received a degree 'for' the University of Phoenix instead of 'from'.",
+      "source_pdf_quote": "...and a Master of Business Administration from the University of Phoenix...",
+      "output_quote": "...and a Master of Business Administration for the University of Phoenix...",
+      "location": "Bernice Bond section, Page 1, element index 8"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The list of red flags associated with phishing attacks on page 2 is incorrectly split into two separate list elements. The source presents these as a single unordered list with seven bullet points, while the output creates one list with three items and a second list with four items.",
+      "source_pdf_quote": "Page 2, a single list of 7 red flags starting with 'An unusual sender address' and ending with 'Going forward...'.",
+      "output_quote": "The items are split into two separate list structures (elements 22 and 23).",
+      "location": "Section 2, elements 22 and 23"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Multiple links and URLs clearly visible in the source PDF are missing from the output. On page 3, several URLs (e.g., fedvte.usalearning.gov, teex.org, niccs.cisa.gov) are omitted entirely from the text. Furthermore, the anchor text for social media links (X, Facebook, LinkedIn) and other resources (Stay Safe Online) is missing from the paragraphs, resulting in incomplete sentences and data loss.",
+      "source_pdf_quote": "Page 3: 'FedVTE: Free Online Training Environment: https://fedvte.usalearning.gov/', 'TEEX: Texas Engineering Extension Service: https://teex.org', and links for 'X', 'Facebook', 'LinkedIn', etc.",
+      "output_quote": "Element 39: 'FedVTE: Free Online Training Environment:', Element 41: 'TEEX: Texas Engineering Extension Service:', Element 51: 'follow the N.C. Department of Information Technology on [missing X]'.",
+      "location": "Section 3, elements 39, 41, 43, 51, 53, 55, 57, 59"
+    }
+  ],
+  "action_items": [
+    "Correct reading order to ensure logos and images do not interrupt words or sentences",
+    "Manually restore missing hyperlinked text and URLs in the 'Additional Cybersecurity Newsletters' and contact sections",
+    "Repair the split list on page 2 to be a single continuous list",
+    "Re-insert missing thematic illustration on Page 2 and ensure proper alt-text"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7051,
+      "text_match": 0.9493851873034029,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7744,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7051,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9224784662406224,
+      "shingling_precision": 0.9779086892488954,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 896,
+      "gemini_words": 896,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 426180,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "document_id": "nc-911-board-meeting-agenda-aug-26-2022-685f9a31",
+  "audited_at": "2026-03-12T23:46:23.561733Z",
+  "quality_score": 74,
+  "fidelity_composite": 0.7228,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document shows a significant discrepancy between the pipeline's auto-approval and the actual quality signals. A shingling recall of 0.638 strongly corroborates the LLM's report of major text omissions (>25% of content), specifically missing sub-items and financial data in multiple agenda sections. The table structure is also reported as corrupted with merged columns, making the document professionally unusable without intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output contains several major text omissions. 1) In Section 4 (Consent Agenda), the financial data (balances and disbursements) for sub-items b, c, d, and e are entirely missing. 2) In Section 5 (Executive Director’s Report), the sub-items a) through f) are missing. 3) In Section 9 (Grant Committee Report), sub-items a) through c) and the list of counties are missing. 4) In Section 13 (Education Committee Report), sub-items a) through d) are missing. These omissions represent more than 25% o",
+      "source_pdf_quote": "June 2022 Fund balance $ 76,125,411 [and all other values in Section 4]; a) Biennial Audit Status [and all other sub-items in Section 5]; a) PSAP Grant Program Progress Reports [and all other sub-items/bullets in Section 9]; a) Training Course Request... [and all other sub-items in Section 13]",
+      "output_quote": "[Empty strings or truncated headers such as 'b) NG 911 Reserve Fund –']",
+      "location": "Sections 4, 5 (Page 1), Sections 9, 13 (Page 2)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The 'Agenda' table structure is corrupted. The source document clearly shows a three-column layout (Tab, Topic, Presenter). However, in the JSON output, the data rows do not maintain this three-column structure. Row 2 merges all columns into a single cell, and Rows 4 through 7 merge the 'Topic' and 'Presenter' columns into a single cell, failing to preserve the structural organization of the original table.",
+      "source_pdf_quote": "Agenda table with 3 distinct columns: Tab, Topic, Presenter. (e.g., Tab '1.', Topic 'Chair's Opening Remarks...', Presenter 'Jim Weaver')",
+      "output_quote": "Rows in the JSON table contain only 1 or 2 cells. Cell 2 in row index 3: 'Chair's Opening Remarks.............................................................................Jim Weaver'",
+      "location": "Page 1, Agenda table, reading_order 4"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is severely compromised in several ways. First, the nested financial data in item 4 (sub-items b, c, d, and e), which is clearly structured as a list of amounts in the source, is entirely missing from the HTML output. Only the sub-item headers remain. Second, the NC DIT logo, which serves as the primary header image on Page 1 of the source PDF, is displaced and rendered in the middle of the document body after item 5. Finally, the cohesive list/table layou",
+      "source_pdf_quote": "Item 4 contains nested financial data (e.g., 'June 2022 Fund balance $ 76,125,411'). The NC DIT logo is at the top left of Page 1.",
+      "output_quote": "The HTML list items for 4b, 4c, 4d, and 4e show only the top-level label and omit all financial data. The NC DIT logo appears after item 5.",
+      "location": "Item 4 and middle of document after item 5"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The tables in the document are misrendered. In the main agenda table at the top, the 'Presenter' column is completely empty because the presenter names (e.g., Jim Weaver, Kristen Falco) have been incorrectly merged into the 'Topic' column. Additionally, the tabular financial data presented under item 4 (sub-items b through e) in the source PDF is not rendered in a readable format; instead, the data columns are entirely missing, leaving only the primary labels.",
+      "source_pdf_quote": "The main agenda table has a distinct 'Presenter' column on the right. Item 4 includes tabular financial data aligned in columns.",
+      "output_quote": "The 'Presenter' column in the HTML table contains no text; presenter names are appended to the 'Topic' text. The financial data columns under item 4 are completely absent.",
+      "location": "Top table and Item 4"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The list structure is significantly compromised because multiple levels of nested list items are entirely missing from the output. Specifically, the financial line items under Consent Agenda items 4b, 4c, 4d, and 4e are omitted. Additionally, the sub-items for Item 5 (a-f), Item 9 (a-c and bullets), and Item 13 (a-d) are completely missing. This failure to capture the nested hierarchy represents a significant loss of document structure.",
+      "source_pdf_quote": "Sub-items for agenda points: 5a-f (e.g., 'a) Biennial Audit Status'), 9a-c (e.g., 'a) PSAP Grant Program Progress Reports'), and 13a-d (e.g., 'a) Training Course Request...').",
+      "output_quote": "The lists at reading_order 6 and reading_order 9 include the parent items but omit all subsequent nested sub-items (a, b, c, etc.) visible in the source.",
+      "location": "Sections for items 5, 9, and 13 on Pages 1 and 2."
+    }
+  ],
+  "action_items": [
+    "Manually restore the missing sub-items (a-f) for Section 5 and (a-d) for Section 13",
+    "Reconstruct the financial data lists for Consent Agenda sub-items 4b through 4e",
+    "Repair the 3-column table structure to properly separate 'Tab', 'Topic', and 'Presenter'"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7228,
+      "text_match": 0.7719298245614035,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7428,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7228,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6378698224852071,
+      "shingling_precision": 0.9773345421577516,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 128,
+      "gemini_words": 128,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 363483,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

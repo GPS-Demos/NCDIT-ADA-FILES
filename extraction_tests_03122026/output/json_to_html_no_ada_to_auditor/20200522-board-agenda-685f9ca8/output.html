@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>20200522 Board Agenda 685F9Ca8</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Checkbox / checklist lists */
+.checklist {
+    list-style: none;
+    padding-left: 0;
+}
+
+.checklist > li {
+    padding-left: 1.8em;
+    text-indent: -1.8em;
+    margin-bottom: var(--spacing-xs);
+}
+
+.checklist > li > span[aria-hidden="true"] {
+    display: inline-block;
+    width: 1.4em;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>20200522 Board Agenda 685F9Ca8</h1>
+    </header>
+    <main id="main-content" role="main">
+<section>
+<h1 id="heading-1">AGENDA</h1>
+<h2 id="heading-2">NORTH CAROLINA 911 BOARD MEETING</h2>
+<p>Friday, May 22, 2020
+Via Simultaneous Communication
+Microsoft Teams Meeting
+984-204-1487 Conference ID: 766 174 851#
+10:00 AM – Noon</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Table with 10 rows and 3 columns">
+<table>
+<thead><tr><th scope="col">Tab</th><th scope="col">Topic</th><th scope="col">Presenter</th></tr>
+</thead><tbody><tr><td>Call to Order...........................................................................................Eric Boyette</td></tr>
+<tr><td>SL 2020-3 (Section 4.31 Remote Meetings)......................................................Pokey Harris</td></tr>
+<tr><td>Roll Call...................................................................................................Pokey Harris</td></tr>
+<tr><td>1.</td><td>Chair&#39;s Opening Remarks.............................................................................Eric Boyette</td></tr>
+<tr><td>2.</td><td>Ethics Awareness/Conflict of Interest Statement.................................................Eric Boyette</td></tr>
+<tr><td>3.</td><td>Public Comment..........................................................................................Eric Boyette</td></tr>
+<tr><td>4.</td><td>Ceremonial Swearing-In of Melanie Neal..........................................................Pokey Harris</td></tr>
+<tr><td>5.</td><td>Consent Agenda (Roll Call Vote Required).......................................................Pokey Harris</td></tr>
+<tr><td>6.</td><td>Executive Director Report..............................................................................Pokey Harris</td></tr>
+</tbody></table>
+</div>
+
+<ul><li>
+a) Minutes of Previous Meetings – April 24, 2020</li>
+<li>
+b) NG 911 Fund/Account</li>
+<li>
+c) CMRS Fund/Account</li>
+<li>
+d) PSAP Fund/Account</li>
+<li>
+e) Grant Fund/Account</li>
+<li>
+f) Grant Project Updates per Reports</li>
+</ul>
+<ul><li>
+a) COVID-19 Update</li>
+<li>
+b) SL 2020-3 (Section 4.38 Regulatory Flexibility).........Donna Wright/Richard Bradford</li>
+<li>
+c) Upcoming Board Meetings</li>
+<li>
+d) 2020 PSAP Manager&#39;s Meeting</li>
+<li>
+e) NextGen 911 Migration Status – Live Status Map</li>
+<li>
+f) NextGen 911 GIS Status – Live Status Map</li>
+<li>
+g) Support for ACN/AACN Research Plan Pilot Project....................Harris/Wright/Neal</li>
+</ul>
+<img src="data:image/png;base64,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" alt="" role="presentation"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+<section>
+<ul><li>
+Education Committee Report............................................................Chuck Greene/Angie Turbeville</li>
+<li>
+Funding Committee Report......................................................................David Bone/Marsha Tapler</li>
+<li>
+Finance Team Report.............................................................................Marsha Tapler/Kristen Falco</li>
+<li>
+Standards Committee Report....................................................................Donna Wright/Tina Gardner</li>
+<li>
+Technology Committee Report............................................................Jeff Shipp/Gerry Means/Stanley Meeks</li>
+<li>
+911 Regional Coordinator Reports.......................................................Conner/Gardner/Newberry/Turbeville</li>
+<li>
+Other...........................................................................................................................Pokey Harris</li>
+</ul>
+<p>Adjourn</p>
+
+<p>***Please reference the 2020 master calendar and NC 911 Board website for upcoming Committee and Board meetings. Members will receive notices prior to meetings.***</p>
+
+<img src="data:image/png;base64,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" alt="NC 911 Board logo"    loading="lazy"
+    style="max-width: 100%; height: auto;"
+>
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

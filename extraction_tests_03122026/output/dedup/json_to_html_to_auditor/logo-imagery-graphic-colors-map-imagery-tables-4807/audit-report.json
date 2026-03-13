@@ -1,0 +1,80 @@
+{
+  "document_id": "logo-imagery-graphic-colors-map-imagery-tables-4807",
+  "audited_at": "2026-03-13T01:50:09.580927Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.9084,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score is high, the conversion of the legend into a table has created false semantic relationships by incorrectly pairing unrelated items across columns (e.g., pairing 'Phase 1' with 'In Progress'). Additionally, the omission of the document's title and status date removes critical context for a government data report, making the document potentially misleading in its current state.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The output omits several informational text strings found in the source document's graphics. Specifically, the map title 'Risk Building Footprint Refresh Current Status 6/16/2025', the agency subtitle 'NC DEPARTMENT OF PUBLIC SAFETY', and the footer date 'Status as of: 6/16/2025' are missing. These omissions result in the loss of the specific context and the effective date of the data displayed.",
+      "source_pdf_quote": "\"NC DEPARTMENT OF PUBLIC SAFETY\", \"Risk Building Footprint Refresh Current Status 6/16/2025\", and \"Status as of: 6/16/2025\"",
+      "output_quote": "[Text strings omitted]",
+      "location": "Page 1: top banner, map header, and bottom right footer."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "minor",
+      "analysis": "The legend, which appears as two independent columns in the source PDF, has been converted into a single two-column table in the HTML. This conversion incorrectly pairs unrelated items from the two columns into rows (e.g., pairing 'Phase 1 (2020)' with 'In Progress'). This creates a false semantic relationship between the items that does not exist in the source, significantly confusing the meaning of the data for the user. Additionally, the color-coded boxes (keys) that are essential for a map l",
+      "source_pdf_quote": "The legend in the bottom-left of the PDF contains two separate columns of distinct categories: 'Phase 1 (2020)' through 'Not Started (2010 Data)' in the first column, and 'In Progress' through 'Needs Review' in the second column.",
+      "output_quote": "The 'Table: Legend' pairs these items into rows, such as 'Phase 1 (2020)' and 'In Progress' on row 1, and 'Phase 3 (2022)' and 'SFHA Update' on row 3.",
+      "location": "Table titled 'Table: Legend' near the top of the document."
+    }
+  ],
+  "action_items": [
+    "Restructure the legend to prevent false row-wise pairings of unrelated items",
+    "Restore the map title, agency header, and status date to the HTML output",
+    "Ensure the map's color-coded legend is accessible via text or proper ARIA labeling"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9084,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8405,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 3
+    },
+    "signals": {
+      "fidelity_composite": 0.9084,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": 1.0,
+      "baseline_words": 61,
+      "gemini_words": 61,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 340024,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

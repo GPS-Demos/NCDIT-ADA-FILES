@@ -1,0 +1,96 @@
+{
+  "document_id": "gicc-2020-census-nc-factsheet-20170809-686131e8",
+  "audited_at": "2026-03-12T22:53:58.889710Z",
+  "quality_score": 83,
+  "fidelity_composite": 0.8297,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "The document contains multiple major defects including the omission of critical contact information (email address) and significant structural failures. Specifically, the reading order is disrupted by moving a key timeline graphic to the end of the document, and the heading hierarchy violates accessibility standards by skipping the H2 level. These issues, reflected in the low structural fidelity score (0.5), necessitate manual intervention despite high text recall.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The email address for the primary contact person, 'Bob.Coats@osbm.nc.gov', is missing from the contact information section at the end of Page 2. In the source, the email appears between the organization name and the phone number. In the output, element 27 (organization) is followed immediately by element 29 (phone number), with the email address completely omitted. This is a significant loss of information for a contact block.",
+      "source_pdf_quote": "Bob.Coats@osbm.nc.gov",
+      "output_quote": "[Omitted]",
+      "location": "Section 2, contact information block (between element reading_order 27 and 29)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "In Section 2 (Page 2), the heading hierarchy skips a level. The main title of the second page is assigned H1 ('Preparing for the Census – We Have Work To Do!'), but the next heading in that section is 'Bob Coats', which is assigned H3. This skips the H2 level entirely, which is a structural defect according to the provided rules.",
+      "source_pdf_quote": "Heading: Preparing for the Census – We Have Work To Do! and Bob Coats",
+      "output_quote": "{\"type\": \"heading\", \"level\": 1, \"text\": \"Preparing for the Census – We Have Work To Do!\"} ... {\"type\": \"heading\", \"level\": 3, \"text\": \"Bob Coats\"}",
+      "location": "Section 2, reading_order 19 and 26"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order for the second page is materially incorrect regarding the timeline image (reading_order 30). In the source PDF, the timeline graphic appears at the very top of the page, immediately following the title, and provides the chronological context for the subsequent text. In the output JSON, this image is placed at the very end of the document, following the contact footer (reading_order 29). This significantly disrupts the logical flow of information.",
+      "source_pdf_quote": "Visual timeline graphic located at the top of page 2.",
+      "output_quote": "{\"type\": \"image\", \"src\": \"...\", \"alt\": \"Timeline of census activities...\", \"reading_order\": 30}",
+      "location": "Section 2, following reading_order 29"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The email address 'Bob.Coats@osbm.nc.gov' present in the contact information footer on page 2 of the source document is completely missing from the output. This is a loss of contact data visible in the source.",
+      "source_pdf_quote": "Bob.Coats@osbm.nc.gov",
+      "output_quote": "The text block containing the email is missing between reading_order 27 and 29.",
+      "location": "Section 2, within the contact footer"
+    }
+  ],
+  "action_items": [
+    "Restore the missing email address 'Bob.Coats@osbm.nc.gov' to the contact block",
+    "Relocate the timeline image (reading_order 30) to its correct logical position following the Page 2 title",
+    "Adjust the heading level of 'Bob Coats' from H3 to H2 to maintain proper structural hierarchy"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8297,
+      "text_match": 0.958697618329816,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8318,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8297,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9636363636363636,
+      "shingling_precision": 0.9538092381523695,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 332,
+      "gemini_words": 332,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 401404,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "document_id": "esrmo-newsletter-april-2017-686b1f74",
+  "audited_at": "2026-03-12T22:38:51.896775Z",
+  "quality_score": 81,
+  "fidelity_composite": 0.8103,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The conversion exhibits significant fidelity issues, including the systematic omission of critical URLs, email addresses, and entire content blocks (such as the 'Did you know' section). While programmatic recall is technically above the 0.85 threshold, the structural and visual scores (0.72-0.75) and the nature of the missing content in a security-focused newsletter make AUTO_APPROVE a high-risk decision.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There is a systematic omission of contact information (URLs and email addresses) throughout the document. In Section 1, the URL following 'read the article “Why I Always Tug on the ATM” at' is missing. In Section 2, the URLs for the 'SECURITYsense', 'Security Tips', and 'SANS OUCH!' newsletters, as well as the SANS videos and webcasts links, are missing. In Section 3, Maria Thompson's email address is missing, as are all four URLs in the 'Useful Links' section and the suggestion email address. I",
+      "source_pdf_quote": "Multiple URLs and emails throughout the document, e.g., 'https://krebsonsecurity.com/2017/03/why-i-always-tug-on-the-atm/', 'maria.s.thompson@nc.gov', 'http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management'.",
+      "output_quote": "The text is truncated or the element following the label is missing. For example, Section 3, element 36 ends with 'at ' and is followed by element 38, skipping the email address.",
+      "location": "Sections 1, 2, 3, and 5; multiple element indices including 5, 17, 20, 22, 36, 43, 45, 47, 49, 51, and 81."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The structural organization fails due to the omission of significant content blocks on Page 2. Specifically, the introductory paragraph for the 'other monthly newsletters' section ('Remember, there are other monthly newsletters available to you...') and the entire 'Did you know' box regarding The SANS Institute's videos and webcasts are missing. This disrupts the logical flow and organization of the document as intended in the source.",
+      "source_pdf_quote": "Page 2: Paragraph beginning 'Remember, there are other monthly newsletters available to you...' and the boxed section 'Did you know that The SANS Institute also provides free awareness videos and webcasts?'",
+      "output_quote": "The text between elements 16 and 24 skips these sections entirely.",
+      "location": "Page 2, between elements 16 and 24"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images present in the source PDF are missing or broken in the HTML conversion. Specifically, the 'Useful Links' graphic on page 3, the 'My idea is...' lightbulb graphic on page 3, and the official logos in the footer on page 5 (Department of Homeland Security and Stop.Think.Connect) are missing. In the footer, the logos are replaced by a text placeholder '[Homeland Security logo and Stop.Think.Connect. campaign logo]' which indicates a failure to render the actual images. Whil",
+      "source_pdf_quote": "The source PDF contains a 'Useful Links' graphic (Page 3), a lightbulb graphic for 'My idea is...' (Page 3), and Homeland Security/Stop.Think.Connect logos (Page 5).",
+      "output_quote": "The HTML output is missing the 'Useful Links' and lightbulb graphics. The footer displays text '[Homeland Security logo and Stop.Think.Connect. campaign logo]' instead of the actual images.",
+      "location": "Page 3 (Useful Links and Suggestion sections) and Page 5 (Footer)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion systematically omits almost all URLs and email addresses present in the source document. While the surrounding text is often present, the actual link data (both text and hyperlink) is missing in numerous instances, leaving sentences incomplete.",
+      "source_pdf_quote": "Numerous URLs and emails: https://krebsonsecurity.com/2017/03/why-i-always-tug-on-the-atm/ (p1); maria.s.thompson@nc.gov (p3); it.nc.gov URLs (p3); www.us-cert.gov (p5).",
+      "output_quote": "Element 6: '...read the article “Why I Always Tug on the ATM” at' (URL missing); Element 36: '...contact Maria Thompson, State Chief Risk Officer, at ' (Email missing); Element 81: '...1-888-282-0870 or ' (URL missing).",
+      "location": "Throughout the document (Elements 6, 17, 20, 22, 36, 51, 81, 84, 86, 88)"
+    }
+  ],
+  "action_items": [
+    "Verify and restore missing URLs and email addresses to ensure functional links.",
+    "Re-insert the missing 'Did you know' content block and introductory paragraph on page 2.",
+    "Fix broken image placeholders and ensure official logos (DHS/Stop.Think.Connect) are correctly rendered."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8103,
+      "text_match": 0.9064155385520895,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8116,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8103,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8753979081400637,
+      "shingling_precision": 0.9397119843788138,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1180,
+      "gemini_words": 1180,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 395305,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

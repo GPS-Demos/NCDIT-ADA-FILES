@@ -1,0 +1,72 @@
+{
+  "document_id": "scanned-from-paper-many-pages-of-tables-6878",
+  "audited_at": "2026-03-13T00:12:04.176346Z",
+  "quality_score": 88,
+  "fidelity_composite": 0.9318,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "Although programmatic signals show high text recall, the fidelity structural score (0.77) and qualitative evidence indicate material corruption of the document's primary content (tables). The loss of entire columns and misidentification of headers in a multi-page table document represents a significant failure in accessibility and data integrity that cannot be auto-approved.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The table structure is materially corrupted across multiple pages. The document fragments tables at page breaks, and for every table after the first, the pipeline misidentifies the first data row or category label as a header row ('is_header_row': true). Furthermore, columns are missing in subsequent tables; the source consistently has a 5-column structure (Section, Part Number, Description, Previous Price, 2025 Price), but tables starting on new pages (e.g., at element index 1 and 2) only conta",
+      "source_pdf_quote": "The source document uses a consistent 5-column layout for the price list across all pages.",
+      "output_quote": "\"cells\": [ {\"cell_type\": \"header\", \"content\": [{\"text\": \"93303\"...}], \"is_header_row\": true } ] - The table at element index 1 only has 4 columns and mislabels data as a header row.",
+      "location": "sections[1].elements[0], sections[2].elements[0], and subsequent table elements."
+    }
+  ],
+  "action_items": [
+    "Verify column count consistency (5 columns expected) across all table fragments.",
+    "Correct 'is_header_row' attributes for data rows misidentified as headers at page breaks.",
+    "Re-stitch fragmented tables to ensure logical flow for screen readers."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9318,
+      "text_match": 0.9888570717317003,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8839,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9318,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9804490606384604,
+      "shingling_precision": 0.9992216687422167,
+      "duplication_ratio": 0.0013474023133322834,
+      "word_count_ratio": 1.0,
+      "baseline_words": 15918,
+      "gemini_words": 15918,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 527141,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "document_id": "federal-interagency-committee-agenda20190516-68614dc2",
+  "audited_at": "2026-03-13T00:47:50.193216Z",
+  "quality_score": 88,
+  "fidelity_composite": 0.966,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity composite score is high (0.966), the document is missing the primary WebEx URL, which is identified as the 'primary method for remote access.' Although the concerns are labeled as minor, the description acknowledges this as a 'significant omission' in a very short document (36 words). Given the cost asymmetry where a bad document auto-approved is 3x more costly, human review is warranted to restore the essential functional link.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The WebEx URL ('http://www.mymeetings.com/nc/join.php?sigKey=mymeetings&i=445085031&p=IndigoSnake&t=c') is completely missing from the output. In the sequence of elements, reading_order 6 is skipped entirely, which corresponds to the location of this URL in the source. This is a significant omission as it is the primary method for remote access.",
+      "source_pdf_quote": "http://www.mymeetings.com/nc/join.php?sigKey=mymeetings&i=445085031&p=IndigoSnake&t=c",
+      "output_quote": "[Content missing between element 5 and element 7]",
+      "location": "WebEx section, following the 'WebEx:' heading"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to include the WebEx meeting link provided in the source PDF. The source contains the URL 'http://www.mymeetings.com/nc/join.php?sigKey=mymeetings&i=445085031&p=IndigoSnake&t=c' immediately following the 'WebEx:' text. This content is entirely missing from the output, as evidenced by the gap in the sequence of 'reading_order' values (jumping from 5 directly to 7).",
+      "source_pdf_quote": "http://www.mymeetings.com/nc/join.php?sigKey=mymeetings&i=445085031&p=IndigoSnake&t=c",
+      "output_quote": "The text block corresponding to reading_order 6 is missing between reading_order 5 and 7.",
+      "location": "WebEx section, between elements 5 and 7"
+    }
+  ],
+  "action_items": [
+    "Locate the WebEx URL in the source PDF and manually insert it into the HTML at the correct reading order position.",
+    "Ensure the URL is correctly marked up as a functional hyperlink."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.966,
+      "text_match": 0.9125642909625276,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8821,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.966,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8808510638297873,
+      "shingling_precision": 0.9466463414634146,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 36,
+      "gemini_words": 36,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 343004,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

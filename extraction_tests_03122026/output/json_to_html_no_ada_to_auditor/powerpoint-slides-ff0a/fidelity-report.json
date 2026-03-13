@@ -1,0 +1,213 @@
+{
+  "document_id": "powerpoint-slides-ff0a",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I examined the output text against the source PDF for all visible pages (1, 2, 3, 13, 24, 25). All headings, paragraphs, and list items in the output correspond to text found in the source document. No fabricated sentences or invented sections were found. The metadata title 'Powerpoint Slides Ff0A' is an acceptable AI addition.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The source document contains no phone numbers, email addresses, or specific URLs in the text (it only contains a QR code). I verified that no such information was hallucinated in the output JSON.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "Comparing the 25-page source PDF to the output JSON, there is a massive omission. The output JSON contains content only for pages 1, 2, 3, 13, 24, and 25. An explicit property `_omitted` states that 19 sections were omitted for token budget. These sections (pages 4-12 and 14-23) contain significant content regarding OneDrive/SharePoint features, use cases, best practices, and integration scenarios which are entirely absent from the output.",
+        "b_evidence_source": "The source document contains 25 pages of content, including slides on 'OneDrive for Business' (p. 4), 'SharePoint Online' (p. 5), 'Storage Scope' (p. 7), 'Collaboration' (p. 8), etc.",
+        "b_evidence_output": "The JSON sections array contains only 7 elements, skipping from Slide 3 to Slide 13 and from Slide 13 to Slide 24, with an explicit `_omitted` marker at index 3.",
+        "b_evidence_location": "sections array, between index 2 and index 4, and between index 4 and index 5",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Page 13 of the source document contains five use cases arranged visually. The output correctly converts these into a table with 5 columns. One header row contains the titles and one data row contains the corresponding descriptions. No data rows or columns are missing from this transformation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "For the sections that were successfully converted (Pages 1, 2, 3, 13, 24, 25), I performed a line-by-line comparison. Page 13's table contains all text from the source slide. Page 2's agenda list is complete. Page 1's title and subtitle are correct. No significant text was omitted within these individual sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "I checked for wording changes that alter meaning. Most differences found were minor punctuation or formatting adjustments (e.g., adding a hyphen in 'Work-in-Progress' on Slide 13). These are considered acceptable reformatting and do not change the information conveyed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I examined the output text against the source PDF for all visible pages (1, 2, 3, 13, 24, 25). All headings, paragraphs, and list items in the output correspond to text found in the source document. No fabricated sentences or invented sections were found. The metadata title 'Powerpoint Slides Ff0A' is an acceptable AI addition.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The source document contains no phone numbers, email addresses, or specific URLs in the text (it only contains a QR code). I verified that no such information was hallucinated in the output JSON.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"Comparing the 25-page source PDF to the output JSON, there is a massive omission. The output JSON contains content only for pages 1, 2, 3, 13, 24, and 25. An explicit property `_omitted` states that 19 sections were omitted for token budget. These sections (pages 4-12 and 14-23) contain significant content regarding OneDrive/SharePoint features, use cases, best practices, and integration scenarios which are entirely absent from the output.\",\n      \"b_evidence_source\": \"The source document contains 25 pages of content, including slides on 'OneDrive for Business' (p. 4), 'SharePoint Online' (p. 5), 'Storage Scope' (p. 7), 'Collaboration' (p. 8), etc.\",\n      \"b_evidence_output\": \"The JSON sections array contains only 7 elements, skipping from Slide 3 to Slide 13 and from Slide 13 to Slide 24, with an explicit `_omitted` marker at index 3.\",\n      \"b_evidence_location\": \"sections array, between index 2 and index 4, and between index 4 and index 5\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Page 13 of the source document contains five use cases arranged visually. The output correctly converts these into a table with 5 columns. One header row contains the titles and one data row contains the corresponding descriptions. No data rows or columns are missing from this transformation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"For the sections that were successfully converted (Pages 1, 2, 3, 13, 24, 25), I performed a line-by-line comparison. Page 13's table contains all text from the source slide. Page 2's agenda list is complete. Page 1's title and subtitle are correct. No significant text was omitted within these individual sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"I checked for wording changes that alter meaning. Most differences found were minor punctuation or formatting adjustments (e.g., adding a hyphen in 'Work-in-Progress' on Slide 13). These are considered acceptable reformatting and do not change the information conveyed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the source PDF and the provided JSON output. Text blocks such as 'Overview of OneDrive and SharePoint' appear multiple times in the document (once in the agenda list, and again as a section header), but this reflects the actual structure of the source slides rather than a conversion error. No instances of accidental duplication by the pipeline were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The JSON output consistently uses H1 for the main title of each slide. Subtitles and sub-sections are appropriately nested or categorized as paragraphs or list items within these sections. The hierarchy is flat but reflects the nature of a slide deck where each slide is a primary container.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "On page 13, the source document presents five categories of 'Use Cases' in a horizontal columnar layout. The JSON output converts this layout into a 5-column table with a header row for titles and a data row for descriptions. This structural choice faithfully preserves the relationships between the titles and their respective content without corruption or data loss.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the sequence of the slides in the PDF. Within individual slides, the order follows a logical top-to-bottom and left-to-right flow, maintaining the original narrative path.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The 'Agenda Items' on page 2 are correctly identified as an unordered list in the JSON output. The items match the source text exactly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document does not contain explicit hyperlink strings. No links have been incorrectly injected or fabricated in the JSON output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the source PDF and the provided JSON output. Text blocks such as 'Overview of OneDrive and SharePoint' appear multiple times in the document (once in the agenda list, and again as a section header), but this reflects the actual structure of the source slides rather than a conversion error. No instances of accidental duplication by the pipeline were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The JSON output consistently uses H1 for the main title of each slide. Subtitles and sub-sections are appropriately nested or categorized as paragraphs or list items within these sections. The hierarchy is flat but reflects the nature of a slide deck where each slide is a primary container.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"On page 13, the source document presents five categories of 'Use Cases' in a horizontal columnar layout. The JSON output converts this layout into a 5-column table with a header row for titles and a data row for descriptions. This structural choice faithfully preserves the relationships between the titles and their respective content without corruption or data loss.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the sequence of the slides in the PDF. Within individual slides, the order follows a logical top-to-bottom and left-to-right flow, maintaining the original narrative path.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The 'Agenda Items' on page 2 are correctly identified as an unordered list in the JSON output. The items match the source text exactly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document does not contain explicit hyperlink strings. No links have been incorrectly injected or fabricated in the JSON output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output faithfully translates the slide-based organization of the source PDF into a linear web page. The visual flow and organization of information match the original presentation's intent. Multi-column layouts from the slides (such as the five-column grid on page 13 and the three-column conclusion on page 23) are correctly adapted into single-column or table formats that maintain the logical relationship between content blocks. A user can find the information in the expected sequence.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The complex five-column layout of text on page 13 is successfully rendered as a valid HTML table. The columns are distinct, alignment is maintained, and the content is clearly readable. No other tables are present in the source document, and no visual corruption of table-like structures was observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "There is a significant failure in rendering meaningful images. Most critically, the QR code on Page 24, which constitutes the primary functional content of the 'NC DIT Innovation Summit Follow-Up' slide, is completely missing from the HTML output. Additionally, the Microsoft logo and brand text from Page 1 are not rendered as an image; instead, a text string 'Microsoft logo in the top left corner.' appears, indicating a failure to correctly process or display the visual asset. While many illustrative images in other sections are present, the loss of functional content (the QR code) is a major defect.",
+        "b_evidence_source": "QR code on Page 24; Microsoft logo and brand text on Page 1",
+        "b_evidence_output": "The QR code is missing under the 'NC DIT Innovation Summit Follow-Up' heading; the logo is replaced by the text 'Microsoft logo in the top left corner.'",
+        "b_evidence_location": "Pages 1 and 24",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "No visual duplication of body content was found. Sections, paragraphs, and list items appear only once in the sequence corresponding to the source document. The presence of headings in the Table of Contents area at the top of the HTML is an intentional navigation feature and does not constitute content duplication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output faithfully translates the slide-based organization of the source PDF into a linear web page. The visual flow and organization of information match the original presentation's intent. Multi-column layouts from the slides (such as the five-column grid on page 13 and the three-column conclusion on page 23) are correctly adapted into single-column or table formats that maintain the logical relationship between content blocks. A user can find the information in the expected sequence.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The complex five-column layout of text on page 13 is successfully rendered as a valid HTML table. The columns are distinct, alignment is maintained, and the content is clearly readable. No other tables are present in the source document, and no visual corruption of table-like structures was observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"There is a significant failure in rendering meaningful images. Most critically, the QR code on Page 24, which constitutes the primary functional content of the 'NC DIT Innovation Summit Follow-Up' slide, is completely missing from the HTML output. Additionally, the Microsoft logo and brand text from Page 1 are not rendered as an image; instead, a text string 'Microsoft logo in the top left corner.' appears, indicating a failure to correctly process or display the visual asset. While many illustrative images in other sections are present, the loss of functional content (the QR code) is a major defect.\",\n      \"b_evidence_source\": \"QR code on Page 24; Microsoft logo and brand text on Page 1\",\n      \"b_evidence_output\": \"The QR code is missing under the 'NC DIT Innovation Summit Follow-Up' heading; the logo is replaced by the text 'Microsoft logo in the top left corner.'\",\n      \"b_evidence_location\": \"Pages 1 and 24\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"No visual duplication of body content was found. Sections, paragraphs, and list items appear only once in the sequence corresponding to the source document. The presence of headings in the Table of Contents area at the top of the HTML is an intentional navigation feature and does not constitute content duplication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

@@ -1,0 +1,94 @@
+{
+  "document_id": "create-beautiful-sharepoint-sites-685fb98c",
+  "audited_at": "2026-03-13T01:12:17.872594Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output document is missing the content of two complete pages from the source: Page 18 ('The Landing') and Page 19 ('Engineering Onboarding'). While the section count (21) matches the page count (21), the sequential mapping shows a jump from the content of Page 17 (Section 18) directly to the content of Page 20 (Section 19). The specific web part lists and example site content for 'The Landing' and 'Engineering Onboarding' are entirely absent from the JSON structure.",
+      "source_pdf_quote": "Page 18: 'The Landing' (including list of web parts: News, Quick links, Twitter, Yammer, etc.) and Page 19: 'Engineering Onboarding' (including list of web parts: Hero web part, Weather, News, etc.).",
+      "output_quote": "The JSON array jumps from Section 18 (Crisis Communications / Page 17) to Section 19 (Conclusion / Page 20). The intermediate page content is not present in Section 18, Section 19, or as separate sections.",
+      "location": "Sections 18 and 19, spanning pages 17 to 20."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful and central images from the source PDF are missing in the HTML rendering. Specifically, the full-page screenshots of intranet site examples on pages 16, 17, 18, and 19 are absent. These images are the primary content for those sections. Additionally, the illustrative image of a meeting room on page 20 (Conclusion slide) is missing. In some cases (e.g., 'Crisis Communications'), the missing image is replaced by unformatted OCR text extracted from the screenshot, but the visual ",
+      "source_pdf_quote": "In the source PDF, page 16 shows a full-page screenshot of 'The Perspective' intranet site. Similar screenshots are present on pages 17, 18, and 19. Page 20 shows a meeting room with a large display screen.",
+      "output_quote": "In the HTML rendered output, the screenshot images of the intranet designs (pages 16-19) and the meeting room image (page 20) are missing. For 'Crisis Communications', the image is replaced by a wall of raw text beginning with 'THE LATEST UPDATES'.",
+      "location": "Sections 'The Perspective', 'Crisis Communications', 'The Landing', 'Engineering Onboarding', and 'Conclusion'"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The list conversion in the 'Conclusion' section is structurally incorrect. In the source (Page 20), there is a single list containing three bulleted items, each followed by a descriptive paragraph. The output has split this single list into three separate list elements, each containing only one item, interspersed with paragraphs. This breaks the intended grouping of the list.",
+      "source_pdf_quote": "Page 20 (Conclusion) contains a single list with three bullet points: 'Benefits of Intranet on M365 Platform', 'SharePoint Online', and 'Valuable Insights and Resources'.",
+      "output_quote": "The JSON for the Conclusion section contains three separate list elements at reading_order 125, 127, and 129, each containing a single item.",
+      "location": "Conclusion section, Page 20, element indices 125, 127, 129"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Several URLs visible as text in the source PDF are missing from the output. Specifically, the URL 'https://lookbook.microsoft.com' appears on pages 15, 16, 17, 18, and 19 of the source document. While the descriptive text preceding these links (e.g., 'Link to Crisis Communications example') is present, the actual URL text is absent in several instances in the output.",
+      "source_pdf_quote": "Page 17 (Crisis Communications) shows the URL 'https://lookbook.microsoft.com' at the bottom left.",
+      "output_quote": "In the section corresponding to Page 17, the element at reading_order 104 ('Link to Crisis Communications example') is followed by images (ro 106, 107) without the URL being present in the text stream.",
+      "location": "Crisis Communications section, Page 17, following element index 104"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.7109127555427585,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5108,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8113703581991456,
+      "shingling_precision": 0.6325903151421983,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1377,
+      "gemini_words": 1377,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 369481,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

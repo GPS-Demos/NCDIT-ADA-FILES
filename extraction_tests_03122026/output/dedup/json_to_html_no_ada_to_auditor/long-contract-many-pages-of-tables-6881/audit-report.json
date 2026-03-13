@@ -1,0 +1,118 @@
+{
+  "document_id": "long-contract-many-pages-of-tables-6881",
+  "audited_at": "2026-03-13T02:02:50.804344Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.4545454545454546,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output is missing a vast majority of the source document's content. Specifically, Page 4 (Sections B, C, D, E) is absent as the reading order skips from 46 to 55. Furthermore, Pages 6 through 22, which contain the bulk of the Master Agreement's terms and conditions (Sections I continued through EE), are entirely missing, with the JSON skipping from reading order 68 to 210. Most of the attachments listed in the Table of Contents (Page 26) are also omitted.",
+      "source_pdf_quote": "The source document contains Sections B through E on Page 4, and Sections I (continued) through EE on Pages 6 through 22, along with several appendices and attachments.",
+      "output_quote": "The JSON output contains an '_omitted' tag indicating 115 sections were skipped, and the element indices (reading_order) confirm the absence of these pages.",
+      "location": "Sections B-EE, Pages 4, 6-22"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are two major text omissions within sections that are partially present. First, Section I (NC eProcurement System) on Page 5 is truncated mid-sentence in the output (element 65), ending at '...in order to receive an', and missing the conclusion of the sentence and the subsequent four sub-points found on Page 6. Second, in Section H (Contractor Utilization of Workers Outside the U.S.) on Page 5, the output fails to capture the 'No' checkbox selection, leaving the value field empty in elemen",
+      "source_pdf_quote": "Page 5, Section I: '...in order to receive an electronic purchase order resulting from this Addendum.' followed by sub-points 1-4. Page 5, Section H: 'Will the Contractor perform any work outside of the United States? ___ Yes _X_ No'",
+      "output_quote": "Element 65: '...in order to receive an'. Element 62: value is empty string (\"\").",
+      "location": "Page 5, Sections H and I"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "There are multiple failures in table mapping. First, in the Contractor Utilization section (index 62), the selection data ('No') for the checkbox question is missing, resulting in an empty value cell. Second, the header table for the Contract Amendments (Attachment A, index 244 and following) exhibits cell alignment shifts; data intended for specific cells (like the Contract number) is shifted into lower rows or different columns compared to the source grid. These constitute major structural mis",
+      "source_pdf_quote": "Page 5, Section H: 'Will the Contractor perform any work outside of the United States? ___ Yes X No'. \nPage 27 (Attachment A): The top header box is a 3-column grid containing Contract #, Amendment #, and Department address info.",
+      "output_quote": "index 62: Value is an empty string \"\", losing the 'No' selection mark. \nindex 244: Row 1 has an empty cell where Contract # should be, and Row 2 contains data shifted from Row 1.",
+      "location": "Contractor Worker Location table (index 62); Contract Amendment header table (index 244)."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The signature table at index 218 (Page 24 of the main document) linearizes the parallel 2-column signature block by interleaving fields. Instead of presenting all fields for the Participating Entity followed by all fields for the Contractor, it alternates them (Entity, Contractor, Entity Signature, Contractor Signature, etc.). This breaks the logical flow of the signing parties' information.",
+      "source_pdf_quote": "Page 24, Signature Section: Shows two columns side-by-side for the Participating Entity and the Contractor respectively.",
+      "output_quote": "index 218: Row 3: Signature: Signed by Teena Piccione; Row 4: Signature: Signed by John Tartaro; Row 5: Name: Teena Piccione; Row 6: Name: John Tartaro.",
+      "location": "Signature Section table (index 218)."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There is a significant duplication of a data table. The 'Master Pricing' table for 'Connect Suite e-Certify' under heading 339 (listing parts CS-ECERT512K, CS-ECERT64K, etc.) is repeated exactly under heading 359 in the 'Removed Product' section. This is a duplication of actual document body content rather than intended navigational redundancy.",
+      "source_pdf_quote": "Page 151 and Page 168 of the source PDF show unique content (different pricing levels or sections).",
+      "output_quote": "The table under heading 339 (element index 339) is identical to the table under heading 359 (element index 359).",
+      "location": "Sections under 'Master Pricing' (heading 339) and 'Removed Product' (heading 359)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "In index 12, a numbered list (1., 2., 3.) is converted into an unordered list type. While the text of the markers is partially preserved in bold headers within the items, the underlying structural type is incorrect.",
+      "source_pdf_quote": "Page 1, Master Agreement Terms and Conditions: '1. Scope:', '2. Participation and Usage:', '3. Primary Contacts:'.",
+      "output_quote": "index 12: \"list_type\": \"unordered\"",
+      "location": "Master Agreement Terms and Conditions list (index 12)."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Critical contact information is missing from the output. On Page 3 (original numbering) of the main document, the email address for Nyesha Daley is clearly visible, but it is absent in the corresponding JSON index. Additionally, several URLs throughout the document (e.g., indices 65 and 234) are rendered as plain text without link metadata (url/href properties), making them non-clickable.",
+      "source_pdf_quote": "Page 3 (Section 1.2): 'Email: nyesha.daley@azdoa.gov'. \nPage 5 (Section I): 'https://eprocurement.nc.gov'.",
+      "output_quote": "index 372: \"text\": \"...Email: \" (Address missing). \nindex 65: \"text\": \"...See https://eprocurement.nc.gov for more information...\" (Text only, no link element).",
+      "location": "Lead State Contract Administrator contact (index 372); NC eProcurement System (index 65)."
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9128909046619889,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5556,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.4545454545454546,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9185608911636309,
+      "shingling_precision": 0.9505783385909569,
+      "duplication_ratio": 0.0324310432595126,
+      "word_count_ratio": 1.0,
+      "baseline_words": 41652,
+      "gemini_words": 41652,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 715921,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

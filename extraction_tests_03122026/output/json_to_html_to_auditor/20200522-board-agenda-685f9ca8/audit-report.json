@@ -1,0 +1,113 @@
+{
+  "document_id": "20200522-board-agenda-685f9ca8",
+  "audited_at": "2026-03-12T22:22:33.768447Z",
+  "quality_score": 74,
+  "fidelity_composite": 0.6547,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document shows significant quality degradation across multiple dimensions. The programmatic shingling recall (0.795) strongly corroborates the LLM fidelity report regarding missing text, including financial data and specific agenda items. Structural scores of 0.5 and the presence of five major findings, including corrupted reading order and broken table structures, necessitate human intervention to ensure government document accessibility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are two major omissions. First, under item 5 (Consent Agenda) on page 1, all financial data associated with sub-items b, c, d, and e is missing (Month-End Balances, Disbursements, and Encumbered funds). Additionally, sub-items i and ii under 5f are missing. Second, on page 2, sub-item 8a ('FY 2021 Proposed PSAP Distribution') is entirely absent from the list at reading order 11.",
+      "source_pdf_quote": "April 2020 Month-End Balance $ 66,897,707\nApril 2020 Disbursement $ 65,036\n[and similar financial data for items 5c, 5d, 5e];\ni. Monthly Reports per PSAP\nii. Mitchell County Grant Extension Request;\na) FY 2021 Proposed PSAP Distribution (Roll Call Vote Required)……….Marsha Tapler",
+      "output_quote": "The text for financial figures, the nested sub-bullets for 5f, and the entirety of item 8a are not present in the JSON elements corresponding to those sections.",
+      "location": "Sections 5 and 8; reading_order 5 and 11"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table structure is corrupted. The output defines a table with three headers ('Tab', 'Topic', 'Presenter') based on the source columns. However, the data rows fail to maintain this 3-column structure. Row 1 contains only a single cell merging all content, and rows for items 1-6 contain only two cells, merging the 'Topic' and 'Presenter' data into a single string separated by dots. This misrepresents the structural relationship between the topics and their presenters.",
+      "source_pdf_quote": "Source columns: Tab | Topic | Presenter. Example row: 1. | Chair's Opening Remarks | Eric Boyette",
+      "output_quote": "Row with two cells: cell 1: '1.', cell 2: 'Chair's Opening Remarks.............................................................................Eric Boyette'",
+      "location": "Section 1, Table element, reading_order 4"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially incorrect for the first page of the agenda. In the source, item 5 is followed by its detailed sub-items (a through f), and item 6 follows those sub-items. In the output, the table containing the header for item 6 (reading_order 4) precedes the list containing the details for item 5 (reading_order 5). This forces the reader to encounter the title of the Executive Director Report before the contents of the Consent Agenda.",
+      "source_pdf_quote": "Visual flow: Item 5 title -> Sub-items (a-f) -> Item 6 title.",
+      "output_quote": "Table including '6. Executive Director Report' (reading_order 4) precedes List starting with 'a) Minutes of Previous Meetings' (reading_order 5).",
+      "location": "Section 1, elements index 4 and 5"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the agenda is significantly altered. In the source PDF, the agenda is a single cohesive structure where main topics and their sub-items (including detailed financial data for item 5) are presented together. In the HTML output, this structure is fragmented: top-level items 1-6 are in a table, but their sub-items are pulled out into a separate bulleted list. Crucially, the detailed financial data (month-end balances and disbursements) present in the source for items 5b t",
+      "source_pdf_quote": "Item 5 includes nested financial data: 'b) NG 911 Fund/Account April 2020 Month-End Balance $ 66,897,707 April 2020 Disbursement $ 65,036'. Items 1-13 form a continuous tabular list.",
+      "output_quote": "Item 5 appears in a table but its sub-items are in a separate list. The text 'b) NG 911 Fund/Account' exists in a list, but the associated financial figures are missing. Items 7-13 are separated into a different list format at the bottom.",
+      "location": "Items 5 and 6 (Page 1) and Items 7-13 (Page 2)"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The 3-column table structure (Tab, Topic, Presenter) that defines the agenda in the source PDF is only partially rendered in the HTML. The HTML version renders items 1-6 in a table, but items 7-13 (from Page 2 of the PDF) are rendered as plain text bulleted list items. This results in the loss of the 'Presenter' column alignment, which was a key visual component of the source document's organization.",
+      "source_pdf_quote": "Items 7 through 13 are presented in a 3-column bordered table structure on Page 2.",
+      "output_quote": "Items 7 through 13 are rendered as a bulleted list: 'Education Committee Report............................................................Chuck Greene/Angie Turbeville'. The presenter names are no longer aligned in a vertical column.",
+      "location": "Items 7-13, corresponding to Page 2 of the source PDF"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The list conversion failed to capture the full structural hierarchy of item 5. Specifically, the nested sub-items (i. Monthly Reports per PSAP and ii. Mitchell County Grant Extension Request) under item 5f are missing. Furthermore, the financial data lines within items 5b, 5c, 5d, and 5e (e.g., 'April 2020 Month-End Balance $ 66,897,707') are omitted from the output, significantly degrading the structural representation of the list content.",
+      "source_pdf_quote": "f) Grant Project Updates per Reports\\n i. Monthly Reports per PSAP\\n ii. Mitchell County Grant Extension Request",
+      "output_quote": "\"text\": \"f) Grant Project Updates per Reports\"",
+      "location": "Section 1, list element (reading_order 5), item f"
+    }
+  ],
+  "action_items": [
+    "Restore missing financial data for Consent Agenda items 5b, 5c, 5d, and 5e",
+    "Reinsert missing agenda item 8a (FY 2021 Proposed PSAP Distribution)",
+    "Correct reading order to ensure item 5 details precede the item 6 header",
+    "Reconstruct the table structure for items 7-13 to maintain 'Presenter' alignment"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6547,
+      "text_match": 0.8747954173486088,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7354,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6547,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7947955390334572,
+      "shingling_precision": 0.9727024567788899,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 136,
+      "gemini_words": 136,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 315157,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "document_id": "table-seal-imagery-diagram-1468",
+  "audited_at": "2026-03-13T02:23:14.093280Z",
+  "quality_score": 69,
+  "fidelity_composite": 0.6001,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.31818181818181823,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document suffers from significant content loss (shingling_recall: 0.671) and structural degradation, corroborated by the low structural (0.318) and visual (0.5) fidelity scores. The destruction of the central network diagram through fragmentation and the corruption of the bottom table make the automated output unusable for publication.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The network diagram in the center of the page contains a substantial amount of technical text and labels (e.g., VLAN identifiers, server names like 'NCID', 'XiQ', and functional labels like 'OOB Management', 'Data Center'). None of this text is captured in the JSON as text elements. The image alt text for the main diagram is too generic and fails to convey this specific information, resulting in a loss of more than 25% of the document's total content.",
+      "source_pdf_quote": "Labels in diagram: 'Guests', 'State Employees', 'SSIDs', 'Employee - hidden', 'NCGovRoam - broadcast', 'NCGov Guest - broadcast', 'Internet Access', 'Agency Networks', 'State Network', 'Access Point', 'OOB Management', 'Data Center', 'AP management', 'User Authentication Requests', 'VLANs & Subnets', 'Employee - 210, agency', 'NCGovRoam - 410, guest', 'NCGov Guest - 410, guest', 'XiQ', 'Enterprise AD', 'NCID', 'Policy Servers (EDC & WDC)'.",
+      "output_quote": "[The listed strings are entirely missing from the extracted text elements in the JSON]",
+      "location": "Page 1, central network diagram"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The converted document lacks any heading elements. According to the structural requirements, H1 should be used for the document title to facilitate screen reader navigation. Although a title exists in the metadata and a clear descriptive label ('Description:WLAN Service – Current') exists in the content, no H1 or other heading levels were created, resulting in a flat and inaccessible structure.",
+      "source_pdf_quote": "The document contains a descriptive title area in the bottom table: 'Description:WLAN Service – Current'.",
+      "output_quote": "The 'elements' array contains no objects with \"type\": \"heading\". All sections have \"title\": null.",
+      "location": "sections[0].elements"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table at the bottom of the document is structurally corrupted. In the source, the table has a 3-column grid in the first row. The second row has two cells, the second of which spans the width of the last two columns of the first row. The JSON output defines three cells in the first row and two in the second, but assigns all cells a 'colspan' of 1. This creates an invalid and inconsistent table grid (3 columns in row 1 vs. 2 columns in row 2).",
+      "source_pdf_quote": "The footer table has 3 columns in the top row ('Date', 'Project', 'Created By') and 2 columns in the bottom row ('Department', 'Description').",
+      "output_quote": "The table at element index 1 has a first row with 3 cells and a second row with 2 cells, all with \"colspan\": 1.",
+      "location": "sections[0].elements[1]"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order in the JSON diverges significantly from the logical flow of the source document. The metadata table, which is located at the very bottom of the source PDF as a footer, has been moved to the second position in the reading order (reading_order: 2), appearing before the main diagram content (reading_order: 3). This disrupts the intended logical flow of information.",
+      "source_pdf_quote": "The table containing 'Date', 'Project', and 'Created By' is located at the bottom of the page.",
+      "output_quote": "The table is assigned \"reading_order\": 2, while the main diagram is assigned \"reading_order\": 3.",
+      "location": "sections[0].elements[1] and sections[0].elements[2]"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source PDF contains a complex network topology diagram where the spatial organization of elements (Users, Access Points, Networks, Data Center) communicates the flow of data and connectivity. In the HTML output, this organization is completely destroyed. The diagram is decomposed into a long, single-column vertical list of disconnected image fragments and text blocks. A user cannot understand the relationship between the components or follow the intended visual logic of the document.",
+      "source_pdf_quote": "The unified network topology diagram showing connectivity between 'Guests'/'State Employees' on the left and 'Internet Access'/'Agency Networks'/'State Network' on the right.",
+      "output_quote": "A vertical series of fragmented images (green blurs, red blurs) and text blocks that strip away all spatial relationships and directional arrows present in the original diagram.",
+      "location": "Page 1 / Entire Document"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The primary meaningful image in the document is the network diagram. The conversion process has 'broken' this image by slicing it into numerous small, unrecognizable fragments (e.g., blurs of color without context). These fragments do not represent the original content and fail to communicate the information contained in the source diagram. While the State Seal is rendered correctly as a single image, the failure to render the central diagram as a coherent visual unit constitutes a major image r",
+      "source_pdf_quote": "The central 'WLAN Service – Current' network topology diagram.",
+      "output_quote": "Multiple separate <img> elements showing only pieces of the diagram, such as a large green blur (from the 'Agency Networks' cloud) and a red blur (from the 'Internet Access' cloud), separated by white space and other fragments.",
+      "location": "Page 1"
+    }
+  ],
+  "action_items": [
+    "Correct the table structure to reflect the 3-column source grid",
+    "Restore the network diagram as a single coherent image with descriptive alt-text including all technical labels",
+    "Implement proper H1 heading for the document title",
+    "Fix reading order to place the metadata table at the end of the document"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6001,
+      "text_match": 0.794044665012407,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6932,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6001,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.31818181818181823,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6708595387840671,
+      "shingling_precision": 0.9726443768996961,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 19,
+      "gemini_words": 19,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 425416,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

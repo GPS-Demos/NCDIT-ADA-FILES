@@ -1,0 +1,113 @@
+{
+  "document_id": "20200522-board-agenda-685f9ca8",
+  "audited_at": "2026-03-13T01:01:14.375308Z",
+  "quality_score": 74,
+  "fidelity_composite": 0.6547,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document shows significant content and structural failures, specifically the omission of critical financial data and the total corruption of the main agenda table structure. These findings are corroborated by a low shingling recall (0.795) and very poor LLM structural/visual scores (0.5), contradicting the pipeline's overly optimistic auto-approval recommendation.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The conversion fails significantly on Item 5 (Consent Agenda) and Item 8 (Funding Committee Report). For Item 5, the entire sub-content for sub-items b, c, d, and e—which contains all the financial figures (Month-End Balance and Disbursement amounts) for the various funds—is missing. Additionally, sub-sub-items f.i and f.ii (Monthly Reports and Mitchell County request) are absent. For Item 8, the sub-item 'a) FY 2021 Proposed PSAP Distribution' is entirely missing from the list.",
+      "source_pdf_quote": "Item 5: April 2020 Month-End Balance $ 66,897,707 ... i. Monthly Reports per PSAP ... Item 8: a) FY 2021 Proposed PSAP Distribution (Roll Call Vote Required)..........Marsha Tapler",
+      "output_quote": "Item 5 in JSON only contains the fund titles without figures or sub-sub-items. Item 8 in JSON only contains the top-level report title and presenters.",
+      "location": "Sections 1 and 2, element indices 5 and 11"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The main agenda table (reading_order 4) is structurally corrupted. While the header defines three columns (Tab, Topic, Presenter), the subsequent rows fail to maintain this structure. Most rows contain only one or two cells, incorrectly merging content from the 'Topic' and 'Presenter' columns into a single string. Additionally, the financial data associated with item 5 is omitted from the table structure.",
+      "source_pdf_quote": "The table header lists 3 columns: Tab, Topic, Presenter. Row 1 (Item 1) should have '1.' in column 1, 'Chair's Opening Remarks' in column 2, and 'Eric Boyette' in column 3.",
+      "output_quote": "The output table row for item 1 contains only two cells. Cell 2 is: 'Chair's Opening Remarks.............................................................................Eric Boyette'",
+      "location": "sections[0].elements[3], reading_order 4"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order for the first page is logically flawed. The conversion places all top-level agenda items (1 through 6) into a single table at reading_order 4. It then lists the sub-items for item 5 (Consent Agenda) and item 6 (Executive Director Report) in separate lists at reading_order 5 and 6. This results in the main heading for item 6 appearing before the supporting details/sub-items of item 5, which contradicts the sequential flow of the source document.",
+      "source_pdf_quote": "Item 5 (Consent Agenda) header is immediately followed by sub-items a) through f). Item 6 (Executive Director Report) follows after sub-item f) ii.",
+      "output_quote": "The output table at reading_order 4 includes both the Item 5 and Item 6 headers. The detailed sub-items for Item 5 are not provided until reading_order 5.",
+      "location": "Page 1, elements with reading_order 4, 5, and 6."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly compromised. In the source PDF, the agenda follows a clear hierarchical structure where sub-items (a, b, c, etc.) are nested directly under their parent items (5 and 6). In the HTML output, these sub-items are detached from their parent rows and rendered as separate bulleted lists, which breaks the logical and visual flow of the meeting agenda. Furthermore, substantial portions of the content are missing: the financial data (Month-End Bala",
+      "source_pdf_quote": "Item 5 (Consent Agenda) contains nested sub-items a-f, including indented financial data like 'April 2020 Month-End Balance $ 66,897,707'. Item 6 similarly contains nested sub-items a-g.",
+      "output_quote": "The HTML displays Item 5 and 6 as table rows, but their sub-items are extracted into standalone bulleted lists below the table. All financial data (dollar amounts and descriptions) is missing from the list under item 5.",
+      "location": "Items 5 and 6, middle of page 1 / top half of HTML rendering."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The table structure used for the main agenda is visually broken due to column misalignment. Although the HTML includes 'Tab', 'Topic', and 'Presenter' headers, the data is not correctly placed within these columns. For the first three unnumbered rows, the topic text and presenter names are both merged into the 'Tab' column. For the numbered rows (1-6), the topic and presenter names are merged into the 'Topic' column. Consequently, the 'Presenter' column is entirely empty for all rows in the rend",
+      "source_pdf_quote": "The source PDF shows '1.' in the Tab column, 'Chair’s Opening Remarks...' in the Topic column, and 'Eric Boyette' in the Presenter column.",
+      "output_quote": "The HTML table for the same row shows '1.' in the Tab column, but 'Chair's Opening Remarks............................................................Eric Boyette' combined in the Topic column, leaving the Presenter column empty.",
+      "location": "Main agenda table, items 1 through 6."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Multiple lists are missing data or nested items. In the Consent Agenda list (reading_order 5), the financial figures (Month-End Balance and Disbursement) for sub-items b, c, d, and e are entirely missing. The nested list items i and ii under item 5f are also absent. On page 2 (reading_order 11), sub-item 8a ('FY 2021 Proposed PSAP Distribution') is missing from the list.",
+      "source_pdf_quote": "b) NG 911 Fund/Account [followed by financial data] ... f) Grant Project Updates per Reports i. Monthly Reports per PSAP ... 8. Funding Committee Report a) FY 2021 Proposed PSAP Distribution",
+      "output_quote": "The output list at reading_order 5 for item 5b contains only 'b) NG 911 Fund/Account'. Item 8 in reading_order 11 lacks its sub-item 'a'.",
+      "location": "reading_order 5 and reading_order 11"
+    }
+  ],
+  "action_items": [
+    "Manually restore missing financial figures for Consent Agenda items b, c, d, and e",
+    "Reconstruct the main agenda table to properly separate Tab, Topic, and Presenter into distinct columns",
+    "Reorder the HTML blocks to ensure sub-items follow their parent headers sequentially",
+    "Verify the presence of Item 8a (FY 2021 Proposed PSAP Distribution) which was reported missing"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6547,
+      "text_match": 0.8747954173486088,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7354,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6547,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7947955390334572,
+      "shingling_precision": 0.9727024567788899,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 136,
+      "gemini_words": 136,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 196046,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

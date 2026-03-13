@@ -1,0 +1,87 @@
+{
+  "document_id": "logo-imagery-graphic-colors-map-imagery-tables-4807",
+  "audited_at": "2026-03-13T01:12:07.738726Z",
+  "quality_score": 75,
+  "fidelity_composite": 0.7568,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document shows significant structural defects in the map legend conversion, with the LLM fidelity report flagging corrupted table structures and the omission of vital color-coded keys. Given the low word count (61 words), the programmatic signals are less reliable, and the mismatch between the pipeline's auto-approval and the LLM's major findings triggers a mandatory human review to prevent inaccessible data publication.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The 'Legend' section is converted into a table. However, the table structure is inconsistent and corrupted. The first row (header) contains only one cell without a colspan. The next four rows contain two cells each, establishing a two-column grid. The final row (Row 5) contains only one cell. This creates a table with an irregular number of columns per row without using column spans to maintain structural integrity, which is a major defect in table conversion.",
+      "source_pdf_quote": "The legend in the source contains a consistent set of items, where the first four entries consist of a phase and a status, and the fifth is a single status string.",
+      "output_quote": "The table at reading_order 3 has rows with inconsistent cell counts: row 0 has 1 cell, rows 1-4 have 2 cells, and row 5 has 1 cell. No colspans are used to normalize the grid.",
+      "location": "Section 1, element index 1 (table)"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The legend from the source document is rendered as a table in the HTML. This table is misrendered in two significant ways: 1) It incorrectly pairs unrelated items from the two distinct legend columns into rows (e.g., pairing 'Phase 1 (2020)' with 'In Progress'), which implies a relationship that does not exist. 2) It omits the color-coded icons/keys from the source, making it impossible for a user to understand or apply the legend data to the map image. This renders the table data effectively us",
+      "source_pdf_quote": "The legend on page 1 consists of two independent columns of data with color-coded keys: one for 'Phase' (1-4) and one for 'Status' (In Progress, etc.).",
+      "output_quote": "The HTML renders this as a 2-column table where independent items are paired in rows (e.g., 'Phase 1 (2020)' in column 1 and 'In Progress' in column 2). No color keys are present.",
+      "location": "Table at the top of the document labeled 'Legend'"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There is significant duplication of body content in the HTML output. The main map image rendered in the HTML is a full-page capture that already includes the legend and the logos. However, the conversion process has also extracted the legend (as a table) and the logos (as separate large images) and placed them outside of the map image. This results in the same body content (legend text and organizational logos) appearing twice on the same page.",
+      "source_pdf_quote": "The source PDF shows the legend and logos appearing once within the layout.",
+      "output_quote": "The legend text appears in a table at the top and again inside the map image. The logos for EMAP, DPS, and NC Emergency Management appear as separate images at the bottom and are also visible within the main map image.",
+      "location": "Throughout the rendered HTML page"
+    }
+  ],
+  "action_items": [
+    "Reconstruct the map legend to ensure accurate pairing of labels and accessibility of color-coded information",
+    "Identify and remove redundant instances of logos and legend text that appear both inside and outside the map image"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7568,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7539,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 3
+    },
+    "signals": {
+      "fidelity_composite": 0.7568,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": 1.0,
+      "baseline_words": 61,
+      "gemini_words": 61,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 359339,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

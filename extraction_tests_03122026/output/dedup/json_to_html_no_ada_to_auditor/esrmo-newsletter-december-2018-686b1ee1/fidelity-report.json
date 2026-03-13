@@ -1,0 +1,213 @@
+{
+  "document_id": "esrmo-newsletter-december-2018-686b1ee1",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains fabricated text in the table representing the 'Phishing Identification Checklist' on page 4. Specifically, the conversion has added a 'Value' column and populated every row with the word 'false'. In the source document, this is a blank checklist for users to mark; it contains no data values or status indicators. The word 'false' and the column header 'Value' are hallucinated and do not appear in the source.",
+        "b_evidence_source": "Checklist on Page 4 containing only questions and empty checkboxes.",
+        "b_evidence_output": "Table at element index 60 containing a 'Value' column with 'false' entries (e.g., 'Does the email contain poor spelling and/or bad grammar?' | 'false').",
+        "b_evidence_location": "Section 4, Page 4, element index 60",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "A thorough check of all elements shows no fabricated phone numbers, emails, or URLs. While several URLs from the source are missing (see C5), no incorrect or invented contact information was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages (1-5) and their main sections are accounted for in the output's structure. While significant portions of text are omitted within sections (addressed in C5), no entire page or high-level section has been silently dropped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The output converts the checklist graphic from page 4 into a table. The source checklist has 8 items, and the resulting table in the output (index 60) contains 8 data rows. The row count matches the source perfectly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The output contains several significant omissions. In the 'Fake Charity Websites' subsection on page 2, three descriptive sub-bullets ('✓ Browse directly...', '✓ Carefully study...', '✓ Research an organization...') are completely missing. On page 3, all six primary URLs/links for external resources (CIS, SANS, FedVTE, FEMA) are omitted from the text. Furthermore, the final sentences for the FedVTE (index 38) and FEMA (index 40) sections are truncated, ending mid-sentence and omitting critical link information.",
+        "b_evidence_source": "Page 2: '✓ Browse directly to the charity... ✓ Carefully study the website’s URL... ✓ Research an organization’s correct information...'. Page 3: 'https://www.cisecurity.org/resources/newsletter', 'https://www.sans.org/security-awareness-training/ouch-newsletter', 'https://fedvte.usalearning.gov', etc.",
+        "b_evidence_output": "Section 2 (Index 19) misses the checklist items. Section 3 (Index 26, 28, 30, 32, 38, 40) omits all URLs and link-related sentence endings.",
+        "b_evidence_location": "Sections 2 and 3, Pages 2 and 3",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Wording in the preserved sections (like the lead stats on Page 1 and the case study on Page 5) matches the source. Style changes like bolding for emphasis or italicization that reflect the original document's visual formatting are considered acceptable reformatting.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains fabricated text in the table representing the 'Phishing Identification Checklist' on page 4. Specifically, the conversion has added a 'Value' column and populated every row with the word 'false'. In the source document, this is a blank checklist for users to mark; it contains no data values or status indicators. The word 'false' and the column header 'Value' are hallucinated and do not appear in the source.\",\n      \"b_evidence_source\": \"Checklist on Page 4 containing only questions and empty checkboxes.\",\n      \"b_evidence_output\": \"Table at element index 60 containing a 'Value' column with 'false' entries (e.g., 'Does the email contain poor spelling and/or bad grammar?' | 'false').\",\n      \"b_evidence_location\": \"Section 4, Page 4, element index 60\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"A thorough check of all elements shows no fabricated phone numbers, emails, or URLs. While several URLs from the source are missing (see C5), no incorrect or invented contact information was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages (1-5) and their main sections are accounted for in the output's structure. While significant portions of text are omitted within sections (addressed in C5), no entire page or high-level section has been silently dropped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The output converts the checklist graphic from page 4 into a table. The source checklist has 8 items, and the resulting table in the output (index 60) contains 8 data rows. The row count matches the source perfectly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The output contains several significant omissions. In the 'Fake Charity Websites' subsection on page 2, three descriptive sub-bullets ('✓ Browse directly...', '✓ Carefully study...', '✓ Research an organization...') are completely missing. On page 3, all six primary URLs/links for external resources (CIS, SANS, FedVTE, FEMA) are omitted from the text. Furthermore, the final sentences for the FedVTE (index 38) and FEMA (index 40) sections are truncated, ending mid-sentence and omitting critical link information.\",\n      \"b_evidence_source\": \"Page 2: '✓ Browse directly to the charity... ✓ Carefully study the website’s URL... ✓ Research an organization’s correct information...'. Page 3: 'https://www.cisecurity.org/resources/newsletter', 'https://www.sans.org/security-awareness-training/ouch-newsletter', 'https://fedvte.usalearning.gov', etc.\",\n      \"b_evidence_output\": \"Section 2 (Index 19) misses the checklist items. Section 3 (Index 26, 28, 30, 32, 38, 40) omits all URLs and link-related sentence endings.\",\n      \"b_evidence_location\": \"Sections 2 and 3, Pages 2 and 3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Wording in the preserved sections (like the lead stats on Page 1 and the case study on Page 5) matches the source. Style changes like bolding for emphasis or italicization that reflect the original document's visual formatting are considered acceptable reformatting.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I carefully compared the source PDF and the converted JSON output for duplicated text blocks. Each main section and paragraph, such as the phishing definitions, the personal account in 'A Cautionary Tale in Phishing', and the 'Why Phishing Works' text, appear only once in the output, matching their occurrence in the source. No content duplication was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy in the output contains a skip. On Page 4 (Attachment), the document title 'Why Phishing Works' is assigned level H1 (element index 53). The next heading in that section, 'DID YOU KNOW...', is assigned level H3 (element index 62). This skips level H2, which is a major defect according to the instructions.",
+        "b_evidence_source": "Page 4 (Attachment) contains the title 'Why Phishing Works' and a callout box 'DID YOU KNOW...'.",
+        "b_evidence_output": "\"text\": \"Why Phishing Works\", \"level\": 1 (index 53) followed later by \"text\": \"DID YOU KNOW...\", \"level\": 3 (index 62).",
+        "b_evidence_location": "Section 4, elements 53 and 62",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The 'Phishing Identification Checklist' on Page 4 is presented in the source as a graphical list of questions with checkbox icons. The output converts this into a table structure with 'Field' and 'Value' columns. This is a structural corruption as it misinterprets a list as a data table and invents a 'Value' column not present in the original.",
+        "b_evidence_source": "Page 4, sidebar titled 'Phishing Identification Checklist' containing a list of questions with square checkbox icons.",
+        "b_evidence_output": "\"type\": \"table\", \"rows\": [...] containing columns for 'Field' and 'Value'.",
+        "b_evidence_location": "Section 4, element 60",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "On Page 5, the reading order of the main story ('A Cautionary Tale in Phishing') is significantly disrupted. In the source, the story is a continuous narrative flowing around sidebar boxes. In the output, the 'Ransomware Everywhere' sidebar (elements 70-72) is interjected between the second and third paragraphs of the story, and the 'High-Profile Ransomware Case' sidebar (elements 76-79) is placed after the story's conclusion. This breaks the logical flow of the personal account.",
+        "b_evidence_source": "Page 5, narrative flow: 'It was one of those weeks...' followed by 'So, late Friday afternoon...'",
+        "b_evidence_output": "The text 'It was one of those weeks...' (element 69) is followed by the 'Ransomware Everywhere' section (elements 70-72) before the story continues with 'So, late Friday afternoon...' (element 73).",
+        "b_evidence_location": "Section 5, elements 69-73",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "There are two issues with list conversion. First, the nested sub-bullets (checkmarks) under 'Fake Charity Websites' on Page 2 (e.g., 'Browse directly to the charity...', 'Carefully study the website’s URL...') are missing entirely from the list in the output. Second, the checklist on Page 4 is converted into a table (as noted in S3), which incorrectly represents the list structure.",
+        "b_evidence_source": "Page 2, under 'Fake Charity Websites', there are three sub-bullets marked with checkmarks.",
+        "b_evidence_output": "Element 19 contains the list for scams, but the content for 'Fake Charity Websites' does not include the nested checkmark items.",
+        "b_evidence_location": "Section 2, element 19",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Multiple URLs and link texts from Page 3 are missing or truncated in the output. The links for the CIS Newsletter, SANS OUCH!, SANS Video, and SANS Webcasts are absent. Furthermore, the URL in element 38 is truncated, and the link text/URL for the FEMA 'training bulletin' in element 40 is missing.",
+        "b_evidence_source": "Page 3 contains several clickable URLs for cybersecurity resources (e.g., https://www.cisecurity.org/resources/newsletter).",
+        "b_evidence_output": "Elements 26, 28, 30, and 32 provide descriptions but omit the corresponding URLs. Element 38 ends abruptly: '...please go to '.",
+        "b_evidence_location": "Section 3, elements 26-40",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.2272727272727273,
+    "penalty_sum": 17,
+    "defect_count": 5,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I carefully compared the source PDF and the converted JSON output for duplicated text blocks. Each main section and paragraph, such as the phishing definitions, the personal account in 'A Cautionary Tale in Phishing', and the 'Why Phishing Works' text, appear only once in the output, matching their occurrence in the source. No content duplication was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy in the output contains a skip. On Page 4 (Attachment), the document title 'Why Phishing Works' is assigned level H1 (element index 53). The next heading in that section, 'DID YOU KNOW...', is assigned level H3 (element index 62). This skips level H2, which is a major defect according to the instructions.\",\n      \"b_evidence_source\": \"Page 4 (Attachment) contains the title 'Why Phishing Works' and a callout box 'DID YOU KNOW...'.\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"Why Phishing Works\\\", \\\"level\\\": 1 (index 53) followed later by \\\"text\\\": \\\"DID YOU KNOW...\\\", \\\"level\\\": 3 (index 62).\",\n      \"b_evidence_location\": \"Section 4, elements 53 and 62\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The 'Phishing Identification Checklist' on Page 4 is presented in the source as a graphical list of questions with checkbox icons. The output converts this into a table structure with 'Field' and 'Value' columns. This is a structural corruption as it misinterprets a list as a data table and invents a 'Value' column not present in the original.\",\n      \"b_evidence_source\": \"Page 4, sidebar titled 'Phishing Identification Checklist' containing a list of questions with square checkbox icons.\",\n      \"b_evidence_output\": \"\\\"type\\\": \\\"table\\\", \\\"rows\\\": [...] containing columns for 'Field' and 'Value'.\",\n      \"b_evidence_location\": \"Section 4, element 60\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"On Page 5, the reading order of the main story ('A Cautionary Tale in Phishing') is significantly disrupted. In the source, the story is a continuous narrative flowing around sidebar boxes. In the output, the 'Ransomware Everywhere' sidebar (elements 70-72) is interjected between the second and third paragraphs of the story, and the 'High-Profile Ransomware Case' sidebar (elements 76-79) is placed after the story's conclusion. This breaks the logical flow of the personal account.\",\n      \"b_evidence_source\": \"Page 5, narrative flow: 'It was one of those weeks...' followed by 'So, late Friday afternoon...'\",\n      \"b_evidence_output\": \"The text 'It was one of those weeks...' (element 69) is followed by the 'Ransomware Everywhere' section (elements 70-72) before the story continues with 'So, late Friday afternoon...' (element 73).\",\n      \"b_evidence_location\": \"Section 5, elements 69-73\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"There are two issues with list conversion. First, the nested sub-bullets (checkmarks) under 'Fake Charity Websites' on Page 2 (e.g., 'Browse directly to the charity...', 'Carefully study the website’s URL...') are missing entirely from the list in the output. Second, the checklist on Page 4 is converted into a table (as noted in S3), which incorrectly represents the list structure.\",\n      \"b_evidence_source\": \"Page 2, under 'Fake Charity Websites', there are three sub-bullets marked with checkmarks.\",\n      \"b_evidence_output\": \"Element 19 contains the list for scams, but the content for 'Fake Charity Websites' does not include the nested checkmark items.\",\n      \"b_evidence_location\": \"Section 2, element 19\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Multiple URLs and link texts from Page 3 are missing or truncated in the output. The links for the CIS Newsletter, SANS OUCH!, SANS Video, and SANS Webcasts are absent. Furthermore, the URL in element 38 is truncated, and the link text/URL for the FEMA 'training bulletin' in element 40 is missing.\",\n      \"b_evidence_source\": \"Page 3 contains several clickable URLs for cybersecurity resources (e.g., https://www.cisecurity.org/resources/newsletter).\",\n      \"b_evidence_output\": \"Elements 26, 28, 30, and 32 provide descriptions but omit the corresponding URLs. Element 38 ends abruptly: '...please go to '.\",\n      \"b_evidence_location\": \"Section 3, elements 26-40\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 5,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 2,\n    \"penalty_sum\": 17,\n    \"score\": 0.2272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully translates the multi-page PDF into a single-column responsive layout. The sequence of information follows the source document faithfully. Content such as the 'Don't Take the Bait!', 'Avoid Holiday Scams', 'Why Phishing Works', and 'A Cautionary Tale in Phishing' sections appear in the same relative order as the original PDF. While fonts and styling differ, the visual organization of information is preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The 'Phishing Identification Checklist' from page 4 of the PDF, which is visually presented as a checklist with boxes, has been converted into a structured HTML table with 'Field' and 'Value' columns. The table is rendered clearly with distinguishable rows and readable text. Although it defaults the 'Value' column to 'false', the table structure itself is not visually corrupted or broken.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful images from the source PDF are missing or broken in the HTML output. Specifically, the 'DANGER SCAM ALERT' sign and the question mark character from page 2 are missing. On page 3, the FedVTE and FEMA logos, as well as the 'SANS Video of the Month' graphic (man at desk), are absent. Furthermore, a meaningful image on page 4 (computer monitor) is replaced by its alt-text description but the image itself does not render, appearing as a broken or missing element.",
+        "b_evidence_source": "The source PDF contains meaningful images: a 'DANGER SCAM ALERT' sign (page 2), FedVTE and FEMA logos (page 3), and a computer monitor graphic (page 4).",
+        "b_evidence_output": "The HTML rendered output is missing the scam alert sign, FedVTE/FEMA logos, and displays only alt-text ('A computer monitor displaying a phishing email message...') instead of the actual image on page 4.",
+        "b_evidence_location": "Sections: Avoid Holiday Scams (page 2), FedVTE/FEMA sections (page 3), Why Phishing Works (page 4)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A thorough review of the HTML screenshot shows no instances of duplicated body content. Each paragraph and section (excluding the navigation/TOC area) appears exactly once, matching the source material.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully translates the multi-page PDF into a single-column responsive layout. The sequence of information follows the source document faithfully. Content such as the 'Don't Take the Bait!', 'Avoid Holiday Scams', 'Why Phishing Works', and 'A Cautionary Tale in Phishing' sections appear in the same relative order as the original PDF. While fonts and styling differ, the visual organization of information is preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The 'Phishing Identification Checklist' from page 4 of the PDF, which is visually presented as a checklist with boxes, has been converted into a structured HTML table with 'Field' and 'Value' columns. The table is rendered clearly with distinguishable rows and readable text. Although it defaults the 'Value' column to 'false', the table structure itself is not visually corrupted or broken.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful images from the source PDF are missing or broken in the HTML output. Specifically, the 'DANGER SCAM ALERT' sign and the question mark character from page 2 are missing. On page 3, the FedVTE and FEMA logos, as well as the 'SANS Video of the Month' graphic (man at desk), are absent. Furthermore, a meaningful image on page 4 (computer monitor) is replaced by its alt-text description but the image itself does not render, appearing as a broken or missing element.\",\n      \"b_evidence_source\": \"The source PDF contains meaningful images: a 'DANGER SCAM ALERT' sign (page 2), FedVTE and FEMA logos (page 3), and a computer monitor graphic (page 4).\",\n      \"b_evidence_output\": \"The HTML rendered output is missing the scam alert sign, FedVTE/FEMA logos, and displays only alt-text ('A computer monitor displaying a phishing email message...') instead of the actual image on page 4.\",\n      \"b_evidence_location\": \"Sections: Avoid Holiday Scams (page 2), FedVTE/FEMA sections (page 3), Why Phishing Works (page 4)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A thorough review of the HTML screenshot shows no instances of duplicated body content. Each paragraph and section (excluding the navigation/TOC area) appears exactly once, matching the source material.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 8,
+  "total_critical": 1,
+  "total_major": 5,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

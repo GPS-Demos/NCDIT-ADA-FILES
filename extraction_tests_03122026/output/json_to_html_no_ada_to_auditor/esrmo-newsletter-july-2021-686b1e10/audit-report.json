@@ -1,0 +1,89 @@
+{
+  "document_id": "esrmo-newsletter-july-2021-686b1e10",
+  "audited_at": "2026-03-13T00:44:45.494698Z",
+  "quality_score": 82,
+  "fidelity_composite": 0.8785,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While the fidelity composite score (0.8785) and word count ratio (1.0) initially suggest an auto-approval path, the qualitative reports indicate a systemic failure to extract hyperlinked text. This results in the loss of critical technical identifiers such as CVE IDs, report names, and webinar titles across multiple pages. Because these omissions create gaps in sentences and remove essential technical information from a security-focused newsletter, human intervention is required to ensure the document remains functional and accurate.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "There are multiple significant omissions of text throughout the document, specifically involving the text of hyperlinks. In several instances, the name of a report, a technical CVE identifier, or a webinar title is entirely missing, leaving gaps in sentences. This occurs on page 1 (report name), page 3 (CVE ID and Emergency Directive number), and page 5 (five separate webinar titles). These omissions represent a loss of critical technical and identifying information.",
+      "source_pdf_quote": "Page 1: 'Global Security Insights Report 2021'; Page 3: 'CVE-2021-34527', 'Emergency Directive (ED) 21-04', and 'here'; Page 5: 'Are Cloud Service Provider Tools Enough to Secure Your Identities?', 'A SANS 2021 Report: Top New Attacks and Threat Report', 'Modern Identity Hacking: Have Hackers Really Adjusted to Constant Remote?', 'Security Beyond the Perimeter - Accelerating Government’s Journey to Zero Trust', and 'Securing your Enterprise: Why Protection is Essential'",
+      "output_quote": "The text is missing at the following JSON element transitions: between index 5 and 7; between index 39 and 41; between index 43 and 45; between index 49 and 51; and within indices 84, 86, 88, 90, and 92 where sentences end abruptly after a colon.",
+      "location": "Sections: 'Increased Cyber Attacks...', 'Zero Trust...', 'PrintNightmare...', and 'Training and Continued Learning Resources'"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion has a systemic failure where text segments containing hyperlinks are omitted from the output. This results in several missing phrases and labels throughout the document. Specifically, the hyperlinked text for article titles, CVE identifiers, and registration links are dropped, leaving incomplete sentences or headers. For example, on page 1, the link title 'Cybersecurity Tips for Remote Working & Learning During COVID-19' is missing. On page 3, several identifiers and the word 'her",
+      "source_pdf_quote": "Page 1: 'be sure to read Cybersecurity Tips for Remote Working & Learning During COVID-19.'; Page 3: 'click here.'; Page 3: 'vulnerability (CVE-2021-34527) in the'; Page 3: 'review the Emergency Directive (ED) 21-04 from the'; Page 5: 'July 20: SANS Webinar: Are Cloud Service Provider Tools Enough to Secure Your Identities?'",
+      "output_quote": "Element 12: 'be sure to read '; Element 39: 'click ' / Element 41: '.'; Element 43: 'vulnerability (' / Element 45: ') in the'; Element 49: 'review the ' / Element 51: ' from the'; Element 84: '**July 20:** SANS Webinar: '",
+      "location": "Sections 1, 3, and 5"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "minor",
+      "analysis": "The HTML output exhibits a significant layout rearrangement of the header elements. In the source PDF, the NCDIT logo and the 'Enterprise Security and Risk Management Office (ESRMO)' block are prominently positioned at the top of page 1, identifying the document's origin. In the HTML rendering, these elements have been moved to the bottom of the first article's text. Furthermore, several inline links are missing their descriptive link text (e.g., the long link at the end of the first section and",
+      "source_pdf_quote": "The NCDIT logo and ESRMO text block are located at the top of page 1, between the document title and the 'From the Desk of' line. Also, a full sentence on page 1 ends with 'be sure to read Cybersecurity Tips for Remote Working & Learning During COVID-19.'",
+      "output_quote": "The NCDIT logo and ESRMO text block appear after the final paragraph of the first article. The sentence on page 1 ends abruptly with 'be sure to read', followed by the misplaced header block. Other link text such as 'here' is also missing from the text flow on subsequent pages.",
+      "location": "Page 1, top and section 'Increased Cyber Attacks Require Increased Vigilence'; Page 3, section 'Zero Trust and the New Normal of Cybersecurity'."
+    }
+  ],
+  "action_items": [
+    "Verify the presence of technical identifiers (CVE IDs) on page 3.",
+    "Restore missing report titles and webinar names on pages 1 and 5.",
+    "Check sentence flow where hyperlinked phrases were dropped.",
+    "Correct the placement of the NCDIT logo and ESRMO header block to the top of the document."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8785,
+      "text_match": 0.8248166948674563,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8237,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8785,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8742228598756576,
+      "shingling_precision": 0.7806961349562247,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1543,
+      "gemini_words": 1543,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 352761,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

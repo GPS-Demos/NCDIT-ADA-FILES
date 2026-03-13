@@ -1,0 +1,79 @@
+{
+  "document_id": "draft-addressnc-specifications-20210811-68610610",
+  "audited_at": "2026-03-13T01:15:41.115480Z",
+  "quality_score": 85,
+  "fidelity_composite": 0.8636,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "Despite a high composite score and perfect word count ratio, the structural fidelity score of 0.545 is alarmingly low, corroborating the specific concerns regarding massive table truncation in Appendix A and the Place Type sections. The reported loss of data across seven pages (5-8 and 11-13) constitutes a significant failure for a technical specification document, and the discrepancy between word count and structural integrity requires human verification.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The document contains two major tables that span multiple pages. Both tables are severely truncated in the conversion. The table 'Appendix A - Fields' (starting on page 4) only contains rows from the first page of the table; all data from pages 5, 6, 7, and 8 is missing. Similarly, the 'Place Type' table (starting on page 9) only contains rows from pages 9 and 10; all data from pages 11, 12, and 13 is missing.",
+      "source_pdf_quote": "The 'Appendix A - Fields' table spans pages 4-8, concluding with 'UniqueID' on page 8. The 'Place Type' table spans pages 9-13, concluding with 'Vacant' on page 13.",
+      "output_quote": "The table in the JSON following heading 'Appendix A - Fields' ends at row 'St_PosDir'. The table following heading 'Place Type' ends at row 'Government – Other'.",
+      "location": "Section 0, elements at reading_order 47 and 92"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The reading order is significantly disrupted by the omission of massive blocks of content. Because the conversion failed to capture the continuation of the tables in Appendix A and Appendix B, the logical flow jumps from the middle of one table to the start of another section, bypassing several pages of critical data.",
+      "source_pdf_quote": "The source PDF maintains a continuous flow through the fields table from page 4 to page 8, and the place type table from page 9 to 13.",
+      "output_quote": "The JSON jumps from the row 'St_PosDir' (end of page 4) directly to the start of Appendix B (page 9), and from 'Government - Other' (end of page 10) directly to 'Placement' (page 13).",
+      "location": "Gaps between reading_order 47/88 and 92/125"
+    }
+  ],
+  "action_items": [
+    "Verify if the tabular data from pages 5-8 and 11-13 was omitted or simply rendered as unstructured text.",
+    "Assess whether the reading order jump between truncated tables renders the document's technical content unusable."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8636,
+      "text_match": 0.9703947368421052,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8495,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8636,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9634619310063278,
+      "shingling_precision": 0.9774280389314558,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 3047,
+      "gemini_words": 3047,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 461592,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

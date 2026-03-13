@@ -1,0 +1,102 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc",
+  "audited_at": "2026-03-13T02:12:24.992151Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": null,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The conversion result is extremely incomplete. The JSON contains placeholders like '_omitted: 34 sections omitted for token budget', indicating that a vast majority of the document's content was not converted. Specifically, pages 5 through 10 (Executive Summary, Introduction, About the Council, What is GIS?, FY23-24 Highlights), and pages 23 through 30 (Statewide Efforts, Flood Resiliency Blueprint, Resiliency Exchange, Environmental Justice Tool, etc.) are entirely missing from the output.",
+      "source_pdf_quote": "The entire 'Executive Summary' section on page 5, the 'Introduction' on page 6, and the 'About the Council' section on page 7.",
+      "output_quote": "The JSON skips directly from the Table of Contents (ending at element 36) to the 'North Carolina Report Card' table (starting at element 84), with an explicit note that sections were omitted.",
+      "location": "Between element 36 and 84."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Within the sections that were partially converted, there is significant text loss. For example, the 'Broadband Expansion' section on page 14 (page 9 of the report) contains three paragraphs of body text. The JSON (elements 114, 115, 118) captures the first and second paragraphs and part of the final paragraph, but omits the detailed descriptions of the GREAT, CAB, and BEAD funding programs found in the middle of that section.",
+      "source_pdf_quote": "Page 14, paragraph beginning 'GIS provides a tool for transparency...' which mentions 'Funding programs such as the Growing Rural Economies with Access to Technology (GREAT) grant, Completing Access to Broadband (CAB) program, and Broadband Equity, Access, and Deployment (BEAD) program...'",
+      "output_quote": "Element 118 captures the surrounding text but omits the specific list of programs and the explanation of transparency provided in the source.",
+      "location": "Element 118"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The tables representing the strategic goals (1.1 through 2.4) on pages 19-21 of the source are structurally corrupted in the output. In the source, these tables have a consistent two-column layout where the first column often spans multiple rows (e.g., the 'Need' label). In the output (e.g., element 158 for Goal 1.1 or element 160 for Goal 1.3), the header row contains one cell, the first data row contains two cells, and subsequent rows contain only one cell. This results in an inconsistent colu",
+      "source_pdf_quote": "Table for Goal 1.3 (page 19) showing a 2-column structure with 'Need' spanning 4 rows.",
+      "output_quote": "Element index 160: Row 2 has 2 cells, but Rows 3, 4, and 5 only have 1 cell each.",
+      "location": "Strategic Direction... Goal 1.3, page 19, element index 160"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The Table of Contents (reading_order 11) is significantly corrupted. The hierarchical nesting of the source's list (where subsections are indented) has been lost, resulting in a flat list. Furthermore, many items from the second and third pages of the source's TOC (e.g., items 1.1 through 1.6) are missing entirely from the list element, and some items (like 1.7 at reading_order 12) have been converted into standalone paragraphs instead of being included in the list structure.",
+      "source_pdf_quote": "The Table of Contents on pages 2-4 shows a detailed, multi-level nested list.",
+      "output_quote": "Element index 11 is a flat, incomplete list. Element index 12 is a paragraph that should be a list item.",
+      "location": "Contents, pages 2-4, element index 11-12"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The heading hierarchy is inconsistent. 'Goal 1' (reading_order 157) is correctly identified as an H2, but 'Goal 2' (reading_order 167) is categorized as a paragraph despite serving the same structural role in the source document. Additionally, several H2 sections in the source (e.g., 'Collaboration for Public Access to Geographic Information') are promoted to H1 in the output (reading_order 301), although this is generally an acceptable normalization.",
+      "source_pdf_quote": "Goal 2. Collaborate and conduct outreach...",
+      "output_quote": "{\n          \"type\": \"paragraph\",\n          \"content\": [\n            {\n              \"text\": \"Goal 2. Collaborate and conduct outreach...\"",
+      "location": "page 21, element index 167"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9312827580035777,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5597,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9219161894373239,
+      "shingling_precision": 0.9519429322320255,
+      "duplication_ratio": 0.008191255111670336,
+      "word_count_ratio": 1.0,
+      "baseline_words": 10950,
+      "gemini_words": 10950,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 550961,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

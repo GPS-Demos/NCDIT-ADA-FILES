@@ -1,0 +1,213 @@
+{
+  "document_id": "mostly-text-charts-tables-screenshots-maps-67fb",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output text reflects the headings and paragraphs found in the source document without inventing new content. Reading order numbers jump, but the text present is grounded in the original PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "Contact information found on page 28 of the source is not present in the JSON elements due to significant omissions, so no fabrication was found. No other addresses or phone numbers were invented.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The JSON output contains a note about omitted sections and the reading order indices show a massive gap between page 3 and page 13. Pages 4 through 12 (covering NCDIT's role, efforts, legal authority, and definitions) and pages 52 through 53 (containing appendix data like maps and demographic charts) are completely missing from the conversion.",
+        "b_evidence_source": "Entire pages 4, 5, 6, 7, 8, 9, 10, 11, 12, 52, and 53.",
+        "b_evidence_output": "The sections array jumps from the end of page 3 (element 21) to the start of page 13 (element 127), and ends at page 51 (element 522) before jumping to page 54 (element 544).",
+        "b_evidence_location": "Throughout document, specifically jumps between pp 3-13 and pp 51-54",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The large table on page 54 is captured correctly with all 12 language rows. The sub-header row (A-R) is correctly represented as a data row in the JSON. The small table on p14 is also accurate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "While some minor text strings are missing (handled in C6), there are no instances where a section starts correctly but is truncated by more than 25% within the text that was converted.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "On page 29, the specific name of a guidance document ('Interpretation Waiver Form Guidance') is missing from the sentence describing requirements for using an interpreter, leaving a grammatical and informational gap.",
+        "b_evidence_source": "...following the guidelines set in the Proposed Language Access Policy and Interpretation Waiver Form Guidance document.",
+        "b_evidence_output": "...following the guidelines set in the Proposed Language Access Policy and  document.",
+        "b_evidence_location": "Section 3.1, Page 29, element indices 297 and 299",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6976744186046512,
+    "penalty_sum": 26,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output text reflects the headings and paragraphs found in the source document without inventing new content. Reading order numbers jump, but the text present is grounded in the original PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"Contact information found on page 28 of the source is not present in the JSON elements due to significant omissions, so no fabrication was found. No other addresses or phone numbers were invented.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The JSON output contains a note about omitted sections and the reading order indices show a massive gap between page 3 and page 13. Pages 4 through 12 (covering NCDIT's role, efforts, legal authority, and definitions) and pages 52 through 53 (containing appendix data like maps and demographic charts) are completely missing from the conversion.\",\n      \"b_evidence_source\": \"Entire pages 4, 5, 6, 7, 8, 9, 10, 11, 12, 52, and 53.\",\n      \"b_evidence_output\": \"The sections array jumps from the end of page 3 (element 21) to the start of page 13 (element 127), and ends at page 51 (element 522) before jumping to page 54 (element 544).\",\n      \"b_evidence_location\": \"Throughout document, specifically jumps between pp 3-13 and pp 51-54\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The large table on page 54 is captured correctly with all 12 language rows. The sub-header row (A-R) is correctly represented as a data row in the JSON. The small table on p14 is also accurate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"While some minor text strings are missing (handled in C6), there are no instances where a section starts correctly but is truncated by more than 25% within the text that was converted.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"On page 29, the specific name of a guidance document ('Interpretation Waiver Form Guidance') is missing from the sentence describing requirements for using an interpreter, leaving a grammatical and informational gap.\",\n      \"b_evidence_source\": \"...following the guidelines set in the Proposed Language Access Policy and Interpretation Waiver Form Guidance document.\",\n      \"b_evidence_output\": \"...following the guidelines set in the Proposed Language Access Policy and  document.\",\n      \"b_evidence_location\": \"Section 3.1, Page 29, element indices 297 and 299\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 26,\n    \"score\": 0.6976744186046512\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Human-readable name of the check",
+        "a_analysis": "The output contains repeated headers like 'N.C. Department of Information Technology Language Access Plan' and table headers ('Phase', 'Action Items'), but these correspond to repeated elements on each page of the source PDF. No paragraphs or major sections were found to be duplicated incorrectly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy follows a logical order (H1 for title, H2 for major sections, H3 for subsections, H4 for internal headings). While some section levels are flattened compared to the visual hierarchy (e.g., in Section 2.1), there are no skips (e.g., H1 to H3) that would break navigation for screen readers. This is considered normalized hierarchy.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The large statistical table on page 54 (JSON section 54) has corrupted structure. Row 1 has 3 cells (Language, COGRs, Avg. Rank), Row 2 contains 16 letter headers (A-R), and Row 3+ contains 18 data cells (Language name, 16 region values, Avg. Rank). Row 2 is missing the first and last cells, which causes the letter headers to misalign with the data columns in a grid view. This is a major structural corruption of a complex table.",
+        "b_evidence_source": "Table on page 54 with columns: Language, A, B, C, D, E, F, G, J, K, L, M, N, O, P, Q, R, Avg Rank.",
+        "b_evidence_output": "Section 54 table: Row 2 contains 16 cells starting with 'A' and ending with 'R', missing alignment cells for the 'Language' and 'Avg. Rank' columns present in other rows.",
+        "b_evidence_location": "Section 9: Appendix, Page 54, element reading_order 544",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the source document's logical flow. Footnotes are placed logically near their references or at section ends, and the progression through the sections and action plans matches the PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are generally captured correctly as list objects. In some cases, lists within table cells are rendered using markdown bullet characters within a single text block, which preserves the structural meaning even if not using nested list objects.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "In Section 3.1, on page 29, the link text 'Interpretation Waiver Form Guidance' is missing from the output. The text surrounding it is split into two elements, leaving out the specific phrase that serves as the link label in the source. This results in a missing link defect.",
+        "b_evidence_source": "...following the guidelines set in the Proposed Language Access Policy and Interpretation Waiver Form Guidance document.",
+        "b_evidence_output": "\"...Proposed Language Access Policy and \" (reading_order 297) followed by \" document.\" (reading_order 299)",
+        "b_evidence_location": "Section 3.1, Page 29, elements 297 and 299",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Human-readable name of the check\",\n      \"a_analysis\": \"The output contains repeated headers like 'N.C. Department of Information Technology Language Access Plan' and table headers ('Phase', 'Action Items'), but these correspond to repeated elements on each page of the source PDF. No paragraphs or major sections were found to be duplicated incorrectly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy follows a logical order (H1 for title, H2 for major sections, H3 for subsections, H4 for internal headings). While some section levels are flattened compared to the visual hierarchy (e.g., in Section 2.1), there are no skips (e.g., H1 to H3) that would break navigation for screen readers. This is considered normalized hierarchy.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The large statistical table on page 54 (JSON section 54) has corrupted structure. Row 1 has 3 cells (Language, COGRs, Avg. Rank), Row 2 contains 16 letter headers (A-R), and Row 3+ contains 18 data cells (Language name, 16 region values, Avg. Rank). Row 2 is missing the first and last cells, which causes the letter headers to misalign with the data columns in a grid view. This is a major structural corruption of a complex table.\",\n      \"b_evidence_source\": \"Table on page 54 with columns: Language, A, B, C, D, E, F, G, J, K, L, M, N, O, P, Q, R, Avg Rank.\",\n      \"b_evidence_output\": \"Section 54 table: Row 2 contains 16 cells starting with 'A' and ending with 'R', missing alignment cells for the 'Language' and 'Avg. Rank' columns present in other rows.\",\n      \"b_evidence_location\": \"Section 9: Appendix, Page 54, element reading_order 544\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the source document's logical flow. Footnotes are placed logically near their references or at section ends, and the progression through the sections and action plans matches the PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are generally captured correctly as list objects. In some cases, lists within table cells are rendered using markdown bullet characters within a single text block, which preserves the structural meaning even if not using nested list objects.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"In Section 3.1, on page 29, the link text 'Interpretation Waiver Form Guidance' is missing from the output. The text surrounding it is split into two elements, leaving out the specific phrase that serves as the link label in the source. This results in a missing link defect.\",\n      \"b_evidence_source\": \"...following the guidelines set in the Proposed Language Access Policy and Interpretation Waiver Form Guidance document.\",\n      \"b_evidence_output\": \"\\\"...Proposed Language Access Policy and \\\" (reading_order 297) followed by \\\" document.\\\" (reading_order 299)\",\n      \"b_evidence_location\": \"Section 3.1, Page 29, elements 297 and 299\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output maintains the same visual organization and hierarchical structure as the source PDF. The document flows logically from the cover page through the table of contents to the various sections and sub-sections. Layout elements such as headers, sub-headers, bulleted lists, and tables are placed in the same relative order as the original document. The conversion successfully translates the fixed PDF layout into a responsive HTML format without losing the visual relationship between content blocks.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The document contains numerous 'Five-Year Action Plan' tables throughout the sections, as well as complex demographic tables in the Appendix. Upon visual inspection of the HTML output, these tables are correctly rendered. The 'Phase' and 'Action Items' columns are clearly defined and aligned. The complex demographic tables (e.g., the regional population table on page 52 and the 17-column COGRs table on page 54) are rendered as functional HTML tables with appropriate cell borders and background colors (heatmap styling) that match the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The meaningful images from the source PDF are present in the HTML output. This includes the NCDIT logo on the title page and the regional map in Appendix 1 (page 52). The charts/visuals on page 53 regarding the LOTE and LEP populations are also correctly included. No broken image icons or empty containers were observed where meaningful content should be.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The content in the HTML output was reviewed for visual duplication. Aside from the intentional and standard practice of including headings in both the navigation/TOC area and the body of the document for accessibility, no genuine body content (paragraphs, list items, or tables) is duplicated. Every content block appears exactly once in the document body, mirroring the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output maintains the same visual organization and hierarchical structure as the source PDF. The document flows logically from the cover page through the table of contents to the various sections and sub-sections. Layout elements such as headers, sub-headers, bulleted lists, and tables are placed in the same relative order as the original document. The conversion successfully translates the fixed PDF layout into a responsive HTML format without losing the visual relationship between content blocks.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The document contains numerous 'Five-Year Action Plan' tables throughout the sections, as well as complex demographic tables in the Appendix. Upon visual inspection of the HTML output, these tables are correctly rendered. The 'Phase' and 'Action Items' columns are clearly defined and aligned. The complex demographic tables (e.g., the regional population table on page 52 and the 17-column COGRs table on page 54) are rendered as functional HTML tables with appropriate cell borders and background colors (heatmap styling) that match the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The meaningful images from the source PDF are present in the HTML output. This includes the NCDIT logo on the title page and the regional map in Appendix 1 (page 52). The charts/visuals on page 53 regarding the LOTE and LEP populations are also correctly included. No broken image icons or empty containers were observed where meaningful content should be.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The content in the HTML output was reviewed for visual duplication. Aside from the intentional and standard practice of including headings in both the navigation/TOC area and the body of the document for accessibility, no genuine body content (paragraphs, list items, or tables) is duplicated. Every content block appears exactly once in the document body, mirroring the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

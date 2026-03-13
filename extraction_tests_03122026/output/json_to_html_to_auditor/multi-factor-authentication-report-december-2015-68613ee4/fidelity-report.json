@@ -1,0 +1,213 @@
+{
+  "document_id": "multi-factor-authentication-report-december-2015-68613ee4",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output faithfully follows the structure and content of the source PDF. No hallucinated paragraphs, fabricated table-of-contents entries, or invented section headers were found. All text in the JSON has a clear corresponding basis in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The source document on page 5 contains a reference URL: http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf. In the output JSON, this URL is completely omitted. Paragraph element 19 contains 'See' and element 21 contains 'for reference.', but the URL that should appear between them is missing. The omission of a critical government reference URL is a critical failure.",
+        "b_evidence_source": "See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf forreference.",
+        "b_evidence_output": "Elements 19: \"text\": \"See\" and Element 21: \"text\": \"for reference.\"",
+        "b_evidence_location": "Legislative Request section, page 5, elements 19 and 21",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages (1-12) and their primary sections (Cover, Contents, Legislative Request, Introduction, Background, Benefits, Potential Participants, MFA Project, Goals, Key Deliverables, Requirements Prioritization, Methodology, Plan, Budget) are represented in the output JSON. No entire pages or major sections were silently dropped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The project status tables on pages 10-11 and the budget tables on page 12 were examined. The JSON correctly preserves the row counts and data for these tables. For example, the Budget table for FY 2015-2016 contains all line items and the correct total of $623,215.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "There are two instances of significant text omission involving nested lists. 1) On page 5, the nested bullet points under 'Single-factor' and 'Two-factor authentication' (e.g., 'Something you know...', 'Something you are...') are missing, which defines the authentication types. 2) On page 8, under 'Potential Participants', the entire nested list of participating state departments (approximately 22 items) is missing. This loss of specific departmental data constitutes a major omission of more than 25% of the content within that list-heavy section.",
+        "b_evidence_source": "Under 'Potential Participants', 1. VPN (Administrator Access) lists: Department of Information Technology, Department of Public Safety, Department of Revenue, Department of Human and Health Services, Department of Natural and Cultural Resources, Department of Administration, Department of Transportation.",
+        "b_evidence_output": "Element 52 contains the top-level list items (1-8) but completely omits all nested departmental bullet points.",
+        "b_evidence_location": "Potential Participants section, page 8, element 52; Introduction section, page 5, element 27",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Excluding the omissions noted in C2 and C5, the text content is accurately captured. Minor reformatting like adding spaces (e.g., 'for reference' instead of the source's 'forreference') or normalizing punctuation is within acceptable bounds and does not alter the meaning for a user.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output faithfully follows the structure and content of the source PDF. No hallucinated paragraphs, fabricated table-of-contents entries, or invented section headers were found. All text in the JSON has a clear corresponding basis in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The source document on page 5 contains a reference URL: http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf. In the output JSON, this URL is completely omitted. Paragraph element 19 contains 'See' and element 21 contains 'for reference.', but the URL that should appear between them is missing. The omission of a critical government reference URL is a critical failure.\",\n      \"b_evidence_source\": \"See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf forreference.\",\n      \"b_evidence_output\": \"Elements 19: \\\"text\\\": \\\"See\\\" and Element 21: \\\"text\\\": \\\"for reference.\\\"\",\n      \"b_evidence_location\": \"Legislative Request section, page 5, elements 19 and 21\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages (1-12) and their primary sections (Cover, Contents, Legislative Request, Introduction, Background, Benefits, Potential Participants, MFA Project, Goals, Key Deliverables, Requirements Prioritization, Methodology, Plan, Budget) are represented in the output JSON. No entire pages or major sections were silently dropped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The project status tables on pages 10-11 and the budget tables on page 12 were examined. The JSON correctly preserves the row counts and data for these tables. For example, the Budget table for FY 2015-2016 contains all line items and the correct total of $623,215.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"There are two instances of significant text omission involving nested lists. 1) On page 5, the nested bullet points under 'Single-factor' and 'Two-factor authentication' (e.g., 'Something you know...', 'Something you are...') are missing, which defines the authentication types. 2) On page 8, under 'Potential Participants', the entire nested list of participating state departments (approximately 22 items) is missing. This loss of specific departmental data constitutes a major omission of more than 25% of the content within that list-heavy section.\",\n      \"b_evidence_source\": \"Under 'Potential Participants', 1. VPN (Administrator Access) lists: Department of Information Technology, Department of Public Safety, Department of Revenue, Department of Human and Health Services, Department of Natural and Cultural Resources, Department of Administration, Department of Transportation.\",\n      \"b_evidence_output\": \"Element 52 contains the top-level list items (1-8) but completely omits all nested departmental bullet points.\",\n      \"b_evidence_location\": \"Potential Participants section, page 8, element 52; Introduction section, page 5, element 27\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Excluding the omissions noted in C2 and C5, the text content is accurately captured. Minor reformatting like adding spaces (e.g., 'for reference' instead of the source's 'forreference') or normalizing punctuation is within acceptable bounds and does not alter the meaning for a user.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 35,\n    \"score\": 0.5930232558139535\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the entire output JSON and compared it to the source PDF. The content flows logically from the cover page through to the budget section. While the source document has multiple pages with the same footer and two separate pages with the text 'This page left blank intentionally', the output does not repeat these inappropriately or duplicate body paragraphs or list items. Each section appears exactly once.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is well-preserved for accessibility. The document title is an H1, the Table of Contents header is an H1, and major section headers (Legislative Request, Introduction, Background, etc.) are H2s. Subsections like 'Goals' are correctly nested as H3s under their respective H2 ('The MFA Project'). No levels are skipped in a way that violates logical structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The table on page 10 representing the 'MFA Project status' is structurally inconsistent. In the source, this data forms a 3-column grid (Phase ID/Name, Status, and Date). Items 1-4 have values for columns 1 and 2, while item 5 (Procurement Phase) has values for all three. In the output JSON, the table structure is corrupted because the first four rows contain only 2 cell elements each, while the fifth row contains 3 cells. This inconsistency in column counts across rows without appropriate spans constitutes a structural failure.",
+        "b_evidence_source": "The project status table on page 10 shows alignment for Phase, Status, and Date across multiple items.",
+        "b_evidence_output": "The table at element index 79 shows rows with differing cell counts: rows 1-4 have 2 cells, while row 5 has 3 cells.",
+        "b_evidence_location": "Plan section, page 10, element index 79",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the source document faithfully. Content blocks, including the TOC, main text, and tables, appear in the order intended by the original PDF. The logo on the cover page has been moved to the end of the section (element index 8), which is a common and acceptable adjustment for screen reader accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "There are several defects in list conversion. First, nested list items are missing entirely on page 5 (sub-bullets for types of authentication) and page 8 (department lists under Potential Participants). In the source on page 8, each of the 8 main items includes a bulleted list of specific agencies; the output JSON only includes the top-level items. Second, the numbered list for 'Methodology' on page 10 (items 1-6) is incorrectly converted to an unordered list.",
+        "b_evidence_source": "Page 8: '1. VPN (Administrator Access) o Department of Information Technology o Department of Public Safety...' and Page 10: numbered list 1-6 under Methodology.",
+        "b_evidence_output": "Element index 52: missing the nested department sub-bullets. Element index 75: 'list_type': 'unordered' for the numbered Methodology list.",
+        "b_evidence_location": "Potential Participants (page 8, element 52) and Methodology (page 10, element 75)",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URL link present on page 5 ('http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf') is completely missing from the output text. The paragraph is broken into two elements ('See' and 'for reference.'), and the URL data that should be between them is lost.",
+        "b_evidence_source": "See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf for reference.",
+        "b_evidence_output": "\"text\": \"See\" ... \"text\": \"for reference.\"",
+        "b_evidence_location": "Legislative Request section, page 5, element indices 19 and 21",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6818181818181819,
+    "penalty_sum": 7,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the entire output JSON and compared it to the source PDF. The content flows logically from the cover page through to the budget section. While the source document has multiple pages with the same footer and two separate pages with the text 'This page left blank intentionally', the output does not repeat these inappropriately or duplicate body paragraphs or list items. Each section appears exactly once.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is well-preserved for accessibility. The document title is an H1, the Table of Contents header is an H1, and major section headers (Legislative Request, Introduction, Background, etc.) are H2s. Subsections like 'Goals' are correctly nested as H3s under their respective H2 ('The MFA Project'). No levels are skipped in a way that violates logical structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The table on page 10 representing the 'MFA Project status' is structurally inconsistent. In the source, this data forms a 3-column grid (Phase ID/Name, Status, and Date). Items 1-4 have values for columns 1 and 2, while item 5 (Procurement Phase) has values for all three. In the output JSON, the table structure is corrupted because the first four rows contain only 2 cell elements each, while the fifth row contains 3 cells. This inconsistency in column counts across rows without appropriate spans constitutes a structural failure.\",\n      \"b_evidence_source\": \"The project status table on page 10 shows alignment for Phase, Status, and Date across multiple items.\",\n      \"b_evidence_output\": \"The table at element index 79 shows rows with differing cell counts: rows 1-4 have 2 cells, while row 5 has 3 cells.\",\n      \"b_evidence_location\": \"Plan section, page 10, element index 79\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the source document faithfully. Content blocks, including the TOC, main text, and tables, appear in the order intended by the original PDF. The logo on the cover page has been moved to the end of the section (element index 8), which is a common and acceptable adjustment for screen reader accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"There are several defects in list conversion. First, nested list items are missing entirely on page 5 (sub-bullets for types of authentication) and page 8 (department lists under Potential Participants). In the source on page 8, each of the 8 main items includes a bulleted list of specific agencies; the output JSON only includes the top-level items. Second, the numbered list for 'Methodology' on page 10 (items 1-6) is incorrectly converted to an unordered list.\",\n      \"b_evidence_source\": \"Page 8: '1. VPN (Administrator Access) o Department of Information Technology o Department of Public Safety...' and Page 10: numbered list 1-6 under Methodology.\",\n      \"b_evidence_output\": \"Element index 52: missing the nested department sub-bullets. Element index 75: 'list_type': 'unordered' for the numbered Methodology list.\",\n      \"b_evidence_location\": \"Potential Participants (page 8, element 52) and Methodology (page 10, element 75)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URL link present on page 5 ('http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf') is completely missing from the output text. The paragraph is broken into two elements ('See' and 'for reference.'), and the URL data that should be between them is lost.\",\n      \"b_evidence_source\": \"See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf for reference.\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"See\\\" ... \\\"text\\\": \\\"for reference.\\\"\",\n      \"b_evidence_location\": \"Legislative Request section, page 5, element indices 19 and 21\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 2,\n    \"penalty_sum\": 7,\n    \"score\": 0.6818181818181818\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output faithfully reproduces the visual organization of the source PDF. The title page information, table of contents, and all sections (Legislative Request, Introduction, Background, Benefits, Potential Participants, The MFA Project, Goals, Key Deliverables, Requirements Prioritization Process, Methodology, Plan, and Budget) appear in the correct sequence. The transition from physical pages to a continuous HTML flow is handled correctly without disrupting the meaning or visual relationship of content blocks.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tabular-style lists in the source PDF (MFA Project status on pages 10-11 and Budget expenses on page 12) have been correctly converted into HTML tables. These tables are visually clear, with distinct rows and columns that accurately align the descriptions with their statuses, dates, or amounts. For example, the Budget section on page 12 of the PDF lists expenses and amounts; in the HTML, these are rendered in a structured table format that remains easy to read and understand.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The primary meaningful image from the source PDF—the 'NC Information Technology' logo on the cover page—is present and correctly rendered in the HTML output. No other meaningful images (charts, photos) are present in the source document to be missed. Decorative elements like page footers are appropriately handled.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no visual duplication of body content in the HTML output. Content from the different pages of the PDF is mapped once to the continuous HTML document. The presence of section titles in the sidebar/TOC and again in the main body is an intentional accessibility feature and not a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output faithfully reproduces the visual organization of the source PDF. The title page information, table of contents, and all sections (Legislative Request, Introduction, Background, Benefits, Potential Participants, The MFA Project, Goals, Key Deliverables, Requirements Prioritization Process, Methodology, Plan, and Budget) appear in the correct sequence. The transition from physical pages to a continuous HTML flow is handled correctly without disrupting the meaning or visual relationship of content blocks.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tabular-style lists in the source PDF (MFA Project status on pages 10-11 and Budget expenses on page 12) have been correctly converted into HTML tables. These tables are visually clear, with distinct rows and columns that accurately align the descriptions with their statuses, dates, or amounts. For example, the Budget section on page 12 of the PDF lists expenses and amounts; in the HTML, these are rendered in a structured table format that remains easy to read and understand.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The primary meaningful image from the source PDF—the 'NC Information Technology' logo on the cover page—is present and correctly rendered in the HTML output. No other meaningful images (charts, photos) are present in the source document to be missed. Decorative elements like page footers are appropriately handled.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no visual duplication of body content in the HTML output. Content from the different pages of the PDF is mapped once to the continuous HTML document. The presence of section titles in the sidebar/TOC and again in the main body is an intentional accessibility feature and not a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 5,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

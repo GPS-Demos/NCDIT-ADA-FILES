@@ -1,0 +1,120 @@
+{
+  "document_id": "20190416-nc-911-board-minutes-approved-687248c4",
+  "audited_at": "2026-03-13T00:59:10.477375Z",
+  "quality_score": 60,
+  "fidelity_composite": 0.5865,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.2727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document fails significantly on structural and content fidelity, evidenced by a very low structural score (0.27) and a poor shingling recall (0.67). The LLM identifies a 40% loss of informative text, specifically critical financial data and list items, which is corroborated by the programmatic shingling recall dropping below the 0.75 threshold.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output contains several major omissions. 1) In Section 4, the detailed financial data (fund balances and disbursements) for the NG 911 Fund, CMRS Fund, PSAP Fund, and Grant Fund are missing. 2) The list of names (i. through v.) under item 4.g is missing. 3) The entire sub-list (a. through f.) under item 5 'Executive Director Report' is missing. 4) The 'WebEx Link' in the document header is missing. Together, these omissions represent approximately 40% of the document's informative text conte",
+      "source_pdf_quote": "November 2018 Fund Balance $27,867,858 ... i. Vicki Callicutt ... a) New Board Member Orientation – Held December 14, 2018",
+      "output_quote": "b) NG 911 Fund ... g) Peer Reviewer Approvals – Presented as Recommendation of Standards Committee ... 5. Executive Director Report",
+      "location": "Items 4 and 5, pages 1 and 2"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table structure in Section 1 (representing items 1-4) is corrupted. The header defines three columns: 'Tab', 'Topic', and 'Presenter'. However, for rows 'Call to Order' and 'Roll Call', the output only generates two cells. This causes a structural misalignment where the data shifts to the wrong columns (e.g., 'Call to Order' appears in the 'Tab' column). Furthermore, items 5 through 12, which are visually presented in a two-column tabular format (Topic and Presenter), are not converted into ",
+      "source_pdf_quote": "Visual table layout on Page 1 for items 1-4 with columns Tab, Topic, Presenter.",
+      "output_quote": "Rows 2 and 3 of the table in Section 1 contain only two cells instead of three, causing data to shift into incorrect columns.",
+      "location": "Section 1, element index 5 (table)"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order for items 5 through 12 is significantly corrupted. In the source, each topic is immediately followed by its presenter on the same line (columns). In the output JSON, all the topics for items 6-13 are grouped into a single list (reading_order 13), and then all the presenters are listed as individual paragraphs (reading_order 14-20) afterward. This disconnects the topics from their presenters, making the document logically incoherent for screen reader users.",
+      "source_pdf_quote": "Topic 6 (Education Committee Report) and Presenter (Mike Reitz) are on the same line. This continues through item 12.",
+      "output_quote": "The list of topics (reading_order 13) is completed before the names of the presenters (reading_order 14-20) begin.",
+      "location": "Section 2, reading_order 13-20"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The output fails to capture significant portions of the list structure. Specifically: 1) The financial details (Fund Balance, Disbursement) under items 4b, 4c, 4d, and 4e are entirely omitted from the output. 2) The nested sub-items i. through v. under item 4g are missing. 3) The sub-items a) through f) under item 5 are missing. This is a major failure in preserving the hierarchical list structure of the agenda.",
+      "source_pdf_quote": "Item 4g has sub-items: i. Vicki Callicutt, ii. Megan Daub, etc. Item 5 has sub-items: a) New Board Member Orientation, b) Legislative Stakeholder Meeting, etc.",
+      "output_quote": "The output lists 4g and 5 as flat items without their respective nested sub-lists.",
+      "location": "Section 2, reading_order 10 and 11"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "In the source PDF, agenda items 5 through 12 are organized in a clear two-column table/layout with the 'Topic' on the left and the 'Presenter' on the right. This allows immediate visual association between an item and its speaker. In the HTML rendering, this organization is lost; the topics are listed sequentially (items 6-13), followed by a completely separate list of names at the bottom of the section. This requires the user to guess or cross-reference which name belongs to which item, fundame",
+      "source_pdf_quote": "Page 2 of the PDF shows items 6-12 (e.g., '6. Education Committee Report') horizontally aligned with their presenters (e.g., 'Mike Reitz').",
+      "output_quote": "The HTML screenshot shows items 6-13 as a list, then a separate block of text starting with 'Mike Reitz' and ending with 'Tina Bone/Angie Turbeville' further down the page.",
+      "location": "Agenda items 6-12, corresponding to Page 2 of the source."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The financial data presented in the source PDF under item 4 (Consent Agenda) is entirely missing in the HTML rendering. In the source, sub-items 4b through 4e contain detailed financial figures (Fund Balances and Disbursements) for November and December 2018. In the HTML screenshot, these items are reduced to simple list headers with no underlying content. This is a critical failure of visual fidelity as significant structured data has been omitted.",
+      "source_pdf_quote": "Under item 4b: 'November 2018 Fund Balance $27,867,858', 'November 2018 Disbursement -$15,088', etc.",
+      "output_quote": "The HTML screenshot shows only 'b) NG 911 Fund' as a bullet point with no content following it before the next list item.",
+      "location": "Item 4, Consent Agenda, sub-points b, c, d, and e (Page 1 of source)."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains a clear, red-colored hyperlink: '20190111 NC 911 Board WebEx Link'. The output JSON represents this text as part of an H2 heading but fails to identify or preserve it as a clickable link element.",
+      "source_pdf_quote": "20190111 NC 911 Board WebEx Link",
+      "output_quote": "\"text\": \"NORTH CAROLINA 911 BOARD MEETING\\nFriday, January 18, 2019\\nWebEx and Conference Bridge\"",
+      "location": "Section 1, element index 2 (H2)"
+    }
+  ],
+  "action_items": [
+    "Manually restore missing financial data (balances and disbursements) for the various 911 funds.",
+    "Fix the reading order for items 5-12 to ensure topics and presenters are correctly paired.",
+    "Reconstruct the list hierarchies for the Consent Agenda and Executive Director Report."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.5865,
+      "text_match": 0.7903481012658229,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6863,
+      "ceiling": 0.6,
+      "ceiling_reason": "fidelity_low_score",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.5865,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.2727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "MANDATORY_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6722745625841184,
+      "shingling_precision": 0.9587332053742802,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 159,
+      "gemini_words": 159,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 85195,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

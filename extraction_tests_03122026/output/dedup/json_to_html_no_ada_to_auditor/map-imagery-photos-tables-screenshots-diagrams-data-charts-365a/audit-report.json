@@ -1,0 +1,78 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-365a",
+  "audited_at": "2026-03-13T02:08:11.453367Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 1.0,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output is missing a significant portion of the document. Specifically, pages 4-30 and page 35 are not present in the 'sections' array. This includes the Introduction, Section I (Purpose), Section II (Accomplishments), Section III (Action Plan), and Appendix B (Establishing Authority). While the JSON includes a key '_omitted' as a placeholder, the authoritative content from these pages is completely absent from the converted output.",
+      "source_pdf_quote": "Page 4 (NC OneMap intro), Page 5 (Contents), Page 6 (Introduction), Page 7 (Section I), Page 10 (Section II), Page 26 (Section III), Page 35 (Appendix B)",
+      "output_quote": "The 'sections' array jumps from Page 3 (reading_order 26) to Appendix A (reading_order 274), and from Page 34 (reading_order 281) to Appendix C (reading_order 291).",
+      "location": "Missing pages 4-30 and page 35"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "There are two structural defects in the tables. First, for tables spanning multiple pages (Appendix A and Appendix C), the pipeline incorrectly designated the first data row on each new page as a header row (`is_header_row: true`) instead of data. Second, in Section 34, the 'Advisory Members' row contains only one cell while the table structure defines three columns, leading to a structural column count mismatch.",
+      "source_pdf_quote": "Source Page 32: 'Edward S. Finley, Jr.' (Data row). Source Page 34: 'Advisory Members' (Internal table section header).",
+      "output_quote": "Section 32, element reading_order 277, row index 0 has cell_type 'data' but is_header_row is 'true'. Section 34, element reading_order 281, row index 2 contains only 1 cell for a 3-column table.",
+      "location": "Sections 32, 33, 34, 37, 38"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9581919772403813,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5657,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9557912521118829,
+      "shingling_precision": 0.9754765782163043,
+      "duplication_ratio": 0.011123654700082787,
+      "word_count_ratio": 1.0,
+      "baseline_words": 8648,
+      "gemini_words": 8648,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 565909,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

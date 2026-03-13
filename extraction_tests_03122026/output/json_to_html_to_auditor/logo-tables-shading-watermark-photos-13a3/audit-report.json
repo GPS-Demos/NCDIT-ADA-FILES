@@ -1,0 +1,110 @@
+{
+  "document_id": "logo-tables-shading-watermark-photos-13a3",
+  "audited_at": "2026-03-12T23:16:02.944663Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": null,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output document has massive content omissions. A placeholder in the JSON explicitly states that 28 sections were omitted. This includes the entire RQI T-CPR Program Instructional Overview (pages 7-17), the 'Saving Lives Together' brochure (pages 18-27), the Cardiac Arrest Case Review section (pages 29-33), the introductory page for the D-RAK training (page 34), and the 'Training Payment Options' page (page 36). These are authoritative sections of the source document that are completely absen",
+      "source_pdf_quote": "Pages 7-17, 18-27, 29-33, 34, and 36 of the source PDF.",
+      "output_quote": "The JSON contains an explicit marker: '{\"_omitted\": \"28 sections omitted for token budget\"}'. No content from these pages appears between elements 18 and 355 or between 361 and 458.",
+      "location": "Middle of the document, specifically between reading_order 18 and 355, and 361 and 458."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "In Section 8 of the meeting minutes (page 4), the text is truncated. The output element ends abruptly mid-word, and the next element starts at the next paragraph, resulting in the loss of several words that complete the sentence. This constitutes a significant omission within an otherwise present section.",
+      "source_pdf_quote": "approve the 911 4 Heroes Telecommunicator Training Bundle Online subscription at the current course list for the subscription at 90%",
+      "output_quote": "...approve the 911 4 Heroes Telecommunicator Training Bundle Online subscription at the current co",
+      "location": "Section index 4, element index 26, reading_order 26."
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "In the Minutes section (starting at index 14), the title is assigned as an H1. The subsequent sectional items (specifically item 6 at index 20) are assigned as H3. This results in a skipped H2 level, breaking the heading hierarchy necessary for accessibility and semantic organization.",
+      "source_pdf_quote": "The section '6. Technology Update' follows the main title 'North Carolina 911 Board Education Committee Meeting MINUTES'.",
+      "output_quote": "Index 14 is a level 1 heading. Index 20 is a level 3 heading.",
+      "location": "Minutes section, page 3-4, elements 14 and 20"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "Two failures were identified. First, the numbered list of agenda items in the minutes (1-11) is fragmented across different element types: items 1-5 are in a list element (index 16), items 6-8 are heading elements (indices 20, 25, 26), and items 9-11 are paragraph elements (indices 30, 31, 34). This destroys the semantic coherence of the list. Second, the clearly numbered lists in the 'Goals' section are incorrectly typed as 'unordered' lists in the output.",
+      "source_pdf_quote": "Numbered list 1-11 in the Minutes section (pages 3-6) and Numbered lists 1-4 in the Goals section (page 37).",
+      "output_quote": "Items 1-11 are split into 'list', 'heading', and 'paragraph' types (indices 16-34). Goals lists at indices 490 and 492 are marked 'list_type': 'unordered'.",
+      "location": "Minutes section (pp. 3-6) and Goals section (p. 37)"
+    },
+    {
+      "description": "Low text recall (possible truncation): 38%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The contact information on page 35 includes an email address (D.Jewiss@me.com) and a website (www.TheRAKAcademy.com). These are missing from the output text stream, which splits the paragraph into two fragments (indices 467 and 469) exactly where the link content should reside.",
+      "source_pdf_quote": "Please contact Dan Jewiss at D.Jewiss@me.com or 203-704-0581... www.TheRAKAcademy.com",
+      "output_quote": "Index 467: 'Please contact Dan Jewiss at '. Index 469: ' or 203-704-0581 with any questions or to host this training.'",
+      "location": "RAK Academy contact info, page 35, indices 467-469"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.5084465691797007,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.4658,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.3794689426268374,
+      "shingling_precision": 0.8287252770011391,
+      "duplication_ratio": 0.018370520377535893,
+      "word_count_ratio": 1.0,
+      "baseline_words": 6113,
+      "gemini_words": 6113,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 559177,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

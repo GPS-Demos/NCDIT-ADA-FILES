@@ -1,0 +1,95 @@
+{
+  "document_id": "powerpoint-slides-feef",
+  "audited_at": "2026-03-13T02:41:20.170527Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8938,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity score is high (0.89), the documented omission of an entire section of links on Page 25 constitutes a significant loss of informational utility. Given that the evaluator noted this loss exceeds the threshold for a major defect despite its minor label, and the programmatic recall (0.86) corroborates content loss, human intervention is required to restore the missing resources.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "Section 25 ('Learn More Links') contains the major headings found on Page 25 of the source, but it is missing all of the corresponding list items (8 links/text entries in total). This constitutes a loss of over 70% of the section's informative content, which exceeds the 25% threshold for a MAJOR defect. The reading order numbering in the JSON also shows gaps (e.g., jump from 205 to 210) where these list items were skipped.",
+      "source_pdf_quote": "Microsoft Learn: Accessibility Fundamentals, Accessibility guide for M365 apps, Accessibility by design | Microsoft Docs, Accessibility - Windows apps | Microsoft Docs; LinkedIn Learning: Accessibility Learning Path; Accessibility links: Accessibility Technology & Tools | Microsoft Accessibility, Microsoft Accessibility Blog - Making technology easier to see, hear and use!, Accessibility Resources & Training | Microsoft Accessibility",
+      "output_quote": "(Only the headings 'Microsoft Learn', 'Accessibility links', and 'LinkedIn Learning' are present; all list items are missing)",
+      "location": "Section 25, Page 25"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In Section 8 (page 8), the subtitle 'Inclusively embedded within Microsoft 365 Apps' is entirely absent from the output. Additionally, the primary label 'Microsoft 365 Copilot' is not present as text, appearing only in the alt text of an image. These omissions constitute a minor loss of specific informational context.",
+      "source_pdf_quote": "Inclusively embedded within Microsoft 365 Apps",
+      "output_quote": "(Text is absent from Section 8)",
+      "location": "Section 8, Page 8"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "In Section 25, the list items that appear under the 'Microsoft Learn', 'Accessibility links', and 'LinkedIn Learning' subheadings are entirely missing. The 'reading_order' values in that section jump from 205 to 210, from 210 to 214, and from 214 to 216, indicating that several elements (including the lists of resources) were skipped in the structural conversion.",
+      "source_pdf_quote": "Microsoft Learn\nAccessibility Fundamentals\nAccessibility guide for M365 apps\nAccessibility by design | Microsoft Docs\nAccessibility - Windows apps | Microsoft Docs\nAccessibility links\nAccessibility Technology & Tools | Microsoft Accessibility\nMicrosoft Accessibility Blog - Making technology easier to see, hear and use!\nAccessibility Resources & Training | Microsoft Accessibility\nLinkedIn Learning\nAccessibility Learning Path",
+      "output_quote": "{\n          \"type\": \"heading\",\n          \"level\": 2,\n          \"text\": \"Microsoft Learn\",\n          \"reading_order\": 205\n        },\n        {\n          \"type\": \"heading\",\n          \"level\": 2,\n          \"text\": \"Accessibility links\",\n          \"reading_order\": 210\n        },\n        {\n          \"type\": \"heading\",\n          \"level\": 2,\n          \"text\": \"LinkedIn Learning\",\n          \"reading_order\": 214\n        }",
+      "location": "Section index 25, page 25"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The URLs and link descriptions on page 25 (e.g., 'aka.ms/accessibility101' and several Microsoft Docs links) are not represented in the output JSON because the list items containing them are missing. This constitutes a failure to preserve the links present in the source.",
+      "source_pdf_quote": "Accessibility Fundamentals\nAccessibility guide for M365 apps\nAccessibility by design | Microsoft Docs\nAccessibility - Windows apps | Microsoft Docs",
+      "output_quote": "[Links are missing from Section 25 elements list]",
+      "location": "Section index 25, page 25"
+    }
+  ],
+  "action_items": [
+    "Manually insert the missing 8 links and resource descriptions in Section 25.",
+    "Verify and restore the missing subtitle and 'Microsoft 365 Copilot' label on Page 8."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8938,
+      "text_match": 0.8690872751499001,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8404,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8938,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8596375617792422,
+      "shingling_precision": 0.8787470528797575,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 952,
+      "gemini_words": 952,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 371641,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

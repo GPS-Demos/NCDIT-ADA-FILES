@@ -1,0 +1,97 @@
+{
+  "document_id": "esrmo-newsletter-september-2021-686b1e03",
+  "audited_at": "2026-03-13T00:46:51.893301Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8649,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score (0.8649) and shingling recall (0.903) are relatively high, the identified concerns reveal a systematic failure to extract hyperlinked anchor text and URLs. This results in the omission of critical entity names (e.g., 'PhishLabs', 'Ad Council') and the fragmentation of sentences throughout the document, which significantly degrades the content's integrity and accessibility. Given the high cost of publishing a government newsletter with missing resource links and broken prose, human intervention is required to restore these elements.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "There is a systemic failure to capture the anchor text for hyperlinks throughout the document. In nearly every instance where the source PDF contains a link, the corresponding text string is missing in the JSON, creating gaps in sentences and omitting critical names. For example, on Page 1, 'PhishLabs' and 'Business Email Compromise' are missing. On Page 2, 'Ad Council', 'Ready.gov/September', and 'Cybersecurity and Infrastructure Security Agency' are missing. This pattern continues through Page",
+      "source_pdf_quote": "according to researchers at PhishLabs, a cybersecurity... response-based attacks, such as Business Email Compromise (BEC).",
+      "output_quote": "according to researchers at [OMITTED], a cybersecurity... response-based attacks, such as [OMITTED] (BEC).",
+      "location": "Sections across pages 1, 2, 3, and 4 (e.g., element indices 6, 8, 11, 13, 25, 27, 36, 38, etc.)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The conversion of the list on page 5 under 'Training and Continued Learning Resources' is structurally incomplete. In the source document, this is a nested list where each main bullet point (e.g., FedVTE) is followed by a nested sub-bullet containing a URL. The JSON output (reading_order: 125) renders this as a flat list of 4 items, entirely omitting the nested sub-items (the URLs).",
+      "source_pdf_quote": "Page 5, list under 'Training and Continued Learning Resources' shows sub-bullets with URLs (e.g., under FedVTE: o https://fedvte.usalearning.gov/).",
+      "output_quote": "The JSON list at reading_order 125 only contains the top-level items: \"items\": [ {\"content\": [{\"text\": \"FedVTE: Free Online Training Environment\"}], \"nested_list\": null ... } ]",
+      "location": "Section 5, element index 125 (reading_order: 125)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion pipeline consistently fails to extract and include text that is formatted as a hyperlink in the source PDF. This results in missing information and structural fragmentation of sentences. Multiple URLs visible as text in the source are missing, and internal paragraph links are dropped, splitting single sentences into multiple paragraph elements.",
+      "source_pdf_quote": "Page 1: 'according to researchers at PhishLabs, a cybersecurity...' (PhishLabs is a link). Page 1 footer: 'https://www.phishlabs.com/blog/...' Page 5 URLs under newsletters.",
+      "output_quote": "Section 1, paragraph 6: '...researchers at '. Section 1, paragraph 8: ', a cybersecurity...'. The text 'PhishLabs' is missing. Paragraph 15 ends at 'link below:' with no following URL. Page 5 list URLs are missing.",
+      "location": "Throughout document, particularly Section 1 (paragraphs 6, 8, 11, 13, 15) and Section 5 (list 125)."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "The majority of meaningful images from the source PDF are missing in the HTML output. Specifically, the photograph and road sign image on page 2, the Lego illustration and FEMA logo on page 3, the three organization/event logos on page 4, and the photograph and two section-specific graphics on page 5 are all absent from the rendered HTML screenshot. Only the page 1 phishing illustration and the NCDIT logo are present.",
+      "source_pdf_quote": "Source PDF contains meaningful images on Page 2 (photo and 'SCAM AHEAD' sign), Page 3 (Lego figure and FEMA logo), Page 4 (Symposium, Triangle InfoSeCon, and PCI DSS logos), and Page 5 (laptop photo, newsletter graphic, and calendar icon).",
+      "output_quote": "These images are entirely absent from the rendered HTML screenshot, which only shows text and the first page's primary illustrations.",
+      "location": "Throughout the document, specifically pages 2-5"
+    }
+  ],
+  "action_items": [
+    "Restore missing anchor text within sentences to ensure grammatical completeness.",
+    "Re-insert missing URLs and restore the nested list structure on page 5.",
+    "Audit the document for fragmented paragraph elements caused by link extraction errors and merge them.",
+    "Add missing images or provide appropriate alt-text for the missing visual aids."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8649,
+      "text_match": 0.932150870819532,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8415,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8649,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9032926071650446,
+      "shingling_precision": 0.9629139072847682,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1716,
+      "gemini_words": 1716,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 346102,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

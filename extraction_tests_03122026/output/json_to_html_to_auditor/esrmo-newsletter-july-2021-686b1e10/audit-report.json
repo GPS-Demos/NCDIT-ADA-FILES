@@ -1,0 +1,97 @@
+{
+  "document_id": "esrmo-newsletter-july-2021-686b1e10",
+  "audited_at": "2026-03-12T22:43:53.708763Z",
+  "quality_score": 83,
+  "fidelity_composite": 0.9005,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity score is high (0.90), the qualitative evidence reveals the omission of critical technical data including CVE identifiers, report titles, and entire nested lists. The loss of anchor text for hyperlinks has created fragmented sentences, and the disruption of the reading order on the first page further compromises the document's accessibility and utility as a government record.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There are several instances where text that was hyperlinked in the source document has been omitted in the output. On page 1, the name of the cited report ('Global Security Insights Report 2021') and the title of an external link ('Cybersecurity Tips for Remote Working & Learning During COVID-19') are missing. On page 3, the technical identifier 'CVE-2021-34527' and the text 'Emergency Directive (ED) 21-04' are also omitted from their respective paragraphs. Additionally, the word 'here' is missi",
+      "source_pdf_quote": "Global Security Insights Report 2021 (Page 1); Cybersecurity Tips for Remote Working & Learning During COVID-19 (Page 1); here (Page 3); CVE-2021-34527 (Page 3); Emergency Directive (ED) 21-04 (Page 3)",
+      "output_quote": "According to new data from VMware Carbon Black’s [omitted], the sophistication... (Page 1); be sure to read [omitted]. (Page 1); click [omitted]. (Page 3); code execution vulnerability ([omitted]) in the... (Page 3); please review the [omitted] from the... (Page 3)",
+      "location": "Sections 1 and 3 (Pages 1 and 3)"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "There is a significant displacement of structural information on the first page. The header info (NCDIT logo and ESRMO title) appears at the top of the source document, but in the JSON conversion, the image containing this information (element index 14) is placed at the end of the first section, after the intro letter and the first set of paragraphs. This disrupts the intended reading order of the document.",
+      "source_pdf_quote": "The graphical header with the NCDIT logo and 'Enterprise Security and Risk Management Office (ESRMO)' text is located at the top of Page 1, immediately below the main title.",
+      "output_quote": "The image (element index 14) containing this header information is placed after element 12 (the final paragraph of the first section).",
+      "location": "Page 1, elements 1-14"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The output fails to capture several list structures correctly. On Page 5, the nested list of URLs under 'Training and Continued Learning Resources' is completely omitted, leaving only the top-level bullet points. Additionally, the 'UPCOMING EVENTS' section, which is presented as a list in the source, is converted into a series of individual paragraphs, losing the semantic list structure.",
+      "source_pdf_quote": "Training resources list with nested URLs (Page 5); 'UPCOMING EVENTS' list of webinars (Page 5).",
+      "output_quote": "Element 76 (flat list missing URLs); Elements 84, 86, 88, 90, 92 (individual paragraphs).",
+      "location": "Page 5, elements 76, 84-92"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion results in a widespread loss of content related to hyperlinks. In many cases, the entire anchor text of a link is missing from the output, leaving fragmented sentences. Furthermore, explicit URLs listed in text boxes on Page 5 are omitted entirely. For example, on Page 1, the text 'Global Security Insights Report 2021' is gone, and on Page 3, the link text 'here' and 'CVE-2021-34527' are missing.",
+      "source_pdf_quote": "Anchor text such as 'Global Security Insights Report 2021' (P1), 'here' (P3), 'CVE-2021-34527' (P3), 'Emergency Directive (ED) 21-04' (P3), and multiple URLs on P5.",
+      "output_quote": "The corresponding text segments are missing, resulting in gaps such as 'According to new data from VMware Carbon Black’s , the sophistication...' or 'vulnerability () in the Windows Print Spooler service'.",
+      "location": "Throughout the document, e.g., elements 5, 12, 39, 43, 49, 76, 80, 82, 84-94."
+    }
+  ],
+  "action_items": [
+    "Restore missing technical identifiers and report titles in the text paragraphs",
+    "Repair the reading order to ensure the NCDIT logo and ESRMO header appear at the start of the document",
+    "Reconstruct the nested lists and URL sections on page 5",
+    "Fix fragmented sentences by re-inserting the missing anchor text for all links"
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9005,
+      "text_match": 0.8248166948674563,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8335,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9005,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8742228598756576,
+      "shingling_precision": 0.7806961349562247,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1543,
+      "gemini_words": 1543,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 357079,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

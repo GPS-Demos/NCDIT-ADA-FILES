@@ -1,0 +1,110 @@
+{
+  "document_id": "smac-lidar-apr-10-2024-6860db7b",
+  "audited_at": "2026-03-13T00:18:04.143499Z",
+  "quality_score": 25,
+  "fidelity_composite": 0.7324,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Output appears mostly fabricated: shingling_precision=0.18. Only 18% of output text found in source.",
+  "decision_method": "hard_veto:V4",
+  "concerns": [
+    {
+      "description": "Low text precision (possible hallucination): 18%",
+      "severity": "critical",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "On page 2, the 'Phase & Quality' legend contains crucial descriptive text defining the map's colors (e.g., 'Phase 1 (2020) - QL 1'). While other text boxes from the map were successfully extracted (reading_order 14, 15, 16), the specific details of the five phases in the legend are entirely omitted from the text content. This constitutes a significant loss of information for this section.",
+      "source_pdf_quote": "Phase 1 (2020) - QL 1; Phase 2 (2020) - QL 1; Phase 3 (2015) - QL 2; Phase 4 (2016) - QL 1; Phase 5 (2017) - QL 1",
+      "output_quote": "[Text missing from output]",
+      "location": "Section 2, element following reading_order 12"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table on page 3 (Table 5) has a corrupted structure in the JSON output. In the source PDF, Table 5 has a complex header: 'Delivery dates' is a merged cell spanning two columns (columns 2 and 3), while 'When the Acquisition phase is actually conducted' is the header for the first column. In the output JSON (reading_order 26), the first row (is_header_row: true) contains only a single cell with 'Delivery dates' and a colspan of 1. The second row of headers from the source is incorrectly classi",
+      "source_pdf_quote": "Table 5 on page 3. Header row 1: [empty] | [Delivery dates (merged)]. Header row 2: [When the Acquisition phase is actually conducted] | [Processing calibration and classification...] | [All products and deliverables...]",
+      "output_quote": "\"rows\": [ { \"cells\": [ { \"cell_type\": \"header\", \"content\": [ { \"text\": \"Delivery dates\" } ], \"colspan\": 1, ... } ], \"is_header_row\": true }, { \"cells\": [ { \"cell_type\": \"data\", \"content\": [ { \"text\": \"When the Acquisition phase is actually conducted\" } ], ... }, ... ], \"is_header_row\": false } ]",
+      "location": "Page 3, Table 5, element index 26"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly flawed due to the duplication of the entire final section of content. The information from page 3 of the source PDF (logos, Project Timeline text, and Table 5) is rendered twice in the HTML flow. The first instance uses an HTML table for the data, while the second instance uses an image snippet. This creates a confusing and unprofessional document structure that does not reflect the single-page layout of the source material.",
+      "source_pdf_quote": "The source PDF contains three distinct pages, with the 'Project Timeline' and 'Table 5' appearing only on page 3.",
+      "output_quote": "The HTML output renders the 'Project Timeline' section twice. The first occurrence begins after the plane diagram, and the second occurrence (containing logos and an image of the table) begins after the first occurrence's footer note.",
+      "location": "Final third of the HTML document."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There is a clear duplication of body content in the rendered HTML. The entire 'Project Timeline' section, including the descriptive paragraph, the Table 5 data, and the concluding note, appears twice in the body of the document. The first version uses rendered HTML elements, while the second version uses image captures of the PDF content, but both present the same information sequentially.",
+      "source_pdf_quote": "Project Timeline: LiDAR data collection will be performed... Table 5. The estimated delivery dates... Note: Quality control would be performed with all deliverables.",
+      "output_quote": "The text block starting with 'Project Timeline:' and the associated Table 5 and Note are repeated twice in the body of the HTML document.",
+      "location": "The two instances appear consecutively at the end of the document."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "On page 1, the specific date and status line 'April 9, 2024 NCEM Status' located above the map is missing from the output. This is a minor omission of metadata that defines the specific state of the data at a point in time.",
+      "source_pdf_quote": "April 9, 2024 NCEM Status",
+      "output_quote": "[Text missing from output]",
+      "location": "Section 1, element following reading_order 2"
+    }
+  ],
+  "action_items": [
+    "Output appears mostly fabricated: shingling_precision=0.18. Only 18% of output text found in source."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7324,
+      "text_match": 0.30909090909090914,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5692,
+      "ceiling": 0.25,
+      "ceiling_reason": "extreme_hallucination",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7324,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9714285714285714,
+      "shingling_precision": 0.1837837837837838,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 232,
+      "gemini_words": 232,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 359965,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "document_id": "ifb-its-400277-2017-1102-final-686b18e9",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output content was cross-referenced with the source PDF. The text provided in the JSON sections corresponds to text found in the original document. There are no signs of hallucinated paragraphs or fabricated section headings that do not have a basis in the source document. The normalized table headers ('Field', 'Value') are an acceptable structural normalization for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "Contact information including emails (debbie.patterson@nc.gov), phone numbers (919-754-6619), and various URLs (e.g., https://it.nc.gov/document/statewide-data-classification-and-handling-policy) were checked against the source PDF. All contact information in the output is authentic and correctly transcribed from the original pages.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output document is missing a substantial portion of the source content. Specifically, pages 7-12 (containing sections 12-15 of General Information and the start of Section C) and pages 14-48 (containing sections 20-42 of Section C, and the entirety of Section D Price Proposal text, Section E Additional Information, Section F Instructions to Vendors, and Section G Terms and Conditions) are absent. The JSON explicitly contains a placeholder noting that 42 sections were omitted for token budget, which results in a failure of content fidelity.",
+        "b_evidence_source": "The source PDF contains content from Page 7 to 12 and Page 14 to 48, including critical legal terms and conditions (Section G).",
+        "b_evidence_output": "\"_omitted\": \"42 sections omitted for token budget\"",
+        "b_evidence_location": "Sections, Page 7 and Page 14",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Key tables such as Table D.1 (Minimum Percentage Discounts), Table D.4 (Additional Pricing Incentives), and the various Attachment tables were inspected. Data rows present in the source PDF are faithfully represented in the output. While empty template rows in form tables (like Table D.2) are collapsed or omitted, this does not constitute a significant loss of information as those rows were blank in the original document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Section A (Intent, Use, Duration, and Scope) exists in the output but is significantly truncated. While paragraphs 1 and 2 and Table 1 are present, paragraphs 3 through 11 (located on Page 4 of the source PDF) are entirely missing. These omitted paragraphs contain vital information regarding segment requirements, OEM status, historical spend data, and contract duration.",
+        "b_evidence_source": "Section A, paragraphs 3 through 11 on Page 4, beginning with 'Vendor shall include in its offer the following...' and ending with 'The State reserves the right to further amend...'",
+        "b_evidence_output": "The output for Section A ends after the 'Value Added Services' entry in the Segment Table (element index 19).",
+        "b_evidence_location": "Section A, element index 19, Page 4",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The OCR quality of the provided sections is high. Wording across the preserved sections matches the source document faithfully, with only minor formatting adjustments made for structural consistency in the JSON format.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output content was cross-referenced with the source PDF. The text provided in the JSON sections corresponds to text found in the original document. There are no signs of hallucinated paragraphs or fabricated section headings that do not have a basis in the source document. The normalized table headers ('Field', 'Value') are an acceptable structural normalization for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"Contact information including emails (debbie.patterson@nc.gov), phone numbers (919-754-6619), and various URLs (e.g., https://it.nc.gov/document/statewide-data-classification-and-handling-policy) were checked against the source PDF. All contact information in the output is authentic and correctly transcribed from the original pages.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output document is missing a substantial portion of the source content. Specifically, pages 7-12 (containing sections 12-15 of General Information and the start of Section C) and pages 14-48 (containing sections 20-42 of Section C, and the entirety of Section D Price Proposal text, Section E Additional Information, Section F Instructions to Vendors, and Section G Terms and Conditions) are absent. The JSON explicitly contains a placeholder noting that 42 sections were omitted for token budget, which results in a failure of content fidelity.\",\n      \"b_evidence_source\": \"The source PDF contains content from Page 7 to 12 and Page 14 to 48, including critical legal terms and conditions (Section G).\",\n      \"b_evidence_output\": \"\\\"_omitted\\\": \\\"42 sections omitted for token budget\\\"\",\n      \"b_evidence_location\": \"Sections, Page 7 and Page 14\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Key tables such as Table D.1 (Minimum Percentage Discounts), Table D.4 (Additional Pricing Incentives), and the various Attachment tables were inspected. Data rows present in the source PDF are faithfully represented in the output. While empty template rows in form tables (like Table D.2) are collapsed or omitted, this does not constitute a significant loss of information as those rows were blank in the original document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Section A (Intent, Use, Duration, and Scope) exists in the output but is significantly truncated. While paragraphs 1 and 2 and Table 1 are present, paragraphs 3 through 11 (located on Page 4 of the source PDF) are entirely missing. These omitted paragraphs contain vital information regarding segment requirements, OEM status, historical spend data, and contract duration.\",\n      \"b_evidence_source\": \"Section A, paragraphs 3 through 11 on Page 4, beginning with 'Vendor shall include in its offer the following...' and ending with 'The State reserves the right to further amend...'\",\n      \"b_evidence_output\": \"The output for Section A ends after the 'Value Added Services' entry in the Segment Table (element index 19).\",\n      \"b_evidence_location\": \"Section A, element index 19, Page 4\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The OCR quality of the provided sections is high. Wording across the preserved sections matches the source document faithfully, with only minor formatting adjustments made for structural consistency in the JSON format.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the provided JSON output and compared it with the source PDF. I checked for text blocks or sections that appear more times in the output than in the original document. While some instructional text (e.g., instructions for Attachment F) appears multiple times in the source, the output faithfully reflects this intentional repetition without adding erroneous duplicates.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is logical and mostly consistent. Main sections such as 'Section A', 'Section B', and the various 'Attachments' are assigned levels H1 or H2. For instance, 'Attachment A' is H1, and its subsections or tables are nested appropriately. While there is minor inconsistency where some Attachments are H1 and others H2 (e.g., Attachment B is H2 while Attachment A is H1), this does not represent a broken hierarchy or skip (like H1 to H3), and falls under acceptable accessibility adjustments.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "I verified the structural integrity of complex tables including the Page 1 header, the IFB Schedule (Table 2), and the Attachment templates (e.g., Table D.1, Purchase Activity Report). The output correctly identifies header rows and maintains the correct number of columns and logical row organization. For form-like areas (e.g., Page 1 Offeror info), the conversion to a key-value table is structurally sound and preserves the meaning of the original layout.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The output follows the logical top-to-bottom, left-to-right reading order of the source PDF. Multicolumn header tables are read row-by-row, ensuring related labels and data remain adjacent. Section sequences, from the introductory boilerplate to the final reporting templates, match the source's intended flow.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists in the source (e.g., Section A, points 1-2; Table of Contents) are correctly identified and converted into unordered or numbered list structures in the JSON. Nesting levels are preserved where applicable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Links visible in the source PDF, such as email addresses (debbie.patterson@nc.gov) and government portals (ips.state.nc.us, eprocurement.nc.gov), are present in the output. No broken, missing, or fabricated links were identified during the forensic audit.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the provided JSON output and compared it with the source PDF. I checked for text blocks or sections that appear more times in the output than in the original document. While some instructional text (e.g., instructions for Attachment F) appears multiple times in the source, the output faithfully reflects this intentional repetition without adding erroneous duplicates.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is logical and mostly consistent. Main sections such as 'Section A', 'Section B', and the various 'Attachments' are assigned levels H1 or H2. For instance, 'Attachment A' is H1, and its subsections or tables are nested appropriately. While there is minor inconsistency where some Attachments are H1 and others H2 (e.g., Attachment B is H2 while Attachment A is H1), this does not represent a broken hierarchy or skip (like H1 to H3), and falls under acceptable accessibility adjustments.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"I verified the structural integrity of complex tables including the Page 1 header, the IFB Schedule (Table 2), and the Attachment templates (e.g., Table D.1, Purchase Activity Report). The output correctly identifies header rows and maintains the correct number of columns and logical row organization. For form-like areas (e.g., Page 1 Offeror info), the conversion to a key-value table is structurally sound and preserves the meaning of the original layout.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The output follows the logical top-to-bottom, left-to-right reading order of the source PDF. Multicolumn header tables are read row-by-row, ensuring related labels and data remain adjacent. Section sequences, from the introductory boilerplate to the final reporting templates, match the source's intended flow.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists in the source (e.g., Section A, points 1-2; Table of Contents) are correctly identified and converted into unordered or numbered list structures in the JSON. Nesting levels are preserved where applicable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Links visible in the source PDF, such as email addresses (debbie.patterson@nc.gov) and government portals (ips.state.nc.us, eprocurement.nc.gov), are present in the output. No broken, missing, or fabricated links were identified during the forensic audit.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "total_defects": 2,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

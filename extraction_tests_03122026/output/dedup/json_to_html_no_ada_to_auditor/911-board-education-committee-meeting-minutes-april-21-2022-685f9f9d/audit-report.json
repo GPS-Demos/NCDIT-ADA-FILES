@@ -1,0 +1,97 @@
+{
+  "document_id": "911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d",
+  "audited_at": "2026-03-13T01:04:58.692390Z",
+  "quality_score": 79,
+  "fidelity_composite": 0.7558,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document shows significant structural and content failures that preclude automatic approval. While programmatic metrics suggest high word count retention, the LLM fidelity report identifies a major omission of 14 lines of text (Agenda item 10) and a very low structural score (0.54) due to corrupted tables and fragmented lists. Given the cost asymmetry where bad documents are 3x more expensive to approve, the specific evidence of data loss and layout corruption requires human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Agenda item 10, 'Community College –', is present as a heading in the output's list (reading_order 20, item index 2), but it is entirely missing its body content. In the source document, this section includes three sub-points (a, b, and c) totaling approximately 14 lines of text detailing partnerships, training at Cape Fear Community College, and 'Be Rail Safe' training. The output completely omits this descriptive text, losing roughly 30% of the content on page 3. This constitutes a major omiss",
+      "source_pdf_quote": "10. Community College –\na) Partnerships – Ms. Turbeville reviewed a meeting... [paragraphs regarding Tracy McPherson, NC Community College System]\nb) Cape Fear Community College Telecommunicator Training – Ms. Turbeville shared... [paragraphs regarding free NENA/APCO training]\nc) Be Rail Safe Training for Telecommunicators- Ms. Turbeville welcomed guests... [paragraphs regarding Roger Smock, Ike Avery, and DOT Be Rail Safe Program]",
+      "output_quote": "{\n  \"content\": [\n    {\n      \"text\": \"Community College –\",\n      ...\n    }\n  ],\n  ...\n}",
+      "location": "Page 3, Agenda Item 10, JSON element reading_order 20 (list item index 2)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The attendee tables on page 1 are structurally corrupted in the output. The source contains a primary attendee table (Committee Members/Guests) and a separate table for 'Staff'. The output merges these into a single table object. Because the primary table has 6 columns and the staff table has 3, the resulting merged table has rows with inconsistent cell counts, leading to structural corruption where 'Staff' headers are placed in the middle of a 6-column structure.",
+      "source_pdf_quote": "Separate tables on page 1 for 'Committee Members / Guests' and 'Staff'.",
+      "output_quote": "A single table at element index 7 containing both sets of data, with rows starting at index 11 having only 3 cells in a 6-column table structure.",
+      "location": "sections[0].elements[6]"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The Agenda list (items 1-11) is significantly corrupted. The source presents a single numbered list across three pages. The output fragments this into two separate unordered lists and several individual paragraphs (for items 4-7). Additionally, the nested sub-items for item 10 (a, b, and c), which are present on page 3 of the source, are entirely omitted from the output, representing a major structural failure of the list element.",
+      "source_pdf_quote": "A single continuous numbered list (1-11) starting on page 1 and ending on page 3, with nested items (a, b, c) under item 10.",
+      "output_quote": "Items 1-3 are in an unordered list (reading_order 9). Items 4-7 are separate paragraphs (reading_order 12, 14, 16, 17). Items 8-11 are in a second unordered list (reading_order 20). Sub-items 10a, 10b, and 10c are missing.",
+      "location": "sections[1].elements and sections[2].elements[1]"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "Several significant layout discrepancies exist between the source PDF and the HTML output. First, the NC DIT 911 Board logo, which acts as the document's header in the PDF, is misplaced in the HTML, appearing between Agenda items 3 and 4. Second, the 'Committee Members' and 'Guests' lists, which are distinct side-by-side tables in the source, have been merged into a single wide table in the HTML. This layout change creates incorrect visual row-level associations between unrelated people in the t",
+      "source_pdf_quote": "Logo at top-left of page 1; two separate side-by-side tables for Attendees; sub-items 10a, 10b, 10c on page 3.",
+      "output_quote": "Logo misplaced after Agenda item 3; merged 6-column table for Attendees; sub-items 10a-c omitted under 'Community College' heading.",
+      "location": "Page 1 and Page 3"
+    }
+  ],
+  "action_items": [
+    "Restore the missing sub-points (a, b, c) and descriptive text for Agenda item 10 on page 3.",
+    "Separate the merged attendee tables back into distinct 'Committee Members' and 'Staff' structures.",
+    "Reconstruct the Agenda as a single continuous nested list (1-11).",
+    "Relocate the NC DIT 911 Board logo to the document header."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7558,
+      "text_match": 0.9055979337384383,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7872,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7558,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8630636604774535,
+      "shingling_precision": 0.9619364375461936,
+      "duplication_ratio": 0.006399707441945511,
+      "word_count_ratio": 1.0,
+      "baseline_words": 655,
+      "gemini_words": 655,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 322562,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

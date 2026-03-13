@@ -1,0 +1,110 @@
+{
+  "document_id": "20200522-nc911-board-minutes-approved-685f9cb7",
+  "audited_at": "2026-03-12T22:23:37.019628Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6395348837209303,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "There is a mismatch in one of the phone numbers provided in the 'Phone Numbers' list on page 3. The source document lists '910-564-4194', but the output lists '910-564-2194'. This is a critical data error.",
+      "source_pdf_quote": "910-564-4194",
+      "output_quote": "910-564-2194",
+      "location": "Section 2, Phone Numbers table, page 3"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Within section 5 (Consent Agenda), specifically under part 'f) Grant Project Updates per Reports', the two sub-items listed in the source ('i. Monthly Reports per PSP' and 'ii. Mitchell County Grant Extension Request') are missing from the output.",
+      "source_pdf_quote": "i. Monthly Reports per PSP\nii. Mitchell County Grant Extension Request",
+      "output_quote": "[The text following 'f) Grant Project Updates per Reports' jumps directly to the paragraph 'Ms. Wright moved to accept...']",
+      "location": "Section 5, page 4 (represented in output section 3)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent and broken throughout the document. The document title is H1, but major numbered sections (e.g., Items 1-5, 7-13) are represented as paragraphs. However, Item 6 is assigned an H3 level. Furthermore, the roll call table title on page 6 is assigned H1 and H2 levels, resetting the hierarchy and skipping levels relative to the previous content. Screen readers would find this hierarchy confusing for navigation.",
+      "source_pdf_quote": "1. Chair’s Opening Remarks; 7. Education Committee Report; 8. Funding Committee Report; 9. Finance Team Report",
+      "output_quote": "The text for sections 1, 7, 8, and 9 are all contained within 'type': 'paragraph' elements instead of headings, while section 6 is 'type': 'heading', 'level': 3.",
+      "location": "Section 3 (Item 1), Section 4 (Item 6), Section 5 (Items 7-8), Section 6 (Item 9)"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "There are multiple instances where tables are misrendered because the first row of data has been incorrectly designated as the table header. Specifically, in the continuation of the guest list from PDF page 2, the guest name 'Ray Silance' is used as a table header. Similarly, the first instance of the 'ROLL CALL VOTE' table (from PDF page 4) uses the first row of member data ('Bone, David', 'Y', 'Y') as headers, displacing the actual headers ('NC 911 BOARD MEMBERS', etc.). This results in tables",
+      "source_pdf_quote": "On PDF page 4, the 'ROLL CALL VOTE' table has headers: 'NC 911 BOARD MEMBERS', '5. CONSENT AGENDA', and '8 a.) FY 2021 PROPOSED PSAP DISTRIBUTION'.",
+      "output_quote": "The HTML renders this table with headers: 'Bone, David', 'Y', 'Y' and gives it the title 'Table: Bone, David, Y, Y'.",
+      "location": "After item 5. Consent Agenda"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The name of Board Member 'Earl Struble' is consistently misspelled as 'Earl Sturble' in the 'ROLL CALL VOTE' tables in sections 3 and 5. This alters the factual information of the document.",
+      "source_pdf_quote": "Struble, Earl",
+      "output_quote": "Sturble, Earl",
+      "location": "Sections 3 and 5, ROLL CALL VOTE tables"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The list structure for Item 5 (Consent Agenda) and Item 6 (Executive Director Report) is partially broken. While some items are captured in a list element, the sub-items for the financial accounts (April 2020 balances/disbursements) are rendered as flat paragraphs, losing their logical association with the list items 'b' and 'c' which they support.",
+      "source_pdf_quote": "April 2020 Month-End Balance $66,897,707 ... April 2020 Disbursement $65,036 ... c) CMRS Fund/Account",
+      "output_quote": "These are rendered as individual paragraphs in Section 4 (elements 22-32) rather than as a nested list or continuation of the list starting in Section 3.",
+      "location": "Section 4, elements 22-32"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9635954572407307,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5669,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6395348837209303,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9687226978857243,
+      "shingling_precision": 0.9641739130434782,
+      "duplication_ratio": 0.004314387544550741,
+      "word_count_ratio": 1.0,
+      "baseline_words": 2176,
+      "gemini_words": 2176,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 326273,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

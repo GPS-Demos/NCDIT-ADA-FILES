@@ -1,0 +1,213 @@
+{
+  "document_id": "911-telecommunicators-resolution-rockingham-county-685f6ff5",
+  "composite_score": 0.8047,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.80 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I have reviewed each paragraph and sentence in the output JSON and compared it to the source PDF. The text in the output correctly reflects the content of the source document, including the header, resolution title, 'whereas' clauses, and the resolution itself. The table headers 'Field' and 'Value' in element 10 are structural additions common in document conversion and do not constitute fabricated content. No hallucinated text was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The source document contains no phone numbers, email addresses, mailing addresses, or URLs. The output JSON also contains no such information. Therefore, no fabrication has occurred.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source document is a single-page resolution. The output JSON includes all major sections: the jurisdictional header, the resolution heading, the preamble clauses, the resolution statement, the date, the signature block, and the official seal. While some text is missing from the signature block (evaluated under C5), the section itself is present.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source PDF does not contain any tables. The table in the output (element index 10) is a structural representation used to organize the signature block data. Therefore, this check is not applicable in the sense of comparing row counts.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "A significant portion of text is missing from the signature block area (element index 10 in the output). Specifically, the line 'ROCKINGHAM COUNTY BOARD OF COMMISSIONERS' appearing directly under Mark F. Richardson's title and the functional term 'ATTEST:' which precedes the clerk's signature are omitted. Calculating word counts for this specific block (17 words total in the source), the 6 omitted words represent approximately 35% of the section's text content, exceeding the 25% threshold for a major defect.",
+        "b_evidence_source": "ROCKINGHAM COUNTY BOARD OF COMMISSIONERS\n\nATTEST:",
+        "b_evidence_output": "Missing from the signature table (element index 10)",
+        "b_evidence_location": "Signature block, end of page 1",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Aside from the omissions noted in C5, the remaining text accurately captures the information from the source. Punctuation, capitalization, and minor spacing differences (like the handling of '9-1-1' vs '911' which follows the source's own varied usage) are within acceptable limits.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9418604651162791,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I have reviewed each paragraph and sentence in the output JSON and compared it to the source PDF. The text in the output correctly reflects the content of the source document, including the header, resolution title, 'whereas' clauses, and the resolution itself. The table headers 'Field' and 'Value' in element 10 are structural additions common in document conversion and do not constitute fabricated content. No hallucinated text was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The source document contains no phone numbers, email addresses, mailing addresses, or URLs. The output JSON also contains no such information. Therefore, no fabrication has occurred.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source document is a single-page resolution. The output JSON includes all major sections: the jurisdictional header, the resolution heading, the preamble clauses, the resolution statement, the date, the signature block, and the official seal. While some text is missing from the signature block (evaluated under C5), the section itself is present.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source PDF does not contain any tables. The table in the output (element index 10) is a structural representation used to organize the signature block data. Therefore, this check is not applicable in the sense of comparing row counts.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"A significant portion of text is missing from the signature block area (element index 10 in the output). Specifically, the line 'ROCKINGHAM COUNTY BOARD OF COMMISSIONERS' appearing directly under Mark F. Richardson's title and the functional term 'ATTEST:' which precedes the clerk's signature are omitted. Calculating word counts for this specific block (17 words total in the source), the 6 omitted words represent approximately 35% of the section's text content, exceeding the 25% threshold for a major defect.\",\n      \"b_evidence_source\": \"ROCKINGHAM COUNTY BOARD OF COMMISSIONERS\\n\\nATTEST:\",\n      \"b_evidence_output\": \"Missing from the signature table (element index 10)\",\n      \"b_evidence_location\": \"Signature block, end of page 1\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Aside from the omissions noted in C5, the remaining text accurately captures the information from the source. Punctuation, capitalization, and minor spacing differences (like the handling of '9-1-1' vs '911' which follows the source's own varied usage) are within acceptable limits.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.9418604651162791\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the source PDF and the converted JSON. All text blocks appear the correct number of times in the output relative to their presence in the source document. Key phrases like 'Rockingham County Board of Commissioners' and the SOC classification details appear in the WHEREAS and RESOLVED clauses as intended without erroneous duplication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document contains a single logical heading, which is the title of the resolution. This has been correctly identified as a Level 1 heading (H1) in the output. There are no sub-headings in the source, so no hierarchy issues exist.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document does not contain traditional grid-based tables. The signature area, which features side-by-side components (signature and printed title), has been converted into a 'Field/Value' table structure in the JSON. This is an appropriate structural choice for preserving the relationship between the signatures and the corresponding titles for accessibility. The table structure itself is internally consistent with defined headers and rows.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the JSON follows the logical top-to-bottom flow of the resolution: preamble, whereas clauses, resolution, date, signature block, and seal. This matches the intended reading path of the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The source document does not contain any lists (bulleted or numbered). Consequently, no list conversion errors are present.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document contains no hyperlinks. No links have been incorrectly injected into the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the source PDF and the converted JSON. All text blocks appear the correct number of times in the output relative to their presence in the source document. Key phrases like 'Rockingham County Board of Commissioners' and the SOC classification details appear in the WHEREAS and RESOLVED clauses as intended without erroneous duplication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document contains a single logical heading, which is the title of the resolution. This has been correctly identified as a Level 1 heading (H1) in the output. There are no sub-headings in the source, so no hierarchy issues exist.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document does not contain traditional grid-based tables. The signature area, which features side-by-side components (signature and printed title), has been converted into a 'Field/Value' table structure in the JSON. This is an appropriate structural choice for preserving the relationship between the signatures and the corresponding titles for accessibility. The table structure itself is internally consistent with defined headers and rows.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the JSON follows the logical top-to-bottom flow of the resolution: preamble, whereas clauses, resolution, date, signature block, and seal. This matches the intended reading path of the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The source document does not contain any lists (bulleted or numbered). Consequently, no list conversion errors are present.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document contains no hyperlinks. No links have been incorrectly injected into the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output significantly deviates from the visual organization of the source PDF. While the source is a single, cohesive document flow, the HTML rendering repeats the entire content twice and inserts an additional data table ('Board of Commissioners Signatures') in the middle. This fragmentation and repetition creates a visual flow that does not match the source's intent and confuses the document's structure.",
+        "b_evidence_source": "The source PDF is a single-page resolution with a logical flow from the title through the preamble clauses to the signatures and seal.",
+        "b_evidence_output": "The HTML screenshot shows the document text repeated twice (once as plain text at the top and again with images/formatting at the bottom), with a signature data table inserted between the two versions.",
+        "b_evidence_location": "Entire HTML document",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source PDF does not contain any tables. The HTML output includes a table summarizing signatures that was generated during the conversion process. This table is rendered correctly with distinct headers and rows, and is easily readable by a sighted user.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The meaningful images from the source PDF, which include the handwritten signatures of Mark F. Richardson and Susan O. Washburn as well as the Rockingham County seal, are successfully rendered in the HTML output. They appear in the lower half of the rendered page within the second instance of the document text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The HTML output contains genuine body content duplication. The entire text of the resolution, including all 'WHEREAS' clauses and the 'NOW, THEREFORE, BE IT RESOLVED' section, is printed twice within the body of the same page. This is not a table of contents or navigation landmark, but a repeated rendering of the document's core content.",
+        "b_evidence_source": "The source PDF contains a single instance of the resolution text starting with 'WHEREAS, in September of 2021...' and ending with '...Standard Occupational Classification (SOC) catalog.'",
+        "b_evidence_output": "The text block starting with 'WHEREAS, in September of 2021...' appears at the top of the HTML screenshot and is repeated again near the bottom of the screenshot.",
+        "b_evidence_location": "The first instance starts after the main heading; the second instance starts after the 'Board of Commissioners Signatures' table.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output significantly deviates from the visual organization of the source PDF. While the source is a single, cohesive document flow, the HTML rendering repeats the entire content twice and inserts an additional data table ('Board of Commissioners Signatures') in the middle. This fragmentation and repetition creates a visual flow that does not match the source's intent and confuses the document's structure.\",\n      \"b_evidence_source\": \"The source PDF is a single-page resolution with a logical flow from the title through the preamble clauses to the signatures and seal.\",\n      \"b_evidence_output\": \"The HTML screenshot shows the document text repeated twice (once as plain text at the top and again with images/formatting at the bottom), with a signature data table inserted between the two versions.\",\n      \"b_evidence_location\": \"Entire HTML document\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source PDF does not contain any tables. The HTML output includes a table summarizing signatures that was generated during the conversion process. This table is rendered correctly with distinct headers and rows, and is easily readable by a sighted user.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The meaningful images from the source PDF, which include the handwritten signatures of Mark F. Richardson and Susan O. Washburn as well as the Rockingham County seal, are successfully rendered in the HTML output. They appear in the lower half of the rendered page within the second instance of the document text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The HTML output contains genuine body content duplication. The entire text of the resolution, including all 'WHEREAS' clauses and the 'NOW, THEREFORE, BE IT RESOLVED' section, is printed twice within the body of the same page. This is not a table of contents or navigation landmark, but a repeated rendering of the document's core content.\",\n      \"b_evidence_source\": \"The source PDF contains a single instance of the resolution text starting with 'WHEREAS, in September of 2021...' and ending with '...Standard Occupational Classification (SOC) catalog.'\",\n      \"b_evidence_output\": \"The text block starting with 'WHEREAS, in September of 2021...' appears at the top of the HTML screenshot and is repeated again near the bottom of the screenshot.\",\n      \"b_evidence_location\": \"The first instance starts after the main heading; the second instance starts after the 'Board of Commissioners Signatures' table.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 0,
+  "total_major": 3,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

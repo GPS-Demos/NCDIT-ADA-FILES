@@ -1,0 +1,104 @@
+{
+  "document_id": "colored-text-logos-676a",
+  "audited_at": "2026-03-13T00:33:11.968533Z",
+  "quality_score": 82,
+  "fidelity_composite": 0.8063,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant content loss, specifically missing nested sub-bullets in the 'Measuring Success' section that contain critical 'Accomplished/Not accomplished' status indicators. While programmatic shingling recall is high (0.88), the loss of these specific informational markers combined with broken heading hierarchy and misplaced header blocks necessitates human intervention to ensure government document accuracy.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output fails to capture numerous nested list items (sub-bullets) that are present in the source document. Significant omissions occur in the 'Partnership Engagements/Economic Development' section (missing sub-bullets for DHS efforts and IWCE panels) and throughout the 'Measuring Success' section (missing all sub-bullets for numbered items 4 through 10). These sub-bullets contain critical information, such as whether specific goals were 'Accomplished' or 'Not accomplished'. The loss of these ",
+      "source_pdf_quote": "Page 3, Measuring Success item 6: 'a. Fell short of this goal, though we did work with NCEM to develop a Radio 101 training. b. Presented at the NC Emergency Management Association’s conference on FirstNet deployable assets. c. Worked with the N.C. State Bureau of Investigation to develop a Cellular 101 training.'",
+      "output_quote": "The nested_list for element 37, item 6 is null, and the corresponding text does not appear elsewhere in the output.",
+      "location": "Section 3, element 37 (Measuring Success list)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The source document uses a clear hierarchical structure under the section 'Accomplishments'. Sections like 'Responder Engagements', 'Industry Engagements', 'Partnership Engagements', and 'Detail Assignments' are subsections of 'Accomplishments'. In the output JSON, 'Responder Engagements' is correctly identified as an H3 (level 3), whereas 'Industry Engagements', 'Partnership Engagements/Economic Development', and 'Detail Assignments' are all tagged as H2 (level 2). This creates an inconsistent ",
+      "source_pdf_quote": "Accomplishments (Section Heading)\n- Responder Engagements (Subsection)\n- Industry Engagements (Subsection)\n- Partnership Engagements/Economic Development (Subsection)\n- Detail Assignments - Emergency Response & Planned Events (Subsection)",
+      "output_quote": "{\"type\": \"heading\", \"level\": 2, \"text\": \"Accomplishments\"}\n{\"type\": \"heading\", \"level\": 3, \"text\": \"Responder Engagements\"}\n{\"type\": \"heading\", \"level\": 2, \"text\": \"Industry Engagements\"}\n{\"type\": \"heading\", \"level\": 2, \"text\": \"Partnership Engagements/Economic Development\"}\n{\"type\": \"heading\", \"level\": 2, \"text\": \"Detail Assignments - Emergency Response & Planned Events\"}",
+      "location": "Sections under Accomplishments, pages 1-2, element indices 10, 12, 21, 23, 25"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output fails to maintain the visual organization of the source document in two significant ways. First, the primary document title and agency logo from the header of page 1 are missing from the top of the HTML, which instead begins with a navigation sidebar and the 'Executive Summary' heading. Second, the conversion incorrectly handles page transitions by inserting the header block (containing the title and logo) directly into the body text. This disrupts the logical flow, specifically ",
+      "source_pdf_quote": "Header: 'FirstTech Annual Review 2023' and NCDIT logo; Paragraph transition: '...focused on the mission. This' [page break] 'tool had 3130 unique visitors...'",
+      "output_quote": "The HTML top omits the title/logo header. A header block is inserted between 'This' and 'tool had 3130...', with the latter text rendered as a new bullet point rather than a continuation of the previous paragraph.",
+      "location": "Start of document and page transition between pages 1 and 2."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a minor text fragmentation issue at the page 1 to page 2 transition. A single list item ('Continued support of our text-to-speech tool...') is split between a list element on page 1 and a paragraph element on page 2. While all characters are present, the split alters the semantic structure of the sentence.",
+      "source_pdf_quote": "Page 1 and Page 2 transition: '...focused on the mission. This tool had 3130 unique visitors...'",
+      "output_quote": "Section 1, item 13 ends with '...focused on the mission. This'; Section 2, reading_order 19 begins with 'tool had 3130 unique visitors...'",
+      "location": "Section 1, item 13 and Section 2, reading_order 19"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There are several issues with list conversion. First, lists spanning page breaks are fragmented; for example, the list under 'Responder Engagements' is split into two separate list objects (reading_order 13 and 20), with a portion of one item extracted as a standalone paragraph (reading_order 19). Second, and more critically, all nested lists (sub-bullets) are completely missing from the output. In the 'Partnership Engagements' section, the bullets following 'Participated in several ongoing effo",
+      "source_pdf_quote": "- Participated in several ongoing efforts with DHS including:\no Communications Section Task Force...\no P25 Compliance Assessment Program...\n... [and sub-items for Measuring Success items 4, 5, 6, 7, 8, 9, 10]",
+      "output_quote": "List items under 'Partnership Engagements/Economic Development' (reading_order 24) and 'Measuring Success' (reading_order 37 and 47) end with colons, but the subsequent nested items are missing from the elements array.",
+      "location": "Accomplishments (pages 1-2) and Measuring Success (pages 3-4)"
+    }
+  ],
+  "action_items": [
+    "Re-insert missing nested list items in the 'Measuring Success' and 'Partnership Engagements' sections",
+    "Correct heading levels for subsections under 'Accomplishments' to H3",
+    "Fix page transition logic to prevent header/logo blocks from interrupting body text"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8063,
+      "text_match": 0.9321937321937321,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8155,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8063,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8826544375505799,
+      "shingling_precision": 0.9876245095079987,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 525,
+      "gemini_words": 525,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 287572,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

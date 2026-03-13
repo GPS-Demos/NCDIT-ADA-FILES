@@ -1,0 +1,134 @@
+{
+  "document_id": "logo-tables-shading-watermark-photos-13a3",
+  "audited_at": "2026-03-13T01:54:53.836507Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6395348837209303,
+  "fidelity_structural": 0.2272727272727273,
+  "fidelity_visual": null,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output JSON skips several complete pages of content that are not covered by the 'omitted' block (which targeted the brochure pages 7-27). Specifically, Page 34 (RAK scenario-based training description and objectives) and Page 36 (Training Payment Options and COVID-19 precautions) are missing entirely. The reading order jumps from the end of the brochure comparison (Page 28) directly to the dispatcher objectives (Page 35), and then from Page 35 to the committee goals (Page 37).",
+      "source_pdf_quote": "Entire content of Page 34 (starting with 'Dispatch Response to Active Killers') and Page 36 (starting with 'Training Payment Options').",
+      "output_quote": "The content from Page 34 and Page 36 is absent from the sequence of sections and elements.",
+      "location": "Sections following element index 357 (Page 28) and preceding element index 489 (Page 37)."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output contains significant text omissions in the contact section for Dan Jewiss on Page 35. The email address (D.Jewiss@me.com) and the website URL (www.TheRAKAcademy.com) are both omitted, leaving the sentence truncated and incomplete. This represents a loss of essential contact information for the program described.",
+      "source_pdf_quote": "Please contact Dan Jewiss at D.Jewiss@me.com or 203-704-0581 with any questions or to host this training. www.TheRAKAcademy.com",
+      "output_quote": "Please contact Dan Jewiss at ... or 203-704-0581 with any questions or to host this training. ",
+      "location": "Page 35, elements 467-469."
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy contains several major breaks. In the Minutes section, the document title is set as H1 (index 14), but the subsequent section headers (e.g., '6. Technology Update') are set as H3 (index 20, 25, 26), skipping the H2 level. Additionally, in the Curriculum Overview Comparison section (index 355-356), an H2 precedes an H1, which is logically inverted hierarchy. These defects hinder navigation for assistive technologies.",
+      "source_pdf_quote": "6. Technology Update (Page 4); Curriculum Overview Comparison (Page 28)",
+      "output_quote": "{\"type\": \"heading\", \"level\": 3, \"text\": \"6. Technology Update...\"} (index 20); {\"type\": \"heading\", \"level\": 2, \"text\": \"RQI Telecommunicator CPR\"} followed by {\"type\": \"heading\", \"level\": 1, \"text\": \"Curriculum Overview Comparison\"} (index 355-356)",
+      "location": "Sections 4 and 28"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "In the Agenda table on Page 1, the content for Tab 8 includes sub-bullets ('Buncombe County...', 'Haywood County...'). The output extracts these bullets from the table cell and places them in a separate list element (index 8) after the table. This corrupts the structural integrity of the table as the specific data associated with Tab 8 is no longer contained within that row's structure.",
+      "source_pdf_quote": "Tab 8 Topic cell containing: 'Buncombe County: RQI Telecommunicator CPR Program...' and 'Haywood County 911: RAK Academy...' (Page 1)",
+      "output_quote": "The table data cell for Tab 8 only contains the introductory text (index 7, row 9), while the specific program details are moved to a separate list element (index 8) following the entire table.",
+      "location": "Section 1, index 7 and 8"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially broken by the extraction of sub-bullets from the Agenda table. Because the table element (index 7) contains all 13 agenda items and is processed before the subsequent list (index 8), a reader would encounter agenda items 9 through 13 before reading the sub-details for item 8. This breaks the logical flow of the meeting agenda.",
+      "source_pdf_quote": "Agenda item 8 sub-bullets are presented immediately following the item 8 header within the table flow. (Page 1)",
+      "output_quote": "Table (reading_order 7) includes items 1-13. List (reading_order 8) contains item 8 details. Item 9-13 text appears in output before item 8 bullet details.",
+      "location": "Section 1"
+    },
+    {
+      "description": "Low text recall (possible truncation): 38%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "A minor text truncation occurs at the end of the first paragraph of Item 8 in the meeting minutes. The text is cut off mid-word, which is a defect in the transcription fidelity.",
+      "source_pdf_quote": "...approve the 911 4 Heroes Telecommunicator Training Bundle Online subscription at the current course list for the subscription at 90%.",
+      "output_quote": "...approve the 911 4 Heroes Telecommunicator Training Bundle Online subscription at the current co subscription at 90%.",
+      "location": "Page 4, element 26 and Page 5, element 28."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The numbered lists for the '2022 Education Committee Goals' and '2023 Education Committee Goals' on Page 37 have been converted to unordered lists in the output. While the items themselves are preserved, the numbering (1, 2, 3, 4) used in the source to denote priority or sequence is lost.",
+      "source_pdf_quote": "1. Continue... 2. Explore... (Page 37)",
+      "output_quote": "\"list_type\": \"unordered\"",
+      "location": "Section 37, index 490 and 492"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to preserve functional contact information. In Section 35, the email address 'D.Jewiss@me.com' present in the source footer is entirely missing from the output text, leaving a trailing preposition with no object.",
+      "source_pdf_quote": "Please contact Dan Jewiss at D.Jewiss@me.com or 203-704-0581 (Page 35)",
+      "output_quote": "\"text\": \"Please contact Dan Jewiss at \" (index 467)",
+      "location": "Section 35, element 467"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.5084465691797007,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.4658,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6395348837209303,
+      "fidelity_structural": 0.2272727272727273,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.3794689426268374,
+      "shingling_precision": 0.8287252770011391,
+      "duplication_ratio": 0.018370520377535893,
+      "word_count_ratio": 1.0,
+      "baseline_words": 6113,
+      "gemini_words": 6113,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 486784,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

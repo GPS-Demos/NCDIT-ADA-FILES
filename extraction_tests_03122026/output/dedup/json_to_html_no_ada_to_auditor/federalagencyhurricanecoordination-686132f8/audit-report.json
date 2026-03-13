@@ -1,0 +1,79 @@
+{
+  "document_id": "federalagencyhurricanecoordination-686132f8",
+  "audited_at": "2026-03-13T01:30:09.506454Z",
+  "quality_score": 60,
+  "fidelity_composite": 0.6,
+  "fidelity_content": null,
+  "fidelity_structural": null,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While the text volume appears complete (word_count_ratio 1.0), the extremely low programmatic precision of 36.3% strongly corroborates the LLM fidelity report of significant visual corruption. The absence of maps and diagrams in a coordination document is a major failure that prevents automatic approval despite the pipeline's heuristic suggestion.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The rendered HTML suffers from a widespread failure to display meaningful visual content from the source PDF. Nearly all central maps, screenshots, and diagrams are missing or broken. A series of large black rectangles appears early in the document, likely indicating failed rendering of image assets. Specifically, maps from pages 5, 6, 8, and screenshots from pages 7, 9, 11 are missing or replaced by broken placeholders (e.g., the map under '2016 Post-Matthew Operations Overview' is distorted/un",
+      "source_pdf_quote": "The source PDF contains meaningful maps and charts on pages 5, 6, 7, 8, 9, 11, 12, 13, and 14.",
+      "output_quote": "In the HTML, these images are either entirely absent from their respective sections or appear as non-functional black/grey rectangles.",
+      "location": "Throughout the document, starting after the 'National Coastal Mapping Program Goals' section and recurring in nearly every subsequent section."
+    },
+    {
+      "description": "Low text precision (possible hallucination): 36%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    }
+  ],
+  "action_items": [
+    "Inspect the text for hallucinations or garbled characters caused by the low precision score",
+    "Restore missing maps and screenshots on pages 5, 6, 7, 8, 9, and 11 which are currently broken or missing"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6,
+      "text_match": 0.508037308989879,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6296,
+      "ceiling": 0.6,
+      "ceiling_reason": "fidelity_low_score",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6,
+      "fidelity_content": null,
+      "fidelity_structural": null,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.845442536327609,
+      "shingling_precision": 0.36312056737588655,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 662,
+      "gemini_words": 662,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 368357,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

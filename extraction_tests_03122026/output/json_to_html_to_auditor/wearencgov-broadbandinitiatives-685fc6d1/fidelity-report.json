@@ -1,0 +1,213 @@
+{
+  "document_id": "wearencgov-broadbandinitiatives-685fc6d1",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output follows the structure of the source document for the sections it includes. There are no signs of hallucinated text or paragraphs that were not present in the original source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The URLs and email addresses that are present match the source. While several pieces of contact information are missing (omitted), none are fabricated or incorrect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output document is missing a vast majority of its content. Out of 27 pages in the source PDF, the output only provides content for pages 1-4, 24, 26, and 27. The JSON explicitly notes that 20 sections were omitted for token budget. This represents a total loss of roughly 75% of the source document's pages.",
+        "b_evidence_source": "The source PDF contains 27 pages of content, including maps (p. 5), household connectivity infographics (p. 6-9), strategic vision (p. 14), the state broadband plan (p. 16), and specific program details.",
+        "b_evidence_output": "The output JSON contains an explicit omission note: '{\"_omitted\": \"20 sections omitted for token budget\"}'. It jumps from page 4 (Typical Broadband Usage) directly to page 24 (GREAT Grant Program).",
+        "b_evidence_location": "Sections list, between reading_order index 19 and 111",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables present in the output (Pages 3, 4, and 24) correctly represent the number of rows from the source. The table on page 24 uses the first data row as a header, which is an acceptable reformatting choice.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "There are several instances of significant text omission within the sections that were converted. On page 2, the descriptive sub-bullets for every technology type (DSL, Cable, Fiber, Wireless, Satellite) containing speed ranges and technical specifications are completely missing. On page 4, the source URL is missing from the citation. On page 26, the contact email address is missing. On page 27, all social media handles and the primary department website URL are missing.",
+        "b_evidence_source": "Page 2: DSL sub-bullets ('Runs over traditional copper...', 'Speeds range from...'); Page 4: URL 'https://www.fcc.gov/research-reports/guides/household-broadband-guide'; Page 26: email 'firsttech@nc.gov'; Page 27: Handles like '@NCDIT', '@BroadbandIO' and URL 'it.nc.gov'.",
+        "b_evidence_output": "Page 2 list items (reading_order 8) are missing all sub-bullet text content. Page 4 'Source' (reading_order 19) is truncated. Page 26 (reading_order 122) ends before the email. Page 27 section contains no text for handles or URLs.",
+        "b_evidence_location": "Sections for pages 2, 4, 26, and 27",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "In the segments of text that were successfully converted, no meaning-altering changes were observed. The primary issues with this conversion are massive omissions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output follows the structure of the source document for the sections it includes. There are no signs of hallucinated text or paragraphs that were not present in the original source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The URLs and email addresses that are present match the source. While several pieces of contact information are missing (omitted), none are fabricated or incorrect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output document is missing a vast majority of its content. Out of 27 pages in the source PDF, the output only provides content for pages 1-4, 24, 26, and 27. The JSON explicitly notes that 20 sections were omitted for token budget. This represents a total loss of roughly 75% of the source document's pages.\",\n      \"b_evidence_source\": \"The source PDF contains 27 pages of content, including maps (p. 5), household connectivity infographics (p. 6-9), strategic vision (p. 14), the state broadband plan (p. 16), and specific program details.\",\n      \"b_evidence_output\": \"The output JSON contains an explicit omission note: '{\\\"_omitted\\\": \\\"20 sections omitted for token budget\\\"}'. It jumps from page 4 (Typical Broadband Usage) directly to page 24 (GREAT Grant Program).\",\n      \"b_evidence_location\": \"Sections list, between reading_order index 19 and 111\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables present in the output (Pages 3, 4, and 24) correctly represent the number of rows from the source. The table on page 24 uses the first data row as a header, which is an acceptable reformatting choice.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"There are several instances of significant text omission within the sections that were converted. On page 2, the descriptive sub-bullets for every technology type (DSL, Cable, Fiber, Wireless, Satellite) containing speed ranges and technical specifications are completely missing. On page 4, the source URL is missing from the citation. On page 26, the contact email address is missing. On page 27, all social media handles and the primary department website URL are missing.\",\n      \"b_evidence_source\": \"Page 2: DSL sub-bullets ('Runs over traditional copper...', 'Speeds range from...'); Page 4: URL 'https://www.fcc.gov/research-reports/guides/household-broadband-guide'; Page 26: email 'firsttech@nc.gov'; Page 27: Handles like '@NCDIT', '@BroadbandIO' and URL 'it.nc.gov'.\",\n      \"b_evidence_output\": \"Page 2 list items (reading_order 8) are missing all sub-bullet text content. Page 4 'Source' (reading_order 19) is truncated. Page 26 (reading_order 122) ends before the email. Page 27 section contains no text for handles or URLs.\",\n      \"b_evidence_location\": \"Sections for pages 2, 4, 26, and 27\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"In the segments of text that were successfully converted, no meaning-altering changes were observed. The primary issues with this conversion are massive omissions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the source document and the converted JSON output. The NC DIT logo and department name appear at the bottom of almost every slide in the source PDF. The JSON correctly represents this by including the image and its associated alt text at the end of each section corresponding to a slide. No textual paragraphs or headings appear to be duplicated beyond what is explicitly repeated in the original source slides (e.g., the repeated title 'Executive Order 91' on pages 17 and 18).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The JSON maintains a generally consistent heading hierarchy using H1 for slide titles. In Section 24 (Page 24), it correctly nests an H2 under an H1. While Section 26 (Page 26) uses an H2 for a main slide title where others use H1, this falls under acceptable adjustments for normalization and navigation, and no heading levels are skipped (e.g., H1 to H3).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "In Section 24 (Page 24), the converter interprets a two-column list of awardees as a table. While the table interpretation is logical, the first row of data ('Bertie' and 'Roanoke Connect Holdings') is misidentified as a header row ('is_header_row': true and 'cell_type': 'header'). These are data values belonging to the body of the table, not column headers.",
+        "b_evidence_source": "The list of awards on page 24 begins with 'Bertie' and 'Roanoke Connect Holdings' as the first entry, not as titles for the columns.",
+        "b_evidence_output": "The first row of the table in Section 24 (reading_order 114) is marked as a header row: \"is_header_row\": true, \"cell_type\": \"header\".",
+        "b_evidence_location": "Section title 'GREAT Grant Program', Page 24, element index 114",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the slide-by-slide sequence of the source document. Content within the slides flows logically from top to bottom, with titles followed by main content and finally footer-positioned logos. No major sections are misplaced.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "On Page 2, the source document contains an unordered list where several items (e.g., 'Digital Subscriber Line (DSL)') have nested sub-bullets describing speeds and technical details. The JSON conversion (reading_order 8) renders these as a flat list and entirely omits the nested sub-bullet content, failing to preserve the structural nesting and meaning of the list.",
+        "b_evidence_source": "Digital Subscriber Line (DSL)\n- Runs over traditional copper phone lines...\n- Speeds range from 1.5 Mbps to 80 Mbps",
+        "b_evidence_output": "The list item for DSL (reading_order 8) contains no nested content: \"nested_list\": null.",
+        "b_evidence_location": "Section title 'Broadband Technology Types', Page 2, element index 8",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Multiple URLs and contact email addresses are clearly visible in the source document (Pages 3, 4, 16, 26, 27). In the JSON output, these are rendered as plain text within paragraphs but are not hyperlinked or identified as link elements, making them non-functional for accessibility purposes.",
+        "b_evidence_source": "URLs on pages 3, 4, 16, 27 and email address 'firsttech@nc.gov' on page 26.",
+        "b_evidence_output": "The contact info and URLs are present only as text strings, such as in reading_order 122: \"Red Grasso, Director/FirstNet SPOC; Charles Laird, Program Specialist firsttech@nc.gov\".",
+        "b_evidence_location": "Various pages including Page 3 (index 14), Page 4 (index 19), and Page 26 (index 122).",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6818181818181819,
+    "penalty_sum": 7,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the source document and the converted JSON output. The NC DIT logo and department name appear at the bottom of almost every slide in the source PDF. The JSON correctly represents this by including the image and its associated alt text at the end of each section corresponding to a slide. No textual paragraphs or headings appear to be duplicated beyond what is explicitly repeated in the original source slides (e.g., the repeated title 'Executive Order 91' on pages 17 and 18).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The JSON maintains a generally consistent heading hierarchy using H1 for slide titles. In Section 24 (Page 24), it correctly nests an H2 under an H1. While Section 26 (Page 26) uses an H2 for a main slide title where others use H1, this falls under acceptable adjustments for normalization and navigation, and no heading levels are skipped (e.g., H1 to H3).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"In Section 24 (Page 24), the converter interprets a two-column list of awardees as a table. While the table interpretation is logical, the first row of data ('Bertie' and 'Roanoke Connect Holdings') is misidentified as a header row ('is_header_row': true and 'cell_type': 'header'). These are data values belonging to the body of the table, not column headers.\",\n      \"b_evidence_source\": \"The list of awards on page 24 begins with 'Bertie' and 'Roanoke Connect Holdings' as the first entry, not as titles for the columns.\",\n      \"b_evidence_output\": \"The first row of the table in Section 24 (reading_order 114) is marked as a header row: \\\"is_header_row\\\": true, \\\"cell_type\\\": \\\"header\\\".\",\n      \"b_evidence_location\": \"Section title 'GREAT Grant Program', Page 24, element index 114\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the slide-by-slide sequence of the source document. Content within the slides flows logically from top to bottom, with titles followed by main content and finally footer-positioned logos. No major sections are misplaced.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"On Page 2, the source document contains an unordered list where several items (e.g., 'Digital Subscriber Line (DSL)') have nested sub-bullets describing speeds and technical details. The JSON conversion (reading_order 8) renders these as a flat list and entirely omits the nested sub-bullet content, failing to preserve the structural nesting and meaning of the list.\",\n      \"b_evidence_source\": \"Digital Subscriber Line (DSL)\\n- Runs over traditional copper phone lines...\\n- Speeds range from 1.5 Mbps to 80 Mbps\",\n      \"b_evidence_output\": \"The list item for DSL (reading_order 8) contains no nested content: \\\"nested_list\\\": null.\",\n      \"b_evidence_location\": \"Section title 'Broadband Technology Types', Page 2, element index 8\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Multiple URLs and contact email addresses are clearly visible in the source document (Pages 3, 4, 16, 26, 27). In the JSON output, these are rendered as plain text within paragraphs but are not hyperlinked or identified as link elements, making them non-functional for accessibility purposes.\",\n      \"b_evidence_source\": \"URLs on pages 3, 4, 16, 27 and email address 'firsttech@nc.gov' on page 26.\",\n      \"b_evidence_output\": \"The contact info and URLs are present only as text strings, such as in reading_order 122: \\\"Red Grasso, Director/FirstNet SPOC; Charles Laird, Program Specialist firsttech@nc.gov\\\".\",\n      \"b_evidence_location\": \"Various pages including Page 3 (index 14), Page 4 (index 19), and Page 26 (index 122).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 2,\n    \"penalty_sum\": 7,\n    \"score\": 0.6818181818181818\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The overall visual organization of the text content matches the source document. Information is presented in the correct sequence, and the single-column layout effectively translates the slides' content into a readable web format. Margins and font styles differ as expected for HTML conversion.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables on pages 3, 4, and 24 are rendered correctly as HTML tables. They maintain clear row and column structures, making the data easily readable and understandable by a sighted user. Headers are appropriately distinguished from body rows.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Numerous meaningful and content-critical images are missing from the HTML output. This includes data maps (pages 5, 11, 19), house grid data representations (pages 6-9), conceptual hexagon diagrams (pages 10, 12), website navigation graphics (page 21), and the report cover photo (page 22). In many cases, these images are replaced by their alt-text descriptions (e.g., 'A pattern of houses icons', 'Two blue hexagon shapes...', 'Abstract colorful wavy background...'), which confirms the images themselves failed to render in the converted output.",
+        "b_evidence_source": "Page 5: 'North Carolina Broadband Service Inventory' Map; Pages 6-9: House icon grids; Page 11: '2017 County Broadband Adoption Rates' Map; Page 19: 'Technical Assistance Regions' Map; Page 21: 'The Playbook' navigation images; Page 22: Photo of children with tablets.",
+        "b_evidence_output": "The HTML output shows text placeholders or alt-text descriptions instead of these images. For example, 'A pattern of houses icons.' appears instead of the page 6-9 graphics, and descriptive text appears where the maps and diagrams should be.",
+        "b_evidence_location": "Pages 5, 6, 7, 8, 9, 10, 11, 12, 19, 21, 22, 23, 27",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of body content being duplicated in the HTML output. The presence of section titles in the Table of Contents at the top, followed by the same titles in the body, is an expected accessibility feature and does not constitute content duplication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The overall visual organization of the text content matches the source document. Information is presented in the correct sequence, and the single-column layout effectively translates the slides' content into a readable web format. Margins and font styles differ as expected for HTML conversion.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables on pages 3, 4, and 24 are rendered correctly as HTML tables. They maintain clear row and column structures, making the data easily readable and understandable by a sighted user. Headers are appropriately distinguished from body rows.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Numerous meaningful and content-critical images are missing from the HTML output. This includes data maps (pages 5, 11, 19), house grid data representations (pages 6-9), conceptual hexagon diagrams (pages 10, 12), website navigation graphics (page 21), and the report cover photo (page 22). In many cases, these images are replaced by their alt-text descriptions (e.g., 'A pattern of houses icons', 'Two blue hexagon shapes...', 'Abstract colorful wavy background...'), which confirms the images themselves failed to render in the converted output.\",\n      \"b_evidence_source\": \"Page 5: 'North Carolina Broadband Service Inventory' Map; Pages 6-9: House icon grids; Page 11: '2017 County Broadband Adoption Rates' Map; Page 19: 'Technical Assistance Regions' Map; Page 21: 'The Playbook' navigation images; Page 22: Photo of children with tablets.\",\n      \"b_evidence_output\": \"The HTML output shows text placeholders or alt-text descriptions instead of these images. For example, 'A pattern of houses icons.' appears instead of the page 6-9 graphics, and descriptive text appears where the maps and diagrams should be.\",\n      \"b_evidence_location\": \"Pages 5, 6, 7, 8, 9, 10, 11, 12, 19, 21, 22, 23, 27\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of body content being duplicated in the HTML output. The presence of section titles in the Table of Contents at the top, followed by the same titles in the body, is an expected accessibility feature and does not constitute content duplication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 6,
+  "total_critical": 1,
+  "total_major": 3,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

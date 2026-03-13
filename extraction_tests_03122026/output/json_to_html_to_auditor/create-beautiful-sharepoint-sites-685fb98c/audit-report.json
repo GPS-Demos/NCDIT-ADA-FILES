@@ -1,0 +1,94 @@
+{
+  "document_id": "create-beautiful-sharepoint-sites-685fb98c",
+  "audited_at": "2026-03-12T22:34:42.067272Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 1.0,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output is missing two entire pages from the source PDF: Page 18 ('The Landing') and Page 19 ('Engineering Onboarding'). While there is a block indicating 15 sections were omitted earlier in the document, there is no omission marker between the section for Slide 17 ('Crisis Communications') and the section for Slide 20 ('Conclusion'). The 'reading_order' metadata for the sections confirms this jump from 17 to 20, leaving Pages 18 and 19 completely unaccounted for.",
+      "source_pdf_quote": "The source PDF contains Page 18 titled 'The Landing' and Page 19 titled 'Engineering Onboarding'.",
+      "output_quote": "The JSON output skips directly from the section corresponding to Page 17 (Crisis Communications) to the section for Page 20 (Conclusion).",
+      "location": "Sections between 'Crisis Communications' and 'Conclusion', Pages 18-19"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are major text omissions in the 'Overview' (Page 2) and 'Why use SharePoint Online' (Page 3) sections. In both cases, the output includes the list headers but completely omits the descriptive paragraphs that accompany each point. For example, on Page 2, the description for 'Why Microsoft 365 Intranet is a Smart Choice' is entirely missing. These omissions represent a loss of over 50% of the text content for these specific pages.",
+      "source_pdf_quote": "Slide 2: 'Microsoft 365 SharePoint Online is a smart choice for your organization as it can increase productivity, streamline communication, and enhance collaboration among your fellow employees.' | Slide 3: 'M365 SharePoint Online seamlessly integrates with other Microsoft 365 tools, providing a unified experience for employees and streamlining workflows.'",
+      "output_quote": "The list items in sections[1] and sections[2] contain only the titles of the points, such as 'Why Microsoft 365 Intranet is a Smart Choice' and 'Microsoft 365 Integration', with no following descriptive text.",
+      "location": "Sections[1] and [2], Pages 2 and 3"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "In several instances, specifically on Page 20 (Conclusion), the structure of the list items is broken. In the source, each list item consists of a bulleted heading followed by a descriptive paragraph. The JSON output converts these into a sequence of separate single-item lists and standalone paragraphs (elements 125-130), failing to group the heading and body of the list item into a single cohesive structure.",
+      "source_pdf_quote": "Page 20 (Conclusion) contains three list items, each with a bulleted heading (e.g., 'Benefits of Intranet on M365 Platform') and an associated descriptive paragraph.",
+      "output_quote": "The JSON output separates these into distinct elements: element 125 (List), element 126 (Paragraph), element 127 (List), element 128 (Paragraph), etc.",
+      "location": "Section 'Conclusion', Page 20, elements 125-130"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The URL 'https://lookbook.microsoft.com', which appears as plain text on multiple slides in the source (Pages 15, 16, 17, 18, 19), is missing from the output. In Section 17 (Crisis Communications), the surrounding text 'Link to Crisis Communications example' is captured (element 104), but the subsequent URL is absent.",
+      "source_pdf_quote": "https://lookbook.microsoft.com",
+      "output_quote": "The text is completely missing from the 'Crisis Communications' section and other relevant sections.",
+      "location": "Section 'Crisis Communications', Page 17"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.7109127555427585,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5108,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8113703581991456,
+      "shingling_precision": 0.6325903151421983,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1377,
+      "gemini_words": 1377,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 335039,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "document_id": "nc-911-board-minutes-september-30-2022-685f9a2b",
+  "audited_at": "2026-03-13T01:50:16.300344Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": null,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The source PDF consists of 10 pages. A comparison between the source and the output JSON reveals that nearly all narrative content from pages 3 through 9 has been omitted. The output successfully captures the header and tables from pages 1 and 2, and then jumps immediately to the final tables and adjournment text on page 10. Entire sections such as the 'Executive Director Report', 'Education Committee Report', 'Funding Committee Report', 'Finance Team Report', 'Grant Committee Report', 'Standard",
+      "source_pdf_quote": "The source document contains narrative text spanning pages 3 through 9, including headers such as '5. Executive Director Report', '7. Education Committee Report', '8. Funding Committee Report', etc.",
+      "output_quote": "The output JSON transitions from the Guest list table (page 2, reading_order 13) to the Roll Call Vote roster (page 10, reading_order 80), skipping all intermediate text.",
+      "location": "Sections following the Guest list table, pages 3-9"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The meeting minutes, which form the primary section of this document, are missing approximately 70% of their total content. While this is captured as a total page omission in C3, it also constitutes a critical failure of section-level fidelity as the bulk of the record of the meeting is lost.",
+      "source_pdf_quote": "Narrative meeting minutes content across pages 3-9.",
+      "output_quote": "The entire content of the meeting minutes (reports, remarks, and discussions) is omitted between the initial attendance list and the final vote tallies.",
+      "location": "Pages 3-9"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The HTML output contains significant visual duplication of body content. The roll call information (Board Members, Staff, and Guests) is first rendered as accessible HTML tables. Immediately following these tables, the document embeds large images of the original PDF pages 1 and 2, which contain the exact same roll call information. This results in the same body content block appearing twice in the document flow.",
+      "source_pdf_quote": "The source PDF contains roll call tables on pages 1 and 2.",
+      "output_quote": "The HTML output renders the roll call data as HTML tables and then immediately includes two images (screenshots of PDF page 1 and 2) containing the same tables.",
+      "location": "In the HTML body, immediately following the 'NC 911 Board Members' table and before the 'North Carolina 911 Board Meeting Roll Call' (Guests) section."
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8642140122171446,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5448,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": null,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.955359765051395,
+      "shingling_precision": 0.8538057742782152,
+      "duplication_ratio": 0.05684619623538966,
+      "word_count_ratio": 1.0,
+      "baseline_words": 3026,
+      "gemini_words": 3026,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 805845,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

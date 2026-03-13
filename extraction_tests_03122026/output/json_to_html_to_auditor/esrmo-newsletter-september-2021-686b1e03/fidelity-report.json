@@ -1,0 +1,213 @@
+{
+  "document_id": "esrmo-newsletter-september-2021-686b1e03",
+  "composite_score": 0.7092,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.71 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I have compared the output JSON with the source PDF page by page. All headings and paragraphs in the output have a direct basis in the source document. No fabricated content or placeholder text was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "I verified all contact information (URLs and emails) in the output against the source. While many URLs and emails are missing from the output (addressed in C5), none of the ones that are present are fabricated or incorrect. For example, the URLs in reading_order 129 and 130 match the source exactly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages and major sections from the source document are represented in the output JSON. The logical structure of the newsletter is preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The output contains one table (reading_order 108) which corresponds to the 'PCI Webinars by Coalfire' table on page 4 of the source. Both the source and the output have 2 data rows. No rows are missing.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "There is a systemic issue where the text content of hyperlinks is omitted from the output. This results in missing names of organizations and numerous URLs/emails. On Page 1, 'PhishLabs' is missing from reading_order 6 and 'Business Email Compromise' is missing from reading_order 11. On Page 2, 'Ad Council' is missing from reading_order 25, and 'Ready.gov/September' is missing from reading_order 32. On Page 3, 'National Exercise Program', 'webinar webpage', and 'nomination' link texts are missing, as well as the email 'NEP@fema.dhs.gov'. This occurs throughout the document, significantly degrading the information content.",
+        "b_evidence_source": "Page 1: '...researchers at PhishLabs...'; Page 2: '...visit Ready.gov/September.'; Page 3: '...supporting documentation to NEP@fema.dhs.gov.'",
+        "b_evidence_output": "reading_order 6: '...researchers at , a...'; reading_order 32: '...visit '; reading_order 73: '...documentation to '",
+        "b_evidence_location": "Throughout the document (reading_orders 6, 11, 15, 25, 32, 36, 41, 64, 67, 71, 73, 75, etc.)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Minor OCR errors were observed, such as 'Controlebinar' instead of 'Webinar' in reading_order 131, but these do not fundamentally change the meaning of the content beyond the significant omissions already noted in C5.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9418604651162791,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I have compared the output JSON with the source PDF page by page. All headings and paragraphs in the output have a direct basis in the source document. No fabricated content or placeholder text was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"I verified all contact information (URLs and emails) in the output against the source. While many URLs and emails are missing from the output (addressed in C5), none of the ones that are present are fabricated or incorrect. For example, the URLs in reading_order 129 and 130 match the source exactly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages and major sections from the source document are represented in the output JSON. The logical structure of the newsletter is preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The output contains one table (reading_order 108) which corresponds to the 'PCI Webinars by Coalfire' table on page 4 of the source. Both the source and the output have 2 data rows. No rows are missing.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"There is a systemic issue where the text content of hyperlinks is omitted from the output. This results in missing names of organizations and numerous URLs/emails. On Page 1, 'PhishLabs' is missing from reading_order 6 and 'Business Email Compromise' is missing from reading_order 11. On Page 2, 'Ad Council' is missing from reading_order 25, and 'Ready.gov/September' is missing from reading_order 32. On Page 3, 'National Exercise Program', 'webinar webpage', and 'nomination' link texts are missing, as well as the email 'NEP@fema.dhs.gov'. This occurs throughout the document, significantly degrading the information content.\",\n      \"b_evidence_source\": \"Page 1: '...researchers at PhishLabs...'; Page 2: '...visit Ready.gov/September.'; Page 3: '...supporting documentation to NEP@fema.dhs.gov.'\",\n      \"b_evidence_output\": \"reading_order 6: '...researchers at , a...'; reading_order 32: '...visit '; reading_order 73: '...documentation to '\",\n      \"b_evidence_location\": \"Throughout the document (reading_orders 6, 11, 15, 25, 32, 36, 41, 64, 67, 71, 73, 75, etc.)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Minor OCR errors were observed, such as 'Controlebinar' instead of 'Webinar' in reading_order 131, but these do not fundamentally change the meaning of the content beyond the significant omissions already noted in C5.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.9418604651162791\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "An examination of the output reveals a duplication within element 131. The phrase 'Authentication and Access Control' is repeated twice in the same string ('Authentication and Access Controlebinar: Authentication and Access Control'), whereas it appears only once in the corresponding line on page 5 of the source PDF. This constitutes a duplication of content.",
+        "b_evidence_source": "Page 5: 'September 7: Coalfire Webinar: Authentication and Access Control'",
+        "b_evidence_output": "Element index 131: 'September 7: Coalfire Webinar: Authentication and Access Controlebinar: Authentication and Access Control'",
+        "b_evidence_location": "Upcoming Events section, page 5, element index 131",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved throughout the document. H1 levels are used for major page-level titles (e.g., 'Monthly Cybersecurity Newsletter', 'September is National Preparedness Month', '2021 N.C. Cybersecurity Awareness Symposium'), and H2 levels are used for specific articles or sub-sections within those pages. There are no instances of skipped heading levels (e.g., H1 to H3).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The single table found on page 4 of the source PDF ('PCI Webinars by Coalfire') is correctly represented in the output JSON. The header row and data rows are correctly identified, and the three-column structure is maintained without merging or splitting errors.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order of the main content blocks matches the logical flow of the source PDF. Articles, lists, and images are sequenced in a way that respects the top-to-bottom, left-to-right layout of the original document. Although some text strings associated with links are missing (which is a separate defect), the overall organization of the sections is correct.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "On page 5, the 'Training and Continued Learning Resources' section contains a nested list where each main bullet point is followed by a sub-bullet containing a URL. In the output JSON (element index 125), this is converted into a flat list, and the sub-bullet items (the URLs) are omitted entirely. This fails to preserve the hierarchical structure and the content of the list.",
+        "b_evidence_source": "Page 5, 'Training and Continued Learning Resources' section: '• FedVTE: Free Online Training Environment [newline] o https://fedvte.usalearning.gov/'",
+        "b_evidence_output": "Element index 125: item content is 'FedVTE: Free Online Training Environment' with nested_list as null.",
+        "b_evidence_location": "Training and Continued Learning Resources section, page 5, element index 125",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There is a systemic failure to capture bare URL strings and text segments that are hyperlinked in the source. For example, on page 1, the URL 'https://www.phishlabs.com/blog/...' is entirely missing after paragraph 15. Additionally, text that serves as a link (e.g., 'PhishLabs' and 'Business Email Compromise' on page 1, 'Ready.gov/September' on page 2) is omitted, resulting in broken sentences in the output paragraphs (elements 6, 8, 11, 13, 28, 30). This is a widespread omission of document elements.",
+        "b_evidence_source": "Page 1: 'https://www.phishlabs.com/blog/new-quarterly-threat-trends-intelligence-report-now-available/'; Page 1: 'PhishLabs' (link text); Page 2: 'Ready.gov/September' (link text)",
+        "b_evidence_output": "The URLs and link text strings are missing from the relevant paragraph elements (e.g., between elements 6 and 8, 11 and 13, 28 and 30, and following element 15).",
+        "b_evidence_location": "Systemic throughout the document",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6818181818181819,
+    "penalty_sum": 7,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"An examination of the output reveals a duplication within element 131. The phrase 'Authentication and Access Control' is repeated twice in the same string ('Authentication and Access Controlebinar: Authentication and Access Control'), whereas it appears only once in the corresponding line on page 5 of the source PDF. This constitutes a duplication of content.\",\n      \"b_evidence_source\": \"Page 5: 'September 7: Coalfire Webinar: Authentication and Access Control'\",\n      \"b_evidence_output\": \"Element index 131: 'September 7: Coalfire Webinar: Authentication and Access Controlebinar: Authentication and Access Control'\",\n      \"b_evidence_location\": \"Upcoming Events section, page 5, element index 131\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved throughout the document. H1 levels are used for major page-level titles (e.g., 'Monthly Cybersecurity Newsletter', 'September is National Preparedness Month', '2021 N.C. Cybersecurity Awareness Symposium'), and H2 levels are used for specific articles or sub-sections within those pages. There are no instances of skipped heading levels (e.g., H1 to H3).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The single table found on page 4 of the source PDF ('PCI Webinars by Coalfire') is correctly represented in the output JSON. The header row and data rows are correctly identified, and the three-column structure is maintained without merging or splitting errors.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order of the main content blocks matches the logical flow of the source PDF. Articles, lists, and images are sequenced in a way that respects the top-to-bottom, left-to-right layout of the original document. Although some text strings associated with links are missing (which is a separate defect), the overall organization of the sections is correct.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"On page 5, the 'Training and Continued Learning Resources' section contains a nested list where each main bullet point is followed by a sub-bullet containing a URL. In the output JSON (element index 125), this is converted into a flat list, and the sub-bullet items (the URLs) are omitted entirely. This fails to preserve the hierarchical structure and the content of the list.\",\n      \"b_evidence_source\": \"Page 5, 'Training and Continued Learning Resources' section: '• FedVTE: Free Online Training Environment [newline] o https://fedvte.usalearning.gov/'\",\n      \"b_evidence_output\": \"Element index 125: item content is 'FedVTE: Free Online Training Environment' with nested_list as null.\",\n      \"b_evidence_location\": \"Training and Continued Learning Resources section, page 5, element index 125\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There is a systemic failure to capture bare URL strings and text segments that are hyperlinked in the source. For example, on page 1, the URL 'https://www.phishlabs.com/blog/...' is entirely missing after paragraph 15. Additionally, text that serves as a link (e.g., 'PhishLabs' and 'Business Email Compromise' on page 1, 'Ready.gov/September' on page 2) is omitted, resulting in broken sentences in the output paragraphs (elements 6, 8, 11, 13, 28, 30). This is a widespread omission of document elements.\",\n      \"b_evidence_source\": \"Page 1: 'https://www.phishlabs.com/blog/new-quarterly-threat-trends-intelligence-report-now-available/'; Page 1: 'PhishLabs' (link text); Page 2: 'Ready.gov/September' (link text)\",\n      \"b_evidence_output\": \"The URLs and link text strings are missing from the relevant paragraph elements (e.g., between elements 6 and 8, 11 and 13, 28 and 30, and following element 15).\",\n      \"b_evidence_location\": \"Systemic throughout the document\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 2,\n    \"penalty_sum\": 7,\n    \"score\": 0.6818181818181818\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output significantly reorganizes the visual layout of page 1. In the source PDF, the NCDIT logo is a primary header element located at the top of the page, and the 'PHISHING' graphic is positioned as a float image alongside the text. In the HTML rendering, both of these images are moved to the very end of the 'Phishing Attacks Have Increased By 22% This Year' section, appearing after all the text paragraphs. This disrupts the intended visual hierarchy and flow of the document header and first article.",
+        "b_evidence_source": "The NCDIT logo appears at the top of page 1 as part of the header. The 'PHISHING' laptop graphic appears to the right of the text paragraphs.",
+        "b_evidence_output": "The NCDIT logo and the 'PHISHING' graphic appear sequentially at the end of the text for the section 'Phishing Attacks Have Increased By 22% This Year'.",
+        "b_evidence_location": "Page 1, 'Phishing Attacks Have Increased By 22% This Year' section",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The document contains one table on page 4 titled 'PCI Webinars by Coalfire'. The HTML output correctly renders this table with clear headers (Date, Time, Topic) and maintains the correct alignment and content of the rows. The data remains easily readable and visually structured as a table.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Multiple meaningful images present in the source PDF are entirely missing from the HTML output. This includes logos that establish organizational identity (National Preparedness Month, FEMA, NC Cybersecurity Symposium, Triangle InfoSeCon, PCI DSS) and illustrative graphics (SCAM AHEAD sign, LEGO desk image, hands on laptop, and the 'UPCOMING EVENTS' calendar header). The HTML output only renders two images from page 1, leaving the rest of the document without its visual context.",
+        "b_evidence_source": "Meaningful images on pages 2-5, including: National Preparedness Month logo, SCAM AHEAD sign, LEGO disgruntled employee image, FEMA logo, NC Cybersecurity Symposium logo, Triangle InfoSeCon logo, PCI DSS logo, and the 'UPCOMING EVENTS' graphic.",
+        "b_evidence_output": "The HTML rendering contains no images after the first article; the logos and graphics for all subsequent sections are missing.",
+        "b_evidence_location": "Pages 2, 3, 4, and 5",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The HTML output correctly presents the body content without duplication. While section headings appear in the Table of Contents at the top, they correctly serve as navigation links and are not considered content duplication. The actual paragraphs and table data appear only once in the body of the document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output significantly reorganizes the visual layout of page 1. In the source PDF, the NCDIT logo is a primary header element located at the top of the page, and the 'PHISHING' graphic is positioned as a float image alongside the text. In the HTML rendering, both of these images are moved to the very end of the 'Phishing Attacks Have Increased By 22% This Year' section, appearing after all the text paragraphs. This disrupts the intended visual hierarchy and flow of the document header and first article.\",\n      \"b_evidence_source\": \"The NCDIT logo appears at the top of page 1 as part of the header. The 'PHISHING' laptop graphic appears to the right of the text paragraphs.\",\n      \"b_evidence_output\": \"The NCDIT logo and the 'PHISHING' graphic appear sequentially at the end of the text for the section 'Phishing Attacks Have Increased By 22% This Year'.\",\n      \"b_evidence_location\": \"Page 1, 'Phishing Attacks Have Increased By 22% This Year' section\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The document contains one table on page 4 titled 'PCI Webinars by Coalfire'. The HTML output correctly renders this table with clear headers (Date, Time, Topic) and maintains the correct alignment and content of the rows. The data remains easily readable and visually structured as a table.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Multiple meaningful images present in the source PDF are entirely missing from the HTML output. This includes logos that establish organizational identity (National Preparedness Month, FEMA, NC Cybersecurity Symposium, Triangle InfoSeCon, PCI DSS) and illustrative graphics (SCAM AHEAD sign, LEGO desk image, hands on laptop, and the 'UPCOMING EVENTS' calendar header). The HTML output only renders two images from page 1, leaving the rest of the document without its visual context.\",\n      \"b_evidence_source\": \"Meaningful images on pages 2-5, including: National Preparedness Month logo, SCAM AHEAD sign, LEGO disgruntled employee image, FEMA logo, NC Cybersecurity Symposium logo, Triangle InfoSeCon logo, PCI DSS logo, and the 'UPCOMING EVENTS' graphic.\",\n      \"b_evidence_output\": \"The HTML rendering contains no images after the first article; the logos and graphics for all subsequent sections are missing.\",\n      \"b_evidence_location\": \"Pages 2, 3, 4, and 5\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The HTML output correctly presents the body content without duplication. While section headings appear in the Table of Contents at the top, they correctly serve as navigation links and are not considered content duplication. The actual paragraphs and table data appear only once in the body of the document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 6,
+  "total_critical": 0,
+  "total_major": 4,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

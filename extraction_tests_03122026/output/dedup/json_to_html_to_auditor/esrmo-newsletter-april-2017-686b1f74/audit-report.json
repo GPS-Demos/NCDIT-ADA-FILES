@@ -1,0 +1,105 @@
+{
+  "document_id": "esrmo-newsletter-april-2017-686b1f74",
+  "audited_at": "2026-03-13T01:17:41.954998Z",
+  "quality_score": 77,
+  "fidelity_composite": 0.7228,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document exhibits multiple major structural and content defects that preclude auto-approval. Specifically, the systematic omission of URLs/emails, the disappearance of a significant content block from Page 2, and the disruption of reading order where images split individual sentences ('insider [images] threat') create a fragmented and unusable HTML output. While programmatic word counts align, the shingling recall of 0.875 corroborates the missing text blocks identified by the LLM.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output JSON fails this check due to the systematic omission of almost all actionable hyperlinks and email addresses throughout the first three pages. For example, in the 'Useful Links' section (indices 43-50), the headings are preserved but the corresponding URLs are completely absent. Similarly, the URL for the ATM article on page 1, the email address for Maria Thompson on page 3, and the submission email address at the end of page 3 are missing. Additionally, a text box on page 2 regarding",
+      "source_pdf_quote": "The source document contains numerous URLs and email addresses including: https://krebsonsecurity.com/2017/03/why-i-always-tug-on-the-atm/ (Page 1); maria.s.thompson@nc.gov (Page 3); and several URLs under the 'Useful Links' heading (Page 3). It also contains a box on Page 2: 'Did you know that The SANS Institute also provides free awareness videos and webcasts?...'",
+      "output_quote": "The output JSON omits these URLs and the email address in the corresponding sections (e.g., indices 6, 36, 43, 45, 47, 49, 51). The SANS videos/webcasts box text is entirely absent between indices 22 and 24.",
+      "location": "Sections throughout pages 1, 2, and 3; specifically elements at indices 6, 17, 20, 22, 36, 43, 45, 47, 49, 51, and the space between 22 and 24."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order contains two major structural flaws. First, a significant content block from Page 2 (a boxed section starting 'Did you know that The SANS Institute also provides free awareness videos and webcasts?') is entirely missing from the output. Second, images from Page 1 (reading_order 11-14) are placed between elements 10 and 16, effectively splitting a single paragraph and sentence ('...result of an insider / threat.') in the middle. This disrupts the logical flow and meaning of the ",
+      "source_pdf_quote": "Page 2 contains a box: 'Did you know that The SANS Institute also provides free awareness videos and webcasts? The SANS Video of the Month may be accessed at https://securingthehuman.sans.org/resources/votm. Also, The SANS Institute offers free webcasts on a variety of topics that may be accessed at https://www.sans.org/webcasts/upcoming.'",
+      "output_quote": "The output jumps from '...topic is on Passphrases.' (reading_order 22) directly to 'Business Continuity Awareness Week...' (reading_order 24), omitting the boxed content entirely. Additionally, the paragraph starting at reading_order 10 is interrupted by several images before concluding at reading_order 16.",
+      "location": "Sections list, between element index 22 and 24; also splitting of paragraph index 10 and 16."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual flow of the document is significantly disrupted in the converted HTML. In the 'The Threat from Inside' article, three images (the ATM photo, the Spy illustration, and the NC Information Technology logo) are injected into the middle of a sentence that was originally split by a page break in the PDF. This causes the text to read: '...result of an insider [Images] threat.', which severely interrupts the reading experience and visual organization compared to the source's continuous narrat",
+      "source_pdf_quote": "The text in the source PDF (bottom of page 1 to top of page 2) flows continuously: '...result of an insider' (page 1) followed immediately by 'threat. 34%...' (page 2). The NC logo is located in the header of page 1.",
+      "output_quote": "The HTML rendering displays '...result of an insider' followed by the ATM image, the Spy image, and the NC Information Technology logo, before continuing the sentence with 'threat. 34%...'.",
+      "location": "Transition between content from page 1 and page 2, within the 'The Threat from Inside' section."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images are either broken or missing in the HTML output. At the very bottom of the document, the Homeland Security and Stop.Think.Connect logos are missing, replaced by a broken image placeholder icon (though alt text is present). Furthermore, the vertical sidebar featuring 8 portrait photos of diverse individuals, which spans pages 4 and 5 of the PDF Tip Card, is entirely absent from the HTML rendering. These images are meaningful as they represent the 'insiders' discussed in ",
+      "source_pdf_quote": "The footer of page 5 contains the Homeland Security seal and the Stop.Think.Connect logo. Pages 4 and 5 feature a sidebar with 8 portraits of individuals.",
+      "output_quote": "The HTML displays a broken image icon at the end of the document with alt text 'Homeland Security logo and Stop.Think.Connect. campaign logo.'. The portrait sidebar is missing entirely from the 'INSIDER THREAT TIP CARD' section.",
+      "location": "Insider Threat Tip Card (pages 4-5) and Footer (page 5)."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output consistently fails to capture URL strings and email addresses present in the source. Numerous paragraphs end abruptly at the word preceding a URL or email (e.g., 'at', 'to', 'send it to'), leaving essential reference and contact information missing from the structural elements.",
+      "source_pdf_quote": "Multiple URLs and emails such as 'https://krebsonsecurity.com/2017/03/why-i-always-tug-on-the-atm/', 'https://ncconnect.sharepoint.com/sites/it_ext/esrmo_ext/Documents/Newsletters/SECURITYsense', 'maria.s.thompson@nc.gov', and 'security@its.nc.gov'.",
+      "output_quote": "Paragraphs at reading_order 6, 17, 20, 22, 36, 43, 45, 47, 49, 51, and 81 are all missing the URLs/emails that immediately follow them in the source.",
+      "location": "Throughout the document (e.g., reading_order 6, 17, 20, 36, 43, 51, 81)."
+    }
+  ],
+  "action_items": [
+    "Manually restore all missing URLs and email addresses identified in the 'Useful Links' and contact sections.",
+    "Recover and insert the missing SANS Institute boxed section from Page 2.",
+    "Fix reading order to ensure images do not split sentences or paragraphs.",
+    "Address broken image placeholders for logos and restore the missing photo sidebar."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7228,
+      "text_match": 0.9064155385520895,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7727,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7228,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8753979081400637,
+      "shingling_precision": 0.9397119843788138,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1180,
+      "gemini_words": 1180,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 477603,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

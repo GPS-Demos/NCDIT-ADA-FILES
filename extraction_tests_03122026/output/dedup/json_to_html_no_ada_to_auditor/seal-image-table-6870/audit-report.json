@@ -1,0 +1,97 @@
+{
+  "document_id": "seal-image-table-6870",
+  "audited_at": "2026-03-13T02:52:40.666230Z",
+  "quality_score": 86,
+  "fidelity_composite": 0.8938,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity and programmatic scores are high, the document contains material text omissions including the primary navigational URL and a factual date hallucination (2023-24-24). Because the omitted link is the only way for a citizen to access the contract information mentioned, and the date error impacts data integrity, the document requires human correction despite the strong automated scores.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "There are two major text omissions. 1) In the 'Instructions' section on page 1, the term 'ITS Service Catalog' is missing between reading order elements 9 and 11. 2) On page 2, the primary navigational instruction 'CLICK HERE' and the accompanying URL 'https://it.nc.gov/services/service-directory/telephony/cellular-telephone' are omitted from element 18, which is the only place in the document where the citizen is told how to access contract information. This is a material loss of information.",
+      "source_pdf_quote": "To obtain contract information or access Vendor’s website, CLICK HERE https://it.nc.gov/services/service-directory/telephony/cellular-telephone",
+      "output_quote": "To obtain contract information or access Vendor's website, ",
+      "location": "Section 2, Element index 18 (Page 2)"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a factual discrepancy in a date within the 'History' table. The source lists an update on April 24, 2023 ('2023-04-24'), but the output JSON incorrectly lists this as '2023-24-24', which is a non-existent date and an error in the information provided.",
+      "source_pdf_quote": "2023-04-24",
+      "output_quote": "2023-24-24",
+      "location": "History table, element index 40 (Page 2)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The document contains two minor structural defects regarding lists. First, the 'Authorized Vendors' section (page 2), which appears as a vertical list in the source, is flattened into four individual paragraphs (elements 22-25) in the output, losing the list semantic. Second, the single continuous 'History' list from the source is split into two separate tables (elements 40 and 44) based on the page break, which breaks the structural continuity of the list.",
+      "source_pdf_quote": "History list spanning Page 2 and Page 3; Authorized Vendors list on Page 2.",
+      "output_quote": "History is split into Table element 40 and Table element 44. Authorized Vendors are rendered as four separate paragraphs (elements 22, 23, 24, 25).",
+      "location": "History section (page 2-3); Authorized Vendors section (page 2)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to capture several critical external links and URLs present in the source. In the Instructions paragraph (Section 1), the text and link for 'ITS Service Catalog' are entirely omitted (the text jumps from element 9 to 11). Similarly, on page 2 (element 18), the phrase 'CLICK HERE' and the full URL 'https://it.nc.gov/services/service-directory/telephony/cellular-telephone' are missing from the output text.",
+      "source_pdf_quote": "1. 'ITS Service Catalog' (link on page 1)\n2. 'CLICK HERE' (link on page 2)\n3. 'https://it.nc.gov/services/service-directory/telephony/cellular-telephone' (URL on page 2)",
+      "output_quote": "1. [omitted between element 9 and 11]\n2. [omitted after element 18]\n3. [omitted after element 18]",
+      "location": "Section 1 (element 9/11) and Section 2 (element 18)"
+    }
+  ],
+  "action_items": [
+    "Restore the missing instructional links and URLs in section 1 and element 18.",
+    "Correct the invalid date '2023-24-24' to '2023-04-24' in the History table.",
+    "Re-tag Authorized Vendors paragraphs as a proper list.",
+    "Unify the History tables into a single continuous structure if possible."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8938,
+      "text_match": 0.9554551323434474,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8596,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8938,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9507494646680942,
+      "shingling_precision": 0.9602076124567474,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 717,
+      "gemini_words": 717,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 507994,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "document_id": "create-beautiful-sharepoint-sites-685fb98c",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output document contains text that is a faithful transcription of the source document, including text extracted from screenshots used as examples (e.g., in the 'Crisis Communications' section). No invented or hallucinated text was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All URLs (e.g., https://lookbook.microsoft.com) and email addresses (e.g., globalsecurity@contoso.electronics.com) present in the output correctly correspond to the text visible in the source document screenshots.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output document is missing the content of two complete pages from the source: Page 18 ('The Landing') and Page 19 ('Engineering Onboarding'). While the section count (21) matches the page count (21), the sequential mapping shows a jump from the content of Page 17 (Section 18) directly to the content of Page 20 (Section 19). The specific web part lists and example site content for 'The Landing' and 'Engineering Onboarding' are entirely absent from the JSON structure.",
+        "b_evidence_source": "Page 18: 'The Landing' (including list of web parts: News, Quick links, Twitter, Yammer, etc.) and Page 19: 'Engineering Onboarding' (including list of web parts: Hero web part, Weather, News, etc.).",
+        "b_evidence_output": "The JSON array jumps from Section 18 (Crisis Communications / Page 17) to Section 19 (Conclusion / Page 20). The intermediate page content is not present in Section 18, Section 19, or as separate sections.",
+        "b_evidence_location": "Sections 18 and 19, spanning pages 17 to 20.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The table found in Section 18 ('Response teams') correctly captures the four items presented in a grid layout on Page 17 of the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within the sections provided, the text is comprehensive. For instance, the 'Crisis Communications' section (Section 18) includes extensive detail transcribed from the page image. The primary issue is the total omission of pages (covered in C3), rather than partial omission within these sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text in the output accurately reflects the wording of the source document. Punctuation and whitespace are handled correctly within the semantic structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output document contains text that is a faithful transcription of the source document, including text extracted from screenshots used as examples (e.g., in the 'Crisis Communications' section). No invented or hallucinated text was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All URLs (e.g., https://lookbook.microsoft.com) and email addresses (e.g., globalsecurity@contoso.electronics.com) present in the output correctly correspond to the text visible in the source document screenshots.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output document is missing the content of two complete pages from the source: Page 18 ('The Landing') and Page 19 ('Engineering Onboarding'). While the section count (21) matches the page count (21), the sequential mapping shows a jump from the content of Page 17 (Section 18) directly to the content of Page 20 (Section 19). The specific web part lists and example site content for 'The Landing' and 'Engineering Onboarding' are entirely absent from the JSON structure.\",\n      \"b_evidence_source\": \"Page 18: 'The Landing' (including list of web parts: News, Quick links, Twitter, Yammer, etc.) and Page 19: 'Engineering Onboarding' (including list of web parts: Hero web part, Weather, News, etc.).\",\n      \"b_evidence_output\": \"The JSON array jumps from Section 18 (Crisis Communications / Page 17) to Section 19 (Conclusion / Page 20). The intermediate page content is not present in Section 18, Section 19, or as separate sections.\",\n      \"b_evidence_location\": \"Sections 18 and 19, spanning pages 17 to 20.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The table found in Section 18 ('Response teams') correctly captures the four items presented in a grid layout on Page 17 of the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within the sections provided, the text is comprehensive. For instance, the 'Crisis Communications' section (Section 18) includes extensive detail transcribed from the page image. The primary issue is the total omission of pages (covered in C3), rather than partial omission within these sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text in the output accurately reflects the wording of the source document. Punctuation and whitespace are handled correctly within the semantic structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "A thorough review of the output document shows no instances of duplicated text blocks or repeated sections that are not present in the original PDF. Each content element from the slides corresponds to a unique entry in the JSON structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved correctly. Main slide titles are generally assigned H1 levels, and subsections within content (such as those extracted from the 'Crisis Communications' screenshot) are appropriately nested as H2 and H3 without skipping levels.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The table identified in the 'Crisis Communications' section (representing the 'Response teams' grid) accurately reflects the 2x2 layout found in the source screenshot. Headers are correctly assigned to the first row, and columns are properly aligned.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the logical flow of the source document. Content from the main slide body is presented before content extracted from supplementary images or screenshots, which is consistent with an accessible reading experience.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list conversion in the 'Conclusion' section is structurally incorrect. In the source (Page 20), there is a single list containing three bulleted items, each followed by a descriptive paragraph. The output has split this single list into three separate list elements, each containing only one item, interspersed with paragraphs. This breaks the intended grouping of the list.",
+        "b_evidence_source": "Page 20 (Conclusion) contains a single list with three bullet points: 'Benefits of Intranet on M365 Platform', 'SharePoint Online', and 'Valuable Insights and Resources'.",
+        "b_evidence_output": "The JSON for the Conclusion section contains three separate list elements at reading_order 125, 127, and 129, each containing a single item.",
+        "b_evidence_location": "Conclusion section, Page 20, element indices 125, 127, 129",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Several URLs visible as text in the source PDF are missing from the output. Specifically, the URL 'https://lookbook.microsoft.com' appears on pages 15, 16, 17, 18, and 19 of the source document. While the descriptive text preceding these links (e.g., 'Link to Crisis Communications example') is present, the actual URL text is absent in several instances in the output.",
+        "b_evidence_source": "Page 17 (Crisis Communications) shows the URL 'https://lookbook.microsoft.com' at the bottom left.",
+        "b_evidence_output": "In the section corresponding to Page 17, the element at reading_order 104 ('Link to Crisis Communications example') is followed by images (ro 106, 107) without the URL being present in the text stream.",
+        "b_evidence_location": "Crisis Communications section, Page 17, following element index 104",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9090909090909091,
+    "penalty_sum": 2,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"A thorough review of the output document shows no instances of duplicated text blocks or repeated sections that are not present in the original PDF. Each content element from the slides corresponds to a unique entry in the JSON structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved correctly. Main slide titles are generally assigned H1 levels, and subsections within content (such as those extracted from the 'Crisis Communications' screenshot) are appropriately nested as H2 and H3 without skipping levels.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The table identified in the 'Crisis Communications' section (representing the 'Response teams' grid) accurately reflects the 2x2 layout found in the source screenshot. Headers are correctly assigned to the first row, and columns are properly aligned.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the logical flow of the source document. Content from the main slide body is presented before content extracted from supplementary images or screenshots, which is consistent with an accessible reading experience.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list conversion in the 'Conclusion' section is structurally incorrect. In the source (Page 20), there is a single list containing three bulleted items, each followed by a descriptive paragraph. The output has split this single list into three separate list elements, each containing only one item, interspersed with paragraphs. This breaks the intended grouping of the list.\",\n      \"b_evidence_source\": \"Page 20 (Conclusion) contains a single list with three bullet points: 'Benefits of Intranet on M365 Platform', 'SharePoint Online', and 'Valuable Insights and Resources'.\",\n      \"b_evidence_output\": \"The JSON for the Conclusion section contains three separate list elements at reading_order 125, 127, and 129, each containing a single item.\",\n      \"b_evidence_location\": \"Conclusion section, Page 20, element indices 125, 127, 129\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Several URLs visible as text in the source PDF are missing from the output. Specifically, the URL 'https://lookbook.microsoft.com' appears on pages 15, 16, 17, 18, and 19 of the source document. While the descriptive text preceding these links (e.g., 'Link to Crisis Communications example') is present, the actual URL text is absent in several instances in the output.\",\n      \"b_evidence_source\": \"Page 17 (Crisis Communications) shows the URL 'https://lookbook.microsoft.com' at the bottom left.\",\n      \"b_evidence_output\": \"In the section corresponding to Page 17, the element at reading_order 104 ('Link to Crisis Communications example') is followed by images (ro 106, 107) without the URL being present in the text stream.\",\n      \"b_evidence_location\": \"Crisis Communications section, Page 17, following element index 104\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 2,\n    \"penalty_sum\": 2,\n    \"score\": 0.9090909090909091\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output converts the slide-based PDF into a single-column layout. The structural organization of the document is maintained, with section headings in the HTML corresponding to the slide titles in the PDF. While the visual style is different (fonts, margins, background elements removed), the organization of information follows the source's intent. The content is presented in the same sequence.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "Upon review of the source PDF, there are no data tables present. The document consists of text blocks and illustrative images. Therefore, this check is not applicable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful and central images from the source PDF are missing in the HTML rendering. Specifically, the full-page screenshots of intranet site examples on pages 16, 17, 18, and 19 are absent. These images are the primary content for those sections. Additionally, the illustrative image of a meeting room on page 20 (Conclusion slide) is missing. In some cases (e.g., 'Crisis Communications'), the missing image is replaced by unformatted OCR text extracted from the screenshot, but the visual graphic itself is gone. This constitutes a significant loss of visual information as the document is a presentation about visual design.",
+        "b_evidence_source": "In the source PDF, page 16 shows a full-page screenshot of 'The Perspective' intranet site. Similar screenshots are present on pages 17, 18, and 19. Page 20 shows a meeting room with a large display screen.",
+        "b_evidence_output": "In the HTML rendered output, the screenshot images of the intranet designs (pages 16-19) and the meeting room image (page 20) are missing. For 'Crisis Communications', the image is replaced by a wall of raw text beginning with 'THE LATEST UPDATES'.",
+        "b_evidence_location": "Sections 'The Perspective', 'Crisis Communications', 'The Landing', 'Engineering Onboarding', and 'Conclusion'",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The content in the HTML output appears to be unique and follows the sequence of the PDF. There are no instances where body text paragraphs, lists, or sections are repeated within the rendered view. Section headers appearing in navigation/TOC areas and as body headings is expected behavior and not considered a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output converts the slide-based PDF into a single-column layout. The structural organization of the document is maintained, with section headings in the HTML corresponding to the slide titles in the PDF. While the visual style is different (fonts, margins, background elements removed), the organization of information follows the source's intent. The content is presented in the same sequence.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"Upon review of the source PDF, there are no data tables present. The document consists of text blocks and illustrative images. Therefore, this check is not applicable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful and central images from the source PDF are missing in the HTML rendering. Specifically, the full-page screenshots of intranet site examples on pages 16, 17, 18, and 19 are absent. These images are the primary content for those sections. Additionally, the illustrative image of a meeting room on page 20 (Conclusion slide) is missing. In some cases (e.g., 'Crisis Communications'), the missing image is replaced by unformatted OCR text extracted from the screenshot, but the visual graphic itself is gone. This constitutes a significant loss of visual information as the document is a presentation about visual design.\",\n      \"b_evidence_source\": \"In the source PDF, page 16 shows a full-page screenshot of 'The Perspective' intranet site. Similar screenshots are present on pages 17, 18, and 19. Page 20 shows a meeting room with a large display screen.\",\n      \"b_evidence_output\": \"In the HTML rendered output, the screenshot images of the intranet designs (pages 16-19) and the meeting room image (page 20) are missing. For 'Crisis Communications', the image is replaced by a wall of raw text beginning with 'THE LATEST UPDATES'.\",\n      \"b_evidence_location\": \"Sections 'The Perspective', 'Crisis Communications', 'The Landing', 'Engineering Onboarding', and 'Conclusion'\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The content in the HTML output appears to be unique and follows the sequence of the PDF. There are no instances where body text paragraphs, lists, or sections are repeated within the rendered view. Section headers appearing in navigation/TOC areas and as body headings is expected behavior and not considered a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

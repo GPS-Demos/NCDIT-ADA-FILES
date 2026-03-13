@@ -1,0 +1,110 @@
+{
+  "document_id": "gicc-agenda-20200506-68839aed",
+  "audited_at": "2026-03-12T22:56:05.781033Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The source document includes a specific URL at the bottom: 'https://it.nc.gov/gicc'. The conversion output includes the label 'GICC Website: ' but completely omits the actual URL string. According to the instructions, even one mismatch in a URL constitutes a critical failure.",
+      "source_pdf_quote": "GICC Website: https://it.nc.gov/gicc",
+      "output_quote": "GICC Website: ",
+      "location": "reading_order 12"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table structure for Agenda Item 5 is severely corrupted. In the source, Item 5 ('Committee Reports') includes a nested list of committees in the second column and their corresponding members in the third column. In the output JSON, the table row for Item 5 (element index 7, row index 5) contains only the title '5. Committee Reports' and an empty data cell for the third column. The associated committee names and member names are extracted outside the table structure (elements index 8 and 9), ",
+      "source_pdf_quote": "Item 5 in the table contains: '5. Committee Reports', a list of 6 committees, and 6 corresponding members (Paul Badr, etc.).",
+      "output_quote": "{\"cell_type\": \"data\", \"content\": [{\"text\": \"5. Committee Reports\", ...}]}, {\"cell_type\": \"data\", \"content\": [{\"text\": \"\", ...}]}",
+      "location": "Sections[0].elements[6] (table), row index 5"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially broken because the detailed content for Agenda Item 5 (the specific committees and reporters) is placed after Agenda Item 6 ('GICC Member Announcements'). This is because the pipeline incorrectly completed the table structure with Item 6 (reading order 7) before appending the components of Item 5 (reading orders 8 and 9) that it failed to include in the table cells.",
+      "source_pdf_quote": "The reading order in the source is Item 4 -> Item 5 (and its sub-content) -> Item 6.",
+      "output_quote": "Item 6 (Announcements) is provided at reading_order 7, while the sub-content for Item 5 is provided at reading_order 8 and 9.",
+      "location": "Sections[0].elements[6], elements[7], elements[8], elements[9]"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly compromised in the Committee Reports section (Agenda Item 5). In the source PDF, this section is part of a multi-column layout where each committee is visually aligned with its respective chair/member. In the HTML output, this information is fragmented: the committee names are rendered as a bulleted list below the table, and the member names are rendered as a single paragraph below that list. This collapse of the two-column relationship in",
+      "source_pdf_quote": "The source PDF on page 1 shows 'Committee Reports' with two distinct columns: a bulleted list of committees on the left and a list of corresponding members/guests on the right (e.g., 'Statewide Mapping Advisory' aligned with 'Paul Badr').",
+      "output_quote": "The HTML screenshot shows the committees in a single-column bulleted list, followed by a separate paragraph containing a string of names: 'Paul Badr Debbie Brannan Scott Lokken Dean Grantham John Farley Alex Rankin'.",
+      "location": "Agenda Item 5, located in the middle of page 1 / table body."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The main agenda table is visually broken. Row 5 ('Committee Reports') fails to contain its associated data within the table structure. While the 'TIME' and 'AGENDA ITEM' columns are present, the 'GICC MEMBER or GUEST' column is empty for this row. The actual data (sub-committees and names) has been expelled from the table and rendered as plain text and lists below the table container. This prevents a sighted user from reading and understanding the table data as it was originally presented.",
+      "source_pdf_quote": "In the source PDF, row 5 of the table contains a list of committees and their respective chairs within the table's grid structure.",
+      "output_quote": "In the HTML screenshot, row 5 of the table is missing the member names, and the table content for this item is rendered as a separate bulleted list and paragraph outside the table borders.",
+      "location": "Main agenda table, Item 5."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The URL 'https://it.nc.gov/gicc' which is explicitly present in the source document as a clickable or visible link is missing from the output text. The output contains the label 'GICC Website: ' but the actual link/text is omitted.",
+      "source_pdf_quote": "GICC Website: https://it.nc.gov/gicc",
+      "output_quote": "{\"text\": \"GICC Website: \", ...}",
+      "location": "Sections[0].elements[11]"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9304286718200984,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5595,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9131034482758621,
+      "shingling_precision": 0.9484240687679083,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 129,
+      "gemini_words": 129,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 296197,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "document_id": "memo-with-links-1334",
+  "audited_at": "2026-03-12T23:40:20.076591Z",
+  "quality_score": 89,
+  "fidelity_composite": 0.966,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity score is high (0.966), the identified concerns describe the omission of the document's 'functional core,' including legal citations and the primary reporting URL. The loss of critical information like 'SL 2024-26' and the 'it.nc.gov/805' link, combined with fragmented sentences, makes this document unfit for auto-approval despite high word count parity.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The conversion exhibits a systematic failure to capture text that is formatted as links in the source PDF. This results in the omission of several critical pieces of information: 1) the legal citation 'SL 2024-26, Section 7' in the intro paragraph; 2) the reporting URL 'it.nc.gov/805' in the reporting requirements; 3) the policy title 'Acceptable Use Policy (AUP)' on page 2; and 4) header/footer URLs 'it.nc.gov'. These omissions represent a loss of the functional core of the directive document.",
+      "source_pdf_quote": "SL 2024-26, Section 7; it.nc.gov/805; Acceptable Use Policy (AUP)",
+      "output_quote": "[Text missing between reading_order 4 and 6, 12 and 14, and 32 and 34]",
+      "location": "Page 1 intro paragraph, Reporting Requirements paragraph, and Page 2 directive paragraph."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion pipeline failed to capture multiple critical links present in the source document. In three instances, the text containing the link is entirely missing, leaving fragmented sentences in the output. This is evidenced by gaps in the 'reading_order' indices (missing 5, 13, and 33) where the link elements should have been placed.",
+      "source_pdf_quote": "1. 'outlines key requirements under SL 2024-26, Section 7, and provides directives' (Page 1)\n2. 'Information Technology website (it.nc.gov/805):' (Page 1)\n3. 'refer to the Acceptable Use Policy (AUP) published by NCDIT' (Page 2)",
+      "output_quote": "1. Element 4: '...requirements under ' and Element 6: ', and provides...' (reading_order 5 missing)\n2. Element 12: '...website (' and Element 14: '):' (reading_order 13 missing)\n3. Element 32: '...refer to the ' and Element 34: ' published by NCDIT...' (reading_order 33 missing)",
+      "location": "Sections[0] (elements 4, 12) and Sections[1] (element 32)"
+    }
+  ],
+  "action_items": [
+    "Manually insert the missing legal citation 'SL 2024-26, Section 7' in the intro paragraph.",
+    "Restore the reporting URL 'it.nc.gov/805' and the policy title 'Acceptable Use Policy (AUP)'.",
+    "Repair fragmented sentences at reading order indices 5, 13, and 33 to ensure logical flow."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.966,
+      "text_match": 0.9478695548678886,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.89,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.966,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9444971537001897,
+      "shingling_precision": 0.9512661251791686,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 490,
+      "gemini_words": 490,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 720957,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

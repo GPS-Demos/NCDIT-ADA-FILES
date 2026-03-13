@@ -1,0 +1,110 @@
+{
+  "document_id": "wearencgov-broadbandinitiatives-685fc6d1",
+  "audited_at": "2026-03-13T02:36:20.967627Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The source PDF consists of 27 pages. The output JSON sections array contains content only for pages 1, 2, 3, 4, 24, 26, and 27. Pages 5 through 23 (including maps, infographics, and planning details) and page 25 (First Responder program details) are entirely missing. The document includes a note acknowledging this omission: '_omitted': '20 sections omitted for token budget'. This constitutes a critical failure as the majority of the document's content is missing.",
+      "source_pdf_quote": "The entire content of pages 5-23 and page 25 of the source PDF.",
+      "output_quote": "The sections array skips from page 4 content (reading_order 19) to page 24 (reading_order 111), and from page 24 to page 26.",
+      "location": "sections array, specifically between index 3 and 4, and index 4 and 5."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Several sections that are present are missing significant portions of their text. On page 2 ('Broadband Technology Types'), the output lists the categories but omits all descriptive sub-bullets and speed data (e.g., 'DOCSIS 3.0: allows for speeds up to 100 Mbps'), which constitutes most of the page's information. On page 4, the source URL is truncated to 'Source: '. On page 26, the contact email 'firsttech@nc.gov' is missing. On page 27 ('Let's Connect!'), all social media handles and the main w",
+      "source_pdf_quote": "Page 2 sub-bullets (e.g., '- Speeds range from 1.5 Mbps to 80 Mbps'); Page 27 contact handles (e.g., @NCDIT) and URL (it.nc.gov).",
+      "output_quote": "Section 'Broadband Technology Types' list items (reading_order 8) lack sub-bullets; Section 'Let's Connect!' (reading_order 125) lacks all handle and URL text.",
+      "location": "Sections 2 and 7, reading_order 8 and 125-132."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The list of broadband technology types on page 2 contains significant content loss. In the source PDF, each main list item (e.g., 'Digital Subscriber Line (DSL)') has several descriptive sub-bullets (e.g., '- Runs over traditional copper phone lines...'). The output JSON (element 8) only contains the top-level bullet titles and omits the descriptive sub-bullet text entirely.",
+      "source_pdf_quote": "• Digital Subscriber Line (DSL)\\n- Runs over traditional copper phone lines, speed dependent technology and distance\\n- Speeds range from 1.5 Mbps to 80 Mbps",
+      "output_quote": "{\\n  \"content\": [\\n    {\\n      \"text\": \"Digital Subscriber Line (DSL)\",\\n      ...\\n    }\\n  ],\\n  \"nested_list\": null,\\n  ...\\n}",
+      "location": "Broadband Technology Types, Page 2, Element 8"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of several pages is significantly different in the HTML. Specifically, graphical layouts used to structure information (like the hexagons on pages 10 and 12, and the stacked arrows on page 23) have been collapsed into simple text lists or sections. Furthermore, the visual-only slides (pages 6-9) showing grids of house icons are effectively empty in the HTML, containing only text labels or placeholders, which fundamentally alters the document's visual flow and intent.",
+      "source_pdf_quote": "In the source PDF, page 10 and 12 use hexagonal diagrams to group content. Page 23 uses a process arrow graphic to structure 'New Grant', 'Homework Gap', and 'Details'.",
+      "output_quote": "In the HTML screenshot, these diagrams are absent. The content from the hexagons and arrows is rendered as plain text headers or list items, losing the original visual grouping and structure.",
+      "location": "Sections corresponding to PDF pages 10, 12, and 23"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Numerous meaningful images from the source PDF are missing in the HTML conversion. This includes the grid of house icons (pages 6-9), the hexagon graphics (pages 10, 12), background images for 'The Playbook' (page 21), the book cover photo (page 22), the process arrow graphics (page 23), and all social media icons (page 27). While some have text descriptions, the loss of these visual aids is a significant degradation of the content.",
+      "source_pdf_quote": "The source PDF contains meaningful images on pages 6-9 (house icons), 10 and 12 (hexagons), 21 (thumbnails), 22 (report cover photo), 23 (arrows), and 27 (social media logos).",
+      "output_quote": "The HTML screenshot lacks these images, showing only text placeholders (e.g., 'A pattern of home icons', 'Abstract colorful wave background') or nothing at all where the graphics should be.",
+      "location": "Sections corresponding to PDF pages 6-9, 10, 12, 21, 22, 23, and 27"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "A URL clearly visible in the source PDF is missing from the output. On page 4, the source citation 'Source: https://www.fcc.gov/research-reports/guides/household-broadband-guide' is truncated in the JSON, containing only the prefix 'Source: '.",
+      "source_pdf_quote": "Source: https://www.fcc.gov/research-reports/guides/household-broadband-guide",
+      "output_quote": "\"text\": \"Source: \"",
+      "location": "Typical Broadband Usage, Page 4, Element 19"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8609741060419236,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5441,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8374812593703148,
+      "shingling_precision": 0.8858230256898192,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 533,
+      "gemini_words": 533,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 834833,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "document_id": "mo-minutes-20160620-686133d2",
+  "audited_at": "2026-03-12T23:41:15.735808Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8392,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant structural and content defects that preclude auto-approval, specifically the total omission of critical technical sub-bullets in Section 6 and several subsection headings. Despite a high programmatic word recall (0.961), the LLM fidelity check identifies a very low structural score (0.545) due to inconsistent heading hierarchy and fragmented list objects, which would negatively impact accessibility for government minutes.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The output has several notable omissions. In Section 3, sub-headings 'a. 911/NG911 in the Media' and 'b. AddressNC and Census Geospatial Data' are missing. In the first paragraph of page 3 (Section 3 continuation), a reference URL is omitted. Most significantly, on page 5 in Section 6, the three technical sub-bullets under the item 'Source data questions:' are entirely absent. These sub-bullets contained specific questions about satellite, color infrared, and NAIP imagery, which are critical tec",
+      "source_pdf_quote": "Source Page 5, Section 6, list under 'Source data questions:': 'o Is current satellite imagery (applied in 1996) suitable as the source for classification? o Would color infrared imagery, if funded and processed from statewide imagery acquisition, be the best source for statewide land cover classification? o Would National Agriculture Imagery Program (NAIP) leaf-on imagery be adequate for statewide land cover classification?' Also Section 3 sub-headings and the URL on page 3.",
+      "output_quote": "The list element ends abruptly at the term 'Source data questions:' (reading_order: 43).",
+      "location": "Section 6, Page 5, element index reading_order: 43"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy for the main numbered sections of the document is inconsistent. In the source document, items 4, 5, 6, 7, 8, and 9 are all primary sections at the same level of hierarchy. However, in the output, sections 4 and 7 are assigned level H2, while sections 5, 6, 8, and 9 are assigned level H3. This is an incorrect nesting/leveling of logically equivalent sections.",
+      "source_pdf_quote": "4. Working Group for Professional Land Surveying and GIS; 5. GICC Website; 6. Committee Reports; 7. Council Items; 8. Other Items; 9. Future Meeting Dates",
+      "output_quote": "element 21: 'level': 2 (4.); element 33: 'level': 3 (5.); element 38: 'level': 3 (6.); element 44: 'level': 2 (7.); element 51: 'level': 3 (8.); element 54: 'level': 3 (9.)",
+      "location": "Sections 4, 5, 6, 7, 8, and 9; elements 21, 33, 38, 44, 51, 54"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The list structure is corrupted in several ways. 1) The primary numbered list (1-9) is fragmented: items 1-3 are in a list object, while items 4-9 are treated as separate headings/paragraphs. 2) Subsection headings 'a. 911/NG911 in the Media' (page 1) and 'b. AddressNC and Census Geospatial Data' (page 1) are entirely missing from the output. 3) The nested bulleted list under 'Source data questions:' on page 5 (starting with 'o Is current satellite imagery...') is completely omitted from the out",
+      "source_pdf_quote": "a. 911/NG911 in the Media; b. AddressNC and Census Geospatial Data; o Is current satellite imagery (applied in 1996) suitable as the source for classification?; o Would color infrared imagery, if funded and processed from statewide imagery acquisition, be the best source for statewide land cover classification?; o Would National Agriculture Imagery Program (NAIP) leaf-on imagery be adequate for statewide land cover classification?",
+      "output_quote": "(Text not found in output elements 6, 8, or 43)",
+      "location": "Page 1, Section 3a/3b; Page 5, Section 6, last bullet point (element 43)"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "A minor wording difference was found on page 1 where a word was dropped, slightly altering the grammar of a sentence, although the meaning remains mostly clear.",
+      "source_pdf_quote": "...once the national standard is in place, what would be the utility of a North Carolina specific schema?",
+      "output_quote": "...once the national standard is in place, what would the utility of a North Carolina specific schema?",
+      "location": "Section 3, Page 1, element index reading_order: 7"
+    }
+  ],
+  "action_items": [
+    "Restore missing sub-bullets under 'Source data questions' on page 5",
+    "Re-insert missing sub-headings '911/NG911 in the Media' and 'AddressNC and Census Geospatial Data'",
+    "Normalize heading levels for sections 4 through 9 to ensure consistent hierarchy",
+    "Repair the fragmented list structure to ensure sections 1-9 are logically grouped"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8392,
+      "text_match": 0.975351179432812,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8397,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8392,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.960668290985033,
+      "shingling_precision": 0.9904898618338417,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 2587,
+      "gemini_words": 2587,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 740133,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

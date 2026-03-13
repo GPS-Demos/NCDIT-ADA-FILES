@@ -1,0 +1,88 @@
+{
+  "document_id": "multi-factor-authentication-report-december-2015-68613ee4",
+  "audited_at": "2026-03-13T01:38:56.407124Z",
+  "quality_score": 88,
+  "fidelity_composite": 0.9524,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the fidelity composite is high (0.9524) and programmatic signals suggest strong content preservation (0.913 recall), the evidence identifies the loss of a 22-item list of government departments and core MFA definitions. Given that these omissions represent over 50% of a specific section and involve significant governmental data, the document requires human intervention to ensure completeness, following the principle that false negatives are costlier than false positives.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The conversion failed to capture several significant blocks of text. In the 'Introduction' section (Page 5), the definitions of authentication factors (e.g., 'Something you know', 'Something you have') were omitted. In the 'Legislative Request' section (Page 5), the reference URL was omitted. Most critically, in the 'Potential Participants' section (Page 8), the entire nested list of approximately 22 participating government departments was omitted, representing a loss of over 50% of that sectio",
+      "source_pdf_quote": "The nested list of departments under each participant category (e.g., 'o Department of Information Technology', 'o Department of Public Safety') on Page 8; also definitions of factors on Page 5 ('o Something you know...', etc.) and the URL 'http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf'.",
+      "output_quote": "The output list for 'Potential Participants' contains only the 8 top-level categories with no sub-items. The factor definitions and URL are missing from their respective sections.",
+      "location": "Introduction / Legislative Request (Page 5, element index 17-27) and Potential Participants (Page 8, element index 52)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There are two structural failures in list conversion. First, on page 5, the sub-bullets detailing authentication factors (e.g., 'o Something you know...') are omitted from the list in element 27. Second, on page 8, the 'Potential Participants' section contains a numbered list with nested sub-lists of departments. In the output (element 52), the nesting is entirely lost, and the nested items themselves are omitted, leaving only a flat list of the top-level categories. This significantly degrades ",
+      "source_pdf_quote": "Page 8: '1. VPN (Administrator Access) o Department of Information Technology o Department of Public Safety...'",
+      "output_quote": "Element 52: Only contains top-level list items like 'VPN (Administrator Access)' with 'nested_list': null.",
+      "location": "Potential Participants section, Page 8, element 52"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "A critical URL present in the source document text is missing in the output. On page 5, the text 'See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf for reference' is split into elements 19 and 21, but the URL itself is not captured or converted into a link.",
+      "source_pdf_quote": "See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf for reference.",
+      "output_quote": "Element 19: 'See', Element 21: 'for reference.'",
+      "location": "Legislative Request section, Page 5, element indices 19-21"
+    }
+  ],
+  "action_items": [
+    "Restore the missing list of 22 government departments in the 'Potential Participants' section.",
+    "Re-insert the omitted MFA factor definitions on page 5.",
+    "Verify and restore the legislative URL on page 5."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9524,
+      "text_match": 0.9405792084919811,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8823,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9524,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9132870266636791,
+      "shingling_precision": 0.9695528068506185,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1356,
+      "gemini_words": 1356,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 428859,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

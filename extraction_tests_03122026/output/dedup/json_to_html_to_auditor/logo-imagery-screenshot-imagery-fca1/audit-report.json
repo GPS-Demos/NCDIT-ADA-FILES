@@ -1,0 +1,113 @@
+{
+  "document_id": "logo-imagery-screenshot-imagery-fca1",
+  "audited_at": "2026-03-13T01:51:33.016616Z",
+  "quality_score": 72,
+  "fidelity_composite": 0.6899,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.25,
+  "routing": "human_review",
+  "reasoning": "The document displays a significant failure in content preservation, indicated by a low shingling recall (0.693) which corroborates the LLM's report of missing critical instructional text (URLs and button labels). Additionally, the visual score is extremely low (0.25) due to detached UI elements and duplicated branding, making the 'How-to' guide functionally confusing and structurally unsound.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There is a recurring and significant omission of critical instructional text on pages 2 and 3. In the sections 'How to reset your password', 'How to change your password', 'How to update your profile', 'How to enroll Open Subscription Applications', and 'How to delete your account', the URL 'https://myncid.nc.gov/' is consistently missing from Step 1. Furthermore, specific button labels required for following the instructions (e.g., 'Submit', 'Reset', 'SAVE') are omitted from the text of the ste",
+      "source_pdf_quote": "Page 2, 'How to change your password': '1. Go to https://myncid.nc.gov/' and '5. Click on: SAVE'. Page 2, 'How to update your profile': '1. Go to https://myncid.nc.gov/' and '4. ...click on: SAVE'.",
+      "output_quote": "Section 2, reading_order 34: 'Go to ' and 'Click on: '. Section 2, reading_order 37: 'Go to ' and 'Edit the values that you want to update, click on: '.",
+      "location": "Instructions on Page 2 and Page 3 (reading orders 31, 34, 37, 55, 58)."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is significantly compromised. Key instructional elements, specifically the 'SAVE' and 'CONFIRM' buttons which belong to the 'How to register' section on Page 1 of the PDF, have been detached from their relevant text and rendered far down the page after the 'How to retrieve your username' section. This breaks the logical visual flow and relationship between the instructions and the visual aids intended to accompany them.",
+      "source_pdf_quote": "Page 1, 'How to register' section includes steps 4 and 5 with associated button images for 'SAVE' and 'CONFIRM' immediately following the text.",
+      "output_quote": "The 'SAVE' and 'CONFIRM' buttons are located in a block of images positioned after the 'How to retrieve your username' section, disconnected from the registration instructions.",
+      "location": "HTML body, between 'How to retrieve your username' and 'How to reset your password' headings."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The source PDF contains several meaningful screenshots that act as visual aids for the user guide. A critical image—the screenshot of the 'delete' confirmation modal from Step 4 of 'How to delete your account' (Page 3)—is entirely missing from the HTML output. Additionally, while some buttons are rendered as text or separate assets, the visual context provided by the screenshots in the PDF (like the yellow-bordered box for registration on Page 1) is lost or incomplete.",
+      "source_pdf_quote": "Page 3, 'How to delete your account' section, step 4 shows a screenshot of the confirmation modal with a text input field containing 'delete' and buttons for 'CANCEL' and 'DELETE'.",
+      "output_quote": "The confirmation modal screenshot is not rendered in the HTML output.",
+      "location": "HTML 'How to delete your account' section."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There is significant visual duplication in the rendered HTML that does not exist in the source. Specifically, the 'Forgot Username / Forgot Password / Unlock Account' screenshot block and the large MyNCID branding logo with a lock and black background are repeated multiple times within the body of the document, creating visual clutter and confusion.",
+      "source_pdf_quote": "The PDF contains unique instances of screenshot blocks within their respective sections (e.g., 'Forgot Username...' appears once in the context of retrieving a username on Page 1 and once for resetting a password on Page 2).",
+      "output_quote": "The 'Forgot Username / Forgot Password / Unlock Account' block appears twice in the main body area in close proximity. The large MyNCID brand logo also appears twice in the body area.",
+      "location": "HTML body, primarily in the middle section between headings."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The document's numbered lists have been converted to unordered lists. Furthermore, the explicit numbering (e.g., '1.', '2.') present in the source text has been stripped during conversion. Some list items are also rendered incomplete because the text referring to a visual button was not captured in the text flow (e.g., the items ending in colons). This represents a loss of structural meaning for a step-by-step guide.",
+      "source_pdf_quote": "Page 1, 'How to register' section contains a numbered list from 1 to 6. Page 2, 'How to reset your password' step 8: '8. Click on: [Reset button image]'.",
+      "output_quote": "The list in elements index 3 and 4 is 'unordered' and lacks numbering. Item 8 in element index 31 reads only 'Click on: ' with no following text.",
+      "location": "Sections 1 and 2, element indices 3, 4, 31, 34, 37."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document contains several instances of the URL 'https://myncid.nc.gov/'. While the URL text is extracted correctly, it is not marked as a clickable hyperlink within the JSON structure, which is a structural omission for digital documents.",
+      "source_pdf_quote": "URL 'https://myncid.nc.gov/' appearing throughout the document (e.g., Page 1, Step 1).",
+      "output_quote": "\"text\": \"Go to https://myncid.nc.gov/\" (The text is present but lacks hyperlink metadata).",
+      "location": "Element indices 3, 7, 11."
+    }
+  ],
+  "action_items": [
+    "Restore the missing URL and button labels to the instructional steps.",
+    "Correct the visual flow to ensure action buttons are adjacent to the text describing them.",
+    "Remove duplicated branding and logo imagery.",
+    "Restore missing screenshots and fix list formatting to reflect the source's step-by-step numbering."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6899,
+      "text_match": 0.7534102833158446,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.724,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6899,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.25,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.693050193050193,
+      "shingling_precision": 0.825287356321839,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 101,
+      "gemini_words": 101,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 334384,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

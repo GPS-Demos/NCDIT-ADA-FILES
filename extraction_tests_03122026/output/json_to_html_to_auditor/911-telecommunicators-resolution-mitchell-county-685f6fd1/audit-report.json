@@ -1,0 +1,96 @@
+{
+  "document_id": "911-telecommunicators-resolution-mitchell-county-685f6fd1",
+  "audited_at": "2026-03-12T22:29:07.026484Z",
+  "quality_score": 71,
+  "fidelity_composite": 0.6886,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document suffers from major structural defects, most notably the duplication of the entire resolution content and the corruption of the signature block into a table with fabricated headers. While the programmatic word count ratio is perfect, the fidelity score of 0.6886 and the identified structural and reading order issues fall significantly below the threshold for auto-approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The signature block at the bottom of the document is represented as a table (reading_order 12). This table uses fabricated headers ('Field' and 'Value') that do not exist in the source. Furthermore, it collapses the side-by-side (2-column) layout of the original signatures into a single column (names/titles are both in the first column), which is a corruption of the document's logical structural organization for these elements.",
+      "source_pdf_quote": "Visual side-by-side layout of signatures for Taylor McCurry (left) and Steve Pitman (right).",
+      "output_quote": "Table element at index 12 with rows containing names in one column and empty strings in the second, plus fabricated 'Field'/'Value' headers.",
+      "location": "Signature section, page 1, element index 12"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The Mitchell County seal image, which is positioned at the top center of the source document header, has been moved to the end of the document in the reading order (element 13, following the text body and signature table). This is a material change to the logical flow of the document.",
+      "source_pdf_quote": "The Mitchell County seal is located at the top center, between 'NORTH CAROLINA' and 'MITCHELL COUNTY'.",
+      "output_quote": "The image of the seal has a reading_order of 13, appearing after the entire text body and the signature table.",
+      "location": "Document Header / Image element 13"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The layout is significantly reorganized compared to the source PDF. In the source, the document follows a logical flow: Header (County Seal and Names) -> Resolution Title -> Whereas Clauses -> Resolved Clause -> Signatures at the bottom. The HTML output fragments this. It first presents the text, then a signature table with missing values, then separate signature images, and finally a high-contrast section that rearranges the content entirely (placing names/titles above the resolution title and ",
+      "source_pdf_quote": "The source PDF shows a clear top-to-bottom layout: Seal/Header, Title, Body text, and Signatures at the very bottom.",
+      "output_quote": "The HTML screenshot shows signatures at the top of the black high-contrast section (e.g., 'Taylor Mc rry' and 'Steve Pitman' appear before 'RESOLUTION SUPPORTING...') and separate images of signatures detached from their labels in the plain-text section.",
+      "location": "Throughout the HTML rendering, particularly in the bottom high-contrast section."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The entire content of the resolution is duplicated in the HTML output. The full text, including the title, 'WHEREAS' clauses, and the resolution statement, appears once in a plain text/table format and then again in a high-contrast visual block at the bottom. This is a duplication of genuine body content, not just a navigational element.",
+      "source_pdf_quote": "A single instance of the resolution text starting with 'WHEREAS, in September of 2021...'",
+      "output_quote": "The text 'WHEREAS, in September of 2021...' and all subsequent clauses appear twice on the same page (once in the top white section and once in the bottom black section).",
+      "location": "HTML output, visible across the entire vertical length of the screenshot."
+    }
+  ],
+  "action_items": [
+    "Delete the duplicate copy of the resolution text.",
+    "Reformulate the signature block to match the original layout without using fabricated table headers.",
+    "Move the county seal image to the beginning of the reading order as per the source header."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6886,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7149,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 3
+    },
+    "signals": {
+      "fidelity_composite": 0.6886,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": 1.0,
+      "baseline_words": 240,
+      "gemini_words": 240,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 330005,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

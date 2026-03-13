@@ -1,0 +1,96 @@
+{
+  "document_id": "esrmo-newsletter-january-2017-686b1f87",
+  "audited_at": "2026-03-13T01:24:01.147311Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8649,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.9090909090909091,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document shows strong metrics with a fidelity composite of 0.86 and shingling recall of 0.90, which normally triggers an auto-approval. However, the identified concerns describe a systemic omission of functional URLs and the flattening of nested list structures, specifically in the 'Resources to Remember' and membership instruction sections. Given that this is a government newsletter whose primary utility is providing these specific resources, the 'Significant text omission' (noted as 50% for one section) poses a high risk; per the 3x cost rule for false negatives, this document requires human intervention to restore the missing links and structure.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The output suffers from a systemic omission of URLs/hyperlinks. On Page 1, the URLs for the three newsletter types (SECURITYsense, Security Tips, and SANS OUCH!) are missing. On Page 3, the setup instructions for CEB membership are missing two sub-bulleted URLs (irec.executiveboard.com and eaec.executiveboard.com). Most significantly, the 'Resources to Remember' section on Page 3 is missing all four URLs that follow the site titles; this constitutes a 50% loss of text content for that specific s",
+      "source_pdf_quote": "Page 1 URLs: https://ncconnect.sharepoint.com/sites/it_ext/esrmo_ext/Documents/Newsletters/SECURITYsense, http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-tips-newsletters, http://securingthehuman.sans.org/resources/newsletters/ouch/2017. Page 3 URLs: irec.executiveboard.com, eaec.executiveboard.com, http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management, https://ncconnect.sharepoint.com/sites/it_ext/esrmo_ext/default.aspx, https://it.nc.gov/cy",
+      "output_quote": "The text elements corresponding to these URLs are completely absent from the JSON sections.",
+      "location": "Sections 1 and 3; specifically following elements with reading_order 9, 13, 16, 34, 37, 39, 41, 43."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The list on page 3 (element index 34) is converted incorrectly. In the source document, the first bullet point ('Visit the partnership website listed below:') has two nested sub-bullets identifying the specific councils (Information Risk and Enterprise Architecture). The output JSON fails to capture these nested items or their content, rendering the list structure flat and incomplete.",
+      "source_pdf_quote": "Visit the partnership website listed below: \r\no Information Risk Leadership Council – irec.executiveboard.com \r\no Enterprise Architecture Leadership Council – eaec.executiveboard.com",
+      "output_quote": "{\r\n              \"content\": [\r\n                {\r\n                  \"text\": \"Visit the partnership website listed below:\",\r\n                  ...\r\n                }\r\n              ],\r\n              \"nested_list\": null,\r\n              ...",
+      "location": "Section 3, page 3, element index 34"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The conversion has failed to capture numerous URLs that are explicitly visible in the source text. This includes the links following the SECURITYsense, Security Tips, and SANS OUCH! newsletter descriptions on page 1, as well as the four URLs listed under the 'Resources to Remember' section on page 3. These URLs are entirely absent from the text of the corresponding paragraph elements.",
+      "source_pdf_quote": "http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-tips-newsletters",
+      "output_quote": "(URL is completely missing from element 13 and surrounding elements)",
+      "location": "Section 1, page 1, following element 13"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Several meaningful images from the source PDF are missing in the HTML output. Specifically, the PCI DSS logo on page 2, the 'Learn' button image on page 2, the CEB logo on page 2, and the 'My idea is...' lightbulb graphic on page 3 are all absent. While the NC Information Technology logo and the notebook image are present (though relocated), the omission of these other branding and illustrative elements constitutes a failure in visual fidelity.",
+      "source_pdf_quote": "The source PDF includes the PCI DSS logo (page 2), a 'Learn' button image (page 2), the CEB logo (page 2), and a lightbulb graphic for the 'My idea is...' section (page 3).",
+      "output_quote": "These four images are completely missing from the HTML rendering; only the text content of those sections remains.",
+      "location": "Throughout pages 2 and 3 of the source document."
+    }
+  ],
+  "action_items": [
+    "Manually restore missing URLs in the newsletter descriptions on Page 1 and the Resources section on Page 3.",
+    "Reconstruct the nested list hierarchy for the CEB membership instructions on Page 3 (element 34).",
+    "Verify if the omitted branding logos (PCI DSS, CEB) are required for visual compliance."
+  ],
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.8649,
+      "text_match": 0.9420627802690583,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8437,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8649,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.9090909090909091,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9039586919104992,
+      "shingling_precision": 0.9835205992509364,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 656,
+      "gemini_words": 656,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 326235,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

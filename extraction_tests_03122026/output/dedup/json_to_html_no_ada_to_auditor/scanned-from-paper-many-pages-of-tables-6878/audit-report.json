@@ -1,0 +1,71 @@
+{
+  "document_id": "scanned-from-paper-many-pages-of-tables-6878",
+  "audited_at": "2026-03-13T02:51:15.565102Z",
+  "quality_score": 88,
+  "fidelity_composite": 0.9318,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the LLM and pipeline suggest auto-approval, the descriptive evidence for the structural defect identifies material corruption across 'many pages of tables'. Specifically, the shifting of data columns (Part Number into Section) when the first column is empty renders the data-heavy document unreliable and potentially misleading regarding 2025 pricing.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The table structure is materially corrupted throughout the document. The master header row defined in the first table element contains 5 columns: 'Section', 'Part Number', 'Description', 'Previous Price', and '2025 Price'. However, the data rows following this header often contain only 4 cells when the 'Section' column in the source is empty. This causes a misalignment where the data meant for the 'Part Number' column is placed in the first cell (aligning it under the 'Section' header), shifting",
+      "source_pdf_quote": "Page 2, row for Part Number 52384. Table has 5 columns: Section (blank), Part Number (52384), Description (ArcGIS Desktop Advanced Concurrent Use Primary Maintenance), Previous Price ($3,475.00), 2025 Price ($3,475.00).",
+      "output_quote": "In the 'table' element under 'sections[0].elements[3]', the row for part 52384 (index 3) contains only 4 cells. The value '52384' is the first cell, placing it under the 'Section' header defined in row index 0.",
+      "location": "Section index 0, element index 3, row index 3"
+    }
+  ],
+  "action_items": [
+    "Audit all tables to ensure the 'Section' column is properly represented even when empty.",
+    "Correct cell alignment to ensure 'Part Number', 'Description', and 'Price' data points align with their respective headers."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9318,
+      "text_match": 0.9888570717317003,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8839,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9318,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9804490606384604,
+      "shingling_precision": 0.9992216687422167,
+      "duplication_ratio": 0.0013474023133322834,
+      "word_count_ratio": 1.0,
+      "baseline_words": 15918,
+      "gemini_words": 15918,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 591099,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

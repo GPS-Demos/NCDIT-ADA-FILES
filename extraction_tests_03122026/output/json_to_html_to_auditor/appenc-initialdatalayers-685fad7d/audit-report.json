@@ -1,0 +1,102 @@
+{
+  "document_id": "appenc-initialdatalayers-685fad7d",
+  "audited_at": "2026-03-12T22:31:30.247418Z",
+  "quality_score": 25,
+  "fidelity_composite": 0.7568,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Output appears mostly fabricated: shingling_precision=0.00. Only 0% of output text found in source.",
+  "decision_method": "hard_veto:V4",
+  "concerns": [
+    {
+      "description": "Low text precision (possible hallucination): 0%",
+      "severity": "critical",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Low text recall (possible truncation): 0%",
+      "severity": "critical",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table structure is corrupted at the transition between page 1 and page 2. In the source, the row for 'Wetlands' starts on page 1 and its description concludes on page 2. In the output, the continuation text 'Wildlife Service, National Wetlands Inventory' is placed in a new table at the start of section 2 as a single-column header row. This breaks the 2-column grid of the data and misidentifies a cell's data as a table header.",
+      "source_pdf_quote": "The table continues on Page 2 with 'Wildlife Service, National Wetlands Inventory' in the right-hand column of the first row.",
+      "output_quote": "In section 2, the table (reading_order 5) starts with a single cell header row: { \"cell_type\": \"header\", \"content\": [ { \"text\": \"Wildlife Service, National Wetlands Inventory\"... } ], \"colspan\": 1 }",
+      "location": "Page 2, first row of the table / Section 2, element index 1"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output breaks the visual flow of information present in the source PDF. The entry for 'Wetlands' is split between two tables across two separate sections. The second half of the description for 'Wetlands' ('Wildlife Service, National Wetlands Inventory'), which appears at the top of page 2 in the PDF, is used as a header for a new table in the HTML. This disrupts the logical and visual organization of the list.",
+      "source_pdf_quote": "The PDF shows 'Wetlands' on page 1 with its description continuing onto page 2: 'Wetlands areas from the US Fish and' (p1) 'Wildlife Service, National Wetlands Inventory' (p2).",
+      "output_quote": "The HTML first table ends with 'Wetlands' | 'Wetlands areas from the US Fish and'. A new section then repeats the document title and begins a second table where 'Wildlife Service, National Wetlands Inventory' is the header.",
+      "location": "Transition between the end of the first table and the start of the second section/table."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The second table in the HTML output is visually and structurally broken. It uses text that was intended to be the continuation of a data cell from the previous page ('Wildlife Service, National Wetlands Inventory') as its column header. This results in a table where the first column header is incorrect content and the data rows underneath are misaligned with the header's implied meaning.",
+      "source_pdf_quote": "In the PDF, 'Wildlife Service, National Wetlands Inventory' is plain text at the top of page 2, continuing the 'Wetlands' row.",
+      "output_quote": "In the HTML, the second table has a header row containing 'Wildlife Service, National Wetlands Inventory'.",
+      "location": "The header row of the second table in the HTML output."
+    }
+  ],
+  "action_items": [
+    "Output appears mostly fabricated: shingling_precision=0.00. Only 0% of output text found in source."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7568,
+      "text_match": 0.0,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5114,
+      "ceiling": 0.25,
+      "ceiling_reason": "extreme_hallucination",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7568,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.0,
+      "shingling_precision": 0.0,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 367,
+      "gemini_words": 367,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 273732,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "document_id": "gicc-ncdot-florence-20181107-68614eed",
+  "audited_at": "2026-03-12T23:03:27.845447Z",
+  "quality_score": 60,
+  "fidelity_composite": 0.5,
+  "fidelity_content": null,
+  "fidelity_structural": null,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document shows significant fidelity failures with a composite score of 0.5 and a low shingling recall of 0.61, indicating both structural and content loss. The loss of a complex horizontal timeline and multiple data-rich maps/charts (Hurricane Florence Imagery, Facilities Status, and Usage Time Series) constitutes a major failure in preserving the document's informational value.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The infographic timeline on page 4 of the source PDF, which uses a horizontal timeline to relate 'Events', 'Business Impacts', and 'IT Actions' over a 10-day period, is completely broken in the HTML output. The HTML renders these elements as a fragmented vertical list of text and small icons, which removes the temporal context and the visual relationships between the categories. This represents a significant failure in maintaining the visual organization and intent of the source material.",
+      "source_pdf_quote": "The horizontal 'Hurricane Florence Disaster Event Time Line' infographic spanning page 4.",
+      "output_quote": "The vertical sequence of text blocks and small colored boxes starting after 'Hurricane Florence Disaster Event Time Line Business Impacts Events IT Actions'.",
+      "location": "Page 4, Timeline section"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images are missing from the HTML rendering. Specifically, the 'Hurricane Florence Imagery Map' screenshot from page 5, the 'Hurricane Florence Facilities Status Map' from page 9, and the 'Usage Time Series' chart along with the 'GO!NC' portal screenshot from page 10 are all absent. Only large decorative NC DIT logos appear in their place or near their intended locations.",
+      "source_pdf_quote": "Page 5: Map screenshot; Page 9: Facilities Status Map image; Page 10: Usage Time Series chart and GO!NC portal screenshot.",
+      "output_quote": "The corresponding areas in the HTML show the section headers followed by text or unrelated large logos, but the specific maps and charts are missing.",
+      "location": "Pages 5, 9, and 10"
+    }
+  ],
+  "action_items": [
+    "Manually reconstruct the horizontal timeline on page 4 to ensure the relationship between 'Events', 'Business Impacts', and 'IT Actions' is clear.",
+    "Insert missing maps and charts from pages 5, 9, and 10 with appropriate alt-text and layout placement."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.5,
+      "text_match": 0.6648267402637228,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.62,
+      "ceiling": 0.6,
+      "ceiling_reason": "fidelity_low_score",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.5,
+      "fidelity_content": null,
+      "fidelity_structural": null,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.6100168823860439,
+      "shingling_precision": 0.7304582210242587,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 225,
+      "gemini_words": 225,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 289041,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

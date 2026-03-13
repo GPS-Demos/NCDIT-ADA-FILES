@@ -1,0 +1,126 @@
+{
+  "document_id": "20190726-board-agenda-685f9db9",
+  "audited_at": "2026-03-13T00:59:36.128743Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.5813953488372092,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "While both pages are represented, there is a total omission of a logical component of the document: the entire 'Presenter' column and all associated presenter names and speaker codes throughout the document. Furthermore, the sub-sections for agenda items 1, 5, 6, 11, and 15 are entirely missing, not just truncated. For example, the detailed financial reporting sub-items (a-f) under the 'Consent Agenda' are completely absent.",
+      "source_pdf_quote": "5. Consent Agenda (Vote Required) ... a) Minutes of Previous Meeting – June 28, 2019 b) NG 911 Fund June 2019 Fund Balance $ 44,749,222 ...",
+      "output_quote": "5. Consent Agenda (Vote Required)",
+      "location": "Item 5, Page 1"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The source document layout is organized as a table with columns for Tab, Topic, and Presenter. The output creates a table element but only includes the header row. The actual data that should inhabit the table rows is partially converted to a list (omitting the Presenter column) rather than being populated in the table structure. Even if treated as a body, the data rows are missing.",
+      "source_pdf_quote": "The agenda grid from 'Call to Order' through Item 16.",
+      "output_quote": "The table element contains only the 'Tab', 'Topic', and 'Presenter' header cells with no data rows.",
+      "location": "Table element, reading_order 3"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Major sections of text are missing within the agenda items. Item 5 (Consent Agenda) and Item 6 (Executive Director Report) in the output contain only their headers, missing over 75% of the text content associated with those sections in the source (sub-points, status updates, and all financial figures).",
+      "source_pdf_quote": "6. Executive Director Report ... a) NextGen 911 Migration Status – Live Status Map b) Iredell County 911 ESInet Migration – July 17, 2019 ...",
+      "output_quote": "6. Executive Director Report",
+      "location": "Item 6, Page 1"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The main agenda is visually structured as a table with three columns (Tab, Topic, Presenter). In the output, only the header row of this table is captured in a table element. The actual content of the table (the agenda items) is extracted into a subsequent list element, resulting in the total loss of the 'Presenter' column data and the structural relationship between columns.",
+      "source_pdf_quote": "The agenda is a 3-column table with headers 'Tab', 'Topic', and 'Presenter', and rows containing data like 'Call to Order' (Topic) and 'Eric Boyette (01)' (Presenter).",
+      "output_quote": "Element index 2 (reading_order: 3) is a table containing only the header row. Element index 3 (reading_order: 4) is a list containing only text from the 'Topic' column.",
+      "location": "Main agenda, page 1"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The agenda contains multiple nested lists (e.g., items 1a-b, 5a-f, 6a-e, 11a-b) and detailed financial figures under item 5. The output flattens these into a single-level list and entirely omits the nested sub-items and financial data, failing to preserve the structure and hierarchy of the list.",
+      "source_pdf_quote": "Item 5: Consent Agenda (Vote Required) includes sub-items a) through f) and financial figures like 'June 2019 Fund Balance $ 44,749,222'.",
+      "output_quote": "Element 4 contains '5. Consent Agenda (Vote Required)' as a flat item with no nested content or financial data following it.",
+      "location": "Main agenda list, page 1 and page 2"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source PDF features a structured agenda with a three-column layout (Tab, Topic, Presenter) and nested sub-items (e.g., 1a, 1b, 5a-5f) that include detailed financial figures. The rendered HTML collapses this entire structure into a single-column bulleted list. In this process, the information from the 'Presenter' column is omitted from the list items, and all nested sub-items (including the critical financial data for the various funds in item 5) are completely missing from the visual output",
+      "source_pdf_quote": "The source PDF on page 1 shows item 5 'Consent Agenda' with detailed sub-items 'a' through 'f' and specific financial figures (e.g., 'June 2019 Fund Balance $ 44,749,222'). It also lists 'Pokey Harris (03)' as the presenter.",
+      "output_quote": "The HTML screenshot shows item 5 as a single bullet point '- 5. Consent Agenda (Vote Required)' followed immediately by item 6. The sub-items, financial data, and presenter information are missing.",
+      "location": "Item 5, Agenda list, Page 1"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The agenda in the source document is organized as a table. The HTML output renders the headers 'Tab', 'Topic', and 'Presenter' in a grey bar, but the content follows as a standard bulleted list. The columns are not used, and the data that should be in the 'Presenter' column is not associated with the corresponding 'Topic' row, rendering the table structure visually broken and the information incomplete.",
+      "source_pdf_quote": "The source PDF uses a columnar layout with headers 'Tab', 'Topic', and 'Presenter' to organize the meeting agenda.",
+      "output_quote": "In the HTML screenshot, the headers 'Tab', 'Topic', and 'Presenter' are displayed at the top of the section, but the content below is a single-column list that doesn't align with or utilize the 'Presenter' column.",
+      "location": "Agenda section, Page 1"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The numeric speaker codes (e.g., '(01)', '(05)', '(20)') that denote specific IDs or time allocations in the source are missing entirely from the output, which is a loss of specific meeting metadata.",
+      "source_pdf_quote": "Eric Boyette (01)",
+      "output_quote": "[Presenter information missing]",
+      "location": "Call to Order, Page 1"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.6644674835061263,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5004,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5813953488372092,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.5157278712509145,
+      "shingling_precision": 0.9337748344370861,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 96,
+      "gemini_words": 96,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 106724,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

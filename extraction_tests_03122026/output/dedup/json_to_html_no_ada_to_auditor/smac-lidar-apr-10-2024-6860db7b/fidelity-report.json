@@ -1,0 +1,213 @@
+{
+  "document_id": "smac-lidar-apr-10-2024-6860db7b",
+  "composite_score": 0.8199,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.82 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON contains headings, tables, and paragraphs that all have a direct corresponding basis in the source PDF. No invented section headers, table of contents entries, or hallucinated body text were found. Expected AI-generated content like image alt text is not considered fabrication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The source document does not contain any specific contact information such as phone numbers, email addresses, or physical addresses. The output JSON correctly reflects this absence and does not hallucinate any such data.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source PDF consists of three pages. Page 1 (USGS LiDAR status), Page 2 (LiDAR Quality Level map), and Page 3 (Project Timeline) are all accounted for in the output JSON's three corresponding sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The table on Page 1 (Legend for the map) contains a header and four data rows in the source; the output correctly identifies this as a table with 5 rows. The table on Page 3 (Table 5) has a complex header and two data rows; the output represents this as a 3-row table which effectively captures all data rows without significant omission.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "On Page 2, the document includes a textual legend for the 'North Carolina LiDAR Quality Level By Phase' map. This legend contains crucial information defining the five phases and their respective quality levels (e.g., 'Phase 1 (2020) - QL 1', etc.). While the legend is included as an image element (index 19), the text itself has not been extracted into the JSON elements. Given the limited amount of text on Page 2, this omission represents significantly more than 25% of the machine-readable text content for this section, and it constitutes an omission of essential information.",
+        "b_evidence_source": "Phase & Quality: Phase 1 (2020) - QL 1, Phase 2 (2020) - QL 1, Phase 3 (2015) - QL 2, Phase 4 (2016) - QL 1, Phase 5 (2017) - QL 1",
+        "b_evidence_output": "The text is absent from the 'sections' elements, appearing only within a non-searchable image object (reading_order 19).",
+        "b_evidence_location": "Section 2, Page 2",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "There are two minor text omissions that alter the meaning/completeness of the information. 1. On Page 1, the heading 'April 9, 2024 NCEM Status' is completely missing from the output text; this is critical timestamp information for the status report. 2. On Page 3, the caption for Table 5 (Element index 25) is truncated, ending at 'and', whereas the source contains additional descriptive text ('deliverables should be available by beginning of:').",
+        "b_evidence_source": "1. April 9, 2024 NCEM Status (Page 1) \n2. Table 5. The estimated delivery dates for the processing and classification and all products and deliverables should be available by beginning of: (Page 3)",
+        "b_evidence_output": "1. [Text missing from Section 1] \n2. Table 5. The estimated delivery dates for the processing and classification and all products and (Element 25)",
+        "b_evidence_location": "Section 1, Element 2 (Page 1); Section 3, Element 25 (Page 3)",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9302325581395349,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON contains headings, tables, and paragraphs that all have a direct corresponding basis in the source PDF. No invented section headers, table of contents entries, or hallucinated body text were found. Expected AI-generated content like image alt text is not considered fabrication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The source document does not contain any specific contact information such as phone numbers, email addresses, or physical addresses. The output JSON correctly reflects this absence and does not hallucinate any such data.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source PDF consists of three pages. Page 1 (USGS LiDAR status), Page 2 (LiDAR Quality Level map), and Page 3 (Project Timeline) are all accounted for in the output JSON's three corresponding sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The table on Page 1 (Legend for the map) contains a header and four data rows in the source; the output correctly identifies this as a table with 5 rows. The table on Page 3 (Table 5) has a complex header and two data rows; the output represents this as a 3-row table which effectively captures all data rows without significant omission.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"On Page 2, the document includes a textual legend for the 'North Carolina LiDAR Quality Level By Phase' map. This legend contains crucial information defining the five phases and their respective quality levels (e.g., 'Phase 1 (2020) - QL 1', etc.). While the legend is included as an image element (index 19), the text itself has not been extracted into the JSON elements. Given the limited amount of text on Page 2, this omission represents significantly more than 25% of the machine-readable text content for this section, and it constitutes an omission of essential information.\",\n      \"b_evidence_source\": \"Phase & Quality: Phase 1 (2020) - QL 1, Phase 2 (2020) - QL 1, Phase 3 (2015) - QL 2, Phase 4 (2016) - QL 1, Phase 5 (2017) - QL 1\",\n      \"b_evidence_output\": \"The text is absent from the 'sections' elements, appearing only within a non-searchable image object (reading_order 19).\",\n      \"b_evidence_location\": \"Section 2, Page 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"There are two minor text omissions that alter the meaning/completeness of the information. 1. On Page 1, the heading 'April 9, 2024 NCEM Status' is completely missing from the output text; this is critical timestamp information for the status report. 2. On Page 3, the caption for Table 5 (Element index 25) is truncated, ending at 'and', whereas the source contains additional descriptive text ('deliverables should be available by beginning of:').\",\n      \"b_evidence_source\": \"1. April 9, 2024 NCEM Status (Page 1) \\n2. Table 5. The estimated delivery dates for the processing and classification and all products and deliverables should be available by beginning of: (Page 3)\",\n      \"b_evidence_output\": \"1. [Text missing from Section 1] \\n2. Table 5. The estimated delivery dates for the processing and classification and all products and (Element 25)\",\n      \"b_evidence_location\": \"Section 1, Element 2 (Page 1); Section 3, Element 25 (Page 3)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 2,\n    \"penalty_sum\": 7,\n    \"score\": 0.9186046511627907\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the output against the source document. Each significant text block, including the titles, map annotations, and table entries, appears only once in the output, consistent with the source. Recurring branding elements, such as the EMAP logo, appear on every page of the source and are correctly represented as separate image elements in the output. There is no evidence of unintentional duplication of paragraphs or sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The output uses Level 1 headings for the primary titles on the first two pages. While the third page lacks a heading (starting with a list), the overall hierarchy is flat and does not skip levels or nest incorrectly. The heading levels used are appropriate for the document's structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Table 5 on page 3 is structurally corrupted. In the source, the table consists of three columns. The first row contains a header ('Delivery dates') that spans the second and third columns. The second row contains three distinct column headers. In the output (index 26), the first row (row 0) contains only one cell with a colspan of 1, which breaks the alignment with the three columns defined in the subsequent rows. Additionally, the second row (row 1), which contains the actual column headers ('When the Acquisition phase...', etc.), is incorrectly marked as a data row ('is_header_row': false) and the cells are labeled as 'data' instead of 'header'. This results in a significant loss of the table's structural integrity and accessibility.",
+        "b_evidence_source": "Table 5 on page 3. The table has 3 columns with a complex header structure involving a spanned cell in the first row ('Delivery dates') and three sub-headers in the second row.",
+        "b_evidence_output": "The table element at index 26. The first row (row 0) contains only one cell with colspan 1, and the second row (row 1) is not identified as a header row (is_header_row: false), with its cells marked as 'data' instead of 'header'.",
+        "b_evidence_location": "Page 3, element index 26",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the output follows the logical top-to-bottom and left-to-right flow of the source document. Text elements associated with the maps are placed near the images, and the progression from titles to data tables/notes is consistent with the original layout.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list on page 3 under 'Project Timeline' is correctly identified and structured as a list. The legends on pages 1 and 2, which are visually similar to lists, are either converted into a table or maintained within the image blocks, which is an acceptable structural interpretation for these elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document does not contain any hyperlinks or contact information. The output correctly reflects this absence, with no links injected or omitted.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the output against the source document. Each significant text block, including the titles, map annotations, and table entries, appears only once in the output, consistent with the source. Recurring branding elements, such as the EMAP logo, appear on every page of the source and are correctly represented as separate image elements in the output. There is no evidence of unintentional duplication of paragraphs or sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The output uses Level 1 headings for the primary titles on the first two pages. While the third page lacks a heading (starting with a list), the overall hierarchy is flat and does not skip levels or nest incorrectly. The heading levels used are appropriate for the document's structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Table 5 on page 3 is structurally corrupted. In the source, the table consists of three columns. The first row contains a header ('Delivery dates') that spans the second and third columns. The second row contains three distinct column headers. In the output (index 26), the first row (row 0) contains only one cell with a colspan of 1, which breaks the alignment with the three columns defined in the subsequent rows. Additionally, the second row (row 1), which contains the actual column headers ('When the Acquisition phase...', etc.), is incorrectly marked as a data row ('is_header_row': false) and the cells are labeled as 'data' instead of 'header'. This results in a significant loss of the table's structural integrity and accessibility.\",\n      \"b_evidence_source\": \"Table 5 on page 3. The table has 3 columns with a complex header structure involving a spanned cell in the first row ('Delivery dates') and three sub-headers in the second row.\",\n      \"b_evidence_output\": \"The table element at index 26. The first row (row 0) contains only one cell with colspan 1, and the second row (row 1) is not identified as a header row (is_header_row: false), with its cells marked as 'data' instead of 'header'.\",\n      \"b_evidence_location\": \"Page 3, element index 26\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the output follows the logical top-to-bottom and left-to-right flow of the source document. Text elements associated with the maps are placed near the images, and the progression from titles to data tables/notes is consistent with the original layout.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list on page 3 under 'Project Timeline' is correctly identified and structured as a list. The legends on pages 1 and 2, which are visually similar to lists, are either converted into a table or maintained within the image blocks, which is an acceptable structural interpretation for these elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document does not contain any hyperlinks or contact information. The output correctly reflects this absence, with no links injected or omitted.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document faithfully reproduces the visual organization of the source PDF. The primary titles, maps, legends, and diagrams are placed in a logical sequence that reflects the original three-page structure. The transition from a page-based PDF to a continuous HTML layout is handled well without confusing the meaning or visual flow of the information.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "Table 5 from page 3 of the source PDF is rendered correctly in the HTML. It maintains clear row and column boundaries, distinct headers, and readable cell content. Additionally, the legend for the first map is rendered as a clean status table at the top of the document, making the information easily accessible to a sighted user.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present in the HTML rendering. This includes the two primary maps of North Carolina (Status and Quality Level), the technical diagram showing a LiDAR-equipped aircraft, and the institutional logos (DPS, EMAP, and NC Emergency Management). No broken image placeholders are visible.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is a significant visual duplication of body content at the end of the HTML document. The entire content block from the third page of the PDF—including the 'Project Timeline' text, the 'Table 5' caption, the data table itself, and the concluding note about quality control—appears twice in immediate succession. Each instance is also preceded by a redundant DPS Emergency Management logo.",
+        "b_evidence_source": "The content on Page 3 (Project Timeline, Table 5, and the Note) appears only once in the source document.",
+        "b_evidence_output": "In the HTML screenshot, the block starting with 'Project Timeline: LiDAR data collection...' and ending with '...will be performed with all deliverables.' is repeated twice at the bottom of the page.",
+        "b_evidence_location": "Bottom half of the HTML document, following the Page 2 map and diagram.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document faithfully reproduces the visual organization of the source PDF. The primary titles, maps, legends, and diagrams are placed in a logical sequence that reflects the original three-page structure. The transition from a page-based PDF to a continuous HTML layout is handled well without confusing the meaning or visual flow of the information.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"Table 5 from page 3 of the source PDF is rendered correctly in the HTML. It maintains clear row and column boundaries, distinct headers, and readable cell content. Additionally, the legend for the first map is rendered as a clean status table at the top of the document, making the information easily accessible to a sighted user.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present in the HTML rendering. This includes the two primary maps of North Carolina (Status and Quality Level), the technical diagram showing a LiDAR-equipped aircraft, and the institutional logos (DPS, EMAP, and NC Emergency Management). No broken image placeholders are visible.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is a significant visual duplication of body content at the end of the HTML document. The entire content block from the third page of the PDF—including the 'Project Timeline' text, the 'Table 5' caption, the data table itself, and the concluding note about quality control—appears twice in immediate succession. Each instance is also preceded by a redundant DPS Emergency Management logo.\",\n      \"b_evidence_source\": \"The content on Page 3 (Project Timeline, Table 5, and the Note) appears only once in the source document.\",\n      \"b_evidence_output\": \"In the HTML screenshot, the block starting with 'Project Timeline: LiDAR data collection...' and ending with '...will be performed with all deliverables.' is repeated twice at the bottom of the page.\",\n      \"b_evidence_location\": \"Bottom half of the HTML document, following the Page 2 map and diagram.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 0,
+  "total_major": 3,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

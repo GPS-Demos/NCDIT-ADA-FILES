@@ -1,0 +1,96 @@
+{
+  "document_id": "agency-onboarding-68607a87",
+  "audited_at": "2026-03-13T01:07:59.521609Z",
+  "quality_score": 86,
+  "fidelity_composite": 0.9387,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.8636363636363636,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "Despite a high fidelity composite score, the identified concerns reveal significant functional defects, specifically the omission of the primary contact email and the failure to extract granular instructional text from the flowchart into the HTML body. Given that this is an agency onboarding document, the loss of specific guidance steps and contact information represents a failure in content preservation that exceeds the threshold for auto-approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The output fails to capture a substantial portion of the document's information. Firstly, the contact email 'cjleadshelp@nc.gov' is missing from the primary contact paragraph. Secondly, the entire text content of the instructional flowchart—which constitutes the vast majority of the document's specific guidance—is omitted from the JSON text fields. While an AI-generated summary is provided in the alt text of the second image, it fails to include critical details such as 'Identifies & provides Si",
+      "source_pdf_quote": "cjleadshelp@nc.gov; Identifies & provides Signatory Authority; Identifies internal points of contact; Identifies authorized security roles; Files signed documents with CJLEADS Team; ITS and CJLEADS Team will: 1. Assist Agency with adding Org/Div/Sect 2. Agency Admin obtains Org NCID; NCID Administration; CJLEADS User Admin; (Accounts activated at the end of training class)",
+      "output_quote": "The text content is entirely missing from the paragraph and section elements. The image alt text summary ('...steps including agency identification, license agreement, NCID registration, user administration, training...') omits these specific instructions.",
+      "location": "Main section, page 1, elements index 2 and 6"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The reading order in the output diverges from the visual hierarchy of the document. The 'Primary Contact' information, which is visually located in the mid-left area below 'Step 1' of the flowchart, is ordered as the second element (reading_order 2) immediately following the title. This causes the reading flow to jump past the Logo (reading_order 5) and the main flowchart (reading_order 6), which are visually superior on the page. However, since the information remains logically accessible, this",
+      "source_pdf_quote": "Visual flow starts with Logo (top-left) and Heading (top-center), followed by the Flowchart (center). Contact info is located under Step 1 of the flowchart.",
+      "output_quote": "The reading order sequence is: 1. Heading, 2. Paragraph (Contact Info), 5. Image (Logo), 6. Image (Flowchart).",
+      "location": "Sections elements at reading_order indices 1, 2, 5."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source document contains several explicit numbered lists within the steps of the flowchart (e.g., the 5-item list in 'Execution of License and Usage Agreement' and the 2-item list in 'CJLEADS Trains User Admins'). The output JSON fails to preserve these as semantic list elements, instead capturing the entire diagram as a single image. This results in the loss of the document's structured list data.",
+      "source_pdf_quote": "Numbered list in Step 2 containing items: '1. Identifies & provides Signatory Authority', '2. Identifies internal points of contact', etc.",
+      "output_quote": "The JSON contains no elements with 'type': 'list'. The information is exclusively part of an image alt-text summary.",
+      "location": "Flowchart diagram, Step 2 and Step 5."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The contact email address 'cjleadshelp@nc.gov' is clearly visible in the source PDF as a text-based contact link. In the output JSON, this entire string is omitted from the contact paragraph. Additionally, the phone number '919-754-6949' is present as plain text but lacks a functional tel: link markup. The complete omission of the email link is a structural defect.",
+      "source_pdf_quote": "cjleadshelp@nc.gov",
+      "output_quote": "The text 'cjleadshelp@nc.gov' is missing from the paragraph content at reading_order 2.",
+      "location": "Paragraph element, reading_order 2."
+    }
+  ],
+  "action_items": [
+    "Manually insert the missing contact email address into the primary contact section.",
+    "Convert the flowchart's instructional text and numbered lists into semantic HTML elements rather than relying on an image/alt-text summary.",
+    "Correct the reading order to follow the visual flow of the document."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9387,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8578,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 3
+    },
+    "signals": {
+      "fidelity_composite": 0.9387,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.8636363636363636,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": 1.0,
+      "baseline_words": 18,
+      "gemini_words": 18,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 327992,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

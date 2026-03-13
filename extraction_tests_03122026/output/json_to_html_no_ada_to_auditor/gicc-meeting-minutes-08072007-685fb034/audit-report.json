@@ -1,0 +1,84 @@
+{
+  "document_id": "gicc-meeting-minutes-08072007-685fb034",
+  "audited_at": "2026-03-13T01:01:09.229238Z",
+  "quality_score": 93,
+  "fidelity_composite": 0.8978,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document demonstrates strong overall quality with a fidelity score of 0.8978 and excellent programmatic recall (0.983), suggesting that the vast majority of the content is preserved correctly. Although there are minor defects involving the omission of two specific URLs and localized heading hierarchy errors on page 9, these were classified as minor by the evaluation systems and do not meet the threshold for manual intervention given the high corroboration between signals.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "There is a recurring defect where URLs within paragraphs are omitted. Specifically, 'www.ncstreams.net' is missing from the Priority #2 section (page 2) and 'www.nconemap.net' is missing from the Orthoimagery Planning section (page 7). In both cases, the text around the URL is preserved, but the URL itself is dropped, resulting in fragments like 'available on the project website at .'. As these are primary reference points for a government GIS document, their omission is significant.",
+      "source_pdf_quote": "available on the project website at www.ncstreams.net . (Page 2); is on the NC OneMap website, www.nconemap.net. (Page 7)",
+      "output_quote": "available on the project website at (Element 15) ... . (Element 17); is on the NC OneMap website, (Element 60) ... . (Element 62)",
+      "location": "Priority #2 (Page 2), Orthoimagery Planning (Page 7)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The heading hierarchy is largely consistent, correctly identifying major sections (H2) and subsections (H3). However, on page 9, the pipeline incorrectly promoted entire content paragraphs into Heading 2 elements for the sections 'Federal Interagency Committee (FIC)', 'GIS Technical Advisory Committee (GIS TAC)', and the first paragraph of 'Management and Operations Committee (M&O)'. In the source, these are bolded paragraph starters (inline headings). By including the full descriptive text of t",
+      "source_pdf_quote": "Federal Interagency Committee (FIC). Mary Combs reported on the NAIP photography (leaf-on) options for 2008 and the fact that North Carolina will not be flown in 2007. The FIC will continue to discuss land use planning around military installations in North Carolina as directed by the GICC.",
+      "output_quote": "{\n          \"type\": \"heading\",\n          \"level\": 2,\n          \"text\": \"Federal Interagency Committee (FIC). Mary Combs reported on the NAIP photography (leaf-on) options for 2008 and the fact that North Carolina will not be flown in 2007. The FIC will continue to discuss land use planning around military installations in North Carolina as directed by the GICC.\",\n          \"reading_order\": 74\n        }",
+      "location": "Federal Interagency Committee (FIC) section, page 9, element 74"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The document contains several government URLs. The conversion failed to capture the text of two significant URLs: 'www.ncstreams.net' on page 2 and 'www.nconemap.net' on page 7. In both cases, the output text breaks exactly where the URL should appear, resulting in missing information and non-functional links.",
+      "source_pdf_quote": "...available on the project website at www.ncstreams.net . The Upper French Broad...; ...is on the NC OneMap website, www.nconemap.net. Mr. Nagy said...",
+      "output_quote": "...available on the project website at \" (order 15) \". The Upper French Broad...\" (order 17); \"...is on the NC OneMap website, \" (order 60) \". Mr. Nagy said...\" (order 62)",
+      "location": "Priority #2 (page 2) and Orthoimagery Planning (page 7)"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8978,
+      "text_match": 0.9851504493942946,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.9,
+      "raw_score": 0.9346,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8978,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9829737457759293,
+      "shingling_precision": 0.9873368146214099,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 4824,
+      "gemini_words": 4824,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 292852,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

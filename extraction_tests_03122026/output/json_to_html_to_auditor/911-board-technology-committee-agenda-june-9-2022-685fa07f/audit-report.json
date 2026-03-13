@@ -1,0 +1,97 @@
+{
+  "document_id": "911-board-technology-committee-agenda-june-9-2022-685fa07f",
+  "audited_at": "2026-03-12T22:26:56.513794Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8842,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score is high (0.88), the programmatic recall (0.845) falls below the 0.85 threshold, corroborating the reported omissions of nested list items which contain specific statistics and project details. Furthermore, the structural corruption of tables and the loss of functional hyperlinks present significant enough defects to warrant human intervention over automatic approval, especially given the cost of false negatives.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The conversion process systematically failed to capture nested list items (sub-bullets) across multiple pages. On Page 6, the details for 'Military Sites Update' and 'Cybersecurity Remediation' (four bullet points) are missing. On Page 7, the details for '4 jurisdictions remain to reach 100% i3 readiness' (four bullet points), the Rutherford project sub-bullet, and all specific population and land mass statistics are missing. On Page 8, the detail regarding 'Tier 2 technician selection' is missi",
+      "source_pdf_quote": "Page 6: Sub-bullets for Military Sites Update (Seymour Johnson AFB..., Good conversation...) and Cybersecurity Remediation (Ad hoc committee has been created..., Ad hoc committee discussing remediation...). Page 7: Sub-bullets for 4 jurisdictions (Cleveland County..., Lincoln County..., Onslow County..., Polk County...), Rutherford project, and Statistics (Total Population..., Total land mass...). Page 8: Sub-bullet for Staffing update (Tier 2 technician selection...).",
+      "output_quote": "The output JSON only includes the parent list items but none of the supporting sub-bullets or detailed statistics described above.",
+      "location": "Additional project notes (Page 6, element index 44), GIS Update (Page 7, element index 49), NMAC (Page 8, element index 59)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "There are structural corruptions in at least two tables. First, the table listing Guests (continuing on Page 3) is rendered with 3 columns in the output, whereas the source clearly defines 4 columns (Name, Phone/Teams, In-Person, Absent). Second, the table 'Current Deployment Service Types' on Page 5 is malformed; the header row contains a single cell, while the subsequent data rows contain two cells, leading to an inconsistent column count.",
+      "source_pdf_quote": "Table on Page 3 containing guest names (Brian Eaton, Doug Workman, etc.) having 4 columns. Table on Page 5 'Current Deployment Service Types' with a 2-column data layout.",
+      "output_quote": "Table at element index (reading_order) 18 has 3 cells per row. Table at element index (reading_order) 38 has 1 cell in the first row and 2 cells in subsequent rows.",
+      "location": "Guest List Table (Page 3), element index 18; Deployment Service Types Table (Page 5), element index 38."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The minutes items (numbered 1 through 10 on pages 3 and 4) were converted incorrectly. In the output, these are defined as 'unordered' lists (bullets), whereas the source is clearly a numbered list. While the text of the numbers is included at the beginning of the list items, the structural tag is wrong.",
+      "source_pdf_quote": "Numbered list items 1-4 on Page 3 and 5-10 on Page 4.",
+      "output_quote": "\"list_type\": \"unordered\" for elements with reading_order 19 and 24.",
+      "location": "Minutes section, pages 3 and 4, element indices 19 and 24."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Several hyperlinks present in the source document are missing in the output. For example, on Page 6, 'NC NG911 Deployment Map' is a link, and on Page 7, 'NC Next Generation 911 GIS Services Webpage' and 'NC NextGen911 Days Since Last Upload Dashboard (arcgis.com)' are also links. These are rendered as plain text without underlying URLs in the JSON.",
+      "source_pdf_quote": "Clickable blue underlined links on Page 6 ('NC NG911 Deployment Map') and Page 7 ('NC Next Generation 911 GIS Services Webpage', 'NC NextGen911 Days Since Last Upload Dashboard').",
+      "output_quote": "The text for these links is present, but they are not wrapped in link elements or provided with URL metadata.",
+      "location": "Additional project notes (Page 6), GIS Update (Page 7)."
+    }
+  ],
+  "action_items": [
+    "Manually restore missing nested list content on pages 6, 7, and 8.",
+    "Repair the column structure of the Guest list and Deployment Service Types tables.",
+    "Convert unordered list tags to ordered list tags for the minutes items (1-10).",
+    "Re-insert missing hyperlinks for the NG911 map and GIS services pages."
+  ],
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8842,
+      "text_match": 0.9072138669385674,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8446,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8842,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8445657332700522,
+      "shingling_precision": 0.9799008810572687,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 617,
+      "gemini_words": 617,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 301282,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

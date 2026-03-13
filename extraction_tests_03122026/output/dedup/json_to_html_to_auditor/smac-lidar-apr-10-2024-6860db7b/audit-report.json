@@ -1,0 +1,86 @@
+{
+  "document_id": "smac-lidar-apr-10-2024-6860db7b",
+  "audited_at": "2026-03-13T02:58:17.149187Z",
+  "quality_score": 25,
+  "fidelity_composite": 0.8443,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Output appears mostly fabricated: shingling_precision=0.18. Only 18% of output text found in source.",
+  "decision_method": "hard_veto:V4",
+  "concerns": [
+    {
+      "description": "Low text precision (possible hallucination): 18%",
+      "severity": "critical",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Table 5 on page 3 of the source document has a complex header structure. The first row contains a cell 'Delivery dates' which spans across the second and third columns. The second row contains three column headers: 'When the Acquisition phase is actually conducted', 'Processing calibration...', and 'All products and deliverables...'. In the JSON output (section 2, element 2), the first row is correctly identified as a header but contains only one cell with 'colspan: 1'. The subsequent rows conta",
+      "source_pdf_quote": "Table 5 on page 3 shows a header 'Delivery dates' spanning across the two rightmost columns. Below it, the table has three distinct columns with headers.",
+      "output_quote": "The table at element index 2 in section 2 (Page 3) has 1 cell in row 1, 3 cells in row 2, and 3 cells in row 3. Row 1 has \"colspan\": 1. Row 2 is marked \"is_header_row\": false.",
+      "location": "Section index 2, element index 2 (Page 3)"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The entire content block from page 3 of the source PDF, specifically the 'Project Timeline' text and 'Table 5', is duplicated in the HTML output. This section appears once rendered as structured HTML text and a table, and then repeats immediately following another header banner, this time displaying the text and an image snippet of the original table. This results in the same body content appearing twice in succession.",
+      "source_pdf_quote": "Project Timeline: LiDAR data collection will be performed during leaf-off conditions (January – March). The estimated delivery dates for the processing and classification and all products would proceed as follows (Table 5): ... Table 5. The estimated delivery dates for the processing and classification and all products and",
+      "output_quote": "The 'Project Timeline' bullet point and the associated 'Table 5' delivery dates are rendered twice at the bottom of the HTML page.",
+      "location": "End of document, final two content sections."
+    }
+  ],
+  "action_items": [
+    "Output appears mostly fabricated: shingling_precision=0.18. Only 18% of output text found in source."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8443,
+      "text_match": 0.30909090909090914,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.6189,
+      "ceiling": 0.25,
+      "ceiling_reason": "extreme_hallucination",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8443,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9714285714285714,
+      "shingling_precision": 0.1837837837837838,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 232,
+      "gemini_words": 232,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 363098,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

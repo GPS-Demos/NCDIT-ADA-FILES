@@ -1,0 +1,88 @@
+{
+  "document_id": "seal-image-table-6870",
+  "audited_at": "2026-03-13T02:16:08.676100Z",
+  "quality_score": 86,
+  "fidelity_composite": 0.8978,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score is high (0.8978) and word count ratios are stable, the specific omissions of destination URLs and the 'ITS Service Catalog' link text create nonsensical sentence fragments (e.g., 'through the in which you can access'). Because these defects occur in government instructional content and involve functional navigation links, they exceed the threshold of 'minor cosmetic issues' and warrant manual correction to ensure document utility and accessibility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "There are two significant text omissions where the pipeline skipped linked text. 1) On page 1, the phrase 'ITS Service Catalog' is missing between elements 9 and 11 (reading order 10 is missing), resulting in the sentence reading '...through the in which you...'. 2) On page 2, the URL 'https://it.nc.gov/services/service-directory/telephony/cellular-telephone' is entirely omitted after element 18. These omissions are major as they remove the specific destinations (the catalog and the website) req",
+      "source_pdf_quote": "Customers will process all cellular requests through the ITS Service Catalog in which you... [AND] ...access Vendor’s website, CLICK HERE https://it.nc.gov/services/service-directory/telephony/cellular-telephone",
+      "output_quote": "Customers will process all cellular requests through the [END OF ELEMENT 9] in which you can access... [END OF ELEMENT 11] [AND] To obtain contract information or access Vendor's website, [END OF ELEMENT 18]",
+      "location": "Page 1, Instructions section; Page 2, first section."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The reading order fails significantly due to missing content within sentences. In the 'Instructions' section (elements 9 and 11), the flow is broken by the absence of element 10, leaving the sentence 'through the in which you can access' nonsensical. Similarly, on page 2, element 18 ends abruptly, and the subsequent information (the link and URL) is missing entirely before skipping to element 21. This materially disrupts the logical flow of the document.",
+      "source_pdf_quote": "Customers will process all cellular requests through the ITS Service Catalog in which you can access... To obtain contract information or access Vendor’s website, CLICK HERE https://it.nc.gov/services/service-directory/telephony/cellular-telephone",
+      "output_quote": "Customers will process all cellular requests through the [MISSING] in which you can access... To obtain contract information or access Vendor's website, [MISSING]",
+      "location": "Section 1 (Reading Order 9-11) and Section 2 (Reading Order 18-21)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Several critical links and URLs present in the source PDF are missing from the output. The 'ITS Service Catalog' link on page 1 and the 'CLICK HERE' link along with the specific government URL on page 2 are entirely absent from the JSON elements.",
+      "source_pdf_quote": "ITS Service Catalog (link); https://it.nc.gov/services/service-directory/telephony/cellular-telephone (URL)",
+      "output_quote": "[Links/URLs missing in elements 9, 11, and 18]",
+      "location": "Section 1, Reading Order 9-11; Section 2, Reading Order 18"
+    }
+  ],
+  "action_items": [
+    "Restore the missing 'ITS Service Catalog' text and link on page 1.",
+    "Re-insert the omitted cellular telephony URL and associated 'CLICK HERE' link on page 2.",
+    "Verify the reading order for the 'Instructions' section to ensure logical continuity."
+  ],
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.8978,
+      "text_match": 0.9554551323434474,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8613,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8978,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9507494646680942,
+      "shingling_precision": 0.9602076124567474,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 717,
+      "gemini_words": 717,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 567224,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

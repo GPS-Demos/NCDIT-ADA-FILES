@@ -1,0 +1,96 @@
+{
+  "document_id": "911-board-technology-committee-agenda-june-9-2022-685fa07f",
+  "audited_at": "2026-03-13T01:03:56.117880Z",
+  "quality_score": 84,
+  "fidelity_composite": 0.8842,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "reasoning": "Although the composite fidelity score is high (0.88), the low structural score (0.68) and shingling recall (0.845) corroborate the reported loss of specific data within nested lists. The omitted content includes jurisdiction readiness statuses and demographic statistics (population and land mass) which are critical for a government technical agenda, making this more than a cosmetic failure.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The output fails to include significant content from nested lists (sub-bullets) on pages 6, 7, and 8. On page 6, the details regarding Seymour Johnson AFB and Cybersecurity committees are omitted. On page 7, the specific readiness status of four jurisdictions (Cleveland, Lincoln, Onslow, Polk) and the demographic statistics (Total Population and Land Mass) are entirely missing. On page 8, the specific detail about the Tier 2 technician onboarding is omitted. These omissions constitute a loss of ",
+      "source_pdf_quote": "4 jurisdictions remain to reach 100% i3 readiness (as of 5/31/2022). o Cleveland County and Kings Mountain – not scheduled (361 critical errors/73.34%) – given deadline of June 30. o Lincoln County – not scheduled (324 critical errors/97.48%) – aiming for a 5/31 completion. o Onslow County – Q3 migration (867 critical errors/93.24%) - will be complete by mid-June. o Polk County – Q3 migration (561 critical errors/84.61%). ... Statistics o Total Population served by NG 911: 10,477,959 (99%). o To",
+      "output_quote": "• 4 jurisdictions remain to reach 100% i3 readiness (as of 5/31/2022). • Statistics",
+      "location": "GIS Update (Tom Rogers), Section 7, page 7"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "There are significant reading order defects. On Page 6, the reading order is reversed: text elements such as the chart caption (element 40), map link (element 41), and project notes (elements 42-44) appear before the images they describe (elements 45-46), which are physically at the top and middle of the page in the source. Additionally, on Page 7, there are gaps in the reading order sequence (missing elements 48 and 51), which correspond to missing content blocks (URLs).",
+      "source_pdf_quote": "Page 6: Bar Chart followed by '*Hosted Viper #49 is Macon Count'. Page 7: GIS Update followed by 'NC Next Generation 911 GIS Services Webpage' link.",
+      "output_quote": "Section 6: Elements 40-44 appear before element 46 (chart image). Section 7: elements 48 and 51 are missing from the reading_order sequence.",
+      "location": "Sections 6 and 7, pages 6 and 7"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The output consistently fails to represent nested list structures. On Page 6 (element 44) and Page 7 (element 49), top-level list items are present, but their associated sub-bullets (nested items) are entirely omitted from the output. This results in a significant loss of document structure and information.",
+      "source_pdf_quote": "Page 7, GIS Update: bullet for '4 jurisdictions...' followed by sub-bullets for Cleveland, Lincoln, Onslow, and Polk.",
+      "output_quote": "Element 49, item 1: '4 jurisdictions remain to reach 100% i3 readiness (as of 5/31/2022).' (Nested items omitted).",
+      "location": "Section 7, element 49; Section 6, element 44"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Two URLs clearly visible in the source document on Page 7 are completely missing from the output. These missing links correspond to the gaps identified in the reading order (elements 48 and 51).",
+      "source_pdf_quote": "Page 7: 'NC Next Generation 911 GIS Services Webpage' and 'NC NextGen911 Days Since Last Upload Dashboard (arcgis.com)'.",
+      "output_quote": "These text blocks/links are absent from Section 7 of the JSON.",
+      "location": "Section 7, page 7"
+    }
+  ],
+  "action_items": [
+    "Manually restore the missing sub-bullets and demographic data on pages 6-8.",
+    "Fix the reading order on Page 6 to ensure captions follow the relevant images.",
+    "Re-insert the missing URLs on Page 7."
+  ],
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.8842,
+      "text_match": 0.9072138669385674,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8446,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8842,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8445657332700522,
+      "shingling_precision": 0.9799008810572687,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 617,
+      "gemini_words": 617,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 356985,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

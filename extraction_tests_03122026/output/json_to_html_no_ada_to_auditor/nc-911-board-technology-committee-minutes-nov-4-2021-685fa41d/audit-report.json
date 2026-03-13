@@ -1,0 +1,76 @@
+{
+  "document_id": "nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d",
+  "audited_at": "2026-03-13T01:48:50.778629Z",
+  "quality_score": 95,
+  "fidelity_composite": 0.9182,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document shows excellent content preservation with a content fidelity score of 1.0 and a shingling recall of 0.979. Although structural issues were identified regarding table header tagging and list fragmentation, these are categorized as minor defects and the overall fidelity score (0.9182) remains well within the threshold for automatic approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The vote tables found on pages 2 and 3 of the source PDF (following items 4, 5, and 6) have been converted with a structural error. In each case, the first row of data (containing 'Rachel Bello' and her vote 'NP') has been incorrectly identified as a header row (`is_header_row: true`). This is a corruption of the table structure where data is mislabeled as header information, which negatively impacts screen reader navigation.",
+      "source_pdf_quote": "The vote tables on pages 2 and 3 show 'Rachel Bello' as the first member in the list of voters, with 'NP' as her vote status.",
+      "output_quote": "The tables at element index 10, 12, and 19 all mark the first row (containing 'Rachel Bello' and 'NP') as 'is_header_row': true.",
+      "location": "sections[1].elements[10], sections[1].elements[12], sections[2].elements[19]"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The primary numbered list (items 1-14) that spans the document has been fragmented across different element types. Items 1-4 are in a list (index 8), item 5 is a paragraph (index 11), items 6-9 are converted to headings (indices 16, 20, 21, 22), and items 10-14 are in a separate list (index 26). While the content is preserved, the structural integrity of the continuous numbered list from the source is lost.",
+      "source_pdf_quote": "A continuous numbered list from 1 to 14 across pages 2, 3, and 4.",
+      "output_quote": "The list is split into three separate blocks (index 8, index 11, indices 16-22, and index 26) with different structural types (list, paragraph, heading).",
+      "location": "Throughout sections 1, 2, and 3."
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.9182,
+      "text_match": 0.9776671150706026,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.92,
+      "raw_score": 0.9453,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9182,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9792227779915352,
+      "shingling_precision": 0.9879658385093167,
+      "duplication_ratio": 0.008951157812804048,
+      "word_count_ratio": 1.0,
+      "baseline_words": 498,
+      "gemini_words": 498,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 594370,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

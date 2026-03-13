@@ -1,0 +1,104 @@
+{
+  "document_id": "gicc-smac-agenda-20210120-68839aac",
+  "audited_at": "2026-03-12T23:04:38.841812Z",
+  "quality_score": 79,
+  "fidelity_composite": 0.8063,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document shows significant content loss with a shingling recall of 0.727, corroborating the LLM's major findings regarding omitted sub-bullets and nested list structures. The loss of specific agenda details under 'Elevation', 'NC Board on Geographic Names', and the 'Metadata Committee' constitutes a major failure in fidelity that the pipeline's heuristic failed to catch. Given the 3x cost penalty for false negatives, this must be reviewed to restore missing hierarchical content.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are widespread omissions of sub-bullet points across almost every section of the document. The output fails to capture secondary list items that provide critical detail. Notable omissions include sub-bullets for 'Elevation', 'Administrative/Governmental Units', 'NC Board on Geographic Names', 'Metadata Committee', and 'Other Business'. Additionally, the text 'Join meeting' under Web Conference and the entire document footer containing website URLs are missing. The cumulative loss of conten",
+      "source_pdf_quote": "Updates on Contours and DEM QC and “sealing”; County Boundaries - Gary Thompson; Municipal Boundaries – Sarah Wray; SMAC Discussion and Approval; Simone Mountain; Stiles Mountain; Update on refresh of documents/tools on NC OneMap (www.nconemap.gov/pages/metadata); Adjustment to reflect the correct statutes and bring bylaws in line with those of other subcommittees; SMAC Web Site – http://it.nc.gov/gicc | NC OneMap Web Site - www.nconemap.gov; Join meeting",
+      "output_quote": "[These items are entirely absent from the corresponding sections in the output JSON]",
+      "location": "Sections: Framework+ Datasets, Working Groups, Other Business, Web Conference paragraph, and Document Footer."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The list conversion failed to capture nested list structures. In multiple sections, sub-bullets present in the source are entirely omitted from the output. For example, under 'Elevation - John Lay', the sub-bullet 'Updates on Contours and DEM QC and “sealing”' is missing. Similarly, nested items under 'Administrative/Governmental Units', 'NC Board on Geographic Names', and 'Other Business' are gone. This results in significant loss of structural meaning and content.",
+      "source_pdf_quote": "Elevation – John Lay\n• Updates on Contours and DEM QC and “sealing”",
+      "output_quote": "{\n  \"content\": [\n    {\n      \"text\": \"Elevation - John Lay\",\n      ...\n    }\n  ],\n  \"nested_list\": null,\n  ...",
+      "location": "Framework+ Datasets section, reading_order 9, item 3"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output fails to render the nested (indented) list items present in several sections of the source PDF. In the 'Framework+ Datasets' section, sub-bullets for 'Elevation' and 'Administrative/Governmental Units' (such as 'County Boundaries' and 'Municipal Boundaries') are completely missing from the visual layout. Similarly, in the 'Working Groups' section, the multi-level nested items under 'NC Board on Geographic Names' (SMAC Discussion, Simone Mountain, Stiles Mountain) and the sub-bull",
+      "source_pdf_quote": "The source PDF contains nested list items under several headings, such as 'Administrative/Governmental Units' which has 'County Boundaries' and 'Municipal Boundaries' as sub-bullets, and 'NC Board on Geographic Names' which has three levels of nesting.",
+      "output_quote": "The HTML screenshot shows flat lists where these nested items are entirely absent. For example, 'NC Board on Geographic Names - Cam McNutt' is immediately followed by 'Working Group for Municipal Boundaries - John Bridgers' with no intervening content.",
+      "location": "Sections: Framework+ Datasets, Working Groups, Other Business."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In the first bullet point of the 'Welcome/Introductions' section, the word 'minutes' is omitted. While the context implies what is being approved, the loss of the noun changes the literal content of the agenda item.",
+      "source_pdf_quote": "Approval of October 14, 2020 minutes",
+      "output_quote": "Approval of October 14, 2020 ",
+      "location": "Section: Welcome/Introductions, reading_order 6"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Several hyperlinks present in the source are missing in the output. The text for 'Join meeting' and 'minutes' (which are links in the PDF) is missing from their respective paragraph and list elements. Additionally, the footer containing the SMAC and NC OneMap website URLs is completely absent from the JSON representation.",
+      "source_pdf_quote": "Approval of October 14, 2020 minutes\nWeb Conference: Join meeting",
+      "output_quote": "Approval of October 14, 2020 \nWeb Conference: ",
+      "location": "reading_order 6 and reading_order 3"
+    }
+  ],
+  "action_items": [
+    "Manually restore missing sub-bullets for all Framework+ Datasets and Working Groups sections",
+    "Verify and re-insert nested list structures to match the source PDF hierarchy",
+    "Restore missing hyperlinks and footer contact information"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8063,
+      "text_match": 0.817095588235294,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7899,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8063,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7274959083469722,
+      "shingling_precision": 0.9318658280922432,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 109,
+      "gemini_words": 109,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 312214,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

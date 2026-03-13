@@ -1,0 +1,96 @@
+{
+  "document_id": "memo-with-links-1334",
+  "audited_at": "2026-03-13T01:36:15.725742Z",
+  "quality_score": 82,
+  "fidelity_composite": 0.8103,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While programmatic word counts align, the LLM fidelity report identifies three major defects including the omission of critical directive information (submission URLs and statutory references) and significant visual layout failures. The displacement of the NCDIT logo into the middle of the text and the loss of the primary submission link (it.nc.gov/805) represent substantial content and structural failures that require human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The conversion pipeline failed to extract text associated with hyperlinks, resulting in nonsensical sentence fragments and the loss of critical directive information. Specifically, the following text is missing: 'SL 2024-26, Section 7' (Section 1 intro), 'it.nc.gov/805' (submission URL), and 'Acceptable Use Policy (AUP)' (reference policy name). Additionally, standalone link text 'it.nc.gov' appearing in headers/footers is omitted. The missing submission URL is a critical failure as it is the on",
+      "source_pdf_quote": "outlines key requirements under SL 2024-26, Section 7, and provides... via the N.C. Department of Information Technology website (it.nc.gov/805): ...refer to the Acceptable Use Policy (AUP) published by NCDIT",
+      "output_quote": "outlines key requirements under , and provides... via the N.C. Department of Information Technology website ( ): ...refer to the  published by NCDIT",
+      "location": "Section 1 (reading orders 4-6, 12-14) and Section 2 (reading orders 32-34)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent across the document sections. On page 1, major section headings ('State CIO Reporting Obligation' and 'Public Agency Reporting Requirements') are correctly nested as H3 under the document header 'Memorandum' (H2). However, on page 2, sections of the same functional level ('Recommendations on Appropriate Viewing', 'Directive for Deleting...', and 'Directive for Prohibiting...') are promoted to H2. This creates a flat hierarchy where the page 2 sections appear",
+      "source_pdf_quote": "State CIO Reporting Obligation; Public Agency Reporting Requirements; Recommendations on Appropriate Viewing",
+      "output_quote": "State CIO Reporting Obligation (level 3); Public Agency Reporting Requirements (level 3); Recommendations on Appropriate Viewing (level 2)",
+      "location": "Sections 0 and 1, various heading elements"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output exhibits several major rendering and layout failures. First, the NCDIT branding logo, which serves as a header element in the source PDF, has been displaced and rendered in the middle of the document text at the transition point between the original page 1 and page 2 content. Second, there is a significant rendering failure where hyperlinked text ('it.nc.gov/805' and 'Acceptable Use Policy (AUP)') is missing from the output, leaving empty parentheses and broken sentences in the b",
+      "source_pdf_quote": "PDF Page 1 header has NCDIT logo; Page 1 body: '...Technology website (it.nc.gov/805):'; Page 2 body: '...refer to the Acceptable Use Policy (AUP) published by...'.",
+      "output_quote": "HTML logo appears after 'Public Agency Reporting Requirements'; body text shows '...website ( ):' and '...refer to the published by...'; literal '**' characters surround bolded text like '**Josh Stein**'.",
+      "location": "Document header, 'Public Agency Reporting Requirements' section, and 'Directive for Prohibiting Access' section."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Multiple functional links and their associated anchor text are entirely missing from the output. In the paragraphs where these links appear in the source, the output text is split into two separate elements with a gap between them in the reading order, omitting the text entirely. Missing links include the statutory reference 'SL 2024-26, Section 7', the URL 'it.nc.gov/805', and the policy reference 'Acceptable Use Policy (AUP)'.",
+      "source_pdf_quote": "...under SL 2024-26, Section 7, and...; ...website (it.nc.gov/805):; ...refer to the Acceptable Use Policy (AUP) published...",
+      "output_quote": "...under ' [gap] ', and provides...; ...website ( [gap] ):; ...refer to the [gap] published by...",
+      "location": "Page 1 intro paragraph; Page 1 Public Agency Reporting section; Page 2 Directive for Prohibiting section"
+    }
+  ],
+  "action_items": [
+    "Restore the missing submission URL 'it.nc.gov/805' and statutory reference 'SL 2024-26, Section 7'.",
+    "Relocate the NCDIT branding logo from the middle of the document to the header section.",
+    "Correct heading levels on page 2 to maintain a consistent hierarchy (nesting under H2/H3 as appropriate)."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8103,
+      "text_match": 0.9478695548678886,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8208,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8103,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9444971537001897,
+      "shingling_precision": 0.9512661251791686,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 490,
+      "gemini_words": 490,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 569776,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

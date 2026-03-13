@@ -1,0 +1,121 @@
+{
+  "document_id": "gdac-legislative-report-may-2016-68610a4b",
+  "audited_at": "2026-03-13T00:52:10.777249Z",
+  "quality_score": 78,
+  "fidelity_composite": 0.7082,
+  "fidelity_content": 0.8837209302325582,
+  "fidelity_structural": 0.4545454545454546,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While programmatic metrics suggest high content recall (0.931), the LLM identifies severe structural and content defects in the appendices, including a 100% loss of data rows in a critical Gantt chart and missing legal text sub-sections. The low structural score (0.45) and broken heading hierarchy pose significant accessibility and fidelity risks that require manual intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The Gantt-style chart in 'Appendix B - GDAC Portfolio' (Page 19) was converted into a table format. However, the output table only contains the category headers (e.g., 'Criminal Justice', 'Enterprise') and lacks all individual project data rows (approximately 30 projects) that are clearly visible in the source. This constitutes a 100% loss of the data rows for this table.",
+      "source_pdf_quote": "The chart on Page 19 contains roughly 30 projects listed under 7 categories (e.g., CJLEADS Release 13, NC DES SCUBI Integration, HIEA).",
+      "output_quote": "The table in the output (starting at reading_order 196) lists only the category names with empty data cells and no project rows.",
+      "location": "Appendix B - GDAC Portfolio, Page 19, element index 196"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "I identified two major instances of significant text omission. First, the 'Contents' section on Page 3 omits all secondary and tertiary headings (e.g., 'CJLEADS', 'Child Protective Services Pilot'), reducing the list from 32 items to 7. Second, 'Appendix A - Legislation' on Page 18 is missing significant portions of the legal text, specifically the entirety of sub-section (1) and sub-sections (2)a and (2)b. These omissions represent more than 25% of the content for their respective sections.",
+      "source_pdf_quote": "(1) On or before March 1 of each year, submit and present a report on the activities described in this section to the Chairs of the House of Representatives Appropriations... (2) Report the following information upon its occurrence or as requested: a. Any failure of a State agency... b. Any additional information...",
+      "output_quote": "The output for Appendix A skips from the preamble of (f) directly to list items a. and b., and then provides the header for (2) without its sub-items a. and b.",
+      "location": "Appendix A - Legislation, Page 18, element index 189"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is severely broken and inconsistent. Major sections that are peers in the source document are assigned different levels in the output (e.g., 'Accomplishments' is H2 in element 26, while 'Challenges' is H1 in element 170). Additionally, the output uses a flat hierarchy for subsections; for example, 'Accomplishments' (H2), 'Criminal Justice and Public Safety' (H2), and 'CJLEADS' (H2) are all at the same level despite being nested in the source. This significantly disrupts nav",
+      "source_pdf_quote": "Accomplishments (H2 style), Criminal Justice and Public Safety (H3 style), CJLEADS (H4 style).",
+      "output_quote": "Accomplishments (level: 2, element index 26), Criminal Justice and Public Safety (level: 2, element index 29), CJLEADS (level: 2, element index 32).",
+      "location": "Sections 5 and 6"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The complex Gantt-style chart in Appendix B (Page 19) is converted into a corrupted table structure in the output. The table (element index 196) identifies the category headers and time columns but fails to populate the actual data bars that relate projects to specific quarters. This results in a structurally empty grid that loses the logical relationship between tasks and the timeline present in the source.",
+      "source_pdf_quote": "Appendix B - GDAC Portfolio (Gantt chart showing project timelines across 2015 and 2016 quarters).",
+      "output_quote": "Table with headers like 'Q1', 'Q2', etc., but containing mostly empty or disconnected data rows (element index 196).",
+      "location": "Section 18, element index 196"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The complex portfolio timeline chart in Appendix B (page 19 of the source PDF), titled 'GDAC Activities - Calendar Year', is missing its primary meaningful content in the HTML output. While the category labels (e.g., 'Criminal Justice', 'Child Safety') and quarter headers are present, the actual project names and timeline bars that represent the data are absent. This represents a significant loss of information as the visual mapping of projects to timelines is not preserved.",
+      "source_pdf_quote": "Page 19 contains a full-page 'GDAC Activities - Calendar Year' Gantt chart graphic showing project timelines (e.g., 'CJLEADS Release 13', 'NC DES SCUBI Integration') across 2015 and 2016.",
+      "output_quote": "The HTML screenshot shows only the category labels and time headers under 'Appendix B - GDAC Portfolio'. The project names and timeline bars are completely missing.",
+      "location": "Appendix B - GDAC Portfolio, page 19"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There are two major list conversion defects. First, the Table of Contents (element index 14) is highly truncated, omitting approximately 20 sub-entries from the source. Second, the nested list in the 'Child Protective Services Pilot' section is entirely missing; specifically, the three sub-bullets describing DHHS integration (Matching child, Linking child, Integrating CJLEADS) are absent from the output list.",
+      "source_pdf_quote": "Integration of additional DHHS... including: o Matching the child to the caretaker; o Linking child, family, and address information; and o Integrating... (CJLEADS) data...",
+      "output_quote": "The unordered list at element index 50 completely omits the three sub-bullets ('o' items).",
+      "location": "Section 7, element index 50"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The output fails to preserve a critical external URL provided in the source on page 18. While the introductory text is present, the actual link content is missing from the paragraph.",
+      "source_pdf_quote": "The full text of N.C.G.S. 143B-1385 can be found here: http://www.ncleg.net/EnactedLegislation/Statutes/PDF/BySection/Chapter_143B/GS_143B-1385.pdf",
+      "output_quote": "The full text of N.C.G.S. 143B-1385 can be found here: (element index 190 ends here, omitting the URL).",
+      "location": "Section 17, element index 190"
+    }
+  ],
+  "action_items": [
+    "Manually reconstruct the project data table in Appendix B to reflect the source Gantt chart",
+    "Restore missing legal text sub-sections in Appendix A",
+    "Remediate the heading hierarchy to ensure H1s and H2s correctly reflect document nesting",
+    "Update the Table of Contents to include missing sub-sections"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7082,
+      "text_match": 0.9594989053758209,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.778,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7082,
+      "fidelity_content": 0.8837209302325582,
+      "fidelity_structural": 0.4545454545454546,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9310751799834769,
+      "shingling_precision": 0.9897127085685611,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 4262,
+      "gemini_words": 4262,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 318882,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

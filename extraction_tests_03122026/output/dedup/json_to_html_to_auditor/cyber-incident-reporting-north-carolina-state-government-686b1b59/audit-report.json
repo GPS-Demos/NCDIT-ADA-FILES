@@ -1,0 +1,96 @@
+{
+  "document_id": "cyber-incident-reporting-north-carolina-state-government-686b1b59",
+  "audited_at": "2026-03-13T01:13:56.780526Z",
+  "quality_score": 81,
+  "fidelity_composite": 0.7625,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While programmatic signals show high content recall (shingling > 0.98), the LLM fidelity evaluation identifies significant structural and accessibility failures. Specifically, the relocation of header logos into the middle of a bulleted list and the corruption of the contact table's grid integrity (colspan issues) are major defects that violate the goal of high-quality accessible HTML.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table 'Reporting Points of Contact' on page 2 has several structural issues. First, the main header row (index 0) only has one cell with 'colspan: 1', but in the source document, this header spans both columns. Second, the table grid is inconsistent; the final row (index 4) contains only one cell, while the preceding rows contain two. While the content is accurately mapped, the structural grid of the table is corrupted.",
+      "source_pdf_quote": "Table 'Reporting Points of Contact' on page 2 has a header spanning two columns and a consistent two-column layout for the data rows.",
+      "output_quote": "The JSON table contains rows with inconsistent cell counts (Row 0 has 1 cell, Row 4 has 1 cell, while others have 2) and the header cell in row 0 is missing its 'colspan: 2' attribute.",
+      "location": "Section 2, table element, reading_order 25"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The logical flow of the document is severely disrupted. The header images (NCDIT logo, etc.), which are at the top of the first page, are placed at reading_order indices 13, 14, and 15. This places the document header in the middle of the text, specifically breaking apart a continuous list that starts at index 12 and continues at index 16.",
+      "source_pdf_quote": "The document header images are at the top of page 1, followed by the text and a list that begins on page 1 and continues on page 2.",
+      "output_quote": "Image elements 13, 14, and 15 (the header) are inserted between list items (reading_order 12 and 16).",
+      "location": "Section 1 and 2, elements with reading_order 12 through 16"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "In the source PDF, the agency logos (NCDIT, North Carolina State Seal, and DPS) are positioned at the very top of the first page as a document header. In the converted HTML, these logos have been moved and inserted into the middle of the 'When to Report to the State' section, specifically splitting a bulleted list. The logos appear between the bullet points 'Have an impact on a large number of victims' (the end of PDF page 1) and 'Indicate unauthorized access to...' (the start of PDF page 2). Th",
+      "source_pdf_quote": "Logos appear at the top of page 1. The section 'When to Report to the State' contains a continuous list of bullet points spanning pages 1 and 2.",
+      "output_quote": "The DPS, NCDIT, and State Seal logos are inserted in the middle of the bulleted list under the 'When to Report to the State' section, specifically between the bullet 'Have an impact on a large number of victims' and 'Indicate unauthorized access to...'.",
+      "location": "Under the 'When to Report to the State' heading, roughly in the middle of the HTML body content."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "A single unordered list that begins on page 1 ('Result in a significant loss of data...') and continues on page 2 ('Indicate unauthorized access to...') has been converted into two separate list objects. This breaks the structural integrity of the list.",
+      "source_pdf_quote": "Page 1 and 2 show a single continuous unordered list containing 5 bullet points.",
+      "output_quote": "The list is split into two distinct 'list' elements at reading_order 12 and reading_order 16.",
+      "location": "Section 1 (index 12) and Section 2 (index 16)"
+    }
+  ],
+  "action_items": [
+    "Check the 'Reporting Points of Contact' table to ensure headers span correctly and the grid is valid.",
+    "Verify the placement of the NCDIT and DPS logos to ensure they do not interrupt the bulleted list or logical reading flow.",
+    "Evaluate if the split list objects should be merged for better accessibility."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7625,
+      "text_match": 0.9880228487193662,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8084,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7625,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9867500920132499,
+      "shingling_precision": 0.9892988929889299,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 711,
+      "gemini_words": 711,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 421988,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

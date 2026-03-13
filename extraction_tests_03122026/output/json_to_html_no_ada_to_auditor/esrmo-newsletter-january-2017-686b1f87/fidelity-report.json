@@ -1,0 +1,213 @@
+{
+  "document_id": "esrmo-newsletter-january-2017-686b1f87",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output text faithfully reflects the narrative content found in the source PDF. I have cross-referenced the paragraphs and headings in the JSON against the provided OCR and the source document. No fabricated sentences or invented sections were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All contact information present in the output (email: maria.s.thompson@nc.gov, phone: (919) 754-6578, email: security@its.nc.gov) correctly matches the source document. While many URLs are missing from the output, no incorrect or hallucinated contact details were introduced.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output is missing the entire top header banner from Page 1, which contains the newsletter title ('Monthly Cybersecurity Newsletter'), the date ('January 2017'), and the issue number ('Issue 1'). This is a critical structural section of the document that is entirely absent from the conversion.",
+        "b_evidence_source": "Monthly Cybersecurity Newsletter January 2017 Issue 1",
+        "b_evidence_output": "The text begins immediately with 'Enterprise Security and Risk Management Office (ESRMO)'",
+        "b_evidence_location": "Page 1, top banner",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The single table in the document (the Disclaimer box on Page 1) is correctly represented as a single-row table in the JSON output, containing the full disclaimer text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The output suffers from significant content omission, specifically stripping out almost every hyperlink/URL provided in the text. On Page 1, the URLs for the three newsletters are missing. On Page 3, the two specific URLs for the CEB partnership are missing, and all four URLs under the 'Resources to Remember' section are missing. As these URLs constitute the primary utility of the newsletter, their omission is a major defect.",
+        "b_evidence_source": "URLs such as: https://ncconnect.sharepoint.com/sites/it_ext/esrmo_ext/Documents/Newsletters/SECURITYsense, http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-tips-newsletters, irec.executiveboard.com, etc.",
+        "b_evidence_output": "The text jumps from descriptions or headings to the next item, omitting the URL strings entirely (e.g., see elements between reading_order 37 and 43).",
+        "b_evidence_location": "Page 1 and Page 3",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Excluding the significant omissions noted in C3 and C5, the remaining text matches the source document well. Punctuation and wording are preserved accurately.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output text faithfully reflects the narrative content found in the source PDF. I have cross-referenced the paragraphs and headings in the JSON against the provided OCR and the source document. No fabricated sentences or invented sections were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All contact information present in the output (email: maria.s.thompson@nc.gov, phone: (919) 754-6578, email: security@its.nc.gov) correctly matches the source document. While many URLs are missing from the output, no incorrect or hallucinated contact details were introduced.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output is missing the entire top header banner from Page 1, which contains the newsletter title ('Monthly Cybersecurity Newsletter'), the date ('January 2017'), and the issue number ('Issue 1'). This is a critical structural section of the document that is entirely absent from the conversion.\",\n      \"b_evidence_source\": \"Monthly Cybersecurity Newsletter January 2017 Issue 1\",\n      \"b_evidence_output\": \"The text begins immediately with 'Enterprise Security and Risk Management Office (ESRMO)'\",\n      \"b_evidence_location\": \"Page 1, top banner\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The single table in the document (the Disclaimer box on Page 1) is correctly represented as a single-row table in the JSON output, containing the full disclaimer text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The output suffers from significant content omission, specifically stripping out almost every hyperlink/URL provided in the text. On Page 1, the URLs for the three newsletters are missing. On Page 3, the two specific URLs for the CEB partnership are missing, and all four URLs under the 'Resources to Remember' section are missing. As these URLs constitute the primary utility of the newsletter, their omission is a major defect.\",\n      \"b_evidence_source\": \"URLs such as: https://ncconnect.sharepoint.com/sites/it_ext/esrmo_ext/Documents/Newsletters/SECURITYsense, http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-tips-newsletters, irec.executiveboard.com, etc.\",\n      \"b_evidence_output\": \"The text jumps from descriptions or headings to the next item, omitting the URL strings entirely (e.g., see elements between reading_order 37 and 43).\",\n      \"b_evidence_location\": \"Page 1 and Page 3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Excluding the significant omissions noted in C3 and C5, the remaining text matches the source document well. Punctuation and wording are preserved accurately.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have carefully compared the text blocks in the source PDF and the output JSON. Each section, paragraph, and heading appears only once in the output, corresponding to its single occurrence in the source. There are no duplicated paragraphs or repeated sections detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The output maintains a logical heading hierarchy. 'Enterprise Security and Risk Management Office (ESRMO)' is set as H1 (element 3). The desk attribution is H2 (element 4). The newsletter names are correctly nested as H3 (elements 8, 12, 15). On the final page, 'Resources to Remember' is set as H2 (element 36). No levels are skipped, and the structure is accessible.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The document contains a disclaimer box on page 1. The pipeline has converted this into a single-cell table (element 11). This is an appropriate structural representation of a callout box in a semantic document, preserving the distinct nature of the disclaimer content. No other tables are present in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the output follows the logical and visual flow of the document. Text blocks are ordered correctly from top to bottom across the three pages. Images that were positioned as sidebars in the source (like the NC logo and the notepad) have been moved to the end of the first section, which is a standard and acceptable accessibility adjustment to prevent interrupting the main text flow.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "On page 3, the list providing instructions for CEB access contains a nested list (sub-bullets) for 'Information Risk Leadership Council' and 'Enterprise Architecture Leadership Council'. In the output (element 34), these nested items are completely missing. The list item 'Visit the partnership website listed below:' is present, but the subsequent sub-bullets are absent, meaning the list structure is incomplete and meaning is lost.",
+        "b_evidence_source": "o Information Risk Leadership Council – irec.executiveboard.com\no Enterprise Architecture Leadership Council – eaec.executiveboard.com",
+        "b_evidence_output": "The items are missing from the list in element 34.",
+        "b_evidence_location": "Page 3, CEB instructions list, element 34",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Multiple URLs clearly present in the source PDF are missing from the output JSON. Specifically, the URLs for the three newsletters on page 1 and the four URLs under 'Resources to Remember' on page 3 are absent. The lead-in text is preserved (e.g., 'ESRMO SharePoint Site:'), but the actual URL text (e.g., 'https://ncconnect.sharepoint.com/...') following it is truncated and missing.",
+        "b_evidence_source": "http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-tips-newsletters; https://hsin.dhs.gov",
+        "b_evidence_output": "The text strings for the URLs are missing from elements 12, 13, 15, 16, 37, 39, 41, 43.",
+        "b_evidence_location": "Pages 1 and 3, multiple elements",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9090909090909091,
+    "penalty_sum": 2,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have carefully compared the text blocks in the source PDF and the output JSON. Each section, paragraph, and heading appears only once in the output, corresponding to its single occurrence in the source. There are no duplicated paragraphs or repeated sections detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The output maintains a logical heading hierarchy. 'Enterprise Security and Risk Management Office (ESRMO)' is set as H1 (element 3). The desk attribution is H2 (element 4). The newsletter names are correctly nested as H3 (elements 8, 12, 15). On the final page, 'Resources to Remember' is set as H2 (element 36). No levels are skipped, and the structure is accessible.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The document contains a disclaimer box on page 1. The pipeline has converted this into a single-cell table (element 11). This is an appropriate structural representation of a callout box in a semantic document, preserving the distinct nature of the disclaimer content. No other tables are present in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the output follows the logical and visual flow of the document. Text blocks are ordered correctly from top to bottom across the three pages. Images that were positioned as sidebars in the source (like the NC logo and the notepad) have been moved to the end of the first section, which is a standard and acceptable accessibility adjustment to prevent interrupting the main text flow.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"On page 3, the list providing instructions for CEB access contains a nested list (sub-bullets) for 'Information Risk Leadership Council' and 'Enterprise Architecture Leadership Council'. In the output (element 34), these nested items are completely missing. The list item 'Visit the partnership website listed below:' is present, but the subsequent sub-bullets are absent, meaning the list structure is incomplete and meaning is lost.\",\n      \"b_evidence_source\": \"o Information Risk Leadership Council – irec.executiveboard.com\\no Enterprise Architecture Leadership Council – eaec.executiveboard.com\",\n      \"b_evidence_output\": \"The items are missing from the list in element 34.\",\n      \"b_evidence_location\": \"Page 3, CEB instructions list, element 34\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Multiple URLs clearly present in the source PDF are missing from the output JSON. Specifically, the URLs for the three newsletters on page 1 and the four URLs under 'Resources to Remember' on page 3 are absent. The lead-in text is preserved (e.g., 'ESRMO SharePoint Site:'), but the actual URL text (e.g., 'https://ncconnect.sharepoint.com/...') following it is truncated and missing.\",\n      \"b_evidence_source\": \"http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-tips-newsletters; https://hsin.dhs.gov\",\n      \"b_evidence_output\": \"The text strings for the URLs are missing from elements 12, 13, 15, 16, 37, 39, 41, 43.\",\n      \"b_evidence_location\": \"Pages 1 and 3, multiple elements\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 2,\n    \"penalty_sum\": 2,\n    \"score\": 0.9090909090909091\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML conversion follows a standard accessible single-column layout. The logical flow of information remains consistent with the source document. While the position of images (like the NC logo) has shifted relative to the text, the overall visual organization allows a user to find the same information in the expected sequence.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source document does not contain any formal tables. Information is presented in paragraphs and bulleted lists, which have been correctly rendered in the HTML.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful images present in the source PDF are missing from the HTML rendering. This includes the PCI DSS logo on page 2, the 'Learn' keyboard graphic on page 2, the CEB logo on page 2, and the 'My idea is...' lightbulb graphic on page 3. While the NC logo and notepad image are present, the absence of these other functional and branding images constitutes a significant visual discrepancy.",
+        "b_evidence_source": "Images: PCI DSS logo (page 2), Keyboard with 'Learn' button (page 2), CEB logo (page 2), Lightbulb 'My idea is...' graphic (page 3).",
+        "b_evidence_output": "The HTML screenshot lacks these four images. The text 'My idea is....' is present as plain text at the bottom, but the associated lightbulb graphic is missing.",
+        "b_evidence_location": "Throughout pages 2 and 3 of the source document.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of body content duplication. Headings are appropriately used in the Table of Contents and the body, which is expected for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML conversion follows a standard accessible single-column layout. The logical flow of information remains consistent with the source document. While the position of images (like the NC logo) has shifted relative to the text, the overall visual organization allows a user to find the same information in the expected sequence.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source document does not contain any formal tables. Information is presented in paragraphs and bulleted lists, which have been correctly rendered in the HTML.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful images present in the source PDF are missing from the HTML rendering. This includes the PCI DSS logo on page 2, the 'Learn' keyboard graphic on page 2, the CEB logo on page 2, and the 'My idea is...' lightbulb graphic on page 3. While the NC logo and notepad image are present, the absence of these other functional and branding images constitutes a significant visual discrepancy.\",\n      \"b_evidence_source\": \"Images: PCI DSS logo (page 2), Keyboard with 'Learn' button (page 2), CEB logo (page 2), Lightbulb 'My idea is...' graphic (page 3).\",\n      \"b_evidence_output\": \"The HTML screenshot lacks these four images. The text 'My idea is....' is present as plain text at the bottom, but the associated lightbulb graphic is missing.\",\n      \"b_evidence_location\": \"Throughout pages 2 and 3 of the source document.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of body content duplication. Headings are appropriately used in the Table of Contents and the body, which is expected for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 5,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

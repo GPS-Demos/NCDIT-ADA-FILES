@@ -1,0 +1,105 @@
+{
+  "document_id": "nc-911-board-education-committee-meeting-agenda-packet-feb-685f9e81",
+  "audited_at": "2026-03-12T23:45:09.145921Z",
+  "quality_score": 80,
+  "fidelity_composite": 0.8063,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant structural and content defects that require human intervention, notably a corrupted table for meeting attendees and the omission of detailed sub-bullets in the ROI section. Although programmatic word counts appear stable, the loss of visual data (maps and charts) and the degradation of list semantics further diminish the quality of the conversion.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "In the 'ROI – Effectiveness of the Pilot Program' section (Page 17), the output omits the detailed sub-bullets under item 3 ('Direct – Interested party...', 'Organic Search – PSA pushed...'). This omission constitutes a loss of more than 25% of the textual content for that specific list.",
+      "source_pdf_quote": "3. Website Analytics – Reporting high traffic with the source coming from direct and organic search.\n• Direct – Interested party directly went to the site by typing the URL.\n• Organic Search – PSA pushed interested party to website to find out more information.",
+      "output_quote": "Website Analytics – Reporting high traffic with the source coming from direct and organic search.",
+      "location": "ROI – Effectiveness of the Pilot Program, Page 17, element index 125"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The 'Meeting Attendees' table on Page 2 is structurally corrupted in the conversion. The table is defined with 6 header columns ('Committee Members', 'Phone', 'Not in Attendance', 'Guests', 'Phone', 'In Person'). However, starting with the row for 'Staff' (index 11 in the rows array), the number of cells in each row drops to 3 without any colspan attributes to maintain the 6-column structure defined by the header. This results in an invalid table grid where rows have different lengths.",
+      "source_pdf_quote": "The table on page 2 contains rows for 'Committee Members' (left side) and 'Guests' (right side) side-by-side, followed by 'Staff' rows on the left side.",
+      "output_quote": "The table at reading_order 13 contains a header row with 6 cells, but rows starting from index 11 (Staff sub-header) only contain 3 cells (e.g., 'Staff', 'Phone', 'Not in Attendance').",
+      "location": "Section 2, reading_order 13"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images from the source PDF are missing in the HTML output. Specifically, the map of the Durham (RLDU) Zone on page 8, the collage of TV network logos on page 9, and multiple graphical charts (line graph, pie charts, bar chart) in the analytics section (pages 10-12) are absent from the rendered HTML. While some chart data was converted to tables, the visual charts themselves are missing.",
+      "source_pdf_quote": "Page 8: Map of Durham (RLDU) Zone; Page 9: Collage of network logos; Page 10: 'How are site sessions trending?' line chart and 'Desktop vs Mobile' pie chart; Page 12: 'New Visitor vs Returning' pie chart.",
+      "output_quote": "The HTML sections for 'Durham (RLDU) Zone - 0664', 'Campaign Airings', 'Webpage Analytics: Site Summary', and 'Website Analytics: Top 20 Cities' are missing their corresponding graphical images/charts.",
+      "location": "Sections corresponding to PDF pages 8, 9, 10, and 12"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In the Networks list on Page 8, the channel 'NICK' is incorrectly transcribed as 'NATG', resulting in a duplicate entry for 'NATG' in that section.",
+      "source_pdf_quote": "NFL, NATG, NICK, OUTD",
+      "output_quote": "NFL, NATG, NATG, OUTD",
+      "location": "Networks section, Page 8, element index 51"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Several numbered lists in the source document have been incorrectly converted to unordered lists, and the leading numbers have been stripped from the text. This occurs in the minutes (items 1-9 across pages 2-4) and the ROI slide (items 1-4 on page 17). This loss of numbering structure degrades the semantic meaning of the lists.",
+      "source_pdf_quote": "Page 2: '1. Chair Opening Remarks – ...'; Page 3: '4. Approval of July Minutes – ...'; Page 17: '1. Increase in Number of Applications – ...'",
+      "output_quote": "reading_order 15: '**Chair Opening Remarks** – ...'; reading_order 18: 'Approval of July Minutes – ...'; reading_order 125: 'Increase in Number of Applications – ...' (all inside unordered list items)",
+      "location": "reading_order 15, 18, 20, 23, 125"
+    }
+  ],
+  "action_items": [
+    "Reconstruct the Meeting Attendees table to ensure a consistent 6-column grid",
+    "Manually restore the missing sub-bullets on Page 17",
+    "Embed missing visual elements or provide appropriate accessible alternatives for maps and charts",
+    "Correct the duplicate 'NATG' transcription error"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8063,
+      "text_match": 0.8581571387701855,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7991,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8063,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9142747799464217,
+      "shingling_precision": 0.8246461857093546,
+      "duplication_ratio": 0.01362650975534221,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1103,
+      "gemini_words": 1103,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 329909,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

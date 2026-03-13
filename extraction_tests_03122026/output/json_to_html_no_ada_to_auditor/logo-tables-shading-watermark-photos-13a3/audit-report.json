@@ -1,0 +1,118 @@
+{
+  "document_id": "logo-tables-shading-watermark-photos-13a3",
+  "audited_at": "2026-03-13T01:16:45.651643Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6395348837209303,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": null,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The conversion results are incomplete. The output explicitly contains an entry stating '28 sections omitted for token budget'. Extensive content from the RQI T-CPR Program (Pages 7-27), Cardiac Arrest Case Review (Pages 29-30), BLS Responder Education (Page 31), D-RAK Performance Objectives (Page 34 intro), and D-RAK Payment Options (Page 36) is entirely absent from the output.",
+      "source_pdf_quote": "Multiple pages and sections including: RQI T-CPR Program Instructional Overview (Pages 7-17), Cardiac Arrest Case Review (Page 29), and Training Payment Options (Page 36).",
+      "output_quote": "\"_omitted\": \"28 sections omitted for token budget\"",
+      "location": "Sections array, between elements 18 and 355"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Within the contact paragraph for Dan Jewiss on page 35, the output omits critical information. Specifically, the email address 'D.Jewiss@me.com' and the website URL 'www.TheRAKAcademy.com' are missing from the paragraph in element indices 467 and 469.",
+      "source_pdf_quote": "Please contact Dan Jewiss at D.Jewiss@me.com or 203-704-0581 with any questions or to host this training. www.TheRAKAcademy.com",
+      "output_quote": "Please contact Dan Jewiss at ... or 203-704-0581 with any questions or to host this training.",
+      "location": "Section containing reading_order 467 and 469, Page 35 content"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy in the Minutes section (starting at page 3) is broken. The section title is assigned level 1 (reading_order 14), but the subsequent major sections (Items 6, 7, 8) are assigned level 3 (reading_order 20, 25, 26) without an intervening level 2 heading. This represents a heading skip which hinders screen reader navigation.",
+      "source_pdf_quote": "The Minutes section contains major headings for items 1-11.",
+      "output_quote": "Item 6 (Technology Update) is level 3 (reading_order 20) following an H1 (reading_order 14).",
+      "location": "Sections 4 and 5"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "In the Minutes section (pages 3-6), the original document contains a single numbered list (items 1-11). The output disintegrates this structure: items 1-5 are placed in an unordered list (reading_order 16), items 6-8 are converted into H3 headings, and items 9-11 are rendered as standard paragraphs. This significantly changes the structural meaning and accessibility of the list.",
+      "source_pdf_quote": "Numbered list items 1 through 11 in the Minutes section.",
+      "output_quote": "Section 16 (unordered list for 1-5), Reading Order 20 (H3 for 6), Reading Order 30 (paragraph for 9).",
+      "location": "Sections 3, 4, 5, 6"
+    },
+    {
+      "description": "Low text recall (possible truncation): 38%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In the minutes for item 11 (Page 6), the output omits the word 'Course' from the end of the formal motion text. While minor, this is a wording change in a formal government record that slightly alters the specificity of the reference.",
+      "source_pdf_quote": "...registration for a second NENA Center Manager Certification Program (CMCP) Course.",
+      "output_quote": "...fund the course registration for a second NENA Center Manager Certification Program (CMCP).",
+      "location": "Minutes item 11, reading_order 34, Page 6"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "At least one critical contact link is missing. On page 35 of the source (RAK Academy info), an email address 'D.Jewiss@me.com' is clearly present. In the output JSON, the text elements (reading_order 467 and 469) skip this email address entirely, leaving a gap in the sentence.",
+      "source_pdf_quote": "Please contact Dan Jewiss at D.Jewiss@me.com or 203-704-0581...",
+      "output_quote": "467: \"Please contact Dan Jewiss at \" ... 469: \" or 203-704-0581...\"",
+      "location": "Section 35, reading_order 467-469"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.5084465691797007,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.4658,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6395348837209303,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.3794689426268374,
+      "shingling_precision": 0.8287252770011391,
+      "duplication_ratio": 0.018370520377535893,
+      "word_count_ratio": 1.0,
+      "baseline_words": 6113,
+      "gemini_words": 6113,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 503669,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "document_id": "smac-lidar-apr-10-2024-6860db7b",
+  "audited_at": "2026-03-13T02:56:30.821987Z",
+  "quality_score": 25,
+  "fidelity_composite": 0.8199,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Output appears mostly fabricated: shingling_precision=0.18. Only 18% of output text found in source.",
+  "decision_method": "hard_veto:V4",
+  "concerns": [
+    {
+      "description": "Low text precision (possible hallucination): 18%",
+      "severity": "critical",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "On Page 2, the document includes a textual legend for the 'North Carolina LiDAR Quality Level By Phase' map. This legend contains crucial information defining the five phases and their respective quality levels (e.g., 'Phase 1 (2020) - QL 1', etc.). While the legend is included as an image element (index 19), the text itself has not been extracted into the JSON elements. Given the limited amount of text on Page 2, this omission represents significantly more than 25% of the machine-readable text ",
+      "source_pdf_quote": "Phase & Quality: Phase 1 (2020) - QL 1, Phase 2 (2020) - QL 1, Phase 3 (2015) - QL 2, Phase 4 (2016) - QL 1, Phase 5 (2017) - QL 1",
+      "output_quote": "The text is absent from the 'sections' elements, appearing only within a non-searchable image object (reading_order 19).",
+      "location": "Section 2, Page 2"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Table 5 on page 3 is structurally corrupted. In the source, the table consists of three columns. The first row contains a header ('Delivery dates') that spans the second and third columns. The second row contains three distinct column headers. In the output (index 26), the first row (row 0) contains only one cell with a colspan of 1, which breaks the alignment with the three columns defined in the subsequent rows. Additionally, the second row (row 1), which contains the actual column headers ('W",
+      "source_pdf_quote": "Table 5 on page 3. The table has 3 columns with a complex header structure involving a spanned cell in the first row ('Delivery dates') and three sub-headers in the second row.",
+      "output_quote": "The table element at index 26. The first row (row 0) contains only one cell with colspan 1, and the second row (row 1) is not identified as a header row (is_header_row: false), with its cells marked as 'data' instead of 'header'.",
+      "location": "Page 3, element index 26"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There is a significant visual duplication of body content at the end of the HTML document. The entire content block from the third page of the PDF—including the 'Project Timeline' text, the 'Table 5' caption, the data table itself, and the concluding note about quality control—appears twice in immediate succession. Each instance is also preceded by a redundant DPS Emergency Management logo.",
+      "source_pdf_quote": "The content on Page 3 (Project Timeline, Table 5, and the Note) appears only once in the source document.",
+      "output_quote": "In the HTML screenshot, the block starting with 'Project Timeline: LiDAR data collection...' and ending with '...will be performed with all deliverables.' is repeated twice at the bottom of the page.",
+      "location": "Bottom half of the HTML document, following the Page 2 map and diagram."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There are two minor text omissions that alter the meaning/completeness of the information. 1. On Page 1, the heading 'April 9, 2024 NCEM Status' is completely missing from the output text; this is critical timestamp information for the status report. 2. On Page 3, the caption for Table 5 (Element index 25) is truncated, ending at 'and', whereas the source contains additional descriptive text ('deliverables should be available by beginning of:').",
+      "source_pdf_quote": "1. April 9, 2024 NCEM Status (Page 1) \n2. Table 5. The estimated delivery dates for the processing and classification and all products and deliverables should be available by beginning of: (Page 3)",
+      "output_quote": "1. [Text missing from Section 1] \n2. Table 5. The estimated delivery dates for the processing and classification and all products and (Element 25)",
+      "location": "Section 1, Element 2 (Page 1); Section 3, Element 25 (Page 3)"
+    }
+  ],
+  "action_items": [
+    "Output appears mostly fabricated: shingling_precision=0.18. Only 18% of output text found in source."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8199,
+      "text_match": 0.30909090909090914,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.6081,
+      "ceiling": 0.25,
+      "ceiling_reason": "extreme_hallucination",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8199,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9714285714285714,
+      "shingling_precision": 0.1837837837837838,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 232,
+      "gemini_words": 232,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 315255,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

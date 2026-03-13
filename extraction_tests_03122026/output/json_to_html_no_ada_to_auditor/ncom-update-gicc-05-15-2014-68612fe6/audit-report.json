@@ -1,0 +1,121 @@
+{
+  "document_id": "ncom-update-gicc-05-15-2014-68612fe6",
+  "audited_at": "2026-03-13T01:50:56.128008Z",
+  "quality_score": 66,
+  "fidelity_composite": 0.6506,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document shows significant evidence of content loss and structural failure, highlighted by a very low shingling recall (0.404) which corroborates the LLM's finding that ~80% of the 'Tasks' section is missing. There is a major disagreement between the pipeline's auto-approval and the high-severity defects identified in fidelity and programmatic metrics.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The 'Tasks' section on Page 3 is missing nearly all of its content. The source lists multiple bullet points and sub-points under 'Ongoing' and 'Upcoming', but the output only retains those two top-level words. The missing text includes 'Infrastructure buildout', replication tasks, 'EPA parcels project implementation', 'Elevation download from Geoportal imagery tab', and 'Website redesign/integration'. This constitutes an omission of approximately 80% of the section's content.",
+      "source_pdf_quote": "Infrastructure buildout; Replicate data between web servers; Replicate all map/image services between data centers; Replicate geodatabases between DB servers; EPA parcels project implementation; Elevation download from Geoportal imagery tab; Website redesign/integration; NC OneMap; Geoportal",
+      "output_quote": "[The list contains only 'Ongoing' and 'Upcoming']",
+      "location": "Tasks section, Page 3"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "On Slide 2, the reading order is logically inconsistent with the source layout. The text 'Geoportal Website:', which appears as a footer element in the bottom left of the source slide, is assigned a reading_order of 7, placing it before the main content list starting at reading_order 9 ('Natural Heritage Program'). This disrupts the intended flow of information where the website link should follow the content items.",
+      "source_pdf_quote": "Slide 2 bottom left footer: 'Geoportal Website: data.nconemap.com'",
+      "output_quote": "The element with reading_order 7 'Geoportal Website:' appears before element 9 'Natural Heritage Program'.",
+      "location": "Slide 2, elements index 7 and 9"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "There are two significant list errors. 1) On Slide 3, the multi-level nested list is severely truncated. The source contains sub-bullets and sub-sub-bullets detailing specific tasks (e.g., 'Infrastructure buildout', 'Replicate data...', 'EPA parcels...'), but the JSON only captures the two top-level headers ('Ongoing', 'Upcoming') as a flat list. 2) On Slide 2, the parent-child relationship is broken; 'Natural Heritage Program' (a bullet in source) is converted to an H2, while its four sub-bulle",
+      "source_pdf_quote": "Slide 3 list items: 'Ongoing' > 'Infrastructure buildout' > 'Replicate data...'; Slide 2: 'Natural Heritage Program' is a parent bullet to 'Federal Lands', etc.",
+      "output_quote": "Slide 3 (reading_order 13) only contains 'Ongoing' and 'Upcoming'. Slide 2 (reading_order 9-10) splits the heading from the list.",
+      "location": "Slide 2 and Slide 3 list elements"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the 'Tasks' section from Slide 3 is significantly compromised. In the source PDF, this section is organized as a nested hierarchy with specific task items listed under 'Ongoing' and 'Upcoming' categories. The HTML output collapses this structure into a simple two-item bulleted list, entirely omitting the sub-items. This significantly alters the visual organization and flow of the document, making it impossible for a user to find the same level of detail in the same log",
+      "source_pdf_quote": "Slide 3 displays 'Tasks' with sub-headings 'Ongoing' (containing 5 bulleted items) and 'Upcoming' (containing several nested bulleted items).",
+      "output_quote": "The HTML output shows 'Tasks' followed by a flat list of only two items: 'Ongoing' and 'Upcoming'. All sub-bullets are missing.",
+      "location": "Tasks section, corresponding to PDF Page 3."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "The status icons (green checkmarks) used on Slide 3 to indicate completed tasks are missing from their original context in the HTML. Instead, a single, oversized checkmark image is rendered at the bottom of the section, disconnected from the text it describes. This constitutes a failure to correctly render meaningful images present in the source.",
+      "source_pdf_quote": "Three small green checkmark icons appearing next to task items under 'Ongoing' on PDF page 3.",
+      "output_quote": "The checkmark icons are absent from the list; a single large green checkmark image appears at the bottom of the Tasks section.",
+      "location": "Tasks section, corresponding to PDF Page 3."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "On Page 2, the output includes the text 'Geoportal Website:' but omits the actual URL string 'data.nconemap.com' that follows it in the source. This is a wording/content change that alters the information available to the reader.",
+      "source_pdf_quote": "Geoportal Website: data.nconemap.com",
+      "output_quote": "Geoportal Website:",
+      "location": "Data Releases section, Page 2, reading_order index 7"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The URL 'data.nconemap.com' present on Slide 2 is missing from the JSON output. While the introductory text 'Geoportal Website:' is present, the actual link data found in the source is omitted.",
+      "source_pdf_quote": "Geoportal Website: data.nconemap.com",
+      "output_quote": "\"text\": \"Geoportal Website:\"",
+      "location": "Slide 2, element index 7"
+    }
+  ],
+  "action_items": [
+    "Manually restore the missing sub-bullets and sub-sub-bullets in the 'Tasks' section.",
+    "Fix the nested list structure to match the source hierarchy for accessibility compliance.",
+    "Correct the reading order of the footer text on Slide 2.",
+    "Verify and re-insert missing URLs and meaningful status images."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6506,
+      "text_match": 0.5526315789473685,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.662,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6506,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.40384615384615385,
+      "shingling_precision": 0.875,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 20,
+      "gemini_words": 20,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 466927,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

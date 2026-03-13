@@ -1,0 +1,97 @@
+{
+  "document_id": "newsletter-with-many-images-and-formatted-text-117c",
+  "audited_at": "2026-03-13T02:32:59.430754Z",
+  "quality_score": 79,
+  "fidelity_composite": 0.7365,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "While programmatic signals show high text recall (0.922), the LLM fidelity report highlights specific, major functional failures including the total omission of critical URLs for training resources and social media identifiers. Additionally, structural defects such as images splitting words ('in-cludes') and displaced logos indicate a failure in maintaining the document's logical and visual integrity, necessitating manual correction.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are significant omissions in the final two sections of the document. In the 'Training & Continuing Learning Resources' section, the URLs for FedVTE, TEEX, and NICCS are entirely missing. In the final paragraph of the newsletter, several key identifiers and URLs are missing, specifically 'X', 'Facebook', 'LinkedIn', 'it.nc.gov/CyberSecureNC', and 'Stay Safe Online'. This renders these portions of the document functionally useless.",
+      "source_pdf_quote": "The source contains the following URLs and text: 'https://fedvte.usalearning.gov/', 'https://teex.org', 'https://niccs.cisa.gov', 'X', 'Facebook', 'LinkedIn', 'it.nc.gov/CyberSecureNC', and 'Stay Safe Online'.",
+      "output_quote": "The output contains empty spaces or truncated sentences where these items should be: 'FedVTE: Free Online Training Environment: [missing]', 'Technology on  (formerly known as Twitter),  and  for more tips. Also visit  or  for additional information...'",
+      "location": "Sections[2], elements 39-61 (Page 3)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "major",
+      "analysis": "The JSON output completely fails to include the text and URLs for every link found on page 3 of the source PDF. For example, in the 'Training & Continuing Learning Resources' section, the descriptive labels for the resources are present (e.g., 'FedVTE...', 'TEEX...', 'NICCS...'), but the corresponding URLs immediately following them in the PDF are entirely absent from the JSON. Similarly, the social media links ('X', 'Facebook', etc.) and other resource links in the subsequent sections are missi",
+      "source_pdf_quote": "Page 3 of the PDF contains multiple URLs and link texts: 'https://fedvte.usalearning.gov/', 'https://teex.org', 'https://niccs.cisa.gov', 'Read the SAC newsletters', 'https://www.sans.org/newsletters/ouch', 'X', 'Facebook', 'LinkedIn', 'it.nc.gov/CyberSecureNC', 'Stay Safe Online'.",
+      "output_quote": "The JSON output for Section 3 skips these elements entirely. For instance, between element index 39 ('FedVTE...') and index 41 ('TEEX...'), there is no entry for the URL. Between index 51 ('...follow the N.C. Department of Information Technology on ') and index 53 (' (formerly known as Twitter), '), the link text 'X' is missing.",
+      "location": "Section 3, element indices 40, 42, 44, 47, 50, 52, 54, 56, 58, 60 (as indicated by the gaps in the provided reading_order sequence)."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the HTML document is significantly disrupted compared to the source PDF. The primary NCDIT logo, which appears in the top header of the PDF, is moved deep into the body of the document. Furthermore, several images (including the photo of Bernice Bond and the NCDIT logo) are inserted in the middle of a sentence that spans the page break of the original PDF, effectively splitting the word 'includes' into 'in-' and 'cludes'. This interrupts the reading flow and places vis",
+      "source_pdf_quote": "The NCDIT logo is at the top left of Page 1. The photo of Bernice Bond is adjacent to the first article on Page 1. The text on Page 1 ends with 'perhaps by claiming that it in-' and continues on Page 2 with 'cludes details...'.",
+      "output_quote": "The logo and photo are missing from the header/initial article and are instead rendered between the text 'perhaps by claiming that it in-' and 'cludes details...', splitting the word 'includes' and the paragraph's flow.",
+      "location": "Middle of the HTML rendering, following the first paragraph of the 'Protect Yourself from Job Termination Scams' section."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "A meaningful content illustration is missing from the HTML rendering. On page 2 of the source PDF, there is a graphic depicting a hacker behind a laptop with red and green phone icons, which serves as a visual transition and thematic illustration for the mobile phishing content. This image is not present in the HTML output. While some decorative watermarks (shield and person icons on page 3) are also absent, their removal is an expected accessibility improvement; however, the thematic graphic on",
+      "source_pdf_quote": "Illustration of a hacker behind a laptop with mobile phone icons located on Page 2, above the 'Protect Your Devices' section.",
+      "output_quote": "The graphic is completely absent from the HTML rendering; the space between the KnowBe4 attribution and the 'Protect Your Devices' heading contains only text.",
+      "location": "Preceding the 'Protect Your Devices: Mobile Phishing Attacks Bypass Desktop Security Measures' section."
+    }
+  ],
+  "action_items": [
+    "Restore all missing URLs and social media identifiers on page 3",
+    "Fix the image placement that is currently fragmenting the text flow",
+    "Relocate the NCDIT logo back to the header position",
+    "Check for and re-insert the missing thematic graphic (hacker with phone icons) on page 2"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7365,
+      "text_match": 0.9493851873034029,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7883,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7365,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9224784662406224,
+      "shingling_precision": 0.9779086892488954,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 896,
+      "gemini_words": 896,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 389538,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

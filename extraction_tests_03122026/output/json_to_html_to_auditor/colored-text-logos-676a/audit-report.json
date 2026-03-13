@@ -1,0 +1,105 @@
+{
+  "document_id": "colored-text-logos-676a",
+  "audited_at": "2026-03-12T22:32:16.586782Z",
+  "quality_score": 76,
+  "fidelity_composite": 0.6876,
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.31818181818181823,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While programmatic word count appears stable, the LLM fidelity score is low (0.68) with a critical structural failure (0.31). The systematic omission of nested list items (sub-bullets) in the 'Measuring Success' and 'Partnership Engagements' sections represents significant data loss that undermines the document's utility. These structural and content defects, combined with broken reading order across page boundaries, require manual intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There is a systematic omission of nested list items (sub-bullets) across several sections. In the 'Partnership Engagements/Economic Development' section, all four sub-bullets detailing DHS efforts and the sub-bullet regarding the International Wireless Communications Expo are missing. In the 'Measuring Success' section, the status and detail sub-bullets for metrics 4, 5, 6, 7, 8, 9, and 10 are completely absent. These sub-bullets contain a substantial amount of the document's specific data and r",
+      "source_pdf_quote": "Under 'Measuring Success':\r\n6. Conduct four different trainings...\r\na. Fell short of this goal, though we did work with NCEM to develop a Radio 101 training.\r\nb. Presented at the NC Emergency Management Association’s conference on FirstNet deployable assets.\r\nc. Worked with the N.C. State Bureau of Investigation to develop a Cellular 101 training.",
+      "output_quote": "{\r\n              \"content\": [\r\n                {\r\n                  \"text\": \"Conduct four different trainings related to telecommunications to end users within North Carolina per year:\",\r\n                  \"bold\": false,\r\n                  \"italic\": false,\r\n                  \"underline\": false,\r\n                  \"strikethrough\": false,\r\n                  \"superscript\": false,\r\n                  \"subscript\": false,\r\n                  \"code\": false,\r\n                  \"lang\": null\r\n              ",
+      "location": "Measuring Success section, Page 3, element index 37"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent for the sub-sections of 'Accomplishments'. In the source, 'Responder Engagements', 'Industry Engagements', and 'Partnership Engagements/Economic Development' are presented as sibling subsections with identical styling. In the output, 'Responder Engagements' is correctly assigned level 3, but the subsequent two sections are promoted to level 2, breaking the logical hierarchy under the parent 'Accomplishments' heading.",
+      "source_pdf_quote": "Responder Engagements, Industry Engagements, Partnership Engagements/Economic Development (all visually same style under Accomplishments)",
+      "output_quote": "\"text\": \"Responder Engagements\", \"level\": 3 vs \"text\": \"Industry Engagements\", \"level\": 2",
+      "location": "Accomplishments section, Page 1 and Page 2, elements at reading_order 12 and 21"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The logical flow of several list items is broken across page boundaries. For example, a single list item ending page 1 ('... focused on the mission. This') continues on page 2 ('tool had 3130 unique visitors...'). The output separates these into a list item in one section and a standalone paragraph in another, losing the connection between the sentence fragment on page 1 and its conclusion on page 2. Similarly, the list of 'Detail Assignments' is split across sections without being unified.",
+      "source_pdf_quote": "...focused on the mission. This tool had 3130 unique visitors...",
+      "output_quote": "Section 1 ends: \"... focused on the mission. This\". Section 2 starts: \"tool had 3130 unique visitors...\"",
+      "location": "End of page 1 / Start of page 2, reading_order 13 and 19"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The conversion of lists is severely flawed. Numbered lists (e.g., in 'Measuring Success') are rendered as unordered lists. More critically, all nested list items (sub-bullets/sub-points labeled a, b, c, etc.) are entirely missing from the output throughout the document. Additionally, lists that span across pages are fragmented into separate list objects within different JSON sections rather than being maintained as a single structural unit.",
+      "source_pdf_quote": "Numbered list 1-10 under 'Measuring Success' with sub-points (a, b, c). Unordered sub-bullets under DHS efforts.",
+      "output_quote": "The output contains flat 'unordered' lists missing all sub-items (e.g., 4a, 4b, 4c are gone).",
+      "location": "Measuring Success section, Page 3 and 4, reading_order 37 and 47"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The NCDIT brand logo, which appears in the header on every page of the source PDF, has been converted into a block-level image within the main content area of the HTML. As a result, this logo is duplicated four times throughout the body of the document, interrupting the flow of text. This is a visual duplication of meaningful content as it transitions from header-only placement to repeated body placement.",
+      "source_pdf_quote": "The NCDIT logo appears only in the top-right header area of pages 1, 2, 3, and 4.",
+      "output_quote": "The NCDIT logo image is rendered four separate times within the main body text (e.g., after 'focused on the mission', after the Scotland County bullet, before item 8 of Measuring Success, and at the end).",
+      "location": "Throughout the document body at page transition points."
+    }
+  ],
+  "action_items": [
+    "Restore all missing nested sub-bullets in the 'Measuring Success' and 'Partnership Engagements' sections",
+    "Correct heading hierarchy for 'Industry Engagements' and 'Partnership Engagements/Economic Development' to level 3",
+    "Unify fragmented list items and sentences that were split by page breaks",
+    "Remove redundant NCDIT logos from the body content and ensure they are appropriately tagged as decorative or header elements"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.6876,
+      "text_match": 0.9321937321937321,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7628,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.6876,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.31818181818181823,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8826544375505799,
+      "shingling_precision": 0.9876245095079987,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 525,
+      "gemini_words": 525,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 246235,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

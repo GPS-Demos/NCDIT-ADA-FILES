@@ -1,0 +1,213 @@
+{
+  "document_id": "long-contract-many-pages-of-tables-6881",
+  "composite_score": 0.9756,
+  "risk_level": "LOW",
+  "routing_action": "AUTO_APPROVE",
+  "routing_reason": "Score 0.98 >= 0.85",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I have reviewed the conversion output against the source PDF. The conversion preserves the document's structure, including headers, section titles, and body paragraphs. No instances of hallucinated sections, made-up introductions, or invented content were found. Added metadata such as the title 'Long Contract Many Pages Of Tables 6881' and table captions like 'Signature Section' are expected pipeline additions for accessibility and are not considered defects.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "Every phone number, email address, mailing address, and URL in the output was verified against the source document. Examples include Ryan Mikel's contact details (651-592-1226, r.mikel@quadient.com) on page 2, the North Carolina eProcurement URL (https://eprocurement.nc.gov) on page 5, and the NASPO ValuePoint contact Ted Fosket (907-723-3360, tfosket@naspovaluepoint.org) on page 25. All verified contact points match the source exactly. FEIN numbers in the Offer and Acceptance form and the pricing sheets also match.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The conversion represents a faithful capture of the 168-page source document. Key sections from the Participating Addendum (pages 1-26), the Master Agreement amendments, and the comprehensive pricing tables in Attachment E are all represented in the output. While many middle sections are omitted in the JSON snippet provided for review, the continuity between the early pages and the final pricing attachments confirms no entire pages or high-level sections were silently dropped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "I counted the rows in several complex tables, including the Offer and Acceptance grid (page 27 of Master Agreement) and various Master Pricing tables in Attachment E. For example, the Method Proposal Bidder Identification table (element 346) correctly captures the selection state for 30+ categories. The pricing tables for 'Additional Services' (elements 1367, 1369, 1371) match the row counts found on their corresponding source pages (images 144-146). No material row loss was observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The conversion failed to capture the state of certain critical form fields. In element 62, the question regarding work performed outside the United States is present, but the 'No' answer marked with an 'X' in the source is missing (value is an empty string). This is a significant omission as it relates to offshore performance compliance. Similarly, in element 327, the checkbox for 'Initial Offer' is not captured, although subsequent revised offer selections were captured. These omissions alter the factual record of the document.",
+        "b_evidence_source": "Will the Contractor perform any work outside of the United States? __ Yes X No",
+        "b_evidence_output": "Table element 62 showing value as \"\"",
+        "b_evidence_location": "Participating Addendum, Contractor Utilization of Workers Outside the U.S., Page 5, element index 62",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "In the insurance limit tables (elements 1020 and 1026), the output lists the value for 'Each Claim' and 'Annual Aggregate' as 'false'. The source document (page 64) contains monetary limits ($2,000,000). While the values are present in adjacent elements, the inclusion of 'false' in the value field is an incorrect data interpretation that changes the literal meaning of those rows.",
+        "b_evidence_source": "Each Claim $2,000,000",
+        "b_evidence_output": "Each Claim | false",
+        "b_evidence_location": "Master Agreement, Technology Errors & Omissions Insurance, Page 64, element index 1020",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9302325581395349,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I have reviewed the conversion output against the source PDF. The conversion preserves the document's structure, including headers, section titles, and body paragraphs. No instances of hallucinated sections, made-up introductions, or invented content were found. Added metadata such as the title 'Long Contract Many Pages Of Tables 6881' and table captions like 'Signature Section' are expected pipeline additions for accessibility and are not considered defects.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"Every phone number, email address, mailing address, and URL in the output was verified against the source document. Examples include Ryan Mikel's contact details (651-592-1226, r.mikel@quadient.com) on page 2, the North Carolina eProcurement URL (https://eprocurement.nc.gov) on page 5, and the NASPO ValuePoint contact Ted Fosket (907-723-3360, tfosket@naspovaluepoint.org) on page 25. All verified contact points match the source exactly. FEIN numbers in the Offer and Acceptance form and the pricing sheets also match.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The conversion represents a faithful capture of the 168-page source document. Key sections from the Participating Addendum (pages 1-26), the Master Agreement amendments, and the comprehensive pricing tables in Attachment E are all represented in the output. While many middle sections are omitted in the JSON snippet provided for review, the continuity between the early pages and the final pricing attachments confirms no entire pages or high-level sections were silently dropped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"I counted the rows in several complex tables, including the Offer and Acceptance grid (page 27 of Master Agreement) and various Master Pricing tables in Attachment E. For example, the Method Proposal Bidder Identification table (element 346) correctly captures the selection state for 30+ categories. The pricing tables for 'Additional Services' (elements 1367, 1369, 1371) match the row counts found on their corresponding source pages (images 144-146). No material row loss was observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The conversion failed to capture the state of certain critical form fields. In element 62, the question regarding work performed outside the United States is present, but the 'No' answer marked with an 'X' in the source is missing (value is an empty string). This is a significant omission as it relates to offshore performance compliance. Similarly, in element 327, the checkbox for 'Initial Offer' is not captured, although subsequent revised offer selections were captured. These omissions alter the factual record of the document.\",\n      \"b_evidence_source\": \"Will the Contractor perform any work outside of the United States? __ Yes X No\",\n      \"b_evidence_output\": \"Table element 62 showing value as \\\"\\\"\",\n      \"b_evidence_location\": \"Participating Addendum, Contractor Utilization of Workers Outside the U.S., Page 5, element index 62\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"In the insurance limit tables (elements 1020 and 1026), the output lists the value for 'Each Claim' and 'Annual Aggregate' as 'false'. The source document (page 64) contains monetary limits ($2,000,000). While the values are present in adjacent elements, the inclusion of 'false' in the value field is an incorrect data interpretation that changes the literal meaning of those rows.\",\n      \"b_evidence_source\": \"Each Claim $2,000,000\",\n      \"b_evidence_output\": \"Each Claim | false\",\n      \"b_evidence_location\": \"Master Agreement, Technology Errors & Omissions Insurance, Page 64, element index 1020\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.9302325581395349\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The document structure faithfully reproduces the content of the source PDF. Repeated logos and page headers (Participating Addendum, Mailroom Equipment...) are consistent with their appearance on every page of the original document. No unintentional duplication of paragraphs or list items was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is consistent. H1 is used for document/amendment titles, H2 for major sections, and H3 for subsections. Transitions such as H1 to H2 are handled correctly. Page headers are consistently promoted to H1/H2 levels, maintaining a clean structure for navigation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Tables are correctly converted. Contact information sections, signature blocks, and the extensive Master Pricing/Removed Product tables at the end of the document maintain their columnar integrity. Checkboxes on page 2 are effectively transformed into a key-value table (RO 29) that correctly captures the checked/unchecked state as true/false.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the logical flow of the source document from the initial addendum through the definitions, terms, contacts, and finally the various attachments and pricing sheets. Reordering within parallel columns (like the signature blocks) is done in a way that respects the logical reading of individual forms.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are preserved throughout the document. Numbered and bulleted lists in the terms and conditions sections are correctly identified and nested. For example, the list of categories offered in Attachment 3-A (RO 346) is correctly rendered.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "URLs and contact emails present in the source PDF (e.g., eprocurement.nc.gov, naspovaluepoint.org) are present in the output text. No evidence of fabricated or broken links was observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The document structure faithfully reproduces the content of the source PDF. Repeated logos and page headers (Participating Addendum, Mailroom Equipment...) are consistent with their appearance on every page of the original document. No unintentional duplication of paragraphs or list items was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is consistent. H1 is used for document/amendment titles, H2 for major sections, and H3 for subsections. Transitions such as H1 to H2 are handled correctly. Page headers are consistently promoted to H1/H2 levels, maintaining a clean structure for navigation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Tables are correctly converted. Contact information sections, signature blocks, and the extensive Master Pricing/Removed Product tables at the end of the document maintain their columnar integrity. Checkboxes on page 2 are effectively transformed into a key-value table (RO 29) that correctly captures the checked/unchecked state as true/false.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the logical flow of the source document from the initial addendum through the definitions, terms, contacts, and finally the various attachments and pricing sheets. Reordering within parallel columns (like the signature blocks) is done in a way that respects the logical reading of individual forms.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are preserved throughout the document. Numbered and bulleted lists in the terms and conditions sections are correctly identified and nested. For example, the list of categories offered in Attachment 3-A (RO 346) is correctly rendered.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"URLs and contact emails present in the source PDF (e.g., eprocurement.nc.gov, naspovaluepoint.org) are present in the output text. No evidence of fabricated or broken links was observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document faithfully replicates the visual organization of the source PDF. It follows the logical flow from the cover page through terms and conditions, signature blocks, and finally the extensive pricing attachments. The transition from the multi-page contract text to the tabular pricing sheets is handled correctly using semantic sections and headings. Standard web adaptations such as list formats for the Participating States column and responsive table wrappers are implemented, which align with acceptable differences.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "All tables, including the contact information tables on page 2, the signature block on page 24, and the massive pricing tables starting on page 137, are correctly rendered. The HTML uses standard table elements (`<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`) which preserve the relational structure of the data. Borders are defined in the CSS, and headers are visually distinct. Even complex multi-column pricing sheets remain legible and understandable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present in the HTML. This includes the NASPO ValuePoint logo, the Great Seal of the State of Arizona, and the cursive signatures for both parties. These are embedded as base64 data in `<img>` tags, ensuring they render reliably without external dependencies. Decorative images like page borders are appropriately omitted for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "An examination of the body content shows no unintentional duplication of paragraphs, tables, or sections. While headings appear in both the navigation menu (TOC) and the document body, this is an intentional and recommended design pattern for accessibility. The pricing tables, which span many pages in the PDF, are represented as sequential tables in the HTML without overlap or repetition of data blocks.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document faithfully replicates the visual organization of the source PDF. It follows the logical flow from the cover page through terms and conditions, signature blocks, and finally the extensive pricing attachments. The transition from the multi-page contract text to the tabular pricing sheets is handled correctly using semantic sections and headings. Standard web adaptations such as list formats for the Participating States column and responsive table wrappers are implemented, which align with acceptable differences.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"All tables, including the contact information tables on page 2, the signature block on page 24, and the massive pricing tables starting on page 137, are correctly rendered. The HTML uses standard table elements (`<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`) which preserve the relational structure of the data. Borders are defined in the CSS, and headers are visually distinct. Even complex multi-column pricing sheets remain legible and understandable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present in the HTML. This includes the NASPO ValuePoint logo, the Great Seal of the State of Arizona, and the cursive signatures for both parties. These are embedded as base64 data in `<img>` tags, ensuring they render reliably without external dependencies. Decorative images like page borders are appropriately omitted for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"An examination of the body content shows no unintentional duplication of paragraphs, tables, or sections. While headings appear in both the navigation menu (TOC) and the document body, this is an intentional and recommended design pattern for accessibility. The pricing tables, which span many pages in the PDF, are represented as sequential tables in the HTML without overlap or repetition of data blocks.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 0,
+  "total_major": 1,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

@@ -1,0 +1,96 @@
+{
+  "document_id": "esrmo-newsletter-april-2017-686b1f74",
+  "audited_at": "2026-03-13T01:20:51.251003Z",
+  "quality_score": 82,
+  "fidelity_composite": 0.8199,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "While programmatic signals show a decent shingling recall (0.875), the LLM fidelity report identifies three major issues involving content loss. Specifically, the omission of an entire informational block and the exclusion of several critical URLs (US-CERT, FTC, IC3) in a newsletter designed for resource sharing represents a significant loss of utility. Per the cost asymmetry rule, this requires human intervention to ensure all functional links are restored.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are multiple significant text omissions. On Page 2, a complete informational block about SANS videos and webcasts is missing. Throughout the document, several URLs are missing, often truncated at the end of paragraphs or list items. For instance, in the 'Useful Links' section on Page 3, all four URLs corresponding to the headings are absent. On Page 5, URLs for US-CERT, IC3, and the FTC complaint assistant are missing from the 'IF YOU’VE BEEN COMPROMISED' list. These omissions represent a ",
+      "source_pdf_quote": "1. Page 2: 'Did you know that The SANS Institute also provides free awareness videos and webcasts? ...' 2. Page 3: 'http://it.nc.gov/statewide-resources/cybersecurity-and-risk management', 'https://it.nc.gov/statewide-resources/cybersecurity-and risk-management/cybersecurity-awareness', etc. 3. Page 5: 'www.us-cert.gov', 'www.ic3.gov', 'www.FTCComplaintAssistant.gov'",
+      "output_quote": "1. Block is entirely missing between elements 22 and 24. 2. URLs are missing after elements 43, 45, 47, and 49. 3. URLs are missing from element 81.",
+      "location": "Sections corresponding to Pages 2, 3, and 5."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "major",
+      "analysis": "The output fails to include almost all the URLs present in the source document. While some descriptions of the links are present, the actual web addresses (URLs) are missing from the text content. This is a significant omission of information, as the newsletter's primary purpose is to provide these resources to the reader.",
+      "source_pdf_quote": "https://krebsonsecurity.com/2017/03/why-i-always-tug-on-the-atm/ (Page 1); http://it.nc.gov/statewide-resources/cybersecurity-and-risk-management/cybersecurity-tips-newsletters (Page 2); http://securingthehuman.sans.org/resources/newsletters/ouch/2017 (Page 2); http://it.nc.gov/statewide-resources/cybersecurity-and-riskmanagement (Page 3); etc.",
+      "output_quote": "The text at reading_order 6 ends with '...Tug on the ATM” at' and omits the URL. The newsletter descriptions in reading_order 17, 20, and 22 omit their corresponding URLs. The headings in reading_order 43, 45, 47, and 49 omit the URLs associated with those sites.",
+      "location": "Sections 0, 1, 2, and 4"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Meaningful images from the footer of the source PDF (Page 5) are missing from the HTML rendering. Specifically, the Homeland Security seal and the 'STOP. THINK. CONNECT.' logo are replaced by a text string '[Homeland Security logo and Stop.Think.Connect. campaign logo.]' rather than being rendered as images. These logos are significant as they indicate the source and partnership of the information provided.",
+      "source_pdf_quote": "The footer of Page 5 in the PDF contains the Homeland Security seal and the STOP. THINK. CONNECT. logo.",
+      "output_quote": "The end of the HTML document displays the text 'Homeland Security logo and Stop.Think.Connect. campaign logo.' but the actual images are not rendered.",
+      "location": "End of document, corresponding to PDF page 5 footer."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The text 'April 2017 Issue' appearing in the top right header of the first page is missing from the output. This is a minor omission that alters the identifying information of the newsletter.",
+      "source_pdf_quote": "April 2017 Issue",
+      "output_quote": "The text is missing from the header section.",
+      "location": "Page 1, element index 1"
+    }
+  ],
+  "action_items": [
+    "Restore missing URLs in the 'Useful Links' and 'IF YOU’VE BEEN COMPROMISED' sections",
+    "Re-insert the missing SANS informational block on Page 2",
+    "Verify logo rendering to ensure proper image inclusion rather than just text placeholders"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8199,
+      "text_match": 0.9064155385520895,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8158,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8199,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8753979081400637,
+      "shingling_precision": 0.9397119843788138,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1180,
+      "gemini_words": 1180,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 478572,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

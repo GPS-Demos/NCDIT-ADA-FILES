@@ -1,0 +1,102 @@
+{
+  "document_id": "multi-factor-authentication-report-december-2015-68613ee4",
+  "audited_at": "2026-03-12T23:43:30.605223Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 1.0,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The source document on page 5 contains a reference URL: http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf. In the output JSON, this URL is completely omitted. Paragraph element 19 contains 'See' and element 21 contains 'for reference.', but the URL that should appear between them is missing. The omission of a critical government reference URL is a critical failure.",
+      "source_pdf_quote": "See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf forreference.",
+      "output_quote": "Elements 19: \"text\": \"See\" and Element 21: \"text\": \"for reference.\"",
+      "location": "Legislative Request section, page 5, elements 19 and 21"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There are two instances of significant text omission involving nested lists. 1) On page 5, the nested bullet points under 'Single-factor' and 'Two-factor authentication' (e.g., 'Something you know...', 'Something you are...') are missing, which defines the authentication types. 2) On page 8, under 'Potential Participants', the entire nested list of participating state departments (approximately 22 items) is missing. This loss of specific departmental data constitutes a major omission of more tha",
+      "source_pdf_quote": "Under 'Potential Participants', 1. VPN (Administrator Access) lists: Department of Information Technology, Department of Public Safety, Department of Revenue, Department of Human and Health Services, Department of Natural and Cultural Resources, Department of Administration, Department of Transportation.",
+      "output_quote": "Element 52 contains the top-level list items (1-8) but completely omits all nested departmental bullet points.",
+      "location": "Potential Participants section, page 8, element 52; Introduction section, page 5, element 27"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table on page 10 representing the 'MFA Project status' is structurally inconsistent. In the source, this data forms a 3-column grid (Phase ID/Name, Status, and Date). Items 1-4 have values for columns 1 and 2, while item 5 (Procurement Phase) has values for all three. In the output JSON, the table structure is corrupted because the first four rows contain only 2 cell elements each, while the fifth row contains 3 cells. This inconsistency in column counts across rows without appropriate spans",
+      "source_pdf_quote": "The project status table on page 10 shows alignment for Phase, Status, and Date across multiple items.",
+      "output_quote": "The table at element index 79 shows rows with differing cell counts: rows 1-4 have 2 cells, while row 5 has 3 cells.",
+      "location": "Plan section, page 10, element index 79"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "There are several defects in list conversion. First, nested list items are missing entirely on page 5 (sub-bullets for types of authentication) and page 8 (department lists under Potential Participants). In the source on page 8, each of the 8 main items includes a bulleted list of specific agencies; the output JSON only includes the top-level items. Second, the numbered list for 'Methodology' on page 10 (items 1-6) is incorrectly converted to an unordered list.",
+      "source_pdf_quote": "Page 8: '1. VPN (Administrator Access) o Department of Information Technology o Department of Public Safety...' and Page 10: numbered list 1-6 under Methodology.",
+      "output_quote": "Element index 52: missing the nested department sub-bullets. Element index 75: 'list_type': 'unordered' for the numbered Methodology list.",
+      "location": "Potential Participants (page 8, element 52) and Methodology (page 10, element 75)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The URL link present on page 5 ('http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf') is completely missing from the output text. The paragraph is broken into two elements ('See' and 'for reference.'), and the URL data that should be between them is lost.",
+      "source_pdf_quote": "See http://www.ncleg.net/Sessions/2015/Bills/House/PDF/H97v9.pdf for reference.",
+      "output_quote": "\"text\": \"See\" ... \"text\": \"for reference.\"",
+      "location": "Legislative Request section, page 5, element indices 19 and 21"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9405792084919811,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5618,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9132870266636791,
+      "shingling_precision": 0.9695528068506185,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1356,
+      "gemini_words": 1356,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.8,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 485134,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
