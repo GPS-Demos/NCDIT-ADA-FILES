@@ -139,6 +139,42 @@ This broke reading order — e.g., a logo at the top of a PDF page would appear 
 
 **Fix:** Images are now replaced in-place in Gemini's reading order. Only unmatched PyMuPDF images (those without a Gemini description) and videos/links are appended at the end.
 
+## Diagram Fragment Consolidation (`extract_structured_json.py`)
+
+PDFs containing diagrams (network diagrams, flowcharts, org charts, etc.) store each visual element — icons, arrows, cloud shapes, server icons — as a separate embedded raster image. PyMuPDF's `page.get_images()` extracts every one individually, producing dozens of tiny fragments (often 2x3px to 50x90px in PDF points) that are meaningless on their own.
+
+**Problem:** These fragments would each become a separate `<img>` tag in the HTML, scattered with no spatial relationship, completely unlike the original diagram. Most would also be labeled "Unidentified image" by Gemini (since individual fragments are unrecognizable), marked decorative, and hidden.
+
+**Fix:** `extract_images_from_pdf_page()` now detects diagram pages by counting small image fragments (both dimensions < 100 PDF points). When 5+ small fragments are found, the entire page is rendered as a **single full-page PNG screenshot** via `page.get_pixmap()` at the configured `RENDER_SCALE` (3x = 216 DPI). This single image replaces all individual fragments, preserving all spatial relationships exactly as they appear in the PDF.
+
+- **Threshold:** 5+ images with both width and height < 100 PDF points
+- **Rendering:** `page.get_pixmap(matrix=Matrix(RENDER_SCALE, RENDER_SCALE))` — full page, no clipping
+- **Output:** Single image entry with `_full_page_render: true` metadata flag
+- **Text extraction unaffected:** Gemini still extracts text content from its own page render; the full-page image only replaces the fragmented PyMuPDF image entries
+
+### Example: `table-seal-imagery-diagram-1468`
+
+| | Before | After |
+|---|---|---|
+| Embedded images extracted | 50 (49 tiny fragments + 1 seal) | 1 full-page render |
+| Visible in HTML | 0 (all hidden as decorative) | 1 (complete diagram) |
+| Image fidelity | Individual icons/arrows with no context | Exact replica of PDF page |
+
+## Smarter Decorative Image Detection (`render_json.py`)
+
+Updated `_mark_decorative_images()` to avoid hiding images that have real visual content.
+
+**Before:** Any image with description in `{"", "unidentified image", "image", "decorative image", "logo"}` was unconditionally marked decorative and hidden with `display:none`.
+
+**After:** Images are only marked decorative when they lack substantial content:
+
+1. **Always decorative:** Empty description or explicitly "decorative image" — but only if no substantial base64 data (≤ 500 chars)
+2. **Generic descriptions** ("unidentified image", "image", "logo") — decorative only if ALSO lacking substantial base64 data OR bbox is tiny (< 10px in either dimension)
+3. **Images with real base64 data** (> 500 chars) are kept visible even with generic descriptions; "unidentified image" gets relabeled to "Document image" for better alt text
+4. **Thin strips / extreme aspect ratios** — unchanged (still decorative)
+
+This prevents the full-page renders and other meaningful composited images from being incorrectly hidden.
+
 ## Test Results
 
 Tested against 100 extraction-test JSON files: **100 rendered, 0 failed, 0 elements silently lost**.
