@@ -209,7 +209,13 @@ def _merge_consecutive_lists(pages: list) -> int:
 
 
 def _mark_decorative_images(pages: list) -> int:
-    """Mark images with empty/generic descriptions as decorative."""
+    """Mark images as decorative based on description AND dimensions.
+
+    Decorative if any of:
+    - Empty/generic description (unidentified, logo, etc.)
+    - Bbox display size is a thin strip (either dimension < 10px)
+    - Bbox aspect ratio is extreme (> 15:1 or < 1:15) — gradient strips, lines
+    """
     decorative_descriptions = {"", "unidentified image", "image", "decorative image", "logo"}
     count = 0
     for page in pages:
@@ -219,6 +225,25 @@ def _mark_decorative_images(pages: list) -> int:
                 if desc in decorative_descriptions:
                     item["_decorative"] = True
                     count += 1
+                    continue
+
+                # Check bbox dimensions for design elements (thin strips, lines)
+                bbox = item.get("bbox")
+                if bbox:
+                    w = bbox.get("x1", 0) - bbox.get("x0", 0)
+                    h = bbox.get("y1", 0) - bbox.get("y0", 0)
+                    if w > 0 and h > 0:
+                        # Thin strips: either dimension < 10px
+                        if w < 10 or h < 10:
+                            item["_decorative"] = True
+                            count += 1
+                            continue
+                        # Extreme aspect ratios (gradient strips, decorative lines)
+                        ratio = max(w, h) / min(w, h)
+                        if ratio > 15:
+                            item["_decorative"] = True
+                            count += 1
+                            continue
     return count
 
 
@@ -360,16 +385,18 @@ def _render_image(item: dict) -> str:
     # Use bbox (PDF points) to size images to match their original PDF appearance
     bbox = item.get("bbox")
     size_attrs = ""
-    if bbox:
+    if bbox and not is_decorative:
         w = bbox.get("x1", 0) - bbox.get("x0", 0)
         h = bbox.get("y1", 0) - bbox.get("y0", 0)
         if w > 0 and h > 0:
             size_attrs = f' width="{w:.0f}" height="{h:.0f}"'
 
     if is_decorative:
+        # Decorative images: hidden via CSS, no bbox sizing
+        # (thin strips, gradient lines, generic/unidentified images)
         if b64:
-            return f'<img src="data:image/{fmt};base64,{b64}" alt="" role="presentation"{size_attrs}>'
-        return '<img alt="" role="presentation" src="">'
+            return f'<img src="data:image/{fmt};base64,{b64}" alt="" role="presentation" style="display:none">'
+        return '<!-- decorative image -->'
 
     alt_text = escape(desc)
     if b64:

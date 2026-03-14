@@ -912,13 +912,22 @@ class PDFExtractor:
     def extract_images_from_pdf_page(self, pdf_path: Path, page_num: int) -> List[Dict]:
         """Extract embedded images from a PDF page using PyMuPDF.
 
-        Uses doc.extract_image(xref) which properly decodes all colorspaces
-        (including indexed/palette) into standard image formats. Then uses PIL
-        to composite SMask (transparency mask) when present.
+        Uses a hybrid approach depending on image characteristics:
 
-        Note: fitz.Pixmap(doc, xref) was tried but produces garbage for indexed
-        colorspace images (common in PDFs). doc.extract_image() handles them
-        correctly.
+        1. Full-page background layers (bbox covers ≥90% page width and ≥50%
+           page height): rendered via page.get_pixmap(clip=rect) to composite
+           all overlapping layers correctly. PDFs often use multiple stacked
+           full-page images (photo + grunge texture + gradient) that only look
+           correct when composited together.
+
+        2. Images with SMask (transparency mask): extracted via
+           doc.extract_image(xref) then composited with the mask using PIL.
+           The SMask is stored as a separate PDF object and must be applied
+           as an alpha channel.
+
+        3. All other images: extracted via doc.extract_image(xref) with zero
+           post-processing. This preserves indexed/palette colorspaces and
+           original compression (JPEG stays JPEG).
 
         When ENABLE_IMAGE_EXTRACTION is True, includes base64 image data.
         When False, still returns image metadata (bbox, format) but no base64 data.
@@ -928,6 +937,7 @@ class PDFExtractor:
 
         doc = fitz.open(str(pdf_path))
         page = doc[page_num]
+        page_rect = page.rect
         image_list = page.get_images(full=True)
 
         extracted_images = []
@@ -941,6 +951,7 @@ class PDFExtractor:
                 # Get bounding box
                 image_rects = page.get_image_rects(xref)
                 bbox = None
+                rect = None
                 if image_rects:
                     rect = image_rects[0]
                     bbox = {
@@ -959,22 +970,50 @@ class PDFExtractor:
                 if ENABLE_IMAGE_EXTRACTION:
                     image_bytes = base_image["image"]
 
-                    # If there's an SMask, composite it using PIL
-                    if smask_xref:
+                    # Check if this is a full-page background layer
+                    is_full_page = (
+                        rect is not None
+                        and rect.width >= page_rect.width * 0.9
+                        and rect.height >= page_rect.height * 0.5
+                    )
+
+                    if is_full_page:
+                        # Check if this page has MULTIPLE stacked full-page
+                        # images sharing the same bbox (layered backgrounds).
+                        # Only these need compositing via get_pixmap.
+                        # Single full-page images use raw extract_image.
+                        fp_count = 0
+                        for other_img in image_list:
+                            other_rects = page.get_image_rects(other_img[0])
+                            if other_rects:
+                                or_ = other_rects[0]
+                                if (or_.width >= page_rect.width * 0.9
+                                        and or_.height >= page_rect.height * 0.5):
+                                    fp_count += 1
+
+                        if fp_count >= 2:
+                            # Multiple stacked layers — render composited page
+                            mat = fitz.Matrix(3, 3)
+                            pix = page.get_pixmap(matrix=mat, clip=rect)
+                            image_bytes = pix.tobytes("png")
+                            image_entry["format"] = "png"
+                        # else: single full-page image, raw bytes are fine
+                    elif smask_xref:
+                        # Composite SMask transparency using PIL
                         smask_data = doc.extract_image(smask_xref)
                         img_pil = PILImage.open(io.BytesIO(image_bytes))
                         smask_pil = PILImage.open(io.BytesIO(smask_data["image"]))
-
-                        # Convert to RGBA and apply mask as alpha channel
+                        if img_pil.size != smask_pil.size:
+                            smask_pil = smask_pil.resize(img_pil.size, PILImage.LANCZOS)
                         img_rgba = img_pil.convert("RGBA")
                         if smask_pil.mode != "L":
                             smask_pil = smask_pil.convert("L")
                         img_rgba.putalpha(smask_pil)
-
                         buf = io.BytesIO()
                         img_rgba.save(buf, format="PNG")
                         image_bytes = buf.getvalue()
                         image_entry["format"] = "png"
+                    # else: raw extract_image bytes — no post-processing
 
                     image_entry["base64_data"] = base64.b64encode(image_bytes).decode("utf-8")
 
