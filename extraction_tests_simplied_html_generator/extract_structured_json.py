@@ -60,7 +60,7 @@ VIDEO_PATTERNS = [
 ]
 
 # Directories
-DATA_FOLDER = Path("../output-96-files-03-10-2026/ncdit-audit-20260310-073415")
+DATA_FOLDER = Path("/usr/local/google/home/stonejiang/NCDIT-ADA-FILES/extraction_tests_simplied_html_generator/json_to_html_to_auditor")
 OUTPUT_FOLDER = Path("output")
 REPORTS_FOLDER = OUTPUT_FOLDER / "_reports"
 
@@ -912,6 +912,16 @@ class PDFExtractor:
     def extract_images_from_pdf_page(self, pdf_path: Path, page_num: int) -> List[Dict]:
         """Extract embedded images from a PDF page using PyMuPDF.
 
+        Uses page.get_pixmap(clip=rect) to render each image region rather than
+        doc.extract_image(xref), which returns raw PDF stream data that may have
+        issues:
+          - SMask (transparency) not composited — logos render with solid backgrounds
+          - CMYK/indexed colorspaces not converted — colors display incorrectly
+          - Native resolution differs from display size — images appear wrong scale
+
+        get_pixmap() renders through PyMuPDF's full pipeline, producing correct
+        RGB/RGBA output at the intended display size.
+
         When ENABLE_IMAGE_EXTRACTION is True, includes base64 image data.
         When False, still returns image metadata (bbox, format) but no base64 data.
         """
@@ -923,10 +933,7 @@ class PDFExtractor:
         for img_index, img in enumerate(image_list):
             xref = img[0]
             try:
-                base_image = doc.extract_image(xref)
-                image_ext = base_image["ext"]
-
-                # Get bounding box
+                # Get bounding box — needed for both metadata and pixmap rendering
                 image_rects = page.get_image_rects(xref)
                 bbox = None
                 if image_rects:
@@ -940,13 +947,23 @@ class PDFExtractor:
 
                 image_entry = {
                     "index": img_index,
-                    "format": image_ext,
+                    "format": "png",  # pixmap rendering always produces PNG
                     "bbox": bbox,
                 }
 
-                # Only include base64 data if image extraction is enabled
-                if ENABLE_IMAGE_EXTRACTION:
+                # Render image region via pixmap for correct colorspace and transparency
+                if ENABLE_IMAGE_EXTRACTION and bbox:
+                    # Render at 2x scale for good quality without excessive size
+                    mat = fitz.Matrix(2, 2)
+                    # Use alpha=True to preserve transparency (SMask compositing)
+                    pix = page.get_pixmap(matrix=mat, clip=rect, alpha=True)
+                    image_bytes = pix.tobytes("png")
+                    image_entry["base64_data"] = base64.b64encode(image_bytes).decode("utf-8")
+                elif ENABLE_IMAGE_EXTRACTION and not bbox:
+                    # Fallback: no bbox available, use raw extraction
+                    base_image = doc.extract_image(xref)
                     image_bytes = base_image["image"]
+                    image_entry["format"] = base_image["ext"]
                     image_entry["base64_data"] = base64.b64encode(image_bytes).decode("utf-8")
 
                 extracted_images.append(image_entry)

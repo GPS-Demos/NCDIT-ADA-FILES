@@ -94,6 +94,25 @@ Previously, images were rendered with no explicit dimensions — only `max-width
 - `height: auto` in CSS preserves aspect ratio if width is clamped
 - Images without a bbox (rare edge case) fall back to the previous behavior
 
+## Image Extraction: Pixmap Rendering Instead of Raw Stream (`extract_structured_json.py`)
+
+`extract_images_from_pdf_page()` previously used `doc.extract_image(xref)` to pull raw PDF stream bytes. This caused several rendering problems:
+
+1. **Transparency lost** — PDF images with SMask (soft mask / alpha channel) are stored as two separate objects. `extract_image()` returns only the base image without compositing the mask, so logos and graphics with transparency render with solid/wrong backgrounds.
+
+2. **Colorspace issues** — Raw streams may be CMYK, indexed/palette, or ICC-profiled. Browsers expect RGB/sRGB; CMYK JPEGs display with inverted or wrong colors.
+
+3. **Resolution mismatch** — Raw images are at their native embedded resolution (e.g., 1980x430 or 266x2528), which differs from their display size in the PDF. Even with bbox-based sizing in HTML, the browser must decode and downscale huge images.
+
+**Fix:** Replaced `doc.extract_image(xref)` with `page.get_pixmap(matrix=Matrix(2,2), clip=rect, alpha=True)`:
+
+- Renders each image region through PyMuPDF's full compositing pipeline
+- SMasks are automatically applied (transparency preserved)
+- All colorspaces converted to RGB/RGBA
+- Output is at 2x the PDF display size (good quality for retina screens without excessive file size)
+- Format is always PNG (supports alpha channel)
+- Falls back to raw extraction only when no bbox is available (rare edge case)
+
 ## Test Results
 
 Tested against 100 extraction-test JSON files: **100 rendered, 0 failed, 0 elements silently lost**.
