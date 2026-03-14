@@ -912,19 +912,20 @@ class PDFExtractor:
     def extract_images_from_pdf_page(self, pdf_path: Path, page_num: int) -> List[Dict]:
         """Extract embedded images from a PDF page using PyMuPDF.
 
-        Uses page.get_pixmap(clip=rect) to render each image region rather than
-        doc.extract_image(xref), which returns raw PDF stream data that may have
-        issues:
-          - SMask (transparency) not composited — logos render with solid backgrounds
-          - CMYK/indexed colorspaces not converted — colors display incorrectly
-          - Native resolution differs from display size — images appear wrong scale
+        Uses doc.extract_image(xref) which properly decodes all colorspaces
+        (including indexed/palette) into standard image formats. Then uses PIL
+        to composite SMask (transparency mask) when present.
 
-        get_pixmap() renders through PyMuPDF's full pipeline, producing correct
-        RGB/RGBA output at the intended display size.
+        Note: fitz.Pixmap(doc, xref) was tried but produces garbage for indexed
+        colorspace images (common in PDFs). doc.extract_image() handles them
+        correctly.
 
         When ENABLE_IMAGE_EXTRACTION is True, includes base64 image data.
         When False, still returns image metadata (bbox, format) but no base64 data.
         """
+        import io
+        from PIL import Image as PILImage
+
         doc = fitz.open(str(pdf_path))
         page = doc[page_num]
         image_list = page.get_images(full=True)
@@ -932,8 +933,12 @@ class PDFExtractor:
         extracted_images = []
         for img_index, img in enumerate(image_list):
             xref = img[0]
+            smask_xref = img[1]  # SMask xref (0 if none)
             try:
-                # Get bounding box — needed for both metadata and pixmap rendering
+                base_image = doc.extract_image(xref)
+                image_ext = base_image["ext"]
+
+                # Get bounding box
                 image_rects = page.get_image_rects(xref)
                 bbox = None
                 if image_rects:
@@ -947,23 +952,30 @@ class PDFExtractor:
 
                 image_entry = {
                     "index": img_index,
-                    "format": "png",  # pixmap rendering always produces PNG
+                    "format": image_ext,
                     "bbox": bbox,
                 }
 
-                # Render image region via pixmap for correct colorspace and transparency
-                if ENABLE_IMAGE_EXTRACTION and bbox:
-                    # Render at 2x scale for good quality without excessive size
-                    mat = fitz.Matrix(2, 2)
-                    # Use alpha=True to preserve transparency (SMask compositing)
-                    pix = page.get_pixmap(matrix=mat, clip=rect, alpha=True)
-                    image_bytes = pix.tobytes("png")
-                    image_entry["base64_data"] = base64.b64encode(image_bytes).decode("utf-8")
-                elif ENABLE_IMAGE_EXTRACTION and not bbox:
-                    # Fallback: no bbox available, use raw extraction
-                    base_image = doc.extract_image(xref)
+                if ENABLE_IMAGE_EXTRACTION:
                     image_bytes = base_image["image"]
-                    image_entry["format"] = base_image["ext"]
+
+                    # If there's an SMask, composite it using PIL
+                    if smask_xref:
+                        smask_data = doc.extract_image(smask_xref)
+                        img_pil = PILImage.open(io.BytesIO(image_bytes))
+                        smask_pil = PILImage.open(io.BytesIO(smask_data["image"]))
+
+                        # Convert to RGBA and apply mask as alpha channel
+                        img_rgba = img_pil.convert("RGBA")
+                        if smask_pil.mode != "L":
+                            smask_pil = smask_pil.convert("L")
+                        img_rgba.putalpha(smask_pil)
+
+                        buf = io.BytesIO()
+                        img_rgba.save(buf, format="PNG")
+                        image_bytes = buf.getvalue()
+                        image_entry["format"] = "png"
+
                     image_entry["base64_data"] = base64.b64encode(image_bytes).decode("utf-8")
 
                 extracted_images.append(image_entry)
@@ -1188,7 +1200,7 @@ class PDFExtractor:
                 print(f"  [{pdf_name}] Page {page_num + 1}: Failed - {result['error']}")
                 return result
 
-            # Separate images from other content
+            # Separate images from other content (preserve indices for reinsertion)
             gemini_images = [item for item in primary_content if item.get("type") == "image"]
             other_content = [item for item in primary_content if item.get("type") != "image"]
 
@@ -1217,8 +1229,25 @@ class PDFExtractor:
                 for h in pymupdf_hyperlinks
             ]
 
-            # Combine all content: text content + images + videos + links
-            combined_content = other_content + merged_images + video_items + link_items
+            # Combine content preserving Gemini's reading order for images.
+            # Replace Gemini image placeholders in-place with enriched versions,
+            # then append any unmatched PyMuPDF images, videos, and links at end.
+            merged_iter = iter(merged_images)
+            combined_content = []
+            for item in primary_content:
+                if item.get("type") == "image":
+                    # Replace with enriched version (same order as Gemini output)
+                    enriched = next(merged_iter, None)
+                    if enriched:
+                        combined_content.append(enriched)
+                else:
+                    combined_content.append(item)
+            # Append any remaining enriched images (unmatched PyMuPDF images)
+            for remaining in merged_iter:
+                combined_content.append(remaining)
+            # Append videos and links at end
+            combined_content.extend(video_items)
+            combined_content.extend(link_items)
 
             # Post-process content (deduplication, character normalization)
             result["content"], post_process_stats = self._post_process_content(combined_content)
