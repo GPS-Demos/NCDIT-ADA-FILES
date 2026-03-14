@@ -65,7 +65,7 @@ OUTPUT_FOLDER = Path("output")
 REPORTS_FOLDER = OUTPUT_FOLDER / "_reports"
 
 # Test file list - if set, only process these document IDs
-TEST_FILE_LIST = Path("NC ADA 100 Test files.md")
+TEST_FILE_LIST = None#Path("NC ADA 100 Test files.md")
 
 
 # Suppress Google GenAI warning about non-text parts (thought_signature)

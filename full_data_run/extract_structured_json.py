@@ -60,12 +60,12 @@ VIDEO_PATTERNS = [
 ]
 
 # Directories
-DATA_FOLDER = Path("./")
+DATA_FOLDER = Path("/usr/local/google/home/stonejiang/NCDIT-ADA-FILES/extraction_tests_simplied_html_generator/json_to_html_to_auditor")
 OUTPUT_FOLDER = Path("output")
 REPORTS_FOLDER = OUTPUT_FOLDER / "_reports"
 
 # Test file list - if set, only process these document IDs
-TEST_FILE_LIST = None
+TEST_FILE_LIST = None#Path("NC ADA 100 Test files.md")
 
 
 # Suppress Google GenAI warning about non-text parts (thought_signature)
@@ -912,16 +912,38 @@ class PDFExtractor:
     def extract_images_from_pdf_page(self, pdf_path: Path, page_num: int) -> List[Dict]:
         """Extract embedded images from a PDF page using PyMuPDF.
 
+        Uses a hybrid approach depending on image characteristics:
+
+        1. Full-page background layers (bbox covers ≥90% page width and ≥50%
+           page height): rendered via page.get_pixmap(clip=rect) to composite
+           all overlapping layers correctly. PDFs often use multiple stacked
+           full-page images (photo + grunge texture + gradient) that only look
+           correct when composited together.
+
+        2. Images with SMask (transparency mask): extracted via
+           doc.extract_image(xref) then composited with the mask using PIL.
+           The SMask is stored as a separate PDF object and must be applied
+           as an alpha channel.
+
+        3. All other images: extracted via doc.extract_image(xref) with zero
+           post-processing. This preserves indexed/palette colorspaces and
+           original compression (JPEG stays JPEG).
+
         When ENABLE_IMAGE_EXTRACTION is True, includes base64 image data.
         When False, still returns image metadata (bbox, format) but no base64 data.
         """
+        import io
+        from PIL import Image as PILImage
+
         doc = fitz.open(str(pdf_path))
         page = doc[page_num]
+        page_rect = page.rect
         image_list = page.get_images(full=True)
 
         extracted_images = []
         for img_index, img in enumerate(image_list):
             xref = img[0]
+            smask_xref = img[1]  # SMask xref (0 if none)
             try:
                 base_image = doc.extract_image(xref)
                 image_ext = base_image["ext"]
@@ -929,6 +951,7 @@ class PDFExtractor:
                 # Get bounding box
                 image_rects = page.get_image_rects(xref)
                 bbox = None
+                rect = None
                 if image_rects:
                     rect = image_rects[0]
                     bbox = {
@@ -944,9 +967,54 @@ class PDFExtractor:
                     "bbox": bbox,
                 }
 
-                # Only include base64 data if image extraction is enabled
                 if ENABLE_IMAGE_EXTRACTION:
                     image_bytes = base_image["image"]
+
+                    # Check if this is a full-page background layer
+                    is_full_page = (
+                        rect is not None
+                        and rect.width >= page_rect.width * 0.9
+                        and rect.height >= page_rect.height * 0.5
+                    )
+
+                    if is_full_page:
+                        # Check if this page has MULTIPLE stacked full-page
+                        # images sharing the same bbox (layered backgrounds).
+                        # Only these need compositing via get_pixmap.
+                        # Single full-page images use raw extract_image.
+                        fp_count = 0
+                        for other_img in image_list:
+                            other_rects = page.get_image_rects(other_img[0])
+                            if other_rects:
+                                or_ = other_rects[0]
+                                if (or_.width >= page_rect.width * 0.9
+                                        and or_.height >= page_rect.height * 0.5):
+                                    fp_count += 1
+
+                        if fp_count >= 2:
+                            # Multiple stacked layers — render composited page
+                            mat = fitz.Matrix(3, 3)
+                            pix = page.get_pixmap(matrix=mat, clip=rect)
+                            image_bytes = pix.tobytes("png")
+                            image_entry["format"] = "png"
+                        # else: single full-page image, raw bytes are fine
+                    elif smask_xref:
+                        # Composite SMask transparency using PIL
+                        smask_data = doc.extract_image(smask_xref)
+                        img_pil = PILImage.open(io.BytesIO(image_bytes))
+                        smask_pil = PILImage.open(io.BytesIO(smask_data["image"]))
+                        if img_pil.size != smask_pil.size:
+                            smask_pil = smask_pil.resize(img_pil.size, PILImage.LANCZOS)
+                        img_rgba = img_pil.convert("RGBA")
+                        if smask_pil.mode != "L":
+                            smask_pil = smask_pil.convert("L")
+                        img_rgba.putalpha(smask_pil)
+                        buf = io.BytesIO()
+                        img_rgba.save(buf, format="PNG")
+                        image_bytes = buf.getvalue()
+                        image_entry["format"] = "png"
+                    # else: raw extract_image bytes — no post-processing
+
                     image_entry["base64_data"] = base64.b64encode(image_bytes).decode("utf-8")
 
                 extracted_images.append(image_entry)
@@ -1171,7 +1239,7 @@ class PDFExtractor:
                 print(f"  [{pdf_name}] Page {page_num + 1}: Failed - {result['error']}")
                 return result
 
-            # Separate images from other content
+            # Separate images from other content (preserve indices for reinsertion)
             gemini_images = [item for item in primary_content if item.get("type") == "image"]
             other_content = [item for item in primary_content if item.get("type") != "image"]
 
@@ -1200,8 +1268,25 @@ class PDFExtractor:
                 for h in pymupdf_hyperlinks
             ]
 
-            # Combine all content: text content + images + videos + links
-            combined_content = other_content + merged_images + video_items + link_items
+            # Combine content preserving Gemini's reading order for images.
+            # Replace Gemini image placeholders in-place with enriched versions,
+            # then append any unmatched PyMuPDF images, videos, and links at end.
+            merged_iter = iter(merged_images)
+            combined_content = []
+            for item in primary_content:
+                if item.get("type") == "image":
+                    # Replace with enriched version (same order as Gemini output)
+                    enriched = next(merged_iter, None)
+                    if enriched:
+                        combined_content.append(enriched)
+                else:
+                    combined_content.append(item)
+            # Append any remaining enriched images (unmatched PyMuPDF images)
+            for remaining in merged_iter:
+                combined_content.append(remaining)
+            # Append videos and links at end
+            combined_content.extend(video_items)
+            combined_content.extend(link_items)
 
             # Post-process content (deduplication, character normalization)
             result["content"], post_process_stats = self._post_process_content(combined_content)
@@ -1534,49 +1619,8 @@ class PDFExtractor:
 
         return pdf_files
 
-    def _save_pdf_result(self, doc_id: str, info: Dict, page_results_dict: Dict) -> Dict:
-        """Build result dict for a single PDF, save JSON and HTML, and return it."""
-        pages = [page_results_dict[i] for i in sorted(page_results_dict.keys())]
-
-        result = {
-            "pdf_id": doc_id,
-            "source_path": str(info["pdf_path"]),
-            "total_pages": info["total_pages"],
-            "extraction_timestamp": datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z"),
-            "pages": pages,
-        }
-
-        # Calculate quality metrics
-        result["quality_metrics"] = self._calculate_pdf_metrics(pages)
-
-        # Calculate token usage for this PDF
-        pdf_input_tokens = sum(p.get("token_usage", {}).get("input_tokens", 0) for p in pages)
-        pdf_output_tokens = sum(p.get("token_usage", {}).get("output_tokens", 0) for p in pages)
-        result["token_usage"] = {
-            "input_tokens": pdf_input_tokens,
-            "output_tokens": pdf_output_tokens,
-        }
-
-        # Save individual PDF result
-        output_path = OUTPUT_FOLDER / f"{doc_id}.json"
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(result, f, indent=2, ensure_ascii=False)
-
-        # Generate per-document HTML immediately after JSON
-        html_path = OUTPUT_FOLDER / f"{doc_id}.html"
-        generate_document_html(result, html_path)
-
-        print(f"  Saved {doc_id}.json and {doc_id}.html")
-
-        return result
-
     def process_all_pdfs(self):
-        """Process all PDFs one at a time, writing output immediately after each.
-
-        Pages within each PDF are processed in parallel using multiprocessing.Pool.
-        This ensures results are persisted per-directory so no work is lost if the
-        process is interrupted or runs out of memory.
-        """
+        """Process all PDFs with flat page-level concurrency using multiprocessing.Pool."""
         # Create output directories
         OUTPUT_FOLDER.mkdir(exist_ok=True)
         REPORTS_FOLDER.mkdir(exist_ok=True)
@@ -1593,9 +1637,9 @@ class PDFExtractor:
         print(f"Already completed: {len(completed)}")
         print(f"Pending: {len(pending_pdfs)}")
 
-        # Gather PDF metadata
-        pdf_info = {}
-        total_pages_to_process = 0
+        # Collect all pages to process across all PDFs
+        all_page_tasks = []
+        pdf_info = {}  # Store PDF metadata for building results later
         for doc_id, pdf_path in pending_pdfs:
             try:
                 doc = pdfium.PdfDocument(str(pdf_path))
@@ -1609,70 +1653,129 @@ class PDFExtractor:
                 "pdf_filename": pdf_path.name,
                 "total_pages": page_count,
             }
-            total_pages_to_process += page_count
+            for page_num in range(page_count):
+                all_page_tasks.append((str(pdf_path), page_num, doc_id))
 
-        print(f"Processing {total_pages_to_process} pages across {len(pdf_info)} PDFs with {MAX_WORKERS} workers")
+        print(f"Processing {len(all_page_tasks)} pages with {MAX_WORKERS} workers")
         print()
 
-        # Process one PDF at a time, writing results immediately after each
-        all_results = []
+        # Process all pages using multiprocessing.Pool
+        results_by_pdf = {}
+        all_failed_pages = []
 
         with Pool(processes=MAX_WORKERS) as pool:
-            for pdf_idx, (doc_id, info) in enumerate(pdf_info.items(), 1):
-                print(f"\n[{pdf_idx}/{len(pdf_info)}] Processing {doc_id} ({info['total_pages']} pages)...")
+            for doc_id, page_num, page_result in tqdm(
+                pool.imap_unordered(_process_page_worker, all_page_tasks),
+                total=len(all_page_tasks),
+                desc="Processing pages",
+            ):
+                if doc_id not in results_by_pdf:
+                    results_by_pdf[doc_id] = {}
+                results_by_pdf[doc_id][page_num] = page_result
 
-                page_tasks = [
-                    (str(info["pdf_path"]), page_num, doc_id)
-                    for page_num in range(info["total_pages"])
-                ]
+                # Track failed pages for retry
+                if page_result.get("error"):
+                    pdf_path_str = str(pdf_info[doc_id]["pdf_path"])
+                    all_failed_pages.append((pdf_path_str, page_num, doc_id))
 
-                page_results = {}
-                failed_pages = []
+                # Update token stats
+                token_usage = page_result.get("token_usage", {})
+                self.stats["total_input_tokens"] += token_usage.get("input_tokens", 0)
+                self.stats["total_output_tokens"] += token_usage.get("output_tokens", 0)
 
-                for _, page_num, page_result in tqdm(
-                    pool.imap_unordered(_process_page_worker, page_tasks),
-                    total=len(page_tasks),
-                    desc=f"  {doc_id}",
-                ):
-                    page_results[page_num] = page_result
+        # Retry failed pages at end of run
+        if all_failed_pages:
+            print(f"\n{'='*60}")
+            print(f"RETRYING {len(all_failed_pages)} FAILED PAGES")
+            print(f"{'='*60}")
+            self._retry_failed_pages(all_failed_pages, results_by_pdf)
 
-                    # Track failed pages for retry
-                    if page_result.get("error"):
-                        failed_pages.append((str(info["pdf_path"]), page_num, doc_id))
+        # Build final results, calculate metrics, and save JSON files
+        all_results = []
+        for pdf_id, info in pdf_info.items():
+            page_results_dict = results_by_pdf.get(pdf_id, {})
+            # Convert dict to sorted list by page number
+            pages = [page_results_dict[i] for i in sorted(page_results_dict.keys())]
 
-                    # Update token stats
-                    token_usage = page_result.get("token_usage", {})
-                    self.stats["total_input_tokens"] += token_usage.get("input_tokens", 0)
-                    self.stats["total_output_tokens"] += token_usage.get("output_tokens", 0)
+            result = {
+                "pdf_id": pdf_id,
+                "source_path": str(info["pdf_path"]),
+                "total_pages": info["total_pages"],
+                "extraction_timestamp": datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z"),
+                "pages": pages,
+            }
 
-                # Retry failed pages for this PDF
-                if failed_pages:
-                    print(f"  Retrying {len(failed_pages)} failed pages for {doc_id}...")
-                    for _, page_num, retry_result in pool.imap_unordered(
-                        _process_page_worker, failed_pages
-                    ):
-                        token_usage = retry_result.get("token_usage", {})
-                        self.stats["total_input_tokens"] += token_usage.get("input_tokens", 0)
-                        self.stats["total_output_tokens"] += token_usage.get("output_tokens", 0)
-                        page_results[page_num] = retry_result
+            # Calculate quality metrics
+            result["quality_metrics"] = self._calculate_pdf_metrics(pages)
 
-                # Save this PDF's results immediately
-                result = self._save_pdf_result(doc_id, info, page_results)
-                all_results.append(result)
+            # Calculate token usage for this PDF
+            pdf_input_tokens = sum(p.get("token_usage", {}).get("input_tokens", 0) for p in pages)
+            pdf_output_tokens = sum(p.get("token_usage", {}).get("output_tokens", 0) for p in pages)
+            result["token_usage"] = {
+                "input_tokens": pdf_input_tokens,
+                "output_tokens": pdf_output_tokens,
+            }
 
-                # Update aggregate stats
-                metrics = result["quality_metrics"]
-                self.stats["total_pages"] += info["total_pages"]
-                self.stats["successful_extractions"] += metrics.get("pages_successful", 0)
-                self.stats["failed_extractions"] += metrics.get("pages_failed", 0)
-                self.stats["pages_by_confidence"]["high"] += metrics.get("pages_high_confidence", 0)
-                self.stats["pages_by_confidence"]["medium"] += metrics.get("pages_medium_confidence", 0)
-                self.stats["pages_by_confidence"]["low"] += metrics.get("pages_low_confidence", 0)
+            # Save individual PDF result
+            output_path = OUTPUT_FOLDER / f"{pdf_id}.json"
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(result, f, indent=2, ensure_ascii=False)
+
+            # Generate per-document HTML immediately after JSON
+            html_path = OUTPUT_FOLDER / f"{pdf_id}.html"
+            generate_document_html(result, html_path)
+
+            all_results.append(result)
+
+            # Update aggregate stats
+            metrics = result["quality_metrics"]
+            self.stats["total_pages"] += info["total_pages"]
+            self.stats["successful_extractions"] += metrics.get("pages_successful", 0)
+            self.stats["failed_extractions"] += metrics.get("pages_failed", 0)
+            self.stats["pages_by_confidence"]["high"] += metrics.get("pages_high_confidence", 0)
+            self.stats["pages_by_confidence"]["medium"] += metrics.get("pages_medium_confidence", 0)
+            self.stats["pages_by_confidence"]["low"] += metrics.get("pages_low_confidence", 0)
 
         # Generate summary report
         self._generate_summary_report(all_results)
 
         return all_results
+
+    def _retry_failed_pages(self, failed_pages: List[Tuple[str, int, str]], results_by_pdf: Dict):
+        """Retry failed pages using multiprocessing.Pool and update results dict.
+
+        Args:
+            failed_pages: List of (pdf_path_str, page_num, doc_id) tuples to retry
+            results_by_pdf: Dict mapping pdf_id -> {page_num: page_result} (modified in place)
+        """
+        if not failed_pages:
+            return
+
+        print(f"Retrying {len(failed_pages)} pages...")
+        successful_retries = 0
+        still_failed = 0
+
+        with Pool(processes=MAX_WORKERS) as pool:
+            for doc_id, page_num, retry_result in tqdm(
+                pool.imap_unordered(_process_page_worker, failed_pages),
+                total=len(failed_pages),
+                desc="Retrying pages",
+            ):
+                # Update token stats from retry
+                token_usage = retry_result.get("token_usage", {})
+                self.stats["total_input_tokens"] += token_usage.get("input_tokens", 0)
+                self.stats["total_output_tokens"] += token_usage.get("output_tokens", 0)
+
+                if retry_result.get("error"):
+                    still_failed += 1
+                else:
+                    successful_retries += 1
+
+                # Update the result in place
+                if doc_id in results_by_pdf:
+                    results_by_pdf[doc_id][page_num] = retry_result
+
+        print(f"Retry complete: {successful_retries} succeeded, {still_failed} still failed")
 
     def _generate_summary_report(self, results: List[Dict]):
         """Generate aggregate summary report."""
