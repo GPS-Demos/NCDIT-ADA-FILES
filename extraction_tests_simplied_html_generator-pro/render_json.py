@@ -430,7 +430,12 @@ def _render_image(item: dict) -> str:
         src = f"data:image/{fmt};base64,{b64}"
         img_tag = f'<img src="{src}" alt="{alt_text}"{size_attrs}>'
     else:
-        img_tag = f'<img alt="{alt_text}" src="">'
+        # No image data — Gemini described something it saw but PyMuPDF had
+        # no matching embedded image.  Rendering an <img src=""> produces a
+        # broken-image icon with the alt text visible, which looks wrong.
+        # Skip these; the visual is already captured by other images or a
+        # full-page render.
+        return '<!-- image without data: ' + alt_text + ' -->'
 
     if caption:
         return (
