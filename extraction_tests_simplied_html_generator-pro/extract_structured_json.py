@@ -1021,6 +1021,35 @@ class PDFExtractor:
             except Exception:
                 continue
 
+        # Diagram detection: when a page has many small embedded image
+        # fragments (icons, arrows, shapes composing a diagram), replace ALL
+        # of them with a single full-page screenshot rendered via get_pixmap.
+        # This preserves the spatial relationships between diagram elements
+        # exactly as they appear in the PDF.
+        if ENABLE_IMAGE_EXTRACTION and len(extracted_images) > 1:
+            small_count = sum(
+                1 for img in extracted_images
+                if img.get("bbox") and
+                (img["bbox"]["x1"] - img["bbox"]["x0"]) < 100 and
+                (img["bbox"]["y1"] - img["bbox"]["y0"]) < 100
+            )
+            if small_count >= 5:
+                # Too many small fragments — this page has a diagram.
+                # Render the entire page as one image to preserve layout.
+                mat = fitz.Matrix(RENDER_SCALE, RENDER_SCALE)
+                pix = page.get_pixmap(matrix=mat)
+                page_png = pix.tobytes("png")
+                extracted_images = [{
+                    "index": 0,
+                    "format": "png",
+                    "bbox": {
+                        "x0": page_rect.x0, "y0": page_rect.y0,
+                        "x1": page_rect.x1, "y1": page_rect.y1,
+                    },
+                    "base64_data": base64.b64encode(page_png).decode("utf-8"),
+                    "_full_page_render": True,
+                }]
+
         doc.close()
         return extracted_images
 

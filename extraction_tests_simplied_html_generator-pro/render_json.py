@@ -209,26 +209,53 @@ def _merge_consecutive_lists(pages: list) -> int:
 
 
 def _mark_decorative_images(pages: list) -> int:
-    """Mark images as decorative based on description AND dimensions.
+    """Mark images as decorative based on description, dimensions, AND content.
 
-    Decorative if any of:
-    - Empty/generic description (unidentified, logo, etc.)
-    - Bbox display size is a thin strip (either dimension < 10px)
-    - Bbox aspect ratio is extreme (> 15:1 or < 1:15) — gradient strips, lines
+    Decorative if ALL of the following hold:
+    - Description is empty/generic (unidentified, logo, etc.) OR
+      bbox indicates a thin strip / extreme aspect ratio
+    - AND the image does NOT have substantial base64 data (> 500 chars).
+      Images with real rendered content (e.g. composited diagram clusters)
+      should always be shown even if the description is generic.
     """
-    decorative_descriptions = {"", "unidentified image", "image", "decorative image", "logo"}
+    decorative_descriptions = {"", "decorative image"}
+    # Descriptions that are decorative ONLY when the image is also tiny
+    generic_descriptions = {"unidentified image", "image", "logo"}
     count = 0
     for page in pages:
         for item in page.get("content", []):
             if item.get("type") == "image":
                 desc = (item.get("description") or "").strip().lower()
-                if desc in decorative_descriptions:
+                b64 = item.get("base64_data") or ""
+                has_substantial_data = len(b64) > 500
+                bbox = item.get("bbox")
+
+                # Always-decorative descriptions (empty, explicitly decorative)
+                if desc in decorative_descriptions and not has_substantial_data:
                     item["_decorative"] = True
                     count += 1
                     continue
 
+                # Generic descriptions — only decorative if also tiny
+                if desc in generic_descriptions:
+                    if not has_substantial_data:
+                        item["_decorative"] = True
+                        count += 1
+                        continue
+                    # Has substantial data — check if bbox is tiny
+                    if bbox:
+                        w = bbox.get("x1", 0) - bbox.get("x0", 0)
+                        h = bbox.get("y1", 0) - bbox.get("y0", 0)
+                        if w > 0 and h > 0 and (w < 10 or h < 10):
+                            item["_decorative"] = True
+                            count += 1
+                            continue
+                    # Large enough with data — keep visible, use generic alt text
+                    if desc == "unidentified image":
+                        item["description"] = "Document image"
+                    continue
+
                 # Check bbox dimensions for design elements (thin strips, lines)
-                bbox = item.get("bbox")
                 if bbox:
                     w = bbox.get("x1", 0) - bbox.get("x0", 0)
                     h = bbox.get("y1", 0) - bbox.get("y0", 0)
