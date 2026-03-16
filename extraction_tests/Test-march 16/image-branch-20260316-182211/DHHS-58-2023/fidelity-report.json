@@ -1,0 +1,213 @@
+{
+  "document_id": "DHHS-58-2023",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output does not contain any fabricated paragraphs or sentences. All text present in the output can be traced back to the source document. While there is duplication of text at the end of the document, this is a structural repetition of existing content, not the creation of new, non-existent text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The audit confirmation web address on page 1 is incorrectly extracted. The URL is split across two lines in the source PDF ('...administrative-' and 'offices/...'). The pipeline extracted only the first part as a functional Link href, resulting in a broken and incorrect URL. Other contact information, including names, phone numbers, and email addresses, is correct.",
+        "b_evidence_source": "https://www.ncdhhs.gov/about/administrative- offices/office-controller/audit-confirmation-reports",
+        "b_evidence_output": "https://www.ncdhhs.gov/about/administrative-",
+        "b_evidence_location": "Section 'CHILDREN’S TRUST FUND', table 'Agency Contact Information', element index 2 (data cell content)",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages (1-6) and all primary sections (I. Program Objectives, II. Program Procedures, III. Compliance Requirements, and detailed crosscutting requirements) are present in the output JSON.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables in the output (Agency Contact Information and Compliance Requirements Matrix) have the same number of data rows as the source PDF. The matrix accurately captures all 14 columns and their corresponding Y/N values.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "No significant text omissions were identified. Each section contains the full text of its corresponding part in the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The content from the start of the 'Suspension and Debarment' sub-section on page 6 through the end of the document is duplicated. It appears once within the 'CROSSCUTTING REQUIREMENTS' section (reading_order 5) and then again as its own top-level section 'Suspension and Debarment' (reading_order 6). This is a structural error that does not change the information but is a material defect in document reconstruction.",
+        "b_evidence_source": "The content of page 6 (Suspension and Debarment, Reporting, Subrecipient Monitoring) appears once.",
+        "b_evidence_output": "The content of page 6 is repeated in Section 5 (elements starting index 39) and Section 6.",
+        "b_evidence_location": "Sections 5 and 6",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6976744186046512,
+    "penalty_sum": 26,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output does not contain any fabricated paragraphs or sentences. All text present in the output can be traced back to the source document. While there is duplication of text at the end of the document, this is a structural repetition of existing content, not the creation of new, non-existent text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The audit confirmation web address on page 1 is incorrectly extracted. The URL is split across two lines in the source PDF ('...administrative-' and 'offices/...'). The pipeline extracted only the first part as a functional Link href, resulting in a broken and incorrect URL. Other contact information, including names, phone numbers, and email addresses, is correct.\",\n      \"b_evidence_source\": \"https://www.ncdhhs.gov/about/administrative- offices/office-controller/audit-confirmation-reports\",\n      \"b_evidence_output\": \"https://www.ncdhhs.gov/about/administrative-\",\n      \"b_evidence_location\": \"Section 'CHILDREN’S TRUST FUND', table 'Agency Contact Information', element index 2 (data cell content)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages (1-6) and all primary sections (I. Program Objectives, II. Program Procedures, III. Compliance Requirements, and detailed crosscutting requirements) are present in the output JSON.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables in the output (Agency Contact Information and Compliance Requirements Matrix) have the same number of data rows as the source PDF. The matrix accurately captures all 14 columns and their corresponding Y/N values.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"No significant text omissions were identified. Each section contains the full text of its corresponding part in the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The content from the start of the 'Suspension and Debarment' sub-section on page 6 through the end of the document is duplicated. It appears once within the 'CROSSCUTTING REQUIREMENTS' section (reading_order 5) and then again as its own top-level section 'Suspension and Debarment' (reading_order 6). This is a structural error that does not change the information but is a material defect in document reconstruction.\",\n      \"b_evidence_source\": \"The content of page 6 (Suspension and Debarment, Reporting, Subrecipient Monitoring) appears once.\",\n      \"b_evidence_output\": \"The content of page 6 is repeated in Section 5 (elements starting index 39) and Section 6.\",\n      \"b_evidence_location\": \"Sections 5 and 6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 26,\n    \"score\": 0.6977\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output significantly duplicates content from page 6. The content for 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' is included at the end of section 5 (reading_order 5) and then repeated almost entirely in section 6 (reading_order 6). For example, the paragraphs regarding budget expenditures and monthly reports appear twice.",
+        "b_evidence_source": "The sections '12. REPORTING' and '13. SUBRECIPIENT MONITORING' appear only once on page 6 of the source PDF.",
+        "b_evidence_output": "The text 'A monthly report of budget expenditures is to be submitted to DSS...' and associated headings appear both in 'sections[4]' (reading_order 5) and 'sections[5]' (reading_order 6).",
+        "b_evidence_location": "Sections 5 and 6, elements following headings 9/10 and 12/13.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading levels are inconsistent for peer sections within the 'CROSSCUTTING REQUIREMENTS' group. Section '1. ACTIVITIES ALLOWED OR UNALLOWED' is assigned heading level 3 (heading-2), while peer sections such as '2. ALLOWABLE COSTS/COST PRINCIPLES' and '4. CONFLICT OF INTEREST' are assigned heading level 4 (heading-3 and heading-4). This breaks the logical hierarchy where parallel sections should share the same level. Additionally, 'Suggested Audit Procedures' in the repeated section 6 is promoted to H3, despite being a subsection of item 9.",
+        "b_evidence_source": "The source document presents sections 1, 2, 4, 5, 7, 8, 9, 12, and 13 as peer-level compliance requirements.",
+        "b_evidence_output": "Section 1 is <h3 id=\"heading-2\">; Section 2 is <h4 id=\"heading-3\">; Section 4 is <h4 id=\"heading-4\">; etc.",
+        "b_evidence_location": "Section 5 (reading_order 5).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The contact information table on page 1 and the compliance matrix on page 3 are both converted with their structural integrity intact. The matrix correctly identifies the two-row header structure and the subsequent data row containing 'Y' and 'N' values.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order generally follows the source document. The logic flows from the title and contact information into the program objectives, procedures, and compliance requirements. While there is duplication at the end of the document, the sequential order of content remains logically aligned with the source's presentation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists throughout the document, including the numbered objectives on page 1/2 and the bulleted requirements on pages 3 and 4, have been correctly identified and structured as ordered or unordered lists in the JSON.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There are two issues with link extraction. First, the primary audit confirmation URL on page 1 is truncated at the hyphen ('https://www.ncdhhs.gov/about/administrative-'), breaking the link. Second, the 'NC DSS Sub-Recipient Contract Monitoring Plan' on page 6, which is a visible hyperlink in the source, is rendered only as underlined text without an associated 'href' or link structure.",
+        "b_evidence_source": "Page 1: https://www.ncdhhs.gov/about/administrative-offices/office-controller/audit-confirmation-reports; Page 6: NC DSS Sub-Recipient Contract Monitoring Plan (hyperlinked text).",
+        "b_evidence_output": "Page 1 link text/href: 'https://www.ncdhhs.gov/about/administrative-'; Page 6 text: 'NC DSS Sub-Recipient Contract Monitoring Plan' (no href).",
+        "b_evidence_location": "Section 1 table and Section 6 paragraph.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 11,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output significantly duplicates content from page 6. The content for 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' is included at the end of section 5 (reading_order 5) and then repeated almost entirely in section 6 (reading_order 6). For example, the paragraphs regarding budget expenditures and monthly reports appear twice.\",\n      \"b_evidence_source\": \"The sections '12. REPORTING' and '13. SUBRECIPIENT MONITORING' appear only once on page 6 of the source PDF.\",\n      \"b_evidence_output\": \"The text 'A monthly report of budget expenditures is to be submitted to DSS...' and associated headings appear both in 'sections[4]' (reading_order 5) and 'sections[5]' (reading_order 6).\",\n      \"b_evidence_location\": \"Sections 5 and 6, elements following headings 9/10 and 12/13.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading levels are inconsistent for peer sections within the 'CROSSCUTTING REQUIREMENTS' group. Section '1. ACTIVITIES ALLOWED OR UNALLOWED' is assigned heading level 3 (heading-2), while peer sections such as '2. ALLOWABLE COSTS/COST PRINCIPLES' and '4. CONFLICT OF INTEREST' are assigned heading level 4 (heading-3 and heading-4). This breaks the logical hierarchy where parallel sections should share the same level. Additionally, 'Suggested Audit Procedures' in the repeated section 6 is promoted to H3, despite being a subsection of item 9.\",\n      \"b_evidence_source\": \"The source document presents sections 1, 2, 4, 5, 7, 8, 9, 12, and 13 as peer-level compliance requirements.\",\n      \"b_evidence_output\": \"Section 1 is <h3 id=\\\"heading-2\\\">; Section 2 is <h4 id=\\\"heading-3\\\">; Section 4 is <h4 id=\\\"heading-4\\\">; etc.\",\n      \"b_evidence_location\": \"Section 5 (reading_order 5).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The contact information table on page 1 and the compliance matrix on page 3 are both converted with their structural integrity intact. The matrix correctly identifies the two-row header structure and the subsequent data row containing 'Y' and 'N' values.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order generally follows the source document. The logic flows from the title and contact information into the program objectives, procedures, and compliance requirements. While there is duplication at the end of the document, the sequential order of content remains logically aligned with the source's presentation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists throughout the document, including the numbered objectives on page 1/2 and the bulleted requirements on pages 3 and 4, have been correctly identified and structured as ordered or unordered lists in the JSON.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There are two issues with link extraction. First, the primary audit confirmation URL on page 1 is truncated at the hyphen ('https://www.ncdhhs.gov/about/administrative-'), breaking the link. Second, the 'NC DSS Sub-Recipient Contract Monitoring Plan' on page 6, which is a visible hyperlink in the source, is rendered only as underlined text without an associated 'href' or link structure.\",\n      \"b_evidence_source\": \"Page 1: https://www.ncdhhs.gov/about/administrative-offices/office-controller/audit-confirmation-reports; Page 6: NC DSS Sub-Recipient Contract Monitoring Plan (hyperlinked text).\",\n      \"b_evidence_output\": \"Page 1 link text/href: 'https://www.ncdhhs.gov/about/administrative-'; Page 6 text: 'NC DSS Sub-Recipient Contract Monitoring Plan' (no href).\",\n      \"b_evidence_location\": \"Section 1 table and Section 6 paragraph.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 1,\n    \"penalty_sum\": 11,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the HTML document follows the source PDF reasonably well. Information is presented in the correct sequence, and the two-column contact information on the first page has been appropriately converted into a side-by-side table layout. While there are expected differences in fonts and spacing, the overall visual flow matches the source's intent.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The Compliance Requirements Matrix table is significantly misrendered. In the source PDF, the matrix contains 14 columns (CC, 1-10, 12-14). In the HTML output, the table terminates at column 9. Columns 10 (Program Income), 12 (Reporting), 13 (Subrecipient Monitoring), and 14 (Special Tests and Provisions) are missing entirely, including their corresponding 'Y/N' values. This results in a major loss of information regarding program compliance requirements.",
+        "b_evidence_source": "The Compliance Requirements Matrix on page 3 contains 14 columns: CC, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14.",
+        "b_evidence_output": "The Compliance Requirements Matrix in the HTML only contains 10 columns: CC, 1, 2, 3, 4, 5, 6, 7, 8, 9.",
+        "b_evidence_location": "III. COMPLIANCE REQUIREMENTS, Compliance Requirements Matrix (page 3)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF consists entirely of text and lines; there are no meaningful images, logos, or charts that require rendering in the HTML. The horizontal lines used for section separation are preserved as appropriate HTML horizontal rules or borders.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "Content at the end of the document is visually duplicated. After the first instance of '13. SUBRECIPIENT MONITORING', the sections for 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' appear again in their entirety at the bottom of the HTML render.",
+        "b_evidence_source": "The sections 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' appear once on page 6 of the PDF.",
+        "b_evidence_output": "These sections appear twice in the HTML output, with the second occurrence starting after the final horizontal rule of the first instance.",
+        "b_evidence_location": "End of document, following the first instance of Section 13.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.625,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the HTML document follows the source PDF reasonably well. Information is presented in the correct sequence, and the two-column contact information on the first page has been appropriately converted into a side-by-side table layout. While there are expected differences in fonts and spacing, the overall visual flow matches the source's intent.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The Compliance Requirements Matrix table is significantly misrendered. In the source PDF, the matrix contains 14 columns (CC, 1-10, 12-14). In the HTML output, the table terminates at column 9. Columns 10 (Program Income), 12 (Reporting), 13 (Subrecipient Monitoring), and 14 (Special Tests and Provisions) are missing entirely, including their corresponding 'Y/N' values. This results in a major loss of information regarding program compliance requirements.\",\n      \"b_evidence_source\": \"The Compliance Requirements Matrix on page 3 contains 14 columns: CC, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14.\",\n      \"b_evidence_output\": \"The Compliance Requirements Matrix in the HTML only contains 10 columns: CC, 1, 2, 3, 4, 5, 6, 7, 8, 9.\",\n      \"b_evidence_location\": \"III. COMPLIANCE REQUIREMENTS, Compliance Requirements Matrix (page 3)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF consists entirely of text and lines; there are no meaningful images, logos, or charts that require rendering in the HTML. The horizontal lines used for section separation are preserved as appropriate HTML horizontal rules or borders.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"Content at the end of the document is visually duplicated. After the first instance of '13. SUBRECIPIENT MONITORING', the sections for 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' appear again in their entirety at the bottom of the HTML render.\",\n      \"b_evidence_source\": \"The sections 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' appear once on page 6 of the PDF.\",\n      \"b_evidence_output\": \"These sections appear twice in the HTML output, with the second occurrence starting after the final horizontal rule of the first instance.\",\n      \"b_evidence_location\": \"End of document, following the first instance of Section 13.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.25\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 7,
+  "total_critical": 1,
+  "total_major": 3,
+  "total_minor": 3,
+  "programmatic_signals": null,
+  "corroboration": null
+}

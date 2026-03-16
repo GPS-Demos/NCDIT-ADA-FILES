@@ -1,0 +1,80 @@
+{
+  "document_id": "02-20-25-SRB-BOT-BNY-Slides",
+  "audited_at": "2026-03-16T18:26:39.967163Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.9375,
+  "fidelity_composite": 0.9099,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score is high (0.91) and content retention is perfect, there is a confirmed structural defect where the 'Enterprise Risk Management Structure' content is duplicated at the end of the document. Given the lowered structural score (0.77) and the lack of accessibility signals, a human review is required to prune redundant blocks and ensure the document structure is logical for screen readers.",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "minor",
+      "analysis": "The output contains significant content duplication within the 'Enterprise Risk Management Structure' section (representing Page 6). The risk categories (Credit, Counterparty, Business, Market) and their associated bullet points are listed twice in the 'elements' array. The first occurrence starts at 'heading-19' and continues through lists for each risk type. After two image elements, the same headings and lists are repeated starting from 'heading-23' through 'heading-26'. In the source PDF, th",
+      "source_pdf_quote": "Page 6 contains four distinct text blocks describing different risk types (Credit, Counterparty, Business, Market) surrounding a central graphic.",
+      "output_quote": "The text for 'CREDIT (BORROWER) RISK' appears twice: once at 'heading-19' with a list, and again at 'heading-23' with the same list. Similarly, 'BUSINESS & OPERATIONAL RISK' appears at 'heading-21' and 'heading-25'.",
+      "location": "Section: 'Enterprise Risk Management Structure', elements array, indices from heading-23 onwards."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "The content blocks for 'CREDIT (BORROWER) RISK', 'COUNTERPARTY CREDIT RISK (NON-CASH COLLATERAL)', 'BUSINESS & OPERATIONAL RISK', and 'MARKET RISK (CASH COLLATERAL INVESTMENT)' from page 6 of the PDF are duplicated in the HTML output. They appear once under the 'Enterprise Risk Management Structure' heading and are repeated a second time at the very end of the document.",
+      "source_pdf_quote": "CREDIT (BORROWER) RISK ... COUNTERPARTY CREDIT RISK (NON-CASH COLLATERAL) ... BUSINESS & OPERATIONAL RISK ... MARKET RISK (CASH COLLATERAL INVESTMENT)",
+      "output_quote": "The HTML repeats the entire list of risk categories and their bullet points twice at the end of the document.",
+      "location": "End of HTML document, following the Enterprise Risk Management section."
+    }
+  ],
+  "action_items": [
+    "Remove the duplicated 'Enterprise Risk Management Structure' blocks from the end of the document.",
+    "Verify the document's reading order and accessibility compliance manually since the automated signal was missing."
+  ],
+  "quality_score": 86,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9099,
+      "text_match": 0.9336336336336337,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8619,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9099,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.9375,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9087985969014908,
+      "shingling_precision": 0.9598641556035814,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 67564,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

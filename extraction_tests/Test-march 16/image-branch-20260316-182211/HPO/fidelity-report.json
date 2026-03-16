@@ -1,0 +1,213 @@
+{
+  "document_id": "HPO",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output preserves the wording of the source document for all sections provided. I found no instances of hallucinated or invented text that does not have a basis in the source document. Duplication of existing text was noted but belongs under C6.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All URLs found in the footnotes (e.g., delmarktransfers.com, ncmodernist.org, mgcrouchlumber.com) and addresses in the appendices were verified against the source text and are correct. No fabrication was detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "Multiple entire sections and page ranges are missing from the output. Specifically, Section 'VI. HICKORY HOUSING' (Pages 42-58) is completely absent. Furthermore, Section 'III. METHODOLOGY' (Pages 7-11) is significantly compromised: the section title is missing, and all content from Pages 7, 8, 9, and 10 is omitted. Only the tail end of the methodology content from Page 11 is present, but it has been erroneously appended to the end of Section II.",
+        "b_evidence_source": "Section VI. HICKORY HOUSING (Pages 42-58); Section III. METHODOLOGY (Pages 7-10).",
+        "b_evidence_output": "The entire section VI is missing. Section III title and pages 7-10 are missing.",
+        "b_evidence_location": "Sections list, between page 42 and 58; and page 7 to 10.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The tables in Appendix A and B were analyzed. While some rows are missing (noted in C5), the tables that are present for specific page ranges are generally row-complete. Some content from Appendix B (Pages 76-80) was converted as paragraphs instead of table rows, but the data itself is preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within Section 'APPENDIX A – UPDATED PROPERTIES', two full pages of data (Pages 72 and 73) containing entries CT0922 through CT1319 are missing. The JSON table for Appendix A stops at CT0920 (end of Page 71) and immediately jumps to Appendix B.",
+        "b_evidence_source": "Entries CT0922 to CT1313 (Page 72) and CT1314 to CT1319 (Page 73).",
+        "b_evidence_output": "The output table for Appendix A terminates at CT0920.",
+        "b_evidence_location": "APPENDIX A - UPDATED PROPERTIES, following entry CT0920.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "In Section II, a paragraph from the top of Page 6 is duplicated. The text beginning 'the Claremont High School and Kenworth historic districts...' appears once as the end of a longer block and then repeats immediately as a standalone paragraph.",
+        "b_evidence_source": "the Claremont High School and Kenworth historic districts that have since been added to the National Register as boundary increase areas. A similar expansion of the Oakwood Historic District was also recommended. Hood and Phillips further proposed that the residential neighborhood around the Green Park School might be a potential historic district. No action was taken, however, to have the Oakwood Historic District Boundary Increase and Green Park Historic District placed on the North Carolina Study List in 1999. (Page 6)",
+        "b_evidence_output": "The exact paragraph above is repeated twice consecutively at the end of Section II elements.",
+        "b_evidence_location": "Section II. ARCHITECTURAL SURVEY HISTORY, elements index.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.6395348837209303,
+    "penalty_sum": 31,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output preserves the wording of the source document for all sections provided. I found no instances of hallucinated or invented text that does not have a basis in the source document. Duplication of existing text was noted but belongs under C6.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All URLs found in the footnotes (e.g., delmarktransfers.com, ncmodernist.org, mgcrouchlumber.com) and addresses in the appendices were verified against the source text and are correct. No fabrication was detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"Multiple entire sections and page ranges are missing from the output. Specifically, Section 'VI. HICKORY HOUSING' (Pages 42-58) is completely absent. Furthermore, Section 'III. METHODOLOGY' (Pages 7-11) is significantly compromised: the section title is missing, and all content from Pages 7, 8, 9, and 10 is omitted. Only the tail end of the methodology content from Page 11 is present, but it has been erroneously appended to the end of Section II.\",\n      \"b_evidence_source\": \"Section VI. HICKORY HOUSING (Pages 42-58); Section III. METHODOLOGY (Pages 7-10).\",\n      \"b_evidence_output\": \"The entire section VI is missing. Section III title and pages 7-10 are missing.\",\n      \"b_evidence_location\": \"Sections list, between page 42 and 58; and page 7 to 10.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The tables in Appendix A and B were analyzed. While some rows are missing (noted in C5), the tables that are present for specific page ranges are generally row-complete. Some content from Appendix B (Pages 76-80) was converted as paragraphs instead of table rows, but the data itself is preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within Section 'APPENDIX A – UPDATED PROPERTIES', two full pages of data (Pages 72 and 73) containing entries CT0922 through CT1319 are missing. The JSON table for Appendix A stops at CT0920 (end of Page 71) and immediately jumps to Appendix B.\",\n      \"b_evidence_source\": \"Entries CT0922 to CT1313 (Page 72) and CT1314 to CT1319 (Page 73).\",\n      \"b_evidence_output\": \"The output table for Appendix A terminates at CT0920.\",\n      \"b_evidence_location\": \"APPENDIX A - UPDATED PROPERTIES, following entry CT0920.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"In Section II, a paragraph from the top of Page 6 is duplicated. The text beginning 'the Claremont High School and Kenworth historic districts...' appears once as the end of a longer block and then repeats immediately as a standalone paragraph.\",\n      \"b_evidence_source\": \"the Claremont High School and Kenworth historic districts that have since been added to the National Register as boundary increase areas. A similar expansion of the Oakwood Historic District was also recommended. Hood and Phillips further proposed that the residential neighborhood around the Green Park School might be a potential historic district. No action was taken, however, to have the Oakwood Historic District Boundary Increase and Green Park Historic District placed on the North Carolina Study List in 1999. (Page 6)\",\n      \"b_evidence_output\": \"The exact paragraph above is repeated twice consecutively at the end of Section II elements.\",\n      \"b_evidence_location\": \"Section II. ARCHITECTURAL SURVEY HISTORY, elements index.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 31,\n    \"score\": 0.6395348837209303\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output contains several instances of duplicated content. In section 'II. ARCHITECTURAL SURVEY HISTORY', the fourth paragraph element is a near-exact duplication of the second half of the third paragraph element, repeating text from page 6 of the source. In 'APPENDIX A – UPDATED PROPERTIES', the table rows for survey sites CT0453 through CT0508 (originally on page 66) are repeated twice within the same table element (rows 22-31 are identical to rows 32-41). Additionally, the entire content of the Appendix B table is repeated as a separate section titled 'Survey Properties List' where each row is converted into a redundant paragraph.",
+        "b_evidence_source": "The text 'the Claremont High School and Kenworth historic districts that have since been added...' appears once at the top of page 6. The Appendix A table entries for CT0453-CT0508 appear once on page 66.",
+        "b_evidence_output": "The text 'the Claremont High School and Kenworth historic districts...' appears in both the third and fourth paragraph elements of section 'II. ARCHITECTURAL SURVEY HISTORY'. Table rows for CT0453-CT0508 are duplicated at index 32-41 in the Appendix A table.",
+        "b_evidence_location": "Sections 'II. ARCHITECTURAL SURVEY HISTORY' and 'APPENDIX A – UPDATED PROPERTIES' (element index 0)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is mostly preserved through normalization, but major section headers from the source are missing in the output structure. Specifically, 'III. METHODOLOGY' (source page 7) and 'VI. HICKORY HOUSING' (source page 42) do not appear as section titles or heading elements. While the text associated with Section III is erroneously appended to Section II, the structural marker (the heading) is lost, which breaks the navigation hierarchy intended by the document's organization.",
+        "b_evidence_source": "III. METHODOLOGY (Page 7); VI. HICKORY HOUSING (Page 42)",
+        "b_evidence_output": "The sections list skips from 'II. ARCHITECTURAL SURVEY HISTORY' to 'IV. HICKORY IN THE TWENTIETH CENTURY'.",
+        "b_evidence_location": "Sections array, between indices 2 and 3",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The tables in Appendix A and B generally follow the correct 3-column structure (SSN, Property Name, Address/Location) found in the source. Headers are correctly identified. While the tables contain duplicated rows (noted in S1), the physical structure of columns and row alignment matches the source formatting.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is significantly impacted by the missing sections and the injection of a redundant section. The text from Section III (Methodology) is merged into Section II, which is a significant structural deviation. Furthermore, the creation of the 'Survey Properties List' section (index 10) disrupts the flow by re-inserting Appendix B data as a series of paragraphs immediately after the table, which does not exist in the source document.",
+        "b_evidence_source": "Methodology text begins on page 7 after the header 'III. METHODOLOGY'.",
+        "b_evidence_output": "Methodology text is found within elements of the 'II. ARCHITECTURAL SURVEY HISTORY' section.",
+        "b_evidence_location": "Sections[2]",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The Table of Contents (page 2) is missing from the output. Other lists, such as those in Appendix C, are rendered as paragraphs. Since the source lists in Appendix C do not use bullets or numbers (they are vertical blocks of text), rendering them as paragraphs is an acceptable reformatting, though the semantic grouping of the TOC is lost.",
+        "b_evidence_source": "TABLE OF CONTENTS (Page 2)",
+        "b_evidence_output": "The TOC section is entirely missing from the JSON.",
+        "b_evidence_location": "Start of document after cover page",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "URLs and references found in the footnotes and text (e.g., in footnote 10 on page 21) are accurately captured as text. No fabricated links or incorrect external URLs were detected during the analysis.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.2727272727272727,
+    "penalty_sum": 16,
+    "defect_count": 4,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output contains several instances of duplicated content. In section 'II. ARCHITECTURAL SURVEY HISTORY', the fourth paragraph element is a near-exact duplication of the second half of the third paragraph element, repeating text from page 6 of the source. In 'APPENDIX A – UPDATED PROPERTIES', the table rows for survey sites CT0453 through CT0508 (originally on page 66) are repeated twice within the same table element (rows 22-31 are identical to rows 32-41). Additionally, the entire content of the Appendix B table is repeated as a separate section titled 'Survey Properties List' where each row is converted into a redundant paragraph.\",\n      \"b_evidence_source\": \"The text 'the Claremont High School and Kenworth historic districts that have since been added...' appears once at the top of page 6. The Appendix A table entries for CT0453-CT0508 appear once on page 66.\",\n      \"b_evidence_output\": \"The text 'the Claremont High School and Kenworth historic districts...' appears in both the third and fourth paragraph elements of section 'II. ARCHITECTURAL SURVEY HISTORY'. Table rows for CT0453-CT0508 are duplicated at index 32-41 in the Appendix A table.\",\n      \"b_evidence_location\": \"Sections 'II. ARCHITECTURAL SURVEY HISTORY' and 'APPENDIX A – UPDATED PROPERTIES' (element index 0)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is mostly preserved through normalization, but major section headers from the source are missing in the output structure. Specifically, 'III. METHODOLOGY' (source page 7) and 'VI. HICKORY HOUSING' (source page 42) do not appear as section titles or heading elements. While the text associated with Section III is erroneously appended to Section II, the structural marker (the heading) is lost, which breaks the navigation hierarchy intended by the document's organization.\",\n      \"b_evidence_source\": \"III. METHODOLOGY (Page 7); VI. HICKORY HOUSING (Page 42)\",\n      \"b_evidence_output\": \"The sections list skips from 'II. ARCHITECTURAL SURVEY HISTORY' to 'IV. HICKORY IN THE TWENTIETH CENTURY'.\",\n      \"b_evidence_location\": \"Sections array, between indices 2 and 3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The tables in Appendix A and B generally follow the correct 3-column structure (SSN, Property Name, Address/Location) found in the source. Headers are correctly identified. While the tables contain duplicated rows (noted in S1), the physical structure of columns and row alignment matches the source formatting.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is significantly impacted by the missing sections and the injection of a redundant section. The text from Section III (Methodology) is merged into Section II, which is a significant structural deviation. Furthermore, the creation of the 'Survey Properties List' section (index 10) disrupts the flow by re-inserting Appendix B data as a series of paragraphs immediately after the table, which does not exist in the source document.\",\n      \"b_evidence_source\": \"Methodology text begins on page 7 after the header 'III. METHODOLOGY'.\",\n      \"b_evidence_output\": \"Methodology text is found within elements of the 'II. ARCHITECTURAL SURVEY HISTORY' section.\",\n      \"b_evidence_location\": \"Sections[2]\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The Table of Contents (page 2) is missing from the output. Other lists, such as those in Appendix C, are rendered as paragraphs. Since the source lists in Appendix C do not use bullets or numbers (they are vertical blocks of text), rendering them as paragraphs is an acceptable reformatting, though the semantic grouping of the TOC is lost.\",\n      \"b_evidence_source\": \"TABLE OF CONTENTS (Page 2)\",\n      \"b_evidence_output\": \"The TOC section is entirely missing from the JSON.\",\n      \"b_evidence_location\": \"Start of document after cover page\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"URLs and references found in the footnotes and text (e.g., in footnote 10 on page 21) are accurately captured as text. No fabricated links or incorrect external URLs were detected during the analysis.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 4,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 1,\n    \"penalty_sum\": 16,\n    \"score\": 0.2727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document fails to represent the visual organization of the source PDF by completely omitting Section III (Methodology) and the beginning of Section VI (Hickory Housing), including the header and first four pages of content (text and images from PDF pages 42-45). This loss of information and structural gap significantly changes the document's flow and meaning. Furthermore, the content of Sections IV and V is repeated, creating a confusing and disorganized reading experience.",
+        "b_evidence_source": "Table of Contents lists 'III. Methodology' on page 6 and 'VI. Hickory Housing' on page 41. Section III covers pages 6-10 and Section VI begins on page 42.",
+        "b_evidence_output": "The HTML main body skips from Section II to Section IV. Section VI header is missing, and content jumps from Section V to text found on page 46 of the original PDF.",
+        "b_evidence_location": "Main document body, between sections II/IV and after section V.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables in the appendices are rendered correctly using standard HTML table tags. Headers are visually distinct due to background shading and bold text, and columns are aligned. While there is duplicated content within the tables, the rendering of the tables themselves is structurally sound.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful images present in the source PDF are missing from the HTML output. Specifically, the Ridgeview Cemetery photos (p. 22), the Montgomery Ward and J.C. Penney store photos (p. 25), the Corinth Evangelical and Episcopal church photos (p. 30), and the map of the Proposed Oakwood Historic District (p. 44) have no corresponding image elements in the HTML.",
+        "b_evidence_source": "Ridgeview Cemetery (p. 22), Montgomery Ward/J.C. Penney (p. 25), Corinth Evangelical/Episcopal (p. 30), Map (p. 44).",
+        "b_evidence_output": "No <img> elements correspond to these specific meaningful architectural photos and maps.",
+        "b_evidence_location": "Sections corresponding to pages 22, 25, 30, and 44.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The document contains extensive visual duplication. Sections IV and V, including their associated images, appear twice in the document body. Within the first table of Appendix A, rows CT0453 through CT0505 are repeated sequentially. Appendix B's data is provided in a table and then repeated as a paragraph-based list under 'Survey Properties List'. Additionally, the 'Study List properties' section is rendered twice.",
+        "b_evidence_source": "Single occurrences of Sections IV, V, Appendix A/B data, and the Study List.",
+        "b_evidence_output": "Sections IV and V repeat; Appendix A table repeats rows CT0453-CT0505; Appendix B content is repeated as a list; Study List properties appear twice.",
+        "b_evidence_location": "Main body, Appendix A, and footer sections.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.8125,
+    "penalty_sum": 3,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 3,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document fails to represent the visual organization of the source PDF by completely omitting Section III (Methodology) and the beginning of Section VI (Hickory Housing), including the header and first four pages of content (text and images from PDF pages 42-45). This loss of information and structural gap significantly changes the document's flow and meaning. Furthermore, the content of Sections IV and V is repeated, creating a confusing and disorganized reading experience.\",\n      \"b_evidence_source\": \"Table of Contents lists 'III. Methodology' on page 6 and 'VI. Hickory Housing' on page 41. Section III covers pages 6-10 and Section VI begins on page 42.\",\n      \"b_evidence_output\": \"The HTML main body skips from Section II to Section IV. Section VI header is missing, and content jumps from Section V to text found on page 46 of the original PDF.\",\n      \"b_evidence_location\": \"Main document body, between sections II/IV and after section V.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables in the appendices are rendered correctly using standard HTML table tags. Headers are visually distinct due to background shading and bold text, and columns are aligned. While there is duplicated content within the tables, the rendering of the tables themselves is structurally sound.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful images present in the source PDF are missing from the HTML output. Specifically, the Ridgeview Cemetery photos (p. 22), the Montgomery Ward and J.C. Penney store photos (p. 25), the Corinth Evangelical and Episcopal church photos (p. 30), and the map of the Proposed Oakwood Historic District (p. 44) have no corresponding image elements in the HTML.\",\n      \"b_evidence_source\": \"Ridgeview Cemetery (p. 22), Montgomery Ward/J.C. Penney (p. 25), Corinth Evangelical/Episcopal (p. 30), Map (p. 44).\",\n      \"b_evidence_output\": \"No <img> elements correspond to these specific meaningful architectural photos and maps.\",\n      \"b_evidence_location\": \"Sections corresponding to pages 22, 25, 30, and 44.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The document contains extensive visual duplication. Sections IV and V, including their associated images, appear twice in the document body. Within the first table of Appendix A, rows CT0453 through CT0505 are repeated sequentially. Appendix B's data is provided in a table and then repeated as a paragraph-based list under 'Survey Properties List'. Additionally, the 'Study List properties' section is rendered twice.\",\n      \"b_evidence_source\": \"Single occurrences of Sections IV, V, Appendix A/B data, and the Study List.\",\n      \"b_evidence_output\": \"Sections IV and V repeat; Appendix A table repeats rows CT0453-CT0505; Appendix B content is repeated as a list; Study List properties appear twice.\",\n      \"b_evidence_location\": \"Main body, Appendix A, and footer sections.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 3,\n    \"penalty_sum\": 3,\n    \"score\": 0.625\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 10,
+  "total_critical": 1,
+  "total_major": 4,
+  "total_minor": 5,
+  "programmatic_signals": null,
+  "corroboration": null
+}

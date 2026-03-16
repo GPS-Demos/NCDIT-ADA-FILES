@@ -1,0 +1,213 @@
+{
+  "document_id": "42736---State-Human-Resources",
+  "composite_score": 0.7914,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.79 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON faithfully represents the source document's text content. While some section titles are rephrased or include rule citations (e.g., 'REQUEST FOR TECHNICAL CHANGE (25 NCAC 01D .0201)'), these are considered acceptable AI-generated enhancements for navigation. The textual information in the body paragraphs and amendment sections matches the source PDF exactly, with no invented or hallucinated content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All addresses (1711 New Hope Church Road, Raleigh, NC 27609) and dates match the source document. The URLs extracted from the rule amendment pages (e.g., oshr.nc.gov and eeoc.gov) are correctly identified and match the source text. There are parsing errors (line numbers included in URL text) on page 5, but the information is not fabricated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section/page missing",
+        "a_analysis": "",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document primarily consists of formatted text rather than formal data tables. The pipeline generated a few small tables to handle URL updates (e.g., in Section 1 Subsection 4). These tables capture the required information from the source text and do not suffer from row loss.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "A careful comparison of paragraphs between the source OCR and the JSON elements shows that no substantial text has been omitted. The strike-throughs and underlined amendments are correctly preserved using formatting flags. All history notes and procedural text are included.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The conversion result includes line numbers from the original legal document directly within the text of body paragraphs (e.g., '35 NCAC 01D .2701' instead of '25 NCAC 01D .2701'). Additionally, in Section 1 Subsection 4 (Page 5), the URLs are broken into multiple table rows/cells and include line numbers in the link text (e.g., '17 forms/...'). There is also significant duplication of page 16 content within Section 10. These differences represent a failure to clean OCR noise and structure text cleanly, affecting the readability and accuracy of rule citations and links.",
+        "b_evidence_source": "NCAC 01D .2701. (Page 5, line 35)",
+        "b_evidence_output": "35 NCAC 01D .2701. (Section 1 Subsection 4, element 11)",
+        "b_evidence_location": "Section 1 Subsection 4, element 11",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9883720930232558,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON faithfully represents the source document's text content. While some section titles are rephrased or include rule citations (e.g., 'REQUEST FOR TECHNICAL CHANGE (25 NCAC 01D .0201)'), these are considered acceptable AI-generated enhancements for navigation. The textual information in the body paragraphs and amendment sections matches the source PDF exactly, with no invented or hallucinated content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All addresses (1711 New Hope Church Road, Raleigh, NC 27609) and dates match the source document. The URLs extracted from the rule amendment pages (e.g., oshr.nc.gov and eeoc.gov) are correctly identified and match the source text. There are parsing errors (line numbers included in URL text) on page 5, but the information is not fabricated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"complete_section_or_page_missing\": \"The output JSON contains 30 sections and various subsections that correspond to all 37 pages of the source document. Each rule amendment and its associated Request for Technical Change (RTC) is present in the output. Sections containing rule history notes are also preserved. There is no evidence of missing pages or skipped sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document primarily consists of formatted text rather than formal data tables. The pipeline generated a few small tables to handle URL updates (e.g., in Section 1 Subsection 4). These tables capture the required information from the source text and do not suffer from row loss.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"A careful comparison of paragraphs between the source OCR and the JSON elements shows that no substantial text has been omitted. The strike-throughs and underlined amendments are correctly preserved using formatting flags. All history notes and procedural text are included.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The conversion result includes line numbers from the original legal document directly within the text of body paragraphs (e.g., '35 NCAC 01D .2701' instead of '25 NCAC 01D .2701'). Additionally, in Section 1 Subsection 4 (Page 5), the URLs are broken into multiple table rows/cells and include line numbers in the link text (e.g., '17 forms/...'). There is also significant duplication of page 16 content within Section 10. These differences represent a failure to clean OCR noise and structure text cleanly, affecting the readability and accuracy of rule citations and links.\",\n      \"b_evidence_source\": \"NCAC 01D .2701. (Page 5, line 35)\",\n      \"b_evidence_output\": \"35 NCAC 01D .2701. (Section 1 Subsection 4, element 11)\",\n      \"b_evidence_location\": \"Section 1 Subsection 4, element 11\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 1,\n    \"score\": 0.9883720930232558\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output document contains significant amounts of duplicated content. Entire rule sections and their corresponding history notes are repeated either within the same section or across consecutive sections. For example, the text for 25 NCAC 01D .0112 (Pages 16-17) is rendered in its entirety twice within section 14: first as a sequence of line-numbered paragraphs (elements 1-37) and then again as a set of non-numbered paragraphs and lists. Similarly, the content of 25 NCAC 01D .0401 (Page 26) is duplicated in Section 23 and then immediately again in Section 24. Duplication also occurs for Rule .0201 (Sections 18 and 19) and Rule .0102's history notes (Section 10).",
+        "b_evidence_source": "25 NCAC 01D .0112 (Pages 16-17), 25 NCAC 01D .0401 (Page 26), 25 NCAC 01D .0201 (Page 21-22), and History Notes for .0102 (Page 11) all appear exactly once in the source PDF.",
+        "b_evidence_output": "The text for .0112 is duplicated within Section 14. Rule .0401 text is identical in Sections 23 and 24. Rule .0201 text is duplicated across Sections 18 and 19. History notes for .0102 are duplicated within Section 10.",
+        "b_evidence_location": "Sections 10, 14, 18/19, 23/24",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is severely compromised due to a recursive nesting error in the first section. Pages 1 through 5 of the source document are not treated as equal sequential sections but are instead nested deeper and deeper into each other. Page 2 is a subsection of Page 1, Page 3 is a subsection of Page 2, and so on. This creates an illogical hierarchy where the levels do not reflect the document's actual organization. Additionally, several top-level headings (like NCAC rule numbers) are assigned Level 3 without a preceding H1 or H2 within those sections.",
+        "b_evidence_source": "Request for Technical Change for .0402 (Page 2), NCAC .0402 (Page 3), Request for .1004 (Page 4), and NCAC .1004 (Page 5) are sequential, distinct pages.",
+        "b_evidence_output": "Section 0 contains Page 1. Its subsection contains Page 2. That subsection's subsection contains Page 3, and so on through Page 5.",
+        "b_evidence_location": "Sections 0-5",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The tables appearing on page 5 of the source document (regarding website link substitutions) are correctly identified and structured in the output. The JSON accurately captures the two-column layout for the URLs and the spanning row for the policy paths, preserving the organizational intent of the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order and organizational structure are fundamentally flawed. The recursive nesting of the first five pages into a single hierarchy (Section 0) incorrectly implies that later pages are parts of earlier pages, which is not the case in the source document. Furthermore, the massive repetition of content (as noted in S1) significantly disrupts the logical flow and information order, as users must traverse identical blocks of text multiple times.",
+        "b_evidence_source": "The source document is a linear sequence of 37 distinct pages.",
+        "b_evidence_output": "The output groups the first five pages into a nested hierarchy and kemudian repeats large content blocks for multiple rules.",
+        "b_evidence_location": "Section 0 (nesting), Sections 10, 14, 18/19, 23/24 (duplication)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are generally handled well. For instance, the multi-part definitions in rule .0112 (Page 16) are correctly converted from a labeled sequence into a structured list. Numbered and bulleted lists preserve their intended meanings, even if formatting varies slightly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Government and institutional URLs found in the source document are correctly captured as active links in the JSON output (e.g., oshr.nc.gov and eeoc.gov links). No broken or fabricated links were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.31818181818181823,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output document contains significant amounts of duplicated content. Entire rule sections and their corresponding history notes are repeated either within the same section or across consecutive sections. For example, the text for 25 NCAC 01D .0112 (Pages 16-17) is rendered in its entirety twice within section 14: first as a sequence of line-numbered paragraphs (elements 1-37) and then again as a set of non-numbered paragraphs and lists. Similarly, the content of 25 NCAC 01D .0401 (Page 26) is duplicated in Section 23 and then immediately again in Section 24. Duplication also occurs for Rule .0201 (Sections 18 and 19) and Rule .0102's history notes (Section 10).\",\n      \"b_evidence_source\": \"25 NCAC 01D .0112 (Pages 16-17), 25 NCAC 01D .0401 (Page 26), 25 NCAC 01D .0201 (Page 21-22), and History Notes for .0102 (Page 11) all appear exactly once in the source PDF.\",\n      \"b_evidence_output\": \"The text for .0112 is duplicated within Section 14. Rule .0401 text is identical in Sections 23 and 24. Rule .0201 text is duplicated across Sections 18 and 19. History notes for .0102 are duplicated within Section 10.\",\n      \"b_evidence_location\": \"Sections 10, 14, 18/19, 23/24\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is severely compromised due to a recursive nesting error in the first section. Pages 1 through 5 of the source document are not treated as equal sequential sections but are instead nested deeper and deeper into each other. Page 2 is a subsection of Page 1, Page 3 is a subsection of Page 2, and so on. This creates an illogical hierarchy where the levels do not reflect the document's actual organization. Additionally, several top-level headings (like NCAC rule numbers) are assigned Level 3 without a preceding H1 or H2 within those sections.\",\n      \"b_evidence_source\": \"Request for Technical Change for .0402 (Page 2), NCAC .0402 (Page 3), Request for .1004 (Page 4), and NCAC .1004 (Page 5) are sequential, distinct pages.\",\n      \"b_evidence_output\": \"Section 0 contains Page 1. Its subsection contains Page 2. That subsection's subsection contains Page 3, and so on through Page 5.\",\n      \"b_evidence_location\": \"Sections 0-5\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The tables appearing on page 5 of the source document (regarding website link substitutions) are correctly identified and structured in the output. The JSON accurately captures the two-column layout for the URLs and the spanning row for the policy paths, preserving the organizational intent of the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order and organizational structure are fundamentally flawed. The recursive nesting of the first five pages into a single hierarchy (Section 0) incorrectly implies that later pages are parts of earlier pages, which is not the case in the source document. Furthermore, the massive repetition of content (as noted in S1) significantly disrupts the logical flow and information order, as users must traverse identical blocks of text multiple times.\",\n      \"b_evidence_source\": \"The source document is a linear sequence of 37 distinct pages.\",\n      \"b_evidence_output\": \"The output groups the first five pages into a nested hierarchy and kemudian repeats large content blocks for multiple rules.\",\n      \"b_evidence_location\": \"Section 0 (nesting), Sections 10, 14, 18/19, 23/24 (duplication)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are generally handled well. For instance, the multi-part definitions in rule .0112 (Page 16) are correctly converted from a labeled sequence into a structured list. Numbered and bulleted lists preserve their intended meanings, even if formatting varies slightly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Government and institutional URLs found in the source document are correctly captured as active links in the JSON output (e.g., oshr.nc.gov and eeoc.gov links). No broken or fabricated links were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.31818181818181823\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output maintains the visual organization of the source PDF. The document is structured as a series of 'Request for Technical Change' memos followed by the actual rule text ('Permanent Amendment/Readoption'). This sequential organization is preserved in the HTML. Key visual indicators of rule changes, such as strike-throughs for deletions and underlines for additions, are correctly rendered in the HTML. The layout is simplified for web viewing (single-column, responsive text), which is an expected and acceptable transformation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source document does not contain traditional grid-based tables. The rule text (e.g., on PDF pages 3, 5, 8, and 11) is organized using hierarchical lists. The HTML conversion successfully captures this structure, rendering the sub-sections (a), (b), (1), (2), etc., as logically nested list items that remain easily readable and understandable for a sighted user.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF is entirely text-based and contains no logos, seals, charts, or other meaningful images. Consequently, the absence of image elements in the HTML output is correct and does not constitute a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "Each page of the source PDF appears once and in the correct order in the rendered HTML screenshot. There is no evidence of duplicated blocks of text, headers, or repeated sections beyond what exists in the source document itself (where multiple separate requests use the same form header).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output maintains the visual organization of the source PDF. The document is structured as a series of 'Request for Technical Change' memos followed by the actual rule text ('Permanent Amendment/Readoption'). This sequential organization is preserved in the HTML. Key visual indicators of rule changes, such as strike-throughs for deletions and underlines for additions, are correctly rendered in the HTML. The layout is simplified for web viewing (single-column, responsive text), which is an expected and acceptable transformation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source document does not contain traditional grid-based tables. The rule text (e.g., on PDF pages 3, 5, 8, and 11) is organized using hierarchical lists. The HTML conversion successfully captures this structure, rendering the sub-sections (a), (b), (1), (2), etc., as logically nested list items that remain easily readable and understandable for a sighted user.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF is entirely text-based and contains no logos, seals, charts, or other meaningful images. Consequently, the absence of image elements in the HTML output is correct and does not constitute a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"Each page of the source PDF appears once and in the correct order in the rendered HTML screenshot. There is no evidence of duplicated blocks of text, headers, or repeated sections beyond what exists in the source document itself (where multiple separate requests use the same form header).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 0,
+  "total_major": 3,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

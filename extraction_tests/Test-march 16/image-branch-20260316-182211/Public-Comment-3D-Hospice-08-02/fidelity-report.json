@@ -1,0 +1,213 @@
+{
+  "document_id": "Public-Comment-3D-Hospice-08-02",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON faithfully represents the text found in the source document. No fabricated paragraphs or sentences were identified. AI-generated table captions and summaries are present as allowed by the instructions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All URLs and contact information references in the JSON (such as links to dma.ncdhhs.gov and eCFR references) are verified against the source PDF or correctly extracted from invisible hyperlink annotations within the PDF structure. No fabrications were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output JSON fails to include several entire sections and pages present in the source document. Specifically, Sections 1.0 (pg 4) and 2.0 (pg 5) are completely absent from the beginning of the sections array. Furthermore, Section 6.0 (pg 19) and the heading for Section 7.0 (pg 20) are missing. Between JSON section index 7 (Section 5.7) and index 8 (Section 8.0), content for subsections 5.8 through 5.13 and 7.1 through 7.3.3 is entirely omitted without even summary entries. This represents a significant loss of authoritative content.",
+        "b_evidence_source": "Table of Contents: 1.0 Description of the Procedure... 2.0 Eligibility Requirements... 6.0 Provider(s) Eligible to Bill... 7.0 Additional Requirements... (Subsections 5.8-5.13, 7.1-7.3)",
+        "b_evidence_output": "The sections array starts at Title '3.0 When the Procedure, Product, or Service Is Covered' and skips from '5.7 Duration of Hospice Care Coverage -Election Periods' directly to '8.0 Policy Implementation/Revision Information' without including the intervening sections.",
+        "b_evidence_location": "Metadata and Sections array indices 0-8",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Major tables, such as the Policy Implementation/Revision Information (pg 28-30) and the Revenue Code table in Attachment A (pg 31-33), contain the correct number of rows and data points compared to the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "There is a massive failure in the conversion of Section 5.7 and the beginning of Section 7.0. The element array for section index 7 (Title: 5.7) contains a few elements of 5.7, then jumps to elements from Section 7.1.b (page 21) and Section 7.3.4 (page 26), omitting all text from page 17 to 20 including subsections 5.8 through 5.13 and the start of 7.1. This is a significant omission within the sequence of the document.",
+        "b_evidence_source": "Source Pages 17-21 contain sections 5.8 to 7.1.a.",
+        "b_evidence_output": "Section 5.7 elements skip from page 16 content directly to element 3: 'b. All DMA’s clinical (medical) coverage policies...' (pg 21).",
+        "b_evidence_location": "JSON sections array index 7, elements 2-3",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text content and meaning are preserved in the sections that were successfully converted. Wording and numbering match the source, including the preservation of typos from the original document (e.g., 'shall nor require' in Section 5.1). Formatting like strikethroughs (e.g., in Section 5.1) is generally captured correctly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON faithfully represents the text found in the source document. No fabricated paragraphs or sentences were identified. AI-generated table captions and summaries are present as allowed by the instructions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All URLs and contact information references in the JSON (such as links to dma.ncdhhs.gov and eCFR references) are verified against the source PDF or correctly extracted from invisible hyperlink annotations within the PDF structure. No fabrications were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output JSON fails to include several entire sections and pages present in the source document. Specifically, Sections 1.0 (pg 4) and 2.0 (pg 5) are completely absent from the beginning of the sections array. Furthermore, Section 6.0 (pg 19) and the heading for Section 7.0 (pg 20) are missing. Between JSON section index 7 (Section 5.7) and index 8 (Section 8.0), content for subsections 5.8 through 5.13 and 7.1 through 7.3.3 is entirely omitted without even summary entries. This represents a significant loss of authoritative content.\",\n      \"b_evidence_source\": \"Table of Contents: 1.0 Description of the Procedure... 2.0 Eligibility Requirements... 6.0 Provider(s) Eligible to Bill... 7.0 Additional Requirements... (Subsections 5.8-5.13, 7.1-7.3)\",\n      \"b_evidence_output\": \"The sections array starts at Title '3.0 When the Procedure, Product, or Service Is Covered' and skips from '5.7 Duration of Hospice Care Coverage -Election Periods' directly to '8.0 Policy Implementation/Revision Information' without including the intervening sections.\",\n      \"b_evidence_location\": \"Metadata and Sections array indices 0-8\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Major tables, such as the Policy Implementation/Revision Information (pg 28-30) and the Revenue Code table in Attachment A (pg 31-33), contain the correct number of rows and data points compared to the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"There is a massive failure in the conversion of Section 5.7 and the beginning of Section 7.0. The element array for section index 7 (Title: 5.7) contains a few elements of 5.7, then jumps to elements from Section 7.1.b (page 21) and Section 7.3.4 (page 26), omitting all text from page 17 to 20 including subsections 5.8 through 5.13 and the start of 7.1. This is a significant omission within the sequence of the document.\",\n      \"b_evidence_source\": \"Source Pages 17-21 contain sections 5.8 to 7.1.a.\",\n      \"b_evidence_output\": \"Section 5.7 elements skip from page 16 content directly to element 3: 'b. All DMA’s clinical (medical) coverage policies...' (pg 21).\",\n      \"b_evidence_location\": \"JSON sections array index 7, elements 2-3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text content and meaning are preserved in the sections that were successfully converted. Wording and numbering match the source, including the preservation of typos from the original document (e.g., 'shall nor require' in Section 5.1). Formatting like strikethroughs (e.g., in Section 5.1) is generally captured correctly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The content for 'Attachment A: Claims-Related Information' is duplicated. It appears in its entirety in both element index 8 (sections[8]) and index 9 (sections[9]). The first occurrence (index 8) is a partial capture ending at revenue code 0652, while the second occurrence (index 9) repeats the start of the attachment and includes more data.",
+        "b_evidence_source": "Attachment A: Claims-Related Information",
+        "b_evidence_output": "The entire block starting with 'Provider(s) shall comply with the, NCTracks Provider Claims and Billing Assistance Guide...' appears twice in consecutive sections.",
+        "b_evidence_location": "Attachment A: Claims-Related Information, sections[8] and sections[9]",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is severely compromised. Major subsections of 5.0 (such as 5.3 Admission to Hospice, 5.4, 5.5, 5.6) are elevated to top-level sections in the root 'sections' array instead of being nested as subsections of 5.0. Additionally, the Revision Information table (Section 8.0) is nested as an H3 within the elements of Section 5.7. Finally, Sections 1.0 and 2.0 are completely omitted from the start of the document structure.",
+        "b_evidence_source": "Table of Contents showing 5.3, 5.4 etc. as subsections of 5.0.",
+        "b_evidence_output": "Sections 5.3, 5.4, 5.5, and 5.6 are root-level objects in the JSON array (indices 3, 4, 5, 6).",
+        "b_evidence_location": "sections array, elements 3 through 6",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The pipeline has incorrectly converted numerous non-tabular content blocks into tables. For instance, paragraphs in Section 5.1 ('Medicaid and NCHC do not require clinical review...'), Section 5.2.2.2 (Nursing Facility), and Section 5.3 (Admission to Hospice) are rendered as single-cell or multi-cell tables. Lists in Section 5.2.2.4 and 5.4.1 are also wrapped in complex table structures that do not exist in the source.",
+        "b_evidence_source": "5.1 Prior Approval (paragraph starting 'Medicaid and NCHC do not require clinical review...')",
+        "b_evidence_output": "\"type\": \"table\", \"caption\": \"Prior Approval Changes\"",
+        "b_evidence_location": "Section 5.1, Page 9",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is materially broken, specifically within section index 7. The content flows from Section 5.7 (Page 16) directly into a list item from Section 7.1 (Page 21), then jumps to a paragraph from Section 7.3.3.2 (Page 26). This skips approximately 10 pages of required policy content (Sections 5.8 through 6.2 and early parts of 7.0), which are neither present in sequence nor properly grouped.",
+        "b_evidence_source": "Source flow: 5.7 -> 5.8 -> 5.9 ... -> 7.1",
+        "b_evidence_output": "Output flow in sections[7]: 5.7 content followed by 'b. All DMA’s clinical...' (from 7.1b) and then 'agency and leave the home...' (from 7.3.3.2).",
+        "b_evidence_location": "sections[7], Page 16 jumping to Page 21 and Page 26",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Multiple lists have been flattened or converted into tables, losing their semantic list structure. Specifically, the nested lists in 5.2.2.4 and 5.4.1 are now table rows. Furthermore, in Section 5.7 item 'c', the sub-numbered list (1, 2, 3) present in the source is rendered as plain text within list items without the numbering preserved.",
+        "b_evidence_source": "Page 16, Section 5.7.c, items 1, 2, 3.",
+        "b_evidence_output": "Numbered list items converted to plain text within the nested_list structure without preserving '1.', '2.', '3.' prefixes.",
+        "b_evidence_location": "Section 5.7, Page 16",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There is a minor text error in a link reference where '42 CFR' is written as '42 CRF'. While the underlying URL might be correct, the displayed text in the output contains a transposition error relative to the source.",
+        "b_evidence_source": "42 CFR 418.24(4)",
+        "b_evidence_output": "CRF 418.24(4)",
+        "b_evidence_location": "Section 5.2.2.1, element 1",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.0,
+    "penalty_sum": 22,
+    "defect_count": 6,
+    "critical_count": 0,
+    "major_count": 4,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The content for 'Attachment A: Claims-Related Information' is duplicated. It appears in its entirety in both element index 8 (sections[8]) and index 9 (sections[9]). The first occurrence (index 8) is a partial capture ending at revenue code 0652, while the second occurrence (index 9) repeats the start of the attachment and includes more data.\",\n      \"b_evidence_source\": \"Attachment A: Claims-Related Information\",\n      \"b_evidence_output\": \"The entire block starting with 'Provider(s) shall comply with the, NCTracks Provider Claims and Billing Assistance Guide...' appears twice in consecutive sections.\",\n      \"b_evidence_location\": \"Attachment A: Claims-Related Information, sections[8] and sections[9]\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is severely compromised. Major subsections of 5.0 (such as 5.3 Admission to Hospice, 5.4, 5.5, 5.6) are elevated to top-level sections in the root 'sections' array instead of being nested as subsections of 5.0. Additionally, the Revision Information table (Section 8.0) is nested as an H3 within the elements of Section 5.7. Finally, Sections 1.0 and 2.0 are completely omitted from the start of the document structure.\",\n      \"b_evidence_source\": \"Table of Contents showing 5.3, 5.4 etc. as subsections of 5.0.\",\n      \"b_evidence_output\": \"Sections 5.3, 5.4, 5.5, and 5.6 are root-level objects in the JSON array (indices 3, 4, 5, 6).\",\n      \"b_evidence_location\": \"sections array, elements 3 through 6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The pipeline has incorrectly converted numerous non-tabular content blocks into tables. For instance, paragraphs in Section 5.1 ('Medicaid and NCHC do not require clinical review...'), Section 5.2.2.2 (Nursing Facility), and Section 5.3 (Admission to Hospice) are rendered as single-cell or multi-cell tables. Lists in Section 5.2.2.4 and 5.4.1 are also wrapped in complex table structures that do not exist in the source.\",\n      \"b_evidence_source\": \"5.1 Prior Approval (paragraph starting 'Medicaid and NCHC do not require clinical review...')\",\n      \"b_evidence_output\": \"\\\"type\\\": \\\"table\\\", \\\"caption\\\": \\\"Prior Approval Changes\\\"\",\n      \"b_evidence_location\": \"Section 5.1, Page 9\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is materially broken, specifically within section index 7. The content flows from Section 5.7 (Page 16) directly into a list item from Section 7.1 (Page 21), then jumps to a paragraph from Section 7.3.3.2 (Page 26). This skips approximately 10 pages of required policy content (Sections 5.8 through 6.2 and early parts of 7.0), which are neither present in sequence nor properly grouped.\",\n      \"b_evidence_source\": \"Source flow: 5.7 -> 5.8 -> 5.9 ... -> 7.1\",\n      \"b_evidence_output\": \"Output flow in sections[7]: 5.7 content followed by 'b. All DMA’s clinical...' (from 7.1b) and then 'agency and leave the home...' (from 7.3.3.2).\",\n      \"b_evidence_location\": \"sections[7], Page 16 jumping to Page 21 and Page 26\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Multiple lists have been flattened or converted into tables, losing their semantic list structure. Specifically, the nested lists in 5.2.2.4 and 5.4.1 are now table rows. Furthermore, in Section 5.7 item 'c', the sub-numbered list (1, 2, 3) present in the source is rendered as plain text within list items without the numbering preserved.\",\n      \"b_evidence_source\": \"Page 16, Section 5.7.c, items 1, 2, 3.\",\n      \"b_evidence_output\": \"Numbered list items converted to plain text within the nested_list structure without preserving '1.', '2.', '3.' prefixes.\",\n      \"b_evidence_location\": \"Section 5.7, Page 16\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There is a minor text error in a link reference where '42 CFR' is written as '42 CRF'. While the underlying URL might be correct, the displayed text in the output contains a transposition error relative to the source.\",\n      \"b_evidence_source\": \"42 CFR 418.24(4)\",\n      \"b_evidence_output\": \"CRF 418.24(4)\",\n      \"b_evidence_location\": \"Section 5.2.2.1, element 1\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 6,\n    \"critical_count\": 0,\n    \"major_count\": 4,\n    \"minor_count\": 2,\n    \"penalty_sum\": 22,\n    \"score\": 0.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document faithfully translates the multi-page PDF structure into a single continuous web page. The hierarchical numbering (1.0, 1.1, 1.1.1, etc.) is preserved, ensuring that the visual organization of information matches the source. The transition from a fixed-page layout with repeated headers/footers to a structured HTML document with a side navigation menu is a standard and acceptable transformation that enhances usability without losing visual context.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The major tables in the document, including the Table of Contents, the Revision Information table (starting on PDF page 28), and the Revenue Code table in Attachment A (starting on PDF page 31), are correctly rendered as HTML tables. They maintain distinct headers, clear row/column separation, and proper alignment of content. A sighted user can easily read and interpret the data within these tables.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF contains complex form pages in Attachment C (pages 40-41). These pages have been rendered as high-quality full-page images in the HTML output. This is an appropriate fallback for vector-based forms that cannot be easily converted to structured HTML, ensuring that the visual content of the forms is fully preserved and accessible to the user.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A careful review of the HTML output confirms that no content blocks, paragraphs, or tables have been duplicated during the conversion process. Each section of the policy appears exactly once in the sequence defined by the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document faithfully translates the multi-page PDF structure into a single continuous web page. The hierarchical numbering (1.0, 1.1, 1.1.1, etc.) is preserved, ensuring that the visual organization of information matches the source. The transition from a fixed-page layout with repeated headers/footers to a structured HTML document with a side navigation menu is a standard and acceptable transformation that enhances usability without losing visual context.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The major tables in the document, including the Table of Contents, the Revision Information table (starting on PDF page 28), and the Revenue Code table in Attachment A (starting on PDF page 31), are correctly rendered as HTML tables. They maintain distinct headers, clear row/column separation, and proper alignment of content. A sighted user can easily read and interpret the data within these tables.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF contains complex form pages in Attachment C (pages 40-41). These pages have been rendered as high-quality full-page images in the HTML output. This is an appropriate fallback for vector-based forms that cannot be easily converted to structured HTML, ensuring that the visual content of the forms is fully preserved and accessible to the user.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A careful review of the HTML output confirms that no content blocks, paragraphs, or tables have been duplicated during the conversion process. Each section of the policy appears exactly once in the sequence defined by the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 8,
+  "total_critical": 1,
+  "total_major": 5,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

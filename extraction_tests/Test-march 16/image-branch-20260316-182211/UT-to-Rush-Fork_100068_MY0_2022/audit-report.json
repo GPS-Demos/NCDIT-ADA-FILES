@@ -1,0 +1,129 @@
+{
+  "document_id": "UT-to-Rush-Fork_100068_MY0_2022",
+  "audited_at": "2026-03-16T18:42:08.557150Z",
+  "fidelity_content": 0.5930232558139534,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.5625,
+  "fidelity_composite": 0.4,
+  "routing": "human_review",
+  "reasoning": "The document shows significant data loss and structural failure, specifically the omission of two entire tables from Appendix A and a 95% data loss in Table 6. The concatenation of multi-column data into single text strings in Tables 7 and 8 destroys the technical utility of the report, necessitating human intervention to restore data integrity.",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output is missing two entire tables from Appendix A. 'Table 4. Project Contacts' (found on p19 of the source) and 'Table 5. Project Baseline Information and Attributes' (found on p20 of the source) are completely absent from the elements list in the output JSON. These are substantive data sections required by the report structure.",
+      "source_pdf_quote": "Table 4. Project Contacts (p19); Table 5. Project Baseline Information and Attributes (p20)",
+      "output_quote": "The tables are entirely omitted from the output elements between 'Table 3' and 'Appendix B'.",
+      "location": "Appendix A, between pages 18 and 21"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "Multiple tables suffer from material row loss. Table 6 (p40) in the source lists over 20 species, but the output only contains 1 species ('Acer negundo'). The 'Proposed BMP Planted Species' table (p97) is missing the entire 'Temporary Inundation Zone' section (10 shrub species rows). Table 7 (p43-45) and Table 8 (p46) also show significant loss of metrics or data rows, often merging multiple source rows into single concatenated strings, which materially reduces the row count.",
+      "source_pdf_quote": "Table 6 lists 20+ species (p40). BMP Planted Species table lists 20 species (p97).",
+      "output_quote": "Table 6 lists only 1 species (element index 18). BMP table lists only 10 species (element index 65).",
+      "location": "Tables 6, 7, 8, and BMP Species Table"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "As noted in C4, significant portions of text content are missing from tables. In Table 6, approximately 95% of the species data is absent. In the BMP Species Table, 50% of the species list (the entire shrubs section) is missing. This constitutes a major omission of technical data.",
+      "source_pdf_quote": "Full lists of species and metrics in Tables 6 and BMP Species table.",
+      "output_quote": "Truncated species lists representing less than 50-10% of the source data.",
+      "location": "Appendix C (Table 6) and Appendix E (BMP Table)"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The end of the Response Letter (from page 5/6) is duplicated. Section index 1 ('Response to DMS Comments') ends with the signature of Jason York. Section index 2 ('Response Letter') begins with the final response from page 5 ('Both the soil road and the fencing...') and repeats the signature and closing text again.",
+      "source_pdf_quote": "The response letter concludes once on page 6 with Jason York's signature.",
+      "output_quote": "The text 'RESPONSE: Both the soil road...' through 'Environmental Scientist' appears at the end of the section 'Response to DMS Comments' and is repeated in its entirety in the following section 'Response Letter'.",
+      "location": "Sections 2 and 3, element index 2 and 3, spanning pages 5-6."
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Several complex data tables have suffered severe structural corruption. In Table 7 (Page 43) and Table 8 (Page 46), the column structure has collapsed, and the output concatenates data from all columns into single text blocks or rows within one cell. Additionally, Table 6 (Page 40) is missing most of its data columns; the source has columns for 7 different vegetation plots, but the output only renders columns for 'Veg Plot 1 F'.",
+      "source_pdf_quote": "Table 7. Baseline Stream Data Summary (Page 43) contains multiple columns (Min, Mean, Med, Max) nested under several categorical headers.",
+      "output_quote": "Table 7 (reading_order 21) collapses these into a single column of concatenated strings: 'BF Width (ft) 7.1000 9.65 ----- 12.2000 9.90 11.39 ----- 12.88...'",
+      "location": "Baseline Stream Data Summary, element index 21, page 43."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "Several technical tables are severely misrendered. In Table 7 (Baseline Stream Data Summary) and Table 8 (Cross-Section Morphology Data Summary), the multi-column numeric data has been concatenated into a single string within a single table cell for each row. This destroys the tabular structure and makes the data impossible to read or interpret correctly. For example, row 1 of Table 7 in the HTML contains 16 distinct values run together in one <td> element.",
+      "source_pdf_quote": "Table 7 on PDF page 43 shows distinct columns for Min, Mean, Med, and Max across different categories (Pre-Existing, Reference, Design, As-built).",
+      "output_quote": "<td>BF Width (ft) 7.1000 9.65 ----- 12.2000 9.90 11.39 ----- 12.88 9.00 9.50 ----- 10.00 7.79 9.28 9.28 10.76...</td>",
+      "location": "Baseline Stream Data Summary, Section 19"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "In the section for Appendix D (Cross-Section data), many images intended to show the left and right banks of stream reaches have invalid and broken 'src' attributes. Instead of valid image paths or base64 data, the HTML uses placeholders like 'image_56_0', which do not point to valid resources.",
+      "source_pdf_quote": "Photos 'Looking at the Left Bank' and 'Looking at the Right Bank' for Cross-Section 2 on PDF page 56.",
+      "output_quote": "<img src=\"image_56_0\" alt=\"Looking at the Left Bank of Permanent Cross-Section 2\" ...>",
+      "location": "Permanent Cross-Section 2, Section 29"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "There is significant visual duplication of content blocks throughout the HTML. Section 1.5 (Project Timeline) and Section 1.6 (Design Change Deviations) appear twice: once within the '1.0 PROJECT SUMMARY' block and again as individual standalone sections. The response letter signature and response text are also repeated. Additionally, the 'Figure 5' photo log and several 'Figure 8' cross-section entries are duplicated in full.",
+      "source_pdf_quote": "Section 1.5 Project Timeline appears once on PDF page 11.",
+      "output_quote": "The text for '1.5 Project Timeline' appears in both Section 3 and Section 6 of the HTML output.",
+      "location": "Section 3 and Section 6"
+    }
+  ],
+  "action_items": [
+    "Manually reintegrate missing tables from Appendix A (Source p19-20).",
+    "Reconstruct Table 6, Table 7, and Table 8 to restore data row/column integrity and species counts.",
+    "Resolve broken image links in Appendix D and remove all duplicated content blocks identified in sections 1.0 and the Response Letter."
+  ],
+  "quality_score": 40,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8216496093927865,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6104,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5930232558139534,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.5625,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7974477135767458,
+      "shingling_precision": 0.9275171105796982,
+      "duplication_ratio": 0.054437758555848065,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.86,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 120488,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

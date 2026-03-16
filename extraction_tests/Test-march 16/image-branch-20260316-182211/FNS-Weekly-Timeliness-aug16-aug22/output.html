@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>NORTH CAROLINA FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY FOR THE WEEK ENDING AUGUST 22, 2021</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>NORTH CAROLINA FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY FOR THE WEEK ENDING AUGUST 22, 2021</h1>
+    </header>
+    <main id="main-content" role="main">
+<section aria-labelledby="section-1">
+<h2 id="section-1">County</h2>
+<div class="table-responsive" role="region" tabindex="0" aria-label="NORTH CAROLINA FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY">
+<table>
+<caption>NORTH CAROLINA FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY</caption><thead><tr><td rowspan="2">&nbsp;</td><th scope="col" colspan="4">Not Expedited</th><th scope="col" colspan="4">Expedited</th><th scope="col" colspan="4">All Approved</th></tr>
+<tr><th scope="col" colspan="2">Timely</th><th scope="col" colspan="2">Untimely</th><th scope="col" colspan="2">Timely</th><th scope="col" colspan="2">Untimely</th><th scope="col" colspan="2">Timely</th><th scope="col" colspan="2">Untimely</th></tr>
+<tr><th scope="col">Count Percent Count Percent Count Percent Count Percent Count Percent Count Percent</th></tr>
+</thead><tbody><tr><td>Alamance 58 98.31 1 1.69 24 100.00 0 0.00 82 98.80 1 1.20</td></tr>
+<tr><td>Alexander 2 100.00 0 0.00 3 100.00 0 0.00 5 100.00 0 0.00</td></tr>
+<tr><td>Alleghany 3 100.00 0 0.00 2 100.00 0 0.00 5 100.00 0 0.00</td></tr>
+<tr><td>Anson 15 100.00 0 0.00 3 75.00 1 25.00 18 94.74 1 5.26</td></tr>
+<tr><td>Ashe 7 100.00 0 0.00 4 100.00 0 0.00 11 100.00 0 0.00</td></tr>
+<tr><td>Avery 4 100.00 0 0.00 1 100.00 0 0.00 5 100.00 0 0.00</td></tr>
+<tr><td>Beaufort 18 94.74 1 5.26 12 92.31 1 7.69 30 93.75 2 6.25</td></tr>
+<tr><td>Bertie 14 100.00 0 0.00 5 100.00 0 0.00 19 100.00 0 0.00</td></tr>
+<tr><td>Bladen 27 100.00 0 0.00 5 100.00 0 0.00 32 100.00 0 0.00</td></tr>
+<tr><td>Brunswick 28 100.00 0 0.00 15 100.00 0 0.00 43 100.00 0 0.00</td></tr>
+<tr><td>Buncombe 86 100.00 0 0.00 53 100.00 0 0.00 139 100.00 0 0.00</td></tr>
+<tr><td>Burke 27 100.00 0 0.00 17 94.44 1 5.56 44 97.78 1 2.22</td></tr>
+<tr><td>Cabarrus 67 100.00 0 0.00 40 100.00 0 0.00 107 100.00 0 0.00</td></tr>
+<tr><td>Caldwell 41 100.00 0 0.00 18 100.00 0 0.00 59 100.00 0 0.00</td></tr>
+<tr><td>Camden 5 100.00 0 0.00 1 100.00 0 0.00 6 100.00 0 0.00</td></tr>
+<tr><td>Carteret 27 100.00 0 0.00 10 100.00 0 0.00 37 100.00 0 0.00</td></tr>
+<tr><td>Caswell 8 88.89 1 11.11 3 100.00 0 0.00 11 91.67 1 8.33</td></tr>
+<tr><td>Catawba 71 100.00 0 0.00 32 100.00 0 0.00 103 100.00 0 0.00</td></tr>
+<tr><td>Chatham 16 100.00 0 0.00 4 100.00 0 0.00 20 100.00 0 0.00</td></tr>
+<tr><td>Cherokee 7 100.00 0 0.00 8 100.00 0 0.00 15 100.00 0 0.00</td></tr>
+<tr><td>Chowan 4 100.00 0 0.00 4 100.00 0 0.00 8 100.00 0 0.00</td></tr>
+<tr><td>Clay 0 0 0 0 2 100.00 0 0.00 2 100.00 0 0.00</td></tr>
+<tr><td>Cleveland 49 98.00 1 2.00 23 95.83 1 4.17 72 97.30 2 2.70</td></tr>
+<tr><td>Columbus 27 100.00 0 0.00 5 83.33 1 16.67 32 96.97 1 3.03</td></tr>
+<tr><td>Craven 34 100.00 0 0.00 10 83.33 2 16.67 44 95.65 2 4.35</td></tr>
+<tr><td>Cumberland 190 96.94 6 3.06 111 98.23 2 1.77 301 97.41 8 2.59</td></tr>
+<tr><td>Currituck 5 100.00 0 0.00 1 100.00 0 0.00 6 100.00 0 0.00</td></tr>
+<tr><td>Dare 7 100.00 0 0.00 2 100.00 0 0.00 9 100.00 0 0.00</td></tr>
+<tr><td>Davidson 61 96.83 2 3.17 34 97.14 1 2.86 95 96.94 3 3.06</td></tr>
+<tr><td>Davie 12 100.00 0 0.00 2 100.00 0 0.00 14 100.00 0 0.00</td></tr>
+<tr><td>Duplin 22 91.67 2 8.33 3 75.00 1 25.00 25 89.29 3 10.71</td></tr>
+<tr><td>Durham 107 97.27 3 2.73 49 100.00 0 0.00 156 98.11 3 1.89</td></tr>
+<tr><td>Edgecombe 40 97.56 1 2.44 5 83.33 1 16.67 45 95.74 2 4.26</td></tr>
+<tr><td>Forsyth 139 97.20 4 2.80 70 94.59 4 5.41 209 96.31 8 3.69</td></tr>
+<tr><td>Franklin 24 100.00 0 0.00 8 100.00 0 0.00 32 100.00 0 0.00</td></tr>
+<tr><td>Gaston 72 97.30 2 2.70 77 98.72 1 1.28 149 98.03 3 1.97</td></tr>
+<tr><td>Gates 8 100.00 0 0.00 1 100.00 0 0.00 9 100.00 0 0.00</td></tr>
+<tr><td>Graham 3 100.00 0 0.00 1 100.00 0 0.00 4 100.00 0 0.00</td></tr>
+<tr><td>Granville 25 96.15 1 3.85 1 100.00 0 0.00 26 96.30 1 3.70</td></tr>
+<tr><td>Greene 7 100.00 0 0.00 5 100.00 0 0.00 12 100.00 0 0.00</td></tr>
+<tr><td>Guilford 209 98.12 4 1.88 162 99.39 1 0.61 371 98.67 5 1.33</td></tr>
+<tr><td>Halifax 33 100.00 0 0.00 14 100.00 0 0.00 47 100.00 0 0.00</td></tr>
+<tr><td>Harnett 61 98.39 1 1.61 26 100.00 0 0.00 87 98.86 1 1.14</td></tr>
+<tr><td>Haywood 12 100.00 0 0.00 5 100.00 0 0.00 17 100.00 0 0.00</td></tr>
+<tr><td>Henderson 19 100.00 0 0.00 14 100.00 0 0.00 33 100.00 0 0.00</td></tr>
+<tr><td>Hertford 8 100.00 0 0.00 1 100.00 0 0.00 9 100.00 0 0.00</td></tr>
+<tr><td>Hoke 25 100.00 0 0.00 15 100.00 0 0.00 40 100.00 0 0.00</td></tr>
+<tr><td>Hyde 4 100.00 0 0.00 1 100.00 0 0.00 5 100.00 0 0.00</td></tr>
+<tr><td>Iredell 35 100.00 0 0.00 9 100.00 0 0.00 44 100.00 0 0.00</td></tr>
+<tr><td>Jackson 19 100.00 0 0.00 9 90.00 1 10.00 28 96.55 1 3.45</td></tr>
+<tr><td>Johnston 98 100.00 0 0.00 32 100.00 0 0.00 130 100.00 0 0.00</td></tr>
+<tr><td>Jones 4 100.00 0 0.00 0 0 0 0 4 100.00 0 0.00</td></tr>
+<tr><td>Lee 18 100.00 0 0.00 16 100.00 0 0.00 34 100.00 0 0.00</td></tr>
+<tr><td>Lenoir 35 100.00 0 0.00 12 92.31 1 7.69 47 97.92 1 2.08</td></tr>
+<tr><td>Lincoln 25 100.00 0 0.00 18 100.00 0 0.00 43 100.00 0 0.00</td></tr>
+<tr><td>Macon 13 100.00 0 0.00 5 100.00 0 0.00 18 100.00 0 0.00</td></tr>
+<tr><td>Madison 6 100.00 0 0.00 2 100.00 0 0.00 8 100.00 0 0.00</td></tr>
+<tr><td>Martin 13 100.00 0 0.00 1 100.00 0 0.00 14 100.00 0 0.00</td></tr>
+<tr><td>McDowell 23 100.00 0 0.00 15 93.75 1 6.25 38 97.44 1 2.56</td></tr>
+<tr><td>Mecklenburg 374 93.50 26 6.50 228 97.02 7 2.98 602 94.80 33 5.20</td></tr>
+<tr><td>Mitchell 10 100.00 0 0.00 2 100.00 0 0.00 12 100.00 0 0.00</td></tr>
+<tr><td>Montgomery 7 100.00 0 0.00 3 100.00 0 0.00 10 100.00 0 0.00</td></tr>
+<tr><td>Moore 24 100.00 0 0.00 12 100.00 0 0.00 36 100.00 0 0.00</td></tr>
+<tr><td>Nash 49 96.08 2 3.92 20 100.00 0 0.00 69 97.18 2 2.82</td></tr>
+<tr><td>New Hanover 51 98.08 1 1.92 51 98.08 1 1.92 102 98.08 2 1.92</td></tr>
+<tr><td>Northampton 9 100.00 0 0.00 5 100.00 0 0.00 14 100.00 0 0.00</td></tr>
+<tr><td>Onslow 52 96.30 2 3.70 25 92.59 2 7.41 77 95.06 4 4.94</td></tr>
+<tr><td>Orange 26 100.00 0 0.00 14 93.33 1 6.67 40 97.56 1 2.44</td></tr>
+<tr><td>Pamlico 3 100.00 0 0.00 2 100.00 0 0.00 5 100.00 0 0.00</td></tr>
+<tr><td>Pasquotank 20 100.00 0 0.00 8 100.00 0 0.00 28 100.00 0 0.00</td></tr>
+<tr><td>Pender 10 100.00 0 0.00 8 100.00 0 0.00 18 100.00 0 0.00</td></tr>
+<tr><td>Perquimans 3 100.00 0 0.00 2 100.00 0 0.00 5 100.00 0 0.00</td></tr>
+<tr><td>Person 17 100.00 0 0.00 5 83.33 1 16.67 22 95.65 1 4.35</td></tr>
+<tr><td>Pitt 101 94.39 6 5.61 21 95.45 1 4.55 122 94.57 7 5.43</td></tr>
+<tr><td>Polk 5 100.00 0 0.00 4 100.00 0 0.00 9 100.00 0 0.00</td></tr>
+<tr><td>Randolph 47 100.00 0 0.00 20 100.00 0 0.00 67 100.00 0 0.00</td></tr>
+<tr><td>Richmond 26 100.00 0 0.00 12 100.00 0 0.00 38 100.00 0 0.00</td></tr>
+<tr><td>Robeson 85 100.00 0 0.00 49 98.00 1 2.00 134 99.26 1 0.74</td></tr>
+<tr><td>Rockingham 35 100.00 0 0.00 14 100.00 0 0.00 49 100.00 0 0.00</td></tr>
+<tr><td>Rowan 46 97.87 1 2.13 30 100.00 0 0.00 76 98.70 1 1.30</td></tr>
+<tr><td>Rutherford 51 100.00 0 0.00 13 100.00 0 0.00 64 100.00 0 0.00</td></tr>
+<tr><td>Sampson 32 100.00 0 0.00 18 100.00 0 0.00 50 100.00 0 0.00</td></tr>
+<tr><td>Scotland 26 100.00 0 0.00 5 100.00 0 0.00 31 100.00 0 0.00</td></tr>
+<tr><td>Stanly 24 96.00 1 4.00 13 100.00 0 0.00 37 97.37 1 2.63</td></tr>
+<tr><td>Stokes 17 100.00 0 0.00 8 100.00 0 0.00 25 100.00 0 0.00</td></tr>
+<tr><td>Surry 42 97.67 1 2.33 7 87.50 1 12.50 49 96.08 2 3.92</td></tr>
+<tr><td>Swain 7 100.00 0 0.00 3 100.00 0 0.00 10 100.00 0 0.00</td></tr>
+<tr><td>Transylvania 10 100.00 0 0.00 4 100.00 0 0.00 14 100.00 0 0.00</td></tr>
+<tr><td>Tyrrell 1 100.00 0 0.00 1 100.00 0 0.00 2 100.00 0 0.00</td></tr>
+<tr><td>Union 45 100.00 0 0.00 22 100.00 0 0.00 67 100.00 0 0.00</td></tr>
+<tr><td>Vance 35 100.00 0 0.00 10 100.00 0 0.00 45 100.00 0 0.00</td></tr>
+<tr><td>Wake 204 98.08 4 1.92 125 96.90 4 3.10 329 97.63 8 2.37</td></tr>
+<tr><td>Warren 10 100.00 0 0.00 1 100.00 0 0.00 11 100.00 0 0.00</td></tr>
+<tr><td>Washington 5 100.00 0 0.00 0 0 0 0 5 100.00 0 0.00</td></tr>
+<tr><td>Watauga 9 100.00 0 0.00 3 100.00 0 0.00 12 100.00 0 0.00</td></tr>
+<tr><td>Wayne 58 100.00 0 0.00 17 100.00 0 0.00 75 100.00 0 0.00</td></tr>
+<tr><td>Wilkes 28 100.00 0 0.00 10 100.00 0 0.00 38 100.00 0 0.00</td></tr>
+<tr><td>Wilson 31 93.94 2 6.06 23 100.00 0 0.00 54 96.43 2 3.57</td></tr>
+<tr><td>Yadkin 13 92.86 1 7.14 1 100.00 0 0.00 14 93.33 1 6.67</td></tr>
+<tr><td>Yancey 7 100.00 0 0.00 3 100.00 0 0.00 10 100.00 0 0.00</td></tr>
+<tr><td>All Counties 3682 97.95 77 2.05 1853 97.89 40 2.11 5535 97.93 117 2.07</td></tr>
+</tbody></table>
+</div>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

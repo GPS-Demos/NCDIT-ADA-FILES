@@ -1,0 +1,213 @@
+{
+  "document_id": "updateltr-302",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON follows the source text closely. No fabricated paragraphs or sentences were found. AI-generated metadata like the document title and table summaries are within acceptable limits.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The URL in the body of the memorandum is correctly captured from the source. While the contact information in the footer is missing, it is not fabricated in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The entire footer block containing official department contact information, mailing address, location address, website URL, phone number, and fax number is missing from the output. This is a significant omission of official government information from the source document.",
+        "b_evidence_source": "NC MEDICAID NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF HEALTH BENEFITS LOCATION: 1985 Umstead Drive, Kirby Building, Raleigh NC 27603 MAILING ADDRESS: 2501 Mail Service Center, Raleigh NC 27699-2501 www.ncdhhs.gov • TEL: 919-855-4100 • FAX: 919-733-6608 AN EQUAL OPPORTUNITY / AFFIRMATIVE ACTION EMPLOYER",
+        "b_evidence_output": "[The JSON ends with the paragraph element containing 'AB' and contains no subsequent footer content]",
+        "b_evidence_location": "Page 1 footer",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The memorandum header details (TO, FROM, SUBJECT, DATE) are correctly represented as a table in the JSON. The source document lists 4 fields, and the JSON table contains exactly 4 corresponding rows.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The text within the header and memorandum sections is captured accurately. The omission of the footer is treated as a missing section (C3) rather than a truncation of the memorandum section, as the memorandum body text finishes completely at the initials 'AB'.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text preservation for the captured sections is high. Minor changes like the reconstruction of a URL that was split by a line break in the source are considered acceptable reformatting/normalization.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON follows the source text closely. No fabricated paragraphs or sentences were found. AI-generated metadata like the document title and table summaries are within acceptable limits.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The URL in the body of the memorandum is correctly captured from the source. While the contact information in the footer is missing, it is not fabricated in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The entire footer block containing official department contact information, mailing address, location address, website URL, phone number, and fax number is missing from the output. This is a significant omission of official government information from the source document.\",\n      \"b_evidence_source\": \"NC MEDICAID NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF HEALTH BENEFITS LOCATION: 1985 Umstead Drive, Kirby Building, Raleigh NC 27603 MAILING ADDRESS: 2501 Mail Service Center, Raleigh NC 27699-2501 www.ncdhhs.gov • TEL: 919-855-4100 • FAX: 919-733-6608 AN EQUAL OPPORTUNITY / AFFIRMATIVE ACTION EMPLOYER\",\n      \"b_evidence_output\": \"[The JSON ends with the paragraph element containing 'AB' and contains no subsequent footer content]\",\n      \"b_evidence_location\": \"Page 1 footer\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The memorandum header details (TO, FROM, SUBJECT, DATE) are correctly represented as a table in the JSON. The source document lists 4 fields, and the JSON table contains exactly 4 corresponding rows.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The text within the header and memorandum sections is captured accurately. The omission of the footer is treated as a missing section (C3) rather than a truncation of the memorandum section, as the memorandum body text finishes completely at the initials 'AB'.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text preservation for the captured sections is high. Minor changes like the reconstruction of a URL that was split by a line break in the source are considered acceptable reformatting/normalization.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output JSON faithfully represents the content without duplication. Text blocks such as the list of recipients, the subject line, and the specific page references (e.g., 'Attachment 4.19-A, Page 23') appear in the output exactly as many times as they appear in the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved and logical. The document title is extracted to the metadata, and 'MEMORANDUM' serves as the primary section heading. Although subsections like 'SPA 20-0004' and 'SPA 20-0012' are rendered as paragraphs with bold and underlined styling rather than explicit heading levels (H3), this represents a flat but consistent and valid structural mapping for a single-page document. There are no skips in level (e.g., H1 to H3) and no incorrect nesting.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The pipeline has correctly identified the memo header (TO, FROM, SUBJECT, DATE) as a tabular structure. The mapping of labels to the first column and values to the second column accurately preserves the layout and structural relationship found in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is materially incomplete. The footer block containing crucial agency contact information (NC MEDICAID name, department, location, mailing address, website, and phone numbers) is present in the source and recognized by the OCR but is entirely omitted from the structural JSON output. Per the check requirements, content must be complete to satisfy structural fidelity.",
+        "b_evidence_source": "NC MEDICAID NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF HEALTH BENEFITS LOCATION: 1985 Umstead Drive, Kirby Building, Raleigh NC 27603 MAILING ADDRESS: 2501 Mail Service Center, Raleigh NC 27699-2501 www.ncdhhs.gov • TEL: 919-855-4100 • FAX: 919-733-6608 AN EQUAL OPPORTUNITY / AFFIRMATIVE ACTION EMPLOYER",
+        "b_evidence_output": "The JSON sections conclude with the element 'AB' (at element index 13 in the 'MEMORANDUM' section) and do not contain any subsequent elements representing the footer text.",
+        "b_evidence_location": "Bottom of Page 1",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The source document does not contain standard bulleted or numbered lists. Information is presented either in paragraphs or within the formatted memo header (which was correctly handled as a table).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The document contains one primary URL in the body text (medicaid.ncdhhs.gov/...). This link is accurately captured in the JSON with appropriate underlining formatting. No fabricated or broken links were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output JSON faithfully represents the content without duplication. Text blocks such as the list of recipients, the subject line, and the specific page references (e.g., 'Attachment 4.19-A, Page 23') appear in the output exactly as many times as they appear in the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved and logical. The document title is extracted to the metadata, and 'MEMORANDUM' serves as the primary section heading. Although subsections like 'SPA 20-0004' and 'SPA 20-0012' are rendered as paragraphs with bold and underlined styling rather than explicit heading levels (H3), this represents a flat but consistent and valid structural mapping for a single-page document. There are no skips in level (e.g., H1 to H3) and no incorrect nesting.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The pipeline has correctly identified the memo header (TO, FROM, SUBJECT, DATE) as a tabular structure. The mapping of labels to the first column and values to the second column accurately preserves the layout and structural relationship found in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is materially incomplete. The footer block containing crucial agency contact information (NC MEDICAID name, department, location, mailing address, website, and phone numbers) is present in the source and recognized by the OCR but is entirely omitted from the structural JSON output. Per the check requirements, content must be complete to satisfy structural fidelity.\",\n      \"b_evidence_source\": \"NC MEDICAID NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF HEALTH BENEFITS LOCATION: 1985 Umstead Drive, Kirby Building, Raleigh NC 27603 MAILING ADDRESS: 2501 Mail Service Center, Raleigh NC 27699-2501 www.ncdhhs.gov • TEL: 919-855-4100 • FAX: 919-733-6608 AN EQUAL OPPORTUNITY / AFFIRMATIVE ACTION EMPLOYER\",\n      \"b_evidence_output\": \"The JSON sections conclude with the element 'AB' (at element index 13 in the 'MEMORANDUM' section) and do not contain any subsequent elements representing the footer text.\",\n      \"b_evidence_location\": \"Bottom of Page 1\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The source document does not contain standard bulleted or numbered lists. Information is presented either in paragraphs or within the formatted memo header (which was correctly handled as a table).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The document contains one primary URL in the body text (medicaid.ncdhhs.gov/...). This link is accurately captured in the JSON with appropriate underlining formatting. No fabricated or broken links were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML conversion generally follows the visual organization of the source memorandum, maintaining the sequence of header information, body text, and SPA sections. However, the contact and location information present in the footer of the source PDF (including 'NC MEDICAID', street address, mailing address, website, telephone, and fax numbers) is completely omitted from the HTML output. While layout adjustments like converting the memorandum header into a table or stacking executive names for responsiveness are acceptable, the total loss of the contact information block represents a significant loss of information and a failure to represent the document's visual structure faithfully.",
+        "b_evidence_source": "The footer section containing contact details: 'NC MEDICAID NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF HEALTH BENEFITS LOCATION: 1985 Umstead Drive... MAILING ADDRESS: 2501 Mail Service Center... www.ncdhhs.gov • TEL: 919-855-4100 • FAX: 919-733-6608 AN EQUAL OPPORTUNITY / AFFIRMATIVE ACTION EMPLOYER'",
+        "b_evidence_output": "The HTML content ends after the initials 'AB' followed by a horizontal line and the converter credit: 'Converted to accessible HTML by ADA Compliance Engine.' No contact or location information is present at the bottom or top of the page.",
+        "b_evidence_location": "Bottom of page 1",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The memorandum header (TO, FROM, SUBJECT, DATE) has been converted from an indented list into a clean HTML table. The table is visually sound, with distinct labels and properly aligned values. The content is easily readable, and there are no other tables in the source document to evaluate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The primary meaningful image, the State of North Carolina seal in the header, is correctly rendered and clearly visible in the HTML screenshot. There are no other meaningful images or icons in the source document that have been omitted.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A thorough review of the HTML screenshot confirms that no blocks of content, paragraphs, or headers are duplicated. Each piece of information appears exactly once as intended.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9375,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML conversion generally follows the visual organization of the source memorandum, maintaining the sequence of header information, body text, and SPA sections. However, the contact and location information present in the footer of the source PDF (including 'NC MEDICAID', street address, mailing address, website, telephone, and fax numbers) is completely omitted from the HTML output. While layout adjustments like converting the memorandum header into a table or stacking executive names for responsiveness are acceptable, the total loss of the contact information block represents a significant loss of information and a failure to represent the document's visual structure faithfully.\",\n      \"b_evidence_source\": \"The footer section containing contact details: 'NC MEDICAID NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF HEALTH BENEFITS LOCATION: 1985 Umstead Drive... MAILING ADDRESS: 2501 Mail Service Center... www.ncdhhs.gov • TEL: 919-855-4100 • FAX: 919-733-6608 AN EQUAL OPPORTUNITY / AFFIRMATIVE ACTION EMPLOYER'\",\n      \"b_evidence_output\": \"The HTML content ends after the initials 'AB' followed by a horizontal line and the converter credit: 'Converted to accessible HTML by ADA Compliance Engine.' No contact or location information is present at the bottom or top of the page.\",\n      \"b_evidence_location\": \"Bottom of page 1\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The memorandum header (TO, FROM, SUBJECT, DATE) has been converted from an indented list into a clean HTML table. The table is visually sound, with distinct labels and properly aligned values. The content is easily readable, and there are no other tables in the source document to evaluate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The primary meaningful image, the State of North Carolina seal in the header, is correctly rendered and clearly visible in the HTML screenshot. There are no other meaningful images or icons in the source document that have been omitted.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A thorough review of the HTML screenshot confirms that no blocks of content, paragraphs, or headers are duplicated. Each piece of information appears exactly once as intended.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 1,\n    \"score\": 0.875\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 1,
+  "total_major": 1,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

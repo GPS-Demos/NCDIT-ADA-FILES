@@ -1,0 +1,97 @@
+{
+  "document_id": "Cosmetic-Arts-Board-BD-307-2025-27",
+  "audited_at": "2026-03-16T18:28:15.363796Z",
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 0.625,
+  "fidelity_composite": 0.7802,
+  "routing": "human_review",
+  "reasoning": "The document shows significant structural failures, specifically the truncation and complete omission of critical financial tables which are instead rendered as unstructured paragraph text. These defects, while maintaining most raw content, destroy the relational integrity of the budget data and create severe accessibility barriers. The composite score of 0.78 and low visual/structural scores accurately reflect these major rendering issues.",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The conversion exhibits significant structural failures in table extraction. In Section 3, the table 'Summary By Account' (Page 3) is truncated in the table element, containing only 13 rows (including headers and titles) while the source table has approximately 37 rows; the remaining data is dumped into a following paragraph element. In Section 4, the entire table 'Detail by Fund' (Page 5) is completely missing as a table object, with its contents being placed into a paragraph instead. These are",
+      "source_pdf_quote": "Page 3: 'Summary By Account' table contains rows for 'TOTAL PURCHASED SERVICES', 'GENERAL ADMINISTRATIVE SUPPLIES', etc., and the entire 'RECEIPTS' section. Page 5: 'Detail by Fund' table contains ~35 rows of data.",
+      "output_quote": "Section 3, element index 2: Table ends at '52909999 OTHER SERVICES'. Section 4: Contains no table element for the data on Page 5.",
+      "location": "Section 3 (element 2) and Section 4"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "There are major failures in table structural fidelity across multiple pages. \n1. On Page 3 (Section 3), the main financial table is truncated; rows following '52909999 OTHER SERVICES' (starting with 'TOTAL PURCHASED SERVICES') are rendered as a flat paragraph instead of table rows, losing column relationships.\n2. On Page 5 (Section 4), the 'Certified Budget Detail by Fund' table is entirely missing as a table object and is instead rendered as a single paragraph (element index 3).\n3. On Page 5 (S",
+      "source_pdf_quote": "The full 'Summary By Account' table on Page 3 and the 'Detail by Fund' and 'Position Counts' tables on Page 5.",
+      "output_quote": "\"TOTAL PURCHASED SERVICES\\n$369,904\\n$369,904...\" (Section 3, element 4) and \"Account Code Account Title Fund Source 2025-2026 2026-2027 REQUIREMENTS...\" (Section 4, element 3).",
+      "location": "Sections 3 and 4, corresponding to Page 3 and Page 5 of the source document."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "Multiple tables are severely misrendered. In the 'Certified Budget Summary By Account' section, the table is truncated after 'OTHER SERVICES', and the rest of the financial data is dumped as a block of unformatted plain text. In the 'Certified Budget Detail by Fund' section, the entire table structure is lost, and the data is rendered as a single, dense paragraph of text. This significantly impairs the readability and professional presentation of the budget data.",
+      "source_pdf_quote": "PDF Page 3 and Page 5 contain fully structured tables with columns for Account Code, Title, Fund Source, and biennial amounts.",
+      "output_quote": "In the HTML screenshot, the table under 'Certified Budget Summary By Account' ends prematurely at 'OTHER SERVICES'. Below it, and under 'Certified Budget Detail by Fund', data is presented as plain text blocks (e.g., 'TOTAL PURCHASED SERVICES $369,904 $369,904...') instead of table rows and columns.",
+      "location": "Certified Budget Summary By Account and Certified Budget Detail by Fund sections"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "There is visual content duplication occurring as a result of the broken table rendering. Data rows such as 'TOTAL PERSONAL SERVICES $2,387,386 $2,387,386' appear both within the partially rendered HTML table and again in the plain text block immediately following it. Furthermore, the data from the 'Position Counts' section is duplicated inside the text blocks associated with other sections.",
+      "source_pdf_quote": "The source PDF presents budget and position count data uniquely once per section/page.",
+      "output_quote": "In the HTML screenshot under 'Certified Budget Summary By Account', the row 'TOTAL PERSONAL SERVICES $2,387,386 $2,387,386' appears twice: once in the table and once in the following text paragraph. Position count data is also repeated in this paragraph.",
+      "location": "Certified Budget Summary By Account section"
+    }
+  ],
+  "action_items": [
+    "Reconstruct the 'Summary By Account' and 'Detail by Fund' tables to ensure proper tabular structure",
+    "Remove duplicated text blocks following the truncated tables",
+    "Ensure all financial figures are correctly aligned within table cells for accessibility compliance"
+  ],
+  "quality_score": 81,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.7802,
+      "text_match": 0.968986905582357,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8121,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7802,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 0.625,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9519295870006771,
+      "shingling_precision": 0.9866666666666667,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 76523,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

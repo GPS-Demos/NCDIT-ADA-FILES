@@ -1,0 +1,123 @@
+{
+  "document_id": "DHHS-58-2023",
+  "audited_at": "2026-03-16T18:29:16.179425Z",
+  "fidelity_content": 0.6976744186046512,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.625,
+  "fidelity_composite": 0.4,
+  "routing": "human_review",
+  "reasoning": "The document conversion exhibits significant fidelity failures including a 40% loss of columns in a critical compliance matrix and a broken, truncated URL for audit confirmations. The low composite score (0.4) and the lack of accessibility data necessitate a thorough manual intervention to restore missing data and correct structural duplications.",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The audit confirmation web address on page 1 is incorrectly extracted. The URL is split across two lines in the source PDF ('...administrative-' and 'offices/...'). The pipeline extracted only the first part as a functional Link href, resulting in a broken and incorrect URL. Other contact information, including names, phone numbers, and email addresses, is correct.",
+      "source_pdf_quote": "https://www.ncdhhs.gov/about/administrative- offices/office-controller/audit-confirmation-reports",
+      "output_quote": "https://www.ncdhhs.gov/about/administrative-",
+      "location": "Section 'CHILDREN’S TRUST FUND', table 'Agency Contact Information', element index 2 (data cell content)"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output significantly duplicates content from page 6. The content for 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' is included at the end of section 5 (reading_order 5) and then repeated almost entirely in section 6 (reading_order 6). For example, the paragraphs regarding budget expenditures and monthly reports appear twice.",
+      "source_pdf_quote": "The sections '12. REPORTING' and '13. SUBRECIPIENT MONITORING' appear only once on page 6 of the source PDF.",
+      "output_quote": "The text 'A monthly report of budget expenditures is to be submitted to DSS...' and associated headings appear both in 'sections[4]' (reading_order 5) and 'sections[5]' (reading_order 6).",
+      "location": "Sections 5 and 6, elements following headings 9/10 and 12/13."
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading levels are inconsistent for peer sections within the 'CROSSCUTTING REQUIREMENTS' group. Section '1. ACTIVITIES ALLOWED OR UNALLOWED' is assigned heading level 3 (heading-2), while peer sections such as '2. ALLOWABLE COSTS/COST PRINCIPLES' and '4. CONFLICT OF INTEREST' are assigned heading level 4 (heading-3 and heading-4). This breaks the logical hierarchy where parallel sections should share the same level. Additionally, 'Suggested Audit Procedures' in the repeated section 6 is prom",
+      "source_pdf_quote": "The source document presents sections 1, 2, 4, 5, 7, 8, 9, 12, and 13 as peer-level compliance requirements.",
+      "output_quote": "Section 1 is <h3 id=\"heading-2\">; Section 2 is <h4 id=\"heading-3\">; Section 4 is <h4 id=\"heading-4\">; etc.",
+      "location": "Section 5 (reading_order 5)."
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The Compliance Requirements Matrix table is significantly misrendered. In the source PDF, the matrix contains 14 columns (CC, 1-10, 12-14). In the HTML output, the table terminates at column 9. Columns 10 (Program Income), 12 (Reporting), 13 (Subrecipient Monitoring), and 14 (Special Tests and Provisions) are missing entirely, including their corresponding 'Y/N' values. This results in a major loss of information regarding program compliance requirements.",
+      "source_pdf_quote": "The Compliance Requirements Matrix on page 3 contains 14 columns: CC, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14.",
+      "output_quote": "The Compliance Requirements Matrix in the HTML only contains 10 columns: CC, 1, 2, 3, 4, 5, 6, 7, 8, 9.",
+      "location": "III. COMPLIANCE REQUIREMENTS, Compliance Requirements Matrix (page 3)"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The content from the start of the 'Suspension and Debarment' sub-section on page 6 through the end of the document is duplicated. It appears once within the 'CROSSCUTTING REQUIREMENTS' section (reading_order 5) and then again as its own top-level section 'Suspension and Debarment' (reading_order 6). This is a structural error that does not change the information but is a material defect in document reconstruction.",
+      "source_pdf_quote": "The content of page 6 (Suspension and Debarment, Reporting, Subrecipient Monitoring) appears once.",
+      "output_quote": "The content of page 6 is repeated in Section 5 (elements starting index 39) and Section 6.",
+      "location": "Sections 5 and 6"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "There are two issues with link extraction. First, the primary audit confirmation URL on page 1 is truncated at the hyphen ('https://www.ncdhhs.gov/about/administrative-'), breaking the link. Second, the 'NC DSS Sub-Recipient Contract Monitoring Plan' on page 6, which is a visible hyperlink in the source, is rendered only as underlined text without an associated 'href' or link structure.",
+      "source_pdf_quote": "Page 1: https://www.ncdhhs.gov/about/administrative-offices/office-controller/audit-confirmation-reports; Page 6: NC DSS Sub-Recipient Contract Monitoring Plan (hyperlinked text).",
+      "output_quote": "Page 1 link text/href: 'https://www.ncdhhs.gov/about/administrative-'; Page 6 text: 'NC DSS Sub-Recipient Contract Monitoring Plan' (no href).",
+      "location": "Section 1 table and Section 6 paragraph."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "Content at the end of the document is visually duplicated. After the first instance of '13. SUBRECIPIENT MONITORING', the sections for 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' appear again in their entirety at the bottom of the HTML render.",
+      "source_pdf_quote": "The sections 'Suspension and Debarment', '12. REPORTING', and '13. SUBRECIPIENT MONITORING' appear once on page 6 of the PDF.",
+      "output_quote": "These sections appear twice in the HTML output, with the second occurrence starting after the final horizontal rule of the first instance.",
+      "location": "End of document, following the first instance of Section 13."
+    }
+  ],
+  "action_items": [
+    "Reconstruct the Compliance Requirements Matrix to include all 14 columns from the source PDF.",
+    "Fix the truncated URL on page 1 to ensure it is a single, functional link.",
+    "Deduplicate the content at the end of the document (sections 5 and 6).",
+    "Normalize heading levels for the 'CROSSCUTTING REQUIREMENTS' sub-sections.",
+    "Ensure all visible hyperlinks are correctly tagged with valid 'href' attributes."
+  ],
+  "quality_score": 40,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.98,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9279366717345789,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.634,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6976744186046512,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.625,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9670802734869587,
+      "shingling_precision": 0.987842731505432,
+      "duplication_ratio": 0.07487056949422541,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 140269,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
