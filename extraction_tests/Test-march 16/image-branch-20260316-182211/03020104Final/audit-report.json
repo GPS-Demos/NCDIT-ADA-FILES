@@ -1,0 +1,81 @@
+{
+  "document_id": "03020104Final",
+  "audited_at": "2026-03-16T18:43:30.194327Z",
+  "fidelity_content": 0.8837209302325582,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 1.0,
+  "fidelity_composite": 0.9593,
+  "routing": "human_review",
+  "reasoning": "While the composite score is very high (0.9593), the specific findings indicate a catastrophic loss of tabular data in Tables 4-2 and 4-3, with 77% and 100% of data rows missing respectively. Since these tables contain the core informative content for the 'Wastewater Dischargers' and 'Non-Discharge' sections, the document cannot be approved automatically despite the high overall score.",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "minor",
+      "analysis": "Table 4-2 (Wastewater Dischargers) in the source PDF (pages 18-19) contains 18 data rows, whereas the output JSON only contains 4 data rows (77% missing). Table 4-3 (Non-Discharge Permits) on page 20 of the source contains 16 data rows, but the output JSON contains 0 data rows, only the header row (100% missing). Both failures exceed the 20% threshold.",
+      "source_pdf_quote": "Table 4-2 contains 18 rows including facilities from NC0003255 to NC0088072. Table 4-3 contains 16 rows including facilities like 'PCS Phosphate' and 'Town of Bath'.",
+      "output_quote": "JSON element for Table 4-2 contains only 4 data rows. JSON element for Table 4-3 contains 0 data rows (only header).",
+      "location": "Sections 'Wastewater Dischargers' (reading_order 16) and 'Non-Discharge' (reading_order 19)."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The complete omission of data rows in Table 4-3 within the 'Non-Discharge' section results in a loss of over 50% of that section's informative content. Similarly, the loss of 14 rows in Table 4-2 represents a substantial omission of the core data for the 'Wastewater Dischargers' section.",
+      "source_pdf_quote": "Table 4-2 (18 rows) and Table 4-3 (16 rows) provide the primary data for their respective sections.",
+      "output_quote": "The tables in these sections are significantly depopulated of their data rows.",
+      "location": "Sections 'Wastewater Dischargers' (reading_order 16) and 'Non-Discharge' (reading_order 19)."
+    }
+  ],
+  "action_items": [
+    "Locate Table 4-2 on pages 18-19 of the source and manually restore the 14 missing rows.",
+    "Locate Table 4-3 on page 20 of the source and manually restore the 16 missing rows.",
+    "Verify why the extraction pipeline failed on these specific tables to prevent recurrence."
+  ],
+  "quality_score": 89,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.98,
+    "score_breakdown": {
+      "fidelity_composite": 0.9593,
+      "text_match": 0.9394963147587221,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8851,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9593,
+      "fidelity_content": 0.8837209302325582,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9020983879933296,
+      "shingling_precision": 0.9834116043023784,
+      "duplication_ratio": 0.0022808367732456447,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.96,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 80522,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

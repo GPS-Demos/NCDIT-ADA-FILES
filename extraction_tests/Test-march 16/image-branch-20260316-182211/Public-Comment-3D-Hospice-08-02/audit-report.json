@@ -1,0 +1,128 @@
+{
+  "document_id": "Public-Comment-3D-Hospice-08-02",
+  "audited_at": "2026-03-16T18:31:52.516635Z",
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.0,
+  "fidelity_visual": 1.0,
+  "fidelity_composite": 0.4,
+  "routing": "reject",
+  "reasoning": "The document exhibits catastrophic structural failure, evidenced by a structural score of 0.0 and the omission of approximately 10 pages of essential policy content. The reading order is fundamentally broken, jumping between non-sequential sections, and critical initial sections (1.0 and 2.0) are missing entirely, rendering the document unfit for public use.",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output JSON fails to include several entire sections and pages present in the source document. Specifically, Sections 1.0 (pg 4) and 2.0 (pg 5) are completely absent from the beginning of the sections array. Furthermore, Section 6.0 (pg 19) and the heading for Section 7.0 (pg 20) are missing. Between JSON section index 7 (Section 5.7) and index 8 (Section 8.0), content for subsections 5.8 through 5.13 and 7.1 through 7.3.3 is entirely omitted without even summary entries. This represents a s",
+      "source_pdf_quote": "Table of Contents: 1.0 Description of the Procedure... 2.0 Eligibility Requirements... 6.0 Provider(s) Eligible to Bill... 7.0 Additional Requirements... (Subsections 5.8-5.13, 7.1-7.3)",
+      "output_quote": "The sections array starts at Title '3.0 When the Procedure, Product, or Service Is Covered' and skips from '5.7 Duration of Hospice Care Coverage -Election Periods' directly to '8.0 Policy Implementation/Revision Information' without including the intervening sections.",
+      "location": "Metadata and Sections array indices 0-8"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "There is a massive failure in the conversion of Section 5.7 and the beginning of Section 7.0. The element array for section index 7 (Title: 5.7) contains a few elements of 5.7, then jumps to elements from Section 7.1.b (page 21) and Section 7.3.4 (page 26), omitting all text from page 17 to 20 including subsections 5.8 through 5.13 and the start of 7.1. This is a significant omission within the sequence of the document.",
+      "source_pdf_quote": "Source Pages 17-21 contain sections 5.8 to 7.1.a.",
+      "output_quote": "Section 5.7 elements skip from page 16 content directly to element 3: 'b. All DMA’s clinical (medical) coverage policies...' (pg 21).",
+      "location": "JSON sections array index 7, elements 2-3"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The content for 'Attachment A: Claims-Related Information' is duplicated. It appears in its entirety in both element index 8 (sections[8]) and index 9 (sections[9]). The first occurrence (index 8) is a partial capture ending at revenue code 0652, while the second occurrence (index 9) repeats the start of the attachment and includes more data.",
+      "source_pdf_quote": "Attachment A: Claims-Related Information",
+      "output_quote": "The entire block starting with 'Provider(s) shall comply with the, NCTracks Provider Claims and Billing Assistance Guide...' appears twice in consecutive sections.",
+      "location": "Attachment A: Claims-Related Information, sections[8] and sections[9]"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is severely compromised. Major subsections of 5.0 (such as 5.3 Admission to Hospice, 5.4, 5.5, 5.6) are elevated to top-level sections in the root 'sections' array instead of being nested as subsections of 5.0. Additionally, the Revision Information table (Section 8.0) is nested as an H3 within the elements of Section 5.7. Finally, Sections 1.0 and 2.0 are completely omitted from the start of the document structure.",
+      "source_pdf_quote": "Table of Contents showing 5.3, 5.4 etc. as subsections of 5.0.",
+      "output_quote": "Sections 5.3, 5.4, 5.5, and 5.6 are root-level objects in the JSON array (indices 3, 4, 5, 6).",
+      "location": "sections array, elements 3 through 6"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The pipeline has incorrectly converted numerous non-tabular content blocks into tables. For instance, paragraphs in Section 5.1 ('Medicaid and NCHC do not require clinical review...'), Section 5.2.2.2 (Nursing Facility), and Section 5.3 (Admission to Hospice) are rendered as single-cell or multi-cell tables. Lists in Section 5.2.2.4 and 5.4.1 are also wrapped in complex table structures that do not exist in the source.",
+      "source_pdf_quote": "5.1 Prior Approval (paragraph starting 'Medicaid and NCHC do not require clinical review...')",
+      "output_quote": "\"type\": \"table\", \"caption\": \"Prior Approval Changes\"",
+      "location": "Section 5.1, Page 9"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially broken, specifically within section index 7. The content flows from Section 5.7 (Page 16) directly into a list item from Section 7.1 (Page 21), then jumps to a paragraph from Section 7.3.3.2 (Page 26). This skips approximately 10 pages of required policy content (Sections 5.8 through 6.2 and early parts of 7.0), which are neither present in sequence nor properly grouped.",
+      "source_pdf_quote": "Source flow: 5.7 -> 5.8 -> 5.9 ... -> 7.1",
+      "output_quote": "Output flow in sections[7]: 5.7 content followed by 'b. All DMA’s clinical...' (from 7.1b) and then 'agency and leave the home...' (from 7.3.3.2).",
+      "location": "sections[7], Page 16 jumping to Page 21 and Page 26"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Multiple lists have been flattened or converted into tables, losing their semantic list structure. Specifically, the nested lists in 5.2.2.4 and 5.4.1 are now table rows. Furthermore, in Section 5.7 item 'c', the sub-numbered list (1, 2, 3) present in the source is rendered as plain text within list items without the numbering preserved.",
+      "source_pdf_quote": "Page 16, Section 5.7.c, items 1, 2, 3.",
+      "output_quote": "Numbered list items converted to plain text within the nested_list structure without preserving '1.', '2.', '3.' prefixes.",
+      "location": "Section 5.7, Page 16"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "There is a minor text error in a link reference where '42 CFR' is written as '42 CRF'. While the underlying URL might be correct, the displayed text in the output contains a transposition error relative to the source.",
+      "source_pdf_quote": "42 CFR 418.24(4)",
+      "output_quote": "CRF 418.24(4)",
+      "location": "Section 5.2.2.1, element 1"
+    }
+  ],
+  "action_items": [
+    "The document is unfit for manual correction; the conversion pipeline must be re-run or the source PDF must be investigated for processing errors.",
+    "Verify why sections 1.0 and 2.0 were skipped entirely by the parser."
+  ],
+  "quality_score": 40,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.98,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.7785568860990929,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.020000000000000018,
+      "raw_score": 0.5208,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7357135927039876,
+      "shingling_precision": 0.9776946879834967,
+      "duplication_ratio": 0.0925151671499991,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.83,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 99626,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

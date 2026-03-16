@@ -1,0 +1,213 @@
+{
+  "document_id": "2025-07-24-WRCAgendaPackage.pdf",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output faithfully follows the structure and content of the source document. There are no invented paragraphs, fabricated table of contents, or hallucinated body text. Section headings such as 'EXHIBIT F-2 Caldwell County Approved FN' and 'EXHIBIT L NCWRC-Black Rail Conservation Plan-2025' are derived from the content of the corresponding pages.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The conversion failed significantly regarding URL extraction. First, a URL belonging to a footnote on page 78 ('https://lnmc.org/list-of-charter-boats-approved-by-lake-norman-marine-commission/') was incorrectly mapped to the word 'Commission' in the Roll Call section on page 1. More critically, the pipeline interpreted numeric monetary values in Land Acquisition summaries (Exhibits D-1 and D-2) as domain names and fabricated malformed URLs for them. For example, '$2,100,000.00' was converted into a link with the href 'https://2,100,000.00'. These URLs do not exist in the source text or annotations.",
+        "b_evidence_source": "$2,100,000.00; $571,000.00; $2,671,000.00; $13,500,000.00",
+        "b_evidence_output": "\"href\": \"https://2,100,000.00\"; \"href\": \"https://571,000.00\"; \"href\": \"https://2,671,000.00\"; \"href\": \"https://13,500,000.00\"",
+        "b_evidence_location": "Sections 'Dennis Creek (Exhibit D-1)' and 'Buffalo Creek Headwaters (Exhibit D-2)', elements 30 and 31 (Pages 14 and 15)",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages and major sections from the source document (1-145) are accounted for in the output JSON. Middle sections are appropriately listed as truncated evaluation artifacts as per instructions, confirming their existence in the full pipeline output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Tables present in the visible sections of the output were compared to the source. The Statement of Revenues (Page 10), Statement of Expenditures (Page 10), Cage Dimensions (Page 91), and Summary of Actions Needed (Page 141) all contain the correct number of data rows corresponding to the original document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Visible sections preserve the core text content. While index 16 (Page 38) appears to cut off mid-sentence ('Boat wakes have damaged some of the non-'), the following section (index 17) is marked as truncated with 30 elements, indicating the remainder of the content exists in the full conversion and was simply split/trimmed for the evaluation view. Other sections like the Furbearer Propagation rules and the Black Rail Plan preserve all key paragraphs.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text conversion is highly accurate. OCR handling of strikethroughs in regulatory amendments (Pages 89-94) correctly captures both the original and replacement text (e.g., changing 'Buy' to 'acquire, buy'). Information such as home range values, stewardship estimates, and fiscal impacts are correctly preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output faithfully follows the structure and content of the source document. There are no invented paragraphs, fabricated table of contents, or hallucinated body text. Section headings such as 'EXHIBIT F-2 Caldwell County Approved FN' and 'EXHIBIT L NCWRC-Black Rail Conservation Plan-2025' are derived from the content of the corresponding pages.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The conversion failed significantly regarding URL extraction. First, a URL belonging to a footnote on page 78 ('https://lnmc.org/list-of-charter-boats-approved-by-lake-norman-marine-commission/') was incorrectly mapped to the word 'Commission' in the Roll Call section on page 1. More critically, the pipeline interpreted numeric monetary values in Land Acquisition summaries (Exhibits D-1 and D-2) as domain names and fabricated malformed URLs for them. For example, '$2,100,000.00' was converted into a link with the href 'https://2,100,000.00'. These URLs do not exist in the source text or annotations.\",\n      \"b_evidence_source\": \"$2,100,000.00; $571,000.00; $2,671,000.00; $13,500,000.00\",\n      \"b_evidence_output\": \"\\\"href\\\": \\\"https://2,100,000.00\\\"; \\\"href\\\": \\\"https://571,000.00\\\"; \\\"href\\\": \\\"https://2,671,000.00\\\"; \\\"href\\\": \\\"https://13,500,000.00\\\"\",\n      \"b_evidence_location\": \"Sections 'Dennis Creek (Exhibit D-1)' and 'Buffalo Creek Headwaters (Exhibit D-2)', elements 30 and 31 (Pages 14 and 15)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages and major sections from the source document (1-145) are accounted for in the output JSON. Middle sections are appropriately listed as truncated evaluation artifacts as per instructions, confirming their existence in the full pipeline output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Tables present in the visible sections of the output were compared to the source. The Statement of Revenues (Page 10), Statement of Expenditures (Page 10), Cage Dimensions (Page 91), and Summary of Actions Needed (Page 141) all contain the correct number of data rows corresponding to the original document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Visible sections preserve the core text content. While index 16 (Page 38) appears to cut off mid-sentence ('Boat wakes have damaged some of the non-'), the following section (index 17) is marked as truncated with 30 elements, indicating the remainder of the content exists in the full conversion and was simply split/trimmed for the evaluation view. Other sections like the Furbearer Propagation rules and the Black Rail Plan preserve all key paragraphs.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text conversion is highly accurate. OCR handling of strikethroughs in regulatory amendments (Pages 89-94) correctly captures both the original and replacement text (e.g., changing 'Buy' to 'acquire, buy'). Information such as home range values, stewardship estimates, and fiscal impacts are correctly preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output contains repeated rule text (e.g., 15A NCAC 10H .1101 appearing at heading-65 and heading-71). However, upon inspection of the source PDF, these pages are actually duplicated within the original document (pages 89-94 and 99-104 are identical). Since the conversion faithfully represents the redundancy present in the source, this is not a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is consistent and logical. Major sections like 'EXHIBIT A' and 'EXHIBIT B' are treated as section titles, with sub-sections correctly using H3 and H4 levels. Skips between levels are not observed in a way that breaks semantic navigation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Tables are correctly structured. Financial statements in Exhibit B preserve the 3-column layout. The complex table in Exhibit L (Black Rail Home Ranges) correctly identifies header rows and preserves column alignment. Pseudo-tables in the land acquisition slides are normalized into proper table structures, which is acceptable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the linear progression of the PDF. Multi-column content in the Eastern Black Rail Conservation Plan is correctly linearized. The sequence of exhibits matches the file structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists are generally well-converted. Bulleted lists in the Agenda and Conservation Plan are preserved. Numbered lists in rule text are correctly identified, and nested lists (e.g., in Exhibit J-2) are properly structured in the JSON schema.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There are multiple link injection issues. On page 1, the word 'Commission' in 'Commission Liaison' is assigned a hallucinated URL (lnmc.org) that does not exist in the source at that location. Additionally, in the land acquisition slides (e.g., page 14), dollar amounts such as '$2,100,000.00' have been incorrectly identified as links and wrapped in invalid 'https://' prefixes.",
+        "b_evidence_source": "Page 1: 'Margo Minkler, Commission Liaison' (plain text). Page 14: '$2,100,000.00' (plain text).",
+        "b_evidence_output": "Section 'AGENDA', element index 11: 'href': 'https://lnmc.org/list-of-charter-boats-approved-by-lake-norman-marine-commission/'. Section 'Dennis Creek', Table cell: 'href': 'https://2,100,000.00'.",
+        "b_evidence_location": "Sections 'AGENDA' and 'Dennis Creek (Exhibit D-1)'",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9545454545454546,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output contains repeated rule text (e.g., 15A NCAC 10H .1101 appearing at heading-65 and heading-71). However, upon inspection of the source PDF, these pages are actually duplicated within the original document (pages 89-94 and 99-104 are identical). Since the conversion faithfully represents the redundancy present in the source, this is not a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is consistent and logical. Major sections like 'EXHIBIT A' and 'EXHIBIT B' are treated as section titles, with sub-sections correctly using H3 and H4 levels. Skips between levels are not observed in a way that breaks semantic navigation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Tables are correctly structured. Financial statements in Exhibit B preserve the 3-column layout. The complex table in Exhibit L (Black Rail Home Ranges) correctly identifies header rows and preserves column alignment. Pseudo-tables in the land acquisition slides are normalized into proper table structures, which is acceptable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the linear progression of the PDF. Multi-column content in the Eastern Black Rail Conservation Plan is correctly linearized. The sequence of exhibits matches the file structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists are generally well-converted. Bulleted lists in the Agenda and Conservation Plan are preserved. Numbered lists in rule text are correctly identified, and nested lists (e.g., in Exhibit J-2) are properly structured in the JSON schema.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There are multiple link injection issues. On page 1, the word 'Commission' in 'Commission Liaison' is assigned a hallucinated URL (lnmc.org) that does not exist in the source at that location. Additionally, in the land acquisition slides (e.g., page 14), dollar amounts such as '$2,100,000.00' have been incorrectly identified as links and wrapped in invalid 'https://' prefixes.\",\n      \"b_evidence_source\": \"Page 1: 'Margo Minkler, Commission Liaison' (plain text). Page 14: '$2,100,000.00' (plain text).\",\n      \"b_evidence_output\": \"Section 'AGENDA', element index 11: 'href': 'https://lnmc.org/list-of-charter-boats-approved-by-lake-norman-marine-commission/'. Section 'Dennis Creek', Table cell: 'href': 'https://2,100,000.00'.\",\n      \"b_evidence_location\": \"Sections 'AGENDA' and 'Dennis Creek (Exhibit D-1)'\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 1,\n    \"score\": 0.9545454545454546\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document faithfully replicates the visual organization of the source PDF. Headings (H1-H4) are used consistently to delineate sections and exhibits. The hierarchical structure of the agenda, minutes, and conservation plan is preserved through appropriate use of semantic HTML elements and lists. Multi-column information from the PDF is correctly serialized into a logical single-column flow or tables without loss of meaning.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "Tables throughout the document, including the complex financial statements in Exhibit B (page 10), the 'Home Range Sizes' table in Exhibit L (page 132), and the 'Minimum Cage Dimensions' table (page 91), are rendered correctly. The HTML uses standard <table> tags with <thead> and <tbody> sections, ensuring rows and columns are aligned and readable. Headers are visually distinct.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are present in the HTML. This includes the agency logos, the numerous maps in Exhibits D through G, the photos in Exhibit L (Black Rail Plan), and the 'Investigation Matrix' forms which are rendered as images to preserve their complex layout. No <img> tags have empty or broken source attributes.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The document contains significant visual duplication of content blocks. In several exhibits, the same text or rules are rendered twice in succession. For example, the text for Exhibit F-2 starts at Section 16 and is repeated in its entirety at Section 17. Similarly, Exhibit H-1 is repeated in Section 29 and Section 30. The rulemaking text for Furbearer Propagation (10H .1101-.1107) appears multiple times across Sections 33 and 34. This repetition creates a redundant reading experience that differs from the source's intent of presenting one distinct section per item.",
+        "b_evidence_source": "Exhibit F-2 (Fiscal Note) appears once on page 38 of the PDF.",
+        "b_evidence_output": "The text 'Fiscal Note for No-Wake Zone Rule 15A NCAC 10F .0338 Caldwell County' and its following paragraphs appear in full in Section 16 and are then repeated identically in Section 17.",
+        "b_evidence_location": "Sections 16 and 17",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9375,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document faithfully replicates the visual organization of the source PDF. Headings (H1-H4) are used consistently to delineate sections and exhibits. The hierarchical structure of the agenda, minutes, and conservation plan is preserved through appropriate use of semantic HTML elements and lists. Multi-column information from the PDF is correctly serialized into a logical single-column flow or tables without loss of meaning.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"Tables throughout the document, including the complex financial statements in Exhibit B (page 10), the 'Home Range Sizes' table in Exhibit L (page 132), and the 'Minimum Cage Dimensions' table (page 91), are rendered correctly. The HTML uses standard <table> tags with <thead> and <tbody> sections, ensuring rows and columns are aligned and readable. Headers are visually distinct.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are present in the HTML. This includes the agency logos, the numerous maps in Exhibits D through G, the photos in Exhibit L (Black Rail Plan), and the 'Investigation Matrix' forms which are rendered as images to preserve their complex layout. No <img> tags have empty or broken source attributes.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The document contains significant visual duplication of content blocks. In several exhibits, the same text or rules are rendered twice in succession. For example, the text for Exhibit F-2 starts at Section 16 and is repeated in its entirety at Section 17. Similarly, Exhibit H-1 is repeated in Section 29 and Section 30. The rulemaking text for Furbearer Propagation (10H .1101-.1107) appears multiple times across Sections 33 and 34. This repetition creates a redundant reading experience that differs from the source's intent of presenting one distinct section per item.\",\n      \"b_evidence_source\": \"Exhibit F-2 (Fiscal Note) appears once on page 38 of the PDF.\",\n      \"b_evidence_output\": \"The text 'Fiscal Note for No-Wake Zone Rule 15A NCAC 10F .0338 Caldwell County' and its following paragraphs appear in full in Section 16 and are then repeated identically in Section 17.\",\n      \"b_evidence_location\": \"Sections 16 and 17\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 1,\n    \"score\": 0.875\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 1,
+  "total_major": 0,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

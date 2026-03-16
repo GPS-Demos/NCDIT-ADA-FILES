@@ -1,0 +1,89 @@
+{
+  "document_id": "2025-07-24-WRCAgendaPackage.pdf",
+  "audited_at": "2026-03-16T18:41:54.808326Z",
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 0.9375,
+  "fidelity_composite": 0.4,
+  "routing": "human_review",
+  "reasoning": "The composite fidelity score of 0.4 falls into the weak quality band, primarily due to serious content integrity issues where monetary values were hallucinated as URLs. The combination of fabricated domain names for land acquisition costs and significant duplication of entire rule-making sections makes the document unfit for immediate publication without manual correction.",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The conversion failed significantly regarding URL extraction. First, a URL belonging to a footnote on page 78 ('https://lnmc.org/list-of-charter-boats-approved-by-lake-norman-marine-commission/') was incorrectly mapped to the word 'Commission' in the Roll Call section on page 1. More critically, the pipeline interpreted numeric monetary values in Land Acquisition summaries (Exhibits D-1 and D-2) as domain names and fabricated malformed URLs for them. For example, '$2,100,000.00' was converted in",
+      "source_pdf_quote": "$2,100,000.00; $571,000.00; $2,671,000.00; $13,500,000.00",
+      "output_quote": "\"href\": \"https://2,100,000.00\"; \"href\": \"https://571,000.00\"; \"href\": \"https://2,671,000.00\"; \"href\": \"https://13,500,000.00\"",
+      "location": "Sections 'Dennis Creek (Exhibit D-1)' and 'Buffalo Creek Headwaters (Exhibit D-2)', elements 30 and 31 (Pages 14 and 15)"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "There are multiple link injection issues. On page 1, the word 'Commission' in 'Commission Liaison' is assigned a hallucinated URL (lnmc.org) that does not exist in the source at that location. Additionally, in the land acquisition slides (e.g., page 14), dollar amounts such as '$2,100,000.00' have been incorrectly identified as links and wrapped in invalid 'https://' prefixes.",
+      "source_pdf_quote": "Page 1: 'Margo Minkler, Commission Liaison' (plain text). Page 14: '$2,100,000.00' (plain text).",
+      "output_quote": "Section 'AGENDA', element index 11: 'href': 'https://lnmc.org/list-of-charter-boats-approved-by-lake-norman-marine-commission/'. Section 'Dennis Creek', Table cell: 'href': 'https://2,100,000.00'.",
+      "location": "Sections 'AGENDA' and 'Dennis Creek (Exhibit D-1)'"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "The document contains significant visual duplication of content blocks. In several exhibits, the same text or rules are rendered twice in succession. For example, the text for Exhibit F-2 starts at Section 16 and is repeated in its entirety at Section 17. Similarly, Exhibit H-1 is repeated in Section 29 and Section 30. The rulemaking text for Furbearer Propagation (10H .1101-.1107) appears multiple times across Sections 33 and 34. This repetition creates a redundant reading experience that diffe",
+      "source_pdf_quote": "Exhibit F-2 (Fiscal Note) appears once on page 38 of the PDF.",
+      "output_quote": "The text 'Fiscal Note for No-Wake Zone Rule 15A NCAC 10F .0338 Caldwell County' and its following paragraphs appear in full in Section 16 and are then repeated identically in Section 17.",
+      "location": "Sections 16 and 17"
+    }
+  ],
+  "action_items": [
+    "Strip all invalid 'https://' prefixes and link tags from monetary values in Exhibits D-1 and D-2",
+    "Identify and remove duplicate text blocks in Exhibits F-2, H-1, and Section 33/34",
+    "Fix the URL mapping for the Lake Norman Marine Commission footnote to ensure it points to the correct reference on page 78"
+  ],
+  "quality_score": 40,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9038506621953419,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6286,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 0.9375,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9065384779001999,
+      "shingling_precision": 0.973681805720552,
+      "duplication_ratio": 0.05312215709960777,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 188538,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

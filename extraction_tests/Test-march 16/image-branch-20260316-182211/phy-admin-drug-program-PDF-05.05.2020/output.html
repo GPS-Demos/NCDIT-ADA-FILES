@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>Physician Drug Program Procedure Codes And Rates</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Physician Drug Program Procedure Codes And Rates</h1>
+    </header>
+    <main id="main-content" role="main">
+<section>
+<p>Physician Drug Program Procedure Codes And Rates
+Effective January 1, 2020
+The inclusion of a rate on this table does not guarantee that a service is covered. Please refer to the Medicaid Billing Guide and the Medicaid and Health Choice Clinical Policies on the DMA Web Site. Providers should always bill their usual and customary charges. Please use the monthly NC Medicaid Bulletins for additions, changes, and deletion to this schedule. ****Please note: LARCs, Vaccines, and Clotting Factor rates are priced off of the NDC.****
+ProcCode NDC Description Facility Non-Facility J0129 Abatacept 10 mg, injection (Orencia) $17.84 $17.84 J0586 AbobotulinumtoxinA, 5 units (Dysport) $7.21 $7.21 J0178 Aflibercept, 1 mg, injection (Eylea) $935.65 $935.65 J0202 Alemtuzumab, 1 mg (Lemtrada) $1,743.82 $1,743.82 J0221 Alglucosidase alfa, 10 mg, injection (Lumizyme) $141.53 $141.53 J7308 Aminolevulinic acid HCI for topical admin.</p>
+
+<p>20% single unit dosage form (354 mg) (Levulan) (Kerastick) $104.74 $104.74 J7196 Antithrombin (recombinant), 50 IU (ATryn) $100.49 $100.49 J3590 Asfotase alfa 1 mg (Strensiq) $75.60 $75.60 J9999 Avelumab injection, 1 mg (Bavencio) $8.12 $8.12 J0485 Belatacept, 1 mg, injection (Nulojix) $3.63 $3.63 J0490 Belimumab, 10 mg, injection (Benlysta) $36.66 $36.66 J0179 Brolucizumab-dbll injection 1 mg (Beovu) $317.58 $317.58 J0597 C1 Esterase Inhibitor (human), 10 units (Berinert) $26.27 $26.27 J0598 C1 esterase inhibitor (human), 10 units, injection (Cinryze) $41.56 $41.56 J0638 Canakinumab, 1 mg vial (Ilaris) $85.09 $85.09 J0716 Centruriodes Immune F(ab), 120 mg (Anascorp) $3,757.41 $3,757.41 J3590 Cerliponase alfa injection 1 kit (Brineura) $29,160.00 $29,160.00 J0717 Certolizumab pegol, 1 mg, injection (Cimzia) $5.19 $5.19 J0775 Collagenase clostridium histolyticum, 0.01 mg (Xiaflex) $35.80 $35.80 J3590 Crizanlizumab-tmca injection 1 mg (Adakveo) $25.46 $25.46 J0897 Denosumab, 1 mg (Xgeva) (Prolia) $13.77 $13.77 J1300 Eculizumab, 10 mg, injection (Soliris) $168.34 $168.34 J9999 fam-trastuzumab deruxtecan-nxki for injection 10 mg (Enhertu) $247.96 $247.96 J1458 Galsulfase injection for intravenous use 1 mg (Naglazyme) $380.50 $380.50 J1602 Golimumab Hydrochloride 1 mg (Simponi) $24.59 $24.59 J7178 Human fibrinogen concentrate, 1 mg, injection (RiaSTAP) $0.93 $0.93 J3590 Human Topical Protein, 1 IU (Recothrom) $0.02 $0.02 J1744 Icatibant acetate, 1 mg (Firazyr) $145.14 $145.14 J3590 Idarucizumab injection 2.5 g/50 ml (Praxbind) $1,890.00 $1,890.00 J3590 Immune Globulin Subcutaneous, 20% solution 100 mg (Cuvitru) $18.14 $18.14 J0588 IncobotulinumtoxinA, 1 unit (Xeomin) $5.28 $5.28 Q5108 Pegfilgrastim-jmdb injection 0.5 mg (Fulphila) $368.79 $368.79 S0145 Peginterferon Alfa-2a, 180 mcg/ml (Pegasys) $321.08 $321.08 J3590 Peginterferon Alfa-2b, 1 mcg (Sylatron) $3.10 $3.10 J2507 Pegloticase, 1 mg (Krystexxa) $288.31 $288.31 S0148 Pegylated interferon alfa-2b, 10 mcg (Peg-Intron) $100.29 $100.29 J9306 Pertuzumab, 1 mg, injection (Perjeta) $10.33 $10.33 J2724 Protein C concentrate, intravenous, human, 1 IU, injection (Ceprotin) $11.63 $11.63 J3590 Prothrombin complex concentrate (Human) 1 IU (Kcentra) $2.04 $2.04 J2778 Ranibizumab, 0.1 mg, injection (Lucentis) $386.71 $386.71 J2786 Reslizumab injection 1 mL(Cinqair) $90.18 $90.18 J2793 Rilonacept, 1 mg injection (Arcalyst) $23.42 $23.42 J3590 Secukinumab injection 150 mg (Cosentyx) $3,656.66 $3,656.66 J3262 Tocilizumab, 1 mg (Actemra) $3.32 $3.32 J3357 Ustekinumab Injection for subcutaneous use, 1 mg (Stelara) $106.76 $106.76 J3358 Ustekinumab injection for intravenous use, 1 mg (Stelara IV) $12.85 $12.85 J3385 Velaglucerase Alfa, 100 units (VPRIV) $334.55 $334.55 J9400 Ziv-aflibercept, 1 ml or 25 mg, injection (Zaltrap) $9.48 $9.48 J3490 17 Alpha Hydroxprogesterone Caporoate, Bulk powder, 250 mg (17P) $19.80 $19.80 J0130 Abciximab, 10mg, injection (ReoPro) $403.77 $403.77 J1120 Acetazolamide sodium, up to 500 mg, injection (Diamox) $15.92 $15.92 J0133 Acyclovir, 5 mg, injection (Zovirax) $0.02 $0.02 J0153 Adenosine injection 1 mg (Adenoscan, Adenocard) $0.89 $0.89 J9354 Ado-trastuzumab Emtansine, 1 mg, injection (Kadcyla) $30.58 $30.58 J0180 Agalsidase Beta, 1 mg, injection (Fabrazyme) $123.68 $123.68 P9047 Albumin (human), 25%, 50 ml, infusion (Albuminar, Albutein, Bluminate), Plasbumin $38.30 $38.30 P9041 Albumin (human), 5%, 50 ml, infusion (Albiminar, Albutein, Buminate, Plasbumin) $19.14 $19.14 J9015 Aldesleukin, per single use vial (Proleukin, etc) $732.43 $732.43 J0215 Alefacept, 0.5 mg, injection (Amevive) $25.44 $25.44 J0205 Alglucerase, per 10 units, injection (Ceredase) $37.86 $37.86 J0220 Alglucosidase alfa, 10 mg, injection (Myozyme) $121.40 $121.40 J0257 Alpha 1 proteinase inhibitor (human), 10 mg (Glassia) $3.67 $3.67 J0256 Alpha 1-proteinase inhibitor-human, 10mg, injection (Prolastin) (Aralast, Zemaira) $3.49 $3.49</p>
+
+<p>J2997 Alteplase recombinant, 1 mg, injection (Activase) $30.71 $30.71 J0207 Amifostine, 500mg, injection (Ethyol) $487.92 $487.92 J0278 Amikacin sulfate, 100 mg, injection (Amikin) $0.70 $0.70 J0280 Aminophylline, up to 250mg, injection $0.35 $0.35 J0300 Amobarbital, up to 125mg, injection (Amytal) $11.41 $11.41 J0285 Amphotericin B, 50 mg, injection (Amphocin) (Fungizone) $11.43 $11.43 J0288 Amphotericin B cholesteryl sulfate complex, 10 mg, injection (Amphotec) $11.45 $11.45 J0287 Amphotericin B lipid complex, 10 mg, injection (Abelcet) $9.98 $9.98 J0289 Amphotericin B liposome, 10 mg, injection (Ambisome) $16.38 $16.38 J0290 Ampicillin sodium, 500mg, injection $2.15 $2.15 J0295 Ampicillin sodium/sulbactam sodium, per 1.5g, injection (Unasyn) $4.20 $4.20 J7188 Antihemophilic factor (recombinant) porcine sequence 1 IU (Orbizur) $5.57 $5.57 J7199 Antihempohilic factor VIII (recombinant) 1 IU (Nuwiq) $1.83 $1.83 J7197 Antithrombin III (human), per IU (Throbate III) $1.82 $1.82 J3490 Aprepitant injectable emulsion, for intravenous use 1 mg (Cinvanti) $2.45 $2.45 J0400 Aripiprazole, intramuscular, 0.25 mg, injection (Abilify) $0.28 $0.28 J0401 Aripiprazole, extended release, 1 mg, injection $3.85 $3.85 J1943 Aripiprazole, lauroxil extended-release injectable suspension 1 mg (Aristada Initio) $2.86 $2.86 J9017 Arsenic trioxide, 1 mg (Trisenox) $32.90 $32.90 J9020 Asparaginase, 10,000 units (Elspar) $54.42 $54.42 J9019 Asparaginase Erwinia Chrysanthemi, 1,000 IUs, injection (Erwinaze) $319.03 $319.03 J0461 Atropine sulfate, 0.01 mg, injection $0.04 $0.04 J9025 Azacitidine 1 mg (Vidaza) $4.28 $4.28 J0456 Azithromycin, 500mg, injection (Zithromax) $17.16 $17.16 Q0144 Azithromycin dihydrate, oral, capsules/powder, 1 gm (Zithromax, Zithromax Z-Pak) $20.75 $20.75 J0475 Baclofen, 10mg, injection (Lioresal) $182.15 $182.15 J0476 Baclofen, 50 mcg for intrathecal trial, injection (Lioresal) $66.58 $66.58 J9031 BCG live (intravesical), per installation (Tice BCG, Theracys) $108.56 $108.56 J9032 Belinostat 10 mg (Beleodaq) $32.50 $32.50 J9033 Bendamustine HCl, 1 mg, injection (Treanda) $17.76 $17.76 J0702 Betamethasone acetate and betamethasone sodium phosphate, per 3mg, injection (Celestone) (Soluspan) $5.49 $5.49 J9035 Bevacizumab, 10 mg, injection (Avastin) $54.83 $54.83 Q5118 Bevacizumab-bzr injection 10 mg (Zirabev) $66.25 $66.25 J9040 Bleomycin sulfate, 15 units (Blenoxane) $27.70 $27.70 J9039 Blinatumomab (Blincyto), 1 mcg $98.08 $98.08 J9041 Bortezomib, 0.1 mg, inj.</p>
+
+<p>(Velcade) $32.86 $32.86 J0585 Botulinum toxin type A, per unit (Botox) $5.67 $5.67 J0587 Botulinum toxin type B, per 100 units (Myobloc) $8.31 $8.31 J9042 Brentuximab vedotin, 1 mg (Adcetris) $94.47 $94.47 Q9991 Buprenorphine extended-release injection (&lt; or = 100 mg) (Sublocade) $1,674.80 $1,674.80 Q9992 Buprenorphine extended-release injection (&gt; 100 mg) (Sublocade) $1,674.80 $1,674.80 J0570 Buprenorphine implant, 74.2 mg (Probuphine) $1,280.52 $1,280.52 J0595 Butorphinol tartrate, 1 mg, injection (Stadol) $0.48 $0.48 J9043 Cabazitaxel, 1 mg (Jevtana) $129.02 $129.02 J9118 Calaspargase pegol-mknl injection 10 Units (Asparlas) $69.12 $69.12 J0636 Calcitriol, 0.1 mcg, injection (Calcijex) $0.41 $0.41 J0610 Calcium gluconate, per 10ml, injection $0.34 $0.34 J0620 Calcium glycerophosphate and calcium lactate, per 10ml, injection (Calphosan) $12.60 $12.60 J3590 caplacizumab-yhdp for injection 11 mg (Cablivi) $7,884.00 $7,884.00 J7336 Capsaicin 8% patch, per 1 square cm (Qutenza) $2.86 $2.86 J9045 Carboplatin, 50 mg (Paraplatin) $6.02 $6.02 J9047 Carfilzomib, 1 mg injection (Kyprolis) $29.63 $29.63 J9050 Carmustine, 100 mg (BiCNU) $149.68 $149.68 J0690 Cefazolin Sodium, 500 mg, Injection $0.63 $0.63 J0692 Cefepime HCL, 500 mg, injection (Maxipime) $6.44 $6.44 J0698 Cefotaxime Sodium, per 1 g (Claforan) $4.09 $4.09 J0694 Cefoxitin Sodium, 1g, injection (Mefoxin) $7.82 $7.82 J0712 Ceftaroline Fosamil Acetate, 10 mg (Teflaro) $0.70 $0.70 J0714 Ceftazidime; avibactam injection 0.625 g (Avycaz) $76.95 $76.95 J0713 Ceftazidime, per 500 mg, injection (Fortaz, Tazidime) $3.32 $3.32 J0715 Ceftizoxime sodium, per 500mg, injection (Cefizox) $5.00 $5.00 J0695 Ceftolozane/Tazobactam 75 mg, 1-0.5 gm vial (Zerbaxa) $4.48 $4.48 J0696 Ceftriaxone Sodium, per 250mg, injection (Rocephin) $1.41 $1.41 J0697 Cefuroxime sodium, per 750mg, injection (Zinacef) $3.28 $3.28 J9119 cemiplimab-rwlc injection, 1 mg (Libtayo) $27.45 $27.45 J3490 Cetrizine hydrochloride injection 1 mg (Quzyttir) $32.40 $32.40 J9055 Cetuximab, 10 mg, injection (Erbitux) $47.54 $47.54 J0720 Chloramphenicol sodium succinate, up to 1g, injection (Chloromycetin) $17.54 $17.54 J1990 Chlordiazepoxide HCl, up to 100 mg, injection (Librium) $20.09 $20.09 J2400 Chloroprocaine HCl, per 30 ml, injection (Nesacaine) $12.14 $12.14 J1205 Chlorothiazide sodium, per 500 mg, injection (Diuril Sodium) $157.60 $157.60 J3230 Chlorpromazine HCl, up to 50 mg, injection (Thorazine) $3.07 $3.07 J0725 Chorionic Gonadotropin, per 1,000 USP units, injection (Novarel, Pregnyl, Profasil HP) $3.22 $3.22 J0740 Cidofovir, 375 mg, injection (Vistide) $727.70 $727.70 J0743 Cilastatin sodium imipenem, per 250mg, injection (Primaxin IM or IV) $13.63 $13.63 S0023 Cimetidine hydrochloride, 300 mg, injection (Tagamet) $0.58 $0.58 J0744 Ciprofloxacin for IV infusion, 200 mg, injection (Cipro) $5.10 $5.10 J9060 Cisplatin, powder or solution, per 10 mg $2.17 $2.17 J9065 Cladribine, per 1 mg, injection (Leustatin) $29.23 $29.23</p>
+
+<p>J3490 Clevidipine injectable emulsion (Cleviprex) $2.89 $2.89 J0735 Clonidine hydrochloride, 1mg, 1 IU injection (Duracion) $53.45 $53.45 J7199 Coagulation factor IX (recombinant) vials (Ixinity) $1.59 $1.59 J3590 Coagulation factor Xa (recombinant) 1 mg (Andexxa) $29.70 $29.70 J0745 Codeine phosphate, per 30mg, injection $1.21 $1.21 J0770 Colistimethate Sodium,150 mg, injection (Coly-Mycin M) $18.98 $18.98 S4993 Contraceptive pills for birth control, 1 tablet $3.00 $3.00 J9999 Copanlisib injection, 1 mg (Aliqopa) $75.60 $75.60 J0800 Corticotropin, up to 40 units, injection (Acthar, ACTH) $2,248.17 $2,248.17 J0834 Cosyntropin, 0.25 injection (Cortrosyn) $87.03 $87.03 J3590 Crotalidae immune f(ab&#39;)2 (equine), lyophilized powder for solution 1 vial (Anavip) $1,317.60 $1,317.60 J0840 Crotalidae polyvalent immune fab (ovine) powder for solution for intravenous injection, up to 1 gram (1 vial) (CroFab) $2,090.25 $2,090.25 J9070 Cyclophosphamide, 100 mg (Cytoxan, Neosar) $1.78 $1.78 J9100 Cytarabine, 100 mg (Cytosar-U) $1.15 $1.15 J9098 Cytarabine Liposome, 10 MG (Depocyt) $396.04 $396.04 J7070 D-5-W, 1,000 cc, infusion $2.08 $2.08 J9130 Dacarbazine, 100 mg (DTIC- Dome) $4.39 $4.39 J7513 Daclizumab, parenteral, 25 mg (Zenapax) $301.30 $301.30 J9120 Dactinomycin, 0.5 mg (Cosmegen) $470.94 $470.94 J0875 Dalbavancin hydrochloride 5 mg (Dalvance) $14.58 $14.58 J1645 Dalteparin sodium, per 2500 IU, injection (Fragmin) $10.30 $10.30 J0878 Daptomycin, 1 mg (Cubicin) $0.33 $0.33 J0881 Darbepoetin alfa, 1 mcg, (for non-ESRD use), injection (Aranesp) $2.64 $2.64 J0882 Darbepoetin alfa for ESRD on dialysis, 1 mcg (Aranesp) $2.64 $2.64 J9151 Daunorubicin citrate, liposomal formulation, 10 mg (Daunoxome) $53.51 $53.51 J9150 Daunorubicin HCl, 10 mg (Cerubidine) $16.36 $16.36 J0894 Decitabine, 1 mg, injection (Dacogen) $25.88 $25.88 J0895 Deferoxamine Mesylate, 500mg, injection (Desferal) $11.75 $11.75 J9155 Degarelix, 1 mg, injection (Firmagon) $2.74 $2.74 J3490 Delafloxacin for injection 300 mg (Baxdela) $0.48 $0.48 J9160 Denileukin Diftitox, 300 mcg (Ontak) $1,345.78 $1,345.78 J1000 Depo-estradiol cypionate, up to 5mg, injection (Depo-Estradiol) $5.90 $5.90 J2597 Desmopressin acetate, per 1 mcg, injection (DDAVP) $1.78 $1.78 J1094 Dexamethasone acetate, 1 mg, injection (Dalalone DP, Dexasone LA, Dexone LA, Cortastat LA) $0.22 $0.22 J1095 Dexamethasone Intraocular suspension 9% 1 mcg (Dexycu) $1.24 $1.24 J7312 Dexamethasone, Intravitreal implant, 0.1 mg (Ozurdex) $187.02 $187.02 J1096 Dexamethasone ophthalmic insert 0.4 mg, 1 mg (Dextenza) $145.48 $145.48 J1100 Dexamethasone sodium phosphate, 1mg, injection (Cortastat, Dalalone) (Hexadrol) $0.08 $0.08 J1190 Dexrazoxane hydrochloride, per 250 mg, injection (Zinecard) (Totect) $172.70 $172.70 J7042 Dextrose 5% / normal saline (500 ml = 1 unit) $0.27 $0.27 J7060 Dextrose 5% / water (500 ml = 1 unit) $1.04 $1.04 J7121 Dextrose 5% in lactated ringers infusion, up to 1000 cc (Dextrose) $2.11 $2.11 J3360 Diazepam, up to 5 mg, injection (Valium, Zetran) $0.75 $0.75 J1730 Diazoxide, up to 300 mg, injection (Hyperstat IV) (Proglycern) $106.75 $106.75 J0500 Dicyclomine HCl, up to 20mg, injection (Bentyl, Dilomine) $11.37 $11.37 J3490 Defibrotide sodium injection, for intravenous use 1 ml (Defitelio) $356.40 $356.40 J1160 Digoxin, up to 0.5 mg injection (Lanoxin) $1.13 $1.13 J1110 Dihydroergotamine mesylate, per 1mg, injection (DHE 45) $23.38 $23.38 J1240 Dimenhydrinate, up to 50 mg, injection $2.98 $2.98 J0470 Dimercaprol, per 100mg, injection (BAL in oil) $25.45 $25.45 J9999 Dinutuximab Vial 1 ml (Unituxin) $1,603.80 $1,603.80 J1200 Diphenhydramine HCl, up to 50 mg, injection (Benadryl) $0.72 $0.72 J1245 Dipyridamole, per 10 mg, injection (Persantine IV) $0.70 $0.70 J1212 DMSO, dimethyl sulfoxide, 50%, 50 ml, injection $48.19 $48.19 J1250 Dobutamine HCl, per 250 mg, injection (Dobutrex) $4.91 $4.91 J9171 Docetaxel, 1 mg, injection (Taxotere) $16.81 $16.81 J1260 Dolasetron mesylate, 10 mg, injection (Anzemet) $4.00 $4.00 J1265 Dopamine HCI, 40 mg, injection $0.49 $0.49 J1267 Doripenem, 10 mg, injection (Doribax) $0.62 $0.62 J1270 Doxercalciferol, 1 mcg, injection (Hectorol) $2.67 $2.67 J9000 Doxorubicin HCl, 10 mg (Adriamycin) $4.53 $4.53 Q2049 Doxorubicin HCL Liposomal, Imported Lipodox.</p>
+
+<p>10 mg (Doxil) $475.47 $475.47 Q2050 Doxorubicin Hydrochloride, Injection, Liposomal, Not otherwise specified, 10 mg $551.74 $551.74 J1790 Droperidol, up to 5 mg, injection (Inapsine) $1.26 $1.26 J1290 Ecallantide, 1 mg (Kalbitor) $262.69 $262.69 J3490 Edaravone injection (Radicava) 1 mg $19.55 $19.55 J0600 Edetate calcium disodium, up to 1000mg, injection (Calcium EDTA) $47.95 $47.95 J3590 Elapegademase-lvir injection 1 mg (Revcovi) $4,435.20 $4,435.20 J1322 Elosulfase alfa, injection 1mg (Vimizim) $228.38 $228.38 J9999 Enfortumab vedotin-ejfv for injection 10 mg (Padcev) $1,139.40 $1,139.40 J1650 Enoxaparin sodium, 10 mg, injection (Lovenox) $5.63 $5.63 J0122 Ervacucline for injection 1 mg (Xerava) $0.95 $0.95 J0171 Adrenalin, epinephrine, 0.1 mg ampule, injection (Adrenalin) $0.04 $0.04 J9178 Epirubicin HCl, 2 mg, inj. (Ellence) $5.96 $5.96 Q4081 Epoetin Alfa, 100 units (for ESRD on dialysis), injection (Epogen, Procrit) $0.87 $0.87 Q5105 Epoetin Alfa, biosimilar injection (for ESRD on dialysis), 100 units (Retacrit) $1.17 $1.17 Q5106 Epoetin Alfa-epbx injection (for non-ESRD use), 1000 units (Retacrit) $11.69 $11.69 J0885 Epoetin alfa (for non-ESRD use), 1000 units, injection (Epogen, Procrit) $8.66 $8.66 J0887 Epoetin beta ESRD use, 1 microgram injection $1.92 $1.92</p>
+
+<p>J0888 Epoetin beta non ESRD use, 1 microgram injection $1.92 $1.92 J1325 Epoprostenol, 0.5 mg, injection (Flolan) $13.70 $13.70 J9179 Eribulin Mesylate, 0.1 mg (Halaven) $85.93 $85.93 J1335 Ertapenem, 500 mg, injection (Invanz) $24.34 $24.34 J1364 Erythromycin lactobionate, per 500 mg, injection (Erthrocin) $6.45 $6.45 J3490 Esketamine nasal spray 1 device (28 mg) (Spravato) $318.60 $318.60 J1380 Estradiol valerate, up to 10 mg, injection (Delestrogen) $8.22 $8.22 J1410 Estrogen conjugated, per 25 mg, injection (Premarin IV) $68.00 $68.00 J0606 Etelcalcetide injection 0.1 mg (Parsabiv) $3.53 $3.53 J1436 Etidronate disodium, per 300 mg, injection (Didronel) $68.15 $68.15 J9181 Etoposide, 10 mg (VePesid) $0.38 $0.38 J7191 Factor VIII (antihemophilic factor (porcine)), per IU (Hyate C) $1.77 $1.77 J3010 Fentanyl Citrate, 0.1 mg, injection (Sublimaze) $0.27 $0.27 J1439 Ferric Carboxymaltos injection, 1 mg $1.11 $1.11 Q0138 Ferumoxytol, for treatment of iron deficiency anemia, 1 mg (non-ESRD use), injection (Feraheme) $0.79 $0.79 Q0139 Ferumoxytol, for treatment of iron deficiency anemia, 1 mg (for ESRD on dialysis), injection (Feraheme) $0.79 $0.79 J3590 Fibrinogen concentrate (human) lyophilized powder 1 mg (Fibryga) $1.19 $1.19 J1442 Filgrastim (G-CSF), 1 mcg, injection (Neupogen) $1.01 $1.01 Q5110 Filgrastim-aafi injection 1 mcg (Nivestym) $0.79 $0.79 J9200 Floxuridine, 500 mg (FUDR) $48.79 $48.79 J7311 Fluocinolone acetonide intravitreal 1 implant (Retisert) $20,864.30 $20,864.30 J7313 Fluocinolone acetonide intravitreal implant 0.01 mg (Iluvien) $490.95 $490.95 J7314 Fluocinolone acetonide intravitreal implant 0.18 mg (Yutiq) $500.40 $500.40 J9185 Fludarabine phosphate, 50 mg, injection (Fludara) $191.60 $191.60 J9190 Fluorouracil, 500 mg (Adrucil) $1.78 $1.78 J2680 Fluphenazine decanoate, up to 25 mg, injection (Prolixin) $2.26 $2.26 J1652 Fondaparinux sodium, 0.5 mg, injection (Arixtra) $5.95 $5.95 J1453 Fosaprepitant, 1 mg, injection (Emend) $1.50 $1.50 J1455 Foscarnet sodium, per 1,000 mg, injection (Foscavir) $9.91 $9.91 J9395 Fulvestrant, 25 mg, injection (Faslodex) $77.66 $77.66 J1940 Furosemide, up 20 mg, injection (Lasix) $0.18 $0.18 J7310 Ganciclovir, 4.5 mg, long-acting implant (Vitrasert) $4,552.62 $4,552.62 J1570 Ganciclovir sodium, 500 mg, injection (Cytovene) $41.84 $41.84 J1580 Gentamicin, up to 80 mg, injection $0.99 $0.99 J9201 Gemcitabine HCl, 200 mg (Gemzar) $125.77 $125.77 J9199 Gemcitabine in sodium chloride injection 200 mg (Infugem) $82.08 $82.08 J9203 Gemtuzumab Ozogamicin, 0.1 mg, injection (Mylotarg) $193.16 $193.16 J3490 Givosiran injection, for subcutaneous use 1 mg (Givlaari) $222.86 $222.86 J1610 Glucagon hydrochloride, per 1 mg, injection (GlucaGen) $65.53 $65.53 J1600 Gold sodium thiomalate, up to 50 mg, injection (Myochrysine, Aurolate) $7.48 $7.48 J9202 Goserelin acetate implant, per 3.6 mg (Zoladex) $181.08 $181.08 J1626 Granisetron hydrochloride, 100 mcg, injection (Kytril) $4.73 $4.73 J1631 Haloperidol decanoate, per 50 mg, injection (Haldol Decanoate-50) $2.30 $2.30 J1630 Haloperidol, up to 5 mg, injection (Haldol) $1.65 $1.65 J1640 Hemin, 1 mg, injection (Panhematin) $6.98 $6.98 J1642 Heparin sodium, per 10 units, injection (Heparin Lock Flush) $0.04 $0.04 J1644 Heparin sodium, per 1,000 units, injection (Heparin) $0.07 $0.07 J9225 Histrelin implant (Vantas), 50 mg $1,439.36 $1,439.36 J9226 Histrelin implant (Supprelin LA), 50 mg $13,987.88 $13,987.88 J3470 Hyaluronidase injection up to 150 units (Hydase, Amphadase, Vitrase) $16.49 $16.49 J3473 Hyaluronidase, recombinant, 1 USP unit (Hylenex) $0.39 $0.39 J0360 Hydralazine HCl, up to 20mg, injection (Apresoline) $5.79 $5.79 J1720 Hydrocortisone sodium succinate, up to 100 mg, injection (A-Hydrocort, Solu-Cortef) $2.13 $2.13 J1170 Hydromorphone, up to 4 mg, injection (Dilaudid) $1.22 $1.22 J1729 Hydroxyprogesterone caproate injection, 10 mg $16.64 $16.64 J1726 Hydroxyprogestorone caproate, 10 mg, injection (Makena) $33.02 $33.02 J3410 Hydroxyzine HCl, up to 25 mg, injection (Vistaril) $0.13 $0.13 J1980 Hyoscyamine sulfate, up to 0.25 mg, injection (Levsin) $8.87 $8.87 J3590 Ibalizumab-uiyk injection 1 mg (Trogarzo) $6.13 $6.13 J1740 Ibandronate sodium, 1 mg (Boniva) $132.64 $132.64 J1742 Ibutilide fumarate, 1 mg, injection (Corvert) $308.56 $308.56 J9211 Idarubicin HCl, 5 mg (Idamycin) $263.49 $263.49 J1743 Idursulfase, 1 mg, injection (Elaprase) $434.29 $434.29 J9208 Ifosfamide, per 1 g (Ifex) $36.19 $36.19 J1786 Imiglucerase, 10 units, injection (Cerezyme) $40.07 $40.07 J3490 Imipenem, cilastatin, and relebactam for injection 1.25 g (1 vial) (Recarbrio) $288.90 $288.90 J1575 Immune Globulin Infusion 10% (Human) with recombinant human hyaluronidase 100 mg (Hyqvia) $10.83 $10.83 J1599 Immune Globulin intravenous, human-ifas 500 mg (Panzyga) $89.64 $89.64 J1599 Immune Globulin intravenous, human-slra 10% liquid 500 mg (Asceniv) $490.86 $490.86 J3590 Immune Globulin subcutaneous, human - klhw 20% solution 100 mg (Xembify) $18.47 $18.47 J1745 Infliximab, 10 mg, injection (Remicade) $52.53 $52.53 J0185 Injection, aprepitant, 1 mg (Cinvanti) $2.11 $2.11 J1944 Injection, aripiprazole lauroxil, 1 mg (Aristada) $2.78 $2.78 J9022 Injecton, atezolizumab, 10 mg (Tecentriq) $75.79 $75.79 J9023 Injection, avelumab, 10 mg (Bavencio) $79.37 $79.37 J9034 Injection, bendamustine hcl (Bendeka), 1 mg $23.69 $23.69 Q5107 Inection, bevacizumab, (Mvasi) 10 mg $73.16 $73.16 J0565 Injection, bezlotoxumab, 10 mg (Zinplava) $41.04 $41.04</p>
+
+<p>J9044 Injection, bortezomib, 0.1 mg $35.67 $35.67 J0584 Injection, burosumab-twza 1 mg (Crysvita) $367.20 $367.20 J0567 Injection, cerliponase alfa, 1 mg (Brineura) $97.20 $97.20 J9057 Injection, copanlisib, 1 mg (Aliqopa) $75.60 $75.60 J0841 Injection, crotalidae immune f(ab&#39;)2 (equine), 120 mg (Anavip) $1,317.60 $1,317.60 J9145 Injection, daratumumab, 10 mg (Darzalex) $46.92 $46.92 J1130 Injection, diclofenac sodium, 0.5 mg (Dyloject) $0.22 $0.22 J9173 Injection, durvalumab, 10 mg (Imfinizi) $75.14 $75.14 J1301 Injection, edaravone, 1 mg (Radicava) $19.55 $19.55 J9176 Injection, elotuzumab, 1 mg (Empliciti) $6.23 $6.23 J7170 Injection, emicizumab-kxwh, 0.5 mg (Hemlibra) $46.38 $46.38 J7175 Injection, factor X, (human), 1 IU (Coagadex) $8.36 $8.36 J1443 Injection, ferric pyrophosphate citrate solution, 0.1mg of iron (Triferic) $0.02 $0.02 J1444 ferric pyrophosphate citrate solution, for hemodialysis use, 0.1 mg (Triferic) $0.03 $0.03 Q5101 Injection, Filgrastim (G-CSC), Biosimilar, 1 microgram (Zarxio) $1.02 $1.02 J1454 Injection, fosnetupitant 235 mg and palonosetron 0.25 mg (Akynzeo) $529.52 $529.52 J1627 Injection, granisetron, extended-release, 0.1 mg (Sustol) $4.60 $4.60 J7177 Injection, human fibrinogen concentrate (Fibryga), 1 mg $1.19 $1.19 J1746 Injection, ibalizumab-uiyk, 10 mg (Trogarzo) $61.29 $61.29 J1555 Injection, immune globuline, 100 mg (Cuvitru) $13.79 $13.79 Q5103 Injection, infliximab, biosimilar, 10 mg (Inflectra) $69.71 $69.71 J9229 Injection, inotuzumab ozogamicin, 0.1 mg (Besponsa) $2,244.00 $2,244.00 J0594 Injection, busulfan, 60 mg/10 ml (Busulfex) $33.18 $33.18 J9205 Injection, irinotecan liposome, 1 mg (Onivyde) $39.51 $39.51 J9153 injection, liposomal, 1 mg daunorubicin and 2.27 mg cytarabine (Vyxeos) $190.32 $190.32 J9295 Injection, necitumumab, 1 mg (Portrazza) $5.26 $5.26 J9285 Injection, olaratumab 10 mg (Lartruvo) $49.95 $49.95 J9311 Injection, rifuximab,10 mg and hyaluronidase (Rituxan Hycela) $46.64 $46.64 J9312 Injection, rituximab, 10 mg (Rituxan) $95.40 $95.40 Q5115 Injection, rituximab-abbs, biosimilar, 10 mg (Truxima) $91.32 $91.32 J2797 Injection, rolapitant, 0.5 mg (Varubi) $0.96 $0.96 Q5111 Injection, pegfilgrastim-cbqv, biosimilar, 0.5 mg (Udenyca) $375.75 $375.75 J2840 Injection, sebelipase alfa, 1 mg (Kanuma) $540.00 $540.00 J9325 Injection, talimogene laherparepvec, per 1 million plaque forming units (Imlygic) $46.13 $46.13 J9352 Injection, trabectedin, 0.1 mg (Yondelis) $283.39 $283.39 Q5114 Injection, trastuzumab-dkst 10 mg, (Ogivri) $95.07 $95.07 J3304 Injection, triamcinolone acetonide, preservative-free, extended-release, microsphere formulation, 1 mg (Zilretta) $18.88 $18.88 J3316 Injection, triptorelin, extended-release, 3.75 mg (Triptodur) $2,880.00 $2,880.00 J3397 Injection, vestronidase alfa-vjbk, 1 mg (Mepsevii) $228.42 $228.42 J7342 Installation, ciprofloxacin otic suspension, 6 mg (Otiprio) $30.59 $30.59 J1815 Insulin, per 5 units, injection $0.27 $0.27 J9212 Interferon Alfacon-1, recombinant, 1 mcg, injection (Infergen) $4.58 $4.58 J9215 Interferon alfa-N3, (human leukocyte derived), 250,000 IU (Alferon N) $18.46 $18.46 J9213 Interferon alfa-2A, recombinant, 3 million units (Roferon-A) $39.06 $39.06 J9214 Interferon alfa-2B, recombinant, 1 million units (Intron-A) $13.51 $13.51 Q3027 Interferon beta-1a, 1 mcg for intramuscular use, injection $33.20 $33.20 Q3028 Interferon beta-1a, 1 mcg for subcutaneous use, injection $18.88 $18.88 J1826 Interferon beta-1a, 30 mcg for intramuscular use, injection (Avonex) $744.09 $744.09 J1830 Interferon beta-1b, 0.25 mg, injection (Extavia) $168.98 $168.98 J9216 Interferon gamma-1B, 3 million units (Actimmune) $295.48 $295.48 J9228 Ipilimumab, 1 mg, (Yervoy) $119.33 $119.33 J9206 Irinotecan, 20 mg (Camptosar) $120.48 $120.48 J1750 Iron dextran, 50 mg, injection (InFeD, Dexferrum) $11.25 $11.25 J1756 Iron sucrose, 1 mg, injection (Venofer) $0.33 $0.33 J1833 Isavuconazonium sulfate injection 1 mg (Cresemba) $0.69 $0.69 J9207 Ixabepilone, 1 mg, injection (Ixempra) $60.84 $60.84 J1850 Kanamycin sulfate, up to 75 mg, injection (Kantrex) $0.73 $0.73 J1840 Kanamycin sulfate, up to 500 mg, injection (Kantrex) $4.86 $4.86 J1885 Ketorolac tromethamine, per 15 mg, injection (Toradol) $0.32 $0.32 J3490 Lacosamide, per ml/10mg (Vimpat) $1.95 $1.95 J1930 Lanreotide, 1 mg, injection (Somatuline Depot) $25.63 $25.63 J1931 Laronidase, 0.1 mg, inj.</p>
+
+<p>(Aldurazyme) $23.25 $23.25 J3490 Lefamulin injection, 1 mg (Xenleta) $0.74 $0.74 J3490 Letermovir injection, for intravenous use 1 vial (Prevymis) $291.60 $291.60 J0640 Leucovorin Calcium, per 50 mg, injection (Wellcovorin) $0.74 $0.74 J9218 Leuprolide acetate, per 1 mg (Lupron) $7.13 $7.13 J9217 Leuprolide acetate (for depot suspension), 7.5 mg (Lupron Depot) (Eligard) $210.79 $210.79 J1950 Leuprolide acetate (for depot suspension), per 3.75 mg, injection (Lupron Depot) (Eligard) $421.52 $421.52 J9219 Leuprolide Acetate Implant 65mg (Viadur) $1,534.89 $1,534.89 J1953 Levetiracetam, 10 mg, injection (Keppra) $0.41 $0.41 J1955 Levocarnitine, per 1 g, injection (Carnitor) $5.61 $5.61 J1956 Levofloxacin, 250 mg, injection (Levaquin) $5.60 $5.60 J0641 Levoleucovorin calcium, 0.5 mg, injection (Fusilev) $1.00 $1.00 J0642 Levoleucovorin for injection, 0.5 mg (Khapzory) $2.04 $2.04 J1960 Levorphanol tartrate, up to 2 mg, injection (Levo-Dromoran) $3.03 $3.03 J3490 Lidocaine , for topical use 1 mg invoice required ***See Rate Table below J2001 Lidocaine HCL for IV infusion, Injection 10 mg $0.02 $0.02 J2010 Lincomycin HCl, up to 300 mg, injection (Lincocin) $4.07 $4.07 J2020 Linezolid, 200 mg, injection (Zyvox) $26.81 $26.81</p>
+
+<p>J2060 Lorazepam, 2 mg, injection (Ativan) $0.61 $0.61 J3590 Luspatercept-aamt for injection 1 mg (Reblozyl) $148.66 $148.66 J3475 Magnesium sulfate, per 500 mg, injection $0.05 $0.05 J2150 Mannitol, 25% in 50 ml, injection, (Osmitrol, Resectisol) $0.82 $0.82 J9230 Mechlorethamine HCl, 10 mg (Nitrogen Mustard) $137.86 $137.86 J9245 Melphalan HCl, 50 mg, injection (Alkeran) $1,492.38 $1,492.38 J2175 Meperidine HCl, per 100 mg, injection (Demerol) $1.45 $1.45 J0670 Mepivacaine HCl, per 10ml, injection (Carbocaine) (Polocaine) $1.10 $1.10 J2186 Meropenem and vaborbactem for injection 10 mg/10 mg (20 mg) (Vabomere) $1.78 $1.78 J9209 Mesna, 200 mg (Mesnex) $7.51 $7.51 J0380 Metaraminol bitartrate, per 10mg, injection (Aramine) $1.10 $1.10 J7674 Methacholine chloride (Provocholine) $0.52 $0.52 J1230 Methadone HCl, up to 10 mg, injection (Dolophine) $2.82 $2.82 J2800 Methocarbamol up to 10 ml, injection (Robaxin) $9.75 $9.75 J9250 Methotrexate sodium, 5 mg $0.20 $0.20 J9260 Methotrexate sodium, 50 mg $2.16 $2.16 J7309 Methly aminolevulinate (MAL) for topical administration, 16.8%, 1 gram (Metvixia) $73.84 $73.84 J0210 Methyldopate HCl, up to 250mg, injection IV $14.50 $14.50 J3490 Methylene blue injection 1 mL (Provayblue) $20.14 $20.14 J2210 Methylergonovine maleate, up to 0.2 mg, injection (Methergine) $4.81 $4.81 J1020 Methylprednisolone acetate, 20mg, injection (Depo-Medrol) $2.30 $2.30 J1030 Methylprednisolone acetate, 40mg, injection (Depo-Medrol) $4.27 $4.27 J1040 Methylprednisolone acetate, 80mg, injection (Depo-Medrol) $8.98 $8.98 J2920 Methylprednisolone sodium succinate, up to 40 mg, injection (Solu-Medrol) $1.98 $1.98 J2930 Methylprednisolone sodium succinate, up to 125 mg, injection (Solu-Medrol) $2.88 $2.88 J2765 Metoclopramide HCl, up to 10 mg, injection (Reglan) $0.32 $0.32 J2250 Midazolam HCl, per 1 mg, injection (Versed) $0.14 $0.14 S0190 mifepristone tablets, for oral use 200 mcg (Mifeprex) $73.80 $73.80 J2260 Milrinone lactate, per 5 mg, injection (Primacor) $4.34 $4.34 S0191 misoprostol tablets, for oral use 200 mcg (Cytotec) $0.98 $0.98 J9280 Mitomycin, 5 mg (Mutamycin) $12.45 $12.45 J9293 Mitoxantrone HCl, per 5 mg, injection (Novantrone) $84.65 $84.65 J9204 Mogamuliumab-kpke injection 1 mg (Poteligeo) $200.87 $200.87 J7401 Mometasone furoate sinus implant 10 mcg (Sinuva) $10.20 $10.20 J2274 Morphine preservative free, Injection 10 mg $9.73 $9.73 J2270 Morphine sulfate, up to 10 mg, injection $1.71 $1.71 J9313 Moxetumomab pasudotox-tdfk for injection 0.01 mg (Lumoxiti) $22.50 $22.50 J2300 Nalbuphine HCl, per 10 mg, injection (Nubain) $0.92 $0.92 J2310 Naloxone HCl, per 1 mg, injection (Narcan) $3.02 $3.02 J2315 Naltrexone, depot form, 1 mg, injection (Vivitrol) $1.79 $1.79 J2320 Nandrolone decanoate, up to 50 mg, injection (Deca-Durabolin) $4.54 $4.54 J2323 Natalizumab, 1 mg, injection (Tysabri) $7.19 $7.19 J9261 Nelarabine, 50 mg, injection (Arranon) $87.51 $87.51 J2710 Neostigmine methylsulfate, up to 0.5 mg, injection (Prostigmin) $0.10 $0.10 J9299 Nivolumab, 1 mg, injection (Opdivo) $25.37 $25.37 J7050 Normal saline solution, 250 cc infusion $0.25 $0.25 J7040 Normal saline solution, sterile (500 ml = 1 unit), infusion $0.50 $0.50 J7030 Normal saline solution, 1,000 cc, infusion $0.98 $0.98 J2326 Nusinersen injection for intrathecal use 0.1 mg (Spinraza) $1,125.00 $1,125.00 J9301 Obinutuzumab Inj 10 mg (Gazyva) $56.92 $56.92 J7316 Ocriplasmin, 0.125 mg, injection (Jetrea) $1,058.81 $1,058.81 J2353 Octreotide, depot form for IM injection, 1 mg (Sandostatin LAR Depot) $86.02 $86.02 J2354 Octreotide non-depot form for SC or IV injection, 25 mcg (Sandostatin) $2.11 $2.11 J9302 Ofatumumab, per 10 mg (Arzerra) $43.30 $43.30 S0166 Olanzapine, 2.5 mg (Zyprexa) $7.66 $7.66 J2358 Olanzapine long-acting, 1 mg (Zyprexa Relprevv) $2.62 $2.62 J9262 Omacetaxine mepesuccinate, 0.01 mg, injection (Synbrio) $2.46 $2.46 J0121 Omadacucline for injection, 1 mg (Nuzyra) $3.73 $3.73 J2405 Ondansetron HCl, per 1 mg, injection (Zofran) $0.21 $0.21 J2407 Oritavancin diphosphate 10 mg (Orbactiv) $25.62 $25.62 J2360 Orphenadrine citrate, up to 60 mg, injection (Norflex) $8.61 $8.61 J2700 Oxacillin sodium, up to 250 mg, injection (Bactocile, Prostaphlin) $1.51 $1.51 J9263 Oxaliplatin, 0.5 mg, injection (Eloxatin) $9.06 $9.06 J2410 Oxymorphone HCl, up to 1 mg, injection (Numorphan) $2.40 $2.40 J2460 Oxytetracycline HCl, up to 50 mg, injection (Terramycin IM) $0.90 $0.90 J2590 Oxytocin, up to 10 units, injection (Pitocin) $1.96 $1.96 J9267 Paclitaxel, 1 mg injection (Taxol) $0.17 $0.17 J9264 Paclitaxel protein-bound particles, 1 mg, (Abraxane) $8.45 $8.45 J2425 Palifermin injection 50 mcg (Kepivance) $11.35 $11.35 J3490 Paliperidone palmitate extended-release injectable suspension 1 mg (Invega Trinza) $8.82 $8.82 J2426 Paliperidone palmitate extended-release injectable suspension 1 mg (Invega Sustenna) $6.21 $6.21 J2469 Palonosetron HCl, 25 mcg, injection (Aloxi) $16.43 $16.43 J2430 Pamidronate disodium, per 30 mg, injection (Aredia) $27.03 $27.03 J9303 Panitumumab, 10 mg, injection (Vectibix) $78.51 $78.51 J2440 Papaverine HCl, up to 60 mg, injection $0.54 $0.54 J2501 Paricalcitol, 1 mcg, injection (Zemplar) $3.74 $3.74 J2502 Pasireotide suspension 1 mg (Signifor LAR) $290.77 $290.77 J0222 Patisiran lipid complex injection 0.1 mg (Onpattro) $102.60 $102.60 J2503 Pegaptanib sodium, 0.3 mg, (Macugen) $984.03 $984.03</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Page 1 Drug Procedure Codes Table">
+<table>
+<caption>Page 1 Drug Procedure Codes Table</caption><thead><tr><th scope="col">ProcCode</th><th scope="col">NDC</th><th scope="col">Description</th><th scope="col">Facility</th><th scope="col">Non-Facility</th></tr>
+</thead></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Page 3 Drug Procedure Codes Table">
+<table>
+<caption>Page 3 Drug Procedure Codes Table</caption><thead><tr><th scope="col">ProcCode</th><th scope="col">NDC</th><th scope="col">Description</th><th scope="col">Facility</th><th scope="col">Non-Facility</th></tr>
+</thead></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Page 5 Drug Procedure Codes Table">
+<table>
+<caption>Page 5 Drug Procedure Codes Table</caption><thead><tr><th scope="col">ProcCode</th><th scope="col">NDC</th><th scope="col">Description</th><th scope="col">Facility</th><th scope="col">Non-Facility</th></tr>
+</thead></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Vaccine Fee Schedule Part 1">
+<table>
+<caption>Vaccine Fee Schedule Part 1</caption><tbody><tr><td>90636 58160081552 TWINRIX VACCINE SYRINGE - HEPATITIS A AND HEPATITIS B VACCINE (HEPA-HEP $105.58 $105.58</td></tr>
+<tr><td>90636 58160081552 TWINRIX VACCINE SYRINGE - HEPATITIS A AND HEPATITIS B VACCINE (HEPA-HEP $110.85 $110.85</td></tr>
+<tr><td>90636 58160081501 TWINRIX VACCINE VIAL - HEPATITIS A AND HEPATITIS B VACCINE (HEPA-HEPB), A $99.50 $99.50</td></tr>
+<tr><td>90636 58160081511 TWINRIX VACCINE VIAL - HEPATITIS A AND HEPATITIS B VACCINE (HEPA-HEPB), A $99.50 $99.50</td></tr>
+<tr><td>90647 00006489700 PEDVAXHIB VACCINE VIAL - HAEMOPHILUS INFLUENZAE TYPE B VACCINE (HIB), P $26.25 $26.25</td></tr>
+<tr><td>90647 00006489701 PEDVAXHIB VACCINE VIAL - HAEMOPHILUS INFLUENZAE TYPE B VACCINE (HIB), P $26.25 $26.25</td></tr>
+<tr><td>90648 49281054758 ACTHIB VACCINE VIAL - HAEMOPHILUS INFLUENZAE TYPE B VACCINE (HIB), PRP- $15.76 $15.76</td></tr>
+<tr><td>90648 49281054503 ACTHIB VACCINE WITH DILUENT - HAEMOPHILUS INFLUENZAE TYPE B VACCINE ( $15.76 $15.76</td></tr>
+<tr><td>90648 49281054505 ACTHIB VACCINE WITH DILUENT - HAEMOPHILUS INFLUENZAE TYPE B VACCINE ( $15.45 $15.45</td></tr>
+<tr><td>90648 58160081601 HIBERIX VACCINE VIAL - HAEMOPHILUS INFLUENZAE TYPE B VACCINE (HIB), PRP $10.40 $10.40</td></tr>
+<tr><td>90648 58160081601 HIBERIX VACCINE VIAL - HAEMOPHILUS INFLUENZAE TYPE B VACCINE (HIB), PRP $10.72 $10.72</td></tr>
+<tr><td>90648 58160081605 HIBERIX VACCINE VIAL - HAEMOPHILUS INFLUENZAE TYPE B VACCINE (HIB), PRP $10.40 $10.40</td></tr>
+<tr><td>90648 58160081605 HIBERIX VACCINE VIAL - HAEMOPHILUS INFLUENZAE TYPE B VACCINE (HIB), PRP $10.72 $10.72</td></tr>
+<tr><td>90648 58160081811 HIBERIX VACCINE WITH DILUENT - HAEMOPHILUS INFLUENZAE TYPE B VACCINE $10.40 $10.40</td></tr>
+<tr><td>90648 58160081811 HIBERIX VACCINE WITH DILUENT - HAEMOPHILUS INFLUENZAE TYPE B VACCINE $10.72 $10.72</td></tr>
+<tr><td>90649 00006410901 GARDASIL SYRINGE - HUMAN PAPILLOMAVIRUS VACCINE, TYPES 6, 11, 16, 18, QU $165.77 $165.77</td></tr>
+<tr><td>90649 00006410902 GARDASIL SYRINGE - HUMAN PAPILLOMAVIRUS VACCINE, TYPES 6, 11, 16, 18, QU $165.77 $165.77</td></tr>
+<tr><td>90649 00006410909 GARDASIL SYRINGE - HUMAN PAPILLOMAVIRUS VACCINE, TYPES 6, 11, 16, 18, QU $165.77 $165.77</td></tr>
+<tr><td>90649 00006404500 GARDASIL VIAL - HUMAN PAPILLOMAVIRUS VACCINE, TYPES 6, 11, 16, 18, QUADR $164.54 $164.54</td></tr>
+<tr><td>90649 00006404501 GARDASIL VIAL - HUMAN PAPILLOMAVIRUS VACCINE, TYPES 6, 11, 16, 18, QUADR $164.54 $164.54</td></tr>
+<tr><td>90649 00006404541 GARDASIL VIAL - HUMAN PAPILLOMAVIRUS VACCINE, TYPES 6, 11, 16, 18, QUADR $164.20 $164.20</td></tr>
+<tr><td>90651 00006412101 GARDASIL 9 SYRINGE - HUMAN PAPILLOMAVIRUS VACCINE TYPES 6, 11, 16, 18, 3 $222.85 $222.85</td></tr>
+<tr><td>90651 00006412101 GARDASIL 9 SYRINGE - HUMAN PAPILLOMAVIRUS VACCINE TYPES 6, 11, 16, 18, 3 $234.00 $234.00</td></tr>
+<tr><td>90651 00006412102 GARDASIL 9 SYRINGE - HUMAN PAPILLOMAVIRUS VACCINE TYPES 6, 11, 16, 18, 3 $222.85 $222.85</td></tr>
+<tr><td>90651 00006412102 GARDASIL 9 SYRINGE - HUMAN PAPILLOMAVIRUS VACCINE TYPES 6, 11, 16, 18, 3 $234.00 $234.00</td></tr>
+<tr><td>90651 00006411901 GARDASIL 9 VIAL - HUMAN PAPILLOMAVIRUS VACCINE TYPES 6, 11, 16, 18, 31, 33, $222.85 $222.85</td></tr>
+<tr><td>90651 00006411901 GARDASIL 9 VIAL - HUMAN PAPILLOMAVIRUS VACCINE TYPES 6, 11, 16, 18, 31, 33, $234.00 $234.00</td></tr>
+<tr><td>90651 00006411903 GARDASIL 9 VIAL - HUMAN PAPILLOMAVIRUS VACCINE TYPES 6, 11, 16, 18, 31, 33, $222.85 $222.85</td></tr>
+<tr><td>90651 00006411903 GARDASIL 9 VIAL - HUMAN PAPILLOMAVIRUS VACCINE TYPES 6, 11, 16, 18, 31, 33, $234.00 $234.00</td></tr>
+<tr><td>90653 70461001803 FLUAD 2018-2019 SYRINGE - INFLUENZA VACCINE, INACTIVATED (IIV), SUBUNIT, A $48.75 $48.75</td></tr>
+<tr><td>90653 70461001804 FLUAD 2018-2019 SYRINGE - INFLUENZA VACCINE, INACTIVATED (IIV), SUBUNIT, A $48.75 $48.75</td></tr>
+<tr><td>90653 70461001903 FLUAD 2019-2020 SYRINGE - INFLUENZA VACCINE, INACTIVATED (IIV), SUBUNIT, A $53.14 $53.14</td></tr>
+<tr><td>90653 70461001904 FLUAD 2019-2020 SYRINGE - INFLUENZA VACCINE, INACTIVATED (IIV), SUBUNIT, A $53.14 $53.14</td></tr>
+<tr><td>90656 33332001801 AFLURIA 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, TRIVALENT (IIV3), SPL $17.22 $17.22</td></tr>
+<tr><td>90656 33332001802 AFLURIA 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, TRIVALENT (IIV3), SPL $17.22 $17.22</td></tr>
+<tr><td>90658 33332011810 AFLURIA 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, TRIVALENT (IIV3), SPLIT VI $15.83 $15.83</td></tr>
+<tr><td>90658 33332011811 AFLURIA 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, TRIVALENT (IIV3), SPLIT VI $15.83 $15.83</td></tr>
+<tr><td>90662 49281040365 FLUZONE HIGH-DOSE 2018-19 SYR - INFLUENZA VIRUS VACCINE (IIV), SPLIT VIRU $47.58 $47.58</td></tr>
+<tr><td>90662 49281040388 FLUZONE HIGH-DOSE 2018-19 SYR - INFLUENZA VIRUS VACCINE (IIV), SPLIT VIRU $47.58 $47.58</td></tr>
+<tr><td>90662 49281040565 FLUZONE HIGH-DOSE 2019-20 SYR - INFLUENZA VIRUS VACCINE (IIV), SPLIT VIRU $49.96 $49.96</td></tr>
+<tr><td>90662 49281040588 FLUZONE HIGH-DOSE 2019-20 SYR - INFLUENZA VIRUS VACCINE (IIV), SPLIT VIRU $49.96 $49.96</td></tr>
+<tr><td>90670 00005197101 PREVNAR 13 SYRINGE - PNEUMOCOCCAL CONJUGATE VACCINE, 13 VALENT (PC $200.00 $200.00</td></tr>
+<tr><td>90670 00005197101 PREVNAR 13 SYRINGE - PNEUMOCOCCAL CONJUGATE VACCINE, 13 VALENT (PC $213.80 $213.80</td></tr>
+<tr><td>90670 00005197102 PREVNAR 13 SYRINGE - PNEUMOCOCCAL CONJUGATE VACCINE, 13 VALENT (PC $193.91 $193.91</td></tr>
+<tr><td>90670 00005197102 PREVNAR 13 SYRINGE - PNEUMOCOCCAL CONJUGATE VACCINE, 13 VALENT (PC $207.29 $207.29</td></tr>
+<tr><td>90670 00005197101 PREVNAR 13 SYRINGE - PNEUMOCOCCAL CONJUGATE VACCINE, 13 VALENT (PC $190.47 $190.47</td></tr>
+<tr><td>90670 00005197102 PREVNAR 13 SYRINGE - PNEUMOCOCCAL CONJUGATE VACCINE, 13 VALENT (PC $184.68 $184.68</td></tr>
+<tr><td>90670 00005197105 PREVNAR 13 SYRINGE - PNEUMOCOCCAL CONJUGATE VACCINE, 13 VALENT (PC $200.00 $200.00</td></tr>
+<tr><td>90670 00005197105 PREVNAR 13 SYRINGE - PNEUMOCOCCAL CONJUGATE VACCINE, 13 VALENT (PC $213.80 $213.80</td></tr>
+<tr><td>90672 66019030501 FLUMIST QUAD NASAL 2018-19 VAC - INFLUENZA VIRUS VACCINE, QUADRIVALEN $23.64 $23.64</td></tr>
+<tr><td>90672 66019030510 FLUMIST QUAD NASAL 2018-19 VAC - INFLUENZA VIRUS VACCINE, QUADRIVALEN $23.64 $23.64</td></tr>
+<tr><td>90672 66019030601 FLUMIST QUAD NASAL 2019-20 VAC - INFLUENZA VIRUS VACCINE, QUADRIVALEN $23.64 $23.64</td></tr>
+<tr><td>90672 66019030610 FLUMIST QUAD NASAL 2019-20 VAC - INFLUENZA VIRUS VACCINE, QUADRIVALEN $23.64 $23.64</td></tr>
+<tr><td>90674 70461031803 FLUCELVAX QUAD 2018-2019 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $21.08 $21.08</td></tr>
+<tr><td>90674 70461031804 FLUCELVAX QUAD 2018-2019 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $21.08 $21.08</td></tr>
+<tr><td>90674 70461020101 FLUCELVAX QUAD 2017-2018 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $21.08 $21.08</td></tr>
+<tr><td>90674 70461020111 FLUCELVAX QUAD 2017-2018 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $21.08 $21.08</td></tr>
+<tr><td>90674 70461031903 FLUCELVAX QUAD 2019-2020 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $24.77 $24.77</td></tr>
+<tr><td>90674 70461031904 FLUCELVAX QUAD 2019-2020 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $24.77 $24.77</td></tr>
+<tr><td>90675 49281024658 IMOVAX RABIES VACCINE VIAL - RABIES VACCINE, FOR INTRAMUSCULAR USE $385.40 $385.40</td></tr>
+<tr><td>90675 49281024858 IMOVAX RABIES VACCINE VIAL - RABIES VACCINE, FOR INTRAMUSCULAR USE $349.56 $349.56</td></tr>
+<tr><td>90675 49281025051 IMOVAX RABIES VACCINE+DILUENT - RABIES VACCINE, FOR INTRAMUSCULAR US $349.56 $349.56</td></tr>
+<tr><td>90675 49281025251 IMOVAX RABIES VACCINE VIAL - RABIES VACCINE, FOR INTRAMUSCULAR USE $385.40 $385.40</td></tr>
+<tr><td>90675 58160096412 RABAVERT RABIES VACC W-DILUENT - RABIES VACCINE, FOR INTRAMUSCULAR $347.11 $347.11</td></tr>
+<tr><td>90675 58160096412 RABAVERT RABIES VACC W-DILUENT - RABIES VACCINE, FOR INTRAMUSCULAR $357.52 $357.52</td></tr>
+<tr><td>90675 63851050102 RABAVERT RABIES VACC W-DILUENT - RABIES VACCINE, FOR INTRAMUSCULAR $337.12 $337.12</td></tr>
+<tr><td>90675 58160096601 RABAVERT RABIES VACCINE VIAL - RABIES VACCINE, FOR INTRAMUSCULAR USE $347.11 $347.11</td></tr>
+<tr><td>90675 58160096601 RABAVERT RABIES VACCINE VIAL - RABIES VACCINE, FOR INTRAMUSCULAR USE $357.52 $357.52</td></tr>
+<tr><td>90675 63851050101 RABAVERT RABIES VACCINE VIAL - RABIES VACCINE, FOR INTRAMUSCULAR USE $262.40 $262.40</td></tr>
+<tr><td>90675 63851051111 RABAVERT RABIES VACCINE VIAL - RABIES VACCINE, FOR INTRAMUSCULAR USE $337.12 $337.12</td></tr>
+<tr><td>90680 00006404701 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $84.60 $84.60</td></tr>
+<tr><td>90680 00006404701 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $86.30 $86.30</td></tr>
+<tr><td>90680 00006404720 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $84.60 $84.60</td></tr>
+<tr><td>90680 00006404720 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $86.29 $86.29</td></tr>
+<tr><td>90680 00006404741 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $84.60 $84.60</td></tr>
+<tr><td>90680 00006404741 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $86.30 $86.30</td></tr>
+<tr><td>90680 00006404701 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $84.60 $84.60</td></tr>
+<tr><td>90680 00006404720 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $84.60 $84.60</td></tr>
+<tr><td>90680 00006404741 ROTATEQ VACCINE - ROTAVIRUS VACCINE, PENTAVALENT (RV5), 3 DOSE SCHED $84.60 $84.60</td></tr>
+<tr><td>90681 58160085101 ROTARIX VACCINE SUSPENSION - ROTAVIRUS VACCINE, HUMAN, ATTENUATED ( $123.81 $123.81</td></tr>
+<tr><td>90681 58160085101 ROTARIX VACCINE SUSPENSION - ROTAVIRUS VACCINE, HUMAN, ATTENUATED ( $127.52 $127.52</td></tr>
+<tr><td>90681 58160085452 ROTARIX VACCINE SUSPENSION - ROTAVIRUS VACCINE, HUMAN, ATTENUATED ( $123.81 $123.81</td></tr>
+<tr><td>90681 58160085452 ROTARIX VACCINE SUSPENSION - ROTAVIRUS VACCINE, HUMAN, ATTENUATED ( $127.52 $127.52</td></tr>
+<tr><td>90682 49281071810 FLUBLOK QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $47.58 $47.58</td></tr>
+<tr><td>90682 49281071910 FLUBLOK QUAD 2019-2020 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $49.96 $49.96</td></tr>
+<tr><td>90682 49281071888 FLUBLOK QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $47.58 $47.58</td></tr>
+<tr><td>90682 49281071988 FLUBLOK QUAD 2019-2020 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $49.96 $49.96</td></tr>
+<tr><td>90685 33332021920 AFLURIA QUAD 2019-20 (6-35MO) - INFLUENZA VIRUS VACCINE, QUADRIVALENT ( $17.74 $17.74</td></tr>
+<tr><td>90685 33332021921 AFLURIA QUAD 2019-20 (6-35MO) - INFLUENZA VIRUS VACCINE, QUADRIVALENT ( $17.74 $17.74</td></tr>
+<tr><td>90685 49281051800 FLUZONE QUAD PEDI 2018-19 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $19.07 $19.07</td></tr>
+<tr><td>90685 49281051825 FLUZONE QUAD PEDI 2018-19 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $19.06 $19.06</td></tr>
+<tr><td>90685 49281051900 FLUZONE QUAD PEDI 2019-20 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $19.45 $19.45</td></tr>
+<tr><td>90685 49281051925 FLUZONE QUAD PEDI 2019-20 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT $19.45 $19.45</td></tr>
+<tr><td>90686 49281041810 FLUZONE QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $17.74 $17.74</td></tr>
+<tr><td>90686 49281041850 FLUZONE QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $17.74 $17.74</td></tr>
+<tr><td>90686 49281041858 FLUZONE QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $17.74 $17.74</td></tr>
+<tr><td>90686 49281041888 FLUZONE QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $17.74 $17.74</td></tr>
+<tr><td>90686 49281041988 FLUZONE QUAD 2019-2020 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $18.09 $18.09</td></tr>
+<tr><td>90686 49281041950 FLUZONE QUAD 2019-2020 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $18.09 $18.09</td></tr>
+<tr><td>90686 49281041910 FLUZONE QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $18.09 $18.09</td></tr>
+<tr><td>90686 49281041958 FLUZONE QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $18.09 $18.09</td></tr>
+<tr><td>90686 58160089841 FLUARIX QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $16.55 $16.55</td></tr>
+<tr><td>90686 58160089852 FLUARIX QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $16.55 $16.55</td></tr>
+<tr><td>90686 58160089641 FLUARIX QUAD 2019-2020 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $16.55 $16.55</td></tr>
+<tr><td>90686 58160089652 FLUARIX QUAD 2019-2020 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $16.55 $16.55</td></tr>
+<tr><td>90686 19515090941 FLULAVAL QUAD 2018-2019 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT (II $16.55 $16.55</td></tr>
+<tr><td>90686 19515090952 FLULAVAL QUAD 2018-2019 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT (II $16.55 $16.55</td></tr>
+<tr><td>90686 19515090641 FLULAVAL QUAD 2019-2020 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT (II $16.55 $16.55</td></tr>
+<tr><td>90686 19515090652 FLULAVAL QUAD 2019-2020 SYR - INFLUENZA VIRUS VACCINE, QUADRIVALENT (II $16.55 $16.55</td></tr>
+<tr><td>90686 33332031801 AFLURIA QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $17.74 $17.74</td></tr>
+<tr><td>90686 33332031802 AFLURIA QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $17.74 $17.74</td></tr>
+<tr><td>90686 33332031801 AFLURIA QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $17.74 $17.74</td></tr>
+<tr><td>90686 33332031802 AFLURIA QUAD 2018-2019 SYRINGE - INFLUENZA VIRUS VACCINE, QUADRIVALEN $17.74 $17.74</td></tr>
+<tr><td>90686 33332031901 AFLURIA QUAD 2019-20 (3YR UP) - INFLUENZA VIRUS VACCINE, QUADRIVALENT ( $17.74 $17.74</td></tr>
+<tr><td>90686 33332031902 AFLURIA QUAD 2019-20 (3YR UP) - INFLUENZA VIRUS VACCINE, QUADRIVALENT ( $17.74 $17.74</td></tr>
+<tr><td>90687 49281062915 FLUZONE QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $8.17 $8.17</td></tr>
+<tr><td>90687 49281062978 FLUZONE QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $8.17 $8.17</td></tr>
+<tr><td>90687 49281063115 FLUZONE QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $8.34 $8.34</td></tr>
+<tr><td>90687 49281063178 FLUZONE QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $8.34 $8.34</td></tr>
+<tr><td>90688 49281062915 FLUZONE QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $16.35 $16.35</td></tr>
+<tr><td>90688 49281062978 FLUZONE QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $16.35 $16.35</td></tr>
+<tr><td>90688 49281063115 FLUZONE QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $16.67 $16.67</td></tr>
+<tr><td>90688 49281063178 FLUZONE QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $16.67 $16.67</td></tr>
+<tr><td>90688 19515090001 FLULAVAL QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (I $15.47 $15.47</td></tr>
+<tr><td>90688 19515090011 FLULAVAL QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (I $15.47 $15.47</td></tr>
+<tr><td>90688 19515089701 FLULAVAL QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (I $15.47 $15.47</td></tr>
+<tr><td>90688 19515089711 FLULAVAL QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (I $15.47 $15.47</td></tr>
+<tr><td>90688 33332041810 AFLURIA QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $16.35 $16.35</td></tr>
+<tr><td>90688 33332041811 AFLURIA QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $16.35 $16.35</td></tr>
+<tr><td>90688 33332041910 AFLURIA QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $16.35 $16.35</td></tr>
+<tr><td>90688 33332041911 AFLURIA QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT (IIV $16.35 $16.35</td></tr>
+<tr><td>90696 58160081243 KINRIX TIP-LOK SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUS $50.61 $50.61</td></tr>
+<tr><td>90696 58160081243 KINRIX TIP-LOK SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUS $52.13 $52.13</td></tr>
+<tr><td>90696 58160081252 KINRIX TIP-LOK SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUS $50.61 $50.61</td></tr>
+<tr><td>90696 58160081252 KINRIX TIP-LOK SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUS $52.13 $52.13</td></tr>
+<tr><td>90696 58160081201 KINRIX VIAL - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUSSIS VACCINE $50.61 $50.61</td></tr>
+<tr><td>90696 58160081201 KINRIX VIAL - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUSSIS VACCINE $52.13 $52.13</td></tr>
+<tr><td>90696 58160081211 KINRIX VIAL - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUSSIS VACCINE $50.61 $50.61</td></tr>
+<tr><td>90696 58160081211 KINRIX VIAL - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUSSIS VACCINE $52.13 $52.13</td></tr>
+<tr><td>90696 49281056210 QUADRACEL DTAP-IPV VIAL - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERT $50.13 $50.13</td></tr>
+<tr><td>90696 49281056258 QUADRACEL DTAP-IPV VIAL - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERT $50.13 $50.13</td></tr>
+<tr><td>90698 49281051005 PENTACEL VIAL KIT - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTUSSIS V $91.50 $91.50</td></tr>
+<tr><td>90700 49281028610 DAPTACEL DTAP VACCINE - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR P $28.59 $28.59</td></tr>
+<tr><td>90700 49281028658 DAPTACEL DTAP VACCINE - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR P $28.58 $28.58</td></tr>
+<tr><td>90700 58160081043 INFANRIX DTAP SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR PE $23.13 $23.13</td></tr>
+<tr><td>90700 58160081043 INFANRIX DTAP SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR PE $23.83 $23.83</td></tr>
+<tr><td>90700 58160081052 INFANRIX DTAP SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR PE $23.13 $23.13</td></tr>
+<tr><td>90700 58160081052 INFANRIX DTAP SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR PE $23.83 $23.83</td></tr>
+<tr><td>90700 58160081001 INFANRIX DTAP VIAL - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR PERTUS $23.13 $23.13</td></tr>
+<tr><td>90700 58160081001 INFANRIX DTAP VIAL - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR PERTUS $23.83 $23.83</td></tr>
+<tr><td>90700 58160081011 INFANRIX DTAP VIAL - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR PERTUS $23.13 $23.13</td></tr>
+<tr><td>90700 58160081011 INFANRIX DTAP VIAL - DIPHTHERIA, TETANUS TOXOIDS, AND ACELLULAR PERTUS $23.83 $23.83</td></tr>
+<tr><td>90702 49281022510 DIPHTHERIA-TETANUS TOXOIDS-PED - DIPHTHERIA AND TETANUS TOXOIDS ADS $52.08 $52.08</td></tr>
+<tr><td>90702 49281022558 DIPHTHERIA-TETANUS TOXOIDS-PED - DIPHTHERIA AND TETANUS TOXOIDS ADS $52.09 $52.09</td></tr>
+<tr><td>90707 00006468101 M-M-R II VACCINE VIAL - MEASLES, MUMPS AND RUBELLA VIRUS VACCINE (MMR) $74.97 $74.97</td></tr>
+<tr><td>90707 00006468101 M-M-R II VACCINE VIAL - MEASLES, MUMPS AND RUBELLA VIRUS VACCINE (MMR) $78.72 $78.72</td></tr>
+<tr><td>90707 00006468100 M-M-R II VACCINE WITH DILUENT - MEASLES, MUMPS AND RUBELLA VIRUS VACC $74.97 $74.97</td></tr>
+<tr><td>90707 00006468100 M-M-R II VACCINE WITH DILUENT - MEASLES, MUMPS AND RUBELLA VIRUS VACC $78.72 $78.72</td></tr>
+<tr><td>90710 00006417100 PROQUAD VIAL - MEASLES, MUMPS, RUBELLA, AND VARICELLA VACCINE (MMRV) $217.71 $217.71</td></tr>
+<tr><td>90710 00006417100 PROQUAD VIAL - MEASLES, MUMPS, RUBELLA, AND VARICELLA VACCINE (MMRV) $228.60 $228.60</td></tr>
+<tr><td>90710 00006417101 PROQUAD VIAL - MEASLES, MUMPS, RUBELLA, AND VARICELLA VACCINE (MMRV) $217.71 $217.71</td></tr>
+<tr><td>90710 00006417101 PROQUAD VIAL - MEASLES, MUMPS, RUBELLA, AND VARICELLA VACCINE (MMRV) $228.60 $228.60</td></tr>
+<tr><td>90710 00006499900 PROQUAD VIAL - MEASLES, MUMPS, RUBELLA, AND VARICELLA VACCINE (MMRV) $205.39 $205.39</td></tr>
+<tr><td>90710 00006499901 PROQUAD VIAL - MEASLES, MUMPS, RUBELLA, AND VARICELLA VACCINE (MMRV) $205.39 $205.39</td></tr>
+<tr><td>90713 49281086010 IPOL VIAL - POLIOVIRUS VACCINE, INACTIVATED (IPV), FOR SUBCUTANEOUS OR $32.15 $32.15</td></tr>
+<tr><td>90713 49281086078 IPOL VIAL - POLIOVIRUS VACCINE, INACTIVATED (IPV), FOR SUBCUTANEOUS OR $32.15 $32.15</td></tr>
+<tr><td>90714 49281021515 TENIVAC SYRINGE - TETANUS AND DIPHTHERIA TOXOIDS ADSORBED (TD), PRES $32.33 $32.33</td></tr>
+<tr><td>90714 49281021588 TENIVAC SYRINGE - TETANUS AND DIPHTHERIA TOXOIDS ADSORBED (TD), PRES $32.33 $32.33</td></tr>
+<tr><td>90714 49281021510 TENIVAC VIAL - TETANUS AND DIPHTHERIA TOXOIDS ADSORBED (TD), PRESERVA $32.33 $32.33</td></tr>
+<tr><td>90714 49281021558 TENIVAC VIAL - TETANUS AND DIPHTHERIA TOXOIDS ADSORBED (TD), PRESERVA $32.33 $32.33</td></tr>
+<tr><td>90714 13533013100 TETANUS DIPHTHERIA TOXOIDS - TETANUS AND DIPHTHERIA TOXOIDS ADSORBE $24.64 $24.64</td></tr>
+<tr><td>90714 13533013101 TETANUS DIPHTHERIA TOXOIDS - TETANUS AND DIPHTHERIA TOXOIDS ADSORBE $24.64 $24.64</td></tr>
+<tr><td>90715 49281040015 ADACEL TDAP SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULAR PER $43.25 $43.25</td></tr>
+<tr><td>90715 49281040020 ADACEL TDAP SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULAR PER $43.25 $43.25</td></tr>
+<tr><td>90715 49281040088 ADACEL TDAP SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULAR PER $43.25 $43.25</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Vaccine Fee Schedule Part 3">
+<table>
+<caption>Vaccine Fee Schedule Part 3</caption><tbody><tr><td>90715 49281040089 ADACEL TDAP SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULAR PER $43.25 $43.25</td></tr>
+<tr><td>90715 49281040010 ADACEL TDAP VIAL - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULAR PERTUSS $43.25 $43.25</td></tr>
+<tr><td>90715 49281040058 ADACEL TDAP VIAL - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULAR PERTUSS $43.25 $43.25</td></tr>
+<tr><td>90715 58160084205 BOOSTRIX TDAP VACCINE SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACEL $40.11 $40.11</td></tr>
+<tr><td>90715 58160084205 BOOSTRIX TDAP VACCINE SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACEL $41.31 $41.31</td></tr>
+<tr><td>90715 58160084234 BOOSTRIX TDAP VACCINE SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACEL $40.11 $40.11</td></tr>
+<tr><td>90715 58160084234 BOOSTRIX TDAP VACCINE SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACEL $41.31 $41.31</td></tr>
+<tr><td>90715 58160084243 BOOSTRIX TDAP VACCINE SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACEL $40.11 $40.11</td></tr>
+<tr><td>90715 58160084243 BOOSTRIX TDAP VACCINE SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACEL $41.31 $41.31</td></tr>
+<tr><td>90715 58160084252 BOOSTRIX TDAP VACCINE SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACEL $40.11 $40.11</td></tr>
+<tr><td>90715 58160084252 BOOSTRIX TDAP VACCINE SYRINGE - TETANUS, DIPHTHERIA TOXOIDS AND ACEL $41.31 $41.31</td></tr>
+<tr><td>90715 58160084201 BOOSTRIX TDAP VACCINE VIAL - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULA $40.11 $40.11</td></tr>
+<tr><td>90715 58160084201 BOOSTRIX TDAP VACCINE VIAL - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULA $41.31 $41.31</td></tr>
+<tr><td>90715 58160084211 BOOSTRIX TDAP VACCINE VIAL - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULA $40.11 $40.11</td></tr>
+<tr><td>90715 58160084211 BOOSTRIX TDAP VACCINE VIAL - TETANUS, DIPHTHERIA TOXOIDS AND ACELLULA $41.31 $41.31</td></tr>
+<tr><td>90716 00006482601 VARIVAX VACCINE VIAL - VARICELLA VIRUS VACCINE (VAR), LIVE, FOR SUBCUTAN $115.56 $115.56</td></tr>
+<tr><td>90716 00006482701 VARIVAX VACCINE VIAL - VARICELLA VIRUS VACCINE (VAR), LIVE, FOR SUBCUTAN $132.40 $132.40</td></tr>
+<tr><td>90716 00006482701 VARIVAX VACCINE VIAL - VARICELLA VIRUS VACCINE (VAR), LIVE, FOR SUBCUTAN $139.02 $139.02</td></tr>
+<tr><td>90716 00006482600 VARIVAX VACCINE WITH DILUENT - VARICELLA VIRUS VACCINE (VAR), LIVE, FOR $115.56 $115.56</td></tr>
+<tr><td>90716 00006482700 VARIVAX VACCINE WITH DILUENT - VARICELLA VIRUS VACCINE (VAR), LIVE, FOR $132.40 $132.40</td></tr>
+<tr><td>90716 00006482700 VARIVAX VACCINE WITH DILUENT - VARICELLA VIRUS VACCINE (VAR), LIVE, FOR $139.02 $139.02</td></tr>
+<tr><td>90723 58160081143 PEDIARIX 0.5 ML SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTU $77.66 $77.66</td></tr>
+<tr><td>90723 58160081143 PEDIARIX 0.5 ML SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTU $81.55 $81.55</td></tr>
+<tr><td>90723 58160081152 PEDIARIX 0.5 ML SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTU $77.66 $77.66</td></tr>
+<tr><td>90723 58160081152 PEDIARIX 0.5 ML SYRINGE - DIPHTHERIA, TETANUS TOXOIDS, ACELLULAR PERTU $81.55 $81.55</td></tr>
+<tr><td>90732 00006483701 PNEUMOVAX 23 SYRINGE - PNEUMOCOCCAL POLYSACCHARIDE VACCINE, 23-VA $105.17 $105.17</td></tr>
+<tr><td>90732 00006483702 PNEUMOVAX 23 SYRINGE - PNEUMOCOCCAL POLYSACCHARIDE VACCINE, 23-VA $105.17 $105.17</td></tr>
+<tr><td>90732 00006483703 PNEUMOVAX 23 SYRINGE - PNEUMOCOCCAL POLYSACCHARIDE VACCINE, 23-VA $103.19 $103.19</td></tr>
+<tr><td>90732 00006483703 PNEUMOVAX 23 SYRINGE - PNEUMOCOCCAL POLYSACCHARIDE VACCINE, 23-VA $108.35 $108.35</td></tr>
+<tr><td>90732 00006494300 PNEUMOVAX 23 VIAL - PNEUMOCOCCAL POLYSACCHARIDE VACCINE, 23-VALENT $103.19 $103.19</td></tr>
+<tr><td>90732 00006494300 PNEUMOVAX 23 VIAL - PNEUMOCOCCAL POLYSACCHARIDE VACCINE, 23-VALENT $108.35 $108.35</td></tr>
+<tr><td>90732 00006494301 PNEUMOVAX 23 VIAL - PNEUMOCOCCAL POLYSACCHARIDE VACCINE, 23-VALENT $103.19 $103.19</td></tr>
+<tr><td>90732 00006494301 PNEUMOVAX 23 VIAL - PNEUMOCOCCAL POLYSACCHARIDE VACCINE, 23-VALENT $108.35 $108.35</td></tr>
+<tr><td>90734 49281058905 MENACTRA VIAL - MENINGOCOCCAL CONJUGATE VACCINE, SEROGROUPS A, C, $119.01 $119.01</td></tr>
+<tr><td>90734 49281058958 MENACTRA VIAL - MENINGOCOCCAL CONJUGATE VACCINE, SEROGROUPS A, C, $119.02 $119.02</td></tr>
+<tr><td>90734 46028020801 MENVEO A-C-Y-W-135-DIP VIAL KT - MENINGOCOCCAL CONJUGATE VACCINE, SE $126.26 $126.26</td></tr>
+<tr><td>90734 58160095509 MENVEO A-C-Y-W-135-DIP VIAL KT - MENINGOCOCCAL CONJUGATE VACCINE, SE $133.90 $133.90</td></tr>
+<tr><td>90734 58160095509 MENVEO A-C-Y-W-135-DIP VIAL KT - MENINGOCOCCAL CONJUGATE VACCINE, SE $137.92 $137.92</td></tr>
+<tr><td>90736 00006496300 ZOSTAVAX VIAL - ZOSTER (SHINGLES) VACCINE (HZV), LIVE, FOR SUBCUTANEOU $229.81 $229.81</td></tr>
+<tr><td>90736 00006496301 ZOSTAVAX VIAL - ZOSTER (SHINGLES) VACCINE (HZV), LIVE, FOR SUBCUTANEOU $219.05 $219.05</td></tr>
+<tr><td>90736 00006496341 ZOSTAVAX VIAL - ZOSTER (SHINGLES) VACCINE (HZV), LIVE, FOR SUBCUTANEOU $219.05 $219.05</td></tr>
+<tr><td>90739 43528000201 HEPLISAV-B 20 MCG/0.5 ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, $118.45 $118.45</td></tr>
+<tr><td>90739 43528000205 HEPLISAV-B 20 MCG/0.5 ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, $118.45 $118.45</td></tr>
+<tr><td>90739 43528000301 HEPLISAV-B 20 MCG/0.5 ML SYRNG - HEPATITIS B VACCINE (HEPB), ADULT DOSAG $118.45 $118.45</td></tr>
+<tr><td>90739 43528000305 HEPLISAV-B 20 MCG/0.5 ML SYRNG - HEPATITIS B VACCINE (HEPB), ADULT DOSAG $118.45 $118.45</td></tr>
+<tr><td>90740 00006499200 RECOMBIVAX HB 40 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IM $170.25 $170.25</td></tr>
+<tr><td>90740 00006499201 RECOMBIVAX HB 40 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IM $170.25 $170.25</td></tr>
+<tr><td>90744 58160082001 ENGERIX-B 10 MCG/0.5 ML PED VL - HEPATITIS B VACCINE (HEPB), PEDIATRIC/AD $22.97 $22.97</td></tr>
+<tr><td>90744 58160082011 ENGERIX-B 10 MCG/0.5 ML PED VL - HEPATITIS B VACCINE (HEPB), PEDIATRIC/AD $22.97 $22.97</td></tr>
+<tr><td>90744 58160082043 ENGERIX-B PEDI 10 MCG/0.5 SYRN - HEPATITIS B VACCINE (HEPB), PEDIATRIC/AD $23.66 $23.66</td></tr>
+<tr><td>90744 58160082043 ENGERIX-B PEDI 10 MCG/0.5 SYRN - HEPATITIS B VACCINE (HEPB), PEDIATRIC/AD $24.84 $24.84</td></tr>
+<tr><td>90744 58160082052 ENGERIX-B PEDI 10 MCG/0.5 SYRN - HEPATITIS B VACCINE (HEPB), PEDIATRIC/AD $23.66 $23.66</td></tr>
+<tr><td>90744 58160082052 ENGERIX-B PEDI 10 MCG/0.5 SYRN - HEPATITIS B VACCINE (HEPB), PEDIATRIC/AD $24.84 $24.84</td></tr>
+<tr><td>90744 00006409301 RECOMBIVAX HB 5 MCG/0.5 ML SYR - HEPATITIS B VACCINE (HEPB), PEDIATRIC/A $23.90 $23.90</td></tr>
+<tr><td>90744 00006409302 RECOMBIVAX HB 5 MCG/0.5 ML SYR - HEPATITIS B VACCINE (HEPB), PEDIATRIC/A $23.90 $23.90</td></tr>
+<tr><td>90744 00006409309 RECOMBIVAX HB 5 MCG/0.5 ML SYR - HEPATITIS B VACCINE (HEPB), PEDIATRIC/A $23.90 $23.90</td></tr>
+<tr><td>90744 00006498100 RECOMBIVAX HB 5 MCG/0.5 ML VL - HEPATITIS B VACCINE (HEPB), PEDIATRIC/AD $23.90 $23.90</td></tr>
+<tr><td>90744 00006498101 RECOMBIVAX HB 5 MCG/0.5 ML VL - HEPATITIS B VACCINE (HEPB), PEDIATRIC/AD $23.90 $23.90</td></tr>
+<tr><td>90746 58160082143 ENGERIX-B 20 MCG/ML SYRN - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, 3 D $59.95 $59.95</td></tr>
+<tr><td>90746 58160082143 ENGERIX-B 20 MCG/ML SYRN - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, 3 D $62.94 $62.94</td></tr>
+<tr><td>90746 58160082152 ENGERIX-B 20 MCG/ML SYRN - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, 3 D $59.95 $59.95</td></tr>
+<tr><td>90746 58160082152 ENGERIX-B 20 MCG/ML SYRN - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, 3 D $62.94 $62.94</td></tr>
+<tr><td>90746 58160082101 ENGERIX-B 20 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, 3 DO $59.95 $59.95</td></tr>
+<tr><td>90746 58160082101 ENGERIX-B 20 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, 3 DO $62.94 $62.94</td></tr>
+<tr><td>90746 58160082111 ENGERIX-B 20 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, 3 DO $59.95 $59.95</td></tr>
+<tr><td>90746 58160082111 ENGERIX-B 20 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE, 3 DO $62.94 $62.94</td></tr>
+<tr><td>90746 00006409401 RECOMBIVAX HB 10 MCG/ML SYR - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE $62.28 $62.28</td></tr>
+<tr><td>90746 00006409402 RECOMBIVAX HB 10 MCG/ML SYR - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE $62.28 $62.28</td></tr>
+<tr><td>90746 00006409409 RECOMBIVAX HB 10 MCG/ML SYR - HEPATITIS B VACCINE (HEPB), ADULT DOSAGE $62.28 $62.28</td></tr>
+<tr><td>90746 00006499500 RECOMBIVAX HB 10 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAG $63.39 $63.39</td></tr>
+<tr><td>90746 00006499501 RECOMBIVAX HB 10 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAG $62.28 $62.28</td></tr>
+<tr><td>90746 00006499541 RECOMBIVAX HB 10 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), ADULT DOSAG $62.28 $62.28</td></tr>
+<tr><td>90747 58160082143 ENGERIX-B 20 MCG/ML SYRN - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IMMUN $119.89 $119.89</td></tr>
+<tr><td>90747 58160082143 ENGERIX-B 20 MCG/ML SYRN - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IMMUN $125.89 $125.89</td></tr>
+<tr><td>90747 58160082152 ENGERIX-B 20 MCG/ML SYRN - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IMMUN $119.89 $119.89</td></tr>
+<tr><td>90747 58160082152 ENGERIX-B 20 MCG/ML SYRN - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IMMUN $125.89 $125.89</td></tr>
+<tr><td>90747 58160082101 ENGERIX-B 20 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IMMUNO $119.89 $119.89</td></tr>
+<tr><td>90747 58160082101 ENGERIX-B 20 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IMMUNO $125.89 $125.89</td></tr>
+<tr><td>90747 58160082111 ENGERIX-B 20 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IMMUNO $119.89 $119.89</td></tr>
+<tr><td>90747 58160082111 ENGERIX-B 20 MCG/ML VIAL - HEPATITIS B VACCINE (HEPB), DIALYSIS OR IMMUNO $125.89 $125.89</td></tr>
+<tr><td>90750 58160081912 SHINGRIX VIAL KIT - ZOSTER (SHINGLES) VACCINE (HZV), RECOMBINANT, SUBUN $148.53 $148.53</td></tr>
+<tr><td>90750 58160081912 SHINGRIX VIAL KIT - ZOSTER (SHINGLES) VACCINE (HZV), RECOMBINANT, SUBUN $155.95 $155.95</td></tr>
+<tr><td>90750 58160082311 SHINGRIX VIAL KIT - ZOSTER (SHINGLES) VACCINE (HZV), RECOMBINANT, SUBUN $148.53 $148.53</td></tr>
+<tr><td>90750 58160082311 SHINGRIX VIAL KIT - ZOSTER (SHINGLES) VACCINE (HZV), RECOMBINANT, SUBUN $155.95 $155.95</td></tr>
+<tr><td>90756 70461041810 FLUCELVAX QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT $19.95 $19.95</td></tr>
+<tr><td>90756 70461041811 FLUCELVAX QUAD 2018-2019 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT $19.95 $19.95</td></tr>
+<tr><td>90756 70461041910 FLUCELVAX QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT $23.44 $23.44</td></tr>
+<tr><td>90756 70461041911 FLUCELVAX QUAD 2019-2020 VIAL - INFLUENZA VIRUS VACCINE, QUADRIVALENT $23.44 $23.44</td></tr>
+</tbody></table>
+</div>
+
+<h2 id="heading-1">CLOTTING FACTOR</h2>
+<div class="table-responsive" role="region" tabindex="0" aria-label="Clotting Factor Fee Schedule Part 1">
+<table>
+<caption>Clotting Factor Fee Schedule Part 1</caption><tbody><tr><td>J7170 50242092001 HEMLIBRA 30 MG/ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $46.38 $46.38</td></tr>
+<tr><td>J7170 50242092101 HEMLIBRA 60 MG/0.4 ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $46.38 $46.38</td></tr>
+<tr><td>J7170 50242092201 HEMLIBRA 105 MG/0.7 ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $46.38 $46.38</td></tr>
+<tr><td>J7170 50242092301 HEMLIBRA 150 MG/ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $46.38 $46.38</td></tr>
+<tr><td>J7170 50242092001 HEMLIBRA 30 MG/ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $45.19 $45.19</td></tr>
+<tr><td>J7170 50242092001 HEMLIBRA 30 MG/ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $45.83 $45.83</td></tr>
+<tr><td>J7170 50242092101 HEMLIBRA 60 MG/0.4 ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $45.23 $45.23</td></tr>
+<tr><td>J7170 50242092101 HEMLIBRA 60 MG/0.4 ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $45.83 $45.83</td></tr>
+<tr><td>J7170 50242092201 HEMLIBRA 105 MG/0.7 ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $45.39 $45.39</td></tr>
+<tr><td>J7170 50242092201 HEMLIBRA 105 MG/0.7 ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $45.83 $45.83</td></tr>
+<tr><td>J7170 50242092301 HEMLIBRA 150 MG/ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $45.23 $45.23</td></tr>
+<tr><td>J7170 50242092301 HEMLIBRA 150 MG/ML VIAL - INJECTION, EMICIZUMAB-KXWH, 0.5 MG $45.83 $45.83</td></tr>
+<tr><td>J7175 64208775201 COAGADEX 250 UNIT VIAL - INJECTION, FACTOR X, (HUMAN), 1 IU $6.62 $6.62</td></tr>
+<tr><td>J7175 64208775201 COAGADEX 250 UNIT VIAL - INJECTION, FACTOR X, (HUMAN), 1 IU $7.15 $7.15</td></tr>
+<tr><td>J7175 64208775301 COAGADEX 500 UNIT VIAL - INJECTION, FACTOR X, (HUMAN), 1 IU $6.62 $6.62</td></tr>
+<tr><td>J7175 64208775301 COAGADEX 500 UNIT VIAL - INJECTION, FACTOR X, (HUMAN), 1 IU $7.15 $7.15</td></tr>
+<tr><td>J7175 64208775401 COAGADEX 250 UNIT VIAL - INJECTION, FACTOR X, (HUMAN), 1 IU $6.62 $6.62</td></tr>
+<tr><td>J7175 64208775401 COAGADEX 250 UNIT VIAL - INJECTION, FACTOR X, (HUMAN), 1 IU $7.15 $7.15</td></tr>
+<tr><td>J7175 64208775601 COAGADEX 500 UNIT VIAL - INJECTION, FACTOR X, (HUMAN), 1 IU $6.62 $6.62</td></tr>
+<tr><td>J7175 64208775601 COAGADEX 500 UNIT VIAL - INJECTION, FACTOR X, (HUMAN), 1 IU $7.15 $7.15</td></tr>
+<tr><td>J7179 00944755001 VONVENDI 650 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINAN $1.97 $1.97</td></tr>
+<tr><td>J7179 00944755102 VONVENDI 650 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINAN $1.97 $1.97</td></tr>
+<tr><td>J7179 00944755201 VONVENDI 1,300 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINA $1.97 $1.97</td></tr>
+<tr><td>J7179 00944755302 VONVENDI 1,300 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINA $1.97 $1.97</td></tr>
+<tr><td>J7179 00944755001 VONVENDI 650 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINAN $2.00 $2.00</td></tr>
+<tr><td>J7179 00944755102 VONVENDI 650 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINAN $1.97 $1.97</td></tr>
+<tr><td>J7179 00944755102 VONVENDI 650 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINAN $2.00 $2.00</td></tr>
+<tr><td>J7179 00944755201 VONVENDI 1,300 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINA $2.00 $2.00</td></tr>
+<tr><td>J7179 00944755302 VONVENDI 1,300 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR (RECOMBINA $2.00 $2.00</td></tr>
+<tr><td>J7180 63833051802 CORIFACT KIT - INJECTION, FACTOR XIII (ANTIHEMOPHILIC FACTOR, HUMAN), 1 IU $7.71 $7.71</td></tr>
+<tr><td>J7180 63833051802 CORIFACT KIT - INJECTION, FACTOR XIII (ANTIHEMOPHILIC FACTOR, HUMAN), 1 IU $7.71 $7.71</td></tr>
+<tr><td>J7180 63833051802 CORIFACT KIT - INJECTION, FACTOR XIII (ANTIHEMOPHILIC FACTOR, HUMAN), 1 IU $7.96 $7.96</td></tr>
+<tr><td>J7181 00169701301 TRETTEN 2,500 UNIT VIAL - INJECTION, FACTOR XIII A-SUBUNIT, (RECOMBINANT), $14.02 $14.02</td></tr>
+<tr><td>J7181 00169711311 TRETTEN 2,500 UNIT VIAL - INJECTION, FACTOR XIII A-SUBUNIT, (RECOMBINANT), $14.02 $14.02</td></tr>
+<tr><td>J7181 00169711311 TRETTEN 2,500 UNIT VIAL - INJECTION, FACTOR XIII A-SUBUNIT, (RECOMBINANT), $14.02 $14.02</td></tr>
+<tr><td>J7181 00169701301 TRETTEN 2,500 UNIT VIAL - INJECTION, FACTOR XIII A-SUBUNIT, (RECOMBINANT), $13.98 $13.98</td></tr>
+<tr><td>J7181 00169711311 TRETTEN 2,500 UNIT VIAL - INJECTION, FACTOR XIII A-SUBUNIT, (RECOMBINANT), $13.98 $13.98</td></tr>
+<tr><td>J7182 00169781001 NOVOEIGHT 1,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.12 $1.12</td></tr>
+<tr><td>J7182 00169781501 NOVOEIGHT 1,500 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.12 $1.12</td></tr>
+<tr><td>J7182 00169782001 NOVOEIGHT 2,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.12 $1.12</td></tr>
+<tr><td>J7182 00169782501 NOVOEIGHT 250 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR, $1.12 $1.12</td></tr>
+<tr><td>J7182 00169783001 NOVOEIGHT 3,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.12 $1.12</td></tr>
+<tr><td>J7182 00169785001 NOVOEIGHT 500 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR, $1.12 $1.12</td></tr>
+<tr><td>J7182 00169781001 NOVOEIGHT 1,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.16 $1.16</td></tr>
+<tr><td>J7182 00169781501 NOVOEIGHT 1,500 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.16 $1.16</td></tr>
+<tr><td>J7182 00169782001 NOVOEIGHT 2,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.16 $1.16</td></tr>
+<tr><td>J7182 00169782501 NOVOEIGHT 250 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR, $1.16 $1.16</td></tr>
+<tr><td>J7182 00169783001 NOVOEIGHT 3,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.16 $1.16</td></tr>
+<tr><td>J7182 00169785001 NOVOEIGHT 500 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR, $1.16 $1.16</td></tr>
+<tr><td>J7182 00169781001 NOVOEIGHT 1,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.10 $1.10</td></tr>
+<tr><td>J7182 00169781501 NOVOEIGHT 1,500 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.10 $1.10</td></tr>
+<tr><td>J7182 00169782001 NOVOEIGHT 2,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.10 $1.10</td></tr>
+<tr><td>J7182 00169782501 NOVOEIGHT 250 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR, $1.10 $1.10</td></tr>
+<tr><td>J7182 00169783001 NOVOEIGHT 3,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.10 $1.10</td></tr>
+<tr><td>J7182 00169785001 NOVOEIGHT 500 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR, $1.10 $1.10</td></tr>
+<tr><td>J7182 00169781001 NOVOEIGHT 1,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.11 $1.11</td></tr>
+<tr><td>J7182 00169781501 NOVOEIGHT 1,500 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.11 $1.11</td></tr>
+<tr><td>J7182 00169782001 NOVOEIGHT 2,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.11 $1.11</td></tr>
+<tr><td>J7182 00169782501 NOVOEIGHT 250 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR, $1.11 $1.11</td></tr>
+<tr><td>J7182 00169783001 NOVOEIGHT 3,000 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR $1.11 $1.11</td></tr>
+<tr><td>J7182 00169785001 NOVOEIGHT 500 UNIT VIAL - INJECTION, FACTOR VIII, (ANTIHEMOPHILIC FACTOR, $1.11 $1.11</td></tr>
+<tr><td>J7183 67467018201 WILATE 500-500 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.81 $0.81</td></tr>
+<tr><td>J7183 67467018202 WILATE 1,000-1,000 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.81 $0.81</td></tr>
+<tr><td>J7183 68982018202 WILATE 1,000-1,000 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.81 $0.81</td></tr>
+<tr><td>J7183 67467018101 WILATE 450-450 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.81 $0.81</td></tr>
+<tr><td>J7183 67467018102 WILATE 900-900 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.81 $0.81</td></tr>
+<tr><td>J7183 68982018201 WILATE 500-500 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.81 $0.81</td></tr>
+<tr><td>J7183 68982018202 WILATE 1,000-1,000 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.81 $0.81</td></tr>
+<tr><td>J7183 67467018101 WILATE 450-450 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.81 $0.81</td></tr>
+<tr><td>J7183 67467018102 WILATE 900-900 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.81 $0.81</td></tr>
+<tr><td>J7183 68982018201 WILATE 500-500 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.81 $0.81</td></tr>
+<tr><td>J7183 68982018202 WILATE 1,000-1,000 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.81 $0.81</td></tr>
+<tr><td>J7183 67467018101 WILATE 450-450 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.82 $0.82</td></tr>
+<tr><td>J7183 67467018102 WILATE 900-900 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.82 $0.82</td></tr>
+<tr><td>J7183 68982018201 WILATE 500-500 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX (HU $0.82 $0.82</td></tr>
+<tr><td>J7183 68982018202 WILATE 1,000-1,000 UNIT VIAL - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.82 $0.82</td></tr>
+<tr><td>J7185 58394001201 XYNTHA 250 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, RECO $1.04 $1.04</td></tr>
+<tr><td>J7185 58394001301 XYNTHA 500 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, RECO $1.04 $1.04</td></tr>
+<tr><td>J7185 58394001401 XYNTHA 1,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, REC $1.04 $1.04</td></tr>
+<tr><td>J7185 58394001501 XYNTHA 2,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, REC $1.04 $1.04</td></tr>
+<tr><td>J7185 58394001603 XYNTHA SOLOFUSE 3,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.04 $1.04</td></tr>
+<tr><td>J7185 58394002203 XYNTHA SOLOFUSE 250 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FAC $1.04 $1.04</td></tr>
+<tr><td>J7185 58394002303 XYNTHA SOLOFUSE 500 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FAC $1.04 $1.04</td></tr>
+<tr><td>J7185 58394002403 XYNTHA SOLOFUSE 1,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.04 $1.04</td></tr>
+<tr><td>J7185 58394002503 XYNTHA SOLOFUSE 2,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.04 $1.04</td></tr>
+<tr><td>J7185 58394011603 XYNTHA SOLOFUSE 3,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.04 $1.04</td></tr>
+<tr><td>J7185 58394012203 XYNTHA SOLOFUSE 250 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.04 $1.04</td></tr>
+<tr><td>J7185 58394012303 XYNTHA SOLOFUSE 500 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.04 $1.04</td></tr>
+<tr><td>J7185 58394012403 XYNTHA SOLOFUSE 1,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.04 $1.04</td></tr>
+<tr><td>J7185 58394012503 XYNTHA SOLOFUSE 2,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.04 $1.04</td></tr>
+<tr><td>J7185 58394001201 XYNTHA 250 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, RECO $1.10 $1.10</td></tr>
+<tr><td>J7185 58394001301 XYNTHA 500 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, RECO $1.10 $1.10</td></tr>
+<tr><td>J7185 58394001401 XYNTHA 1,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, REC $1.10 $1.10</td></tr>
+<tr><td>J7185 58394001501 XYNTHA 2,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, REC $1.10 $1.10</td></tr>
+<tr><td>J7185 58394001603 XYNTHA SOLOFUSE 3,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.10 $1.10</td></tr>
+<tr><td>J7185 58394002203 XYNTHA SOLOFUSE 250 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FAC $1.10 $1.10</td></tr>
+<tr><td>J7185 58394002303 XYNTHA SOLOFUSE 500 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FAC $1.10 $1.10</td></tr>
+<tr><td>J7185 58394002403 XYNTHA SOLOFUSE 1,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.10 $1.10</td></tr>
+<tr><td>J7185 58394002503 XYNTHA SOLOFUSE 2,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.10 $1.10</td></tr>
+<tr><td>J7185 58394011501 XYNTHA 2,000 UNIT VIAL - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, RE $1.10 $1.10</td></tr>
+<tr><td>J7185 58394011603 XYNTHA SOLOFUSE 3,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.10 $1.10</td></tr>
+<tr><td>J7185 58394012203 XYNTHA SOLOFUSE 250 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.10 $1.10</td></tr>
+<tr><td>J7185 58394012303 XYNTHA SOLOFUSE 500 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.10 $1.10</td></tr>
+<tr><td>J7185 58394012403 XYNTHA SOLOFUSE 1,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.10 $1.10</td></tr>
+<tr><td>J7185 58394012503 XYNTHA SOLOFUSE 2,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.10 $1.10</td></tr>
+<tr><td>J7185 58394001201 XYNTHA 250 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, RECO $1.09 $1.09</td></tr>
+<tr><td>J7185 58394001301 XYNTHA 500 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, RECO $1.09 $1.09</td></tr>
+<tr><td>J7185 58394001401 XYNTHA 1,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, REC $1.09 $1.09</td></tr>
+<tr><td>J7185 58394001501 XYNTHA 2,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, REC $1.09 $1.09</td></tr>
+<tr><td>J7185 58394001603 XYNTHA SOLOFUSE 3,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.09 $1.09</td></tr>
+<tr><td>J7185 58394002203 XYNTHA SOLOFUSE 250 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FAC $1.09 $1.09</td></tr>
+<tr><td>J7185 58394002303 XYNTHA SOLOFUSE 500 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FAC $1.09 $1.09</td></tr>
+<tr><td>J7185 58394002403 XYNTHA SOLOFUSE 1,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.09 $1.09</td></tr>
+<tr><td>J7185 58394002503 XYNTHA SOLOFUSE 2,000 UNIT KIT - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.09 $1.09</td></tr>
+<tr><td>J7185 58394011501 XYNTHA 2,000 UNIT VIAL - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FACTOR, RE $1.09 $1.09</td></tr>
+<tr><td>J7185 58394011603 XYNTHA SOLOFUSE 3,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.09 $1.09</td></tr>
+<tr><td>J7185 58394012203 XYNTHA SOLOFUSE 250 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.09 $1.09</td></tr>
+<tr><td>J7185 58394012303 XYNTHA SOLOFUSE 500 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC FA $1.09 $1.09</td></tr>
+<tr><td>J7185 58394012403 XYNTHA SOLOFUSE 1,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.09 $1.09</td></tr>
+<tr><td>J7185 58394012503 XYNTHA SOLOFUSE 2,000 UNIT SYR - INJECTION, FACTOR VIII (ANTIHEMOPHILIC F $1.09 $1.09</td></tr>
+<tr><td>J7186 68516460101 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460201 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460302 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460402 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460501 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460601 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460702 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460802 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460902 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516461002 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516461101 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.81 $0.81</td></tr>
+<tr><td>J7186 68516461201 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.81 $0.81</td></tr>
+<tr><td>J7186 68516461302 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516461402 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516461502 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.81 $0.81</td></tr>
+<tr><td>J7186 68516460101 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460201 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460302 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460402 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460501 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460601 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460702 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460802 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460902 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516461002 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516461101 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.86 $0.86</td></tr>
+<tr><td>J7186 68516461201 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.86 $0.86</td></tr>
+<tr><td>J7186 68516461302 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516461402 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516461502 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.86 $0.86</td></tr>
+<tr><td>J7186 68516460101 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.87 $0.87</td></tr>
+<tr><td>J7186 68516460201 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.87 $0.87</td></tr>
+<tr><td>J7186 68516460302 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Clotting Factor Fee Schedule Part 3">
+<table>
+<caption>Clotting Factor Fee Schedule Part 3</caption><tbody><tr><td>J7186 68516460402 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+<tr><td>J7186 68516460501 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.87 $0.87</td></tr>
+<tr><td>J7186 68516460601 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.87 $0.87</td></tr>
+<tr><td>J7186 68516460702 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+<tr><td>J7186 68516460802 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+<tr><td>J7186 68516460902 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+<tr><td>J7186 68516461002 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+<tr><td>J7186 68516461101 ALPHANATE 250-100 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.87 $0.87</td></tr>
+<tr><td>J7186 68516461201 ALPHANATE 500-200 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON W $0.87 $0.87</td></tr>
+<tr><td>J7186 68516461302 ALPHANATE 1,000-400 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+<tr><td>J7186 68516461402 ALPHANATE 1,500-600 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+<tr><td>J7186 68516461502 ALPHANATE 2,000-800 UNIT VIAL - INJECTION, ANTIHEMOPHILIC FACTOR VIII/VON $0.87 $0.87</td></tr>
+<tr><td>J7187 63833061502 HUMATE-P 600 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.92 $0.92</td></tr>
+<tr><td>J7187 63833061602 HUMATE-P 1,200 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.92 $0.92</td></tr>
+<tr><td>J7187 63833061702 HUMATE-P 2,400 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.92 $0.92</td></tr>
+<tr><td>J7187 63833062501 HUMATE-P 600 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.92 $0.92</td></tr>
+<tr><td>J7187 63833062601 HUMATE-P 1,200 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.92 $0.92</td></tr>
+<tr><td>J7187 63833062701 HUMATE-P 2,400 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.92 $0.92</td></tr>
+<tr><td>J7187 63833061502 HUMATE-P 600 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.93 $0.93</td></tr>
+<tr><td>J7187 63833061602 HUMATE-P 1,200 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.93 $0.93</td></tr>
+<tr><td>J7187 63833061702 HUMATE-P 2,400 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.93 $0.93</td></tr>
+<tr><td>J7187 63833062501 HUMATE-P 600 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.93 $0.93</td></tr>
+<tr><td>J7187 63833062601 HUMATE-P 1,200 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.93 $0.93</td></tr>
+<tr><td>J7187 63833062701 HUMATE-P 2,400 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.93 $0.93</td></tr>
+<tr><td>J7187 63833061502 HUMATE-P 600 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.95 $0.95</td></tr>
+<tr><td>J7187 63833061602 HUMATE-P 1,200 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.95 $0.95</td></tr>
+<tr><td>J7187 63833061702 HUMATE-P 2,400 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.95 $0.95</td></tr>
+<tr><td>J7187 63833062501 HUMATE-P 600 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPLEX $0.95 $0.95</td></tr>
+<tr><td>J7187 63833062601 HUMATE-P 1,200 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.95 $0.95</td></tr>
+<tr><td>J7187 63833062701 HUMATE-P 2,400 UNIT VWF:RCO - INJECTION, VON WILLEBRAND FACTOR COMPL $0.95 $0.95</td></tr>
+<tr><td>J7189 00169720101 NOVOSEVEN RT 1 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.75 $1.75</td></tr>
+<tr><td>J7189 00169720201 NOVOSEVEN RT 2 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.75 $1.75</td></tr>
+<tr><td>J7189 00169720501 NOVOSEVEN RT 5 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.75 $1.75</td></tr>
+<tr><td>J7189 00169720801 NOVOSEVEN RT 8 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.75 $1.75</td></tr>
+<tr><td>J7189 00169721111 NOVOSEVEN RT 1 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.75 $1.75</td></tr>
+<tr><td>J7189 00169721211 NOVOSEVEN RT 2 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.75 $1.75</td></tr>
+<tr><td>J7189 00169720101 NOVOSEVEN RT 1 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.80 $1.80</td></tr>
+<tr><td>J7189 00169720201 NOVOSEVEN RT 2 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.80 $1.80</td></tr>
+<tr><td>J7189 00169720501 NOVOSEVEN RT 5 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.80 $1.80</td></tr>
+<tr><td>J7189 00169720801 NOVOSEVEN RT 8 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.80 $1.80</td></tr>
+<tr><td>J7189 00169721111 NOVOSEVEN RT 1 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.80 $1.80</td></tr>
+<tr><td>J7189 00169721211 NOVOSEVEN RT 2 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.80 $1.80</td></tr>
+<tr><td>J7189 00169720101 NOVOSEVEN RT 1 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.81 $1.81</td></tr>
+<tr><td>J7189 00169720201 NOVOSEVEN RT 2 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.81 $1.81</td></tr>
+<tr><td>J7189 00169720501 NOVOSEVEN RT 5 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.81 $1.81</td></tr>
+<tr><td>J7189 00169720801 NOVOSEVEN RT 8 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.81 $1.81</td></tr>
+<tr><td>J7189 00169721111 NOVOSEVEN RT 1 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.81 $1.81</td></tr>
+<tr><td>J7189 00169721211 NOVOSEVEN RT 2 MG VIAL - FACTOR VIIA (ANTIHEMOPHILIC FACTOR, RECOMBIN $1.81 $1.81</td></tr>
+<tr><td>J7190 76125025020 KOATE-DVI 250 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER $0.82 $0.82</td></tr>
+<tr><td>J7190 76125025221 KOATE 250 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.82 $0.82</td></tr>
+<tr><td>J7190 76125025620 KOATE 250 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.82 $0.82</td></tr>
+<tr><td>J7190 76125066730 KOATE-DVI 500 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER $0.82 $0.82</td></tr>
+<tr><td>J7190 76125066750 KOATE-DVI 1,000 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PE $0.82 $0.82</td></tr>
+<tr><td>J7190 76125066830 KOATE 500 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.82 $0.82</td></tr>
+<tr><td>J7190 76125066931 KOATE 500 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.82 $0.82</td></tr>
+<tr><td>J7190 76125067250 KOATE-DVI 1,000 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PE $0.82 $0.82</td></tr>
+<tr><td>J7190 76125067351 KOATE 1,000 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.82 $0.82</td></tr>
+<tr><td>J7190 76125067650 KOATE 1,000 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.82 $0.82</td></tr>
+<tr><td>J7190 00944293001 HEMOFIL M 250 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) $0.92 $0.92</td></tr>
+<tr><td>J7190 00944293201 HEMOFIL M 1,000 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.92 $0.92</td></tr>
+<tr><td>J7190 00944293301 HEMOFIL M 1,700 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.92 $0.92</td></tr>
+<tr><td>J7190 00944394002 HEMOFIL M 250 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) $0.92 $0.92</td></tr>
+<tr><td>J7190 00944394202 HEMOFIL M 500 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) $0.92 $0.92</td></tr>
+<tr><td>J7190 00944394402 HEMOFIL M 1,000 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.92 $0.92</td></tr>
+<tr><td>J7190 00944394501 HEMOFIL M 1,000 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.92 $0.92</td></tr>
+<tr><td>J7190 00944394602 HEMOFIL M 1,700 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.92 $0.92</td></tr>
+<tr><td>J7190 76125067250 KOATE-DVI 1,000 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PE $0.77 $0.77</td></tr>
+<tr><td>J7190 00944293001 HEMOFIL M 250 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) $0.96 $0.96</td></tr>
+<tr><td>J7190 00944293201 HEMOFIL M 1,000 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.96 $0.96</td></tr>
+<tr><td>J7190 00944293301 HEMOFIL M 1,700 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.96 $0.96</td></tr>
+<tr><td>J7190 00944394002 HEMOFIL M 250 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) $0.96 $0.96</td></tr>
+<tr><td>J7190 00944394202 HEMOFIL M 500 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) $0.96 $0.96</td></tr>
+<tr><td>J7190 00944394402 HEMOFIL M 1,000 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.96 $0.96</td></tr>
+<tr><td>J7190 00944394501 HEMOFIL M 1,000 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.96 $0.96</td></tr>
+<tr><td>J7190 00944394602 HEMOFIL M 1,700 UNIT NOMINAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN $0.96 $0.96</td></tr>
+<tr><td>J7190 76125025020 KOATE-DVI 250 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER $0.77 $0.77</td></tr>
+<tr><td>J7190 76125025221 KOATE 250 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.77 $0.77</td></tr>
+<tr><td>J7190 76125025620 KOATE 250 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.77 $0.77</td></tr>
+<tr><td>J7190 76125066730 KOATE-DVI 500 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER $0.77 $0.77</td></tr>
+<tr><td>J7190 76125066750 KOATE-DVI 1,000 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PE $0.77 $0.77</td></tr>
+<tr><td>J7190 76125066830 KOATE 500 UNIT VIAL - FACTOR VIII (ANTIHEMOPHILIC FACTOR, HUMAN) PER IU $0.77 $0.77</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Effective Dates and End/Obsolete Dates Continuation">
+<table>
+<caption>Effective Dates and End/Obsolete Dates Continuation</caption><thead><tr><th scope="col">Effective Date</th><th scope="col">End/Obsolete Date</th></tr>
+</thead><tbody><tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/2/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/3/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2016</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>11/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>4/1/2017</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2020</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>6/1/2017</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>11/19/2019</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/6/2020</td><td>&nbsp;</td></tr>
+<tr><td>6/1/2017</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>10/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>11/1/2016</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>10/1/2018</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2017</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>4/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2017</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2018</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+<tr><td>1/1/2015</td><td>&nbsp;</td></tr>
+</tbody></table>
+</div>
+
+<p>1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2016 1/1/2016 1/1/2015 1/4/2018 1/1/2015 1/1/2015 10/1/2019 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2016 1/1/2015 1/1/2015 1/1/2015 1/13/2020 1/1/2015 1/1/2016 1/1/2015 1/1/2015 1/1/2015 1/1/2015 7/1/2018 7/1/2018 1/1/2017 1/1/2015 1/1/2015 9/27/2019 1/1/2015 1/1/2015 1/1/2015 2/25/2019 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2016 1/1/2015 1/1/2015 1/1/2016 1/1/2015 1/1/2015 10/1/2019 2/19/2020 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015</p>
+
+<p>11/1/2016 1/1/2015 6/1/2015 5/10/2018 1/1/2015 1/1/2015 1/1/2015 9/18/2017 1/1/2015 1/1/2015 11/2/2018 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2016 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 11/12/2017 1/1/2015 1/1/2015 1/1/2015 1/1/2015 3/1/2019 1/1/2015 10/1/2019 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2016 1/1/2015 1/1/2015 1/1/2015 4/1/2016 1/1/2015 1/1/2015 1/1/2015 1/1/2015 8/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 8/15/2017 1/1/2015 11/28/2018 1/1/2015 12/31/2019 1/1/2015 10/1/2019 1/1/2015 1/1/2015 1/1/2015 6/7/2018 6/7/2018 1/1/2015 1/1/2015</p>
+
+<p>1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 3/8/2019 1/1/2015 1/1/2015 1/4/2018 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 4/1/2018 1/1/2015 10/3/2018 1/1/2015 6/1/2015 1/1/2016 1/1/2020 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2020 1/1/2018 11/26/2019 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2018 1/1/2018 1/1/2015 1/1/2015 4/1/2018 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/6/2020 1/1/2016 10/16/2018 11/18/2019 10/4/2019 1/1/2015 1/1/2019 10/1/2019 1/1/2018 1/1/2018 1/1/2017 7/22/2019 1/1/2018</p>
+
+<p>1/1/2019 1/1/2019 1/1/2019 1/1/2019 1/1/2019 1/1/2017 1/1/2017 1/1/2019 1/1/2019 1/1/2017 1/1/2019 1/1/2017 1/1/2016 7/1/2019 9/1/2015 1/1/2019 1/1/2018 1/1/2019 1/1/2019 1/1/2018 4/1/2018 1/1/2019 1/1/2016 1/1/2017 1/1/2019 1/1/2017 1/1/2018 1/1/2019 1/1/2019 11/11/2019 1/1/2019 1/3/2019 1/1/2017 1/1/2017 1/1/2017 11/7/2019 1/1/2019 1/1/2019 1/1/2019 1/1/2017 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2016 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 8/22/2019 12/11/2017 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 10/1/2019 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015</p>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Date Schedule Page 36">
+<table>
+<caption>Date Schedule Page 36</caption><thead><tr><th scope="col"><strong>Dates</strong></th></tr>
+</thead><tbody><tr><td>1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 1/1/2015 3/22/2018 3/22/2018 7/1/2017 12/19/2019 7/1/2017 7/1/2017 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 11/1/2017 1/14/2019 1/15/2019 12/31/2019 1/1/2020 11/1/2017 1/14/2019 1/15/2019 12/31/2019 1/1/2020 11/1/2017 1/14/2019 1/15/2019 12/31/2019 1/1/2020 11/1/2017 11/1/2017 11/1/2017 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 11/15/2018 7/31/2019 8/1/2019 7/1/2017 11/15/2018 7/31/2019 8/1/2019 7/1/2017 11/14/2018 11/15/2018 7/31/2019 8/1/2019 8/10/2017 11/15/2018 11/15/2018 7/31/2019 8/1/2019 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 11/15/2018 7/31/2019 8/1/2019 7/1/2017 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 1/1/2019 12/31/2019 1/1/2020</td></tr>
+<tr><td>1/1/2019 12/31/2019 1/1/2020 7/1/2017 7/1/2017 8/10/2017 8/10/2017 1/1/2018 1/1/2018 7/1/2017 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 7/1/2017 8/15/2019 7/1/2017 8/15/2019 7/1/2017 8/15/2019 7/1/2017 7/1/2017 7/1/2017 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 7/16/2018 6/30/2019 7/16/2018 6/30/2019 7/15/2019 7/15/2019 7/16/2018 6/30/2019 7/16/2018 6/30/2019 7/16/2018 6/30/2019 7/16/2018 6/30/2019 7/7/2018 6/30/2019 7/7/2018 6/30/2019 7/3/2019 7/3/2019 1/15/2019 12/31/2019 1/1/2020 1/15/2019 12/31/2019 1/1/2020 11/1/2017 11/1/2017 1/15/2019 12/31/2019 1/1/2020 8/10/2018 6/30/2019 8/10/2018 6/30/2019 8/5/2019 8/5/2019 7/27/2018 6/30/2019 7/27/2018 6/30/2019 7/19/2017 6/30/2018 7/19/2017 6/30/2018 7/15/2019 7/15/2019 4/3/2020 1/1/2018 1/1/2018 4/3/2020 1/1/2018 12/31/2019 1/1/2020 7/1/2017 1/1/2018 12/31/2019 1/1/2020 7/1/2017 7/1/2017 8/10/2017 7/31/2019 8/1/2019 8/10/2017 7/31/2019 8/1/2019 8/10/2017 7/31/2019 8/1/2019 8/10/2017 8/10/2017 8/10/2017 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 7/7/2018 6/30/2019 7/2/2019 7/7/2018 6/30/2019 7/2/2019 7/15/2019</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Date Schedule Page 38">
+<table>
+<caption>Date Schedule Page 38</caption><thead><tr><th scope="col"><strong>Dates</strong></th></tr>
+</thead><tbody><tr><td>7/15/2019 7/5/2018 6/30/2019 7/5/2018 6/30/2019 7/2/2019 7/2/2019 7/5/2018 6/30/2019 7/5/2018 6/30/2019 7/5/2018 6/30/2019 7/5/2018 6/30/2019 7/2/2019 7/2/2019 7/2/2019 7/2/2019 7/3/2018 6/30/2019 7/3/2018 6/30/2019 7/16/2019 7/16/2019 7/3/2018 6/30/2019 7/3/2018 6/30/2019 7/16/2019 7/16/2019 7/16/2018 7/17/2018 7/16/2018 7/17/2018 7/18/2018 6/30/2019 7/18/2018 6/30/2019 7/15/2019 7/15/2019 7/5/2018 6/30/2019 7/5/2018 6/30/2019 7/2/2019 7/2/2019 7/5/2018 6/30/2019 7/5/2018 6/30/2019 7/2/2019 7/2/2019 7/5/2018 6/30/2019 7/5/2018 6/30/2019 7/16/2019 7/16/2019 7/18/2018 6/30/2019 7/18/2018 6/30/2019 7/15/2019 7/15/2019 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 7/1/2017 1/1/2018 1/1/2018 1/1/2018 1/1/2018 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2018 1/1/2018 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 8/10/2017 8/10/2017 1/1/2018 1/1/2018 1/1/2018 1/1/2018 1/1/2018 1/1/2018 7/1/2017 7/1/2017 8/1/2017 10/30/2017 1/1/2018</td></tr>
+<tr><td>10/30/2017 8/1/2017 1/1/2018 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 7/1/2017 4/7/2019 11/15/2018 7/31/2019 8/1/2019 7/1/2017 4/7/2019 11/15/2018 7/31/2019 8/1/2019 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 11/15/2018 11/15/2018 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 11/15/2018 7/31/2019 8/1/2019 1/1/2018 1/1/2018 7/1/2017 1/1/2019 12/31/2019 1/1/2020 7/1/2017 7/1/2017 7/1/2017 2/5/2018 1/8/2018 8/27/2018 8/27/2018 7/1/2017 7/1/2017 7/1/2017 7/1/2017 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 7/1/2017 4/7/2019 7/1/2017 7/1/2017 4/7/2019 8/10/2017 8/10/2017 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 7/1/2017 7/1/2017 7/1/2017 2/7/2019 8/10/2017 8/10/2017 8/10/2017 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019 1/1/2020 1/1/2019 12/31/2019</td></tr>
+</tbody></table>
+</div>
+
+<div class="table-responsive" role="region" tabindex="0" aria-label="Date Schedule Page 40">
+<table>
+<caption>Date Schedule Page 40</caption><thead><tr><th scope="col"><strong>Dates</strong></th></tr>
+</thead><tbody><tr><td>1/1/2020 1/1/2019 12/31/2019 1/1/2020 7/27/2018 6/30/2019 7/27/2018 6/30/2019 7/15/2019 7/15/2019 1/1/2019 11/30/2019 1/1/2019 11/30/2019 1/1/2019 11/30/2019 1/1/2019 11/30/2019 12/1/2019 12/31/2019 1/1/2020 12/1/2019 12/31/2019 1/1/2020 12/1/2019 12/31/2019 1/1/2020 12/1/2019 12/31/2019 1/1/2020 6/1/2018 12/31/2019 1/1/2020 6/1/2018 12/31/2019 1/1/2020 6/1/2018 12/31/2019 1/1/2020 6/1/2018 12/31/2019 1/1/2020 10/1/2017 5/31/2019 10/1/2017 5/31/2019 10/1/2017 5/31/2019 10/1/2017 5/31/2019 6/1/2019 12/1/2018 6/1/2019 6/1/2019 6/1/2019 4/1/2017 5/31/2019 12/1/2018 6/1/2019 4/1/2017 1/7/2019 4/1/2017 1/7/2019 12/1/2018 3/29/2019 1/8/2019 1/8/2019 12/1/2018 1/7/2019 12/1/2018 1/7/2019 12/1/2018 1/7/2019 12/1/2018 1/7/2019 12/1/2018 1/7/2019 12/1/2018 1/7/2019 1/8/2019 5/31/2019 1/8/2019 5/31/2019 1/8/2019 5/31/2019 1/8/2019 5/31/2019 1/8/2019 5/31/2019 1/8/2019 5/31/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2018 3/29/2019 12/1/2018 3/29/2019 12/1/2018 3/29/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019</td></tr>
+<tr><td>12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 12/1/2018 5/31/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 8/14/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 12/1/2019 10/1/2017 5/31/2019 10/1/2017 5/31/2019 10/1/2017 5/31/2019 10/1/2017 5/31/2019 2/1/2018 5/31/2019 2/1/2018 5/31/2019 2/1/2018 5/31/2019 2/1/2018 5/31/2019 10/1/2017 5/31/2019 10/1/2017 5/31/2019 2/1/2018 5/31/2019 2/1/2018 5/31/2019 2/1/2018 5/31/2019 2/1/2018 5/31/2019 2/1/2018 5/31/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 6/1/2019 11/30/2019 12/1/2019 12/1/2019 12/1/2019</td></tr>
+</tbody></table>
+</div>
+
+</section>
+<section aria-labelledby="section-1">
+<h2 id="section-1">[Pages 6-11 unavailable]</h2>
+<p>Content from pages 6-11 could not be converted. This section may be available after retry.</p>
+
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">[Pages 21-26 unavailable]</h2>
+<p>Content from pages 21-26 could not be converted. This section may be available after retry.</p>
+
+</section>
+<section aria-labelledby="section-3">
+<h2 id="section-3">[Pages 31-36 unavailable]</h2>
+<p>Content from pages 31-36 could not be converted. This section may be available after retry.</p>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

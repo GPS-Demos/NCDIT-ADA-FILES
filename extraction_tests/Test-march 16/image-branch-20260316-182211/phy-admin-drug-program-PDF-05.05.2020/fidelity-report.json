@@ -1,0 +1,213 @@
+{
+  "document_id": "phy-admin-drug-program-PDF-05.05.2020",
+  "composite_score": 0.7507,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.75 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON contains text that is derived from the source PDF. The paragraphs and tables correspond to the pricing and vaccine schedules found in the document. No fabricated body text or invented introductions were found. Section titles like '[Pages 6-11 unavailable]' are acknowledged evaluation artifacts indicating partial views.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The document contains no specific phone numbers or email addresses. It mentions the 'DMA Web Site' in the introductory text, but no URL is provided in the source or the output. No fabricated contact details were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output JSON acknowledges several gaps in the conversion (Pages 6-11, 21-26, 31-36). While pages 17-20 are also missing and not covered by a gap notice, the 'Clotting Factor' section to which they belong is present in the output (Elements 14-16). Similarly, while many date table pages (37, 39, 41-51) are missing, the 'Effective Dates' section is represented by Elements 17-23. Per instructions, content that is truncated rather than completely absent at the section level is handled under C5.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The 'Effective Dates and End/Obsolete Dates Continuation' table (Element 17) corresponds to source page 27. Page 27 contains 63 data rows, whereas Element 17 in the output contains only 32 data rows, representing a loss of approximately 50%. Additionally, the tables for drug procedure codes on pages 1, 3, and 5 (Elements 9, 10, 11) contain only headers and no data rows, although the data is partially recovered in preceding paragraphs.",
+        "b_evidence_source": "Effective Dates table on page 27 contains 63 data rows.",
+        "b_evidence_output": "The table in element 17 contains 32 data rows.",
+        "b_evidence_location": "Physician Drug Program Procedure Codes And Rates, Element 17",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The Clotting Factor table (pages 14-25) is missing significant content. Pages 17-20 are missing entirely from the output and are not covered by the explicit gap notices. This represents 4 pages of tabular data within that section. Furthermore, the Date Tables (pages 27-51) are missing pages 37, 39, and 41-51, which are not covered by gap notices. These omissions constitute a loss of more than 25% of the document's total tabular data content.",
+        "b_evidence_source": "Pricing and code rows for Clotting Factors on pages 17, 18, 19, and 20 (codes ranging from Advate to Alphanine SD).",
+        "b_evidence_output": "The output transitions from page 16 content (J7190) in Element 16 directly to Date Table content in Element 17, omitting codes from pages 17-20.",
+        "b_evidence_location": "Physician Drug Program Procedure Codes And Rates, after Element 16",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The conversion of the two-column date tables (Pages 28, 29, 30) into single-paragraph strings (Elements 18, 19, 20) alters the meaning of the data. By stripping the column structure, the relationship between 'Effective Date' and 'End/Obsolete Date' is lost, and the positional mapping to the drug codes from earlier pages is destroyed, making the information unusable.",
+        "b_evidence_source": "Two-column date tables on pages 28, 29, and 30.",
+        "b_evidence_output": "Elements 18, 19, and 20 are paragraphs containing a long string of concatenated dates (e.g., '1/1/2015 1/1/2015 1/1/2015...')",
+        "b_evidence_location": "Physician Drug Program Procedure Codes And Rates, Elements 18, 19, 20",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.872093023255814,
+    "penalty_sum": 11,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON contains text that is derived from the source PDF. The paragraphs and tables correspond to the pricing and vaccine schedules found in the document. No fabricated body text or invented introductions were found. Section titles like '[Pages 6-11 unavailable]' are acknowledged evaluation artifacts indicating partial views.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The document contains no specific phone numbers or email addresses. It mentions the 'DMA Web Site' in the introductory text, but no URL is provided in the source or the output. No fabricated contact details were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output JSON acknowledges several gaps in the conversion (Pages 6-11, 21-26, 31-36). While pages 17-20 are also missing and not covered by a gap notice, the 'Clotting Factor' section to which they belong is present in the output (Elements 14-16). Similarly, while many date table pages (37, 39, 41-51) are missing, the 'Effective Dates' section is represented by Elements 17-23. Per instructions, content that is truncated rather than completely absent at the section level is handled under C5.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The 'Effective Dates and End/Obsolete Dates Continuation' table (Element 17) corresponds to source page 27. Page 27 contains 63 data rows, whereas Element 17 in the output contains only 32 data rows, representing a loss of approximately 50%. Additionally, the tables for drug procedure codes on pages 1, 3, and 5 (Elements 9, 10, 11) contain only headers and no data rows, although the data is partially recovered in preceding paragraphs.\",\n      \"b_evidence_source\": \"Effective Dates table on page 27 contains 63 data rows.\",\n      \"b_evidence_output\": \"The table in element 17 contains 32 data rows.\",\n      \"b_evidence_location\": \"Physician Drug Program Procedure Codes And Rates, Element 17\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The Clotting Factor table (pages 14-25) is missing significant content. Pages 17-20 are missing entirely from the output and are not covered by the explicit gap notices. This represents 4 pages of tabular data within that section. Furthermore, the Date Tables (pages 27-51) are missing pages 37, 39, and 41-51, which are not covered by gap notices. These omissions constitute a loss of more than 25% of the document's total tabular data content.\",\n      \"b_evidence_source\": \"Pricing and code rows for Clotting Factors on pages 17, 18, 19, and 20 (codes ranging from Advate to Alphanine SD).\",\n      \"b_evidence_output\": \"The output transitions from page 16 content (J7190) in Element 16 directly to Date Table content in Element 17, omitting codes from pages 17-20.\",\n      \"b_evidence_location\": \"Physician Drug Program Procedure Codes And Rates, after Element 16\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The conversion of the two-column date tables (Pages 28, 29, 30) into single-paragraph strings (Elements 18, 19, 20) alters the meaning of the data. By stripping the column structure, the relationship between 'Effective Date' and 'End/Obsolete Date' is lost, and the positional mapping to the drug codes from earlier pages is destroyed, making the information unusable.\",\n      \"b_evidence_source\": \"Two-column date tables on pages 28, 29, and 30.\",\n      \"b_evidence_output\": \"Elements 18, 19, and 20 are paragraphs containing a long string of concatenated dates (e.g., '1/1/2015 1/1/2015 1/1/2015...')\",\n      \"b_evidence_location\": \"Physician Drug Program Procedure Codes And Rates, Elements 18, 19, 20\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 1,\n    \"penalty_sum\": 11,\n    \"score\": 0.872093023255814\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The document contains numerous repeating date sequences (e.g., '1/1/2015') which are present across many pages of the source material (Pages 27-51). While the output JSON presents these sequences in different formats (paragraphs vs tables), there is no clear evidence that any specific block of text appears more times in the output than it does in the source. Chunks of text match sequences from distinct source pages.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The source document contains clear major section headings such as 'BIOLOGICALS' (Page 1), 'DRUGS' (Page 1), 'IMMUNE GLOBULINS' (Page 8), 'LARCs and Depo-Provera' (Page 8), and 'RADIOPHARMACEUTICALS' (Page 9). These are either entirely missing as structural heading elements in the JSON or are buried inside paragraph content blocks. For example, 'BIOLOGICALS' and 'DRUGS' are found at the end of the text content in element index 1 instead of being marked as headings. Only 'CLOTTING FACTOR' is correctly identified as an H2.",
+        "b_evidence_source": "Major section headings: 'BIOLOGICALS' (Page 1), 'DRUGS' (Page 1), 'IMMUNE GLOBULINS' (Page 8), 'LARCs and Depo-Provera' (Page 8), 'RADIOPHARMACEUTICALS' (Page 9), 'VACCINES' (Page 10).",
+        "b_evidence_output": "The text 'DRUGS BIOLOGICALS' appears as plain text at the end of a paragraph. Only one H2 heading exists: 'CLOTTING FACTOR'.",
+        "b_evidence_location": "Sections list, element index 1 and element index 16",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The document's primary content consists of 5-column drug tables and 2-column date tables. The conversion has failed to preserve this structure. Multiple pages of data (e.g., Pages 1-7) are rendered as giant text blobs within paragraphs (element indices 0-7). Where tables are attempted (e.g., element indices 11-13 and 17-20), the columns are merged into a single column, concatenating all row data into a single cell string. Empty table headers (element indices 8-10) further indicate a collapse of structural integrity.",
+        "b_evidence_source": "5-column table on Page 1 (ProcCode, NDC, Description, Facility, Non-Facility) and 2-column tables on Pages 27-51 (Effective Date, End/Obsolete Date).",
+        "b_evidence_output": "Data from Page 1 is in a paragraph (index 0). Table at index 11 (Vaccine Fee Schedule Part 1) has only 1 column instead of 5, with row content merged ('90636 58160081552 TWINRIX ... $105.58 $105.58'). Date tables (index 17-20) concatenate an entire page of dates into a single cell.",
+        "b_evidence_location": "Element indices 0-7, 8-13, 17-20",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is materially disrupted by the failure to correctly associate table headers with their data. For example, the headers for the Page 1 drug table are defined in element index 8, but the actual data for that page was already presented as an unstructured text blob in element indices 0 and 1. This disconnects the structural definition of the information from the information itself, significantly altering how the document must be read and understood.",
+        "b_evidence_source": "Page 1 logical flow: Table Headers -> Row 1 -> Row 2...",
+        "b_evidence_output": "Data rows from Page 1 (index 0) -> Data rows from Page 1 (index 1) -> ... -> Table Headers for Page 1 (index 8).",
+        "b_evidence_location": "Element indices 0, 1, 8",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The source document does not contain any lists (bulleted or numbered); it consists entirely of tables, headings, and labels. The output JSON correctly identifies no lists.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document contains no hyperlinks. The output JSON correctly reflects this by including no links.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.31818181818181823,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The document contains numerous repeating date sequences (e.g., '1/1/2015') which are present across many pages of the source material (Pages 27-51). While the output JSON presents these sequences in different formats (paragraphs vs tables), there is no clear evidence that any specific block of text appears more times in the output than it does in the source. Chunks of text match sequences from distinct source pages.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The source document contains clear major section headings such as 'BIOLOGICALS' (Page 1), 'DRUGS' (Page 1), 'IMMUNE GLOBULINS' (Page 8), 'LARCs and Depo-Provera' (Page 8), and 'RADIOPHARMACEUTICALS' (Page 9). These are either entirely missing as structural heading elements in the JSON or are buried inside paragraph content blocks. For example, 'BIOLOGICALS' and 'DRUGS' are found at the end of the text content in element index 1 instead of being marked as headings. Only 'CLOTTING FACTOR' is correctly identified as an H2.\",\n      \"b_evidence_source\": \"Major section headings: 'BIOLOGICALS' (Page 1), 'DRUGS' (Page 1), 'IMMUNE GLOBULINS' (Page 8), 'LARCs and Depo-Provera' (Page 8), 'RADIOPHARMACEUTICALS' (Page 9), 'VACCINES' (Page 10).\",\n      \"b_evidence_output\": \"The text 'DRUGS BIOLOGICALS' appears as plain text at the end of a paragraph. Only one H2 heading exists: 'CLOTTING FACTOR'.\",\n      \"b_evidence_location\": \"Sections list, element index 1 and element index 16\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The document's primary content consists of 5-column drug tables and 2-column date tables. The conversion has failed to preserve this structure. Multiple pages of data (e.g., Pages 1-7) are rendered as giant text blobs within paragraphs (element indices 0-7). Where tables are attempted (e.g., element indices 11-13 and 17-20), the columns are merged into a single column, concatenating all row data into a single cell string. Empty table headers (element indices 8-10) further indicate a collapse of structural integrity.\",\n      \"b_evidence_source\": \"5-column table on Page 1 (ProcCode, NDC, Description, Facility, Non-Facility) and 2-column tables on Pages 27-51 (Effective Date, End/Obsolete Date).\",\n      \"b_evidence_output\": \"Data from Page 1 is in a paragraph (index 0). Table at index 11 (Vaccine Fee Schedule Part 1) has only 1 column instead of 5, with row content merged ('90636 58160081552 TWINRIX ... $105.58 $105.58'). Date tables (index 17-20) concatenate an entire page of dates into a single cell.\",\n      \"b_evidence_location\": \"Element indices 0-7, 8-13, 17-20\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is materially disrupted by the failure to correctly associate table headers with their data. For example, the headers for the Page 1 drug table are defined in element index 8, but the actual data for that page was already presented as an unstructured text blob in element indices 0 and 1. This disconnects the structural definition of the information from the information itself, significantly altering how the document must be read and understood.\",\n      \"b_evidence_source\": \"Page 1 logical flow: Table Headers -> Row 1 -> Row 2...\",\n      \"b_evidence_output\": \"Data rows from Page 1 (index 0) -> Data rows from Page 1 (index 1) -> ... -> Table Headers for Page 1 (index 8).\",\n      \"b_evidence_location\": \"Element indices 0, 1, 8\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The source document does not contain any lists (bulleted or numbered); it consists entirely of tables, headings, and labels. The output JSON correctly identifies no lists.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document contains no hyperlinks. The output JSON correctly reflects this by including no links.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.31818181818181823\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output faithfully reproduces the visual organization of the source PDF. The title and introductory notes are placed at the top, followed by the main data table. Although the PDF is multi-page and the HTML is a single continuous scroll, the information is organized in the same logical flow. The conversion partitions the large table into parts (e.g., '(part 1)', '(part 2)') which is a standard method for presenting long tables in HTML while maintaining readability.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables in the HTML output are rendered correctly. The multi-column structure (ProcCode, NDC, Description, Facility, Non-Facility) matches the source. Rows and columns are clearly defined with borders, and headers are visually distinct. Cell content is well-aligned and does not overlap. The long lists of effective dates found at the end of the source PDF are also correctly rendered into a clean two-column table format in the HTML.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF is a text-heavy document composed of notes and tables; it does not contain any meaningful images, logos, or diagrams. Consequently, no images are expected in the HTML output, and no broken image icons are present.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no unintended visual duplication of content. Each section of text and every data row appears only once in the sequence corresponding to the source. While table headers repeat for each partitioned section of the table, this is an intentional design choice to maintain context in a long HTML document, mirroring the header repetition on each new page of the PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output faithfully reproduces the visual organization of the source PDF. The title and introductory notes are placed at the top, followed by the main data table. Although the PDF is multi-page and the HTML is a single continuous scroll, the information is organized in the same logical flow. The conversion partitions the large table into parts (e.g., '(part 1)', '(part 2)') which is a standard method for presenting long tables in HTML while maintaining readability.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables in the HTML output are rendered correctly. The multi-column structure (ProcCode, NDC, Description, Facility, Non-Facility) matches the source. Rows and columns are clearly defined with borders, and headers are visually distinct. Cell content is well-aligned and does not overlap. The long lists of effective dates found at the end of the source PDF are also correctly rendered into a clean two-column table format in the HTML.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF is a text-heavy document composed of notes and tables; it does not contain any meaningful images, logos, or diagrams. Consequently, no images are expected in the HTML output, and no broken image icons are present.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no unintended visual duplication of content. Each section of text and every data row appears only once in the sequence corresponding to the source. While table headers repeat for each partitioned section of the table, this is an intentional design choice to maintain context in a long HTML document, mirroring the header repetition on each new page of the PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 6,
+  "total_critical": 0,
+  "total_major": 5,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

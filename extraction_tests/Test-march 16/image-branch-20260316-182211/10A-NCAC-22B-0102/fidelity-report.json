@@ -1,0 +1,213 @@
+{
+  "document_id": "10A-NCAC-22B-0102",
+  "composite_score": 0.9959,
+  "risk_level": "LOW",
+  "routing_action": "AUTO_APPROVE",
+  "routing_reason": "Score 1.00 >= 0.85",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I have compared the output JSON against the source PDF. All text content in the JSON, including the introductory line, the main body paragraph, and the History Note, corresponds directly to the text present in the source PDF. There are no fabricated paragraphs or sentences.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output contains one URL: 'http://uscode.house.gov/'. This matches the URL found on line 5 of the source PDF. No other contact information (phone numbers, emails) is present in the source or the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source PDF consists of one page containing a specific rule amendment. All lines (1-14) of the source are represented in the output JSON. The title is captured as the section title, and the three main text blocks (intro, body, history note) are captured as paragraph elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document contains no tables.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "All text from the source PDF is present in the output. The conversion captures the introductory clause, the main legal text with its strikethroughs and underlines, and the full History Note section including all dates and citations.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "In the History Note section (line 10 of the source), the statutory citation '108A-54;' is underlined. In North Carolina Administrative Code documents, underlining typically signifies new text being added. In the output JSON, this citation is contained within a text block where 'underline' is set to false, resulting in a loss of semantic information regarding the status of that text (i.e., that it is an addition to the rule).",
+        "b_evidence_source": "108A-54; (underlined in the History Note on line 10)",
+        "b_evidence_output": "\"text\": \"History Note:\\tAuthority G.S. 108A-25(b); 108A-54;...\", \"underline\": false",
+        "b_evidence_location": "Section \"10A NCAC 22B .0102 COORDINATION WITH TITLE XVIII\", History Note paragraph (third element), first content item.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9883720930232558,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I have compared the output JSON against the source PDF. All text content in the JSON, including the introductory line, the main body paragraph, and the History Note, corresponds directly to the text present in the source PDF. There are no fabricated paragraphs or sentences.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output contains one URL: 'http://uscode.house.gov/'. This matches the URL found on line 5 of the source PDF. No other contact information (phone numbers, emails) is present in the source or the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source PDF consists of one page containing a specific rule amendment. All lines (1-14) of the source are represented in the output JSON. The title is captured as the section title, and the three main text blocks (intro, body, history note) are captured as paragraph elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document contains no tables.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"All text from the source PDF is present in the output. The conversion captures the introductory clause, the main legal text with its strikethroughs and underlines, and the full History Note section including all dates and citations.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"In the History Note section (line 10 of the source), the statutory citation '108A-54;' is underlined. In North Carolina Administrative Code documents, underlining typically signifies new text being added. In the output JSON, this citation is contained within a text block where 'underline' is set to false, resulting in a loss of semantic information regarding the status of that text (i.e., that it is an addition to the rule).\",\n      \"b_evidence_source\": \"108A-54; (underlined in the History Note on line 10)\",\n      \"b_evidence_output\": \"\\\"text\\\": \\\"History Note:\\\\tAuthority G.S. 108A-25(b); 108A-54;...\\\", \\\"underline\\\": false\",\n      \"b_evidence_location\": \"Section \\\"10A NCAC 22B .0102 COORDINATION WITH TITLE XVIII\\\", History Note paragraph (third element), first content item.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 1,\n    \"score\": 0.9883720930232558\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "A thorough review of both the source PDF and the converted JSON confirms that no content has been duplicated. Each paragraph and metadata element from the source document (introductory sentence, rule heading, rule text, and history notes) is represented exactly once in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document structure is simple, containing a single main heading ('10A NCAC 22B .0102 COORDINATION WITH TITLE XVIII'). The conversion correctly identifies this as the primary section title (H1). There are no secondary or nested headings in the source, so no hierarchical skips or nesting errors occur.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document contains only text blocks and does not feature any tables. The output correctly reflects this by containing zero table elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the output follows the logical flow of the document. While the rule title (from line 3 of the PDF) is promoted to the section title position above the introductory text (line 1), this is a standard normalization for digital accessibility and document titling. The subsequent rule body and history note follow the exact order found in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The source document includes a History Note section that is visually organized through indentation but lacks semantic list markers (bullets/numbers). The conversion represents this as a single paragraph element using newlines (\\n) and tabs (\\t) to preserve the original visual structure and logical grouping of dates and authorities. This approach accurately preserves the meaning of the source material.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The single external URL present in the source PDF (http://uscode.house.gov/) is correctly identified and captured as a functional hyperlink in the output with appropriate metadata. No links are missing or fabricated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"A thorough review of both the source PDF and the converted JSON confirms that no content has been duplicated. Each paragraph and metadata element from the source document (introductory sentence, rule heading, rule text, and history notes) is represented exactly once in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document structure is simple, containing a single main heading ('10A NCAC 22B .0102 COORDINATION WITH TITLE XVIII'). The conversion correctly identifies this as the primary section title (H1). There are no secondary or nested headings in the source, so no hierarchical skips or nesting errors occur.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document contains only text blocks and does not feature any tables. The output correctly reflects this by containing zero table elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the output follows the logical flow of the document. While the rule title (from line 3 of the PDF) is promoted to the section title position above the introductory text (line 1), this is a standard normalization for digital accessibility and document titling. The subsequent rule body and history note follow the exact order found in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The source document includes a History Note section that is visually organized through indentation but lacks semantic list markers (bullets/numbers). The conversion represents this as a single paragraph element using newlines (\\\\n) and tabs (\\\\t) to preserve the original visual structure and logical grouping of dates and authorities. This approach accurately preserves the meaning of the source material.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The single external URL present in the source PDF (http://uscode.house.gov/) is correctly identified and captured as a functional hyperlink in the output with appropriate metadata. No links are missing or fabricated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document faithfully preserves the visual organization of the source PDF. The title from the PDF has been used as the main header, and the readoption preamble follows it. The body text and the History Note section are organized logically and reflect the source structure perfectly. Changes (underlines and strike-throughs) are correctly represented. Line numbers are removed as expected for HTML.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "There are no tables in the source PDF or the HTML output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF contains no meaningful images, logos, or seals. The HTML output contains no broken image icons or missing visual elements. A link indicator icon has been added in the HTML, which is an expected navigational enhancement.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "No visual content duplication was observed. Each section of text from the source PDF appears exactly once in the HTML output. The rule heading was promoted to a document title and appropriately removed from the body sequence to avoid duplication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document faithfully preserves the visual organization of the source PDF. The title from the PDF has been used as the main header, and the readoption preamble follows it. The body text and the History Note section are organized logically and reflect the source structure perfectly. Changes (underlines and strike-throughs) are correctly represented. Line numbers are removed as expected for HTML.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"There are no tables in the source PDF or the HTML output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF contains no meaningful images, logos, or seals. The HTML output contains no broken image icons or missing visual elements. A link indicator icon has been added in the HTML, which is an expected navigational enhancement.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"No visual content duplication was observed. Each section of text from the source PDF appears exactly once in the HTML output. The rule heading was promoted to a document title and appropriately removed from the body sequence to avoid duplication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 1,
+  "total_critical": 0,
+  "total_major": 0,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

@@ -1,0 +1,106 @@
+{
+  "document_id": "WeeklyHRIReport-August31-September6.pdf",
+  "audited_at": "2026-03-16T18:35:20.053749Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.2727272727272727,
+  "fidelity_visual": 0.9375,
+  "fidelity_composite": 0.7599,
+  "routing": "human_review",
+  "reasoning": "The document displays significant structural failures, evidenced by a very low structural score of 0.27 and identified major concerns regarding reading order and heading hierarchy. Specifically, the omission of headings in sections 6-10 and the logical flow issues in Section 11 directly impact the document's utility and accessibility for users of assistive technology. While the content score is high, the structural inconsistencies and content duplication require manual correction before publication.",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "Section 11 of the output contains significant content duplication. Specifically, the map of North Carolina HRI Surveillance Regions is included twice as separate image elements. Additionally, the headings 'About the data' and 'Climate data' appear twice; first as heading elements 9 and 10, and again at the end of the section as heading elements 11 and 12. The source PDF only contains one instance of each of these elements on page 11.",
+      "source_pdf_quote": "PDF Page 11 contains one map and one set of 'About the data' and 'Climate data' headings.",
+      "output_quote": "Section 11 contains heading-9 ('About the data'), heading-10 ('Climate data'), heading-11 ('About the data'), and heading-12 ('Climate data'). It also contains two distinct image elements describing the same surveillance region map.",
+      "location": "Section 11, elements array, IDs heading-9 through heading-12 and associated map images."
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent and broken in several places. Several sections (Sections 1, 3, 4, 5, and 11) start with H3 headings, skipping H1 and H2 levels. More critically, Sections 6, 7, 8, 9, and 10 do not contain any heading elements within their 'elements' array at all, even though the source PDF clearly has page titles for each region. Section 2 uses an H2 heading, creating an inconsistent hierarchy across similar regional report pages.",
+      "source_pdf_quote": "Every regional report page (e.g., Foothills (Region 6) on Page 8) has a clear title at the top.",
+      "output_quote": "Sections 6, 7, 8, 9, and 10 lack any heading elements in their elements list. Section 1 starts with heading-1 at level 3.",
+      "location": "Sections 1, 6, 7, 8, 9, 10, and 11."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order in Section 11 is fundamentally broken. The headings 'About the data' and 'Climate data' (heading-11 and heading-12) are appended to the very end of the section's element list, appearing after the text blocks they are meant to introduce and after the concluding footer information. This disrupts the logical flow of the document.",
+      "source_pdf_quote": "On PDF Page 11, 'About the data' and 'Climate data' are headings that precede their respective paragraphs.",
+      "output_quote": "In Section 11, the heading elements heading-11 and heading-12 appear as the final items in the list of elements.",
+      "location": "Section 11, element index for heading-11 and heading-12."
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Throughout the document (specifically in the footnotes of Table 1 for all regions), the CDC URL 'https://www.cdc.gov/niosh/heat-stress/about/illnesses.html' is rendered as plain text within a paragraph rather than as a clickable link object with an 'href' attribute. This is a failure to preserve the interactive functionality of a government URL provided in the source.",
+      "source_pdf_quote": "The CDC URL appears in footnotes on pages 1, 3, 4, 6, 7, and 9.",
+      "output_quote": "The URL is present only as 'text' strings within paragraph elements (e.g., in Section 1 and Section 7).",
+      "location": "Sections 1, 3, 4, 6, 7, 9 - footnotes for Table 1."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "There is a visual duplication of content in the 'Statewide Key Messages' section. The pipeline has extracted the header text, introductory paragraph, and bullet points as HTML text, and also extracted Table 1 as an HTML table. However, it also includes a fallback image of the top portion of PDF page 1, which contains all of those same elements (heading, bullets, and Table 1). This results in the same information being displayed twice in succession: once as formatted HTML and once within an image",
+      "source_pdf_quote": "The content on Page 1 (Statewide Key Messages bullets and Table 1) appears once.",
+      "output_quote": "The 'Statewide Key Messages' bullets and 'Table 1. Heat-related illness ED visits by Severity' are rendered as HTML elements, and then appear again immediately within a fallback image containing the same content.",
+      "location": "Statewide Key Messages section, first page of conversion."
+    }
+  ],
+  "action_items": [
+    "Reorder elements in Section 11 so headers precede their respective content and footer data is correctly placed",
+    "Assign proper H2 headings to the regional report sections that are currently missing titles",
+    "Remove duplicate map images and redundant heading tags",
+    "Wrap CDC URLs in anchor tags to ensure clickable functionality"
+  ],
+  "quality_score": 77,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7599,
+      "text_match": 0.8254487220929453,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7712,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7599,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.2727272727272727,
+      "fidelity_visual": 0.9375,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8332760398762461,
+      "shingling_precision": 0.8654052124241343,
+      "duplication_ratio": 0.03573947801551846,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 88811,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

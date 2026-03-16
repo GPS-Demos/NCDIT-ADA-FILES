@@ -1,0 +1,213 @@
+{
+  "document_id": "LoflinDairy_95008_MY1_2012",
+  "composite_score": 0.7339,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.73 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I reviewed the output text against the source PDF. All headings, paragraphs, and list items have a direct basis in the source document. No fabricated sections or introductory/conclusory text were found beyond expected AI-generated alt text and table summaries. The weirdly formatted table in section 1.2 is simply a fragmented sentence from the source ('There were no significant deviations reported in the project elements in comparison to the design plans.'), not a fabrication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "I verified all contact information including addresses and phone numbers. The NCDENR address on the cover page matches. Wildlands Engineering addresses (1430 S. Mint St and 5605 Chapel Hill Rd) match. Phone numbers for Wildlands (704-332-7754) and contacts like Daniel Taylor (919.851.9986), Charlie Bruton (919.242.6555), and Kirsten Gimbert (704.332.7754 ext. 110) all match the source exactly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages and sections from the source PDF are represented in the output JSON. The appendices and figures are correctly sequenced and identified. Text content in the executive summary, methodology, and references is present.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Significant row loss was observed in Table 1 and Table 4. Table 1 in the source lists five reaches (A1, A2, B1, B2, B3) in the 'Project Components' section, but the output only shows Reach A1, merged into a single cell. Additionally, Table 1 in the source includes 'Component Summation' and 'BMP Elements' sections which are entirely absent from the output. Table 4 in the source (Project Baseline Information and Attributes) contains over 40 rows of data across multiple categories, but the output JSON represents only 4 rows total. These losses exceed the 20% threshold for materiality. Tables 8a and 8b contain placeholders with '[N elements...]' style text and are excluded from this evaluation per instructions.",
+        "b_evidence_source": "Table 1 contains 5 rows for Project Components (Reaches A1, A2, B1, B2, B3) plus Component Summation and BMP Elements sections. Table 4 contains approximately 45 rows of data across multiple sections (Project Information, Watershed Summary, Reach Summary, Regulatory Considerations).",
+        "b_evidence_output": "Table 1 output only shows one row under Project Components ('Reach A1 / Area A / Restoration / 1.7 / 1:1') and omits the Summation and BMP sections. Table 4 output contains only 4 rows total.",
+        "b_evidence_location": "Appendix 1. General Tables and Figures, section reading_order 11 (element Table 1 and Table 4).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Text-heavy sections (1.0 Executive Summary, 1.1 Goals, 1.2 Assessment, 2.0 Methodology, etc.) were found to be complete and faithful to the source text. No paragraphs are cut short. The observed data omissions are localized to complex table structures, which are captured under C4.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Minor differences found, such as the spelling 'Radolph' for 'Randolph' in directions on page 9 and 'Restoraion' in references on page 7, are present in the source document itself and thus correctly extracted by the pipeline to maintain fidelity to the source material. Meaning-altering differences in technical text or numerical monitoring data were not identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9418604651162791,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I reviewed the output text against the source PDF. All headings, paragraphs, and list items have a direct basis in the source document. No fabricated sections or introductory/conclusory text were found beyond expected AI-generated alt text and table summaries. The weirdly formatted table in section 1.2 is simply a fragmented sentence from the source ('There were no significant deviations reported in the project elements in comparison to the design plans.'), not a fabrication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"I verified all contact information including addresses and phone numbers. The NCDENR address on the cover page matches. Wildlands Engineering addresses (1430 S. Mint St and 5605 Chapel Hill Rd) match. Phone numbers for Wildlands (704-332-7754) and contacts like Daniel Taylor (919.851.9986), Charlie Bruton (919.242.6555), and Kirsten Gimbert (704.332.7754 ext. 110) all match the source exactly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages and sections from the source PDF are represented in the output JSON. The appendices and figures are correctly sequenced and identified. Text content in the executive summary, methodology, and references is present.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Significant row loss was observed in Table 1 and Table 4. Table 1 in the source lists five reaches (A1, A2, B1, B2, B3) in the 'Project Components' section, but the output only shows Reach A1, merged into a single cell. Additionally, Table 1 in the source includes 'Component Summation' and 'BMP Elements' sections which are entirely absent from the output. Table 4 in the source (Project Baseline Information and Attributes) contains over 40 rows of data across multiple categories, but the output JSON represents only 4 rows total. These losses exceed the 20% threshold for materiality. Tables 8a and 8b contain placeholders with '[N elements...]' style text and are excluded from this evaluation per instructions.\",\n      \"b_evidence_source\": \"Table 1 contains 5 rows for Project Components (Reaches A1, A2, B1, B2, B3) plus Component Summation and BMP Elements sections. Table 4 contains approximately 45 rows of data across multiple sections (Project Information, Watershed Summary, Reach Summary, Regulatory Considerations).\",\n      \"b_evidence_output\": \"Table 1 output only shows one row under Project Components ('Reach A1 / Area A / Restoration / 1.7 / 1:1') and omits the Summation and BMP sections. Table 4 output contains only 4 rows total.\",\n      \"b_evidence_location\": \"Appendix 1. General Tables and Figures, section reading_order 11 (element Table 1 and Table 4).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Text-heavy sections (1.0 Executive Summary, 1.1 Goals, 1.2 Assessment, 2.0 Methodology, etc.) were found to be complete and faithful to the source text. No paragraphs are cut short. The observed data omissions are localized to complex table structures, which are captured under C4.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Minor differences found, such as the spelling 'Radolph' for 'Randolph' in directions on page 9 and 'Restoraion' in references on page 7, are present in the source document itself and thus correctly extracted by the pipeline to maintain fidelity to the source material. Meaning-altering differences in technical text or numerical monitoring data were not identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.9418604651162791\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output document was reviewed for duplicated content blocks such as paragraphs or list items appearing multiple times. No instances of structural content duplication were found; the text flow represents the source without repetition of sections.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy in the output generally follows the source structure. While some level adjustments were made (e.g., subsection 1.2.1 is assigned the same H3 level as 1.2), this falls under acceptable accessibility normalization. There are no skips (e.g., H2 to H4) or illogical nesting.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Significant structural corruption and loss occurred in the conversion of tables. 1) A paragraph on page 5 ('There were no significant deviations...') was incorrectly converted into a 2x2 table in Section 1.2. 2) Table 1 (page 11) is severely truncated, containing only the first row of data and omitting all summation and BMP elements. 3) Table 4 (page 14) is truncated, omitting nearly 90% of the baseline attributes and summary information. 4) Tables 8a and 8b (pages 28-29) were replaced entirely by text strings in brackets (e.g., '[Table 8a...]'), resulting in total loss of the complex matrix structure and data.",
+        "b_evidence_source": "Multiple tables across pages 5, 11, 14, 28, and 29 containing multi-row and multi-column project data.",
+        "b_evidence_output": "Truncated tables in section 9 (Tables 1 and 4) and placeholder strings replacing tables in section 15 (Tables 8a and 8b).",
+        "b_evidence_location": "Sections 3, 9, and 15",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is materially broken by the omission of major structural components. The Table of Contents (page 3) is entirely missing from the output. Additionally, an entire page of visual data (page 23, containing Vegetation Photographs for plots 7-12) is omitted, causing a skip in the chronological sequence of project monitoring photos.",
+        "b_evidence_source": "Table of Contents (Page 3); Vegetation Photographs for Plots 7-12 (Page 23).",
+        "b_evidence_output": "The output sections skip directly from the preparer info to the Executive Summary (omitting Page 3). Section 14 skips from plots 1-6 to plots 13-16.",
+        "b_evidence_location": "Between Section 2 and 3; Section 14",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Bullet points found in the Executive Summary and Project Goals sections (pages 4-5) were correctly identified and converted into unordered list structures in the JSON output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "Hyperlinks present in the References section (page 7) were captured and converted into valid href objects within the corresponding paragraph elements. No fabricated links were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5454545454545454,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output document was reviewed for duplicated content blocks such as paragraphs or list items appearing multiple times. No instances of structural content duplication were found; the text flow represents the source without repetition of sections.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy in the output generally follows the source structure. While some level adjustments were made (e.g., subsection 1.2.1 is assigned the same H3 level as 1.2), this falls under acceptable accessibility normalization. There are no skips (e.g., H2 to H4) or illogical nesting.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Significant structural corruption and loss occurred in the conversion of tables. 1) A paragraph on page 5 ('There were no significant deviations...') was incorrectly converted into a 2x2 table in Section 1.2. 2) Table 1 (page 11) is severely truncated, containing only the first row of data and omitting all summation and BMP elements. 3) Table 4 (page 14) is truncated, omitting nearly 90% of the baseline attributes and summary information. 4) Tables 8a and 8b (pages 28-29) were replaced entirely by text strings in brackets (e.g., '[Table 8a...]'), resulting in total loss of the complex matrix structure and data.\",\n      \"b_evidence_source\": \"Multiple tables across pages 5, 11, 14, 28, and 29 containing multi-row and multi-column project data.\",\n      \"b_evidence_output\": \"Truncated tables in section 9 (Tables 1 and 4) and placeholder strings replacing tables in section 15 (Tables 8a and 8b).\",\n      \"b_evidence_location\": \"Sections 3, 9, and 15\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is materially broken by the omission of major structural components. The Table of Contents (page 3) is entirely missing from the output. Additionally, an entire page of visual data (page 23, containing Vegetation Photographs for plots 7-12) is omitted, causing a skip in the chronological sequence of project monitoring photos.\",\n      \"b_evidence_source\": \"Table of Contents (Page 3); Vegetation Photographs for Plots 7-12 (Page 23).\",\n      \"b_evidence_output\": \"The output sections skip directly from the preparer info to the Executive Summary (omitting Page 3). Section 14 skips from plots 1-6 to plots 13-16.\",\n      \"b_evidence_location\": \"Between Section 2 and 3; Section 14\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Bullet points found in the Executive Summary and Project Goals sections (pages 4-5) were correctly identified and converted into unordered list structures in the JSON output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"Hyperlinks present in the References section (page 7) were captured and converted into valid href objects within the corresponding paragraph elements. No fabricated links were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 6,\n    \"critical_count\": 0,\n    \"major_count\": 6,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document generally follows the visual organization of the source PDF. It maintains the hierarchical structure of sections, preserves the placement of images relative to text, and includes a functional table of contents. While the layout is simplified for web viewing (single-column responsive design), the overall visual flow is consistent with the source's intent.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "Several major table rendering issues were identified. 1) Table 1 (Project Components and Mitigation Credits) has lost its nested header structure (specifically the 'R' and 'RE' sub-categories for Stream and Wetland types), making the data columns ambiguous. 2) In section 1.2, a plain text sentence has been incorrectly converted into a table format ('Project Element Deviations Summary'), with the sentence fragmented across cells, which disrupts the reading flow. 3) Tables 8a and 8b are structurally broken: the HTML table header row has 10 columns while the data rows contain 13 values, leading to header-data misalignment. Furthermore, the critical 'P' (Planted) and 'T' (Total) sub-headers are missing, making the data uninterpretable.",
+        "b_evidence_source": "Table 1 headers with R/RE sub-columns (page 11); 'There were no significant deviations reported...' text (page 5); Tables 8a and 8b with 17 columns including P/T sub-headers (pages 28-29).",
+        "b_evidence_output": "Table 1 with flattened headers; 'Project Element Deviations Summary' table in Section 1.2; Tables 8a and 8b with column count mismatch and missing P/T sub-headers.",
+        "b_evidence_location": "Table 1 (Project Components and Mitigation Credits), Section 1.2 (Project Element Deviations Summary), and Appendix 2 (Tables 8a and 8b).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images from the source PDF are correctly rendered in the HTML. This includes the cover photograph, the site logos, the location and asset maps (Figures 1-3), and the full set of 16 vegetation plot photographs in Appendix 2. No broken image icons were observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The content blocks in the HTML output correspond 1:1 with the sections and elements of the source PDF. There are no instances of paragraphs, tables, or sections being visually duplicated within the converted document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6875,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document generally follows the visual organization of the source PDF. It maintains the hierarchical structure of sections, preserves the placement of images relative to text, and includes a functional table of contents. While the layout is simplified for web viewing (single-column responsive design), the overall visual flow is consistent with the source's intent.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"Several major table rendering issues were identified. 1) Table 1 (Project Components and Mitigation Credits) has lost its nested header structure (specifically the 'R' and 'RE' sub-categories for Stream and Wetland types), making the data columns ambiguous. 2) In section 1.2, a plain text sentence has been incorrectly converted into a table format ('Project Element Deviations Summary'), with the sentence fragmented across cells, which disrupts the reading flow. 3) Tables 8a and 8b are structurally broken: the HTML table header row has 10 columns while the data rows contain 13 values, leading to header-data misalignment. Furthermore, the critical 'P' (Planted) and 'T' (Total) sub-headers are missing, making the data uninterpretable.\",\n      \"b_evidence_source\": \"Table 1 headers with R/RE sub-columns (page 11); 'There were no significant deviations reported...' text (page 5); Tables 8a and 8b with 17 columns including P/T sub-headers (pages 28-29).\",\n      \"b_evidence_output\": \"Table 1 with flattened headers; 'Project Element Deviations Summary' table in Section 1.2; Tables 8a and 8b with column count mismatch and missing P/T sub-headers.\",\n      \"b_evidence_location\": \"Table 1 (Project Components and Mitigation Credits), Section 1.2 (Project Element Deviations Summary), and Appendix 2 (Tables 8a and 8b).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images from the source PDF are correctly rendered in the HTML. This includes the cover photograph, the site logos, the location and asset maps (Figures 1-3), and the full set of 16 vegetation plot photographs in Appendix 2. No broken image icons were observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The content blocks in the HTML output correspond 1:1 with the sections and elements of the source PDF. There are no instances of paragraphs, tables, or sections being visually duplicated within the converted document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 0,
+  "total_major": 4,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

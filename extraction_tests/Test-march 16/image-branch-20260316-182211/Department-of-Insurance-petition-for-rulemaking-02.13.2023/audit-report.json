@@ -1,0 +1,103 @@
+{
+  "document_id": "Department-of-Insurance-petition-for-rulemaking-02.13.2023",
+  "audited_at": "2026-03-16T18:37:37.235423Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.31818181818181823,
+  "fidelity_visual": 0.875,
+  "fidelity_composite": 0.7517,
+  "routing": "human_review",
+  "reasoning": "Source PDF unavailable — cannot compute text fidelity. Manual review required.",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The document contains significant duplication. Firstly, Section 13 in the output is an exact duplicate of the final paragraph element in Section 12 ('Comment: This rule is unclear and ambiguous...'). Secondly, throughout the document (notably in Sections 6, 8, 11, and 12), the pipeline has included images of the entire source pages as structural elements. These images have AI-generated alt text that OCRs and summarizes the page content, effectively duplicating the text content already converted ",
+      "source_pdf_quote": "Comment: This rule is unclear and ambiguous. This rule is open to interpretation in two or more ways, having no supporting G.S. 58 Statute(s) cited under which the Rule(s) is adopted, having no presiding or subsequent definitions stated in any other 11 NCAC Rule(s) or G.S. 58 Statute(s). This rule may require judicial ruling. (Page 31)",
+      "output_quote": "The text appears as the last paragraph of Section 12 and is then repeated as the sole element of Section 13.",
+      "location": "Section 12 (last element) and Section 13"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is broken in several places. In Section 1, the document begins with a level 2 heading ('heading-1') without a preceding level 1 heading. In Section 2, there is a flat hierarchy: the rule title ('11 NCAC 04 .0419...'), the 'Reasons for...' preamble, and the specific 'Petition to Amend TITLE' are all assigned level 3 headings (H3), despite the source document's layout indicating a clear hierarchical relationship between the rule and its sub-sections. Accessibility standards r",
+      "source_pdf_quote": "Petition to Amend 11 NCAC 04 .0419 MOTOR VEHICLE REPAIR ESTIMATES (Page 8) followed by sub-headings like 'Reasons for adoption...' and 'Petition to Amend TITLE'.",
+      "output_quote": "{\"type\": \"heading\", \"level\": 3, \"text\": \"11 NCAC 04 .0419...\"}, {\"type\": \"heading\", \"level\": 3, \"text\": \"Reasons for adoption...\"}, {\"type\": \"heading\", \"level\": 3, \"text\": \"Petition to Amend TITLE\"}",
+      "location": "Section 2, elements heading-2, heading-3, heading-4"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order and overall completeness are compromised. The conversion omitted the first five pages of the document, which included a formal cover letter, a Certificate of Service, and the beginning of the first petition. The output begins mid-stream on page 6 of the PDF. Crucially, the placeholder explaining this omission (Section 14) is placed at the end of the JSON document rather than at the beginning, disrupting the logical flow and navigation of the document.",
+      "source_pdf_quote": "The document begins with a cover letter dated February 3, 2023, addressed to Loretta Peace-Bunch (Page 1).",
+      "output_quote": "The JSON output starts with content from PDF page 6: '(2) The recommended wording of the process...'. Section 14 at the end states: 'Content from pages 1-6 could not be converted.'",
+      "location": "Start of document and Section 14"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "minor",
+      "analysis": "The visual organization of the HTML output differs significantly from the source PDF. Firstly, the first two pages of the PDF (the cover letter and Certificate of Service) are missing from the rendered content, though a footer note mentions they are unavailable. Secondly, the order of the petition sections has been rearranged; in the source PDF, the petition for 11 NCAC 04 .0418 precedes 11 NCAC 04 .0419, but in the HTML Table of Contents and document body, .0419 appears before .0418. This rearr",
+      "source_pdf_quote": "The PDF starts with a cover letter (Page 1), followed by a Certificate of Service (Page 2), and then the petition for '11 NCAC 04 .0418' (Page 3).",
+      "output_quote": "The HTML document starts with a Table of Contents listing 'Petition to Amend 11 NCAC 04 .0419' as the first section. The content of pages 1 and 2 is missing, with a note at the bottom stating '[Pages 1-2 Unavailable]'.",
+      "location": "Beginning of document and Table of Contents"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Meaningful images present in the source PDF are missing in the HTML output. Specifically, the 'RECEIVED' circular date stamp and the handwritten signature of Danny Wyatt on Page 1 of the PDF are not rendered. While the SUV photos from Page 9 (Page 2/12 of the .0419 petition) are correctly extracted and present in the HTML, the omission of the authentication marks (stamp and signature) is a defect in visual fidelity, particularly as the document is a formal legal petition.",
+      "source_pdf_quote": "Page 1 of the PDF shows a circular 'RECEIVED' stamp and a handwritten signature 'Danny Wyatt'.",
+      "output_quote": "The HTML document lacks these graphical elements, partly because the first two pages were not rendered in the main content flow.",
+      "location": "Cover letter section, corresponding to PDF Page 1"
+    }
+  ],
+  "action_items": [
+    "Source PDF unavailable — cannot compute text fidelity. Manual review required."
+  ],
+  "quality_score": 75,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "hard_veto:V2",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7517,
+      "text_match": null,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.751,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 3
+    },
+    "signals": {
+      "fidelity_composite": 0.7517,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.31818181818181823,
+      "fidelity_visual": 0.875,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 90008,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "document_id": "42736---State-Human-Resources",
+  "audited_at": "2026-03-16T18:26:00.144475Z",
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.31818181818181823,
+  "fidelity_visual": 1.0,
+  "fidelity_composite": 0.7914,
+  "routing": "human_review",
+  "reasoning": "The document exhibits catastrophic structural failure with a structural score of 0.31, primarily due to recursive nesting where subsequent pages are incorrectly nested as children of previous pages. This, combined with massive content duplication and the inclusion of OCR noise like line numbers in the body text, makes the document functionally unusable without significant manual intervention.",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output document contains significant amounts of duplicated content. Entire rule sections and their corresponding history notes are repeated either within the same section or across consecutive sections. For example, the text for 25 NCAC 01D .0112 (Pages 16-17) is rendered in its entirety twice within section 14: first as a sequence of line-numbered paragraphs (elements 1-37) and then again as a set of non-numbered paragraphs and lists. Similarly, the content of 25 NCAC 01D .0401 (Page 26) is",
+      "source_pdf_quote": "25 NCAC 01D .0112 (Pages 16-17), 25 NCAC 01D .0401 (Page 26), 25 NCAC 01D .0201 (Page 21-22), and History Notes for .0102 (Page 11) all appear exactly once in the source PDF.",
+      "output_quote": "The text for .0112 is duplicated within Section 14. Rule .0401 text is identical in Sections 23 and 24. Rule .0201 text is duplicated across Sections 18 and 19. History notes for .0102 are duplicated within Section 10.",
+      "location": "Sections 10, 14, 18/19, 23/24"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is severely compromised due to a recursive nesting error in the first section. Pages 1 through 5 of the source document are not treated as equal sequential sections but are instead nested deeper and deeper into each other. Page 2 is a subsection of Page 1, Page 3 is a subsection of Page 2, and so on. This creates an illogical hierarchy where the levels do not reflect the document's actual organization. Additionally, several top-level headings (like NCAC rule numbers) are as",
+      "source_pdf_quote": "Request for Technical Change for .0402 (Page 2), NCAC .0402 (Page 3), Request for .1004 (Page 4), and NCAC .1004 (Page 5) are sequential, distinct pages.",
+      "output_quote": "Section 0 contains Page 1. Its subsection contains Page 2. That subsection's subsection contains Page 3, and so on through Page 5.",
+      "location": "Sections 0-5"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order and organizational structure are fundamentally flawed. The recursive nesting of the first five pages into a single hierarchy (Section 0) incorrectly implies that later pages are parts of earlier pages, which is not the case in the source document. Furthermore, the massive repetition of content (as noted in S1) significantly disrupts the logical flow and information order, as users must traverse identical blocks of text multiple times.",
+      "source_pdf_quote": "The source document is a linear sequence of 37 distinct pages.",
+      "output_quote": "The output groups the first five pages into a nested hierarchy and kemudian repeats large content blocks for multiple rules.",
+      "location": "Section 0 (nesting), Sections 10, 14, 18/19, 23/24 (duplication)"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The conversion result includes line numbers from the original legal document directly within the text of body paragraphs (e.g., '35 NCAC 01D .2701' instead of '25 NCAC 01D .2701'). Additionally, in Section 1 Subsection 4 (Page 5), the URLs are broken into multiple table rows/cells and include line numbers in the link text (e.g., '17 forms/...'). There is also significant duplication of page 16 content within Section 10. These differences represent a failure to clean OCR noise and structure text ",
+      "source_pdf_quote": "NCAC 01D .2701. (Page 5, line 35)",
+      "output_quote": "35 NCAC 01D .2701. (Section 1 Subsection 4, element 11)",
+      "location": "Section 1 Subsection 4, element 11"
+    },
+    {
+      "description": "Content duplication detected: 22%",
+      "severity": "minor",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    }
+  ],
+  "action_items": [
+    "Flatten the heading hierarchy to remove recursive nesting of pages.",
+    "Identify and delete all duplicated text blocks and repeated rule sections.",
+    "Perform a regex-based or manual cleanup of line numbers (e.g., '35' inside '25 NCAC') embedded in paragraphs.",
+    "Repair broken URL fragments in Section 1."
+  ],
+  "quality_score": 77,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7914,
+      "text_match": 0.7794316687694085,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7749,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7914,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.31818181818181823,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9089424254797877,
+      "shingling_precision": 0.9465627214741318,
+      "duplication_ratio": 0.22415080253826056,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.95,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 81141,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

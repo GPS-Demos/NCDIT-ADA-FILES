@@ -1,0 +1,104 @@
+{
+  "document_id": "Dental-Fee-Scedule-FQHC-2-10-22.pdf",
+  "audited_at": "2026-03-16T18:36:13.662256Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.2727272727272727,
+  "fidelity_visual": 0.9375,
+  "fidelity_composite": 0.7599,
+  "routing": "reject",
+  "reasoning": "The document conversion suffered a catastrophic failure, resulting in the omission of the first five pages of a seven-page fee schedule. With the primary tabular data missing and the reading order inverted, the document is functionally useless and fails to meet basic fidelity requirements.",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The source document contains a clear hierarchical structure starting with the title 'NC Medicaid Dental Reimbursement Rates' (H1) and subheadings like 'Federally Qualified Health Centers'. The output contains zero headings, failing to preserve the document's organizational structure. Although the metadata contains a title, the semantic structure within the 'sections' block is completely flat.",
+      "source_pdf_quote": "NC Medicaid Dental Reimbursement Rates",
+      "output_quote": "\"heading_count\": 0",
+      "location": "Metadata and Page 1 header"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The source document consists primarily of a tabular data set spanning 7 pages. The output contains only a single table element that represents a fragment of the data starting mid-way through page 6 (CDT code D7940). The structural organization of the tables from pages 1 through 5 and the start of page 6 is entirely absent. This constitutes a major corruption of the source's structural representation of data.",
+      "source_pdf_quote": "Table starting with 'D0120' on page 1 and continuing through page 7.",
+      "output_quote": "The single table element starts with 'D7940'.",
+      "location": "sections[0].elements[0]"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order in the output is fundamentally broken. It begins with data from page 6 and 7, followed by a trailing paragraph from page 7, and ends with a placeholder message stating that content from pages 1-6 is unavailable. This is the reverse of the intended logical flow of the source document.",
+      "source_pdf_quote": "Document begins with 'NC Medicaid Dental Reimbursement Rates' and 'D0120' on page 1.",
+      "output_quote": "Document begins with table row 'D7940' (from page 6).",
+      "location": "sections[0]"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The source document on page 1 contains a clear URL: 'https://medicaid.ncdhhs.gov/providers/clinical-coverage-policies/dental-program-clinical-coverage-policies'. This link is missing from the output.",
+      "source_pdf_quote": "https://medicaid.ncdhhs.gov/providers/clinical-coverage-policies/dental-program-clinical-coverage-policies",
+      "output_quote": "The URL text and associated link are not present in the elements array.",
+      "location": "Page 1"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "minor",
+      "analysis": "The HTML output exhibits a severe visual organization failure. The source PDF is a 7-page document containing reimbursement rates for hundreds of codes, starting with header information (Taxonomy, Specialty, Effective Date) and CDT code D0120 on page 1. The HTML output only renders a portion of the codes (starting from D7940, which is on page 6 of the PDF) and completely omits the first 5 pages of the document, replacing them with a placeholder message: '[Pages 1-6 unavailable] Content from page",
+      "source_pdf_quote": "The source PDF begins on page 1 with header information: 'NC Medicaid Dental Reimbursement Rates', 'Effective Date: February 10, 2022', 'Taxonomy: 261QF0400X Specialty: 010', followed by a table starting with CDT Code 'D0120'.",
+      "output_quote": "The HTML screenshot shows a single table starting with CDT Code 'D7940' and ends with a message: '[Pages 1-6 unavailable] Content from pages 1-6 could not be converted. This section may be available after retry.'",
+      "location": "Throughout the document, specifically the absence of pages 1-5 and the header of page 1."
+    }
+  ],
+  "action_items": [
+    "Investigate why the parser failed to extract the first 5 pages.",
+    "Reprocess the PDF to ensure all 7 pages of tabular data are captured and serialized in the correct order."
+  ],
+  "quality_score": 61,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.7599,
+      "text_match": 0.45332976731746466,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.0,
+      "raw_score": 0.6051,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7599,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.2727272727272727,
+      "fidelity_visual": 0.9375,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.2959664745940283,
+      "shingling_precision": 0.9680182752712736,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.91,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 62097,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

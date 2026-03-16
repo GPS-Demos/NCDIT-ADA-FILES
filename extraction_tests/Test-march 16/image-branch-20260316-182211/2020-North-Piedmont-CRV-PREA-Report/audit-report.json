@@ -1,0 +1,89 @@
+{
+  "document_id": "2020-North-Piedmont-CRV-PREA-Report",
+  "audited_at": "2026-03-16T18:30:34.679471Z",
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": null,
+  "fidelity_composite": 0.4,
+  "routing": "human_review",
+  "reasoning": "The document shows a weak composite score of 0.4, just above the rejection threshold, with a critical failure in content retention. The omission of several multi-page auditor narratives across four distinct standards, combined with significant reading order corruption and pervasive content duplication, makes the document currently unfit for publication without manual intervention.",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "Multiple entire multi-page narrative analysis sections present in the source PDF are missing from the conversion result. Specifically, the 'Auditor Discussion' (narrative analysis) for the following standards is absent: 115.222 (pages 43-45), 115.242 (pages 62-65), 115.283 (pages 107-108), and 115.286 (pages 109-110). While the corresponding Appendix checklist tables are present, the detailed auditor findings for these standards are silently omitted from the main text array.",
+      "source_pdf_quote": "Standard 115.222 Analysis (p. 43-45); Standard 115.242 Analysis (p. 62-65); Standard 115.283 Analysis (p. 107-108); Standard 115.286 Analysis (p. 109-110)",
+      "output_quote": "[Narrative for these standards is absent from the 'sections' array]",
+      "location": "Main sections array, following standards 115.221, 115.241, 115.282"
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output contains numerous instances of content duplication across multiple sections. In Section 1, the text block beginning with 'The auditor did not encounter any initial barriers...' appears in Element 9 and is repeated in Element 11. In Section 7 (Standard 115.215), the analysis header paragraph is repeated three times as Elements 2, 7, and 10. In Section 21 (Standard 115.272), Elements 10 and 11 repeat the findings text already provided in the table cell of Element 9. In Section 25 (Stand",
+      "source_pdf_quote": "The exit briefing was conducted with the Facility Director, Program Supervisor, Associate Warden, Administrative Officer, and the Correctional Sergeant... for development of the final report and completion of the audit.",
+      "output_quote": "This text block appears at the end of the Section 2 paragraph list and is repeated identically as Element 2 in Section 3.",
+      "location": "Sections 2 and 3, page 10-11"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially corrupted in Section 1. Text from the top of page 6 (starting with 'probation officer...') appears as Element 10, which is placed after Element 9 containing text from the bottom of page 6 ('The auditor did not encounter any initial barriers...'). This breaks the logical flow of the auditor's description of the pre-audit phase. Furthermore, items from lists are occasionally stranded between unrelated blocks, such as item 7 of the interview list in Standard 115.216 ",
+      "source_pdf_quote": "The text on page 6 follows a logical sequence from 'probation officer...' at the top to 'The auditor did not encounter any initial barriers...' at the bottom.",
+      "output_quote": "Element 9: 'The auditor did not encounter...'; Element 10: 'probation officer...'; Element 11: 'The auditor did not encounter...'",
+      "location": "Section 1, page 6"
+    }
+  ],
+  "action_items": [
+    "Restore missing narrative text from the source PDF for the four omitted auditor discussion sections.",
+    "Manually re-order the 'probation officer' text blocks in Section 1 to restore logical flow.",
+    "Remove duplicate element repetitions in Sections 7 and 21."
+  ],
+  "quality_score": 40,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9187552867510531,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6319,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9491547807712626,
+      "shingling_precision": 0.9928166873877607,
+      "duplication_ratio": 0.07839335710049171,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.99,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 154012,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

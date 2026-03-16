@@ -1,0 +1,73 @@
+{
+  "document_id": "NC-401(k)-Plan-Hardship-Distributions",
+  "audited_at": "2026-03-16T18:28:13.811242Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.9375,
+  "fidelity_composite": 0.9781,
+  "routing": "human_review",
+  "reasoning": "While the automated fidelity score is high, the qualitative feedback reveals a significant failure in processing tracked changes. The failure to render strikethroughs and the resulting concatenation of deleted and added text (e.g., 'forof') creates a document that is semantically incorrect and misleading for a legal or policy draft.",
+  "concerns": [
+    {
+      "description": "Major visual layout difference",
+      "severity": "minor",
+      "analysis": "The source document is a tracked-changes draft that uses red text, underlines (to indicate additions), and strikethroughs (to indicate deletions). The HTML output fails to render the strikethrough formatting. This results in deleted text being presented as active content, which fundamentally changes the visual meaning and intent of the document. For instance, in item (ii), the deleted word 'for' and the added word 'of' are merged into 'forof' without any visual distinction. Additionally, an enti",
+      "source_pdf_quote": "Visual indicators of revisions: strikethrough on 'for' and underline on 'of' in item (ii) on page 1; strikethrough on the entire paragraph starting with 'Effective for hardship withdrawals...' in section (d)(ii) on page 3.",
+      "output_quote": "The text '(ii) costs directly related to the purchase of a principal residence forof the Member' is rendered without strikeout or underline markers. The paragraph 'Effective for hardship withdrawals...' in section (d)(ii) is rendered as plain text without the strikethrough shown in the PDF.",
+      "location": "Item (ii) on PDF page 1; Paragraph in section (d)(ii) on PDF page 3."
+    }
+  ],
+  "action_items": [
+    "Manually verify the document against the tracked-changes source PDF.",
+    "Correct instances where deleted text was merged with new text.",
+    "Implement proper HTML tags (e.g., <del> and <ins>) if the document must reflect the redline status, or produce a clean final version if intended."
+  ],
+  "quality_score": 85,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9781,
+      "text_match": 0.7544097693351425,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8524,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9781,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.9375,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.6067219554779573,
+      "shingling_precision": 0.9971305595408895,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 69698,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
