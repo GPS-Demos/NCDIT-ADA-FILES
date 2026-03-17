@@ -48,6 +48,7 @@ RENDER_SCALE = 3  # 216 DPI (was 2 = 144 DPI). Increase to 4 for 288 DPI if need
 ENABLE_COHERENCE_CHECK = True  # LLM-based quality check
 ENABLE_IMAGE_EXTRACTION = True  # Include base64 image data in output
 ENABLE_VIDEO_DETECTION = True
+ENABLE_PER_IMAGE_ALT_TEXT = True  # Generate alt text per-image via Gemini (fixes swapped/wrong alt text)
 
 # Video platform patterns
 VIDEO_PATTERNS = [
@@ -676,6 +677,160 @@ class PDFExtractor:
         output_tokens = getattr(response.usage_metadata, 'candidates_token_count', 0) or 0
 
         return response.text, input_tokens, output_tokens
+
+    ALT_TEXT_PROMPT = (
+        "Describe this image for use as alt text on a web page. "
+        "Write a concise description (1-3 sentences) of what the image visually shows. "
+        "Be specific: identify people, objects, logos, charts, maps, diagrams, or scenes. "
+        "If there is text visible in the image (e.g., a title, label, or caption), include the key text. "
+        "Do NOT say 'image of' or 'picture of' — just describe the content directly. "
+        "Do NOT transcribe all text in the image — just summarize what it shows. "
+        "Return ONLY the alt text description, no JSON, no quotes, no extra formatting."
+    )
+
+    def generate_alt_text_for_image(self, image_bytes: bytes, image_format: str = "png") -> Tuple[str, int, int]:
+        """Generate alt text for a single image by sending it to Gemini.
+
+        This produces more accurate alt text than the full-page extraction approach
+        because Gemini sees only the specific image, not the whole page.
+
+        Args:
+            image_bytes: Raw image data (PNG, JPEG, etc.)
+            image_format: Image format string (e.g., "png", "jpeg")
+
+        Returns:
+            Tuple of (alt_text, input_tokens, output_tokens)
+        """
+        return self._call_gemini_for_alt_text(image_bytes, image_format, self.ALT_TEXT_PROMPT)
+
+    FULL_PAGE_ALT_TEXT_PROMPT = (
+        "This is a full-page rendering of a PDF page that contains multiple overlapping images "
+        "(such as a presentation slide, infographic, or layered design). "
+        "Describe the overall visual content of this page for use as alt text on a web page. "
+        "Write a concise description (2-4 sentences) of the key visual elements: images, diagrams, "
+        "charts, logos, photographs, and their spatial arrangement. "
+        "Include any visible titles or key labels, but do NOT transcribe all text. "
+        "Do NOT say 'image of' or 'picture of'. "
+        "Return ONLY the alt text description, no JSON, no quotes, no extra formatting."
+    )
+
+    def regenerate_alt_text_for_images(
+        self, images: List[Dict], pdf_name: str, page_num: int
+    ) -> Tuple[int, int]:
+        """Regenerate alt text for all images that have base64 data.
+
+        Sends each individual image to Gemini for accurate per-image alt text,
+        replacing the position-based descriptions from the full-page extraction.
+
+        For full-page composite renders (5+ images merged into one), uses a
+        specialized prompt and makes only ONE Gemini call for the entire composite.
+
+        Args:
+            images: List of image dicts (modified in-place)
+            pdf_name: PDF filename for logging
+            page_num: 0-indexed page number for logging
+
+        Returns:
+            Tuple of (total_input_tokens, total_output_tokens)
+        """
+        total_input = 0
+        total_output = 0
+
+        for i, img in enumerate(images):
+            # Skip images without binary data
+            if "base64_data" not in img:
+                continue
+
+            # Decode base64 to bytes
+            try:
+                image_bytes = base64.b64decode(img["base64_data"])
+            except Exception:
+                continue
+
+            # Skip tiny images (likely icons/spacers, < 1KB)
+            if len(image_bytes) < 1024:
+                continue
+
+            img_format = img.get("format", "png")
+            old_desc = img.get("description", "")
+
+            # Choose prompt based on whether this is a full-page composite render
+            is_composite = img.get("_full_page_render", False)
+
+            try:
+                if is_composite:
+                    # Full-page composite: single Gemini call with specialized prompt
+                    alt_text, inp_tok, out_tok = self._call_gemini_for_alt_text(
+                        image_bytes, img_format, self.FULL_PAGE_ALT_TEXT_PROMPT
+                    )
+                else:
+                    alt_text, inp_tok, out_tok = self.generate_alt_text_for_image(
+                        image_bytes, img_format
+                    )
+                total_input += inp_tok
+                total_output += out_tok
+
+                if alt_text:
+                    img["description"] = alt_text
+                    label = "composite" if is_composite else f"image {i+1}"
+                    print(
+                        f"  [{pdf_name}] Page {page_num + 1}: {label} alt text: "
+                        f"\"{alt_text[:60]}...\" (was: \"{old_desc[:40]}...\")"
+                    )
+            except Exception as e:
+                print(
+                    f"  [{pdf_name}] Page {page_num + 1}: Image {i+1} alt text failed: {e}"
+                )
+                # Keep the original description on failure
+
+        return total_input, total_output
+
+    @backoff.on_exception(backoff.expo, Exception, max_tries=2)
+    def _call_gemini_for_alt_text(self, image_bytes: bytes, image_format: str, prompt: str) -> Tuple[str, int, int]:
+        """Call Gemini with an image and a custom prompt to generate alt text.
+
+        Low-level helper used by both generate_alt_text_for_image() and
+        the full-page composite handler.
+        """
+        mime_map = {
+            "png": "image/png",
+            "jpeg": "image/jpeg",
+            "jpg": "image/jpeg",
+            "gif": "image/gif",
+            "webp": "image/webp",
+            "bmp": "image/bmp",
+            "tiff": "image/tiff",
+        }
+        mime_type = mime_map.get(image_format.lower(), "image/png")
+
+        config = types.GenerateContentConfig(
+            max_output_tokens=500,
+            temperature=TEMPERATURE_EXTRACTION,
+            top_p=TOP_P,
+            top_k=TOP_K,
+            safety_settings=get_safety_settings(),
+        )
+
+        response = client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=[
+                types.Part.from_bytes(data=image_bytes, mime_type=mime_type),
+                prompt,
+            ],
+            config=config,
+        )
+
+        input_tokens = getattr(response.usage_metadata, 'prompt_token_count', 0) or 0
+        output_tokens = getattr(response.usage_metadata, 'candidates_token_count', 0) or 0
+
+        alt_text = (response.text or "").strip()
+        # Strip any surrounding quotes Gemini may add
+        if alt_text.startswith('"') and alt_text.endswith('"'):
+            alt_text = alt_text[1:-1]
+        if alt_text.startswith("'") and alt_text.endswith("'"):
+            alt_text = alt_text[1:-1]
+
+        return alt_text, input_tokens, output_tokens
 
     def check_coherence(self, content: List[Dict]) -> Tuple[Dict, int, int]:
         """
@@ -1426,6 +1581,17 @@ class PDFExtractor:
                             img["base64_data"] = rendered
                             img["format"] = "png"
                             img["_fallback_render"] = True
+
+            # Per-image alt text generation: send each extracted image individually
+            # to Gemini for accurate descriptions. This fixes swapped/wrong alt text
+            # that occurs when Gemini generates descriptions from the full page image.
+            if ENABLE_PER_IMAGE_ALT_TEXT:
+                print(f"  [{pdf_name}] Page {page_num + 1}: Generating per-image alt text...")
+                alt_inp, alt_out = self.regenerate_alt_text_for_images(
+                    merged_images, pdf_name, page_num
+                )
+                result["token_usage"]["input_tokens"] += alt_inp
+                result["token_usage"]["output_tokens"] += alt_out
 
             # Combine content preserving Gemini's reading order for images.
             # Replace Gemini image placeholders in-place with enriched versions,
