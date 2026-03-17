@@ -30,7 +30,7 @@ from google import genai
 from google.genai import types
 
 # Configuration
-PROJECT_ID = "camp-ai-nc"
+PROJECT_ID = "playground-439016"
 REGION = "global"  # so we can call Gemini 3
 GEMINI_MODEL = "gemini-3.1-pro-preview"
 MAX_OUTPUT_TOKENS = 65500
@@ -61,7 +61,7 @@ VIDEO_PATTERNS = [
 ]
 
 # Directories
-DATA_FOLDER = Path("/usr/local/google/home/stonejiang/NCDIT-ADA-FILES/extraction_tests_simplied_html_generator-pro-dhhs/json_to_html_generator/")
+DATA_FOLDER = Path("/usr/local/google/home/stonejiang/NCDIT-ADA-FILES/extraction_tests_simplied_html_generator-pro-fixes/json_to_html_to_auditor/")
 OUTPUT_FOLDER = Path("output")
 REPORTS_FOLDER = OUTPUT_FOLDER / "_reports"
 

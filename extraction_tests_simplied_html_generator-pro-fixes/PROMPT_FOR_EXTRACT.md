@@ -48,6 +48,7 @@ IMPORTANT for tables:
 - CRITICAL: The first row of a table is a header row ONLY if its cells contain COLUMN LABELS (descriptive names like "Name", "Date", "Amount"). Data values (phone numbers, addresses, actual content) in the first row are NOT headers — treat them as regular data cells.
 - CRITICAL: If a row contains only a single cell spanning all columns that acts as a section label within the table, represent it as a regular data row spanning all columns (with num_columns equal to the total column count). Do NOT treat it as a table heading that breaks the table into sub-tables.
 - When a table continues across a page break with a repeated header row at the top of the next page, extract only the data rows from the continuation — do NOT repeat the header row.
+- CRITICAL: When a table cell contains nested/indented sub-content (for example, an agenda table where the "Topic" cell for one item contains indented sub-items like "a) Minutes", "b) NG 911 Fund" with further indented financial rows like "November Fund Balance $X", "November Disbursement -$Y"), do NOT expand those nested rows into the outer table. Keep the outer table's row structure intact and include all nested sub-content as text within the relevant cell, using newlines (\n) to separate inner rows. Example: a cell whose content is "a) Minutes\nb) NG 911 Fund\nNovember Balance $X\nDisbursement -$Y" is ONE cell in ONE row of the outer table, not multiple separate rows.
 
 ### Images/Figures
 {"type": "image", "description": "...", "caption": "...", "position": "..."}
