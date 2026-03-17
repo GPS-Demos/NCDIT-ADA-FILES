@@ -1040,9 +1040,55 @@ class PDFExtractor:
                 "base64_data": base64.b64encode(page_png).decode("utf-8"),
                 "_full_page_render": True,
             }]
+        else:
+            # Deduplicate images with heavily overlapping bboxes.
+            # When multiple images share the same area (>80% overlap),
+            # keep only the largest one. This prevents the same content
+            # being shown multiple times (e.g., page images captured twice
+            # at different sizes).
+            extracted_images = self._deduplicate_overlapping_images(extracted_images)
 
         doc.close()
         return extracted_images
+
+    def _deduplicate_overlapping_images(self, images: List[Dict]) -> List[Dict]:
+        """Remove duplicate images that cover the same area on the page.
+
+        When multiple images have bounding boxes that overlap by >80%,
+        keep only the one with the largest area (highest resolution).
+        This prevents the same content appearing multiple times
+        (e.g., page screenshots captured at different sizes).
+        """
+        if len(images) <= 1:
+            return images
+
+        # Mark images to remove
+        to_remove = set()
+        for i in range(len(images)):
+            if i in to_remove:
+                continue
+            bbox_i = images[i].get("bbox")
+            if not bbox_i:
+                continue
+            area_i = (bbox_i["x1"] - bbox_i["x0"]) * (bbox_i["y1"] - bbox_i["y0"])
+
+            for j in range(i + 1, len(images)):
+                if j in to_remove:
+                    continue
+                bbox_j = images[j].get("bbox")
+                if not bbox_j:
+                    continue
+
+                if self._bboxes_overlap(bbox_i, bbox_j, threshold=0.8):
+                    # Keep the larger image, remove the smaller one
+                    area_j = (bbox_j["x1"] - bbox_j["x0"]) * (bbox_j["y1"] - bbox_j["y0"])
+                    if area_i >= area_j:
+                        to_remove.add(j)
+                    else:
+                        to_remove.add(i)
+                        break  # i is removed, stop comparing it
+
+        return [img for idx, img in enumerate(images) if idx not in to_remove]
 
     def extract_text_with_pymupdf(self, pdf_path: Path, page_num: int) -> str:
         """Extract text from a PDF page using PyMuPDF for cross-validation."""
@@ -1282,15 +1328,9 @@ class PDFExtractor:
                 gemini_images, pymupdf_images, video_links, page_height
             )
 
-            # Build link items from PyMuPDF hyperlinks
-            link_items = [
-                {"type": "link", "text": h["text"], "url": h["url"]}
-                for h in pymupdf_hyperlinks
-            ]
-
             # Combine content preserving Gemini's reading order for images.
             # Replace Gemini image placeholders in-place with enriched versions,
-            # then append any unmatched PyMuPDF images, videos, and links at end.
+            # then append any unmatched PyMuPDF images and videos.
             merged_iter = iter(merged_images)
             combined_content = []
             for item in primary_content:
@@ -1304,9 +1344,13 @@ class PDFExtractor:
             # Append any remaining enriched images (unmatched PyMuPDF images)
             for remaining in merged_iter:
                 combined_content.append(remaining)
-            # Append videos and links at end
+            # Append videos
             combined_content.extend(video_items)
-            combined_content.extend(link_items)
+
+            # Merge PyMuPDF hyperlinks INTO existing content instead of appending.
+            # This enriches Gemini's link objects with correct URLs and avoids
+            # duplicating links already present in the content.
+            combined_content = self._merge_pymupdf_links(combined_content, pymupdf_hyperlinks)
 
             # Post-process content (deduplication, character normalization)
             result["content"], post_process_stats = self._post_process_content(combined_content)
@@ -1329,6 +1373,118 @@ class PDFExtractor:
             print(f"  [{pdf_name}] Page {page_num + 1}: Exception - {e}")
 
         return result
+
+    def _merge_pymupdf_links(self, content: List[Dict], pymupdf_hyperlinks: List[Dict]) -> List[Dict]:
+        """Merge PyMuPDF-extracted hyperlinks into Gemini content instead of appending.
+
+        Strategy:
+        1. Enrich Gemini link objects that have broken URLs (url == text) with
+           correct URLs from PyMuPDF by matching on display text.
+        2. Collect all URLs already present in Gemini content (in link objects,
+           paragraphs with markdown links, table cells, etc.).
+        3. Only add PyMuPDF links that are truly NEW (URL not already in content).
+        4. Clean garbled text from PyMuPDF link text (newline artifacts).
+
+        This addresses:
+        - Duplicate links at bottom of page
+        - Broken Gemini URLs replaced with correct PyMuPDF URLs
+        - Links inside tables being duplicated below
+        """
+        if not pymupdf_hyperlinks:
+            return content
+
+        # Build a lookup from PyMuPDF: normalized display text -> actual URL
+        pymupdf_by_text = {}
+        pymupdf_urls = set()
+        for h in pymupdf_hyperlinks:
+            url = h.get("url", "").strip()
+            text = h.get("text", "").strip()
+            if url:
+                pymupdf_urls.add(url)
+                # Normalize text for matching (collapse whitespace, lowercase)
+                norm_text = " ".join(text.split()).lower()
+                if norm_text:
+                    pymupdf_by_text[norm_text] = url
+
+        # Pass 1: Enrich Gemini link objects with correct URLs from PyMuPDF
+        # Also collect all URLs already in the content
+        urls_in_content = set()
+        for item in content:
+            item_type = item.get("type")
+
+            if item_type == "link":
+                link_text = item.get("text", "").strip()
+                link_url = item.get("url", "").strip()
+                urls_in_content.add(link_url)
+
+                # Check if this link has a broken URL (url == text or url is not a valid URL)
+                url_looks_broken = (
+                    link_url == link_text
+                    or (not link_url.startswith(("http://", "https://", "mailto:", "ftp://", "/"))
+                        and "." not in link_url)
+                )
+
+                if url_looks_broken:
+                    # Try to find correct URL from PyMuPDF
+                    norm_text = " ".join(link_text.split()).lower()
+                    if norm_text in pymupdf_by_text:
+                        corrected_url = pymupdf_by_text[norm_text]
+                        item["url"] = corrected_url
+                        urls_in_content.add(corrected_url)
+
+            elif item_type == "paragraph":
+                text = item.get("text", "")
+                # Extract URLs from markdown links in paragraph text
+                for m in re.finditer(r'\[([^\]]+)\]\(([^)]+)\)', text):
+                    urls_in_content.add(m.group(2))
+                # Extract bare URLs
+                for m in re.finditer(r'https?://\S+', text):
+                    urls_in_content.add(m.group(0))
+
+            elif item_type == "table":
+                for cell in item.get("cells", []):
+                    cell_text = cell.get("text", "")
+                    for m in re.finditer(r'\[([^\]]+)\]\(([^)]+)\)', cell_text):
+                        urls_in_content.add(m.group(2))
+                    for m in re.finditer(r'https?://\S+', cell_text):
+                        urls_in_content.add(m.group(0))
+
+            elif item_type == "list":
+                for li in item.get("items", []):
+                    li_text = li.get("text", "")
+                    for m in re.finditer(r'https?://\S+', li_text):
+                        urls_in_content.add(m.group(0))
+                    for child in li.get("children", []):
+                        child_text = child.get("text", "")
+                        for m in re.finditer(r'https?://\S+', child_text):
+                            urls_in_content.add(m.group(0))
+
+        # Pass 2: Only add PyMuPDF links whose URL is NOT already in content
+        new_links = []
+        for h in pymupdf_hyperlinks:
+            url = h.get("url", "").strip()
+            if not url:
+                continue
+            if url in urls_in_content:
+                continue  # Already present, skip
+
+            # Clean garbled text (newline artifacts from PyMuPDF extraction)
+            text = h.get("text", "").strip()
+            text = re.sub(r'[\n\r]+', ' ', text)  # Replace newlines with space
+            text = " ".join(text.split())  # Collapse whitespace
+
+            # Skip if text is empty or very short garbage
+            if not text or len(text) < 2:
+                text = url  # Use URL as display text
+
+            new_links.append({"type": "link", "text": text, "url": url})
+            urls_in_content.add(url)  # Prevent adding same URL twice
+
+        # Append only genuinely new links
+        if new_links:
+            content.extend(new_links)
+
+        return content
 
     def _flatten_to_text(self, content: List[Dict]) -> str:
         """Flatten extracted content to plain text for comparison."""
@@ -1402,6 +1558,60 @@ class PDFExtractor:
 
         return result
 
+    def _merge_consecutive_lists(self, content: List[Dict]) -> List[Dict]:
+        """Merge consecutive lists of the same type into a single list.
+
+        When Gemini splits a logical list into multiple single-item (or few-item)
+        list objects with the same list_type (e.g., multiple consecutive ordered
+        lists), merge them into one list. This commonly happens when page breaks
+        or extraction artifacts fragment lists.
+
+        Only merges lists that are directly adjacent (no content between them)
+        and have the same list_type (both ordered or both unordered).
+        """
+        if len(content) < 2:
+            return content
+
+        result = []
+        i = 0
+        while i < len(content):
+            item = content[i]
+
+            if item.get("type") != "list":
+                result.append(item)
+                i += 1
+                continue
+
+            # Found a list — check if next items are also lists of same type
+            merged_items = list(item.get("items", []))
+            list_type = item.get("list_type", "unordered")
+
+            j = i + 1
+            while j < len(content):
+                next_item = content[j]
+                if (next_item.get("type") == "list"
+                        and next_item.get("list_type") == list_type):
+                    # Same type list, merge items
+                    merged_items.extend(next_item.get("items", []))
+                    j += 1
+                else:
+                    break
+
+            if j > i + 1:
+                # Merged multiple lists — create combined list
+                merged_list = {
+                    "type": "list",
+                    "list_type": list_type,
+                    "items": merged_items,
+                }
+                result.append(merged_list)
+            else:
+                result.append(item)
+
+            i = j
+
+        return result
+
     def _deduplicate_consecutive_paragraphs(self, content: List[Dict], similarity_threshold: float = 0.95) -> List[Dict]:
         """
         Remove consecutive duplicate or near-duplicate paragraphs.
@@ -1464,6 +1674,67 @@ class PDFExtractor:
             # Log for diagnostics (could be captured in validation)
             pass
 
+        return result
+
+    def _strip_list_number_prefix(self, text: str) -> str:
+        """Strip leading number/letter prefixes from ordered list item text.
+
+        When Gemini marks content as an ordered list AND includes the number
+        in the text (e.g., "1. text" or "(a) text"), the rendered HTML shows
+        double numbering. This strips the leading prefix.
+
+        Patterns stripped:
+        - "1. text" or "1) text" or "(1) text" (numeric)
+        - "a. text" or "a) text" or "(a) text" (alphabetic)
+        - "i. text" or "ii) text" or "(iii) text" (roman numeral)
+
+        Only strips if the prefix is followed by a space and more text.
+        """
+        if not text:
+            return text
+
+        # Numeric: "1.", "1)", "(1)", "1 ."
+        stripped = re.sub(r'^\s*\(?\d{1,3}\)?[\.\)]\s+', '', text)
+        if stripped != text:
+            return stripped
+
+        # Alphabetic: "a.", "a)", "(a)"
+        stripped = re.sub(r'^\s*\(?[a-zA-Z]\)?[\.\)]\s+', '', text)
+        if stripped != text:
+            return stripped
+
+        # Roman numeral: "i.", "ii)", "(iii)", "iv."
+        stripped = re.sub(r'^\s*\(?(?:i{1,3}|iv|vi{0,3}|ix|xi{0,3}|xiv|xv)\)?[\.\)]\s+', '', text, flags=re.IGNORECASE)
+        if stripped != text:
+            return stripped
+
+        return text
+
+    def _strip_spurious_markdown(self, text: str) -> str:
+        """Strip markdown bold/italic markers from text where they shouldn't be.
+
+        Used for table cells and headings where Gemini adds ** or * around text
+        that should be plain. The renderer (render_json.py) handles formatting
+        separately, so having markdown in the JSON just causes duplicate
+        formatting or literal asterisks in output.
+
+        Examples:
+            "**Members Present**" -> "Members Present"
+            "**Page No.** 1 of 12" -> "Page No. 1 of 12"
+            "***Bold Italic***" -> "Bold Italic"
+        """
+        if not text or '**' not in text and '*' not in text:
+            return text
+
+        # Remove bold+italic: ***text***
+        result = re.sub(r'\*{3}(.+?)\*{3}', r'\1', text, flags=re.DOTALL)
+        # Remove bold: **text**
+        result = re.sub(r'\*{2}(.+?)\*{2}', r'\1', result, flags=re.DOTALL)
+        # Remove italic: *text* (but not ** which was already handled)
+        result = re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'\1', result, flags=re.DOTALL)
+        # Strip any remaining orphan asterisks at start/end
+        result = re.sub(r'^\s*\*{1,3}\s+', '', result)
+        result = re.sub(r'\s+\*{1,3}\s*$', '', result)
         return result
 
     def _post_process_content(self, content: List[Dict]) -> Tuple[List[Dict], Dict]:
@@ -1540,11 +1811,137 @@ class PDFExtractor:
                     item["text"] = normalized_text
                     stats["characters_normalized"] += 1
 
-        # Step 2: Deduplicate consecutive paragraphs
+        # Step 2: Strip spurious markdown from table cells, headings, and list items
+        for item in content:
+            item_type = item.get("type")
+            if item_type == "table":
+                for cell in item.get("cells", []):
+                    cell["text"] = self._strip_spurious_markdown(cell.get("text", ""))
+            elif item_type == "heading":
+                item["text"] = self._strip_spurious_markdown(item.get("text", ""))
+            elif item_type == "list":
+                for li in item.get("items", []):
+                    li["text"] = self._strip_spurious_markdown(li.get("text", ""))
+                    for child in li.get("children", []):
+                        child["text"] = self._strip_spurious_markdown(child.get("text", ""))
+
+        # Step 3: Strip duplicate numbering from ordered list items
+        # Gemini often includes the list number in the text (e.g., "1. text")
+        # while also marking the list as ordered — causing double numbering.
+        for item in content:
+            if item.get("type") == "list" and item.get("list_type") == "ordered":
+                for li in item.get("items", []):
+                    li["text"] = self._strip_list_number_prefix(li.get("text", ""))
+
+        # Step 4: Merge consecutive single-item lists of the same type
+        content = self._merge_consecutive_lists(content)
+
+        # Step 5: Remove "page intentionally left blank" boilerplate
+        _blank_page_re = re.compile(
+            r'^\s*\*{0,3}\s*(?:this\s+)?page\s+(?:(?:was\s+)?(?:left\s+)?intentionally\s+(?:left\s+)?blank'
+            r'|(?:left\s+)?(?:blank\s+)?intentionally)\s*\*{0,3}\s*\.?\s*$',
+            re.IGNORECASE
+        )
+        content = [
+            item for item in content
+            if not (
+                item.get("type") in ("paragraph", "heading")
+                and _blank_page_re.match(item.get("text", ""))
+            )
+        ]
+
+        # Step 6: Deduplicate consecutive paragraphs
         content = self._deduplicate_consecutive_paragraphs(content)
         stats["duplicates_removed"] = original_count - len(content)
 
         return content, stats
+
+    def _deduplicate_cross_page_content(self, pages: List[Dict]) -> List[Dict]:
+        """Remove content that repeats identically across multiple pages.
+
+        Targets:
+        - Header/footer tables that appear on every page (e.g., document metadata tables
+          with page numbers). Keeps first occurrence, removes subsequent copies.
+        - Repeated header_footer items across pages. Keeps first occurrence.
+
+        Does NOT remove content that differs between pages (different page numbers
+        are tolerated — we normalize "Page X of Y" before comparison).
+        """
+        if len(pages) < 2:
+            return pages
+
+        def _normalize_for_dedup(text: str) -> str:
+            """Normalize text for dedup comparison, ignoring page numbers and markdown."""
+            t = " ".join(text.split()).lower()
+            # Strip markdown bold/italic
+            t = re.sub(r'\*{1,3}', '', t)
+            # Normalize page numbers: "page 3 of 12" -> "page N of N"
+            t = re.sub(r'page\s*(?:no\.?)?\s*\d+\s*(?:of\s*\d+)?', 'page N', t)
+            # Also normalize standalone numbers that look like page numbers
+            t = re.sub(r'\b\d+\s*of\s*\d+\b', 'N of N', t)
+            return t.strip()
+
+        def _table_fingerprint(item: Dict) -> str:
+            """Create a fingerprint for a table, ignoring page number variations."""
+            cells = item.get("cells", [])
+            parts = []
+            for cell in sorted(cells, key=lambda c: (c.get("row_start", 0), c.get("column_start", 0))):
+                parts.append(_normalize_for_dedup(cell.get("text", "")))
+            return "|".join(parts)
+
+        def _header_footer_fingerprint(item: Dict) -> str:
+            """Create a fingerprint for a header/footer item."""
+            return _normalize_for_dedup(item.get("text", ""))
+
+        # Collect fingerprints from page 1 to identify repeating elements
+        first_page_content = pages[0].get("content", []) if not pages[0].get("error") else []
+
+        seen_table_fps = set()
+        seen_hf_fps = set()
+        for item in first_page_content:
+            if item.get("type") == "table":
+                seen_table_fps.add(_table_fingerprint(item))
+            elif item.get("type") == "header_footer":
+                seen_hf_fps.add(_header_footer_fingerprint(item))
+
+        # Check which fingerprints repeat on page 2 (if exists)
+        repeating_table_fps = set()
+        repeating_hf_fps = set()
+        if len(pages) > 1 and not pages[1].get("error"):
+            page2_content = pages[1].get("content", [])
+            for item in page2_content:
+                if item.get("type") == "table":
+                    fp = _table_fingerprint(item)
+                    if fp in seen_table_fps:
+                        repeating_table_fps.add(fp)
+                elif item.get("type") == "header_footer":
+                    fp = _header_footer_fingerprint(item)
+                    if fp in seen_hf_fps:
+                        repeating_hf_fps.add(fp)
+
+        if not repeating_table_fps and not repeating_hf_fps:
+            return pages  # Nothing repeats, no changes needed
+
+        # Remove repeating items from pages 2+ (keep page 1 intact)
+        for page_idx in range(1, len(pages)):
+            page = pages[page_idx]
+            if page.get("error"):
+                continue
+            content = page.get("content", [])
+            filtered = []
+            for item in content:
+                if item.get("type") == "table":
+                    fp = _table_fingerprint(item)
+                    if fp in repeating_table_fps:
+                        continue  # Skip repeated table
+                elif item.get("type") == "header_footer":
+                    fp = _header_footer_fingerprint(item)
+                    if fp in repeating_hf_fps:
+                        continue  # Skip repeated header/footer
+                filtered.append(item)
+            page["content"] = filtered
+
+        return pages
 
     def _calculate_pdf_metrics(self, pages: List[Dict]) -> Dict:
         """Calculate aggregate quality metrics for a PDF.
@@ -1716,6 +2113,9 @@ class PDFExtractor:
             page_results_dict = results_by_pdf.get(pdf_id, {})
             # Convert dict to sorted list by page number
             pages = [page_results_dict[i] for i in sorted(page_results_dict.keys())]
+
+            # Cross-page deduplication: remove repeated headers/footers/tables
+            pages = self._deduplicate_cross_page_content(pages)
 
             result = {
                 "pdf_id": pdf_id,

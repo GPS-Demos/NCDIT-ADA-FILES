@@ -644,3 +644,174 @@ Gemini misses links that aren't blue/underlined.
 - "Duplicate text used for purpose of example removed" (near-perfect-powerpoint-slides-47b0)
 - "graph missing increase and decrease arrow indicators" (nc-911-board-education-committee-meeting-agenda-packet)
 
+---
+
+## Fixes Applied to extract_structured_json.py (5 total)
+
+These changes address problems that originate during the extraction step. They modify post-processing logic in `extract_structured_json.py` and the Gemini extraction prompt (`PROMPT_FOR_EXTRACT.md`).
+
+### EXT-1. Smart PyMuPDF Link Integration (replaces naive append)
+
+**Problem:** PyMuPDF-extracted hyperlinks were blindly appended at the end of each page's content, causing:
+- Duplicate links (Gemini already extracted them inline)
+- Links separated from their context (placed at bottom of page instead of inline)
+- Garbled text from PyMuPDF bbox text extraction (newline artifacts)
+- Links from inside tables duplicated below the table
+
+**What changed:** New `_merge_pymupdf_links()` method replaces the old `link_items = [...]` + `combined_content.extend(link_items)` pattern. The new approach:
+1. Builds a lookup of PyMuPDF links by normalized display text
+2. Enriches Gemini's existing link objects that have broken URLs (url == display text) with correct URLs from PyMuPDF
+3. Collects ALL URLs already present in content (paragraphs, tables, lists, existing links)
+4. Only adds PyMuPDF links whose URL is NOT already present in content
+5. Cleans garbled text (newline/whitespace artifacts) from PyMuPDF link text
+
+**Impact:** 650 trailing link items across 100 test files would be deduplicated. Fixes broken URLs like `"CLICK HERE"` → actual URL.
+
+**CSV references:** cyber-incident-reporting ("Links inside a table placed below the table"), gicc-agenda-20160810 ("Links removed from table and placed at the bottom"), seal-image-table-6870 ("CLICK HERE has href of literally 'CLICK HERE'"), colored-text-logos-676a ("Duplicate links in footer"), logos-graphic-colors-table-screenshot-fc98 ("Creating extra links after the content"), long-contract-many-pages-of-tables-6881 ("Duplicated links at the bottom"), esrmo-newsletter-april-2017 ("all links grouped at end of page"), many others
+
+---
+
+### EXT-2. Cross-Page Header/Footer/Table Deduplication
+
+**Problem:** Many PDFs have header tables or header/footer text that repeats on every page (e.g., document metadata tables with organization name, document number, effective date, page number). These repeat in the JSON because each page is processed independently.
+
+**What changed:** New `_deduplicate_cross_page_content()` method runs after all pages are collected but before saving JSON. It:
+1. Fingerprints all tables and header_footer items on page 1
+2. Checks which fingerprints repeat on page 2
+3. Removes matching items from pages 2+ (keeps page 1 intact)
+4. Normalizes page numbers and markdown formatting before comparison so "Page 1 of 12" matches "Page 2 of 12"
+
+**Impact:** 441 repeated items removed across 100 test files.
+
+**CSV references:** scio-physical-and-environmental-protection ("The header was pulled over every time. Should just be pulled over once"), 2019-20-smac-work-plan ("Header text repeated on multiple pages"), nc-911-board-education-committee-meeting-agenda-packet ("data table header row repeated")
+
+---
+
+### EXT-3. Extraction Prompt Improvements (PROMPT_FOR_EXTRACT.md)
+
+**Problem:** Gemini's extraction behavior caused several systematic issues that no amount of post-processing can fully fix. The prompt needed stronger guidance.
+
+**Changes made to PROMPT_FOR_EXTRACT.md:**
+
+1. **No spurious asterisks in table cells:** Added "CRITICAL: Do NOT add ** asterisks or * to table cell text. Table header cells are identified by position, not by markdown bold. Write cell text as plain text only."
+
+2. **No spurious asterisks in paragraphs:** Added "CRITICAL: Do NOT add ** or * around text that is not bold or italic in the original PDF. Only use markdown formatting when the visual appearance clearly shows bold or italic styling"
+
+3. **Better alt text guidance:** Added specific instructions for image descriptions — "Be specific: identify the subject (person, logo, map, chart type, screenshot subject), not generic labels like 'Document image'" and "CRITICAL: When a page has MULTIPLE images, ensure each image's description matches THAT specific image. Do NOT swap or combine descriptions across images."
+
+4. **No screenshot transcription:** Added new section "IMPORTANT for screenshots and UI images" — do NOT transcribe all visible text from screenshots as separate content elements. Describe screenshots as images with summary descriptions.
+
+5. **Better heading hierarchy:** Added "CRITICAL: Maintain proper heading hierarchy... subsections MUST use a deeper level than their parent. Do NOT make all headings the same level" and "Do NOT promote regular body text to headings just because it is bold or italic"
+
+6. **No hallucinated content:** Added "CRITICAL: Do NOT hallucinate or invent content... Do NOT add links, text, or data that does not exist in the original document" and "Do NOT fabricate or guess URLs"
+
+7. **Preserve numeric values:** Added "CRITICAL: Preserve exact numeric values from the document. Do NOT change prices, quantities, dates"
+
+8. **Background images:** Added "When the same image appears as a background or decoration, do NOT transcribe its content as separate text elements"
+
+**CSV references:** All files with "Asterisks added where formatting used", all files with "Alt text issues", powerpoint-slides-fef1 ("Transcribed the full text from the screenshot"), scanned-from-paper-many-pages-of-tables-6878 ("Hallucinated the incorrect price"), text-some-colored-text-3638 ("headers should be H3, but are H2"), many others
+
+---
+
+### EXT-4. Strip Markdown from Table Cells and Headings in Post-Processing
+
+**Problem:** Even with prompt improvements, Gemini frequently adds `**bold**` markdown to table cell text and heading text. This causes duplicate formatting when the renderer also applies bold, or literal `**` showing up in output.
+
+**What changed:** New `_strip_spurious_markdown()` method added to `_post_process_content()`. Runs after OCR normalization but before paragraph deduplication. Strips `***`, `**`, and `*` markdown formatting from:
+- All table cell text
+- All heading text
+
+Carefully preserves text where asterisks are actual content (e.g., footnote markers like `IX5HF**` where there's no opening pair).
+
+**Impact:** 1,663 table cells/headings cleaned across 100 test files.
+
+**CSV references:** seal-imagery-table-with-shading-132c, seal-imagery-table-with-shading-colored-text-672b, smac-lidar-apr-10-2024, standards-committee-meeting-agenda-packet, table-seal-imagery-diagram-1468, tables-screenshots-photos-background-colors-59df, wearencgov-presentation3, logo-tables-shading-watermark-photos-13a3, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881, and many others with "Asterisks added where formatting used" or "Bold replaced by **"
+
+---
+
+### EXT-5. Duplicate Image Deduplication (Overlapping Bboxes)
+
+**Problem:** PyMuPDF sometimes extracts the same page area as multiple images (e.g., same content captured at different sizes/resolutions). This caused images to appear twice or more in the output.
+
+**What changed:** New `_deduplicate_overlapping_images()` method in `extract_images_from_pdf_page()`. After extracting images but before the 5+ image full-page-render threshold:
+1. Compares bounding boxes of all extracted images
+2. When two images overlap by >80%, keeps only the larger one
+3. Uses the existing `_bboxes_overlap()` method for overlap detection
+
+**CSV references:** nc-911-board-technology-committee-minutes ("Image copy of table copied over twice in two different sizes", "Image of entire page of document copied over in two different sizes"), nc-911-board-monthly-dispatch-march-2025 ("Every page has an image, and all of the images are embedded and all content is repeating"), near-perfect-powerpoint-slides-47b0 ("Image duplicated on page")
+
+---
+
+### EXT-6. Extend Markdown Stripping to List Items
+
+**Problem:** Fix EXT-4 only stripped markdown from table cells and headings. List items also frequently had spurious `**bold**` markers, causing the same double-formatting issue.
+
+**What changed:** Extended the Step 2 markdown stripping loop in `_post_process_content()` to also process list items and their children using the existing `_strip_spurious_markdown()` method.
+
+**Impact:** 1,035 additional list items cleaned across 49 files (on top of the 1,663 table cells/headings from EXT-4, for a total of 2,698).
+
+**CSV references:** 911-board-education-committee-meeting-minutes ("Asterisks not on PDF added to HTML"), 20200522-nc911-board-minutes-approved ("Asterisks add to HTML ordered list items"), gicc-mo-minutes-20191216, many others
+
+---
+
+### EXT-7. Strip Duplicate List Numbering from Ordered List Items
+
+**Problem:** Gemini includes the list number/letter in the text of ordered list items (e.g., `"1. text"`, `"(a) text"`, `"iv. text"`) while also marking the list as `list_type: "ordered"`. When rendered as `<ol><li>`, this produces double numbering like "1. 1. text".
+
+**What changed:** New `_strip_list_number_prefix()` method added as Step 3 in `_post_process_content()`. Strips leading numeric, alphabetic, and roman numeral prefixes from ordered list item text. Patterns handled:
+- Numeric: `"1."`, `"1)"`, `"(1)"`
+- Alphabetic: `"a."`, `"a)"`, `"(a)"`
+- Roman numeral: `"i."`, `"ii)"`, `"(iii)"`
+
+Only strips if followed by whitespace and more text, preventing false positives.
+
+**Impact:** 762 list items cleaned across 32 files.
+
+**CSV references:** 10-22-20-edu-committee-agenda-packet ("Ordered list keeping number in text instead of replacing"), seal-imagery-table-with-shading-132c ("Ordered list keeping numbers in text instead of replacing with letters and roman numerals"), gicc-meeting-minutes-08072007 ("restarts the list on the new page"), nc-911-board-meeting-agenda-aug-26-2022 ("numbering restarted from 1"), multi-factor-authentication-report-december-2015 ("extra numbers added to the lists"), nc-911-board-technology-committee-minutes ("List items incorrectly numbered, duplicate numbering"), mostly-text-charts-tables-screenshots-maps-67fb ("additional numbers were added to the TOC"), seal-imagery-table-with-shading-colored-text-672b ("Numbered lists adding additional numbers"), nc-911-board-minutes-september-30-2022 ("Number lists are all messed up")
+
+---
+
+### EXT-8. Merge Consecutive Fragmented Lists
+
+**Problem:** Gemini sometimes splits a single logical list into multiple single-item list objects, especially when lists span page breaks or when each agenda item is treated as its own list. This creates incorrect document structure.
+
+**What changed:** New `_merge_consecutive_lists()` method added as Step 4 in `_post_process_content()`. When adjacent list objects have the same `list_type` (both ordered or both unordered) with no intervening content, merges their items into a single list.
+
+Only merges lists that are directly adjacent — lists with paragraphs or other content between them are preserved as separate lists.
+
+**Impact:** 30 lists merged across 12 files.
+
+**CSV references:** gicc-mo-minutes-20191216 ("A bulleted list continued as an ordered list after page break"), scio-physical-and-environmental-protection ("Letters f, g, etc. are all a bulleted list instead of ordered list")
+
+---
+
+### EXT-9. Remove "Page Intentionally Left Blank" Boilerplate
+
+**Problem:** PDFs containing boilerplate text like "This page intentionally left blank" carried this text through to the JSON. While render_json.py already stripped these during rendering, having them in the JSON is unnecessary.
+
+**What changed:** Added Step 5 in `_post_process_content()` that filters out paragraph/heading items matching blank page patterns. Handles multiple word orderings:
+- "This page intentionally left blank"
+- "Page left intentionally blank"
+- "This page left blank intentionally"
+- "This page was intentionally left blank."
+- With or without surrounding markdown asterisks
+
+**CSV references:** map-imagery-photos-tables-screenshots-diagrams-data-charts-365a ("page intentionally left blank literally added")
+
+---
+
+## Test Results
+
+A test script (`test_post_processing.py`) was created to validate post-processing improvements against existing JSON files without re-running extraction. Results across all 100 test files:
+
+| Fix | Metric | Impact |
+|-----|--------|--------|
+| EXT-1 (Link integration) | Trailing links deduplicated | 650 |
+| EXT-2 (Cross-page dedup) | Repeated items removed | 441 |
+| EXT-4+6 (Markdown stripping) | Cells/headings/list items cleaned | 2,698 |
+| EXT-7 (List number stripping) | Duplicate numbers removed | 762 |
+| EXT-8 (List merging) | Fragmented lists merged | 30 |
+| **Total** | **Content items improved** | **4,581** |
+
+Note: EXT-3 (prompt improvements), EXT-5 (image dedup), and EXT-9 (blank page removal) require re-running extraction to measure full impact — they modify behavior during the extraction step itself or remove content already handled by render_json.py.
+

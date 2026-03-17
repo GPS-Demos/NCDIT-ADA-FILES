@@ -8,18 +8,21 @@ Return a JSON array where each item has a "type" field:
 ### Headings
 {"type": "heading", "level": <1-6>, "text": "Heading text"}
 - Use for titles, section headers, and any visually prominent standalone text
-- Level 1: Document title, main title on a cover page
+- Level 1: Document title, main title on a cover page (use sparingly — typically only one per document)
 - Level 2: Major section headings
 - Level 3: Subsection headings
 - Level 4-6: Progressively smaller sub-subsections
 - Determine level by visual prominence: font size, boldness, spacing
-- Text should be plain text (no markdown # markers)
+- CRITICAL: Maintain proper heading hierarchy. If the document has a clear outline structure (e.g., sections with subsections), subsections MUST use a deeper level than their parent. Do NOT make all headings the same level (e.g., all H2).
+- Text should be plain text (no markdown # markers, no ** bold markers)
 - If unsure between heading and paragraph, use heading for short, prominent, standalone text
+- Do NOT promote regular body text to headings just because it is bold or italic
 
 ### Paragraphs
 {"type": "paragraph", "text": "Markdown formatted text..."}
 - Use for body text and regular content (NOT headings, NOT lists, NOT headers/footers)
-- Preserve bold (**text**) and italics (*text*)
+- Preserve bold (**text**) and italics (*text*) ONLY when the original PDF uses bold or italic formatting
+- CRITICAL: Do NOT add ** or * around text that is not bold or italic in the original PDF. Only use markdown formatting when the visual appearance clearly shows bold or italic styling
 - Follow natural reading order (see Multi-Column Layouts section below)
 - Do NOT put bulleted or numbered lists inside paragraphs - use the "list" type instead
 - Do NOT put page headers/footers in paragraphs - use the "header_footer" type instead
@@ -27,13 +30,14 @@ Return a JSON array where each item has a "type" field:
 ### Tables
 {"type": "table", "cells": [...]}
 Each cell object must include:
-- text: Markdown content of the cell
+- text: Plain text content of the cell (no markdown formatting — do NOT wrap cell text in ** or *)
 - column_start: 0-indexed column position
 - row_start: 0-indexed row position
 - num_columns: columns spanned (default 1)
 - num_rows: rows spanned (default 1)
 
 IMPORTANT for tables:
+- CRITICAL: Do NOT add ** asterisks or * to table cell text. Table header cells are identified by position, not by markdown bold. Write cell text as plain text only.
 - Count grid lines to determine exact rows/columns
 - Handle merged cells by looking at grid boundaries
 - Table titles (e.g., "Table 2.1") should be paragraphs, not table cells
@@ -41,10 +45,16 @@ IMPORTANT for tables:
 ### Images/Figures
 {"type": "image", "description": "...", "caption": "...", "position": "..."}
 - For any images, figures, diagrams, charts, or photographs
-- Provide a brief description of what the image shows
+- "description" is the alt text — a concise description (1-2 sentences) of what the image VISUALLY shows. Be specific: identify the subject (person, logo, map, chart type, screenshot subject), not generic labels like "Document image" or "image"
+- CRITICAL: When a page has MULTIPLE images, ensure each image's description matches THAT specific image. Do NOT swap or combine descriptions across images.
 - Include the caption if one is present (e.g., "Figure 2.1: ...")
 - IMPORTANT: Text directly above, below, or overlaid on an image is its caption - include it in the "caption" field, NEVER as a separate paragraph
 - Position: estimate as "top/middle/bottom-left/center/right"
+
+IMPORTANT for screenshots and UI images:
+- When you see a screenshot of a software interface, email, website, or application, describe it as an IMAGE — do NOT transcribe all the text visible in the screenshot as separate paragraphs, tables, or lists
+- The screenshot's visible text should be summarized in the "description" field, not extracted as separate content elements
+- Only extract text from screenshots if the text IS the primary content (e.g., a scanned text document), not if it's incidental UI text
 
 ### Image Grids and Thumbnails
 When you see a grid or collection of thumbnail images (like a table of contents):
@@ -154,8 +164,11 @@ Example:
 IMPORTANT for links:
 - Do NOT extract links as plain paragraphs - if text is visually a hyperlink, use the "link" type
 - Do NOT confuse underlined text with links - only use "link" for text that appears to be a clickable hyperlink
+- CRITICAL: Do NOT create hyperlinks from text visible inside screenshots or images. Only extract links from actual page text.
+- CRITICAL: Do NOT fabricate or guess URLs. If you can see the display text but cannot determine the actual URL, set url to the display text. Do NOT invent URLs.
 - Email addresses displayed as links (e.g., "john@example.com") should use "mailto:" prefix in url
 - Multiple links in the same line should each be separate link objects
+- If a link's display text is different from its URL (e.g., "Click Here" → some-url), the actual URL will be merged from PDF metadata during post-processing. Just capture the display text accurately.
 
 ## Multi-Column Layouts
 CRITICAL: When a page has multiple text columns:
@@ -193,6 +206,8 @@ Common table patterns:
 
 ## Quality Requirements
 - Extract ALL text - do not summarize or skip content
+- CRITICAL: Do NOT hallucinate or invent content. Only extract text that is actually visible on the page. Do NOT add links, text, or data that does not exist in the original document.
+- CRITICAL: Do NOT add ** or * markdown formatting unless the original text is visually bold or italic
 - CRITICAL: For multi-column pages, read DOWN each column completely before moving right
 - Do NOT group by type - interleave paragraphs, images, lists, and tables as they appear on the page
 - Be precise with table cell positions
@@ -201,5 +216,7 @@ Common table patterns:
 - Preserve list nesting (sub-items go in "children" arrays)
 - CRITICAL: Extract page headers and footers as "header_footer" objects - do NOT skip them
 - CRITICAL: Extract hyperlinks as "link" objects with display text and URL - do NOT flatten them into paragraphs
+- CRITICAL: Preserve exact numeric values from the document. Do NOT change prices, quantities, dates, or any numerical data.
+- When the same image appears as a background or decoration (e.g., a full-page slide background), do NOT transcribe its content as separate text elements. Only extract the primary content that a reader would focus on.
 
 Return ONLY the JSON array. No explanations or markdown code blocks.
