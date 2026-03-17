@@ -2363,6 +2363,384 @@ class PDFExtractor:
 
         return pages
 
+    def _normalize_heading_hierarchy(self, pages: List[Dict]) -> List[Dict]:
+        """Normalize heading hierarchy across all pages of a document.
+
+        Fixes common Gemini extraction issues where:
+        1. All headings are the same level (e.g., all H2) — infers hierarchy
+        2. Heading levels reset across page boundaries
+        3. Levels skip (H1 → H4 with no H2/H3)
+        4. Series headings at inconsistent levels (e.g., Priority #1 at H4,
+           Priority #2 at H2)
+        """
+        if len(pages) < 1:
+            return pages
+
+        # Collect all headings with their page/index references
+        all_headings = []
+        for page_idx, page in enumerate(pages):
+            if page.get("error"):
+                continue
+            for item_idx, item in enumerate(page.get("content", [])):
+                if item.get("type") == "heading":
+                    all_headings.append({
+                        "page_idx": page_idx,
+                        "item_idx": item_idx,
+                        "level": item.get("level", 2),
+                        "text": item.get("text", ""),
+                    })
+
+        if len(all_headings) < 2:
+            return pages
+
+        # Step 1: Fix series headings — headings that follow a numbered/lettered
+        # pattern should all be at the same level as the first in the series.
+        # E.g., "Priority #1" at H4, "Priority #2" at H2 → make #2 also H4
+        self._fix_series_heading_levels(pages, all_headings)
+
+        # Refresh heading data after series fix
+        all_headings = []
+        for page_idx, page in enumerate(pages):
+            if page.get("error"):
+                continue
+            for item_idx, item in enumerate(page.get("content", [])):
+                if item.get("type") == "heading":
+                    all_headings.append({
+                        "page_idx": page_idx,
+                        "item_idx": item_idx,
+                        "level": item.get("level", 2),
+                        "text": item.get("text", ""),
+                    })
+
+        # Step 2: Check if headings are "flat" — most at the same level
+        level_counts = {}
+        for h in all_headings:
+            level_counts[h["level"]] = level_counts.get(h["level"], 0) + 1
+
+        total_headings = len(all_headings)
+        max_level_count = max(level_counts.values())
+        dominant_level = max(level_counts, key=level_counts.get)
+
+        # Only normalize flat hierarchies if >70% same level and not H1-dominant
+        is_flat = (max_level_count / total_headings) > 0.70
+
+        if is_flat and dominant_level >= 2:
+            has_h1 = any(h["level"] == 1 for h in all_headings)
+
+            if not has_h1:
+                # Promote the very first heading to H1
+                first = all_headings[0]
+                pages[first["page_idx"]]["content"][first["item_idx"]]["level"] = 1
+
+            # Step 2a: Track heading context across pages for demotion.
+            # If a page establishes a deeper heading level (e.g., H3 under H2),
+            # subsequent pages with only dominant-level headings should continue
+            # at the deeper level until a clear "new section" heading appears.
+            deepest_child_level = None  # Deepest non-dominant level seen so far
+            parent_level = None  # Level of the heading that "owns" the child
+
+            for page_idx, page in enumerate(pages):
+                if page.get("error"):
+                    continue
+                content = page.get("content", [])
+                page_headings = [
+                    (idx, item) for idx, item in enumerate(content)
+                    if item.get("type") == "heading"
+                ]
+                if not page_headings:
+                    continue
+
+                # Check if this page established a parent→child relationship
+                for i, (h_idx, h) in enumerate(page_headings):
+                    h_level = h.get("level", 2)
+                    if h_level == dominant_level and i + 1 < len(page_headings):
+                        next_level = page_headings[i + 1][1].get("level", 2)
+                        if next_level > dominant_level:
+                            # Found parent (dominant) → child relationship
+                            parent_level = dominant_level
+                            deepest_child_level = next_level
+
+                # If we have an active child context and this page has only
+                # dominant-level headings, check if they should be demoted
+                if deepest_child_level and parent_level:
+                    all_at_dominant = all(
+                        h.get("level") == dominant_level
+                        for _, h in page_headings
+                    )
+                    if all_at_dominant and len(page_headings) >= 1:
+                        # All headings at dominant level — these may be
+                        # continuations of the child context. Demote them.
+                        for h_idx, h in page_headings:
+                            content[h_idx]["level"] = deepest_child_level
+
+                # Check if any heading at dominant level appears with
+                # non-heading content before and after it (section boundary)
+                # If so, reset the child context
+                for i, (h_idx, h) in enumerate(page_headings):
+                    h_level = h.get("level", 2)
+                    if h_level < dominant_level:
+                        # Found a heading shallower than dominant — reset context
+                        deepest_child_level = None
+                        parent_level = None
+
+            # Step 2b: Per-page demotion for remaining same-level headings
+            for page_idx, page in enumerate(pages):
+                if page.get("error"):
+                    continue
+                content = page.get("content", [])
+                page_headings = [
+                    (idx, item) for idx, item in enumerate(content)
+                    if item.get("type") == "heading"
+                ]
+                if len(page_headings) < 2:
+                    continue
+
+                first_h_idx, first_h = page_headings[0]
+                first_level = first_h.get("level", 2)
+
+                same_level_count = sum(
+                    1 for _, h in page_headings
+                    if h.get("level") == first_level
+                )
+                if same_level_count == len(page_headings) and same_level_count >= 3:
+                    # Many headings at same level on one page — demote all but first
+                    for h_idx, h in page_headings[1:]:
+                        if h.get("level") == first_level:
+                            content[h_idx]["level"] = first_level + 1
+
+        # Step 3: Fix skipped levels across the document
+        # Re-collect headings after modifications
+        all_headings = []
+        for page_idx, page in enumerate(pages):
+            if page.get("error"):
+                continue
+            for item_idx, item in enumerate(page.get("content", [])):
+                if item.get("type") == "heading":
+                    all_headings.append({
+                        "page_idx": page_idx,
+                        "item_idx": item_idx,
+                        "level": item.get("level", 2),
+                        "text": item.get("text", ""),
+                    })
+
+        prev_level = 0
+        for h in all_headings:
+            page = pages[h["page_idx"]]
+            item = page["content"][h["item_idx"]]
+            current_level = item.get("level", 2)
+
+            if prev_level > 0 and current_level > prev_level + 1:
+                item["level"] = prev_level + 1
+                current_level = prev_level + 1
+
+            prev_level = current_level
+
+        return pages
+
+    def _fix_series_heading_levels(self, pages: List[Dict], all_headings: List[Dict]):
+        """Fix heading levels for series headings (e.g., Priority #1, #2, #3).
+
+        When headings follow a numbered/lettered pattern, they should all be at
+        the same level as the first one in the series. This fixes the common
+        issue where Gemini extracts the first item at the correct level but
+        resets to H2 on subsequent pages.
+        """
+        # Build series patterns: extract numbering from heading text
+        # Match patterns like "Priority #1", "1. Introduction", "Section A", etc.
+        series_pattern = re.compile(
+            r'^(.*?)\s*'  # prefix text
+            r'(?:'
+            r'#?\s*(\d+)'  # numbered: #1, 1, etc.
+            r'|([a-zA-Z])(?=\s*[.:\)])'  # lettered: a., A), etc.
+            r')'
+        )
+
+        # Group headings by their "series prefix" (text without the number/letter)
+        series_groups = {}
+        for h in all_headings:
+            text = h["text"].strip()
+            m = series_pattern.match(text)
+            if m:
+                prefix = m.group(1).strip().lower()
+                if prefix and len(prefix) > 2:
+                    if prefix not in series_groups:
+                        series_groups[prefix] = []
+                    series_groups[prefix].append(h)
+
+        # For each series with 2+ members, normalize levels to match the first
+        for prefix, group in series_groups.items():
+            if len(group) < 2:
+                continue
+
+            # Use the level of the first heading in the series
+            target_level = group[0]["level"]
+
+            for h in group[1:]:
+                if h["level"] != target_level:
+                    page = pages[h["page_idx"]]
+                    page["content"][h["item_idx"]]["level"] = target_level
+
+    def _merge_cross_page_content(self, pages: List[Dict]) -> List[Dict]:
+        """Merge content that was split across page boundaries.
+
+        Fixes:
+        1. Split paragraphs: last paragraph on page N doesn't end with
+           sentence-ending punctuation → merge with first paragraph on page N+1
+        2. Split lists: list at end of page N + list of same type at start
+           of page N+1 → merge into single list
+        3. Split tables: table at end of page N + table with matching column
+           count at start of page N+1 → merge into single table
+
+        Only merges when there's strong evidence of a split (not just any
+        consecutive same-type content).
+        """
+        if len(pages) < 2:
+            return pages
+
+        for page_idx in range(len(pages) - 1):
+            curr_page = pages[page_idx]
+            next_page = pages[page_idx + 1]
+
+            if curr_page.get("error") or next_page.get("error"):
+                continue
+
+            curr_content = curr_page.get("content", [])
+            next_content = next_page.get("content", [])
+
+            if not curr_content or not next_content:
+                continue
+
+            # Get last non-header_footer item on current page
+            last_item = None
+            last_idx = None
+            for i in range(len(curr_content) - 1, -1, -1):
+                if curr_content[i].get("type") != "header_footer":
+                    last_item = curr_content[i]
+                    last_idx = i
+                    break
+
+            # Get first non-header_footer item on next page
+            first_item = None
+            first_idx = None
+            for i in range(len(next_content)):
+                if next_content[i].get("type") != "header_footer":
+                    first_item = next_content[i]
+                    first_idx = i
+                    break
+
+            if last_item is None or first_item is None:
+                continue
+
+            # Case 1: Split paragraphs
+            if (last_item.get("type") == "paragraph"
+                    and first_item.get("type") == "paragraph"):
+                last_text = last_item.get("text", "").rstrip()
+                first_text = first_item.get("text", "").lstrip()
+
+                if last_text and first_text:
+                    # Check if the paragraph was likely split:
+                    # - Last text doesn't end with sentence-ending punctuation
+                    # - First text doesn't start with a capital letter (continuation)
+                    #   OR first text starts with lowercase
+                    ends_mid_sentence = (
+                        last_text
+                        and not last_text[-1] in '.!?:;"\u201d'
+                        and not last_text.endswith('...')
+                    )
+                    starts_continuation = (
+                        first_text
+                        and (first_text[0].islower()
+                             or first_text[0] in ',-;')
+                    )
+
+                    if ends_mid_sentence or starts_continuation:
+                        # Merge: append first paragraph text to last paragraph
+                        # Add a space if last doesn't end with hyphen (word break)
+                        if last_text.endswith('-'):
+                            # Word break — join without space
+                            merged_text = last_text[:-1] + first_text
+                        else:
+                            merged_text = last_text + " " + first_text
+                        curr_content[last_idx]["text"] = merged_text
+                        # Remove the first item from next page
+                        next_content.pop(first_idx)
+
+            # Case 2: Split lists
+            elif (last_item.get("type") == "list"
+                  and first_item.get("type") == "list"
+                  and last_item.get("list_type") == first_item.get("list_type")):
+                # Merge list items from next page into current page's list
+                last_items = last_item.get("items", [])
+                first_items = first_item.get("items", [])
+                if last_items and first_items:
+                    last_item["items"] = last_items + first_items
+                    next_content.pop(first_idx)
+
+            # Case 3: Split tables
+            elif (last_item.get("type") == "table"
+                  and first_item.get("type") == "table"):
+                last_cells = last_item.get("cells", [])
+                first_cells = first_item.get("cells", [])
+                if last_cells and first_cells:
+                    # Check if tables have matching column counts
+                    last_max_col = max(
+                        (c.get("column_start", 0) + c.get("num_columns", 1))
+                        for c in last_cells
+                    )
+                    first_max_col = max(
+                        (c.get("column_start", 0) + c.get("num_columns", 1))
+                        for c in first_cells
+                    )
+
+                    if last_max_col == first_max_col:
+                        # Same column structure — merge by offsetting row numbers
+                        last_max_row = max(
+                            (c.get("row_start", 0) + c.get("num_rows", 1))
+                            for c in last_cells
+                        )
+                        # Skip first row of next table if it looks like a
+                        # repeated header (same text as first row of current table)
+                        first_row_cells = [
+                            c for c in first_cells
+                            if c.get("row_start", 0) == 0
+                        ]
+                        last_first_row = [
+                            c for c in last_cells
+                            if c.get("row_start", 0) == 0
+                        ]
+                        # Check if first row of next table matches first row of current
+                        skip_first_row = False
+                        if first_row_cells and last_first_row:
+                            first_texts = sorted(
+                                c.get("text", "").strip().lower()
+                                for c in first_row_cells
+                            )
+                            last_first_texts = sorted(
+                                c.get("text", "").strip().lower()
+                                for c in last_first_row
+                            )
+                            if first_texts == last_first_texts:
+                                skip_first_row = True
+
+                        row_offset = 1 if skip_first_row else 0
+                        for cell in first_cells:
+                            if skip_first_row and cell.get("row_start", 0) == 0:
+                                continue
+                            new_cell = dict(cell)
+                            new_cell["row_start"] = (
+                                cell.get("row_start", 0) - row_offset + last_max_row
+                            )
+                            last_cells.append(new_cell)
+
+                        last_item["cells"] = last_cells
+                        next_content.pop(first_idx)
+
+            # Update page content references
+            curr_page["content"] = curr_content
+            next_page["content"] = next_content
+
+        return pages
+
     def _calculate_pdf_metrics(self, pages: List[Dict]) -> Dict:
         """Calculate aggregate quality metrics for a PDF.
 
@@ -2536,6 +2914,12 @@ class PDFExtractor:
 
             # Cross-page deduplication: remove repeated headers/footers/tables
             pages = self._deduplicate_cross_page_content(pages)
+
+            # Cross-page content merging: fix paragraphs/lists/tables split at page boundaries
+            pages = self._merge_cross_page_content(pages)
+
+            # Heading hierarchy normalization: fix flat/inconsistent heading levels
+            pages = self._normalize_heading_hierarchy(pages)
 
             result = {
                 "pdf_id": pdf_id,

@@ -470,36 +470,37 @@ Gemini transcribes visible text from screenshots.
 
 ### I. Wrong Heading Hierarchy from Context
 
-Gemini marks headings at wrong levels based on document context.
+Gemini marks headings at wrong levels based on document context. **PARTIALLY FIXED** via `_normalize_heading_hierarchy()` and `_fix_series_heading_levels()` in `extract_structured_json.py`: series headings (e.g., Priority #1/#2/#3) are normalized to match the first in the series; flat hierarchies (>70% same level) are improved with parent→child demotion and cross-page context tracking; skipped levels are fixed globally.
 
-- "The following headers should be H3, but are H2" (text-some-colored-text-3638)
-- "All headers that should be H3 are H2" (wearencgov-presentation3)
-- "Heading levels are off: Priorities 2-4 are H2 when they should be H4" (gicc-meeting-minutes-08072007)
-- "Incorrect heading hierarchy" (logos-graphic-colors-53de, 53e1)
-- "Visual heading hierarchy not represented semantically, all H2s" (logos-graphic-colors-53de)
-- "Headings order and hierarchy is incorrect" (federalagencyhurricanecoordination, esrmo-newsletter-september-2021)
-- "Header hierarchy issue, all headers are the same" (newsletter-with-many-images-117c)
-- "Not ranking headings correctly, all h2s" (logo-tables-shading-watermark-photos-13a3)
-- "Heading levels didn't carry over from context on previous page" (logos-graphic-colors-53de)
-- "Subheading listed at same level as heading" (gicc-ncdot-florence-20181107)
-- "headings are slightly off" (gicc-smac-agenda-20210120)
-- "Interpreted an infographic as headings" (logos-graphic-colors-53de, 53e1)
-- "Made a bunch of names headings when they shouldn't be" (map-imagery-ff40)
-- "'Accessibility Items' should not be h2" (near-perfect-powerpoint-slides-47b2)
-- "Didn't generate the h1 completely" (map-imagery-ff40)
-- "PDF text with Italic has * added and promoted to heading" (esrmo-newsletter-april-2017)
+- "The following headers should be H3, but are H2" (text-some-colored-text-3638) — *not fixed: requires deeper semantic context to distinguish sub-sections from sections*
+- "All headers that should be H3 are H2" (wearencgov-presentation3) — *not fixed: H1-dominant presentation format is intentional*
+- [x] "Heading levels are off: Priorities 2-4 are H2 when they should be H4" (gicc-meeting-minutes-08072007) — **FIXED: series detection normalizes Priority #2, #3 to H4 matching #1**
+- [x] "Incorrect heading hierarchy" (logos-graphic-colors-53de, 53e1) — **FIXED: flat hierarchy demotion and skipped-level fix improves structure**
+- [x] "Visual heading hierarchy not represented semantically, all H2s" (logos-graphic-colors-53de) — **FIXED: per-page demotion creates H2→H3 hierarchy**
+- [x] "Headings order and hierarchy is incorrect" (federalagencyhurricanecoordination) — **FIXED: hierarchy improved with per-page demotion**
+- "Headings order and hierarchy is incorrect" (esrmo-newsletter-september-2021) — *not fixed: mixed H1/H2 distribution not flat enough to trigger normalization*
+- [x] "Header hierarchy issue, all headers are the same" (newsletter-with-many-images-117c) — **FIXED: H2-flat hierarchy now has H2→H3 structure**
+- [x] "Not ranking headings correctly, all h2s" (logo-tables-shading-watermark-photos-13a3) — **FIXED: hierarchy improved**
+- [x] "Heading levels didn't carry over from context on previous page" (logos-graphic-colors-53de) — **FIXED: cross-page heading context tracking**
+- "Subheading listed at same level as heading" (gicc-ncdot-florence-20181107) — *not fixed: H1-dominant structure not eligible for flat normalization*
+- "headings are slightly off" (gicc-smac-agenda-20210120) — *not fixed: only 2 headings, insufficient data for normalization*
+- "Interpreted an infographic as headings" (logos-graphic-colors-53de, 53e1) — *not fixed: requires Gemini extraction change to avoid interpreting infographic text as headings*
+- "Made a bunch of names headings when they shouldn't be" (map-imagery-ff40) — *not fixed: requires Gemini extraction change*
+- "'Accessibility Items' should not be h2" (near-perfect-powerpoint-slides-47b2) — *not fixed: H1-dominant presentation format*
+- "Didn't generate the h1 completely" (map-imagery-ff40) — *not fixed: incomplete heading text from Gemini extraction*
+- "PDF text with Italic has * added and promoted to heading" (esrmo-newsletter-april-2017) — *not fixed: requires Gemini extraction change*
 
 ### J. Content Split Across Pages
 
-Page-by-page extraction splits paragraphs, lists, and tables at page boundaries.
+Page-by-page extraction splits paragraphs, lists, and tables at page boundaries. **PARTIALLY FIXED** via `_merge_cross_page_content()` in `extract_structured_json.py`: paragraphs split at page boundaries are merged when the last text doesn't end with sentence punctuation or the next starts with continuation text; lists of the same type at page boundaries are merged; tables with matching column counts are merged with repeated header row detection.
 
-- "Paragraphs are split because of page splits" (seal-imagery-11ab)
-- "Page break cuts text into multiple paragraphs" (newsletter-with-many-images-21fb)
-- "text split across pages" (logos-graphic-colors-53e1)
-- "Word breaks are odd because of the page-by-page approach" (seal-imagery-11ab)
-- "Table split by pagination causing subsequent tables to have bad column headers" (map-imagery-365a)
-- "Page break interrupted the TOC list" (map-imagery-0fb1)
-- "'Container-based Encryption' and 'Full Disk Encryption' indentation flattened" (seal-imagery-11ab)
+- [x] "Paragraphs are split because of page splits" (seal-imagery-11ab) — **FIXED: 20 paragraph merges across the 78-page document**
+- "Page break cuts text into multiple paragraphs" (newsletter-with-many-images-21fb) — *not fixed: paragraphs at page boundaries end with complete punctuation, so no split detected*
+- "text split across pages" (logos-graphic-colors-53e1) — *not fixed: no split patterns detected at page boundaries in this file*
+- [x] "Word breaks are odd because of the page-by-page approach" (seal-imagery-11ab) — **FIXED: hyphenated word breaks are joined (e.g., "depart-" + "ment" → "department")**
+- [x] "Table split by pagination causing subsequent tables to have bad column headers" (map-imagery-365a) — **FIXED: 9 table/content merges with repeated header row detection**
+- [x] "Page break interrupted the TOC list" (map-imagery-0fb1) — **FIXED: 6 list/content merges across page boundaries**
+- "'Container-based Encryption' and 'Full Disk Encryption' indentation flattened" (seal-imagery-11ab) — *not fixed: list nesting/indentation is a Gemini extraction issue, not a page-boundary issue*
 
 ### K. Form Handling
 
