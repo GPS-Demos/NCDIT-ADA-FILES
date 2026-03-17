@@ -160,6 +160,7 @@ def _apply_ada_remediation(data: dict) -> dict[str, int]:
     stats["decorative_images_marked"] = _mark_decorative_images(pages)
     stats["table_headers_inferred"] = _infer_table_headers(pages)
     stats["duplicate_links_removed"] = _deduplicate_links(pages)
+    stats["inline_links_merged"] = _merge_inline_links(pages)
     stats["boilerplate_removed"] = _remove_boilerplate(pages)
     stats["empty_pages_removed"] = _remove_empty_pages(pages)
 
@@ -465,6 +466,65 @@ def _infer_table_headers(pages: list) -> int:
     return count
 
 
+def _merge_inline_links(pages: list) -> int:
+    """Merge standalone link items into adjacent paragraphs when they appear mid-sentence.
+
+    Pattern: paragraph (ends incomplete/mid-sentence) → link → paragraph (starts as continuation)
+    Result: single merged paragraph with the link rendered as inline markdown [text](url)
+
+    Detects mid-sentence splits by checking:
+    - Following paragraph starts with whitespace (e.g., " for reference.")
+    - Following paragraph starts with punctuation (e.g., ". The next sentence", "), or")
+    - Preceding paragraph does not end with sentence-final punctuation (.!?;:"')
+    """
+    count = 0
+
+    # Patterns indicating the NEXT paragraph continues from the link position
+    _continuation_start = re.compile(
+        r'^[ \t]'              # starts with space/tab (e.g., " for reference")
+        r'|^[.,;:)\]\'"]'     # starts with closing/separating punctuation
+    )
+    # Sentence-final punctuation at the END of the preceding paragraph
+    _sentence_ending = re.compile(r'[.!?;:\"\']\s*$')
+
+    for page in pages:
+        content = page.get("content", [])
+        i = 0
+        new_content = []
+        while i < len(content):
+            item = content[i]
+
+            # Look for para → link → para triplet
+            if (
+                i + 2 < len(content)
+                and item.get("type") == "paragraph"
+                and content[i + 1].get("type") == "link"
+                and content[i + 2].get("type") == "paragraph"
+            ):
+                para_text = item.get("text", "")
+                link_item = content[i + 1]
+                next_text = content[i + 2].get("text", "")
+
+                next_is_continuation = bool(_continuation_start.match(next_text))
+                para_is_incomplete = not _sentence_ending.search(para_text)
+
+                if next_is_continuation and para_is_incomplete:
+                    link_text = link_item.get("text", "")
+                    link_url = link_item.get("url", "")
+                    merged_text = f"{para_text}[{link_text}]({link_url}){next_text}"
+                    new_content.append({"type": "paragraph", "text": merged_text})
+                    i += 3
+                    count += 1
+                    continue
+
+            new_content.append(item)
+            i += 1
+
+        page["content"] = new_content
+
+    return count
+
+
 def _deduplicate_links(pages: list) -> int:
     """Remove standalone link elements whose URL already appears in paragraph text or as a prior link.
 
@@ -507,16 +567,34 @@ def _deduplicate_links(pages: list) -> int:
                     if norm_text in text_to_real_url:
                         item["url"] = text_to_real_url[norm_text]
 
-    # First pass: collect ALL URLs mentioned in paragraphs/headings across ALL pages
+    # First pass: collect ALL URLs mentioned in paragraphs/headings/table cells/lists across ALL pages
     global_text_urls: set[str] = set()
     for page in pages:
         for item in page.get("content", []):
-            if item.get("type") in ("paragraph", "heading"):
+            item_type = item.get("type")
+            if item_type in ("paragraph", "heading"):
                 text = item.get("text", "")
                 for match in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", text):
                     global_text_urls.add(match.group(2).strip().lower())
                 for match in re.finditer(r"https?://\S+", text):
                     global_text_urls.add(match.group(0).strip().lower())
+            elif item_type == "table":
+                # Also scan table cells — links inside tables should suppress duplicate standalone links
+                for cell in item.get("cells", []):
+                    cell_text = cell.get("text", "")
+                    for match in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", cell_text):
+                        global_text_urls.add(match.group(2).strip().lower())
+                    for match in re.finditer(r"https?://\S+", cell_text):
+                        global_text_urls.add(match.group(0).strip().lower())
+            elif item_type == "list":
+                # Also scan list items
+                for li in item.get("items", []):
+                    for li_item in [li] + li.get("children", []):
+                        li_text = li_item.get("text", "")
+                        for match in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", li_text):
+                            global_text_urls.add(match.group(2).strip().lower())
+                        for match in re.finditer(r"https?://\S+", li_text):
+                            global_text_urls.add(match.group(0).strip().lower())
 
     # Second pass: remove duplicate link items (globally tracked)
     global_seen_urls: set[str] = set()
@@ -533,6 +611,39 @@ def _deduplicate_links(pages: list) -> int:
                 global_seen_urls.add(url)
             filtered.append(item)
         page["content"] = filtered
+
+    # Third pass: remove short shadow paragraphs whose text exactly matches a link's display text.
+    # These arise when Gemini extracts hyperlink text from table cells as separate paragraphs,
+    # then PyMuPDF provides the same text as link display text. The paragraph is redundant.
+    for page in pages:
+        # Collect all link display texts on this page
+        link_texts: set[str] = set()
+        for item in page.get("content", []):
+            if item.get("type") == "link":
+                txt = (item.get("text") or "").strip().lower()
+                if txt and len(txt) < 100:
+                    link_texts.add(txt)
+
+        if not link_texts:
+            continue
+
+        # Also add normalized versions (strip surrounding parens) for flexible matching
+        link_texts_normalized: set[str] = link_texts | {
+            t.strip("()[] \t") for t in link_texts
+        }
+
+        content = page.get("content", [])
+        filtered = []
+        for item in content:
+            if item.get("type") == "paragraph":
+                para_text = (item.get("text") or "").strip()
+                # Only remove short paragraphs that exactly match a link display text
+                if para_text and len(para_text) < 100 and para_text.lower() in link_texts_normalized:
+                    count += 1
+                    continue
+            filtered.append(item)
+        page["content"] = filtered
+
     return count
 
 
@@ -623,9 +734,17 @@ def _render_table(item: dict) -> str:
     caption = item.get("caption") or item.get("title") or ""
     caption_html = f"<caption>{escape(caption)}</caption>" if caption else ""
 
+    # Trim trailing empty rows: find the last row where at least one cell has content
+    last_content_row = max_row
+    while last_content_row > 0:
+        row_cells = [c for c in cells if c.get("row_start", 0) == last_content_row]
+        if any(c.get("text", "").strip() for c in row_cells):
+            break
+        last_content_row -= 1
+
     html = f"<table>{caption_html}"
 
-    for r in range(max_row + 1):
+    for r in range(last_content_row + 1):
         html += "<tr>"
         for c_idx in range(max_col + 1):
             if (r, c_idx) in covered:

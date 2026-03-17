@@ -515,47 +515,47 @@ PDF forms don't map cleanly to HTML.
 
 Gemini flattens or misinterprets table structures.
 
-- "Nested table incorrectly interpreted" (20190416-nc-911-board-minutes-approved, 20190726-board-agenda)
-- "Nested table converted into parent table" (20190416-nc-911-board-minutes-approved, 20190726-board-agenda)
-- "Broke up the 2nd row of the table into two rows" (scanned-from-paper-many-pages-of-tables-6878)
-- "rows split content that should be together" (scanned-from-paper-many-pages-of-tables-6878)
-- "Table should be broken up into multiple tables or lists" (map-imagery-0fb1)
-- "Tables created with incorrect header row. First row should be the table caption" (map-imagery-0fb1)
-- "Table restarts with new header row that should not be a header" (208m-endpoint-reseller-price-list)
-- "Data call marked up as table heading" (20200522-nc911-board-minutes-approved)
-- "List of phone numbers marked up as separate table heading" (20200522-nc911-board-minutes-approved)
-- "Items formatted as table on PDF, running together on HTML" (20200522-board-agenda)
-- "Half of the TOC was put into a table the other half was not" (nc-911-board-meeting-agenda-aug-26-2022)
-- "Table headers inside paragraph above table" (nc-911-board-technology-committee-minutes)
-- "Table headers not properly marked as headers" (powerpoint-slides-f832)
-- "Number 8 in table went to an H1" (nc-911-board-minutes-september-30-2022)
-- "Irregular tables missing colgroup and scope" (208m-endpoint-reseller-price-list)
-- "Table column headers not semantically marked up" (logo-tables-shading-watermark-photos-13a3)
-- "Empty table rows added to bottom of table" (logo-tables-shading-watermark-photos-13a3)
+- "Nested table incorrectly interpreted" (20190416-nc-911-board-minutes-approved, 20190726-board-agenda) — *not fixed: Gemini flattens nested tables; cannot reconstruct nesting from flat data*
+- "Nested table converted into parent table" (20190416-nc-911-board-minutes-approved, 20190726-board-agenda) — *not fixed: same as above*
+- "Broke up the 2nd row of the table into two rows" (scanned-from-paper-many-pages-of-tables-6878) — *not fixed: Gemini row-splitting; requires re-extraction*
+- "rows split content that should be together" (scanned-from-paper-many-pages-of-tables-6878) — *not fixed: same as above*
+- "Table should be broken up into multiple tables or lists" (map-imagery-0fb1) — *not fixed: Gemini extraction decision*
+- "Tables created with incorrect header row. First row should be the table caption" (map-imagery-0fb1) — *not fixed: requires semantic understanding of table content*
+- "Table restarts with new header row that should not be a header" (208m-endpoint-reseller-price-list) — *not fixed: render_json.py fix #14/#15 reduce false headers but can't catch all cases*
+- "Data call marked up as table heading" (20200522-nc911-board-minutes-approved) — *not fixed: Gemini extraction issue*
+- "List of phone numbers marked up as separate table heading" (20200522-nc911-board-minutes-approved) — *not fixed: Gemini extraction issue*
+- "Items formatted as table on PDF, running together on HTML" (20200522-board-agenda) — *not fixed: Gemini extraction issue*
+- "Half of the TOC was put into a table the other half was not" (nc-911-board-meeting-agenda-aug-26-2022) — *not fixed: Gemini extraction issue*
+- "Table headers inside paragraph above table" (nc-911-board-technology-committee-minutes) — *not fixed: requires knowing which paragraphs are table captions*
+- "Table headers not properly marked as headers" (powerpoint-slides-f832) — *not fixed: header inference from JSON structure is limited*
+- "Number 8 in table went to an H1" (nc-911-board-minutes-september-30-2022) — *not fixed: Gemini mis-tagging a table cell as heading*
+- "Irregular tables missing colgroup and scope" (208m-endpoint-reseller-price-list) — *not applicable: colgroup/scope removed as per fix #5*
+- "Table column headers not semantically marked up" (logo-tables-shading-watermark-photos-13a3) — *not fixed: requires per-table semantic analysis*
+- [x] "Empty table rows added to bottom of table" (logo-tables-shading-watermark-photos-13a3) — **FIXED: render_json.py _render_table now trims trailing all-empty rows**
 
 ### M. Multi-Line / Split Headings from Extraction
 
 Gemini splits headings into multiple elements.
 
-- "Multi-line header at the top was considered a paragraph" (gicc-mo-minutes-20191216)
-- "Title is split between H1 & H2" (gicc-tims-may-2016)
-- "Header text repeated on multiple pages" (2019-20-smac-work-plan)
-- "The header was pulled over every time. Should just be pulled over once" (scio-physical-and-environmental-protection)
-- "data table header row repeated" (nc-911-board-education-committee-meeting-agenda-packet)
+- "Multi-line header at the top was considered a paragraph" (gicc-mo-minutes-20191216) — *not fixed: document header paragraphs are not reliably distinguishable from body paragraphs*
+- [x] "Title is split between H1 & H2" (gicc-tims-may-2016) — **FIXED: render_json.py #21 (_merge_consecutive_headings) + _demote_extra_h1s merges consecutive same-level headings; H1+H1 → H1 merged, H2+H2 → H2 merged**
+- [x] "Header text repeated on multiple pages" (2019-20-smac-work-plan) — **FIXED: EXT-2 (cross-page header/footer deduplication)**
+- [x] "The header was pulled over every time. Should just be pulled over once" (scio-physical-and-environmental-protection) — **FIXED: EXT-2 (cross-page deduplication)**
+- [x] "data table header row repeated" (nc-911-board-education-committee-meeting-agenda-packet) — **FIXED: EXT-2 (cross-page deduplication)**
 
 ### N. Links Inside Tables Placed Below / Link Placement Issues
 
 Gemini extracts links from table cells as separate elements.
 
-- "Links inside a table in PDF were placed below the table in HTML" (cyber-incident-reporting)
-- "Links have been removed from the table and placed at the bottom" (gicc-agenda-20160810)
-- "Pulled nested list out of table and placed it under the table" (gicc-agenda-20200506)
-- "Link should be below list" (ncom-update-gicc-05-15-2014)
-- "Paragraph break appears when link does, breaking text flow" (newsletter-with-many-images-21fb)
-- "Links are being listed as a separate paragraph" (gicc-meeting-minutes-08072007)
-- "Placed a link within a paragraph in its own `<p>`" (map-imagery-365a)
-- "Unnecessary returns before and after URL links" (multi-factor-authentication-report-december-2015)
-- "Hyperlinked content starts from the new line each time" (esrmo-newsletter-september-2021)
+- [x] "Links inside a table in PDF were placed below the table in HTML" (cyber-incident-reporting) — **FIXED: _deduplicate_links now scans table cells for URLs; links whose URL is already present inline in table cell markdown are removed as duplicates**
+- [x] "Links have been removed from the table and placed at the bottom" (gicc-agenda-20160810) — **PARTIALLY FIXED: Shadow paragraphs duplicating link text (e.g., "Minutes", "Standard for Parcel Data Content") removed via third-pass deduplication in _deduplicate_links; links themselves still below table (cannot embed PyMuPDF links into cells without re-extraction)**
+- "Pulled nested list out of table and placed it under the table" (gicc-agenda-20200506) — *not fixed: nested list content is already embedded as markdown bullet text in table cells; no standalone list objects present*
+- "Link should be below list" (ncom-update-gicc-05-15-2014) — *not fixed: standalone link after a list is correct rendering; no mid-sentence merge applies*
+- [x] "Paragraph break appears when link does, breaking text flow" (newsletter-with-many-images-21fb) — **FIXED: _merge_inline_links merges standalone link items into adjacent paragraphs when preceding para ends mid-sentence and following para starts with continuation**
+- [x] "Links are being listed as a separate paragraph" (gicc-meeting-minutes-08072007) — **FIXED: _merge_inline_links (2 links merged inline on page 2 and 7)**
+- [x] "Placed a link within a paragraph in its own `<p>`" (map-imagery-365a) — **FIXED: _merge_inline_links**
+- [x] "Unnecessary returns before and after URL links" (multi-factor-authentication-report-december-2015) — **FIXED: _merge_inline_links (1 link merged: "See [URL] for reference.")**
+- [x] "Hyperlinked content starts from the new line each time" (esrmo-newsletter-september-2021) — **FIXED: _merge_inline_links (2 links merged inline)**
 
 ### O. Compressed/Cut Images
 
