@@ -24,7 +24,7 @@ This document details all changes made to `render_json.py` to address problems i
 
 **What changed:**
 - Removed `aria-label="Table with N rows and N columns"` from all `<table>` tags
-- Removed `aria-hidden="true"` from page break divs (replaced with `<hr>`)
+- Removed `aria-hidden="true"` from page break divs (now removed entirely — no page breaks in output)
 - Removed `role="presentation"` from decorative images
 
 **Files affected:** All 100 output files.
@@ -90,13 +90,13 @@ This document details all changes made to `render_json.py` to address problems i
 
 ---
 
-### 8. Page Breaks Changed from `<div>` to `<hr>`
+### 8. Page Breaks Removed Entirely
 
-**Problem:** Page breaks were rendered as `<div class="page-break" aria-hidden="true"></div>` which screen readers couldn't interpret. Reviewers noted "A screen reader user won't know that the page breaks exist."
+**Problem:** Page breaks were rendered as `<div class="page-break" aria-hidden="true"></div>` which screen readers couldn't interpret. Reviewers noted "A screen reader user won't know that the page breaks exist." Page breaks are PDF artifacts that don't belong in HTML output.
 
-**What changed:** Page breaks now render as a simple `<hr>` tag.
+**What changed:** Page breaks are no longer rendered at all. Content flows continuously without any page separation markers.
 
-**Files affected:** ~87 multi-page files.
+**Files affected:** All multi-page files.
 
 **CSV references:**
 - "Dashed lines are used to visually represent page breaks. A screen reader user won't know that the page breaks exist. Was coded using a `<div aria-hidden=true>` instead of an `<hr>`" (near-perfect-powerpoint-slides-47b0, 47b2, newsletter-with-many-images-117c, 21fb, powerpoint-slides-1793, f832, fed0, feef, logos-graphic-colors-53de, 53e1, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881, map-imagery-365a)
@@ -105,7 +105,32 @@ This document details all changes made to `render_json.py` to address problems i
 
 ---
 
-### 9. Markdown Bold `**text**` Converted to `<strong>` in ALL Renderers
+### 9. Page Numbers Removed
+
+**Problem:** Page numbers from the original PDF (e.g., "1", "Page 2 of 5", "- 3 -", "3 | P a g e", "1 of 4") were being included in the HTML output as `<p><small>...</small></p>` elements. These are PDF artifacts that don't belong in HTML.
+
+**What changed:** Added `_remove_page_numbers()` to ADA remediation that strips `header_footer` items matching page number patterns:
+- Bare numbers: `1`, `12`
+- Dash-wrapped: `- 1 -`
+- "Page N", "Page N of M"
+- "N of M" (e.g., `1 of 4`)
+- "N | Page", "N | P a g e"
+- Pipe-separated footers containing page numbers: `00234464.25 | Page 37 of 39 | June 12, 2025`
+- Bold-wrapped page numbers: `**2** | Page (Rev 06-05-15)`
+
+**Files affected:** All files with page number footer/header elements.
+
+**CSV references:**
+- "Page numbers included: all pages" (10-22-20-edu-committee-agenda-packet)
+- "Page numbers included" (2019-20-smac-work-plan)
+- "Page number and page break on p. 14-15" (208m-endpoint-reseller-price-list)
+- "page numbers show up on pg 5" (multi-factor-authentication-report-december-2015)
+- "The footers (e.g. Page 3 of 39 June 12, 2025) show up in the HTML" (scanned-from-paper-many-pages-of-tables-6878)
+- "Added role=contentinfo elements that include the pdf page number" (logo-tables-shading-watermark-photos-13a3, long-contract-many-pages-of-tables-6881)
+
+---
+
+### 10. Markdown Bold `**text**` Converted to `<strong>` in ALL Renderers
 
 **Problem:** Only the paragraph renderer converted `**bold**` to `<strong>`. Headings, table cells, list items, header/footer, and fallback renderers output literal `**` characters.
 
@@ -136,7 +161,7 @@ Also uses `re.DOTALL` flag so bold spanning multiple lines (with `\n`) is correc
 
 ---
 
-### 10. Markdown Italic `*text*` Converted to `<em>` in ALL Renderers
+### 11. Markdown Italic `*text*` Converted to `<em>` in ALL Renderers
 
 **Problem:** Same as bold — only the paragraph renderer handled italic conversion. Other renderers output literal `*text*`.
 
@@ -154,7 +179,7 @@ Also uses `re.DOTALL` flag so bold spanning multiple lines (with `\n`) is correc
 
 ---
 
-### 11. Markdown Links `[text](url)` Converted to `<a href>` in ALL Renderers
+### 12. Markdown Links `[text](url)` Converted to `<a href>` in ALL Renderers
 
 **Problem:** Some text fields contained markdown-style links that were rendered literally as `[text](url)` instead of clickable HTML links.
 
@@ -168,7 +193,7 @@ Also uses `re.DOTALL` flag so bold spanning multiple lines (with `\n`) is correc
 
 ---
 
-### 12. Ordered List Duplicate Number Stripping
+### 13. Ordered List Duplicate Number Stripping
 
 **Problem:** When Gemini extracts ordered lists, it embeds the number/letter prefix in the item text (e.g., `"1. Approve minutes"`). When rendered inside `<ol><li>`, the browser adds its own numbering, resulting in double numbers like "1. 1. Approve minutes".
 
@@ -198,7 +223,7 @@ Applied to both parent items and nested children.
 
 ---
 
-### 13. Table Header: Removed Auto-Mark of Row 0 as `<th>`
+### 14. Table Header: Removed Auto-Mark of Row 0 as `<th>`
 
 **Problem:** The original code treated ALL row-0 cells as `<th>` headers regardless of content. This caused data rows to be incorrectly marked as headers when the first row contained data, not column labels.
 
@@ -215,7 +240,7 @@ Applied to both parent items and nested children.
 
 ---
 
-### 14. Improved Table Header Inference Heuristic
+### 15. Improved Table Header Inference Heuristic
 
 **Problem:** The `_infer_table_headers` function marked row-0 as headers if all cells had short text and there were 2+ columns. This was too aggressive — it marked rows with numeric data (prices, dates) as headers.
 
@@ -225,7 +250,7 @@ Applied to both parent items and nested children.
 
 ---
 
-### 15. Duplicate Link Deduplication
+### 16. Duplicate Link Deduplication
 
 **Problem:** Gemini extraction often produces both inline link references in paragraph text AND separate standalone `link` elements for the same URLs. This results in links appearing twice — once inline and once at the bottom of the page/section.
 
@@ -253,7 +278,7 @@ Applied to both parent items and nested children.
 
 ---
 
-### 16. Nested List Children Use Matching List Type
+### 17. Nested List Children Use Matching List Type
 
 **Problem:** Nested lists inside ordered lists were always rendered as `<ul>` (unordered), even when the parent was `<ol>` (ordered).
 
