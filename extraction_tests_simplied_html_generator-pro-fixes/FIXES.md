@@ -260,6 +260,74 @@ This document details all changes made to `render_json.py` to address problems i
 
 ---
 
+### 28. Extended Page Number/Footer Pattern Matching
+
+**Problem:** Footer text like "Department of Information Technology 10 | P a g e" was not being caught by the page number removal regex because the existing patterns only matched when the text started with a number or "Page".
+
+**What changed:** Added five new patterns to `_remove_page_numbers()`:
+- `^.*\d+\s*\|\s*p\s*a\s*g\s*e\s*$` — catches "X text N | P a g e"
+- `^.*\d+\s*\|\s*p\s*a\s*g\s*$` — catches truncated variants like "X text N | P a g"
+- `^.*\|\s*page\s+\d+\s*/\s*\d+\s*$` — catches "... | Page 1/6"
+- `^.*\|\s*page\s+\d+\s*$` — catches "... | Page 33"
+- `^.*\|\s*page\s+\d+\s+of\s+\d+\s*$` — catches "... | Page 33 of 123" (no trailing pipe)
+
+**CSV references:** gdac-legislative-report-may-2016 ("Department of Information Technology X | P a g e" on multiple pages), multi-factor-authentication-report-december-2015 (similar truncated footer), long-contract-many-pages-of-tables-6881 ("... | Page 1/6"), seal-imagery-table-with-shading-colored-text-672b ("... | Page 33 of 123")
+
+---
+
+### 29. Cross-Page Link Deduplication
+
+**Problem:** The link deduplication only worked within a single page. Standalone link elements with URLs already seen on earlier pages were not removed, causing repeated link blocks across the document.
+
+**What changed:** `_deduplicate_links()` now tracks URLs globally across ALL pages instead of per-page. First pass collects all URLs from paragraph/heading text globally, second pass removes link items whose URL was already in text or already seen as a standalone link on any earlier page.
+
+**CSV references:** logos-graphic-colors-table-screenshot-fc98 (same myncid.nc.gov link repeated 5 times), esrmo-newsletter-april-2017 (links grouped at end of pages), seal-imagery-table-with-shading-colored-text-672b (links duplicated at bottom of pages)
+
+---
+
+### 30. Spaced Letter Text Collapse
+
+**Problem:** OCR/extraction artifacts produce text with spaces between every character (e.g., "A P P . A Z . g o v" instead of "APP.AZ.gov"). Screen readers read each letter individually.
+
+**What changed:** `_md_to_html()` now detects patterns of 4+ single characters separated by spaces and collapses them (removes internal spaces).
+
+**CSV references:** long-contract-many-pages-of-tables-6881 ("A P P . A Z . g o v" in link text)
+
+---
+
+### 31. Short/Meaningless Figcaption Suppression
+
+**Problem:** Images with very short or meaningless captions (e.g., "38%", "image", "logo") produced unhelpful `<figcaption>` elements.
+
+**What changed:** `_render_image()` now suppresses figcaptions that are less than 5 characters, are purely numeric/percentage values, or match generic terms like "image", "figure", "photo", "logo", "icon".
+
+**CSV references:** logo-tables-shading-watermark-photos-13a3 ("Strange figcaption added (38%)")
+
+---
+
+### 32. Bold+Italic Triple Asterisk Nesting Fix
+
+**Problem:** `***text***` (Markdown bold+italic) produced incorrectly nested tags: `<strong><em>text</strong></em>`. The bold regex consumed 2 leading asterisks and matched the last 2 closing asterisks, leaving a stray `*` that caused the italic regex to capture across the `</strong>` tag boundary.
+
+**What changed:** Added a dedicated regex for `***text***` → `<strong><em>text</em></strong>` that runs BEFORE the separate bold and italic regexes.
+
+**CSV references:** 20190416-nc-911-board-minutes-approved ("***LOGISTICS FOR FUTURE BOARD MEETINGS ARE UNDERWAY***"), 20200522-board-agenda, map-imagery-0fb1 (all files with bold+italic content)
+
+---
+
+## Remaining Legitimate `**` in Output
+
+4 files still contain literal `**` characters that are actual footnote markers in the original PDF:
+
+| File | Example | Reason |
+|------|---------|--------|
+| long-contract-many-pages-of-tables-6881 | `IX5HF**`, `**Includes Quadient...` | Footnote markers |
+| federalagencyhurricanecoordination-686132f8 | Various `**` in content | Presentation annotations |
+| powerpoint-slides-1793 | Various `**` in content | Slide annotations |
+| powerpoint-slides-ff0c | Various `**` in content | Slide annotations |
+
+---
+
 ## Problems That CANNOT Be Fixed in render_json.py
 
 These issues originate in the JSON extraction step (Gemini/PyMuPDF) and require changes to `extract_structured_json.py` or the Gemini extraction prompt.
@@ -573,78 +641,6 @@ Gemini misses links that aren't blue/underlined.
 - "Image on slide did not transfer into text" (wearencgov-presentation3)
 - "The colors of the counties which correspond to the legend are not described in text" (map-imagery-logo-imagery-4809)
 - "Pulled out text from distance image but doesn't make sense without image" (map-imagery-logo-imagery-4809)
-- "figcaption created on short alt text" (logo-tables-shading-watermark-photos-13a3)
-- "Strange figcaption added (38%)" (logo-tables-shading-watermark-photos-13a3)
 - "Duplicate text used for purpose of example removed" (near-perfect-powerpoint-slides-47b0)
 - "graph missing increase and decrease arrow indicators" (nc-911-board-education-committee-meeting-agenda-packet)
-
----
-
-### 28. Extended Page Number/Footer Pattern Matching
-
-**Problem:** Footer text like "Department of Information Technology 10 | P a g e" was not being caught by the page number removal regex because the existing patterns only matched when the text started with a number or "Page".
-
-**What changed:** Added five new patterns to `_remove_page_numbers()`:
-- `^.*\d+\s*\|\s*p\s*a\s*g\s*e\s*$` — catches "X text N | P a g e"
-- `^.*\d+\s*\|\s*p\s*a\s*g\s*$` — catches truncated variants like "X text N | P a g"
-- `^.*\|\s*page\s+\d+\s*/\s*\d+\s*$` — catches "... | Page 1/6"
-- `^.*\|\s*page\s+\d+\s*$` — catches "... | Page 33"
-- `^.*\|\s*page\s+\d+\s+of\s+\d+\s*$` — catches "... | Page 33 of 123" (no trailing pipe)
-
-**CSV references:** gdac-legislative-report-may-2016 ("Department of Information Technology X | P a g e" on multiple pages), multi-factor-authentication-report-december-2015 (similar truncated footer), long-contract-many-pages-of-tables-6881 ("... | Page 1/6"), seal-imagery-table-with-shading-colored-text-672b ("... | Page 33 of 123")
-
----
-
-### 29. Cross-Page Link Deduplication
-
-**Problem:** The link deduplication only worked within a single page. Standalone link elements with URLs already seen on earlier pages were not removed, causing repeated link blocks across the document.
-
-**What changed:** `_deduplicate_links()` now tracks URLs globally across ALL pages instead of per-page. First pass collects all URLs from paragraph/heading text globally, second pass removes link items whose URL was already in text or already seen as a standalone link on any earlier page.
-
-**CSV references:** logos-graphic-colors-table-screenshot-fc98 (same myncid.nc.gov link repeated 5 times), esrmo-newsletter-april-2017 (links grouped at end of pages), seal-imagery-table-with-shading-colored-text-672b (links duplicated at bottom of pages)
-
----
-
-### 30. Spaced Letter Text Collapse
-
-**Problem:** OCR/extraction artifacts produce text with spaces between every character (e.g., "A P P . A Z . g o v" instead of "APP.AZ.gov"). Screen readers read each letter individually.
-
-**What changed:** `_md_to_html()` now detects patterns of 4+ single characters separated by spaces and collapses them (removes internal spaces).
-
-**CSV references:** long-contract-many-pages-of-tables-6881 ("A P P . A Z . g o v" in link text)
-
----
-
-### 31. Short/Meaningless Figcaption Suppression
-
-**Problem:** Images with very short or meaningless captions (e.g., "38%", "image", "logo") produced unhelpful `<figcaption>` elements.
-
-**What changed:** `_render_image()` now suppresses figcaptions that are less than 5 characters, are purely numeric/percentage values, or match generic terms like "image", "figure", "photo", "logo", "icon".
-
-**CSV references:** logo-tables-shading-watermark-photos-13a3 ("Strange figcaption added (38%)")
-
----
-
-### 32. Bold+Italic Triple Asterisk Nesting Fix
-
-**Problem:** `***text***` (Markdown bold+italic) produced incorrectly nested tags: `<strong><em>text</strong></em>`. The bold regex consumed 2 leading asterisks and matched the last 2 closing asterisks, leaving a stray `*` that caused the italic regex to capture across the `</strong>` tag boundary.
-
-**What changed:** Added a dedicated regex for `***text***` → `<strong><em>text</em></strong>` that runs BEFORE the separate bold and italic regexes.
-
-**CSV references:** 20190416-nc-911-board-minutes-approved ("***LOGISTICS FOR FUTURE BOARD MEETINGS ARE UNDERWAY***"), 20200522-board-agenda, map-imagery-0fb1 (all files with bold+italic content)
-
----
-
-## Remaining Legitimate `**` in Output
-
-4 files still contain literal `**` characters that are actual footnote markers in the original PDF:
-
-| File | Example | Reason |
-|------|---------|--------|
-| long-contract-many-pages-of-tables-6881 | `IX5HF**`, `**Includes Quadient...` | Footnote markers |
-| federalagencyhurricanecoordination-686132f8 | Various `**` in content | Presentation annotations |
-| powerpoint-slides-1793 | Various `**` in content | Slide annotations |
-| powerpoint-slides-ff0c | Various `**` in content | Slide annotations |
-
-
 
