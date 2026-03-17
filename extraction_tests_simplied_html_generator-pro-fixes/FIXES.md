@@ -647,7 +647,7 @@ Gemini misses links that aren't blue/underlined.
 
 ---
 
-## Fixes Applied to extract_structured_json.py (5 total)
+## Fixes Applied to extract_structured_json.py (14 total)
 
 These changes address problems that originate during the extraction step. They modify post-processing logic in `extract_structured_json.py` and the Gemini extraction prompt (`PROMPT_FOR_EXTRACT.md`).
 
@@ -710,7 +710,25 @@ These changes address problems that originate during the extraction step. They m
 
 8. **Background images:** Added "When the same image appears as a background or decoration, do NOT transcribe its content as separate text elements"
 
-**CSV references:** All files with "Asterisks added where formatting used", all files with "Alt text issues", powerpoint-slides-fef1 ("Transcribed the full text from the screenshot"), scanned-from-paper-many-pages-of-tables-6878 ("Hallucinated the incorrect price"), text-some-colored-text-3638 ("headers should be H3, but are H2"), many others
+9. **No infographic text as headings (iteration 2):** Added "CRITICAL: Do NOT extract text that appears INSIDE diagram boxes, flow chart bubbles, infographic callout boxes, chart labels, or organizational chart nodes as heading objects." and "CRITICAL: Do NOT make person names, organization names, or short label text from within infographics into headings."
+
+10. **Parallel heading levels (iteration 2):** Added "If you see numbered items like '1. Introduction', '2. Background' that form the document outline, use the SAME heading level for items at the SAME logical depth — do NOT assign different levels to parallel outline items."
+
+11. **No table row splitting (iteration 2):** Added "CRITICAL: Do NOT split a single table row into multiple rows. If a cell contains text that wraps across multiple visual lines due to word wrap or small column width, it is STILL one cell in ONE row — extract all the wrapped text as a single cell value."
+
+12. **Correct table header detection (iteration 2):** Added "CRITICAL: The first row of a table is a header row ONLY if its cells contain COLUMN LABELS (descriptive names like 'Name', 'Date', 'Amount'). Data values (phone numbers, addresses, actual content) in the first row are NOT headers." and rules for section-label rows and repeated continuation headers.
+
+13. **Preserve list style prefixes (iteration 2):** Added "CRITICAL: If you see a list where items are labeled with letters (a., b., c., ...) or roman numerals (i., ii., iii., ...) or numbers (1., 2., 3., ...), mark the list as list_type: 'ordered' — even if the visual markers look like bullets. Ordered list items must INCLUDE the letter/number prefix in the item text so the rendering engine can detect the list style."
+
+14. **No arbitrary list numbering restart (iteration 2):** Added "CRITICAL: Do NOT restart list numbering arbitrarily. If a numbered list continues from a previous section, continue the sequence."
+
+15. **No content truncation (iteration 2):** Added "CRITICAL: Do NOT truncate or stop early. If the page has 20 paragraphs, extract all 20."
+
+16. **Asterisk bullets → list items (iteration 2):** Added "CRITICAL: Asterisks (*) used as bullet markers in text (e.g., '* Item one') should be extracted as unordered list items, NOT as paragraphs with literal asterisks."
+
+17. **Cross-page content continuity (iteration 2):** Added "IMPORTANT: Text from the SAME logical section that spans two pages should be treated as continuous — do NOT restart paragraph numbering, list numbering, or heading levels just because a new page begins."
+
+**CSV references:** All files with "Asterisks added where formatting used", all files with "Alt text issues", powerpoint-slides-fef1 ("Transcribed the full text from the screenshot"), scanned-from-paper-many-pages-of-tables-6878 ("Hallucinated the incorrect price"), text-some-colored-text-3638 ("headers should be H3, but are H2"), logos-graphic-colors-53de/53e1 ("Interpreted an infographic as headings"), map-imagery-ff40 ("Made a bunch of names headings when they shouldn't be"), scanned-from-paper-many-pages-of-tables-6878 ("Broke up the 2nd row of the table"), scio-physical-and-environmental-protection ("Letters f, g, etc. are all a bulleted list instead of ordered list"), map-imagery-0fb1 ("Using asterisks instead of <ul>"), logos-graphic-colors-53e1 ("Major content loss from the infographic"), many others
 
 ---
 
@@ -755,20 +773,23 @@ Carefully preserves text where asterisks are actual content (e.g., footnote mark
 
 ---
 
-### EXT-7. Strip Duplicate List Numbering from Ordered List Items
+### EXT-7. Strip Duplicate List Numbering from Ordered List Items (Numeric Only)
 
-**Problem:** Gemini includes the list number/letter in the text of ordered list items (e.g., `"1. text"`, `"(a) text"`, `"iv. text"`) while also marking the list as `list_type: "ordered"`. When rendered as `<ol><li>`, this produces double numbering like "1. 1. text".
+**Problem:** Gemini includes the list number in the text of ordered list items (e.g., `"1. text"`) while also marking the list as `list_type: "ordered"`. When rendered as `<ol><li>`, this produces double numbering like "1. 1. text".
 
-**What changed:** New `_strip_list_number_prefix()` method added as Step 3 in `_post_process_content()`. Strips leading numeric, alphabetic, and roman numeral prefixes from ordered list item text. Patterns handled:
-- Numeric: `"1."`, `"1)"`, `"(1)"`
-- Alphabetic: `"a."`, `"a)"`, `"(a)"`
-- Roman numeral: `"i."`, `"ii)"`, `"(iii)"`
+**What changed:** New `_strip_list_number_prefix()` method added as Step 3 in `_post_process_content()`. Strips leading **numeric only** prefixes from ordered list item text:
+- Numeric: `"1."`, `"1)"`, `"(1)"` — stripped because `<ol>` auto-generates Arabic numerals
+
+**IMPORTANT: Alphabetic and roman numeral prefixes are NOT stripped:**
+- Alphabetic `"a."`, `"a)"`, `"(a)"` — preserved so `render_json.py`'s `_detect_list_style()` can set `<ol type="a">`
+- Roman numeral `"i."`, `"ii)"`, `"(iii)"` — preserved so `_detect_list_style()` can set `<ol type="i">`
+- `render_json.py`'s `_strip_list_prefix()` removes these during rendering to avoid double display
 
 Only strips if followed by whitespace and more text, preventing false positives.
 
-**Impact:** 762 list items cleaned across 32 files.
+**Impact:** 433 numeric list items cleaned across files (down from original 762; the remaining 329 alpha/roman prefixes are now intentionally preserved for render_json style detection).
 
-**CSV references:** 10-22-20-edu-committee-agenda-packet ("Ordered list keeping number in text instead of replacing"), seal-imagery-table-with-shading-132c ("Ordered list keeping numbers in text instead of replacing with letters and roman numerals"), gicc-meeting-minutes-08072007 ("restarts the list on the new page"), nc-911-board-meeting-agenda-aug-26-2022 ("numbering restarted from 1"), multi-factor-authentication-report-december-2015 ("extra numbers added to the lists"), nc-911-board-technology-committee-minutes ("List items incorrectly numbered, duplicate numbering"), mostly-text-charts-tables-screenshots-maps-67fb ("additional numbers were added to the TOC"), seal-imagery-table-with-shading-colored-text-672b ("Numbered lists adding additional numbers"), nc-911-board-minutes-september-30-2022 ("Number lists are all messed up")
+**CSV references:** 10-22-20-edu-committee-agenda-packet ("Ordered list keeping number in text instead of replacing"), gicc-meeting-minutes-08072007 ("restarts the list on the new page"), nc-911-board-meeting-agenda-aug-26-2022 ("numbering restarted from 1"), multi-factor-authentication-report-december-2015 ("extra numbers added to the lists"), nc-911-board-technology-committee-minutes ("List items incorrectly numbered, duplicate numbering"), mostly-text-charts-tables-screenshots-maps-67fb ("additional numbers were added to the TOC"), seal-imagery-table-with-shading-colored-text-672b ("Numbered lists adding additional numbers"), nc-911-board-minutes-september-30-2022 ("Number lists are all messed up"), scio-physical-and-environmental-protection ("Letters f, g, etc. are all a bulleted list instead of ordered list — now detected correctly via preserved prefix")
 
 ---
 
@@ -902,6 +923,18 @@ Also added helper methods `_is_valid_url()` and `_fix_url_protocol()` as static 
 
 ---
 
+### EXT-15. Convert Asterisk-Bullet Paragraphs to Unordered List Items
+
+**Problem:** Gemini sometimes uses asterisks as bullet markers in paragraph text (e.g., `"* Item one"`) instead of proper `list` objects. This causes asterisks to appear literally in the rendered HTML output instead of list bullets.
+
+**What changed:** New `_convert_asterisk_bullet_paragraphs()` method added as Step 8 in `_post_process_content()`. Scans paragraph items whose text starts with `"* "` (asterisk + space) and converts them to proper `{type: "list", list_type: "unordered"}` objects. Consecutive asterisk-bullet paragraphs are merged into a single list. Does NOT affect paragraphs starting with `"**"` (bold text).
+
+**Impact:** 7 asterisk-bullet paragraphs across 4 files converted to proper list items.
+
+**CSV references:** map-imagery-0fb1 ("Using asterisks instead of `<ul>`"), long-contract-many-pages-of-tables-6881 (asterisk note paragraphs), 911-education-committee-meeting-agenda-packet (asterisk disclaimer items), esrmo-newsletter-march-2018 (asterisk note)
+
+---
+
 ## Test Results
 
 A test script (`test_post_processing.py`) was created to validate post-processing improvements against existing JSON files without re-running extraction. Results across all 100 test files:
@@ -911,19 +944,21 @@ A test script (`test_post_processing.py`) was created to validate post-processin
 | EXT-1 (Link integration) | Trailing links deduplicated | 650 |
 | EXT-2 (Cross-page dedup) | Repeated items removed | 441 |
 | EXT-4+6 (Markdown stripping) | Cells/headings/list items cleaned | 2,698 |
-| EXT-7 (List number stripping) | Duplicate numbers removed | 762 |
+| EXT-7 (List number stripping, numeric only) | Duplicate numbers removed | 433 (762 originally; 329 alpha/roman now preserved for style detection) |
 | EXT-8 (List merging) | Fragmented lists merged | 30 |
 | EXT-10 (Large image filtering) | Page screenshots removed | 129 |
 | EXT-13 (Per-image alt text) | Images with regenerated alt text | 443 |
 | EXT-14 (Broken link fix) | Broken/invalid links fixed | 512 |
-| **Total** | **Content items improved** | **6,665** |
+| EXT-15 (Asterisk bullet conversion) | Asterisk-bullet paragraphs → list items | 7 |
+| **Total** | **Content items improved** | **~6,343** |
 
 Additionally, the following fixes activate during the extraction pipeline (require re-extraction):
 
 | Fix | Metric | Potential Impact |
 |-----|--------|-----------------|
-| EXT-3 (Prompt improvements) | Reduced asterisks, better alt text, no hallucination | All 100 files |
+| EXT-3 (Prompt improvements, iterations 1+2) | Better headings, tables, lists, completeness; no hallucination | All 100 files |
 | EXT-5 (Image bbox dedup) | Overlapping duplicate images removed | ~23 files |
+| EXT-7 (Alpha/roman prefix preservation) | Correct `<ol type="a">` / `<ol type="i">` rendering | ~32 files on re-extraction |
 | EXT-9 (Blank page removal) | Boilerplate removed | ~3 files |
 | EXT-11 (2D position matching) | Swapped alt text fixed | ~7 files |
 | EXT-12 (Fallback rendering) | Missing images recovered | Up to 488 images in 44 files |

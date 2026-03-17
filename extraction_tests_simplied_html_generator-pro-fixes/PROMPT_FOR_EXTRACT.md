@@ -17,6 +17,9 @@ Return a JSON array where each item has a "type" field:
 - Text should be plain text (no markdown # markers, no ** bold markers)
 - If unsure between heading and paragraph, use heading for short, prominent, standalone text
 - Do NOT promote regular body text to headings just because it is bold or italic
+- CRITICAL: Do NOT extract text that appears INSIDE diagram boxes, flow chart bubbles, infographic callout boxes, chart labels, or organizational chart nodes as heading objects. Text within visual/diagrammatic elements should be described in the associated image's "description" field, not as standalone headings.
+- CRITICAL: Do NOT make person names, organization names, or short label text from within infographics into headings. Only use heading type for actual document section titles.
+- If you see numbered items like "1. Introduction", "2. Background" that form the document outline, use the SAME heading level for items at the SAME logical depth — do NOT assign different levels to parallel outline items.
 
 ### Paragraphs
 {"type": "paragraph", "text": "Markdown formatted text..."}
@@ -41,6 +44,10 @@ IMPORTANT for tables:
 - Count grid lines to determine exact rows/columns
 - Handle merged cells by looking at grid boundaries
 - Table titles (e.g., "Table 2.1") should be paragraphs, not table cells
+- CRITICAL: Do NOT split a single table row into multiple rows. If a cell contains text that wraps across multiple visual lines due to word wrap or small column width, it is STILL one cell in ONE row — extract all the wrapped text as a single cell value.
+- CRITICAL: The first row of a table is a header row ONLY if its cells contain COLUMN LABELS (descriptive names like "Name", "Date", "Amount"). Data values (phone numbers, addresses, actual content) in the first row are NOT headers — treat them as regular data cells.
+- CRITICAL: If a row contains only a single cell spanning all columns that acts as a section label within the table, represent it as a regular data row spanning all columns (with num_columns equal to the total column count). Do NOT treat it as a table heading that breaks the table into sub-tables.
+- When a table continues across a page break with a repeated header row at the top of the next page, extract only the data rows from the continuation — do NOT repeat the header row.
 
 ### Images/Figures
 {"type": "image", "description": "...", "caption": "...", "position": "..."}
@@ -81,6 +88,9 @@ IMPORTANT for lists:
 - Agenda items with sub-items (e.g., "1. Chair's Remarks" with "a) Opening, b) Status") should use nested children
 - Do NOT confuse lists with tables - if items are arranged in a grid with columns, use a table
 - Short single-item bullet points that are clearly list items should still use the "list" type, not "paragraph"
+- CRITICAL: If you see a list where items are labeled with letters (a., b., c., ...) or roman numerals (i., ii., iii., ...) or numbers (1., 2., 3., ...), mark the list as list_type: "ordered" — even if the visual markers look like bullets. Ordered list items must INCLUDE the letter/number prefix in the item text (e.g., "a. First item", "b. Second item") so the rendering engine can detect the list style.
+- CRITICAL: Do NOT restart list numbering arbitrarily. If a numbered list continues from a previous section (e.g., a previous page ended at item 5 and this page starts with item 6), continue the sequence — do NOT restart at 1.
+- When items clearly form an ordered sequence by their numbering (a, b, c or 1, 2, 3), they are one list object even if separated by paragraphs, UNLESS the paragraph clearly represents a new section break.
 
 Example:
 {"type": "list", "list_type": "ordered", "items": [
@@ -218,5 +228,8 @@ Common table patterns:
 - CRITICAL: Extract hyperlinks as "link" objects with display text and URL - do NOT flatten them into paragraphs
 - CRITICAL: Preserve exact numeric values from the document. Do NOT change prices, quantities, dates, or any numerical data.
 - When the same image appears as a background or decoration (e.g., a full-page slide background), do NOT transcribe its content as separate text elements. Only extract the primary content that a reader would focus on.
+- CRITICAL: Do NOT truncate or stop early. If the page has 20 paragraphs, extract all 20. If a section heading appears near the bottom of the page, still include it. Extract EVERYTHING visible on the page.
+- CRITICAL: Asterisks (*) used as bullet markers in text (e.g., "* Item one") should be extracted as unordered list items, NOT as paragraphs with literal asterisks. Convert markdown-style bullet asterisks to proper list objects.
+- IMPORTANT: Text from the SAME logical section that spans two pages should be treated as continuous — do NOT restart paragraph numbering, list numbering, or heading levels just because a new page begins.
 
 Return ONLY the JSON array. No explanations or markdown code blocks.

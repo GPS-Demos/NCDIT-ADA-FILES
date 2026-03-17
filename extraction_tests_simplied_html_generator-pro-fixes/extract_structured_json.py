@@ -1942,34 +1942,29 @@ class PDFExtractor:
         return result
 
     def _strip_list_number_prefix(self, text: str) -> str:
-        """Strip leading number/letter prefixes from ordered list item text.
+        """Strip leading NUMERIC prefixes from ordered list item text.
 
         When Gemini marks content as an ordered list AND includes the number
-        in the text (e.g., "1. text" or "(a) text"), the rendered HTML shows
-        double numbering. This strips the leading prefix.
+        in the text (e.g., "1. text"), the rendered HTML shows double numbering
+        since <ol> auto-generates "1. 2. 3." automatically. This strips only
+        numeric prefixes.
+
+        Alphabetic ("a. text") and roman numeral ("i. text") prefixes are
+        intentionally NOT stripped here, because render_json.py's
+        _detect_list_style() needs them to set the correct <ol type="a"> or
+        <ol type="i"> attribute. render_json.py's _strip_list_prefix() will
+        remove them during rendering.
 
         Patterns stripped:
-        - "1. text" or "1) text" or "(1) text" (numeric)
-        - "a. text" or "a) text" or "(a) text" (alphabetic)
-        - "i. text" or "ii) text" or "(iii) text" (roman numeral)
+        - "1. text" or "1) text" or "(1) text" (numeric only)
 
         Only strips if the prefix is followed by a space and more text.
         """
         if not text:
             return text
 
-        # Numeric: "1.", "1)", "(1)", "1 ."
+        # Numeric only: "1.", "1)", "(1)"
         stripped = re.sub(r'^\s*\(?\d{1,3}\)?[\.\)]\s+', '', text)
-        if stripped != text:
-            return stripped
-
-        # Alphabetic: "a.", "a)", "(a)"
-        stripped = re.sub(r'^\s*\(?[a-zA-Z]\)?[\.\)]\s+', '', text)
-        if stripped != text:
-            return stripped
-
-        # Roman numeral: "i.", "ii)", "(iii)", "iv."
-        stripped = re.sub(r'^\s*\(?(?:i{1,3}|iv|vi{0,3}|ix|xi{0,3}|xiv|xv)\)?[\.\)]\s+', '', text, flags=re.IGNORECASE)
         if stripped != text:
             return stripped
 
@@ -2123,7 +2118,49 @@ class PDFExtractor:
         content = self._deduplicate_consecutive_paragraphs(content)
         stats["duplicates_removed"] = original_count - len(content)
 
+        # Step 8: Convert asterisk-bullet paragraphs to unordered list items
+        content = self._convert_asterisk_bullet_paragraphs(content)
+
         return content, stats
+
+    def _convert_asterisk_bullet_paragraphs(self, content: list) -> list:
+        """Convert paragraphs starting with '* ' (asterisk bullet) to unordered list items.
+
+        When Gemini uses asterisk markers instead of proper list objects (e.g., a
+        paragraph with text "* Item text"), convert to {type: list, list_type: unordered}.
+        Consecutive asterisk-bullet paragraphs are merged into a single list.
+
+        Only converts paragraphs where text starts with "* " (asterisk + space).
+        Does NOT convert paragraphs starting with "**" (markdown bold).
+        """
+        result = []
+        i = 0
+        while i < len(content):
+            item = content[i]
+            if item.get("type") == "paragraph":
+                text = item.get("text", "")
+                # Check for "* " bullet (not "**" bold)
+                if text.startswith("* ") and not text.startswith("**"):
+                    # Collect consecutive asterisk-bullet paragraphs
+                    list_items = []
+                    while i < len(content):
+                        curr = content[i]
+                        if curr.get("type") == "paragraph":
+                            t = curr.get("text", "")
+                            if t.startswith("* ") and not t.startswith("**"):
+                                list_items.append({"text": t[2:].strip()})
+                                i += 1
+                                continue
+                        break
+                    result.append({
+                        "type": "list",
+                        "list_type": "unordered",
+                        "items": list_items,
+                    })
+                    continue
+            result.append(item)
+            i += 1
+        return result
 
     @staticmethod
     def _is_valid_url(url: str) -> bool:
