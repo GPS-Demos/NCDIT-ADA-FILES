@@ -466,8 +466,46 @@ def _infer_table_headers(pages: list) -> int:
 
 
 def _deduplicate_links(pages: list) -> int:
-    """Remove standalone link elements whose URL already appears in paragraph text or as a prior link."""
+    """Remove standalone link elements whose URL already appears in paragraph text or as a prior link.
+
+    Also fixes broken links: when a link has display text as its URL (e.g., href="CLICK HERE")
+    and another link with the same display text has a valid URL, the broken one gets corrected.
+    """
     count = 0
+
+    # Pre-pass: fix broken link URLs by finding correct URLs for the same display text.
+    # Build a map: normalized display text -> correct URL (from any link with a real URL)
+    text_to_real_url: dict[str, str] = {}
+    for page in pages:
+        for item in page.get("content", []):
+            if item.get("type") == "link":
+                url = (item.get("url") or "").strip()
+                text = (item.get("text") or "").strip()
+                # A "real" URL starts with http/https/mailto/ftp or contains a dot
+                if url and url != text and (
+                    url.startswith(("http://", "https://", "mailto:", "ftp://"))
+                    or "." in url
+                ):
+                    norm_text = " ".join(text.split()).lower()
+                    if norm_text:
+                        text_to_real_url[norm_text] = url
+
+    # Fix broken links using the map
+    for page in pages:
+        for item in page.get("content", []):
+            if item.get("type") == "link":
+                url = (item.get("url") or "").strip()
+                text = (item.get("text") or "").strip()
+                # Check if URL looks broken (url == text and not a real URL)
+                url_is_broken = (
+                    url == text
+                    or (not url.startswith(("http://", "https://", "mailto:", "ftp://", "/"))
+                        and "." not in url)
+                )
+                if url_is_broken:
+                    norm_text = " ".join(text.split()).lower()
+                    if norm_text in text_to_real_url:
+                        item["url"] = text_to_real_url[norm_text]
 
     # First pass: collect ALL URLs mentioned in paragraphs/headings across ALL pages
     global_text_urls: set[str] = set()
