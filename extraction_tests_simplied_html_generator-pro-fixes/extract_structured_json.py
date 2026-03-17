@@ -2115,11 +2115,166 @@ class PDFExtractor:
             )
         ]
 
-        # Step 6: Deduplicate consecutive paragraphs
+        # Step 6: Fix broken hyperlinks
+        content, links_fixed = self._fix_broken_hyperlinks(content)
+        stats["broken_links_fixed"] = links_fixed
+
+        # Step 7: Deduplicate consecutive paragraphs
         content = self._deduplicate_consecutive_paragraphs(content)
         stats["duplicates_removed"] = original_count - len(content)
 
         return content, stats
+
+    @staticmethod
+    def _is_valid_url(url: str) -> bool:
+        """Check if a string looks like a valid URL or URL-like reference.
+
+        Returns True for:
+        - http:// or https:// URLs
+        - mailto: links
+        - tel: links
+        - ftp:// links
+        - Bare domains with dots (e.g., www.example.com, example.gov)
+        - Paths starting with / (root-relative)
+        """
+        if not url:
+            return False
+        url = url.strip()
+        # Protocol-prefixed URLs
+        if re.match(r'^(?:https?://|mailto:|tel:|ftp://)', url, re.IGNORECASE):
+            return True
+        # Root-relative paths
+        if url.startswith('/') and len(url) > 1:
+            return True
+        # Bare domains (must have a dot and a valid-looking TLD)
+        if re.match(r'^[\w.-]+\.\w{2,}(?:/\S*)?$', url):
+            return True
+        return False
+
+    @staticmethod
+    def _fix_url_protocol(url: str) -> str:
+        """Add missing protocol to bare domain URLs.
+
+        www.example.com -> https://www.example.com
+        example.gov/path -> https://example.gov/path
+        """
+        url = url.strip()
+        if not url:
+            return url
+        # Already has protocol
+        if re.match(r'^(?:https?://|mailto:|tel:|ftp://|/)', url, re.IGNORECASE):
+            return url
+        # Bare domain with dot — add https://
+        if re.match(r'^[\w.-]+\.\w{2,}(?:/\S*)?$', url):
+            return 'https://' + url
+        return url
+
+    def _fix_broken_hyperlinks(self, content: List[Dict]) -> tuple:
+        """Fix or remove broken hyperlinks in extracted content.
+
+        Handles:
+        1. Link items where URL == text and URL is not valid: convert to paragraph
+        2. Link items with clearly invalid URLs (no dots, contains spaces, etc.):
+           convert to paragraph
+        3. Add missing protocol to bare domain URLs (www.x.com -> https://www.x.com)
+        4. Merge consecutive link items with the same URL
+        5. Fix bare-domain URLs in markdown links within paragraph text
+
+        Returns:
+            Tuple of (processed_content, count_of_links_fixed)
+        """
+        if not content:
+            return content, 0
+
+        fixed_count = 0
+        result = []
+
+        for item in content:
+            if item.get("type") != "link":
+                result.append(item)
+                continue
+
+            link_text = item.get("text", "").strip()
+            link_url = item.get("url", "").strip()
+
+            # Fix 1: Add missing protocol to bare domain URLs
+            if link_url and not re.match(r'^(?:https?://|mailto:|tel:|ftp://|/)', link_url, re.IGNORECASE):
+                fixed_url = self._fix_url_protocol(link_url)
+                if fixed_url != link_url:
+                    item["url"] = fixed_url
+                    link_url = fixed_url
+                    fixed_count += 1
+
+            # Fix 2: Check if URL is valid after potential protocol fix
+            url_is_valid = self._is_valid_url(link_url)
+
+            # Fix 3: If URL == text and URL is not valid, convert to paragraph
+            url_equals_text = (
+                link_url == link_text
+                or link_url.rstrip('.') == link_text.rstrip('.')
+                or link_url.lower().strip() == link_text.lower().strip()
+            )
+
+            if url_equals_text and not url_is_valid:
+                # Convert broken link to paragraph (preserve the text)
+                result.append({"type": "paragraph", "text": link_text})
+                fixed_count += 1
+                continue
+
+            # Fix 4: If URL is clearly not valid (no protocol, no dots, has spaces), convert to paragraph
+            if not url_is_valid:
+                result.append({"type": "paragraph", "text": link_text})
+                fixed_count += 1
+                continue
+
+            # Link is valid — keep it
+            result.append(item)
+
+        # Fix 5: Merge consecutive link items with the same URL
+        merged = []
+        i = 0
+        while i < len(result):
+            item = result[i]
+            if item.get("type") == "link":
+                # Look ahead for consecutive links with the same URL
+                link_url = item.get("url", "")
+                texts = [item.get("text", "")]
+                j = i + 1
+                while j < len(result) and result[j].get("type") == "link" and result[j].get("url", "") == link_url:
+                    texts.append(result[j].get("text", ""))
+                    j += 1
+                if j > i + 1:
+                    # Merge texts
+                    item["text"] = " ".join(t for t in texts if t)
+                    fixed_count += (j - i - 1)
+                    merged.append(item)
+                    i = j
+                else:
+                    merged.append(item)
+                    i += 1
+            else:
+                merged.append(item)
+                i += 1
+
+        # Fix 6: Fix bare domain URLs in markdown links within paragraph text
+        for item in merged:
+            if item.get("type") in ("paragraph", "heading"):
+                text = item.get("text", "")
+                # Find markdown links [text](url) where url is a bare domain
+                def _fix_md_link_url(m):
+                    md_text = m.group(1)
+                    md_url = m.group(2)
+                    if not re.match(r'^(?:https?://|mailto:|tel:|ftp://|/)', md_url, re.IGNORECASE):
+                        if re.match(r'^[\w.-]+\.\w{2,}(?:/\S*)?$', md_url):
+                            return f'[{md_text}](https://{md_url})'
+                    return m.group(0)
+
+                new_text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', _fix_md_link_url, text)
+                if new_text != text:
+                    item["text"] = new_text
+                    fixed_count += 1
+
+        return merged, fixed_count
 
     def _deduplicate_cross_page_content(self, pages: List[Dict]) -> List[Dict]:
         """Remove content that repeats identically across multiple pages.
