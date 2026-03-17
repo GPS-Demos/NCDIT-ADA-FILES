@@ -47,20 +47,41 @@ from pathlib import Path
 def _md_to_html(text: str) -> str:
     """Convert markdown formatting in text to HTML.
 
-    Handles: **bold**, *italic*, [text](url), and preserves newlines.
+    Handles: **bold**, *italic*, _italic_, [text](url), leader dots,
+    literal <u> tags, and preserves newlines.
     Applied AFTER html-escaping the base text.
     """
     html_text = escape(text)
+
+    # Unescape literal <u> and </u> tags that were in the source text
+    html_text = html_text.replace("&lt;u&gt;", "<u>").replace("&lt;/u&gt;", "</u>")
+
     # Bold: **text** -> <strong>text</strong> (DOTALL to span newlines)
     html_text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", html_text, flags=re.DOTALL)
     # Italic: *text* -> <em>text</em> (but not inside <strong> tags)
     html_text = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"<em>\1</em>", html_text, flags=re.DOTALL)
+
+    # Markdown underscore italic: _text_ -> <em>text</em>
+    # Only match _word_ patterns (not filenames like my_file)
+    html_text = re.sub(r"(?<!\w)_([^_]+?)_(?!\w)", r"<em>\1</em>", html_text)
+
     # Markdown links: [text](url) -> <a href="url">text</a>
     html_text = re.sub(
         r"\[([^\]]+)\]\(([^)]+)\)",
         r'<a href="\2">\1</a>',
         html_text,
     )
+
+    # Leader dots: replace 4+ consecutive dots with a single ellipsis
+    # Screen readers read each dot individually which is terrible UX
+    html_text = re.sub(r"\.{4,}", "…", html_text)
+
+    # Strip orphan/stray asterisks that don't form valid bold/italic pairs
+    # These are artifacts from Gemini extraction (e.g., "** text" or "text **")
+    # Only strip leading/trailing orphan ** or * that don't have a matching pair
+    html_text = re.sub(r"^\s*\*{1,2}\s+", "", html_text)   # leading: "** text" -> "text"
+    html_text = re.sub(r"\s+\*{1,2}\s*$", "", html_text)   # trailing: "text **" -> "text"
+
     # Preserve newlines
     html_text = html_text.replace("\n", "<br>")
     return html_text
@@ -74,8 +95,6 @@ def _strip_list_prefix(text: str, list_type: str) -> str:
     """
     if list_type != "ordered":
         return text
-    # Strip patterns: "1. ", "1) ", "(1) ", "a. ", "a) ", "(a) ",
-    #                  "i. ", "ii. ", "iii. ", "iv. ", etc.
     stripped = re.sub(
         r"^\s*(?:"
         r"\(?\d+[.)]\)?\s*"       # numeric: 1. 1) (1)
@@ -91,6 +110,28 @@ def _strip_list_prefix(text: str, list_type: str) -> str:
     return stripped
 
 
+def _detect_list_style(items: list) -> str:
+    """Detect the list style type from the first item's prefix.
+
+    Returns HTML ol type attribute value: '1' (numeric), 'a' (lowercase letter),
+    'A' (uppercase letter), 'i' (lowercase roman), 'I' (uppercase roman).
+    """
+    for li in items:
+        text = li.get("text", "") if isinstance(li, dict) else str(li)
+        text = text.strip()
+        if re.match(r"^\s*\(?\d+[.)]\)?", text):
+            return "1"
+        if re.match(r"^\s*\(?[a-z][.)]\)?", text):
+            return "a"
+        if re.match(r"^\s*\(?[A-Z][.)]\)?", text):
+            return "A"
+        if re.match(r"^\s*\(?(?:i{1,3}|iv|vi{0,3}|ix|xi{0,3})[.)]\)?", text):
+            return "i"
+        if re.match(r"^\s*\(?(?:I{1,3}|IV|VI{0,3}|IX|XI{0,3})[.)]\)?", text):
+            return "I"
+    return "1"
+
+
 # ---------------------------------------------------------------------------
 # ADA remediation — operates on the raw JSON data (list of pages)
 # ---------------------------------------------------------------------------
@@ -102,6 +143,7 @@ def _apply_ada_remediation(data: dict) -> dict[str, int]:
 
     stats["h1_demoted"] = _demote_extra_h1s(pages)
     stats["headings_normalized"] = _normalize_heading_hierarchy(pages)
+    stats["consecutive_headings_merged"] = _merge_consecutive_headings(pages)
     stats["running_headers_deduped"] = _deduplicate_running_headers(pages)
     stats["page_numbers_removed"] = _remove_page_numbers(pages)
     stats["duplicate_content_removed"] = _deduplicate_content(pages)
@@ -110,6 +152,7 @@ def _apply_ada_remediation(data: dict) -> dict[str, int]:
     stats["decorative_images_marked"] = _mark_decorative_images(pages)
     stats["table_headers_inferred"] = _infer_table_headers(pages)
     stats["duplicate_links_removed"] = _deduplicate_links(pages)
+    stats["boilerplate_removed"] = _remove_boilerplate(pages)
     stats["empty_pages_removed"] = _remove_empty_pages(pages)
 
     return stats
@@ -145,6 +188,35 @@ def _normalize_heading_hierarchy(pages: list) -> int:
                     last_level = new_level
                 else:
                     last_level = level
+    return count
+
+
+def _merge_consecutive_headings(pages: list) -> int:
+    """Merge consecutive headings of the same level into a single heading.
+
+    Fixes cases like:
+      <h2>NORTH CAROLINA 911 BOARD MEETING</h2>
+      <h2>Wednesday, August 14, 2019</h2>
+    Becomes:
+      <h2>NORTH CAROLINA 911 BOARD MEETING — Wednesday, August 14, 2019</h2>
+    """
+    count = 0
+    for page in pages:
+        content = page.get("content", [])
+        if len(content) < 2:
+            continue
+        merged = [content[0]]
+        for item in content[1:]:
+            prev = merged[-1]
+            if (item.get("type") == "heading" and prev.get("type") == "heading"
+                    and item.get("level") == prev.get("level")):
+                prev_text = prev.get("text", "").strip()
+                item_text = item.get("text", "").strip()
+                prev["text"] = prev_text + " — " + item_text
+                count += 1
+            else:
+                merged.append(item)
+        page["content"] = merged
     return count
 
 
@@ -412,6 +484,28 @@ def _deduplicate_links(pages: list) -> int:
     return count
 
 
+def _remove_boilerplate(pages: list) -> int:
+    """Remove boilerplate content like 'page intentionally left blank'."""
+    boilerplate_patterns = [
+        r"^\s*(?:this\s+)?page\s+(?:is\s+)?intentionally\s+left\s+blank\s*\.?\s*$",
+        r"^\s*(?:this\s+)?page\s+left\s+(?:intentionally\s+)?blank\s*\.?\s*$",
+    ]
+    combined = re.compile("|".join(boilerplate_patterns), re.IGNORECASE)
+    count = 0
+    for page in pages:
+        original = page.get("content", [])
+        filtered = []
+        for item in original:
+            if item.get("type") in ("paragraph", "heading"):
+                text = item.get("text", "").strip()
+                if combined.match(text):
+                    count += 1
+                    continue
+            filtered.append(item)
+        page["content"] = filtered
+    return count
+
+
 def _remove_empty_pages(pages: list) -> int:
     """Remove pages with no content after deduplication."""
     count = 0
@@ -512,8 +606,9 @@ def _render_table(item: dict) -> str:
 def _render_image(item: dict) -> str:
     desc = _s(item.get("description"))
     caption = _s(item.get("caption"))
+    # Treat "Document image" / "document image" as generic — mark decorative if no real data
     is_decorative = item.get("_decorative", False) or not desc or desc.lower() in (
-        "unidentified image", "image", "decorative image"
+        "unidentified image", "image", "decorative image", "document image",
     )
     b64 = item.get("base64_data", "")
     fmt = item.get("format", "png")
@@ -528,7 +623,9 @@ def _render_image(item: dict) -> str:
         src = f"data:image/{fmt};base64,{b64}"
         img_tag = f'<img src="{src}" alt="{alt_text}">'
     else:
-        return "<!-- image without data: " + alt_text + " -->"
+        # Render as visible text placeholder instead of hidden comment
+        # so screen readers and users know an image was intended here
+        return f"<p>[Image: {alt_text}]</p>"
 
     if caption:
         return f"<figure>{img_tag}<figcaption>{escape(caption)}</figcaption></figure>"
@@ -538,6 +635,22 @@ def _render_image(item: dict) -> str:
 def _render_list(item: dict) -> str:
     list_type = item.get("list_type", "unordered")
     tag = "ol" if list_type == "ordered" else "ul"
+
+    # Detect list style (a, A, i, I, 1) and start number from first item prefix
+    ol_attrs = ""
+    if list_type == "ordered":
+        items = item.get("items", [])
+        style = _detect_list_style(items)
+        if style != "1":
+            ol_attrs += f' type="{style}"'
+        # Detect start number from first item
+        if items:
+            first_text = items[0].get("text", "") if isinstance(items[0], dict) else str(items[0])
+            first_text = first_text.strip()
+            m = re.match(r"^\s*\(?(\d+)[.)]\)?", first_text)
+            if m and int(m.group(1)) > 1:
+                ol_attrs += f' start="{m.group(1)}"'
+
     items_html = ""
     for li in item.get("items", []):
         text = li.get("text", "") if isinstance(li, dict) else str(li)
@@ -555,7 +668,7 @@ def _render_list(item: dict) -> str:
                 li_html += f"<li>{_md_to_html(child_text)}</li>"
             li_html += f"</{child_tag}>"
         items_html += f"<li>{li_html}</li>"
-    return f"<{tag}>{items_html}</{tag}>"
+    return f"<{tag}{ol_attrs}>{items_html}</{tag}>"
 
 
 def _render_form(item: dict) -> str:
@@ -596,9 +709,9 @@ def _render_video(item: dict) -> str:
 
 
 def _render_header_footer(item: dict) -> str:
-    # Simple rendering — no role attributes, markdown converted
+    # Simple rendering — no role attributes, no <small>, markdown converted
     text = _md_to_html(_s(item.get("text")))
-    return f"<p><small>{text}</small></p>"
+    return f"<p>{text}</p>"
 
 
 # Dispatch table

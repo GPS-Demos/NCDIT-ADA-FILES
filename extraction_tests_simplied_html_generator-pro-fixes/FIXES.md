@@ -6,13 +6,13 @@ This document details all changes made to `render_json.py` to address problems i
 
 ---
 
-## Fixes Applied to render_json.py
+## Fixes Applied to render_json.py (27 total)
 
 ### 1. Removed All CSS/Stylesheets
 
 **Problem:** User requested raw, simple HTML with no styling.
 
-**What changed:** Removed the entire `CSS` constant (~35 lines of CSS) and the `<style>` tag from the HTML template. Output is now unstyled HTML.
+**What changed:** Removed the entire `CSS` constant (~35 lines of CSS) and the `<style>` tag from the HTML template.
 
 **Files affected:** All 100 output files.
 
@@ -20,478 +20,569 @@ This document details all changes made to `render_json.py` to address problems i
 
 ### 2. Removed All ARIA Attributes
 
-**Problem:** Multiple reviewers flagged `aria-label`, `aria-hidden`, and `aria-controls` attributes as problematic or unnecessary.
+**Problem:** Multiple reviewers flagged `aria-label`, `aria-hidden`, and `aria-controls` attributes.
 
-**What changed:**
-- Removed `aria-label="Table with N rows and N columns"` from all `<table>` tags
-- Removed `aria-hidden="true"` from page break divs (now removed entirely — no page breaks in output)
-- Removed `role="presentation"` from decorative images
+**What changed:** Removed `aria-label` from tables, `aria-hidden` from page breaks, `role="presentation"` from images.
 
-**Files affected:** All 100 output files.
-
-**CSV references:**
-- "Remove Page numbers wrapped in role=contentinfo" (2019-20-smac-work-plan)
-- "Aria Labels" (gicc-goals-2021-2023-discussion)
-- "aria-label on the table" (seal-image-table-6870)
+**CSV references:** 2019-20-smac-work-plan, gicc-goals-2021-2023-discussion, seal-image-table-6870, logo-tables-shading-watermark-photos-13a3, long-contract-many-pages-of-tables-6881
 
 ---
 
 ### 3. Removed All `role` Attributes
 
-**Problem:** `role="banner"` and `role="contentinfo"` on header/footer elements, `role="presentation"` on decorative images.
+**Problem:** `role="banner"` / `role="contentinfo"` on header/footer elements.
 
-**What changed:** Header/footer items now render as plain `<p><small>text</small></p>` instead of `<div role="contentinfo">`.
+**What changed:** Header/footer items render as plain `<p>text</p>`.
 
-**Files affected:** All files with header/footer content.
-
-**CSV references:**
-- "Remove Page numbers wrapped in role=contentinfo" (2019-20-smac-work-plan)
-- "Added role=contentinfo elements that include the pdf page number" (logo-tables-shading-watermark-photos-13a3, long-contract-many-pages-of-tables-6881)
+**CSV references:** 2019-20-smac-work-plan, logo-tables-shading-watermark-photos-13a3, long-contract-many-pages-of-tables-6881
 
 ---
 
 ### 4. Removed All `class` Attributes
 
-**Problem:** Simplification request — no `class="page-break"`, `class="page-header"`, etc.
-
-**What changed:** All class attributes removed from output HTML.
-
-**Files affected:** All 100 output files.
+**What changed:** All class attributes removed from output.
 
 ---
 
 ### 5. Removed `scope="col"` from Table Headers
 
-**Problem:** Simplification — raw HTML without accessibility scope attributes.
-
-**What changed:** Table header cells (`<th>`) no longer include `scope="col"`.
-
-**Files affected:** All files with tables.
+**What changed:** `<th>` cells no longer include `scope="col"`.
 
 ---
 
 ### 6. Removed Viewport Meta Tag
 
-**Problem:** Simplification — raw HTML.
-
-**What changed:** Removed `<meta name="viewport" content="width=device-width, initial-scale=1">` from the HTML head.
-
-**Files affected:** All 100 output files.
+**What changed:** Removed `<meta name="viewport">` from HTML head.
 
 ---
 
 ### 7. Removed `<main>` Wrapper
 
-**Problem:** Simplification — raw HTML.
-
-**What changed:** Body content is no longer wrapped in a `<main>` element.
-
-**Files affected:** All 100 output files.
+**What changed:** Body content no longer wrapped in `<main>`.
 
 ---
 
 ### 8. Page Breaks Removed Entirely
 
-**Problem:** Page breaks were rendered as `<div class="page-break" aria-hidden="true"></div>` which screen readers couldn't interpret. Reviewers noted "A screen reader user won't know that the page breaks exist." Page breaks are PDF artifacts that don't belong in HTML output.
+**Problem:** Page breaks rendered as `<div class="page-break" aria-hidden="true"></div>`. Screen readers couldn't interpret them.
 
-**What changed:** Page breaks are no longer rendered at all. Content flows continuously without any page separation markers.
+**What changed:** No page break markers at all. Content flows continuously.
 
-**Files affected:** All multi-page files.
-
-**CSV references:**
-- "Dashed lines are used to visually represent page breaks. A screen reader user won't know that the page breaks exist. Was coded using a `<div aria-hidden=true>` instead of an `<hr>`" (near-perfect-powerpoint-slides-47b0, 47b2, newsletter-with-many-images-117c, 21fb, powerpoint-slides-1793, f832, fed0, feef, logos-graphic-colors-53de, 53e1, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881, map-imagery-365a)
-- "Remove page breaks and divs" (10-22-20-edu-committee-agenda-packet)
-- "Page breaks continue between pages" (20200522-nc911-board-minutes-approved, 911-board-education-committee-meeting-minutes-april-21-2022)
+**CSV references:** near-perfect-powerpoint-slides-47b0/47b2, newsletter-with-many-images-117c/21fb, powerpoint-slides-1793/f832/fed0/feef, logos-graphic-colors-53de/53e1, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881, map-imagery-365a, 10-22-20-edu-committee-agenda-packet, 20200522-nc911-board-minutes-approved, 911-board-education-committee-meeting-minutes
 
 ---
 
 ### 9. Page Numbers Removed
 
-**Problem:** Page numbers from the original PDF (e.g., "1", "Page 2 of 5", "- 3 -", "3 | P a g e", "1 of 4") were being included in the HTML output as `<p><small>...</small></p>` elements. These are PDF artifacts that don't belong in HTML.
+**Problem:** Page numbers from PDF (e.g., "1", "Page 2 of 5", "3 | P a g e") included in output.
 
-**What changed:** Added `_remove_page_numbers()` to ADA remediation that strips `header_footer` items matching page number patterns:
-- Bare numbers: `1`, `12`
-- Dash-wrapped: `- 1 -`
-- "Page N", "Page N of M"
-- "N of M" (e.g., `1 of 4`)
-- "N | Page", "N | P a g e"
-- Pipe-separated footers containing page numbers: `00234464.25 | Page 37 of 39 | June 12, 2025`
-- Bold-wrapped page numbers: `**2** | Page (Rev 06-05-15)`
+**What changed:** Added `_remove_page_numbers()` that strips header_footer items matching page number patterns.
 
-**Files affected:** All files with page number footer/header elements.
-
-**CSV references:**
-- "Page numbers included: all pages" (10-22-20-edu-committee-agenda-packet)
-- "Page numbers included" (2019-20-smac-work-plan)
-- "Page number and page break on p. 14-15" (208m-endpoint-reseller-price-list)
-- "page numbers show up on pg 5" (multi-factor-authentication-report-december-2015)
-- "The footers (e.g. Page 3 of 39 June 12, 2025) show up in the HTML" (scanned-from-paper-many-pages-of-tables-6878)
-- "Added role=contentinfo elements that include the pdf page number" (logo-tables-shading-watermark-photos-13a3, long-contract-many-pages-of-tables-6881)
+**CSV references:** 10-22-20-edu-committee-agenda-packet, 2019-20-smac-work-plan, 208m-endpoint-reseller-price-list, multi-factor-authentication-report-december-2015, scanned-from-paper-many-pages-of-tables-6878, logo-tables-shading-watermark-photos-13a3, long-contract-many-pages-of-tables-6881
 
 ---
 
 ### 10. Markdown Bold `**text**` Converted to `<strong>` in ALL Renderers
 
-**Problem:** Only the paragraph renderer converted `**bold**` to `<strong>`. Headings, table cells, list items, header/footer, and fallback renderers output literal `**` characters.
+**Problem:** Only paragraph renderer converted bold. Headings, table cells, list items, header/footer output literal `**`.
 
-**What changed:** Created a shared `_md_to_html()` function that converts `**text**` to `<strong>text</strong>`. Applied to ALL renderers:
-- `_render_heading`
-- `_render_paragraph`
-- `_render_table` (cell text)
-- `_render_list` (item text and children)
-- `_render_header_footer`
-- `_render_fallback`
+**What changed:** Shared `_md_to_html()` function applied to ALL renderers. Uses `re.DOTALL` for multi-line support.
 
-Also uses `re.DOTALL` flag so bold spanning multiple lines (with `\n`) is correctly converted.
-
-**Files affected:** ~81 files with bold text.
-
-**CSV references:**
-- "Asterisks added where formatting used" (seal-imagery-table-with-shading-132c, seal-imagery-table-with-shading-colored-text-672b, smac-lidar-apr-10-2024, standards-committee-meeting-agenda-packet, table-seal-imagery-diagram-1468, tables-screenshots-photos-background-colors-59df, wearencgov-presentation3, logo-tables-shading-watermark-photos-13a3, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881)
-- "Double asterisks around text" (appenc-initialdatalayers, create-beautiful-sharepoint-sites, draft-fy23-25-goals-and-priorities)
-- "Bold text replaced by plaintext enclosed by 2 asterisks" (nc-911-board-technology-committee-minutes)
-- "Bold is rendered as ** instead of `<strong>`" (scio-physical-and-environmental-protection, scanned-from-paper-many-pages-of-tables-6878, seal-imagery-11ab)
-- "Markdown not interpreted as HTML" (gicc-agenda-20160810, nc-911-board-technology-committee-minutes, near-perfect-powerpoint-slides-47b0/47b2, powerpoint-slides-f832/fed0/feef/fef1/fef5/ff0a/ff0c/ff0d, seal-image-table-6870, seal-imagery-11ab)
-- "On the TOC bold text is replaced with **" (mostly-text-charts-tables-screenshots-maps-67fb)
-- "bold replaced by **" (nc-911-board-education-committee-meeting-agenda-packet, nc-911-board-meeting-agenda-aug-26-2022, nc-911-board-minutes-september-30-2022)
-- "Extraneous asterisks added in place of bold text" (newsletter-with-many-images-117c)
-- "Extraneous asterisks added" (powerpoint-slides-f832, powerpoint-slides-feef)
-- "Numerous improper asterisks" (near-perfect-powerpoint-slides-47b2)
-- "Many extraneous asterisks" (near-perfect-powerpoint-slides-47b0)
+**CSV references:** seal-imagery-table-with-shading-132c, seal-imagery-table-with-shading-colored-text-672b, smac-lidar-apr-10-2024, standards-committee-meeting-agenda-packet, table-seal-imagery-diagram-1468, tables-screenshots-photos-background-colors-59df, wearencgov-presentation3, logo-tables-shading-watermark-photos-13a3, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881, appenc-initialdatalayers, create-beautiful-sharepoint-sites, draft-fy23-25-goals-and-priorities, nc-911-board-technology-committee-minutes, scio-physical-and-environmental-protection, scanned-from-paper-many-pages-of-tables-6878, seal-imagery-11ab, gicc-agenda-20160810, near-perfect-powerpoint-slides-47b0/47b2, powerpoint-slides-f832/fed0/feef/fef1/fef5/ff0a/ff0c/ff0d, seal-image-table-6870, mostly-text-charts-tables-screenshots-maps-67fb, nc-911-board-education-committee-meeting-agenda-packet, nc-911-board-meeting-agenda-aug-26-2022, nc-911-board-minutes-september-30-2022, newsletter-with-many-images-117c, esrmo-newsletter-april-2017, esrmo-newsletter-december-2018, esrmo-newsletter-july-2021, esrmo-newsletter-march-2018
 
 ---
 
 ### 11. Markdown Italic `*text*` Converted to `<em>` in ALL Renderers
 
-**Problem:** Same as bold — only the paragraph renderer handled italic conversion. Other renderers output literal `*text*`.
+**Problem:** Only paragraph renderer converted italic. Other renderers output literal `*text*`.
 
-**What changed:** The shared `_md_to_html()` function also converts `*text*` to `<em>text</em>` (with lookahead/lookbehind to avoid matching `**`). Applied to all renderers. Uses `re.DOTALL` for multi-line support.
+**What changed:** `_md_to_html()` converts `*text*` to `<em>text</em>`.
 
-**Files affected:** ~65 files with italic text.
-
-**CSV references:**
-- "Italics missing and replaced with **" (memo-with-links-1334, gicc-agenda-20160810, mo-minutes-20160620)
-- "Italic text is not being converted from markdown. Displayed as `*...*`" (gicc-ncdot-florence-20181107)
-- "italics show as `*text*`" (gicc-smac-agenda-20210120)
-- "PDF text with Italic has * added" (esrmo-newsletter-april-2017)
-- "Text is not Bold, but listed with **" (esrmo-newsletter-december-2018)
-- "Bold text presented w **" (esrmo-newsletter-july-2021, esrmo-newsletter-march-2018)
+**CSV references:** memo-with-links-1334, gicc-agenda-20160810, mo-minutes-20160620, gicc-ncdot-florence-20181107, gicc-smac-agenda-20210120, esrmo-newsletter-april-2017, esrmo-newsletter-december-2018, esrmo-newsletter-july-2021, esrmo-newsletter-march-2018
 
 ---
 
 ### 12. Markdown Links `[text](url)` Converted to `<a href>` in ALL Renderers
 
-**Problem:** Some text fields contained markdown-style links that were rendered literally as `[text](url)` instead of clickable HTML links.
+**Problem:** Markdown link syntax rendered as literal text.
 
-**What changed:** The `_md_to_html()` function converts `[text](url)` to `<a href="url">text</a>`.
+**What changed:** `_md_to_html()` converts `[text](url)` to `<a href="url">text</a>`.
 
-**Files affected:** Files with markdown link syntax in text.
-
-**CSV references:**
-- "Emails are hyperlinks in the original PDF but in the HTML they are outputted as markdown ([email](link))" (seal-image-table-6870)
-- "Link markdown formatting used instead of html" (logo-tables-shading-watermark-photos-13a3)
+**CSV references:** seal-image-table-6870, logo-tables-shading-watermark-photos-13a3
 
 ---
 
 ### 13. Ordered List Duplicate Number Stripping
 
-**Problem:** When Gemini extracts ordered lists, it embeds the number/letter prefix in the item text (e.g., `"1. Approve minutes"`). When rendered inside `<ol><li>`, the browser adds its own numbering, resulting in double numbers like "1. 1. Approve minutes".
+**Problem:** Gemini embeds number prefixes in list item text (e.g., "1. text") AND `<ol>` adds numbering = double numbers.
 
-**What changed:** Added `_strip_list_prefix()` function that removes leading prefixes from ordered list items:
-- Numeric: `1.`, `1)`, `(1)`
-- Alphabetic: `a.`, `a)`, `(a)`
-- Roman numerals: `i.`, `ii.`, `iii.`, `iv.`
+**What changed:** `_strip_list_prefix()` removes leading numeric, alphabetic, and roman numeral prefixes.
 
-Applied to both parent items and nested children.
-
-**Files affected:** ~15+ files with ordered lists.
-
-**CSV references:**
-- "Ordered list keeping number in text instead of replacing" (10-22-20-edu-committee-agenda-packet, seal-imagery-table-with-shading-132c)
-- "Ordered list items have additional number in text" (911-board-education-committee-meeting-minutes, 20200522-nc911-board-minutes-approved, seal-imagery-table-with-shading-colored-text-672b)
-- "Ordered lists keeping original number in addition to list item markup" (20190814-nc-911-board-minutes-approved)
-- "extra numbers added to numbered list" (nc-911-board-meeting-agenda-aug-26-2022, nc-911-board-education-committee-meeting-agenda-packet)
-- "List items incorrectly numbered, duplicate numbering and a reset in order" (nc-911-board-technology-committee-minutes)
-- "Duplicating list numbers within `<li>`" (logos-graphic-colors-table-screenshot-fc98)
-- "Generating list item letters in addition to showing list item numbers" (long-contract-many-pages-of-tables-6881)
-- "additional numbers were added to the TOC" (mostly-text-charts-tables-screenshots-maps-67fb)
-- "extra numbers added to the lists" (multi-factor-authentication-report-december-2015)
-- "Duplicate list numbering" (powerpoint-slides-f832, powerpoint-slides-feef)
-- "List numbering duplicated" (near-perfect-powerpoint-slides-47b0)
-- "numbered list restarts at new page with duplicate numbering" (gicc-meeting-minutes-08072007)
-- "List separated by pagination. Second half displays two sets of numbers" (map-imagery-365a)
+**CSV references:** 10-22-20-edu-committee-agenda-packet, seal-imagery-table-with-shading-132c, 911-board-education-committee-meeting-minutes, 20200522-nc911-board-minutes-approved, seal-imagery-table-with-shading-colored-text-672b, 20190814-nc-911-board-minutes-approved, nc-911-board-meeting-agenda-aug-26-2022, nc-911-board-education-committee-meeting-agenda-packet, nc-911-board-technology-committee-minutes, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881, mostly-text-charts-tables-screenshots-maps-67fb, multi-factor-authentication-report-december-2015, powerpoint-slides-f832, near-perfect-powerpoint-slides-47b0, gicc-meeting-minutes-08072007, map-imagery-365a, nc-911-board-minutes-september-30-2022
 
 ---
 
 ### 14. Table Header: Removed Auto-Mark of Row 0 as `<th>`
 
-**Problem:** The original code treated ALL row-0 cells as `<th>` headers regardless of content. This caused data rows to be incorrectly marked as headers when the first row contained data, not column labels.
+**Problem:** Original code treated ALL row-0 cells as `<th>` regardless of content.
 
-**What changed:** Removed the `or r == 0` fallback in `_render_table`. Now only cells explicitly marked with `_is_header=True` (by the ADA remediation's `_infer_table_headers`) are rendered as `<th>`.
+**What changed:** Only cells explicitly marked `_is_header=True` by ADA remediation are rendered as `<th>`.
 
-**Files affected:** All files with tables.
-
-**CSV references:**
-- "First row of table incorrectly converted to table header" (nc-911-board-technology-committee-minutes, multi-factor-authentication-report-december-2015, powerpoint-slides-f832)
-- "Table identifies wrong row as table heading row" (20200522-nc911-board-minutes-approved, 911-education-committee-meeting-agenda-packet)
-- "First row incorrectly marked as header" (powerpoint-slides-f832)
-- "Formatted the first row of the data tables as column headers when they should not be" (long-contract-many-pages-of-tables-6881)
-- "First row of the table was made a table header instead of a normal table row" (seal-image-table-6870)
+**CSV references:** nc-911-board-technology-committee-minutes, multi-factor-authentication-report-december-2015, powerpoint-slides-f832, 20200522-nc911-board-minutes-approved, 911-education-committee-meeting-agenda-packet, long-contract-many-pages-of-tables-6881, seal-image-table-6870
 
 ---
 
 ### 15. Improved Table Header Inference Heuristic
 
-**Problem:** The `_infer_table_headers` function marked row-0 as headers if all cells had short text and there were 2+ columns. This was too aggressive — it marked rows with numeric data (prices, dates) as headers.
+**Problem:** `_infer_table_headers` was too aggressive — marked rows with numeric data as headers.
 
-**What changed:** Added a check: if any row-0 cell contains mostly numeric data (`$`, `%`, digits), the row is NOT marked as a header row.
-
-**Files affected:** All files with tables.
+**What changed:** Added check: if any row-0 cell is mostly numeric, the row is NOT marked as header.
 
 ---
 
 ### 16. Duplicate Link Deduplication
 
-**Problem:** Gemini extraction often produces both inline link references in paragraph text AND separate standalone `link` elements for the same URLs. This results in links appearing twice — once inline and once at the bottom of the page/section.
+**Problem:** Gemini produces inline links AND separate standalone link elements = duplicates.
 
-**What changed:** Added `_deduplicate_links()` to ADA remediation. For each page, it:
-1. Collects all URLs mentioned in paragraph/heading text (both markdown links and raw URLs)
-2. Removes standalone `link` elements whose URL already appears in the text
-3. Also removes duplicate `link` elements (same URL appearing multiple times)
+**What changed:** `_deduplicate_links()` removes standalone link elements whose URL already appears in text, or same-page duplicate link elements.
 
-**Files affected:** ~30+ files with duplicate links.
-
-**CSV references:**
-- "Duplicate links in footer" (colored-text-logos-676a)
-- "links duplicated at bottom of pages" (seal-imagery-table-with-shading-colored-text-672b, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881)
-- "Links duplicated" (near-perfect-powerpoint-slides-47b0, 47b2, newsletter-with-many-images-21fb, powerpoint-slides-1793)
-- "extra link at the bottom of the page" (federal-interagency-committee-agenda20190516)
-- "duplicated link at the end of page" (gicc-meeting-minutes-02122003)
-- "Correct links duplicated to bottom of page" (newsletter-with-many-images-117c)
-- "link duplicated in middle of paragraph and bottom of page" (gicc-mo-minutes-20191216)
-- "Originally hyperlinked text duplicated" (near-perfect-powerpoint-slides-47b0)
-- "Extra and unnecessary page breaks around links and links were repeated at the bottom" (memo-with-links-1334)
-- "hyperlinks duplicated at the bottom of every page" (mostly-text-charts-tables-screenshots-maps-67fb)
-- "urls repeated at the bottom of the doc" (multi-factor-authentication-report-december-2015)
-- "Creating extra links after the content" (logos-graphic-colors-table-screenshot-fc98)
-- "all links from the page grouped and listed together at the end of the page" (esrmo-newsletter-april-2017)
+**CSV references:** colored-text-logos-676a, seal-imagery-table-with-shading-colored-text-672b, logos-graphic-colors-table-screenshot-fc98, long-contract-many-pages-of-tables-6881, near-perfect-powerpoint-slides-47b0/47b2, newsletter-with-many-images-21fb, powerpoint-slides-1793, federal-interagency-committee-agenda20190516, gicc-meeting-minutes-02122003, newsletter-with-many-images-117c, gicc-mo-minutes-20191216, memo-with-links-1334, mostly-text-charts-tables-screenshots-maps-67fb, multi-factor-authentication-report-december-2015, esrmo-newsletter-april-2017, esrmo-newsletter-september-2021
 
 ---
 
 ### 17. Nested List Children Use Matching List Type
 
-**Problem:** Nested lists inside ordered lists were always rendered as `<ul>` (unordered), even when the parent was `<ol>` (ordered).
+**Problem:** Nested lists inside `<ol>` always rendered as `<ul>`.
 
-**What changed:** Nested child lists now use the same tag as the parent (`<ol>` children under `<ol>`, `<ul>` children under `<ul>`).
+**What changed:** Children match parent tag.
 
-**Files affected:** Files with nested ordered lists.
+**CSV references:** gicc-agenda-20160810, gicc-smac-agenda-20210120, ncom-update-gicc-05-15-2014
 
-**CSV references:**
-- "Nested lists are not pulling over" (gicc-agenda-20160810)
-- "missing 3rd indent in list (needs additional nesting)" (gicc-smac-agenda-20210120)
-- "List hierarchy did not transfer" (ncom-update-gicc-05-15-2014)
+---
+
+### 18. Leader Dots Replaced with Ellipsis
+
+**Problem:** Sequences of 4+ dots (`.........`) from agendas/TOCs. Screen readers read each dot.
+
+**What changed:** `_md_to_html()` replaces 4+ consecutive dots with `…`.
+
+**CSV references:** 20200522-board-agenda
+
+---
+
+### 19. Literal `<u>` Tags Unescaped
+
+**Problem:** Literal `<u>` tags escaped to `&lt;u&gt;` and displayed as text.
+
+**What changed:** `_md_to_html()` unescapes `&lt;u&gt;` and `&lt;/u&gt;` back to real HTML.
+
+**CSV references:** map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1
+
+---
+
+### 20. Markdown Underscore Italic `_text_` Converted to `<em>`
+
+**Problem:** Underscore-style markdown `_text_` rendered as literal underscores.
+
+**What changed:** `_md_to_html()` converts `_text_` to `<em>text</em>` (word-boundary only).
+
+**CSV references:** map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1
+
+---
+
+### 21. Back-to-Back Same-Level Headings Merged
+
+**Problem:** Gemini splits multi-line headings into multiple consecutive same-level headings.
+
+**What changed:** `_merge_consecutive_headings()` joins them with ` — ` separator.
+
+**CSV references:** 20190814-nc-911-board-minutes-approved, 2019-20-smac-work-plan, logo-tables-shading-watermark-photos-13a3
+
+---
+
+### 22. Removed `<small>` Tags from Header/Footer
+
+**Problem:** `<small>` tags unnecessary for raw simple HTML.
+
+**What changed:** Header/footer renders as plain `<p>text</p>`.
+
+---
+
+### 23. Ordered List `type` Attribute Set from Prefix Detection
+
+**Problem:** `<ol>` defaults to numeric (1, 2, 3) even when PDF used alphabetic (a, b, c) or roman numeral (i, ii, iii) lists.
+
+**What changed:** `_detect_list_style()` examines the first item's prefix and sets `type="a"`, `type="A"`, `type="i"`, or `type="I"` on the `<ol>` tag as appropriate.
+
+**CSV references:** 2019-20-smac-work-plan ("Ordered list using numbers instead of letters"), seal-imagery-table-with-shading-132c ("Ordered list keeping numbers instead of replacing with letters and roman numerals"), nc-911-board-minutes-september-30-2022 ("Letters in numbered lists are replaced with circles")
+
+---
+
+### 24. Ordered List `start` Attribute for Cross-Page Continuation
+
+**Problem:** Lists split across pages restart numbering at 1 instead of continuing from previous page.
+
+**What changed:** If the first item's numeric prefix is > 1, the renderer sets `start="N"` on the `<ol>` tag.
+
+**CSV references:** nc-911-board-meeting-agenda-aug-26-2022 ("numbering restarted from 1"), mostly-text-charts-tables-screenshots-maps-67fb ("numbers restarted at 1"), nc-911-board-minutes-september-30-2022 ("Numbered list starts back at 1"), gicc-meeting-minutes-08072007 ("restarts the list on the new page")
+
+---
+
+### 25. Orphan/Stray Asterisks Stripped
+
+**Problem:** Gemini extraction adds unpaired `*` or `**` to text that don't form valid bold/italic pairs (e.g., `"** text"` or `"text **"`).
+
+**What changed:** `_md_to_html()` strips leading and trailing orphan asterisk patterns.
+
+**CSV references:** 20200522-nc911-board-minutes-approved ("Asterisks added to HTML that aren't on PDF"), 911-board-education-committee-meeting-minutes ("Asterisks not on PDF added to HTML"), 20190416-nc-911-board-minutes-approved ("Multiple asterisks added to table headings"), 20200522-board-agenda ("Misuse of asterisks changing meaning")
+
+---
+
+### 26. "Page Intentionally Left Blank" Boilerplate Removed
+
+**Problem:** Boilerplate text like "This page intentionally left blank" carried from PDF into HTML.
+
+**What changed:** `_remove_boilerplate()` strips paragraphs/headings matching these patterns.
+
+**CSV references:** map-imagery-photos-tables-screenshots-diagrams-data-charts-365a ("page intentionally left blank literally added")
+
+---
+
+### 27. "Document image" Alt Text Treated as Decorative / Missing Image Placeholders
+
+**Problem:** Images with generic `alt="Document image"` or `alt="document image"` provide no useful information. Images without base64 data were hidden as HTML comments.
+
+**What changed:**
+- "Document image" alt text now treated as decorative (same as "unidentified image")
+- Images without base64 data now render as visible `[Image: description]` text placeholders instead of hidden HTML comments
+
+**CSV references:** near-perfect-powerpoint-slides-47b2 ("Alt text just says 'Document image'"), map-imagery-0fb1 ("alt text of main image is 'document image'"), logo-tables-shading-watermark-photos-13a3 ("Alt text is 'document image'"), logos-graphic-colors-table-screenshot-fc98 ("alt text of submit button image is 'document image'"), map-imagery-365a ("Large block of whitespace disguised as an image with alt='document image'"), map-imagery-ff40 ("Inserted many screenshots with alt='document image'"), near-perfect-powerpoint-slides-47b0 ("Images missing and replaced by alt text commented into the html")
 
 ---
 
 ## Problems That CANNOT Be Fixed in render_json.py
 
-These issues originate in the JSON extraction step (Gemini/PyMuPDF) and require changes to `extract_structured_json.py` or the extraction prompt.
+These issues originate in the JSON extraction step (Gemini/PyMuPDF) and require changes to `extract_structured_json.py` or the Gemini extraction prompt.
 
-### A. Wrong/Inaccurate Alt Text on Images
+### A. Wrong/Inaccurate/Swapped Alt Text on Images
 
-The alt text is generated by Gemini during extraction. The renderer faithfully outputs whatever description is in the JSON.
+Gemini generates the alt text during extraction. The renderer outputs whatever is in the JSON.
 
-**CSV references:**
-- "alt text is wrong" (gicc-tims-may-2016 — multiple pages)
-- "Alt text for images is swapped (tagged to the wrong image)" (gicc-ncdot-florence-20181107)
+- "alt text is wrong" (gicc-tims-may-2016 — pg 5, 6, 7, 9, 12, 13, 15, 22, 23)
+- "Alt text for images is swapped (tagged to the wrong image)" (gicc-ncdot-florence-20181107 — pg 7, 10)
 - "Incorrect alt text on images" (newsletter-with-many-images-117c, 21fb, powerpoint-slides-1793)
-- "Alt text just says 'Document image'" (near-perfect-powerpoint-slides-47b2)
-- "alt text of main image is 'document image'" (map-imagery-0fb1)
-- "Image of drone has completely wrong alt text" (gicc-ncdot-florence-20181107)
-- "Alt text issues" (multiple files)
+- "Alt text just says 'Document image'" (near-perfect-powerpoint-slides-47b2 — pg 16)
+- "Image of drone has completely wrong alt text" (gicc-ncdot-florence-20181107 — pg 5)
+- "When a page has multiple images, the alt text is switched" (logos-graphic-colors-53de — pg 7, 8)
+- "Alt text for images swapped" (near-perfect-powerpoint-slides-47b2 — pg 19)
+- "Alt text for image contains alt text for both images on the page" (near-perfect-powerpoint-slides-47b0 — pg 25, 26)
+- "alt text not complete" (gicc-tims-may-2016 — pg 1)
+- "Alt text includes 'sheriff's office personnel' but seems like hallucination" (logos-graphic-colors-53e1 — pg 21)
+- "Incomplete alt text for large flow chart" (logos-graphic-colors-53e1 — pg 32)
+- "An image of people's hands up but alt text says it's the NC logo" (map-imagery-ff40 — pg 13)
+- "Describes state seal but not anything else in the image (flow chart)" (agency-onboarding-68607a87)
+- "Text in logos not used in alt text" (logo-tables-shading-watermark-photos-13a3 — pg 8)
+- "Some of the alt text is confusing and listed as a comment" (gicc-ncdot-florence-20181107 — pg 2)
+- "Image alt text and captions mixed up" (newsletter-with-many-images-117c)
+- "alt text is incorrect" (logo-imagery-screenshot-imagery-fca1)
+- "Text below images included with image and document image alt text" (208m-endpoint-reseller-price-list — pg 9-10)
+- "Alt text issues" (gdac-legislative-report-may-2016, gicc-2020-census-nc-factsheet, multiple powerpoint files)
 
 ### B. Missing Images
 
-Images that Gemini described but PyMuPDF couldn't extract have no base64 data. The renderer correctly comments these out rather than showing broken image icons.
+Images Gemini described but PyMuPDF couldn't extract have no base64 data.
 
-**CSV references:**
 - "Multiple images missing" (map-imagery-e5cc)
 - "Missing images" (powerpoint-slides-1793, near-perfect-powerpoint-slides-47b2)
 - "image missing" (esrmo-newsletter-december-2018, gicc-tims-may-2016)
 - "Image is missing / broken image icon" (map-imagery-logo-imagery-4809, f810)
+- "Missing image on page 37" (911-education-committee-meeting-agenda-packet)
+- "Image depicting connections completely missing" (gicc-tims-may-2016 — pg 8)
+- "Missing graphic completely" (gicc-tims-may-2016 — pg 19)
+- "Only part of image transferred over" (near-perfect-powerpoint-slides-47b0)
+- "Missing images, alt text mixed up" (newsletter-with-many-images-117c — pg 11)
 
 ### C. Content Out of Order
 
-Page-by-page extraction can produce content in wrong reading order, especially for complex layouts.
+Page-by-page extraction produces content in wrong reading order.
 
-**CSV references:**
 - "Images out of order compared to the original PDF" (screenshot-images-11b5)
-- "Text content ordered incorrectly" (newsletter-with-many-images-117c)
+- "Text content ordered incorrectly" (newsletter-with-many-images-117c — pg 5, 9)
 - "One of the Images placed after text block" (esrmo-newsletter-july-2021, march-2018)
 - "order of paragraphs changed" (esrmo-newsletter-december-2018)
-- "Images placed in wrong order" (near-perfect-powerpoint-slides-47b2)
-- "data out of order" (map-imagery-f7f6)
+- "Images placed in wrong order" (near-perfect-powerpoint-slides-47b2 — pg 15)
+- "data out of order" (map-imagery-f7f6 — pg 34)
+- "all images out of order" (logo-imagery-screenshot-imagery-fca1)
+- "Image from pg. 13 put in wrong place" (map-imagery-e5cc)
+- "Images oriented incorrectly" (newsletter-with-many-images-117c — pg 9)
+- "Placed the list of links after the wrong block" (logos-graphic-colors-53de — pg 15)
 
 ### D. Hallucinated Content
 
-Gemini sometimes generates content that doesn't exist in the original PDF.
+Gemini generates content not in the original PDF.
 
-**CSV references:**
-- "Hallucinated a link, 'network', to go to some random site" (seal-imagery-11ab)
+- "Hallucinated a link, 'network'" (seal-imagery-11ab)
 - "Hallucinated links" (powerpoint-slides-1793)
 - "Hallucinated the incorrect price for part '185669'" (scanned-from-paper-many-pages-of-tables-6878)
-- "Added links that don't appear on page" (logos-graphic-colors-53de, 53e1)
-- "Added some links that don't appear on page" (logos-graphic-colors-53de)
-- "Hallucinated a link" (seal-imagery-11ab)
+- "Added links that don't appear on page" (logos-graphic-colors-53de — pg 17, 18, 24, 25; logos-graphic-colors-53e1 — pg 11)
 - "unknown content showing up" (map-imagery-f7f6)
+- "Added links from example image, links were not originally clickable" (near-perfect-powerpoint-slides-47b0 — pg 17)
+- "Added a broken link as a duplicate of a working link" (logos-graphic-colors-53e1 — pg 4, 7, 9, 12, 20, 32, 33, 41)
+- "Truncated/Hallucinated ToC" (seal-imagery-11ab)
+- "Added list bullets where no list was in pdf" (logo-tables-shading-watermark-photos-13a3 — pg 4)
 
 ### E. Missing Watermarks
 
-Watermarks are visual overlays that Gemini doesn't extract into the JSON structure.
+Watermarks are visual overlays Gemini doesn't extract.
 
-**CSV references:**
 - "Missing DRAFT watermark" (10-22-20-edu-committee-agenda-packet)
 - "Watermark not included on HTML" (911-board-education-committee-meeting-minutes)
 - "Missing 'Draft' watermark" (nc-911-board-education-committee-meeting-agenda-packet)
 - "Missing watermark throughout" (nc-911-board-minutes-september-30-2022)
 - "Draft watermark not accounted for" (logo-tables-shading-watermark-photos-13a3)
+- "Watermarked document with large landscape oriented print tables" (draft-addressnc-specifications-20210811)
 
-### F. Broken/Wrong Hyperlinks
+### F. Broken/Wrong Hyperlinks (Extraction)
 
-When Gemini extracts links, it sometimes uses the link text as the URL or produces broken hrefs. This is an extraction issue.
+Gemini uses link text as URL or produces broken hrefs.
 
-**CSV references:**
 - "Copilot Lab link literally has 'Copilot Lab' as the href" (powerpoint-slides-fef1)
 - "CLICK HERE has an href of literally 'CLICK HERE'" (seal-image-table-6870)
 - "Blue text in an image is mistaken as links" (gicc-ncdot-florence-20181107)
-- "Underlined text improperly converted to hyperlink leading to nowhere" (near-perfect-powerpoint-slides-47b0)
+- "Underlined text improperly converted to hyperlink" (near-perfect-powerpoint-slides-47b0)
 - "Links do not have a valid destination" (seal-imagery-table-with-shading-132c)
 - "Created broken links from blue/underlined text" (map-imagery-0fb1)
+- "Broken links created when occurring underlined text" (20200522-board-agenda)
+- "Created a link from underlined text" (logo-tables-shading-watermark-photos-13a3)
+- "Underlined content looks like linkable text but is not" (nc-911-board-meeting-agenda-aug-26-2022)
+- "Link in PDF doesn't have a destination but conversion set the link text as the href" (logo-tables-shading-watermark-photos-13a3)
+- "href is wrong on first link and second link is missing href" (gicc-smac-agenda-20210120)
+- "Link on page five converted from absolute to relative, causing 404" (911-education-committee-meeting-agenda-packet)
+- "url not pulled from source doc" (gicc-meeting-minutes-02122003)
+- "Hyperlink in wrong spot" (near-perfect-powerpoint-slides-47b0)
+- "Link separated into two links" (map-imagery-365a — pg 22)
+- "Link text wrapped in the PDF so the converter created 2 links" (logos-graphic-colors-53e1 — pg 10)
 
 ### G. Text Extracted from Screenshots/Images
 
-Gemini transcribes text visible in screenshots and adds it to the HTML, which is often incorrect behavior.
+Gemini transcribes visible text from screenshots.
 
-**CSV references:**
-- "Transcribed the full text from the screenshot and put it in the HTML. Should have just put alt text on the image" (powerpoint-slides-fef1, near-perfect-powerpoint-slides-47b0)
+- "Transcribed the full text from the screenshot. Should have just put alt text on the image" (powerpoint-slides-fef1, near-perfect-powerpoint-slides-47b0)
 - "All UI in screenshots is being transcribed" (powerpoint-slides-1793)
 - "Entire slides being transcribed after an entire image" (near-perfect-powerpoint-slides-47b0)
 - "Image transcribed along with image" (powerpoint-slides-1793, newsletter-with-many-images-117c)
 - "text from image was converted into a series of tables" (gicc-tims-may-2016)
+- "content from images with text added to the HTML page" (esrmo-newsletter-april-2017)
+- "pulling lines of text and creating an image of them" (gicc-lgc-censussurveyresults-20200506)
+- "Table in the image interpreted as a Form" (esrmo-newsletter-december-2018)
+- "Entire slide is being added instead of just one particular image" (powerpoint-slides-f832)
+- "Put all the screenshots of background images into the HTML" (powerpoint-slides-fef1)
 
 ### H. Duplicate/Repeated Content from Images
 
-Gemini sometimes outputs the image AND a text transcription of its contents.
+Gemini outputs image AND text transcription.
 
-**CSV references:**
 - "Image copy of table copied over twice in two different sizes" (nc-911-board-technology-committee-minutes)
 - "Image of entire page of document copied over in two different sizes" (nc-911-board-technology-committee-minutes)
 - "Converted page to text but still kept the image" (smac-lidar-apr-10-2024, standards-committee-meeting-agenda-packet)
 - "Text content duplicated by image of page" (map-imagery-0fb1)
 - "Inserted a screenshot of the page" (map-imagery-ff40)
+- "Repeats text from image as paragraph below" (logo-imagery-graphic-colors-map-imagery-6e2e)
+- "Image of main PDF pages duplicated by screen text" (logos-graphic-colors-table-screenshot-fc98)
+- "Put the image alt text and the image both in the HTML" (seal-imagery-11ab)
+- "image legend duplicated as a table" (logo-imagery-graphic-colors-map-imagery-f80b)
+- "table created from image that is not accurate" (logo-imagery-screenshot-imagery-fca1)
+- "Background image transferred over" (newsletter-with-many-images-117c)
+- "Background highlighting of headshot images transferred separately" (near-perfect-powerpoint-slides-47b0)
+- "Image duplicated on page, color corrected losing grayscale" (near-perfect-powerpoint-slides-47b0)
+- "Duplicate image improperly removed, different keys highlighted" (near-perfect-powerpoint-slides-47b2)
+- "Every page has an image, and all of the images are embedded and all content is repeating" (nc-911-board-monthly-dispatch-march-2025)
+- "The table on pg. 1 repeats three times" (nc-911-board-minutes-september-30-2022)
+- "Campaign Airings data repeated on pg. 9" (nc-911-board-education-committee-meeting-agenda-packet)
 
 ### I. Wrong Heading Hierarchy from Context
 
-Some headings should be H3/H4 based on document context but Gemini marks them as H2.
+Gemini marks headings at wrong levels based on document context.
 
-**CSV references:**
 - "The following headers should be H3, but are H2" (text-some-colored-text-3638)
 - "All headers that should be H3 are H2" (wearencgov-presentation3)
 - "Heading levels are off: Priorities 2-4 are H2 when they should be H4" (gicc-meeting-minutes-08072007)
 - "Incorrect heading hierarchy" (logos-graphic-colors-53de, 53e1)
-- "Visual heading hierarchy not represented semantically" (logos-graphic-colors-53de)
+- "Visual heading hierarchy not represented semantically, all H2s" (logos-graphic-colors-53de)
 - "Headings order and hierarchy is incorrect" (federalagencyhurricanecoordination, esrmo-newsletter-september-2021)
+- "Header hierarchy issue, all headers are the same" (newsletter-with-many-images-117c)
+- "Not ranking headings correctly, all h2s" (logo-tables-shading-watermark-photos-13a3)
+- "Heading levels didn't carry over from context on previous page" (logos-graphic-colors-53de)
+- "Subheading listed at same level as heading" (gicc-ncdot-florence-20181107)
+- "headings are slightly off" (gicc-smac-agenda-20210120)
+- "Interpreted an infographic as headings" (logos-graphic-colors-53de, 53e1)
+- "Made a bunch of names headings when they shouldn't be" (map-imagery-ff40)
+- "'Accessibility Items' should not be h2" (near-perfect-powerpoint-slides-47b2)
+- "Didn't generate the h1 completely" (map-imagery-ff40)
+- "PDF text with Italic has * added and promoted to heading" (esrmo-newsletter-april-2017)
 
 ### J. Content Split Across Pages
 
 Page-by-page extraction splits paragraphs, lists, and tables at page boundaries.
 
-**CSV references:**
 - "Paragraphs are split because of page splits" (seal-imagery-11ab)
 - "Page break cuts text into multiple paragraphs" (newsletter-with-many-images-21fb)
 - "text split across pages" (logos-graphic-colors-53e1)
 - "Word breaks are odd because of the page-by-page approach" (seal-imagery-11ab)
-- "Table split by pagination" (map-imagery-365a)
+- "Table split by pagination causing subsequent tables to have bad column headers" (map-imagery-365a)
+- "Page break interrupted the TOC list" (map-imagery-0fb1)
+- "'Container-based Encryption' and 'Full Disk Encryption' indentation flattened" (seal-imagery-11ab)
 
 ### K. Form Handling
 
-PDF forms are complex structures that don't map cleanly to HTML.
+PDF forms don't map cleanly to HTML.
 
-**CSV references:**
 - "N/A - Includes form" (ifb-its-400277-2017-1102-final)
 - "Form" (fillable-form-logo-imagery-bddf, bdfc)
 - "Check blocks turned into a table" (seal-imagery-table-with-shading-132c)
+- "Signature block turned into table" (seal-imagery-table-with-shading-132c)
 
-### L. Nested Tables Incorrectly Interpreted
+### L. Nested Tables / Table Structure Errors
 
-Gemini flattens nested tables into the parent table structure.
+Gemini flattens or misinterprets table structures.
 
-**CSV references:**
 - "Nested table incorrectly interpreted" (20190416-nc-911-board-minutes-approved, 20190726-board-agenda)
 - "Nested table converted into parent table" (20190416-nc-911-board-minutes-approved, 20190726-board-agenda)
+- "Broke up the 2nd row of the table into two rows" (scanned-from-paper-many-pages-of-tables-6878)
+- "rows split content that should be together" (scanned-from-paper-many-pages-of-tables-6878)
+- "Table should be broken up into multiple tables or lists" (map-imagery-0fb1)
+- "Tables created with incorrect header row. First row should be the table caption" (map-imagery-0fb1)
+- "Table restarts with new header row that should not be a header" (208m-endpoint-reseller-price-list)
+- "Data call marked up as table heading" (20200522-nc911-board-minutes-approved)
+- "List of phone numbers marked up as separate table heading" (20200522-nc911-board-minutes-approved)
+- "Items formatted as table on PDF, running together on HTML" (20200522-board-agenda)
+- "Half of the TOC was put into a table the other half was not" (nc-911-board-meeting-agenda-aug-26-2022)
+- "Table headers inside paragraph above table" (nc-911-board-technology-committee-minutes)
+- "Table headers not properly marked as headers" (powerpoint-slides-f832)
+- "Number 8 in table went to an H1" (nc-911-board-minutes-september-30-2022)
+- "Irregular tables missing colgroup and scope" (208m-endpoint-reseller-price-list)
+- "Table column headers not semantically marked up" (logo-tables-shading-watermark-photos-13a3)
+- "Empty table rows added to bottom of table" (logo-tables-shading-watermark-photos-13a3)
 
-### M. Back-to-Back Headings from Extraction
+### M. Multi-Line / Split Headings from Extraction
 
-Gemini sometimes splits a multi-line heading into multiple heading elements.
+Gemini splits headings into multiple elements.
 
-**CSV references:**
-- "Heading marked up in separate back-to-back h2s instead of single" (20190814-nc-911-board-minutes-approved, 2019-20-smac-work-plan)
-- "Header text repeated on multiple pages" (2019-20-smac-work-plan)
 - "Multi-line header at the top was considered a paragraph" (gicc-mo-minutes-20191216)
 - "Title is split between H1 & H2" (gicc-tims-may-2016)
+- "Header text repeated on multiple pages" (2019-20-smac-work-plan)
+- "The header was pulled over every time. Should just be pulled over once" (scio-physical-and-environmental-protection)
+- "data table header row repeated" (nc-911-board-education-committee-meeting-agenda-packet)
 
-### N. Links Inside Tables Placed Below
+### N. Links Inside Tables Placed Below / Link Placement Issues
 
-When Gemini encounters links inside table cells, it sometimes extracts them as separate link elements below the table.
+Gemini extracts links from table cells as separate elements.
 
-**CSV references:**
 - "Links inside a table in PDF were placed below the table in HTML" (cyber-incident-reporting)
 - "Links have been removed from the table and placed at the bottom" (gicc-agenda-20160810)
 - "Pulled nested list out of table and placed it under the table" (gicc-agenda-20200506)
+- "Link should be below list" (ncom-update-gicc-05-15-2014)
+- "Paragraph break appears when link does, breaking text flow" (newsletter-with-many-images-21fb)
+- "Links are being listed as a separate paragraph" (gicc-meeting-minutes-08072007)
+- "Placed a link within a paragraph in its own `<p>`" (map-imagery-365a)
+- "Unnecessary returns before and after URL links" (multi-factor-authentication-report-december-2015)
+- "Hyperlinked content starts from the new line each time" (esrmo-newsletter-september-2021)
 
 ### O. Compressed/Cut Images
 
-Image quality issues from extraction.
+Image quality or cropping issues.
 
-**CSV references:**
 - "Compressed and cut images so that they are no longer viewable" (wearencgov-broadbandinitiatives)
-- "Only part of image transferred over" (near-perfect-powerpoint-slides-47b0)
+- "cut off part of the NCDIT logo" (gicc-goals-and-strategic-direction-2021-23)
+- "Image highlights missing" (near-perfect-powerpoint-slides-47b2)
+- "Font styling examples not transferred" (near-perfect-powerpoint-slides-47b0)
+- "Images transferred as just one cluster" (newsletter-with-many-images-117c)
 
-### P. Underlined Text Converted to Links
+### P. Logo Extraction Failures
 
-Gemini interprets underlined text as hyperlinks even when they aren't.
+Logos missing, duplicated, or replaced with text.
 
-**CSV references:**
-- "Broken links created when occurring underlined text" (20200522-board-agenda)
-- "Created a link from underlined text" (logo-tables-shading-watermark-photos-13a3)
-- "Underlined text improperly converted to hyperlink" (near-perfect-powerpoint-slides-47b0)
-- "Underlined content from PDF looks like linkable text on HTML but it is not" (nc-911-board-meeting-agenda-aug-26-2022)
+- "DPS Logo missing" (logo-imagery-graphic-colors-map-imagery-f80b, logo-imagery-graphic-colors-map-imagery-tables-4807)
+- "MyNCID Logo not pulled in" (logo-imagery-screenshot-imagery-fca1)
+- "Missing State Crest on all pages" (seal-imagery-table-with-shading-132c)
+- "Failed to bring over the seal of the state of NC logo" (scio-physical-and-environmental-protection)
+- "Replaced logo seal with screen text" (long-contract-many-pages-of-tables-6881)
+- "Logo repeating" (logo-tables-shading-watermark-photos-13a3 — pg 3)
+- "Duplicated logo" (logo-tables-shading-watermark-photos-13a3 — pg 8)
+- "additional logo from the footer added" (nc-911-board-education-committee-meeting-agenda-packet)
 
 ### Q. Missing/Incorrect Footer Content
 
-Footer handling during extraction.
-
-**CSV references:**
 - "Footer is missing" (esrmo-newsletter-april-2017)
 - "Footer repeated" (multi-factor-authentication-report-december-2015, nc-911-board-education-committee-meeting-agenda-packet)
 - "Footer showing up mid-page" (nc-911-board-meeting-agenda-aug-26-2022)
 
 ### R. Content Loss
 
-Gemini sometimes fails to extract all content from a page.
+Gemini fails to extract content from pages.
 
-**CSV references:**
-- "Loss of text content" (logo-tables-shading-watermark-photos-13a3)
+- "Loss of text content" (logo-tables-shading-watermark-photos-13a3 — pg 12, 24)
 - "Missing content" (map-imagery-f7f6, federalagencyhurricanecoordination)
-- "Major content loss from the infographic" (logos-graphic-colors-53e1)
-- "Major content loss: headings in TOC missing" (long-contract-many-pages-of-tables-6881)
-- "Heading text lost" (logos-graphic-colors-53e1)
+- "Major content loss from the infographic" (logos-graphic-colors-53e1 — pg 14, 15)
+- "Major content loss: headings in TOC missing" (long-contract-many-pages-of-tables-6881 — pg 26)
+- "Heading text lost" (logos-graphic-colors-53e1 — pg 13, 23, 29, 41)
+- "'Goals' heading lost" (logos-graphic-colors-53de — pg 13)
+- "Missing 'Goal 1' Reference" (gicc-goals-and-strategic-direction-2021-23 — pg 5-8)
+- "All content from page 21 missing" (powerpoint-slides-fef1)
+- "Objectives missing" (esrmo-newsletter-april-2024 — pg 25)
+- "Table of contents visual hierarchy lost" (logos-graphic-colors-53e1)
+
+### S. List Type/Structure Errors from Extraction
+
+Gemini misidentifies list type or structure.
+
+- "A bulleted list (a,b,c) continued as an ordered list after page break" (gicc-mo-minutes-20191216)
+- "Letters f, g, etc. are all a bulleted list instead of ordered list" (scio-physical-and-environmental-protection)
+- "letters a & b are missing" (scio-physical-and-environmental-protection)
+- "Sublist is an unordered list when it should be ordered" (powerpoint-slides-f832)
+- "List bullets appearing in pdf, but not formatted as list in html" (logo-tables-shading-watermark-photos-13a3)
+- "Using asterisks instead of `<ul>`" (map-imagery-0fb1)
+
+### T. Link Not Detected (Not Visually Styled)
+
+Gemini misses links that aren't blue/underlined.
+
+- "A link in the pdf was missed, likely because not blue or underlined" (gicc-meeting-minutes-08072007)
+- "missing multiple hyperlinks on text that is not shown as blue and underlined" (gicc-smac-agenda-20210120, logo-imagery-graphic-colors-map-imagery-6e2e)
+- "Hyperlinks aren't formatted as hyperlinks" (seal-imagery-11ab)
+- "Broadband hyperlink dropped" (mostly-text-charts-tables-screenshots-maps-67fb)
+- "hyperlinks are missing" (esrmo-newsletter-september-2021)
+
+### U. Video/Embedded Content Issues
+
+- "Made text for link the alt text of embedded videos, link leads to youtube home page" (newsletter-with-many-images-117c)
+- "Links to embedded videos lead to youtube home page" (newsletter-with-many-images-117c)
+
+### V. Miscellaneous Extraction Issues
+
+- "Entire PDF added as image then transcribed" (911-telecommunicators-resolution-mitchell-county, rockingham-county)
+- "social media icons do not align with text" (gicc-goals-and-strategic-direction-2021-23)
+- "AI created a strange image" (logo-tables-shading-watermark-photos-13a3 — pg 21)
+- "Missed underlining text" (gicc-meeting-minutes-08072007)
+- "Header should be before image and table" (gicc-ncdot-florence-20181107)
+- "Some images nested as figures and others are not" (gicc-ncdot-florence-20181107)
+- "Middle image not listed as a figure, missing caption" (gicc-ncdot-florence-20181107)
+- "Checkmark image from end of list items placed at bottom of page" (ncom-update-gicc-05-15-2014)
+- "Email address populated twice in table and 3rd time under table" (seal-imagery-table-with-shading-colored-text-672b)
+- "Chart did not transfer properly" (wearencgov-presentation3)
+- "Image on slide did not transfer into text" (wearencgov-presentation3)
+- "The colors of the counties which correspond to the legend are not described in text" (map-imagery-logo-imagery-4809)
+- "Pulled out text from distance image but doesn't make sense without image" (map-imagery-logo-imagery-4809)
+- "figcaption created on short alt text" (logo-tables-shading-watermark-photos-13a3)
+- "Strange figcaption added (38%)" (logo-tables-shading-watermark-photos-13a3)
+- "Duplicate text used for purpose of example removed" (near-perfect-powerpoint-slides-47b0)
+- "graph missing increase and decrease arrow indicators" (nc-911-board-education-committee-meeting-agenda-packet)
 
 ---
 
 ## Remaining Legitimate `**` in Output
 
-5 files still contain literal `**` characters. These are **not bugs** — they are actual footnote markers or annotation symbols in the original PDF content:
+5 files still contain literal `**` characters that are actual footnote markers in the original PDF:
 
 | File | Example | Reason |
 |------|---------|--------|
@@ -500,5 +591,3 @@ Gemini sometimes fails to extract all content from a page.
 | federalagencyhurricanecoordination-686132f8 | Various `**` in content | Presentation annotations |
 | powerpoint-slides-1793 | Various `**` in content | Slide annotations |
 | powerpoint-slides-ff0c | Various `**` in content | Slide annotations |
-
-These cannot be converted to `<strong>` because they don't form valid `**text**` bold pairs — they're standalone symbols.
