@@ -1090,6 +1090,51 @@ class PDFExtractor:
 
         return [img for idx, img in enumerate(images) if idx not in to_remove]
 
+    def _render_image_region_fallback(
+        self, pdf_path: Path, page_num: int, position: str,
+        page_height: float, page_width: float
+    ) -> Optional[str]:
+        """Render a page region as fallback when PyMuPDF can't extract the image.
+
+        Uses pypdfium2 to render the approximate region where Gemini detected
+        an image, based on the position string (e.g., "top-center", "middle-left").
+
+        Returns:
+            Base64-encoded PNG string, or None if rendering fails.
+        """
+        try:
+            # Parse position to get approximate region
+            v_ranges = {
+                "top": (0, page_height / 3),
+                "middle": (page_height / 3, 2 * page_height / 3),
+                "bottom": (2 * page_height / 3, page_height),
+            }
+            h_ranges = {
+                "left": (0, page_width / 3),
+                "center": (page_width / 6, 5 * page_width / 6),  # wider center
+                "right": (2 * page_width / 3, page_width),
+            }
+
+            parts = position.split("-") if "-" in position else [position]
+            v_pos = parts[0] if parts[0] in v_ranges else "middle"
+            h_pos = parts[1] if len(parts) > 1 and parts[1] in h_ranges else "center"
+
+            y0, y1 = v_ranges[v_pos]
+            x0, x1 = h_ranges[h_pos]
+
+            # Render the page and crop to the region
+            doc = fitz.open(str(pdf_path))
+            page = doc[page_num]
+            clip = fitz.Rect(x0, y0, x1, y1)
+            mat = fitz.Matrix(RENDER_SCALE, RENDER_SCALE)
+            pix = page.get_pixmap(matrix=mat, clip=clip)
+            doc.close()
+
+            png_bytes = pix.tobytes("png")
+            return base64.b64encode(png_bytes).decode("utf-8")
+        except Exception:
+            return None
+
     def extract_text_with_pymupdf(self, pdf_path: Path, page_num: int) -> str:
         """Extract text from a PDF page using PyMuPDF for cross-validation."""
         doc = fitz.open(str(pdf_path))
@@ -1128,7 +1173,7 @@ class PDFExtractor:
 
     def match_images_to_descriptions(
         self, gemini_images: List[Dict], pymupdf_images: List[Dict],
-        video_links: List[Dict], page_height: float
+        video_links: List[Dict], page_height: float, page_width: float = 612.0
     ) -> Tuple[List[Dict], List[Dict]]:
         """
         Match Gemini image descriptions to PyMuPDF extracted images by position.
@@ -1184,25 +1229,43 @@ class PDFExtractor:
         if not remaining_images and not gemini_images:
             return [], video_items
 
-        # Map position strings to vertical ranges
-        position_ranges = {
+        # Map position strings to vertical and horizontal ranges
+        # Uses 2D matching to better distinguish images at same vertical level
+        v_ranges = {
             "top": (0, page_height / 3),
             "middle": (page_height / 3, 2 * page_height / 3),
             "bottom": (2 * page_height / 3, page_height),
         }
+        h_ranges = {
+            "left": (0, page_width / 3),
+            "center": (page_width / 3, 2 * page_width / 3),
+            "right": (2 * page_width / 3, page_width),
+        }
+
+        def _parse_position(pos_str: str):
+            """Parse 'top-left' into vertical and horizontal components."""
+            parts = pos_str.split("-") if "-" in pos_str else [pos_str]
+            v_pos = parts[0] if parts[0] in v_ranges else "middle"
+            h_pos = parts[1] if len(parts) > 1 and parts[1] in h_ranges else "center"
+            return v_pos, h_pos
+
+        def _position_to_xy(v_pos: str, h_pos: str):
+            """Convert position labels to target (x, y) coordinates."""
+            v_range = v_ranges.get(v_pos, v_ranges["middle"])
+            h_range = h_ranges.get(h_pos, h_ranges["center"])
+            return (h_range[0] + h_range[1]) / 2, (v_range[0] + v_range[1]) / 2
 
         for gemini_img in gemini_images:
             position = gemini_img.get("position", "middle-center")
-            vertical_pos = position.split("-")[0] if "-" in position else position
+            v_pos, h_pos = _parse_position(position)
 
             # Check if this Gemini description matches a video (by position)
             matched_video = False
             for video_item in video_items:
                 if video_item.get("bbox"):
                     video_y = (video_item["bbox"]["y0"] + video_item["bbox"]["y1"]) / 2
-                    v_range = position_ranges.get(vertical_pos, position_ranges["middle"])
+                    v_range = v_ranges.get(v_pos, v_ranges["middle"])
                     if v_range[0] <= video_y <= v_range[1]:
-                        # This description likely refers to the video
                         video_item["description"] = gemini_img.get("description", "")
                         matched_video = True
                         break
@@ -1210,17 +1273,21 @@ class PDFExtractor:
             if matched_video:
                 continue
 
-            # Find best matching PyMuPDF image by vertical position
+            # Find best matching PyMuPDF image by 2D position distance
             best_match = None
             best_distance = float("inf")
 
-            v_range = position_ranges.get(vertical_pos, position_ranges["middle"])
-            target_y = (v_range[0] + v_range[1]) / 2
+            target_x, target_y = _position_to_xy(v_pos, h_pos)
 
             for pymupdf_img in remaining_images:
                 if pymupdf_img.get("bbox"):
-                    img_y = (pymupdf_img["bbox"]["y0"] + pymupdf_img["bbox"]["y1"]) / 2
-                    distance = abs(img_y - target_y)
+                    bbox = pymupdf_img["bbox"]
+                    img_x = (bbox["x0"] + bbox["x1"]) / 2
+                    img_y = (bbox["y0"] + bbox["y1"]) / 2
+                    # 2D Euclidean distance, normalized by page dimensions
+                    dx = (img_x - target_x) / page_width
+                    dy = (img_y - target_y) / page_height
+                    distance = (dx ** 2 + dy ** 2) ** 0.5
                     if distance < best_distance:
                         best_distance = distance
                         best_match = pymupdf_img
@@ -1243,8 +1310,20 @@ class PDFExtractor:
 
             matched_images.append(combined)
 
-        # Add any remaining PyMuPDF images that weren't matched
+        # Add remaining PyMuPDF images that weren't matched to any Gemini description.
+        # Filter out large images (>40% of page area) that are likely full-page
+        # screenshots or background images — these duplicate the text content
+        # that Gemini has already extracted and produce confusing output.
+        page_area = page_height * page_width
         for remaining in remaining_images:
+            bbox = remaining.get("bbox")
+            if bbox:
+                img_area = (bbox["x1"] - bbox["x0"]) * (bbox["y1"] - bbox["y0"])
+                if page_area > 0 and img_area / page_area > 0.40:
+                    # Skip large page-screenshot images — they just duplicate
+                    # the text content Gemini already extracted
+                    continue
+
             unmatched_image = {
                 "type": "image",
                 "description": "Unidentified image",
@@ -1318,15 +1397,35 @@ class PDFExtractor:
             # Extract hyperlinks from PDF using PyMuPDF (non-video links)
             pymupdf_hyperlinks = self.extract_hyperlinks_from_page(pdf_path, page_num)
 
-            # Get page height for position matching
+            # Get page dimensions for position matching
             doc = fitz.open(str(pdf_path))
-            page_height = doc[page_num].rect.height
+            page_rect = doc[page_num].rect
+            page_height = page_rect.height
+            page_width = page_rect.width
             doc.close()
 
             # Match and merge image data, separating out videos
             merged_images, video_items = self.match_images_to_descriptions(
-                gemini_images, pymupdf_images, video_links, page_height
+                gemini_images, pymupdf_images, video_links, page_height, page_width
             )
+
+            # Fallback rendering: for Gemini-described images that have no base64
+            # data (PyMuPDF couldn't extract the binary), render the approximate
+            # page region using pypdfium2.
+            if ENABLE_IMAGE_EXTRACTION:
+                for img in merged_images:
+                    if "base64_data" not in img and img.get("description", "").lower() not in (
+                        "unidentified image", ""
+                    ):
+                        # Render the region where this image should be
+                        rendered = self._render_image_region_fallback(
+                            pdf_path, page_num, img.get("position", "middle-center"),
+                            page_height, page_width
+                        )
+                        if rendered:
+                            img["base64_data"] = rendered
+                            img["format"] = "png"
+                            img["_fallback_render"] = True
 
             # Combine content preserving Gemini's reading order for images.
             # Replace Gemini image placeholders in-place with enriched versions,

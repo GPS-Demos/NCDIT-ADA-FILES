@@ -800,6 +800,51 @@ Only merges lists that are directly adjacent — lists with paragraphs or other 
 
 ---
 
+### EXT-10. Filter Large "Unidentified Image" Page Screenshots
+
+**Problem:** When PyMuPDF extracts images that Gemini didn't describe, they're added as "Unidentified image" entries. Many of these are full-page or near-full-page screenshots that duplicate the text content already extracted by Gemini. They add no value and confuse the output with redundant page captures.
+
+**What changed:** In `match_images_to_descriptions()`, unmatched PyMuPDF images whose bounding box covers >40% of the page area are now filtered out. These are almost always background images or page screenshots. Smaller unmatched images (logos, icons, decorative elements) are preserved.
+
+**Impact:** 129 large page-screenshot images filtered across 23 files.
+
+**CSV references:** nc-911-board-technology-committee-minutes ("Image of entire page of document copied over in two different sizes"), nc-911-board-minutes-september-30-2022 ("Every table was put in the footer and repeats three times"), map-imagery-ff40 ("Inserted a screenshot of the page"), logos-graphic-colors-table-screenshot-fc98 ("Image of main PDF pages duplicated by screen text"), powerpoint-slides-fef1 ("Put all the screenshots of background images into the HTML"), nc-911-board-monthly-dispatch-march-2025 ("all of the images are embedded and all content is repeating")
+
+---
+
+### EXT-11. Improved 2D Image-Description Position Matching
+
+**Problem:** The original `match_images_to_descriptions()` only used vertical position (top/middle/bottom thirds of the page) to match Gemini's image descriptions to PyMuPDF's extracted images. When two images were at similar vertical positions but different horizontal positions (e.g., left vs right), descriptions could be assigned to the wrong image — causing "swapped alt text."
+
+**What changed:** Enhanced position matching to use 2D Euclidean distance instead of 1D vertical distance:
+1. Parse both vertical (top/middle/bottom) AND horizontal (left/center/right) components from Gemini's position string
+2. Calculate target (x, y) coordinates from the position grid
+3. Match using `sqrt((dx/page_width)^2 + (dy/page_height)^2)` — normalized 2D distance
+4. This correctly distinguishes "top-left" from "top-right" images
+
+**CSV references:** gicc-ncdot-florence-20181107 ("Alt text for images is swapped, tagged to the wrong image — pg 7, 10"), logos-graphic-colors-53de ("When a page has multiple images, the alt text is switched — pg 7, 8"), near-perfect-powerpoint-slides-47b2 ("Alt text for images swapped — pg 19"), near-perfect-powerpoint-slides-47b0 ("Alt text for image contains alt text for both images on the page — pg 25, 26")
+
+---
+
+### EXT-12. Fallback Image Rendering for Missing Images
+
+**Problem:** When Gemini detects and describes an image but PyMuPDF fails to extract the binary data (no `base64_data`), the image appears as a broken/missing placeholder in the HTML output. This affected 488 images across 44 files.
+
+**What changed:** New `_render_image_region_fallback()` method renders the approximate page region where the missing image should be, using PyMuPDF's `page.get_pixmap(clip=rect)`. After image matching in `process_single_page()`:
+1. Identifies Gemini-described images without `base64_data`
+2. Uses the position string to calculate the approximate bounding box
+3. Renders that page region at RENDER_SCALE resolution
+4. Stores the rendered PNG as fallback `base64_data`
+5. Marks the image with `_fallback_render: True` for transparency
+
+Only renders for images with actual descriptions (not "Unidentified image" or empty).
+
+**Impact:** Up to 488 missing images could be recovered across 44 files (requires re-extraction to measure actual impact since this runs during the extraction pipeline).
+
+**CSV references:** map-imagery-e5cc ("Multiple images missing"), powerpoint-slides-1793 ("Missing images"), esrmo-newsletter-december-2018 ("image missing"), map-imagery-logo-imagery-4809/f810 ("Image is missing / broken image icon"), gicc-tims-may-2016 ("Image depicting connections completely missing", "Missing graphic completely"), 911-education-committee-meeting-agenda-packet ("Missing image on page 37")
+
+---
+
 ## Test Results
 
 A test script (`test_post_processing.py`) was created to validate post-processing improvements against existing JSON files without re-running extraction. Results across all 100 test files:
@@ -811,7 +856,16 @@ A test script (`test_post_processing.py`) was created to validate post-processin
 | EXT-4+6 (Markdown stripping) | Cells/headings/list items cleaned | 2,698 |
 | EXT-7 (List number stripping) | Duplicate numbers removed | 762 |
 | EXT-8 (List merging) | Fragmented lists merged | 30 |
-| **Total** | **Content items improved** | **4,581** |
+| EXT-10 (Large image filtering) | Page screenshots removed | 129 |
+| **Total post-processing** | **Content items improved** | **5,710** |
 
-Note: EXT-3 (prompt improvements), EXT-5 (image dedup), and EXT-9 (blank page removal) require re-running extraction to measure full impact — they modify behavior during the extraction step itself or remove content already handled by render_json.py.
+Additionally, the following fixes activate during the extraction pipeline (require re-extraction):
+
+| Fix | Metric | Potential Impact |
+|-----|--------|-----------------|
+| EXT-3 (Prompt improvements) | Reduced asterisks, better alt text, no hallucination | All 100 files |
+| EXT-5 (Image bbox dedup) | Overlapping duplicate images removed | ~23 files |
+| EXT-9 (Blank page removal) | Boilerplate removed | ~3 files |
+| EXT-11 (2D position matching) | Swapped alt text fixed | ~7 files |
+| EXT-12 (Fallback rendering) | Missing images recovered | Up to 488 images in 44 files |
 
