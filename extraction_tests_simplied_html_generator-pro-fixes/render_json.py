@@ -56,6 +56,8 @@ def _md_to_html(text: str) -> str:
     # Unescape literal <u> and </u> tags that were in the source text
     html_text = html_text.replace("&lt;u&gt;", "<u>").replace("&lt;/u&gt;", "</u>")
 
+    # Bold+Italic: ***text*** -> <strong><em>text</em></strong> (must come FIRST)
+    html_text = re.sub(r"\*\*\*(.+?)\*\*\*", r"<strong><em>\1</em></strong>", html_text, flags=re.DOTALL)
     # Bold: **text** -> <strong>text</strong> (DOTALL to span newlines)
     html_text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", html_text, flags=re.DOTALL)
     # Italic: *text* -> <em>text</em> (but not inside <strong> tags)
@@ -81,6 +83,12 @@ def _md_to_html(text: str) -> str:
     # Only strip leading/trailing orphan ** or * that don't have a matching pair
     html_text = re.sub(r"^\s*\*{1,2}\s+", "", html_text)   # leading: "** text" -> "text"
     html_text = re.sub(r"\s+\*{1,2}\s*$", "", html_text)   # trailing: "text **" -> "text"
+
+    # Collapse spaced-out letters (e.g., "A P P . A Z . g o v" -> "APP.AZ.gov")
+    # Matches patterns where single chars are separated by spaces
+    def _collapse_spaced(m: re.Match) -> str:
+        return m.group(0).replace(" ", "")
+    html_text = re.sub(r"(?<![a-zA-Z])([a-zA-Z] ){3,}[a-zA-Z](?![a-zA-Z])", _collapse_spaced, html_text)
 
     # Preserve newlines
     html_text = html_text.replace("\n", "<br>")
@@ -276,6 +284,11 @@ def _remove_page_numbers(pages: list) -> int:
         r"^\s*\d+\s*\|\s*p\s*a\s*g\s*e\s*$",          # "3 | P a g e"
         r"^\s*\S+\s+page\s+\d+\s+of\s+\d+\b.*$",     # "00234464.25 Page 3 of 39 ..."
         r"^.*\|\s*page\s+\d+\s+of\s+\d+\s*\|.*$",    # "... | Page 37 of 39 | ..."
+        r"^.*\|\s*page\s+\d+\s+of\s+\d+\s*$",        # "... | Page 33 of 123" (no trailing pipe)
+        r"^.*\d+\s*\|\s*p\s*a\s*g\s*e\s*$",           # "Department of X 10 | P a g e"
+        r"^.*\d+\s*\|\s*p\s*a\s*g\s*$",               # Truncated: "Department of X 10 | P a g"
+        r"^.*\|\s*page\s+\d+\s*/\s*\d+\s*$",             # "... | Page 1/6"
+        r"^.*\|\s*page\s+\d+\s*$",                        # "... | Page 33"
     ]
     combined = re.compile("|".join(page_num_patterns), re.IGNORECASE)
 
@@ -453,32 +466,33 @@ def _infer_table_headers(pages: list) -> int:
 
 
 def _deduplicate_links(pages: list) -> int:
-    """Remove standalone link elements whose URL already appears in paragraph text on the same page."""
+    """Remove standalone link elements whose URL already appears in paragraph text or as a prior link."""
     count = 0
+
+    # First pass: collect ALL URLs mentioned in paragraphs/headings across ALL pages
+    global_text_urls: set[str] = set()
     for page in pages:
-        content = page.get("content", [])
-        # Collect all URLs mentioned in paragraphs and headings on this page
-        text_urls: set[str] = set()
-        for item in content:
+        for item in page.get("content", []):
             if item.get("type") in ("paragraph", "heading"):
                 text = item.get("text", "")
-                # Extract URLs from markdown links and raw URLs
                 for match in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", text):
-                    text_urls.add(match.group(2).strip().lower())
+                    global_text_urls.add(match.group(2).strip().lower())
                 for match in re.finditer(r"https?://\S+", text):
-                    text_urls.add(match.group(0).strip().lower())
+                    global_text_urls.add(match.group(0).strip().lower())
 
-        # Also collect URLs from link items themselves to find duplicates
-        seen_link_urls: set[str] = set()
+    # Second pass: remove duplicate link items (globally tracked)
+    global_seen_urls: set[str] = set()
+    for page in pages:
+        content = page.get("content", [])
         filtered = []
         for item in content:
             if item.get("type") == "link":
                 url = (item.get("url") or "").strip().lower()
-                # Remove if URL already in paragraph text or already seen as a link
-                if url in text_urls or url in seen_link_urls:
+                # Remove if URL already in paragraph text or already seen as a standalone link
+                if url in global_text_urls or url in global_seen_urls:
                     count += 1
                     continue
-                seen_link_urls.add(url)
+                global_seen_urls.add(url)
             filtered.append(item)
         page["content"] = filtered
     return count
@@ -628,7 +642,16 @@ def _render_image(item: dict) -> str:
         return f"<p>[Image: {alt_text}]</p>"
 
     if caption:
-        return f"<figure>{img_tag}<figcaption>{escape(caption)}</figcaption></figure>"
+        cap_stripped = caption.strip()
+        # Suppress meaningless figcaptions: very short (< 5 chars), pure numbers/percentages,
+        # or generic phrases that don't describe the image
+        is_meaningless = (
+            len(cap_stripped) < 5
+            or re.match(r"^\s*[\d,.%$]+\s*$", cap_stripped)
+            or cap_stripped.lower() in ("image", "figure", "photo", "logo", "icon")
+        )
+        if not is_meaningless:
+            return f"<figure>{img_tag}<figcaption>{escape(caption)}</figcaption></figure>"
     return img_tag
 
 
