@@ -33,6 +33,7 @@ from google.genai import types
 PROJECT_ID = "playground-439016"
 REGION = "global"  # so we can call Gemini 3
 GEMINI_MODEL = "gemini-3.1-pro-preview"
+GEMINI_MODEL_ALT_TEXT = 'gemini-3.1-flash-lite-preview'
 MAX_OUTPUT_TOKENS = 65500
 TEMPERATURE_EXTRACTION = 1.0  # Gemini 3.x default; lower values can cause looping/degradation
 TEMPERATURE_VALIDATION = 1.0  # Gemini 3.x default; lower values can cause looping/degradation
@@ -812,7 +813,7 @@ class PDFExtractor:
         )
 
         response = client.models.generate_content(
-            model=GEMINI_MODEL,
+            model=GEMINI_MODEL_ALT_TEXT,
             contents=[
                 types.Part.from_bytes(data=image_bytes, mime_type=mime_type),
                 prompt,
