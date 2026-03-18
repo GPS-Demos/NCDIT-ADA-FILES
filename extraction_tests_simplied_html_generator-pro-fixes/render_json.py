@@ -15,8 +15,9 @@ ADA remediation applied before rendering:
   - Running header/footer deduplication
   - Duplicate content removal (paragraphs, images)
   - Consecutive list merging
-  - Decorative image detection
+  - Decorative image detection (including role=presentation/none)
   - Table header inference (only explicit _is_header, NOT auto row-0)
+  - Table of Contents removal (page-number-based ToC is meaningless post-extraction)
   - Empty page removal
   - Ordered list duplicate number stripping
   - Markdown-to-HTML conversion in all text fields
@@ -154,6 +155,7 @@ def _apply_ada_remediation(data: dict) -> dict[str, int]:
     stats["consecutive_headings_merged"] = _merge_consecutive_headings(pages)
     stats["running_headers_deduped"] = _deduplicate_running_headers(pages)
     stats["page_numbers_removed"] = _remove_page_numbers(pages)
+    stats["toc_removed"] = _remove_table_of_contents(pages)
     stats["duplicate_content_removed"] = _deduplicate_content(pages)
     stats["images_deduped"] = _deduplicate_images(pages)
     stats["lists_merged"] = _merge_consecutive_lists(pages)
@@ -385,7 +387,12 @@ def _merge_consecutive_lists(pages: list) -> int:
 
 
 def _mark_decorative_images(pages: list) -> int:
-    """Mark images as decorative based on description, dimensions, AND content."""
+    """Mark images as decorative based on description, dimensions, AND content.
+
+    Also treats images with role="presentation" or role="none" as decorative —
+    these ARIA roles signal that the image conveys no information, so an empty
+    alt attribute is the correct ADA-compliant replacement.
+    """
     decorative_descriptions = {"", "decorative image"}
     generic_descriptions = {"unidentified image", "image", "logo"}
     count = 0
@@ -396,6 +403,13 @@ def _mark_decorative_images(pages: list) -> int:
                 b64 = item.get("base64_data") or ""
                 has_substantial_data = len(b64) > 500
                 bbox = item.get("bbox")
+
+                # role="presentation" / role="none" means explicitly decorative
+                role = (item.get("role") or "").strip().lower()
+                if role in ("presentation", "none"):
+                    item["_decorative"] = True
+                    count += 1
+                    continue
 
                 if desc in decorative_descriptions and not has_substantial_data:
                     item["_decorative"] = True
@@ -647,6 +661,113 @@ def _deduplicate_links(pages: list) -> int:
     return count
 
 
+def _remove_table_of_contents(pages: list) -> int:
+    """Remove Table of Contents sections from the document.
+
+    After PDF extraction page numbers are meaningless, so ToC entries serve no
+    purpose and introduce noise/hallucinations.
+
+    Detection:
+    - A heading whose text matches "table of contents", "contents", "toc", etc.
+    - All subsequent content items that look like ToC entries (text ending with
+      leader dots + page number, e.g. "Introduction......... 3") or short
+      continuations, up until a real section heading is encountered.
+    - Also detects "List of Figures", "List of Tables" appendices by the same rule.
+    """
+    toc_heading_re = re.compile(
+        r"^\s*(?:"
+        r"table\s+of\s+contents?"
+        r"|list\s+of\s+(?:figures?|tables?|illustrations?|exhibits?|appendix|appendices)"
+        r"|contents?"
+        r"|toc"
+        r")\s*$",
+        re.IGNORECASE,
+    )
+    # ToC entry: text ending with leader dots + number, or multiple spaces + number
+    toc_entry_re = re.compile(r"\.{2,}\s*\d+\s*$|\s{3,}\d+\s*$|\t\d+\s*$")
+
+    # Flatten all items with page/item indices for multi-page spanning
+    flat: list[tuple[int, int, dict]] = []
+    for pi, page in enumerate(pages):
+        for ii, item in enumerate(page.get("content", [])):
+            flat.append((pi, ii, item))
+
+    if not flat:
+        return 0
+
+    to_remove: set[tuple[int, int]] = set()
+    i = 0
+    while i < len(flat):
+        pi, ii, item = flat[i]
+        if item.get("type") == "heading" and toc_heading_re.match(item.get("text", "").strip()):
+            # Mark this heading for removal and scan forward for ToC entries
+            to_remove.add((pi, ii))
+            i += 1
+            while i < len(flat):
+                cpi, cii, cur = flat[i]
+                ctype = cur.get("type")
+                ctext = cur.get("text", "").strip()
+
+                if ctype == "heading":
+                    # Another ToC-style heading (e.g., "List of Figures") — consume it too
+                    if toc_heading_re.match(ctext):
+                        to_remove.add((cpi, cii))
+                        i += 1
+                        continue
+                    # Real section heading — end of ToC
+                    break
+
+                if ctype in ("paragraph", "header_footer"):
+                    if not ctext:
+                        to_remove.add((cpi, cii))
+                        i += 1
+                        continue
+                    if toc_entry_re.search(ctext):
+                        to_remove.add((cpi, cii))
+                        i += 1
+                        continue
+                    # Short unlabeled text (< 80 chars) inside ToC block — likely a
+                    # section label or continuation (e.g., "Appendix A")
+                    if len(ctext) < 80:
+                        to_remove.add((cpi, cii))
+                        i += 1
+                        continue
+                    # Substantial paragraph — end of ToC
+                    break
+
+                if ctype == "list":
+                    list_items = cur.get("items", [])
+                    if list_items:
+                        entry_count = sum(
+                            1 for li in list_items
+                            if toc_entry_re.search(
+                                (li.get("text", "") if isinstance(li, dict) else str(li)).strip()
+                            )
+                        )
+                        # If at least half the list items look like ToC entries, remove the list
+                        if entry_count >= max(1, len(list_items) // 2):
+                            to_remove.add((cpi, cii))
+                            i += 1
+                            continue
+                    # List doesn't look like ToC — end of ToC
+                    break
+
+                # Any other type (table, image, form, …) — end of ToC
+                break
+        else:
+            i += 1
+
+    if not to_remove:
+        return 0
+
+    # Apply removals
+    for pi, page in enumerate(pages):
+        content = page.get("content", [])
+        page["content"] = [item for ii, item in enumerate(content) if (pi, ii) not in to_remove]
+
+    return len(to_remove)
+
+
 def _remove_boilerplate(pages: list) -> int:
     """Remove boilerplate content like 'page intentionally left blank'."""
     boilerplate_patterns = [
@@ -731,7 +852,10 @@ def _render_table(item: dict) -> str:
                     continue
                 covered.add((r + dr, col + dc))
 
-    caption = item.get("caption") or item.get("title") or ""
+    # aria_label on a table is the accessible name — map it to <caption> when
+    # no explicit caption/title is present (aria-label is stripped from output
+    # per our no-ARIA policy, so <caption> is the semantic replacement).
+    caption = item.get("caption") or item.get("title") or item.get("aria_label") or ""
     caption_html = f"<caption>{escape(caption)}</caption>" if caption else ""
 
     # Trim trailing empty rows: find the last row where at least one cell has content
@@ -759,6 +883,16 @@ def _render_table(item: dict) -> str:
             is_header = cell.get("_is_header", False)
             tag = "th" if is_header else "td"
             attrs = ""
+
+            if is_header:
+                # scope="col" for row-0 column headers; scope="row" for column-0
+                # row headers. scope is essential for screen reader navigation.
+                cell_row = cell.get("row_start", 0)
+                cell_col = cell.get("column_start", 0)
+                if cell_row == 0:
+                    attrs += ' scope="col"'
+                elif cell_col == 0:
+                    attrs += ' scope="row"'
 
             rs = cell.get("num_rows", cell.get("row_span", 1)) or 1
             cs = cell.get("num_columns", cell.get("column_span", 1)) or 1
@@ -1001,11 +1135,14 @@ def render_document(data: dict) -> str:
 
     body_html = "\n".join(body_lines)
 
-    # Raw simple HTML — no stylesheets, no ARIA, no roles
+    # Raw simple HTML — no stylesheets, no ARIA, no roles.
+    # viewport meta belongs here in <head> (not in the JSON payload) and is
+    # required for mobile accessibility / responsive layout.
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)}</title>
 </head>
 <body>
