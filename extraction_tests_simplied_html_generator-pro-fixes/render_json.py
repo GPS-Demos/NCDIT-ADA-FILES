@@ -141,6 +141,48 @@ def _detect_list_style(items: list) -> str:
     return "1"
 
 
+def _letter_to_int(letter: str) -> int:
+    """Convert a single letter to its 1-based alphabet position (a/A=1, b/B=2, …)."""
+    c = letter.strip().lower()
+    if len(c) == 1 and c.isalpha():
+        return ord(c) - ord("a") + 1
+    return 1
+
+
+def _roman_to_int(s: str) -> int:
+    """Convert a roman numeral string to an integer (case-insensitive)."""
+    vals = {"i": 1, "v": 5, "x": 10, "l": 50, "c": 100, "d": 500, "m": 1000}
+    result, prev = 0, 0
+    for ch in reversed(s.lower().strip()):
+        v = vals.get(ch, 0)
+        result = result - v if v < prev else result + v
+        prev = v
+    return result
+
+
+def _list_item_ordinal(text: str) -> tuple[str, int] | None:
+    """Return (style, ordinal_int) for the leading prefix of an ordered list item.
+
+    style is '1', 'a', 'A', 'i', or 'I'.  Returns None if no recognized prefix.
+    """
+    t = text.strip()
+    m = re.match(r"^\s*\(?(\d+)[.)]\)?", t)
+    if m:
+        return ("1", int(m.group(1)))
+    m = re.match(r"^\s*\(?([a-z])[.)]\)?", t)
+    if m:
+        return ("a", _letter_to_int(m.group(1)))
+    m = re.match(r"^\s*\(?([A-Z])[.)]\)?", t)
+    if m:
+        return ("A", _letter_to_int(m.group(1)))
+    m = re.match(r"^\s*\(?([ivxlcdm]+)[.)]\)?", t, re.IGNORECASE)
+    if m:
+        raw = m.group(1)
+        style = "I" if raw[0].isupper() else "i"
+        return (style, _roman_to_int(raw))
+    return None
+
+
 # ---------------------------------------------------------------------------
 # ADA remediation — operates on the raw JSON data (list of pages)
 # ---------------------------------------------------------------------------
@@ -159,6 +201,7 @@ def _apply_ada_remediation(data: dict) -> dict[str, int]:
     stats["duplicate_content_removed"] = _deduplicate_content(pages)
     stats["images_deduped"] = _deduplicate_images(pages)
     stats["lists_merged"] = _merge_consecutive_lists(pages)
+    stats["lists_merged"] += _merge_consecutive_lists_across_pages(pages)
     stats["decorative_images_marked"] = _mark_decorative_images(pages)
     stats["table_headers_inferred"] = _infer_table_headers(pages)
     stats["duplicate_links_removed"] = _deduplicate_links(pages)
@@ -202,14 +245,32 @@ def _normalize_heading_hierarchy(pages: list) -> int:
     return count
 
 
+_DATE_HEADING_RE = re.compile(
+    r"^\s*(?:"
+    # Day of week (optional) + full date with month name
+    r"(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)[,\s]+"
+    r"(?:january|february|march|april|may|june|july|august|september|october|november|december)"
+    r"|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b"
+    # Pure year or "October 7, 2025" style
+    r"|\b\d{4}\b"
+    r")\s*",
+    re.IGNORECASE,
+)
+
+
 def _merge_consecutive_headings(pages: list) -> int:
-    """Merge consecutive headings of the same level into a single heading.
+    """Merge consecutive headings of the same level ONLY when the second is a date.
 
     Fixes cases like:
       <h2>NORTH CAROLINA 911 BOARD MEETING</h2>
       <h2>Wednesday, August 14, 2019</h2>
     Becomes:
       <h2>NORTH CAROLINA 911 BOARD MEETING — Wednesday, August 14, 2019</h2>
+
+    NOT merged: independent section headings that happen to be adjacent on the
+    same page (e.g., PowerPoint slide title + sub-section header).  Only the
+    date-subtitle pattern is merged to avoid incorrect concatenation of
+    logically separate headings.
     """
     count = 0
     for page in pages:
@@ -221,12 +282,14 @@ def _merge_consecutive_headings(pages: list) -> int:
             prev = merged[-1]
             if (item.get("type") == "heading" and prev.get("type") == "heading"
                     and item.get("level") == prev.get("level")):
-                prev_text = prev.get("text", "").strip()
                 item_text = item.get("text", "").strip()
-                prev["text"] = prev_text + " — " + item_text
-                count += 1
-            else:
-                merged.append(item)
+                # Only merge when the second heading looks like a date/time subtitle
+                if _DATE_HEADING_RE.match(item_text):
+                    prev_text = prev.get("text", "").strip()
+                    prev["text"] = prev_text + " — " + item_text
+                    count += 1
+                    continue
+            merged.append(item)
         page["content"] = merged
     return count
 
@@ -386,6 +449,44 @@ def _merge_consecutive_lists(pages: list) -> int:
     return count
 
 
+def _merge_consecutive_lists_across_pages(pages: list) -> int:
+    """Merge ordered lists that span PDF page breaks.
+
+    When a numbered/lettered list is split across PDF pages, the JSON has two
+    separate list objects on consecutive pages.  This merges them when the
+    second list's first item is the direct continuation of the first list's
+    last item (e.g., ends at "f." and continues at "g.").
+    """
+    count = 0
+    for i in range(len(pages) - 1):
+        content1 = pages[i].get("content", [])
+        content2 = pages[i + 1].get("content", [])
+        if not content1 or not content2:
+            continue
+        last = content1[-1]
+        first = content2[0]
+        if (last.get("type") != "list" or first.get("type") != "list"):
+            continue
+        if last.get("list_type") != first.get("list_type"):
+            continue
+        last_items = last.get("items", [])
+        first_items = first.get("items", [])
+        if not last_items or not first_items:
+            continue
+        last_text = (last_items[-1].get("text", "") if isinstance(last_items[-1], dict)
+                     else str(last_items[-1])).strip()
+        first_text = (first_items[0].get("text", "") if isinstance(first_items[0], dict)
+                      else str(first_items[0])).strip()
+        last_ord = _list_item_ordinal(last_text)
+        first_ord = _list_item_ordinal(first_text)
+        if last_ord and first_ord and last_ord[0] == first_ord[0]:
+            if first_ord[1] == last_ord[1] + 1:
+                last["items"].extend(first_items)
+                content2.pop(0)
+                count += 1
+    return count
+
+
 def _mark_decorative_images(pages: list) -> int:
     """Mark images as decorative based on description, dimensions, AND content.
 
@@ -410,6 +511,20 @@ def _mark_decorative_images(pages: list) -> int:
                     item["_decorative"] = True
                     count += 1
                     continue
+
+                # Full-page screenshots: bbox covers ≥95% of a standard PDF page
+                # (612×792 pt = 484,704 sq pt).  These are fallback captures by
+                # the extraction pipeline and duplicate all the text already
+                # extracted from the same page — suppress them.
+                if bbox:
+                    w = bbox.get("x1", 0) - bbox.get("x0", 0)
+                    h = bbox.get("y1", 0) - bbox.get("y0", 0)
+                    area = w * h
+                    _STANDARD_PAGE_AREA = 612 * 792  # letter-size PDF
+                    if area >= _STANDARD_PAGE_AREA * 0.90:
+                        item["_decorative"] = True
+                        count += 1
+                        continue
 
                 if desc in decorative_descriptions and not has_substantial_data:
                     item["_decorative"] = True
@@ -544,8 +659,25 @@ def _deduplicate_links(pages: list) -> int:
 
     Also fixes broken links: when a link has display text as its URL (e.g., href="CLICK HERE")
     and another link with the same display text has a valid URL, the broken one gets corrected.
+
+    Also strips URLs that Gemini appended to the display text:
+      "CLICK HERE https://example.com" → "CLICK HERE" (with real href)
     """
     count = 0
+
+    # Pre-pass 0: strip URLs Gemini appended to link display text.
+    # Pattern: "<display text> <url>" where the appended URL matches the href.
+    _url_suffix_re = re.compile(r"\s+https?://\S+$")
+    for page in pages:
+        for item in page.get("content", []):
+            if item.get("type") == "link":
+                text = (item.get("text") or "").strip()
+                url = (item.get("url") or "").strip()
+                if url and _url_suffix_re.search(text):
+                    # If text ends with the URL, strip it from display text
+                    stripped = _url_suffix_re.sub("", text).strip()
+                    if stripped:
+                        item["text"] = stripped
 
     # Pre-pass: fix broken link URLs by finding correct URLs for the same display text.
     # Build a map: normalized display text -> correct URL (from any link with a real URL)
@@ -828,7 +960,7 @@ def _render_table(item: dict) -> str:
     cells = item.get("cells", [])
     if not cells:
         caption = item.get("caption") or item.get("title") or "Empty table"
-        return f"<table><caption>{escape(caption)}</caption><tr><td>(empty table)</td></tr></table>"
+        return f"<table><caption>{_md_to_html(caption)}</caption><tr><td>(empty table)</td></tr></table>"
 
     max_row = max(c.get("row_start", 0) for c in cells)
     max_col = max(c.get("column_start", 0) for c in cells)
@@ -856,7 +988,8 @@ def _render_table(item: dict) -> str:
     # no explicit caption/title is present (aria-label is stripped from output
     # per our no-ARIA policy, so <caption> is the semantic replacement).
     caption = item.get("caption") or item.get("title") or item.get("aria_label") or ""
-    caption_html = f"<caption>{escape(caption)}</caption>" if caption else ""
+    # Use _md_to_html (not bare escape) so **bold** in captions renders correctly
+    caption_html = f"<caption>{_md_to_html(caption)}</caption>" if caption else ""
 
     # Trim trailing empty rows: find the last row where at least one cell has content
     last_content_row = max_row
@@ -957,13 +1090,15 @@ def _render_list(item: dict) -> str:
         style = _detect_list_style(items)
         if style != "1":
             ol_attrs += f' type="{style}"'
-        # Detect start number from first item
+        # Detect start value from first item for ALL styles (numeric, letter, roman).
+        # This handles lists that continue from a previous page after being split
+        # at a PDF page boundary (e.g., a list that starts at "g." on page 2).
         if items:
             first_text = items[0].get("text", "") if isinstance(items[0], dict) else str(items[0])
             first_text = first_text.strip()
-            m = re.match(r"^\s*\(?(\d+)[.)]\)?", first_text)
-            if m and int(m.group(1)) > 1:
-                ol_attrs += f' start="{m.group(1)}"'
+            ord_info = _list_item_ordinal(first_text)
+            if ord_info and ord_info[1] > 1:
+                ol_attrs += f' start="{ord_info[1]}"'
 
     items_html = ""
     for li in item.get("items", []):
