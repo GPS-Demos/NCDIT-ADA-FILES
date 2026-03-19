@@ -1,0 +1,99 @@
+{
+  "document_id": "text-background-colors-53e2",
+  "audited_at": "2026-03-19T18:15:50.135269Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/text-background-colors-53e2/text-background-colors-53e2.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/text-background-colors-53e2/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/text-background-colors-53e2/text-background-colors-53e2.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite very strong programmatic metrics (0.965 recall) and high LLM composite score (0.9167), the HTML includes an image at the end of the document that duplicates the extracted text of page 2. This violates the explicit structural exclusion rule against full-page scanned images duplicated alongside extracted text, requiring manual intervention to remove the redundant image.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "The HTML output includes the extracted text of page 2 as paragraphs, but it also includes an image at the very end of the document that visually contains the exact same text content (described in the alt text as listing the NC.gov portal, the FCC's Affordable Connectivity Plan, the NCID service, and the AddressNC project). This results in the user seeing the same content twice: once as extracted HTML text and once as a rendered image.",
+      "source_pdf_quote": "Launched a new version of NC.gov... Enrolled more than 650,000 residents in the FCC's Affordable Connectivity Plan... Updated the N.C. Identification Management (NCID) service...",
+      "output_quote": "<img src=\"[base64 image stripped for token budget]\" alt=\"A dark blue background displays white text listing several North Carolina state technology initiatives, including updates to the NC.gov portal, the FCC&#x27;s Affordable Connectivity Plan, the NCID service, and the AddressNC project.\">",
+      "location": "End of document / Page 2 content",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "1 bare URL(s) in text not converted to hyperlinks: NC.gov",
+      "severity": "minor",
+      "analysis": "bare_url_count=1. URLs appear as plain text instead of clickable links.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove the redundant image containing the duplicated text of page 2.",
+    "Convert the bare 'NC.gov' text into a clickable hyperlink."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9646504320502749,
+      "shingling_precision": 0.9761526232114467,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9615384615384616,
+      "baseline_words": 728,
+      "gemini_words": 700,
+      "table_count_ratio": null,
+      "image_count_ratio": null,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 171688,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
