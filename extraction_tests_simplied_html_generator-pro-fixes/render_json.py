@@ -33,12 +33,24 @@ Usage:
 """
 
 import argparse
+import base64
 import hashlib
+import io
 import json
 import re
 import sys
 from html import escape
 from pathlib import Path
+
+try:
+    from PIL import Image as _PILImage
+    _PIL_AVAILABLE = True
+except ImportError:
+    _PIL_AVAILABLE = False
+
+# Maximum pixel width for embedded images. Images wider than this are scaled
+# down proportionally so they always fit within a standard page viewport.
+_IMAGE_MAX_WIDTH = 900
 
 
 # ---------------------------------------------------------------------------
@@ -1041,6 +1053,31 @@ def _render_table(item: dict) -> str:
     return html
 
 
+def _scale_image_b64(b64: str, fmt: str) -> tuple[str, str]:
+    """Scale down a base64-encoded image if its width exceeds _IMAGE_MAX_WIDTH.
+
+    Returns (new_b64, new_fmt). If PIL is unavailable or scaling fails,
+    returns the original (b64, fmt) unchanged.
+    """
+    if not _PIL_AVAILABLE or not b64:
+        return b64, fmt
+    try:
+        raw = base64.b64decode(b64)
+        img = _PILImage.open(io.BytesIO(raw))
+        if img.width <= _IMAGE_MAX_WIDTH:
+            return b64, fmt
+        new_h = int(img.height * _IMAGE_MAX_WIDTH / img.width)
+        img = img.resize((_IMAGE_MAX_WIDTH, new_h), _PILImage.LANCZOS)
+        buf = io.BytesIO()
+        save_fmt = "PNG" if fmt.lower() not in ("jpeg", "jpg") else "JPEG"
+        img.save(buf, format=save_fmt)
+        new_b64 = base64.b64encode(buf.getvalue()).decode("ascii")
+        new_fmt = "png" if save_fmt == "PNG" else "jpeg"
+        return new_b64, new_fmt
+    except Exception:
+        return b64, fmt
+
+
 def _render_image(item: dict) -> str:
     desc = _s(item.get("description"))
     caption = _s(item.get("caption"))
@@ -1050,6 +1087,7 @@ def _render_image(item: dict) -> str:
     )
     b64 = item.get("base64_data", "")
     fmt = item.get("format", "png")
+    b64, fmt = _scale_image_b64(b64, fmt)
 
     if is_decorative:
         if b64:
@@ -1270,15 +1308,19 @@ def render_document(data: dict) -> str:
 
     body_html = "\n".join(body_lines)
 
-    # Raw simple HTML — no stylesheets, no ARIA, no roles.
-    # viewport meta belongs here in <head> (not in the JSON payload) and is
-    # required for mobile accessibility / responsive layout.
+    # Raw simple HTML — no ARIA, no roles.
+    # viewport meta and the img style rule are required for responsive layout
+    # and to prevent large images from overflowing their containers.
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)}</title>
+<style>
+img {{ display: block; max-width: 100%; height: auto; }}
+figure {{ max-width: 100%; }}
+</style>
 </head>
 <body>
 {body_html}

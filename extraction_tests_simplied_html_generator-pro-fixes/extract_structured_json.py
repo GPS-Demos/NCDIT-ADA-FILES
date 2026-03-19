@@ -1250,42 +1250,95 @@ class PDFExtractor:
         self, pdf_path: Path, page_num: int, position: str,
         page_height: float, page_width: float
     ) -> Optional[str]:
-        """Render a page region as fallback when PyMuPDF can't extract the image.
+        """Render the image region of a page, excluding surrounding text blocks.
 
-        Uses pypdfium2 to render the approximate region where Gemini detected
-        an image, based on the position string (e.g., "top-center", "middle-left").
+        Uses PyMuPDF text block analysis to detect where body text starts/ends
+        around the image, then crops to just the image region.  This prevents
+        duplicating OCR'd text that Gemini will also extract as structured text.
+
+        Algorithm:
+        1. Extract all text blocks from the page.
+        2. Cluster nearby blocks into "regions" (merge gap ≤ 60 pt).
+        3. A region is "substantial" if its longest single block ≥ 120 chars.
+        4. Derive a vertical center (v_center) from the position label.
+        5. y_crop_start = y1 of the last substantial region *before* v_center
+           (0 if v_pos=="top", to avoid clipping chart tops).
+        6. y_crop_end = y0 of the first substantial region *after* v_center
+           (page bottom if none found).
+        7. Render full-page-width crop at RENDER_SCALE and return as PNG b64.
 
         Returns:
             Base64-encoded PNG string, or None if rendering fails.
         """
+        MERGE_GAP = 60      # pt: merge text blocks within this vertical gap
+        SUBSTANTIAL = 120   # chars: min longest-single-block to count as body text
+
         try:
-            # Parse position to get approximate region
-            v_ranges = {
-                "top": (0, page_height / 3),
-                "middle": (page_height / 3, 2 * page_height / 3),
-                "bottom": (2 * page_height / 3, page_height),
-            }
-            h_ranges = {
-                "left": (0, page_width / 3),
-                "center": (page_width / 6, 5 * page_width / 6),  # wider center
-                "right": (2 * page_width / 3, page_width),
-            }
-
-            parts = position.split("-") if "-" in position else [position]
-            v_pos = parts[0] if parts[0] in v_ranges else "middle"
-            h_pos = parts[1] if len(parts) > 1 and parts[1] in h_ranges else "center"
-
-            y0, y1 = v_ranges[v_pos]
-            x0, x1 = h_ranges[h_pos]
-
-            # Render the page and crop to the region
             doc = fitz.open(str(pdf_path))
             page = doc[page_num]
-            clip = fitz.Rect(x0, y0, x1, y1)
+            page_rect = page.rect  # fitz.Rect with .y0, .y1, .x0, .x1
+
+            # --- Parse position label into vertical position hint ---
+            pos_lower = position.lower()
+            if "top" in pos_lower:
+                v_pos = "top"
+                v_center = page_rect.height * 0.20
+            elif "bottom" in pos_lower:
+                v_pos = "bottom"
+                v_center = page_rect.height * 0.80
+            else:
+                v_pos = "middle"
+                v_center = page_rect.height * 0.50
+
+            # --- Collect text blocks: (y0, y1, text) ---
+            raw_blocks = []
+            for blk in page.get_text("blocks"):
+                # blocks: (x0, y0, x1, y1, text, block_no, block_type)
+                # block_type 0 = text, 1 = image
+                if len(blk) >= 7 and blk[6] == 0:
+                    y0, y1, text = blk[1], blk[3], blk[4]
+                    if text.strip():
+                        raw_blocks.append((y0, y1, text))
+            raw_blocks.sort(key=lambda b: b[0])
+
+            # --- Cluster into regions ---
+            regions = []  # list of [y0, y1, max_single_block_chars]
+            for y0, y1, text in raw_blocks:
+                nch = len(text.strip())
+                if regions and y0 - regions[-1][1] <= MERGE_GAP:
+                    regions[-1][1] = max(regions[-1][1], y1)
+                    regions[-1][2] = max(regions[-1][2], nch)
+                else:
+                    regions.append([y0, y1, nch])
+
+            # --- Determine crop boundaries ---
+            # y_crop_start: bottom of last substantial region before v_center
+            y_crop_start = 0.0
+            if v_pos != "top":
+                for (ry0, ry1, max_nch) in regions:
+                    if ry0 < v_center and max_nch >= SUBSTANTIAL:
+                        y_crop_start = ry1
+
+            # y_crop_end: top of first substantial region after v_center
+            y_crop_end = float(page_rect.y1)
+            for (ry0, ry1, max_nch) in regions:
+                if ry0 > v_center and max_nch >= SUBSTANTIAL:
+                    y_crop_end = ry0
+                    break
+
+            # Clamp to page bounds
+            y_crop_start = max(0.0, y_crop_start)
+            y_crop_end = min(float(page_rect.y1), y_crop_end)
+            if y_crop_end <= y_crop_start:
+                # Fallback: render entire page if crop is degenerate
+                y_crop_start = 0.0
+                y_crop_end = float(page_rect.y1)
+
+            # --- Render the crop ---
+            clip = fitz.Rect(page_rect.x0, y_crop_start, page_rect.x1, y_crop_end)
             mat = fitz.Matrix(RENDER_SCALE, RENDER_SCALE)
             pix = page.get_pixmap(matrix=mat, clip=clip)
             doc.close()
-
             png_bytes = pix.tobytes("png")
             return base64.b64encode(png_bytes).decode("utf-8")
         except Exception:
