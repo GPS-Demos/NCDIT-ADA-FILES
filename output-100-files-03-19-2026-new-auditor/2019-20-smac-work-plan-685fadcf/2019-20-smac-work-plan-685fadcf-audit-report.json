@@ -1,0 +1,123 @@
+{
+  "document_id": "2019-20-smac-work-plan-685fadcf",
+  "audited_at": "2026-03-19T17:53:37.276744Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/2019-20-smac-work-plan-685fadcf/2019-20-smac-work-plan-685fadcf.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/2019-20-smac-work-plan-685fadcf/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/2019-20-smac-work-plan-685fadcf/2019-20-smac-work-plan-685fadcf.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite excellent fidelity scores (0.9167 composite) and high content preservation (0.972 shingling recall), programmatic signals detected retained header, footer, and page number elements in the HTML output. Per routing instructions, documents with retained headers/footers must not be auto-approved, as they disrupt screen reader flow and accessibility. The document is routed to human review to remove these artifacts.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF uses italic formatting to emphasize specific program and system names within the table cells (e.g., 'NC Parcels', 'NC OneMap', 'AddressNC', 'NC Roads'). In the rendered HTML output, these terms appear as plain unstyled text without any <em> or <i> tags. Because this formatting represents a stylistic convention for program names and its absence does not impede comprehension, this is logged as a minor defect.",
+      "source_pdf_quote": "assist the NC Parcels Program (with 'NC Parcels' in italics)",
+      "output_quote": "assist the NC Parcels Program (plain text)",
+      "location": "Major Tasks Numbered by Objective table, Row 2.1",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (3): NC GICC; FY 2019-2020; Page **1** of 3",
+      "severity": "major",
+      "analysis": "header_footer_count=3. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"work plan\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"statewide mapping advisory committee\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained headers, footers, and page numbers from the HTML output",
+    "Restore italic formatting to specific program and system names where appropriate"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9718433787945446,
+      "shingling_precision": 0.9883668903803132,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.958179581795818,
+      "baseline_words": 813,
+      "gemini_words": 779,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 249515,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

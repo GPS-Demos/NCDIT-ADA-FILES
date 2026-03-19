@@ -1,0 +1,99 @@
+{
+  "document_id": "screenshot-images-11b5",
+  "audited_at": "2026-03-19T18:14:03.806425Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/screenshot-images-11b5/screenshot-images-11b5.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/screenshot-images-11b5/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/screenshot-images-11b5/screenshot-images-11b5.html"
+  },
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.8967,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Although the document has excellent text extraction scores (shingling recall 0.992, word count ratio 1.0), the LLM fidelity tool identified a major structural issue where images are placed next to the wrong instructional text. According to the strict routing rules, documents with images placed next to wrong text or out of order must not be auto-approved, regardless of high fidelity scores.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Images placed next to wrong text",
+      "severity": "major",
+      "analysis": "Almost all images in the HTML output are positioned next to the wrong instructional text, creating a highly confusing guide. For example, the first instruction to click the computer icon is followed by an image of the quick settings menu, while the small taskbar icon image appears after step 4. Later, the 'Login successful screen will appear' text is followed by a screenshot showing 'No internet, secured', while the actual successful login portal image appears at the very end.",
+      "source_pdf_quote": "In the source PDF, the text 'Click on Computer Icon in bottom right of screen to open options' is immediately followed by a small screenshot of the Windows taskbar icons (chevron, monitor, speaker).",
+      "output_quote": "In the HTML output, the text 'Click on Computer Icon in bottom right of screen to open options' is followed by an image with alt text 'A Windows 11 quick settings menu panel...'. The taskbar image appears much later, after the text 'Press “Connect” on this screen'.",
+      "location": "Throughout the document (e.g., under 'Click on Computer Icon...', 'Login successful screen will appear')",
+      "source": "fidelity_llm",
+      "check_id": "V4",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The reading order of text and images is significantly jumbled throughout the document, disconnecting instructions from their corresponding screenshots. For example, on Page 1, the instruction to click the computer icon is immediately followed by an image of the quick settings menu (which is the second image in the source), while the actual image of the computer icon is pushed to the very end of the page's content array. This misordering occurs on pages 1, 2, and 3.",
+      "source_pdf_quote": "Paragraph \"Click on Computer Icon in bottom right of screen to open options\" is immediately followed by a small screenshot of the taskbar icons.",
+      "output_quote": "Paragraph \"Click on Computer Icon in bottom right of screen to open options\" is immediately followed by an image with description \"A Windows 11 quick settings menu panel displays...\". The image of the taskbar icons is placed at the end of the array after the fourth text instruction.",
+      "location": "Page 1",
+      "source": "fidelity_llm",
+      "check_id": "S4",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Check the sequence of instructions and their corresponding screenshots",
+    "Reorder images to match the correct text steps as seen in the source document"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8967,
+      "raw_score": 0.8967,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8967,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9922178988326849,
+      "shingling_precision": 0.9922178988326849,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 122,
+      "gemini_words": 122,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 184585,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "document_id": "seal-image-table-6870",
+  "audited_at": "2026-03-19T18:09:33.867414Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-image-table-6870/seal-image-table-6870.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-image-table-6870/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-image-table-6870/seal-image-table-6870.html"
+  },
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6666666666666667,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite strong overall fidelity scores and excellent text recall, the document exhibits three specific structural defects that explicitly block auto-approval: broken heading hierarchy, displaced hyperlinks, and retained header/footer elements. Because these issues degrade document accessibility, human intervention is required to correct the structure.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "In the source PDF, the headings 'Authorized Vendors', 'Minimum Orders', 'Abnormal Quantity', 'Transportation Charges', 'Delivery', 'Warranty', 'Taxes', and 'History:' share the exact same visual styling (bold, underlined) and represent sequential terms/sections of the contract. They are logical siblings. However, the output assigns 'Authorized Vendors' as an H2, while downgrading the subsequent sections ('Minimum Orders' through 'History:') to H3s. This incorrectly nests the latter sections unde",
+      "source_pdf_quote": "Visual siblings: 'Authorized Vendors', 'Minimum Orders', 'Abnormal Quantity', 'Transportation Charges', 'Delivery', 'Warranty', 'Taxes', 'History:'",
+      "output_quote": "\"type\": \"heading\", \"level\": 2, \"text\": \"Authorized Vendors\"\n...\n\"type\": \"heading\", \"level\": 3, \"text\": \"Minimum Orders\"\n...\n\"type\": \"heading\", \"level\": 3, \"text\": \"Abnormal Quantity\"",
+      "location": "Page 2",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Displaced hyperlinks: 3 link(s) extracted as standalone elements instead of inline text",
+      "severity": "major",
+      "analysis": "standalone_links=3, examples=['https://itservices.nc.gov/services/collaboration-communicati', 'mailto:sandra.rosser@nc.gov', 'https://it.nc.gov/services/service-directory/telephony/cellu']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (2): 2024-03-14; Page 1 of 3",
+      "severity": "major",
+      "analysis": "header_footer_count=2. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Adjust heading levels (H2/H3) so that sequential terms of the contract are logical siblings.",
+    "Re-embed the 3 standalone hyperlinks inline within their respective paragraphs.",
+    "Remove the retained header/footer text (e.g., '2024-03-14', 'Page 1 of 3')."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9,
+      "raw_score": 0.9,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6666666666666667,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9717344753747323,
+      "shingling_precision": 0.956173619890434,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9802816901408451,
+      "baseline_words": 710,
+      "gemini_words": 696,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 4,
+      "output_link_count": 3,
+      "link_count_ratio": 0.75,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 180062,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
