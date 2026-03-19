@@ -1,0 +1,96 @@
+{
+  "document_id": "mo-minutes-20160620-686133d2",
+  "audited_at": "2026-03-19T07:22:03.696573Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/mo-minutes-20160620-686133d2/mo-minutes-20160620-686133d2.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/mo-minutes-20160620-686133d2/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/mo-minutes-20160620-686133d2/mo-minutes-20160620-686133d2.html"
+  },
+  "quality_score": 81,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.8095,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6428571428571428,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While programmatic signals show excellent content preservation (recall 0.977) and the content score is a perfect 1.0, the LLM fidelity evaluation identified broken heading hierarchies where headings were misclassified as plain text paragraphs. The routing instructions explicitly forbid auto-approval when headings are misclassified as paragraphs, as this breaks accessibility structure. Therefore, human review is required to fix the heading tags.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The output contains several heading inconsistencies. Most notably, paragraphs that act as clear section headings in the source are incorrectly rendered as plain text paragraphs. Under section 3 (Quick Updates), the first two items ('a. 911/NG911 in the Media' and 'b. AddressNC and Census Geospatial Data') are correctly identified as H4 headings on page 1. However, the continuation of these exact same sibling subsections on page 2 ('b. Orthoimagery', 'c. NC OneMap', and 'd. NC Parcels') are rende",
+      "source_pdf_quote": "b. Orthoimagery",
+      "output_quote": "{\"type\": \"paragraph\", \"text\": \"b. Orthoimagery\"}",
+      "location": "Page 2, element index 1",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "I examined the source PDF for meaningful text formatting. Several subheadings in the PDF are formatted with an underline to denote a new section (e.g., 'a. 911/NG911 in the Media', 'b. Orthoimagery', 'c. NC OneMap', 'd. NC Parcels'). In the HTML output, this underline formatting is stripped entirely. While some of these were converted to heading tags (like <h4>), others like 'b. Orthoimagery' were converted to standard <p> tags with no styling, completely losing their visual distinction as secti",
+      "source_pdf_quote": "b. Orthoimagery (Underlined in the PDF source to denote a section header)",
+      "output_quote": "<p>b. Orthoimagery</p> (No underline or emphasis styling applied)",
+      "location": "Page 2, section under '3. Quick Updates'",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Review section 3 (Quick Updates) and ensure all subsections (e.g., Orthoimagery, NC OneMap) are correctly tagged with appropriate heading levels.",
+    "Verify that structural hierarchies are maintained across page breaks."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8095,
+      "raw_score": 0.8095,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8095,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6428571428571428,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9768534632788026,
+      "shingling_precision": 0.9911707575490023,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9767195767195768,
+      "baseline_words": 2835,
+      "gemini_words": 2769,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 193218,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "document_id": "gicc-smac-agenda-20210120-68839aac",
+  "audited_at": "2026-03-19T06:45:16.705134Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-smac-agenda-20210120-68839aac/gicc-smac-agenda-20210120-68839aac.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-smac-agenda-20210120-68839aac/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-smac-agenda-20210120-68839aac/gicc-smac-agenda-20210120-68839aac.html"
+  },
+  "quality_score": 77,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7667,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document shows moderate LLM fidelity (0.7667) but weak structural integrity (0.5) and low programmatic recall (0.736) along with a low word count ratio (0.69). Multiple structural issues are identified, including misplaced links affecting reading order and flattened nested lists, which warrant human review to ensure logical flow and accessibility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Link injection issues",
+      "severity": "major",
+      "analysis": "The URL 'www.nconemap.gov/pages/metadata' is clearly visible in the source document under the Metadata Committee list item, but it is not rendered as a clickable link element in the output, just as plain text.",
+      "source_pdf_quote": "(www.nconemap.gov/pages/metadata)",
+      "output_quote": "Update on refresh of documents/tools on NC OneMap (www.nconemap.gov/pages/metadata)",
+      "location": "Metadata Committee list item",
+      "source": "fidelity_llm",
+      "check_id": "S7",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source document extensively uses italic text to distinguish the names of datasets, working groups, and specific topics from the names of the associated presenters (e.g., 'Orthoimagery', 'Cadastral', 'Hydrography Working Group'). The HTML output completely strips all of this italic formatting, rendering all list item text identically. While the presence of a hyphen prevents total loss of comprehension, the visual distinction and emphasis on the key terms are lost.",
+      "source_pdf_quote": "Orthoimagery - Ben Shelton",
+      "output_quote": "<li>Orthoimagery - Ben Shelton</li>",
+      "location": "Framework+ Datasets list item",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The link 'minutes', which belongs to the first list item under 'Welcome/Introductions', is placed at the very end of the document, completely separated from its context.",
+      "source_pdf_quote": "Approval of October 14, 2020 minutes",
+      "output_quote": "{\"type\": \"link\", \"text\": \"minutes\", \"url\": \"https://files.nc.gov/ncdit/GICC-SMAC-Minutes-20201014.pdf\"}",
+      "location": "End of document output",
+      "source": "fidelity_llm",
+      "check_id": "S4",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Under 'NC Board on Geographic Names - Cam McNutt', the items 'Simone Mountain' and 'Stiles Mountain' are visually indented as nested sub-points under 'SMAC Discussion and Approval' in the source. In the output, they are rendered at the same level as siblings, losing the nested hierarchy and retaining bullet characters in the text.",
+      "source_pdf_quote": "o SMAC Discussion and Approval\n▪ Simone Mountain\n▪ Stiles Mountain",
+      "output_quote": "{\"text\": \"SMAC Discussion and Approval\"}, {\"text\": \"▪ Simone Mountain\"}, {\"text\": \"▪ Stiles Mountain\"}",
+      "location": "Working Groups list",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Check reading order and relocate the 'minutes' link to its proper context",
+    "Restore nested list hierarchy under the Geographic Names section",
+    "Verify if unlinked URLs need to be converted to anchor tags"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.7667,
+      "raw_score": 0.7667,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7667,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7356792144026186,
+      "shingling_precision": 0.9220512820512821,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.6898954703832753,
+      "baseline_words": 287,
+      "gemini_words": 198,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 161877,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

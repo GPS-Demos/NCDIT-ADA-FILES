@@ -1,0 +1,121 @@
+{
+  "document_id": "newsletter-with-many-images-and-formatted-text-117c",
+  "audited_at": "2026-03-19T06:57:18.877278Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/newsletter-with-many-images-and-formatted-text-117c/newsletter-with-many-images-and-formatted-text-117c.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/newsletter-with-many-images-and-formatted-text-117c/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/newsletter-with-many-images-and-formatted-text-117c/newsletter-with-many-images-and-formatted-text-117c.html"
+  },
+  "quality_score": 79,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7905,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.8571428571428572,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While programmatic signals indicate high content preservation (shingling recall 0.942), the LLM fidelity evaluation identified significant visual and structural issues. Specifically, inline links have been stripped from their original context, duplicated, and appended to the end of the document, which disrupts the reading order. Additionally, an image is placed next to the wrong text. These structural and visual defects require human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Images placed next to wrong text",
+      "severity": "major",
+      "analysis": "In the source PDF, the whiteboard presentation icon is aligned with the 'Additional Cybersecurity Newsletters' section. However, in the HTML output, this image is placed at the very end of the document, after the final disclaimer paragraph, separating it from its proper context.",
+      "source_pdf_quote": "In the source PDF on page 3, the whiteboard/presentation icon is positioned next to the 'Additional Cybersecurity Newsletters' section.",
+      "output_quote": "In the HTML, the whiteboard icon (alt=\"A silhouette of a person standing at a whiteboard...\") is placed after the 'Remember … Stop. Think. Connect.' and Disclaimer sections.",
+      "location": "Page 3 / End of HTML output",
+      "source": "fidelity_llm",
+      "check_id": "V4",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF uses underline formatting to distinguish inline links and emphasize key phrases like 'security awareness training', 'multifactor authentication', and social media platform names on page 3. In the HTML output, this underline formatting is stripped from the paragraph text, rendering these phrases as plain unstyled text.",
+      "source_pdf_quote": "In the source PDF on page 3, phrases like 'security awareness training' and 'multifactor authentication' are visually underlined.",
+      "output_quote": "In the HTML paragraphs, these terms appear as plain text without any underline, bold, italic, or interactive formatting.",
+      "location": "Page 3 / Under 'Protect Your Devices' and 'Additional Cybersecurity Newsletters'",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "minor",
+      "analysis": "The text for several inline links on Page 3 is duplicated. The anchor text is included within the main paragraph text blocks, and then repeated again as separate standalone link elements at the very end of the page.",
+      "source_pdf_quote": "New-school security awareness training can give your organization...",
+      "output_quote": "The text 'security awareness training' appears in a paragraph block and again as a standalone link at the end of the page: `{\"type\": \"link\", \"text\": \"security awareness training\", \"url\": \"...\"}`",
+      "location": "Page 3",
+      "source": "fidelity_llm",
+      "check_id": "S1",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "On Page 3, numerous inline links have been stripped out of their original context and appended at the very end of the page's content array, well after the footer. This significantly disrupts the reading order, as the links are completely detached from the paragraphs they belong to.",
+      "source_pdf_quote": "Be sure to follow the N.C. Department of Information Technology on X (formerly known as Twitter), Facebook and LinkedIn for more tips.",
+      "output_quote": "The link elements for 'Facebook', 'LinkedIn', 'Stay Safe Online', etc., are grouped together at the end of the JSON content array for Page 3, rather than placed inline within or directly after the text they belong to.",
+      "location": "Page 3, content array indices 16-24",
+      "source": "fidelity_llm",
+      "check_id": "S4",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify the placement of the whiteboard presentation icon.",
+    "Check if inline links in the paragraphs function correctly or if they were stripped and moved to the end.",
+    "Remove duplicated standalone links at the end of the document if they are redundant."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.7905,
+      "raw_score": 0.7905,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7905,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.8571428571428572,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9416504584606835,
+      "shingling_precision": 0.9434855233853007,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9590909090909091,
+      "baseline_words": 1100,
+      "gemini_words": 1055,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 149452,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

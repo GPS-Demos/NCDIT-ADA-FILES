@@ -1,0 +1,109 @@
+{
+  "document_id": "standards-committee-meeting-agenda-packet-october-7-2021-685fa26e",
+  "audited_at": "2026-03-19T06:56:52.643485Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e.html"
+  },
+  "quality_score": 83,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.8333,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite perfect content and structural scores from the LLM, there is a major visual defect where tables are rendered twice (once as an image and once as HTML). This duplication is corroborated by the inflated word count ratio of 1.214 and shingling precision drop. Because this creates a visually confusing document, it requires human intervention to remove the redundant images.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The output contains visual duplication where tables from the source document are rendered twice: first as a cropped image of the table with descriptive alt text, and immediately afterward as an extracted HTML table. This occurs for both the Attendance table on page 2 and the Roll Call Vote table on page 4.",
+      "source_pdf_quote": "The source PDF contains a single table for \"NORTH CAROLINA 911 Standards Committee Attendance\" on page 2.",
+      "output_quote": "The HTML contains an <img> tag with alt=\"The attendance log for the North Carolina 911 Standards Committee meeting held on January 7, 2021...\" immediately followed by an HTML <table> containing the exact same data.",
+      "location": "Page 2 (Attendance table) and Page 4 (Roll Call table)",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source document uses red italics for the phrase \"Roll Call Vote\" in the agenda table to emphasize the type of vote that will occur. The HTML output drops this formatting and renders it as plain text. This is a minor defect as the text is still readable, but the visual distinction/emphasis is lost.",
+      "source_pdf_quote": "\"Approval of the January Minutes – Roll Call Vote\" (with \"Roll Call Vote\" in red italics)",
+      "output_quote": "<td>Approval of the January Minutes – Roll Call Vote</td>",
+      "location": "Page 1, Agenda table row 4",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"north carolina 911 board\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove redundant table images to rely solely on the HTML tables",
+    "Restore necessary text formatting for emphasis if required for context",
+    "Clean up repeating header/footer text artifacts"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.8333,
+      "raw_score": 0.8333,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8333,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9758797943851325,
+      "shingling_precision": 0.88745055735347,
+      "duplication_ratio": 0.003749250149970006,
+      "word_count_ratio": 1.214207650273224,
+      "baseline_words": 915,
+      "gemini_words": 1111,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 267689,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

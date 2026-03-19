@@ -1,0 +1,109 @@
+{
+  "document_id": "esrmo-newsletter-july-2021-686b1e10",
+  "audited_at": "2026-03-19T06:41:10.318764Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-july-2021-686b1e10/esrmo-newsletter-july-2021-686b1e10.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-july-2021-686b1e10/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-july-2021-686b1e10/esrmo-newsletter-july-2021-686b1e10.html"
+  },
+  "quality_score": 73,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7262,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6428571428571428,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The LLM fidelity signals indicate major structural and visual defects, specifically that inline links are stripped from paragraphs and dumped at the end of the document, and an image is placed in the wrong section. These issues are corroborated by programmatic signals, specifically a high word count ratio (1.29) and lower shingling precision (0.80), which support the presence of duplicated or injected text fragments. Due to these significant formatting and structural problems, human review is required.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Link injection issues",
+      "severity": "major",
+      "analysis": "The document suffers from widespread link extraction issues. Inline hyperlinks are stripped from their context within paragraphs; the paragraph text is rendered as plain text, while the hyperlink targets (often with truncated or incorrectly sliced anchor text) are dumped as isolated link elements at the bottom of the page content arrays.",
+      "source_pdf_quote": "Page 1 contains an inline hyperlink on the text \"Global Security Insights Report 2021\".",
+      "output_quote": "The text is split into a plain paragraph `{\"type\": \"paragraph\", \"text\": \"Global Security Insights Report 2021\"}`, and the link is completely detached at the end of the page array: `{\"type\": \"link\", \"text\": \"Global\", \"url\": \"https://cdn.www.carbonblack.com/...\"}`.",
+      "location": "Page 1 (and similar issues on Pages 2, 3, and 5)",
+      "source": "fidelity_llm",
+      "check_id": "S7",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The HTML output contains numerous instances of duplicated text, particularly isolated hyperlink texts appearing at the ends of sections or at the very end of the document. For example, at the end of the document, link text fragments like 'here.', 'Twitter,', and 'Are Cloud Service Provider Tools Enough to Secure Your' are duplicated from earlier in the text.",
+      "source_pdf_quote": "Also, for a list of upcoming SANS webcasts, visit here.\n\nBe sure to follow the N.C. Department of Information Technology on Twitter...",
+      "output_quote": "<p>Also, for a list of upcoming SANS webcasts, visit </p>\n<p>Be sure to follow the N.C. Department of Information Technology on </p>\n<p>Twitter</p>\n... [later at bottom of document] ...\n<p><a href=\"...\">Are Cloud Service Provider Tools Enough to Secure Your</a></p>\n<p><a href=\"https://www.sans.org/webcasts/upcoming\">here.</a></p>\n<p><a href=\"https://twitter.com/NCDIT\">Twitter,</a></p>",
+      "location": "End of document / Page 5",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Images placed next to wrong text",
+      "severity": "major",
+      "analysis": "The image of the printer displaying 'HELP!' is positioned directly under the heading 'Zero Trust and the New Normal of Cybersecurity' in the HTML output. In the source document, this image belongs to the section ''PrintNightmare' Affects All Versions of Windows'.",
+      "source_pdf_quote": "Image of printer with 'HELP!' appears next to the heading ''PrintNightmare' Affects All Versions of Windows'.",
+      "output_quote": "<h2>Zero Trust and the New Normal of Cybersecurity</h2>\n<img src=\"...\" alt=\"A white desktop printer sits on a white background, feeding out a single sheet of paper with the word HELP! printed on it in large red capital letters.\">",
+      "location": "Page 3",
+      "source": "fidelity_llm",
+      "check_id": "V4",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify and restore inline hyperlinks within their original paragraph contexts.",
+    "Remove any duplicated link text or isolated fragments at the end of the document.",
+    "Relocate the printer image to its correct section ('PrintNightmare Affects All Versions of Windows')."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7262,
+      "raw_score": 0.7262,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7262,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6428571428571428,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9617407938785271,
+      "shingling_precision": 0.799920445505171,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.2895778364116095,
+      "baseline_words": 1516,
+      "gemini_words": 1955,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.7692307692307693,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 148884,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

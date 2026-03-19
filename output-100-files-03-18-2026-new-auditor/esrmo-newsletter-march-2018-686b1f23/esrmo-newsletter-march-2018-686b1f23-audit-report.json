@@ -1,0 +1,93 @@
+{
+  "document_id": "esrmo-newsletter-march-2018-686b1f23",
+  "audited_at": "2026-03-19T06:40:45.601209Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-march-2018-686b1f23/esrmo-newsletter-march-2018-686b1f23.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-march-2018-686b1f23/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-march-2018-686b1f23/esrmo-newsletter-march-2018-686b1f23.html"
+  },
+  "quality_score": 83,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.8333,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "auto_approve",
+  "routing_label": "Auto-Approve",
+  "reasoning": "The document shows excellent content preservation and structural integrity, with an LLM content and structural score of 1.0 and programmatic recall of 0.966. The identified concerns are primarily visual, including missing bold/italic formatting on some text and duplicated link blocks. Given the strong primary signals and the directive to minimize false positive manual reviews, these visual defects are tolerable for auto-approval.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There are several instances of duplicated text in the output, specifically involving URLs and email addresses. The text extraction pulled the URL/email as part of the paragraph text, but the conversion pipeline then additionally inserted the link as a separate, visible paragraph immediately following the block. For instance, the FEMA link and the email addresses on page 4 appear directly in the paragraph text and are then repeated as standalone `<p><a>...</a></p>` blocks.",
+      "source_pdf_quote": "Additional information is available at https://training.fema.gov/programs/emivttx.aspx.",
+      "output_quote": "<p>...Additional information is available at https://training.fema.gov/programs/emivttx.aspx.</p>\\n<p><a href=\"https://training.fema.gov/programs/emivttx.aspx\">https://training.fema.gov/programs/emivttx.aspx</a></p>",
+      "location": "Page 4, 'Hurricane Virtual Tabletop Exercise!' section",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "While some formatting was preserved (like italics on 'baseline'), several important instances of emphasis were lost. On page 2, the GDPR bullet point headers ('Raise Awareness:', 'Assess Information:', etc.) are bolded and italicized in the source but rendered as plain text in the HTML. On page 3, a critical disclaimer ('Note: You must have a Microsoft O365 account with access to the ESRMO external SharePoint site to access this resource.') is underlined and italicized in the source but rendered",
+      "source_pdf_quote": "1. \"Raise Awareness:\" (Bold and Italicized) 2. \"Note: You must have a Microsoft O365 account with access to the ESRMO external SharePoint site to access this resource.\" (Underlined and Italicized)",
+      "output_quote": "1. \"<li>Raise Awareness: Make sure...</li>\" (No emphasis tags) 2. \"Note: You must have a Microsoft O365 account with access to the ESRMO external SharePoint site to access this resource.\" (No emphasis tags)",
+      "location": "Page 2 ('GDPR is Coming Soon...but What is It?' section) and Page 3 ('SECURITYsense Newsletter' section)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.8,
+    "score_breakdown": {
+      "fidelity_composite": 0.8333,
+      "raw_score": 0.8333,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8333,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9658958187339407,
+      "shingling_precision": 0.9521068385908358,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9894319682959049,
+      "baseline_words": 1514,
+      "gemini_words": 1498,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.9,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 131333,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
