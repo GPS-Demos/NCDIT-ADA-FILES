@@ -1256,39 +1256,67 @@ class PDFExtractor:
         around the image, then crops to just the image region.  This prevents
         duplicating OCR'd text that Gemini will also extract as structured text.
 
+        Returns None when the candidate crop is dominated by text (>60% text
+        coverage), which means the "image" Gemini identified is really a region
+        of ordinary text — rendering it would duplicate the OCR output.
+
+        NOTE: The ideal architecture would extract/mask known image regions
+        BEFORE passing the page to Gemini, so Gemini never OCRs content inside
+        image bounding boxes.  That requires two-pass extraction and is tracked
+        as a future improvement.  For now this method provides the best
+        single-pass approximation: crop to the tightest non-text region, and
+        skip rendering entirely when the region is mostly text.
+
         Algorithm:
-        1. Extract all text blocks from the page.
-        2. Cluster nearby blocks into "regions" (merge gap ≤ 60 pt).
-        3. A region is "substantial" if its longest single block ≥ 120 chars.
-        4. Derive a vertical center (v_center) from the position label.
-        5. y_crop_start = y1 of the last substantial region *before* v_center
-           (0 if v_pos=="top", to avoid clipping chart tops).
-        6. y_crop_end = y0 of the first substantial region *after* v_center
-           (page bottom if none found).
+        1. Extract all text blocks from the page and cluster into regions
+           (merge gap ≤ 60 pt).
+        2. Derive a vertical center (v_center) from the position label.
+        3. y_crop_start = y1 of the last region with max_block_chars ≥
+           SUBSTANTIAL_START (100) whose y0 is before v_center.
+           (Always 0 when v_pos == "top".)
+        4. y_crop_end = y0 of the first region with max_block_chars ≥
+           SUBSTANTIAL_END (120) whose y0 is after v_center AND at least
+           MIN_DIST (10 % of page height) away from v_center.
+           The MIN_DIST guard prevents diagram labels that sit just below
+           v_center from being mistaken for body-text boundaries.
+        5. If the resulting crop is shorter than MIN_CROP_HEIGHT (50 pt),
+           fall back to position-based bounds (top/bottom/middle thirds).
+        6. Compute text coverage = sum of text-block heights overlapping the
+           crop / crop height.  If coverage > OVERLAP_THRESHOLD (60 %),
+           return None — the region is too text-heavy to render as an image.
         7. Render full-page-width crop at RENDER_SCALE and return as PNG b64.
 
         Returns:
-            Base64-encoded PNG string, or None if rendering fails.
+            Base64-encoded PNG string, or None if rendering fails or the crop
+            would duplicate OCR'd text.
         """
-        MERGE_GAP = 60      # pt: merge text blocks within this vertical gap
-        SUBSTANTIAL = 120   # chars: min longest-single-block to count as body text
+        MERGE_GAP = 60           # pt: cluster text blocks within this gap
+        SUBSTANTIAL_START = 100  # chars: min block length for y_crop_start boundary
+        SUBSTANTIAL_END = 120    # chars: min block length for y_crop_end boundary
+        MIN_DIST_FRAC = 0.10     # y_crop_end region must be ≥ this fraction of
+                                  # page height away from v_center
+        MIN_CROP_HEIGHT = 50     # pt: crop shorter than this → use position fallback
+        OVERLAP_THRESHOLD = 0.60 # text coverage fraction above which → return None
 
         try:
             doc = fitz.open(str(pdf_path))
             page = doc[page_num]
             page_rect = page.rect  # fitz.Rect with .y0, .y1, .x0, .x1
+            ph = float(page_rect.y1)   # page height in pts
+            pw = float(page_rect.x1)   # page width in pts
+            min_dist = ph * MIN_DIST_FRAC
 
             # --- Parse position label into vertical position hint ---
             pos_lower = position.lower()
             if "top" in pos_lower:
                 v_pos = "top"
-                v_center = page_rect.height * 0.20
+                v_center = ph * 0.20
             elif "bottom" in pos_lower:
                 v_pos = "bottom"
-                v_center = page_rect.height * 0.80
+                v_center = ph * 0.80
             else:
                 v_pos = "middle"
-                v_center = page_rect.height * 0.50
+                v_center = ph * 0.50
 
             # --- Collect text blocks: (y0, y1, text) ---
             raw_blocks = []
@@ -1312,30 +1340,131 @@ class PDFExtractor:
                     regions.append([y0, y1, nch])
 
             # --- Determine crop boundaries ---
-            # y_crop_start: bottom of last substantial region before v_center
-            y_crop_start = 0.0
-            if v_pos != "top":
-                for (ry0, ry1, max_nch) in regions:
-                    if ry0 < v_center and max_nch >= SUBSTANTIAL:
-                        y_crop_start = ry1
+            if not regions:
+                # No extractable PDF text at all (fully scanned page).
+                # Start with position-based thirds, then try to tighten using
+                # small overlay images embedded in the PDF (seals, stamps,
+                # signature lines, logos).  These overlays often mark exactly
+                # where the visual element lives, giving us a much tighter crop
+                # than a generic one-third of the page.
+                OVERLAY_PAD_ABOVE = 20.0   # pt above the topmost overlay image
+                OVERLAY_PAD_BELOW = 50.0   # pt below the bottommost overlay image
+                OVERLAY_MIN_HT   = 80.0    # minimum crop height when using overlays
 
-            # y_crop_end: top of first substantial region after v_center
-            y_crop_end = float(page_rect.y1)
-            for (ry0, ry1, max_nch) in regions:
-                if ry0 > v_center and max_nch >= SUBSTANTIAL:
-                    y_crop_end = ry0
-                    break
+                if v_pos == "top":
+                    y_crop_start, y_crop_end = 0.0, ph * 0.35
+                elif v_pos == "bottom":
+                    y_crop_start, y_crop_end = ph * 0.65, ph
+                else:
+                    y_crop_start, y_crop_end = ph * 0.20, ph * 0.80
 
-            # Clamp to page bounds
-            y_crop_start = max(0.0, y_crop_start)
-            y_crop_end = min(float(page_rect.y1), y_crop_end)
-            if y_crop_end <= y_crop_start:
-                # Fallback: render entire page if crop is degenerate
+                # Quadrant boundaries for filtering overlay images
+                quad_y_lo = 0.0 if v_pos == "top" else (ph * 0.50 if v_pos == "bottom" else 0.0)
+                quad_y_hi = (ph * 0.50 if v_pos == "top" else ph)
+                quad_x_lo = 0.0 if "right" not in pos_lower else pw * 0.40
+                quad_x_hi = pw if "left" not in pos_lower else pw * 0.60
+
+                ov_y0s, ov_y1s = [], []
+                for ov_img in page.get_images(full=True):
+                    ov_xref = ov_img[0]
+                    ov_rects = page.get_image_rects(ov_xref)
+                    if not ov_rects:
+                        continue
+                    r = ov_rects[0]
+                    wf = r.width / pw
+                    hf = r.height / ph
+                    # Exclude full-page backgrounds and large text templates
+                    if wf >= 0.90 and hf >= 0.85:
+                        continue
+                    if wf * hf > 0.30:
+                        continue
+                    # Include only overlays whose centre falls inside the quadrant
+                    cx = (r.x0 + r.x1) / 2.0
+                    cy = (r.y0 + r.y1) / 2.0
+                    if quad_y_lo <= cy <= quad_y_hi and quad_x_lo <= cx <= quad_x_hi:
+                        ov_y0s.append(r.y0)
+                        ov_y1s.append(r.y1)
+
+                if ov_y0s:
+                    tight_y0 = max(min(ov_y0s) - OVERLAY_PAD_ABOVE, 0.0)
+                    tight_y1 = min(max(ov_y1s) + OVERLAY_PAD_BELOW, ph)
+                    if tight_y1 - tight_y0 < OVERLAY_MIN_HT:
+                        mid = (tight_y0 + tight_y1) / 2.0
+                        tight_y0 = max(0.0, mid - OVERLAY_MIN_HT / 2.0)
+                        tight_y1 = min(ph, mid + OVERLAY_MIN_HT / 2.0)
+                    y_crop_start, y_crop_end = tight_y0, tight_y1
+            else:
+                # y_crop_start: bottom of the last "body text" region above
+                # v_center.  Uses the more lenient SUBSTANTIAL_START threshold
+                # so pages where every line is short (e.g. numbered legislation)
+                # still get a boundary.
                 y_crop_start = 0.0
-                y_crop_end = float(page_rect.y1)
+                if v_pos != "top":
+                    for (ry0, ry1, max_nch) in regions:
+                        if ry0 < v_center and max_nch >= SUBSTANTIAL_START:
+                            y_crop_start = ry1
+
+                # y_crop_end: top of the first "body text" region below v_center
+                # that is also far enough from v_center to not be a diagram label.
+                # MIN_DIST prevents short in-diagram captions (77 pt below center
+                # on page 37) from cutting off the diagram; distant body text
+                # (240 pt below center) is used correctly.
+                y_crop_end = ph
+                for (ry0, ry1, max_nch) in regions:
+                    if ry0 > v_center and max_nch >= SUBSTANTIAL_END and (ry0 - v_center) >= min_dist:
+                        y_crop_end = ry0
+                        break
+
+                # Clamp to page bounds
+                y_crop_start = max(0.0, y_crop_start)
+                y_crop_end = min(ph, y_crop_end)
+
+                # If the resulting crop is too narrow, fall back to position-based
+                if y_crop_end - y_crop_start < MIN_CROP_HEIGHT:
+                    if v_pos == "top":
+                        y_crop_start, y_crop_end = 0.0, ph * 0.35
+                    elif v_pos == "bottom":
+                        y_crop_start, y_crop_end = ph * 0.65, ph
+                    else:
+                        y_crop_start, y_crop_end = ph * 0.20, ph * 0.80
+
+            # --- Horizontal bounds from position label ---
+            # "left" / "right" sub-positions halve the page horizontally so that
+            # e.g. "bottom-left" and "bottom-right" signatures each get their own
+            # crop rather than the same full-width strip.
+            pw = float(page_rect.x1)
+            if "left" in pos_lower:
+                x_crop_start, x_crop_end = 0.0, pw * 0.55  # slight overlap at centre
+            elif "right" in pos_lower:
+                x_crop_start, x_crop_end = pw * 0.45, pw
+            else:
+                x_crop_start, x_crop_end = 0.0, pw
+
+            # --- Text-coverage guard ---
+            # If the crop region is mostly covered by text, the "image" Gemini
+            # identified is really a text region.  Rendering it would duplicate
+            # OCR'd content, so skip it entirely.
+            #
+            # Coverage is computed on *clustered regions* rather than raw blocks
+            # to avoid false positives on diagrams whose visual boxes have PDF
+            # text layers: those overlapping short blocks merge into one small
+            # region, giving a low coverage fraction even though raw-block sums
+            # can exceed 100 %.
+            crop_height = y_crop_end - y_crop_start
+            text_coverage = 0.0
+            if crop_height > 0:
+                for ry0, ry1, _ in regions:
+                    overlap = min(ry1, y_crop_end) - max(ry0, y_crop_start)
+                    if overlap > 0:
+                        text_coverage += overlap
+                text_coverage = min(text_coverage / crop_height, 1.0)
+
+            if text_coverage > OVERLAP_THRESHOLD:
+                doc.close()
+                return None  # "image" is a text-heavy region — omit to avoid duplication
 
             # --- Render the crop ---
-            clip = fitz.Rect(page_rect.x0, y_crop_start, page_rect.x1, y_crop_end)
+            clip = fitz.Rect(x_crop_start, y_crop_start, x_crop_end, y_crop_end)
             mat = fitz.Matrix(RENDER_SCALE, RENDER_SCALE)
             pix = page.get_pixmap(matrix=mat, clip=clip)
             doc.close()
@@ -1608,10 +1737,42 @@ class PDFExtractor:
 
             # Get page dimensions for position matching
             doc = fitz.open(str(pdf_path))
-            page_rect = doc[page_num].rect
+            page_obj = doc[page_num]
+            page_rect = page_obj.rect
             page_height = page_rect.height
             page_width = page_rect.width
+            page_has_text = bool(page_obj.get_text("blocks"))
             doc.close()
+
+            # --- Filter out background / text-content images before matching ---
+            # These images duplicate OCR'd content and must not appear as <img>
+            # elements in the output.
+            #
+            # Rule 1 — full-page backgrounds: an image that covers ≥90 % of the
+            # page width AND ≥85 % of the page height is a scanned-page background.
+            # Including it alongside OCR'd text would show the whole document twice.
+            #
+            # Rule 2 — large images on fully-scanned pages: on pages where
+            # PyMuPDF finds zero text blocks (the page is a pure raster scan),
+            # any embedded image whose bounding box exceeds 30 % of the page area
+            # is assumed to be a pre-printed text template (like a resolution body
+            # or letterhead form) rather than a stand-alone visual.  Including it
+            # would again duplicate the Gemini OCR output.
+            page_area = page_height * page_width
+            filtered_pymupdf = []
+            for img in pymupdf_images:
+                bbox = img.get("bbox")
+                if bbox and page_area > 0:
+                    w_frac = (bbox["x1"] - bbox["x0"]) / page_width
+                    h_frac = (bbox["y1"] - bbox["y0"]) / page_height
+                    # Rule 1
+                    if w_frac >= 0.90 and h_frac >= 0.85:
+                        continue
+                    # Rule 2
+                    if not page_has_text and (w_frac * h_frac) > 0.30:
+                        continue
+                filtered_pymupdf.append(img)
+            pymupdf_images = filtered_pymupdf
 
             # Match and merge image data, separating out videos
             merged_images, video_items = self.match_images_to_descriptions(
