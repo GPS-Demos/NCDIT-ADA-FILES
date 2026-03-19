@@ -1,0 +1,99 @@
+{
+  "document_id": "2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES",
+  "audited_at": "2026-03-19T19:28:07.166280Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES.html"
+  },
+  "quality_score": 98,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.98,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite very high fidelity scores (composite 0.98, recall 0.99), the programmatic signal detected 27 header/footer elements retained in the output. The routing guidelines explicitly prohibit auto-approving documents where page numbers or footers are retained in the HTML output. Additionally, there is a minor concern regarding table column headers from subsequent pages being retained as standard data rows, requiring human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Header/footer elements retained in output (27): 1; 2; 3",
+      "severity": "major",
+      "analysis": "header_footer_count=27. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The output merges tables across pages but incorrectly retains the column headers from subsequent pages as standard data rows within the body of the combined table.",
+      "source_pdf_quote": "Header row on top of PDF page 2 starting with \"Year of Latest Revaluation | Sales Assess...\"",
+      "output_quote": "{\"text\": \"Year\\nof\\nLatest\\nRevaluation\", \"column_start\": 0, \"row_start\": 30} ... these headers appear as a normal data row in the middle of the table.",
+      "location": "Page 1, Table 1, Row 30 (and similarly on other pages like Page 7 Row 39)",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Identify and remove all retained running headers, footers, and page numbers.",
+    "Correct table structures by removing or properly tagging repeated column headers inside the combined table body."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.98,
+      "raw_score": 0.98,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.98,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9898616412213741,
+      "shingling_precision": 0.9948453608247423,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9740811848601206,
+      "baseline_words": 7292,
+      "gemini_words": 7103,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 206531,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

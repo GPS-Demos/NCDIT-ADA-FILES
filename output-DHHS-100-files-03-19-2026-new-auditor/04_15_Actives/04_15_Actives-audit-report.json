@@ -1,0 +1,99 @@
+{
+  "document_id": "04_15_Actives",
+  "audited_at": "2026-03-19T19:28:06.590415Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/04_15_Actives/04_15_Actives.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/04_15_Actives/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/04_15_Actives/04_15_Actives.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite very high content and structural fidelity scores, the programmatic signals detected retained header/footer text in the HTML output ('fns active case error rates...'). Retained footers are explicitly listed as a structural concern that blocks AUTO_APPROVE. Additionally, a totals row lost its bold visual formatting, which warrants a human review to restore proper emphasis and remove the artifacts.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "In the source PDF, the final totals row at the bottom of page 3 (starting with 'STATE' and containing the grand totals like '621' and '$152,396') is printed entirely in bold font to visually distinguish it as a summary row. In the HTML output, this row is placed in standard <td> elements without any bold formatting (such as <b> or <strong> tags), losing the visual emphasis that indicates it is a totals row.",
+      "source_pdf_quote": "The last row on page 3 containing \"STATE\" and the grand totals is in bold font.",
+      "output_quote": "<td colspan=\"2\">STATE</td><td>621</td><td>$152,396</td>... (rendered as unstyled plain text in standard table cells)",
+      "location": "End of the third table (Page 3 totals row)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (2x): \"fns active case error rates\noct 2014 - apr 2015\"",
+      "severity": "minor",
+      "analysis": "Short text with footer-like pattern appears on 2 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained header/footer text from the HTML output",
+    "Add strong/bold tags to the final totals row for visual emphasis"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9827814569536424,
+      "shingling_precision": 0.9858281665190434,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1087,
+      "gemini_words": 1087,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 205945,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
