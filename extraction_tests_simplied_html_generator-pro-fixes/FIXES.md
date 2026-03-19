@@ -963,4 +963,106 @@ Additionally, the following fixes activate during the extraction pipeline (requi
 | EXT-11 (2D position matching) | Swapped alt text fixed | ~7 files |
 | EXT-12 (Fallback rendering) | Missing images recovered | Up to 488 images in 44 files |
 | EXT-13 (Per-image alt text) | Accurate per-image descriptions | All images in all files |
+| EXT-16 (Background image pipeline filter) | Full-page/large-scan images excluded from matching | Mitchell County, Rockingham County, and similar scanned-page resolution PDFs |
+| EXT-17 (Smart crop algorithm overhaul) | Tight, non-duplicating crops for logos, seals, signatures | All PDFs with scanned or mixed pages having embedded images |
+
+---
+
+## Fixes: Smart Crop & Scanned-Page Image Handling (EXT-16, EXT-17)
+
+These fixes address the problem reported in `911-telecommunicators-resolution-mitchell-county-685f6fd1`, `911-telecommunicators-resolution-rockingham-county-685f6ff5`, and `911-education-committee-meeting-agenda-packet-03-25-2021-685f9fa9` where either:
+- The full scanned page was rendered as an image AND the same page was OCR'd (duplication), or
+- Smart crop regions were too wide (including neighboring text alongside signatures/logos).
+
+---
+
+### EXT-16. PyMuPDF Image Pipeline Filter (Background / Large-Scan Images)
+
+**Problem:** On fully-scanned resolution documents (e.g., county commissioner resolutions), PyMuPDF correctly finds all embedded image XRefs — but two of those XRefs are useless or harmful:
+
+1. **Full-page background** (xref=9 in Mitchell County): A JPEG covering 100%×100% of the page. This is the scanned page itself. Matching it to any Gemini image description would embed the entire page as an `<img>` alongside OCR'd text, showing the document twice.
+2. **Large text-content image** (xref=20 in Mitchell County, 77%×56% = 43% area): A PNG containing the entire resolution body text as a pre-printed form template. On a scanned page (no extractable PDF text blocks), any image >30% of page area is assumed to be a text template, not a standalone visual.
+
+**What changed:** In `process_single_page()`, after `extract_images_from_pdf_page()` returns the PyMuPDF image list, a filter pass removes images matching either rule before they enter the matching pipeline:
+
+- **Rule 1 — Full-page background**: `w_frac >= 0.90 AND h_frac >= 0.85` → skip
+- **Rule 2 — Large image on fully-scanned page**: `not page_has_text AND (w_frac * h_frac) > 0.30` → skip
+
+`page_has_text` is derived from `page_obj.get_text("blocks")`: True if PyMuPDF can extract any text layer, False for pure raster scans.
+
+**Why this works:** After filtering, only small overlays (seals, signature lines, stamps) remain in `pymupdf_images`. These are either matched to Gemini descriptions or ignored. Gemini-described images that have no PyMuPDF match fall through to the fallback renderer (EXT-12 / EXT-17), which crops the relevant region tightly.
+
+**Files affected:** `911-telecommunicators-resolution-mitchell-county-685f6fd1` (removed 2 large images from matching), `911-telecommunicators-resolution-rockingham-county-685f6ff5` (removed 1 full-page background), and any other scanned-page PDFs with embedded background or form-template images.
+
+**CSV references:** Section V — "Entire PDF added as image then transcribed" (911-telecommunicators-resolution-mitchell-county, rockingham-county)
+
+---
+
+### EXT-17. Smart Crop Algorithm Overhaul (`_render_image_region_fallback`)
+
+**Problem:** The original EXT-12 fallback rendering used a single `SUBSTANTIAL=120` character threshold to find crop boundaries. This caused two bugs discovered on real test files:
+
+1. **Missed boundary on legislative pages (Education packet p34/35)**: These pages have short lines (max ~101 chars — bill numbers, section headers, "A BILL TO BE ENTITLED"). With `SUBSTANTIAL=120`, no region qualified as a boundary above the image, so the crop started at y=0 and included the full legislative text alongside the image — duplicating OCR'd content.
+
+2. **False boundary on diagram pages (Education packet p37)**: Lowering `SUBSTANTIAL` to 80 to fix p34/35 caused p37's diagram labels (max_nch=113, only 77 pt below v_center) to become a crop boundary, cutting off the bottom half of the NG 9-1-1 diagram.
+
+3. **Full-page render on scanned pages (Mitchell County)**: When `regions=[]` (no text blocks at all), the old code fell into the `else` branch and used `y_crop_start=0, y_crop_end=ph` — a full-page crop, which rendered the entire scanned page as an image.
+
+4. **Text coverage computed on raw blocks (p37 false positive)**: PowerPoint slides have overlapping PDF text layers inside diagram boxes. Summing raw block overlaps with the crop region can exceed 100% (138% measured), falsely triggering the "text-heavy region, skip" guard.
+
+5. **`pw` used before definition (bug)**: The overlay quadrant computation used `pw` (page width) before `pw = float(page_rect.x1)` was assigned. The `NameError` was silently caught by `except Exception: return None`, so every fallback call on scanned pages returned `None` — no images were ever rendered.
+
+**Changes made:**
+
+**(a) Split SUBSTANTIAL threshold into two:**
+- `SUBSTANTIAL_START = 100` — used for `y_crop_start` (boundary above image). Lower threshold catches short-line legislative text (max 101 chars) as a valid upper boundary.
+- `SUBSTANTIAL_END = 120` — used for `y_crop_end` (boundary below image). Higher threshold prevents diagram labels (113 chars) from being mistaken for body text.
+
+**(b) MIN_DIST guard for `y_crop_end`:**
+- `MIN_DIST_FRAC = 0.10` (10% of page height). A region below v_center only qualifies as a crop-end boundary if it is at least `MIN_DIST` away from v_center.
+- On p37: diagram labels at 77 pt from v_center < MIN_DIST=79.2 pt → ignored. Body text at ~240 pt → used correctly.
+
+**(c) Explicit `if not regions:` branch for scanned pages:**
+- When `regions=[]` (no extractable text), the old degenerate-crop guard (`y_crop_end - y_crop_start < MIN_CROP_HEIGHT=50`) never fired because full-page defaults (y=0-792, height=792) are much larger than 50.
+- New explicit branch sets position-based thirds first (`top→y=0-35%`, `bottom→y=65-100%`, `middle→y=20-80%`), then attempts overlay tightening.
+
+**(d) Overlay image tightening for scanned pages:**
+When `regions=[]`, the algorithm searches the page for small embedded overlay images (xrefs) whose center falls inside the position quadrant:
+- Quadrant defined by `v_pos` (top/middle/bottom) and horizontal hint (left/center/right)
+- Excludes full-page backgrounds (`w_frac >= 0.90 AND h_frac >= 0.85`) and large templates (`area > 0.30`)
+- Collects the `y0`, `y1` of qualifying overlays and computes:
+  - `tight_y0 = min(ov_y0s) - 20 pt` (pad above)
+  - `tight_y1 = max(ov_y1s) + 50 pt` (pad below, more space for signature tails)
+  - Enforced minimum height of 80 pt
+
+**Result for Mitchell County:**
+- Top-center (seal): 8 overlays found → tight crop y=56.8–236.2 (vs. full-page y=0–792 before)
+- Bottom-left (Taylor McCurry signature): 3 overlays found → tight crop y=653.0–767.1 x=0–337
+- Bottom-right (Steve Pitman signature): 5 overlays found → tight crop y=657.8–767.1 x=275–612
+
+**Result for Rockingham County:**
+- Bottom-right: No qualifying overlays → position-based thirds crop y=515–792 x=275–612 (includes seal and signature area)
+
+**(e) Text coverage computed on clustered regions (not raw blocks):**
+Changed from:
+```python
+for b in raw_blocks:
+    overlap = min(b[1], y_crop_end) - max(b[0], y_crop_start)
+```
+To:
+```python
+for ry0, ry1, _ in regions:
+    overlap = min(ry1, y_crop_end) - max(ry0, y_crop_start)
+```
+PowerPoint diagrams have many overlapping text layers. Raw blocks summed to 138% coverage (wrong). Clustered regions collapse those into one small region, giving 33% coverage (correct — diagram rendered).
+
+**(f) Fixed `pw` undefined variable:**
+Added `pw = float(page_rect.x1)` immediately after `ph = float(page_rect.y1)` at the top of the function (line ~1306). The `pw` was previously only assigned at the horizontal-bounds step (line ~1434), which is AFTER the overlay quadrant computation block. All fallback calls on scanned pages were silently returning `None` due to this `NameError`.
+
+**Files fixed:**
+- `911-telecommunicators-resolution-mitchell-county-685f6fd1`: 3 images now correctly rendered (seal, 2 signatures)
+- `911-telecommunicators-resolution-rockingham-county-685f6ff5`: 1 image rendered (seal + signature area)
+- `911-education-committee-meeting-agenda-packet-03-25-2021-685f9fa9` p34: barcode/footer mark rendered; p35: fallback returns `None` (92% text coverage, correct — prevents duplication); p37: NG 9-1-1 diagram rendered
+
+**CSV references:** Section V — "Entire PDF added as image then transcribed", Section O — cropped/compressed images, EXT-12 original fix for missing images
 
