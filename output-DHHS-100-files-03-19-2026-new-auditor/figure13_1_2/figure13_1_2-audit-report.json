@@ -1,0 +1,110 @@
+{
+  "document_id": "figure13_1_2",
+  "audited_at": "2026-03-19T19:47:06.108876Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/figure13_1_2/figure13_1_2.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/figure13_1_2/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/figure13_1_2/figure13_1_2.html"
+  },
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.9523809523809523,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The source document's text stream contains extensive tabular data for both the dollar amounts and percentages of wine excise tax collections from 1998 to 2012. The output completely omitted this text, extracting only the two chart images. The actual data table content is entirely absent.",
+      "source_pdf_quote": "Unfortified wine excise tax Fortified wine excise tax\n1998 $7,404,304 $1,560,452",
+      "output_quote": "[Entire text block is missing; output only contains two image objects]",
+      "location": "Page 1",
+      "source": "fidelity_llm",
+      "check_id": "C3",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Severe word count loss: 0% of baseline",
+      "severity": "critical",
+      "analysis": "baseline=201, output=0",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Both charts from the source document are present as images in the HTML. However, the first image (representing Figure 13.1) is given an empty alt attribute (`alt=\"\"`). Because it is a complex data chart, it is highly meaningful content and should not be marked as decorative.",
+      "source_pdf_quote": "The top half of the page is a complex 3D bar chart titled \"Figure 13.1 Wine Excise Tax Collections by Type\".",
+      "output_quote": "<img src=\"[base64 image stripped for token budget]\" alt=\"\">",
+      "location": "First image element in the HTML body",
+      "source": "fidelity_llm",
+      "check_id": "V2",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "raw_score": 0.4,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.9523809523809523,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": 0.0,
+      "baseline_words": 201,
+      "gemini_words": 0,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.2,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 145474,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

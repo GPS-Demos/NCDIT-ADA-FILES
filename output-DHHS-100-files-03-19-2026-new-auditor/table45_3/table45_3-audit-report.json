@@ -1,0 +1,99 @@
+{
+  "document_id": "table45_3",
+  "audited_at": "2026-03-19T19:49:32.981885Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/table45_3/table45_3.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/table45_3/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/table45_3/table45_3.html"
+  },
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6666666666666667,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document shows strong content preservation with a shingling recall of 0.939 and an LLM content score of 1.0. However, the LLM fidelity evaluation identified a broken heading hierarchy where the main title was rendered as a plain paragraph, which explicitly blocks auto-approval according to the guidelines. Furthermore, programmatic signals detected inconsistent column counts in the table structure, requiring human verification.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The source document clearly features a main title heading at the top. However, the output renders this heading as a plain paragraph with bold text instead of using a proper heading level (like an H1 or H2), which violates the requirement that clear section headings must not be rendered as plain `<p>` tags.",
+      "source_pdf_quote": "TABLE 45. MANUFACTURING FUEL and CERTAIN MACHINERY and EQUIPMENT TAX COLLECTIONS [G.S. 105 ARTICLE 5F.]",
+      "output_quote": "{\"type\": \"paragraph\", \"text\": \"**TABLE 45. MANUFACTURING FUEL AND CERTAIN MACHINERY**\\n**and EQUIPMENT TAX COLLECTIONS**\\n**[G.S. 105 ARTICLE 5F.]**\"}",
+      "location": "Beginning of the document (element index 0)",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure issues (1): Table 1 (p1): inconsistent columns (3-8)",
+      "severity": "minor",
+      "analysis": "table_issues=1. Inconsistent column counts or single-column tables suggest structural problems in the conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": "S3",
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify and fix the heading structure at the top of the document to ensure correct HTML tags (e.g., <h1>, <h2>) are used instead of <p>.",
+    "Review Table 1 to correct any structural issues or inconsistent column counts."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.9,
+      "raw_score": 0.9,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6666666666666667,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9388704318936877,
+      "shingling_precision": 0.9302172481895984,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9436619718309859,
+      "baseline_words": 497,
+      "gemini_words": 469,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 134419,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

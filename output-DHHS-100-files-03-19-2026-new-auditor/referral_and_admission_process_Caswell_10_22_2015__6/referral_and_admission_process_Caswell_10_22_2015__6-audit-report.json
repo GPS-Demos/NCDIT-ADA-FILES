@@ -1,0 +1,99 @@
+{
+  "document_id": "referral_and_admission_process_Caswell_10_22_2015__6",
+  "audited_at": "2026-03-19T19:51:13.693449Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/referral_and_admission_process_Caswell_10_22_2015__6/referral_and_admission_process_Caswell_10_22_2015__6.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/referral_and_admission_process_Caswell_10_22_2015__6/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/referral_and_admission_process_Caswell_10_22_2015__6/referral_and_admission_process_Caswell_10_22_2015__6.html"
+  },
+  "quality_score": 98,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.98,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite a high LLM fidelity score (0.98), the document has specific structural defects that explicitly block auto-approval. The programmatic signal detected retained header/footer text ('10/2015'), and the LLM noted a list numbering reset where items 2-5 are split into a new list. Following instructions, these issues require manual intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Header/footer elements retained in output (1): 10/2015",
+      "severity": "major",
+      "analysis": "header_footer_count=1. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Under 'Referral/Application Process', the source document has a single numbered list with items 1 through 5, interrupted after item 1 by the text 'Locate the LME/MCO for your county'. The output splits this into two separate ordered list objects (one containing item 1, and a second containing items 2-5). Because the output creates a new ordered list for the subsequent items without specifying a continuation or start number, the list numbering will reset to 1 in the final rendered format, losing ",
+      "source_pdf_quote": "1. All persons requesting admission...\nLocate the LME/MCO for your county \n 2. Applicants’ requests are reviewed...",
+      "output_quote": "An ordered list with one item ending in \"...Medicaid County of origin.\", followed by an H3 \"Locate the LME/MCO for your county\", followed by a new ordered list beginning with \"Applicants' requests are reviewed...\"",
+      "location": "Referral/Application Process section",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained header/footer text ('10/2015').",
+    "Merge the split ordered lists or add a 'start' attribute so the numbering correctly continues from 2 to 5."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.98,
+      "raw_score": 0.98,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.98,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8357050452781372,
+      "shingling_precision": 0.9802731411229135,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8340336134453782,
+      "baseline_words": 476,
+      "gemini_words": 397,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 129981,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

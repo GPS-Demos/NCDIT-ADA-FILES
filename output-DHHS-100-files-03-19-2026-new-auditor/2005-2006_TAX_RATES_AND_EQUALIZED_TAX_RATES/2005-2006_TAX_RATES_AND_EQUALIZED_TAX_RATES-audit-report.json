@@ -1,0 +1,110 @@
+{
+  "document_id": "2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES",
+  "audited_at": "2026-03-19T19:26:25.992671Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES.html"
+  },
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "Almost all even-numbered pages (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26) have had their tables completely omitted in the JSON output, leaving only the header elements. Additionally, the table on page 28 is completely missing.",
+      "source_pdf_quote": "Page 2 contains a large table covering Ashe, Avery, Beaufort, and Bertie counties. Similar tables are present on all even-numbered pages.",
+      "output_quote": "The JSON output for Page 2 only contains a header text '2' and lacks the table content entirely. Pages 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, and 26 are similarly empty. Page 28's JSON output only captures the footnotes and paragraph text at the bottom, entirely skipping the table for Wilson, Yadkin, and Yancey.",
+      "location": "Pages 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28",
+      "source": "fidelity_llm",
+      "check_id": "C3",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The HTML output fails to preserve the bold formatting of several important text elements. For example, municipality grouping labels within the tables (like 'Burlington:', 'Gibsonville:') are bolded in the source PDF to distinguish them from the indented sub-items. This bolding is lost in the HTML. Additionally, the footer 'North Carolina Department of Revenue' at the end of the document is bold in the source but rendered as plain text in the output.",
+      "source_pdf_quote": "Table 1 shows bolded municipality groupings like 'Burlington:'. Page 28 shows bold text 'North Carolina Department of Revenue'.",
+      "output_quote": "The HTML renders these elements without bold formatting, e.g., '<td>Burlington:</td>' and '<p>North Carolina Department of Revenue<br>...'",
+      "location": "Multiple locations (e.g., Table 1, End of document)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (28): 1; 2; 3",
+      "severity": "major",
+      "analysis": "header_footer_count=28. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "raw_score": 0.4,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9861362266425557,
+      "shingling_precision": 0.9924775539917495,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9529044718466796,
+      "baseline_words": 6731,
+      "gemini_words": 6414,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 105292,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

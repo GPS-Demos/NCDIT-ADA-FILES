@@ -1,0 +1,112 @@
+{
+  "document_id": "Motor_Fuels_Tax_Administrative_Hearing_Docket_#_2006-153_-_03302007",
+  "audited_at": "2026-03-19T19:36:38.843509Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Motor_Fuels_Tax_Administrative_Hearing_Docket_#_2006-153_-_03302007/Motor_Fuels_Tax_Administrative_Hearing_Docket_#_2006-153_-_03302007.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Motor_Fuels_Tax_Administrative_Hearing_Docket_#_2006-153_-_03302007/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Motor_Fuels_Tax_Administrative_Hearing_Docket_#_2006-153_-_03302007/Motor_Fuels_Tax_Administrative_Hearing_Docket_#_2006-153_-_03302007.html"
+  },
+  "quality_score": 80,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7967,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the programmatic signals show strong content preservation (recall 0.931), the fidelity signals indicate significant structural defects. Specifically, continuous numbered lists are split across page objects causing numbering to reset, and the heading hierarchy is broken between sibling elements. According to routing rules, documents with broken list numbering resets or broken heading hierarchies cannot be auto-approved.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "Checked heading levels for consistency. Under the 'ISSUES' section, there are three items labeled 'I.', 'II.', and 'III.' which are presented identically in the source PDF. However, the output assigns level 3 (H3) to 'I.' and 'II.' but assigns level 2 (H2) to 'III.', breaking the logical hierarchy and consistency of sibling headings.",
+      "source_pdf_quote": "Visual headings 'I.', 'II.', and 'III.' under 'ISSUES' (pages 1-2)",
+      "output_quote": "{\"type\": \"heading\", \"level\": 3, \"text\": \"I.\"}, {\"type\": \"heading\", \"level\": 3, \"text\": \"II.\"} vs {\"type\": \"heading\", \"level\": 2, \"text\": \"III.\"}",
+      "location": "Pages 1 and 2",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "The HTML output fails to preserve several instances of text formatting from the source PDF. First, the term 'sic' in item MF-21 is italicized in the source PDF but rendered as plain text in the HTML. Second, the major section headings ('FINAL DECISION', 'EVIDENCE', 'FINDINGS OF FACT', 'CONCLUSIONS OF LAW', and 'DECISION') are underlined (and some are bolded) in the source PDF, but the HTML output only maps them to heading tags (<h1>, <h2>) without preserving the underline styling.",
+      "source_pdf_quote": "\"[Taxpayer] (sic) Meeting with State on September 8, 2006.\" (where 'sic' is italicized, Page 3)",
+      "output_quote": "\"[Taxpayer] (sic) Meeting with State on September 8, 2006.\" (plain text)",
+      "location": "Item MF-21 / Section Headings throughout document",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source document contains two long, continuous numbered lists: 'FINDINGS OF FACT' (1 to 69) and 'CONCLUSIONS OF LAW' (1 to 23). The output splits these into multiple separate ordered lists across different page objects, stripping the explicit numbers from the text. This will cause the numbering to restart at 1 for each new list block (e.g., finding #18 on page 7 will render as #1). Additionally, list item 11 under Conclusions of Law is split incorrectly; the first half is rendered as a list i",
+      "source_pdf_quote": "Continuous numbering for 'FINDINGS OF FACT' (e.g., '18. During the mileage audit...') and 'CONCLUSIONS OF LAW' (e.g., '11. ...to arrive at the average monthly mileage figures by adding total miles...')",
+      "output_quote": "Multiple broken `ordered` list blocks with numbers stripped from the text strings (e.g., \"text\": \"During the mileage audit...\"). Orphaned text on page 12: {\"type\": \"paragraph\", \"text\": \"by adding total miles...\"}",
+      "location": "Pages 5, 7, 9, 11, and 12",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fix heading hierarchy in the 'ISSUES' section to ensure sibling items use the same heading level.",
+    "Repair the continuous ordered lists so that numbering does not reset on each page.",
+    "Restore missing text formatting (italics, underlines) where semantically important."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7967,
+      "raw_score": 0.7967,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7967,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9307964601769911,
+      "shingling_precision": 0.9802423112767941,
+      "duplication_ratio": 0.010499982382579895,
+      "word_count_ratio": 0.9717662508207485,
+      "baseline_words": 4569,
+      "gemini_words": 4440,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 169209,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
