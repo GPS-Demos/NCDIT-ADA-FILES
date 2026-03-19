@@ -1,0 +1,109 @@
+{
+  "document_id": "esrmo-newsletter-december-2018-686b1ee1",
+  "audited_at": "2026-03-19T06:40:30.791081Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-december-2018-686b1ee1/esrmo-newsletter-december-2018-686b1ee1.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-december-2018-686b1ee1/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/esrmo-newsletter-december-2018-686b1ee1/esrmo-newsletter-december-2018-686b1ee1.html"
+  },
+  "quality_score": 80,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7952,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9285714285714286,
+  "fidelity_visual": 0.47619047619047616,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document shows strong content preservation with high shingling metrics (0.944 recall, 0.947 precision) and word count ratio (0.956). However, the LLM fidelity visual score is notably low (0.476) due to reported swapped images next to text (FedVTE and SANS logos) and a missing official state seal. Given the moderate composite score (0.795) and the major concern regarding swapped informational images, human review is warranted to correct the layout.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "I reviewed the body of the HTML for duplicated content blocks. At the end of the FEMA section (from page 3), several fragmented links and texts are dumped at the bottom of the section. Specifically, the text 'training bulletin' appears twice: once as an unlinked plain paragraph, and again at the very end as a linked paragraph.",
+      "source_pdf_quote": "On page 3, the paragraph ends with a single linked phrase: '...please view the training bulletin.'",
+      "output_quote": "The text appears twice in separate paragraphs: `<p>training bulletin</p>` followed shortly after by `<p><a href=\"...\">training bulletin.</a></p>`.",
+      "location": "Page 3 / End of FEMA section",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": true
+    },
+    {
+      "description": "Images placed next to wrong text",
+      "severity": "major",
+      "analysis": "I evaluated the reading order and context of the images in the HTML compared to the PDF. On page 3 of the PDF, the 'FedVTE' logo is next to the FedVTE text, and the 'SANS' stick-figure/monitor image is next to the SANS text. In the HTML, these images have been swapped relative to the text: the FedVTE logo appears right before the SANS Institute text, and the SANS stick-figure image appears right before the FedVTE text.",
+      "source_pdf_quote": "The 'FedVTE' logo is adjacent to the 'Have you considered FedVTE?' paragraph, and the orange stick-figure is adjacent to 'The SANS Institute also provides free awareness videos...'",
+      "output_quote": "The `<img alt=\"The logo features the text 'FedVTE'...\">` is placed immediately before `<p>The SANS Institute also provides free awareness videos...</p>`, while the `<img alt=\"An orange 3D stick-figure...\">` is placed immediately before `<p>Have you considered FedVTE?...</p>`.",
+      "location": "Page 3 / SANS and FedVTE sections",
+      "source": "fidelity_llm",
+      "check_id": "V4",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "I compared the images in the source PDF with the `<img>` elements in the HTML output. While most images are present, the 'Great Seal of the State of North Carolina' located at the top left of page 1 is completely missing from the HTML output. There is no corresponding `<img>` element for this official seal.",
+      "source_pdf_quote": "The 'Great Seal of the State of North Carolina' logo on page 1, positioned to the left of the 'Enterprise Security and Risk Management Office (ESRMO)' heading.",
+      "output_quote": "No `<img>` element corresponding to the state seal is present in the HTML (the first image tag describes the phishing monitor graphic).",
+      "location": "Page 1 header",
+      "source": "fidelity_llm",
+      "check_id": "V2",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify the placement of the FedVTE and SANS logos next to their respective text sections.",
+    "Check the end of the FEMA section for any visually duplicated or fragmented link text.",
+    "Restore the missing State Seal image on the first page if necessary."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.8,
+    "score_breakdown": {
+      "fidelity_composite": 0.7952,
+      "raw_score": 0.7952,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7952,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9285714285714286,
+      "fidelity_visual": 0.47619047619047616,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9438380281690141,
+      "shingling_precision": 0.9466713755959739,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9562841530054644,
+      "baseline_words": 2379,
+      "gemini_words": 2275,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.1,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 1
+    },
+    "processing_ms": 217187,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

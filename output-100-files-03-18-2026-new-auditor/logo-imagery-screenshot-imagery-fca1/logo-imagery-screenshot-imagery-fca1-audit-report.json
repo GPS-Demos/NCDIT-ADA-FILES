@@ -1,0 +1,110 @@
+{
+  "document_id": "logo-imagery-screenshot-imagery-fca1",
+  "audited_at": "2026-03-19T06:44:52.961243Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/logo-imagery-screenshot-imagery-fca1/logo-imagery-screenshot-imagery-fca1.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/logo-imagery-screenshot-imagery-fca1/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/logo-imagery-screenshot-imagery-fca1/logo-imagery-screenshot-imagery-fca1.html"
+  },
+  "quality_score": 79,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7881,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The LLM fidelity composite score is 0.7881 with significant structural issues, while programmatic signals indicate potential content loss (shingling recall 0.693, word count ratio 0.628). The combination of a broken heading hierarchy, split lists, loss of text formatting, and low programmatic content preservation metrics necessitates human review to ensure accessibility and content integrity.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "On Page 2 of the source document, there are three column headers with identical visual styling and structural importance: 'How to reset your password', 'How to change your password', and 'How to update your profile'. The output incorrectly assigns Heading Level 2 to the first one, but Heading Level 3 to the second and third ones, wrongly nesting them under the first column's heading.",
+      "source_pdf_quote": "Three visually identical column headings: 'How to reset your password', 'How to change your password', and 'How to update your profile'.",
+      "output_quote": "{\"type\": \"heading\", \"level\": 2, \"text\": \"How to reset your password\"} ... {\"type\": \"heading\", \"level\": 3, \"text\": \"How to change your password\"} ... {\"type\": \"heading\", \"level\": 3, \"text\": \"How to update your profile\"}",
+      "location": "Page 2",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "The source PDF frequently uses bold formatting to emphasize important UI text or actions (e.g., 'Register now', 'Trouble Signing On?', 'activation link'). In the provided HTML output, this bold text styling has been stripped out entirely, leaving the text unstyled.",
+      "source_pdf_quote": "6. Go to your email and click on the activation link to complete the registration.",
+      "output_quote": "<li>Go to your email and click on the activation link to complete the registration.</li>",
+      "location": "How to register, step 6",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "In the source document, the instructions under 'How to register' form a single continuous numbered list from 1 to 6. The output breaks this single list into three separate, disjointed 'ordered' lists (one for items 1-2, another for items 3-5, and another for item 6). When rendered, this will cause the list numbering to reset to 1 repeatedly. Additionally, list item 5 is incorrectly split, with its second half ('and you will see a Success message on the screen.') improperly converted into an un-n",
+      "source_pdf_quote": "Continuous numbered list: '1. Go to... 2. Click... 3. Select... 4. Fill... 5. Verify your details and click [CONFIRM] and you will see a Success message on the screen. 6. Go to your email...'",
+      "output_quote": "Three separate {\"type\": \"list\", \"list_type\": \"ordered\"} objects, interrupting the numbering, with a detached paragraph: {\"type\": \"paragraph\", \"text\": \"and you will see a Success message on the screen.\"}",
+      "location": "Page 1, 'How to register' section",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Correct the heading levels to accurately reflect the document's visual structure.",
+    "Restore bold formatting to important UI elements and actions.",
+    "Recombine the fragmented numbered lists to ensure continuous numbering.",
+    "Investigate potential content loss indicated by the low word count ratio and shingling recall."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7881,
+      "raw_score": 0.7881,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7881,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.693050193050193,
+      "shingling_precision": 0.8262370540851554,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.6280276816608996,
+      "baseline_words": 578,
+      "gemini_words": 363,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.8,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 124951,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

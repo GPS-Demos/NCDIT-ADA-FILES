@@ -1,0 +1,133 @@
+{
+  "document_id": "logos-graphic-colors-photos-icons-diagrams-charts-53e1",
+  "audited_at": "2026-03-19T06:49:16.931510Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/logos-graphic-colors-photos-icons-diagrams-charts-53e1/logos-graphic-colors-photos-icons-diagrams-charts-53e1.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/logos-graphic-colors-photos-icons-diagrams-charts-53e1/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/logos-graphic-colors-photos-icons-diagrams-charts-53e1/logos-graphic-colors-photos-icons-diagrams-charts-53e1.html"
+  },
+  "quality_score": 70,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7048,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document shows strong content preservation but suffers from significant structural and visual defects. Inline hyperlinks have been extracted from paragraphs and placed at the bottom of sections, leading to visual duplication and loss of inline formatting. Additionally, the heading hierarchy is broken (e.g., H3 followed by H1), which impairs screen reader navigation. These major issues require human intervention to ensure accessibility and proper formatting.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy contains nesting errors and inversions where lower-level headings precede higher-level headings without proper structure. For example, on page 41, 'FEATURE ARTICLE' is marked as an H3, which is immediately followed by an H1. A similar inversion occurs on page 37 where an H3 precedes an H2. This breaks screen reader heading navigation.",
+      "source_pdf_quote": "FEATURE ARTICLE\nNC.gov Delivers a Frictionless Customer and Citizen Digital Experience",
+      "output_quote": "{\"type\": \"heading\", \"level\": 3, \"text\": \"FEATURE ARTICLE\"} followed immediately by {\"type\": \"heading\", \"level\": 1, \"text\": \"NC.gov Delivers a Frictionless...\"}",
+      "location": "Page 41",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The HTML conversion process extracted inline hyperlinks from the text flow and appended them as standalone link blocks at the end of the respective page sections. This results in the link text appearing twice visually: once as plain text in the main paragraph and again as an anchor tag at the bottom of the section.",
+      "source_pdf_quote": "On page 4, the text 'N.C.G.S. 143B, Article 15.' appears exactly once at the end of the text block.",
+      "output_quote": "The text is rendered twice: once inline as `<p>N.C.G.S. 143B, Article 15.</p>` and again at the end of the page block as `<p><a href=\"...\">N.C.G.S. 143B, Article 15</a></p>`.",
+      "location": "Multiple pages, e.g., Page 4 (About NCDIT) and Page 10 (Boards and Commissions)",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "Because inline hyperlinks were separated from their original location, the inline text lost its underline and hyperlink formatting in the main body paragraphs. This strips meaningful interactive styling from the reading flow.",
+      "source_pdf_quote": "On page 4, the text 'N.C.G.S. 143B, Article 15.' is underlined to denote a hyperlink.",
+      "output_quote": "In the main reading flow, it is rendered as plain unstyled text `<p>N.C.G.S. 143B, Article 15.</p>` without underline styling.",
+      "location": "Page 4 (About NCDIT) and Page 10 (Boards and Commissions list items)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "While most lists are converted flawlessly, a list item spanning across the physical boundary between document pages 22 and 23 is improperly split. The first half of the item is rendered as a bullet at the end of page 24 in the JSON, and the second half is incorrectly rendered as a regular paragraph at the start of page 25 before a new list block begins.",
+      "source_pdf_quote": "Implemented a paperless property damage claim reporting system for NCDOT... NCDOT employees can access a dashboard of claims to review and process, with status tracking and reporting capability.",
+      "output_quote": "Page 24 ends the list with '...dashboard of claims to review and'. Page 25 starts with a paragraph element: 'process, with status tracking and reporting capability.' before beginning a new list.",
+      "location": "Pages 24-25",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"feature article\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Correct heading hierarchy levels to ensure proper screen reader navigation.",
+    "Restore inline hyperlinks to their original locations within the text and remove the appended duplicate link blocks.",
+    "Fix the incorrectly split list item spanning across pages 22-25."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7048,
+      "raw_score": 0.7048,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7048,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9402724414949354,
+      "shingling_precision": 0.9670408621463853,
+      "duplication_ratio": 0.0005268703898840885,
+      "word_count_ratio": 0.9266783777591079,
+      "baseline_words": 13093,
+      "gemini_words": 12133,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.302325581395349,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 333935,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "document_id": "scio-physical-and-environmental-protection-686b1b84",
+  "audited_at": "2026-03-19T06:53:00.517668Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/scio-physical-and-environmental-protection-686b1b84/scio-physical-and-environmental-protection-686b1b84.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/scio-physical-and-environmental-protection-686b1b84/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/scio-physical-and-environmental-protection-686b1b84/scio-physical-and-environmental-protection-686b1b84.html"
+  },
+  "quality_score": 79,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7881,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document has strong content preservation (content score 1.0, shingling recall 0.896) but suffers from significant structural and visual defects. The heading hierarchy is broken with sibling sections incorrectly nested as H3 instead of H2, list structures are flattened across page breaks, and important semantic bold formatting has been stripped. These issues directly impact accessibility and document navigation, warranting human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "Checked heading levels against the source document. In the source, the section headings 'PE-6 (1) – Monitoring Physical Access | Intrusion Alarms and Surveillance Equipment' and 'PE-7 – Visitor Control' share the exact same visual formatting (font size and style), representing sibling sections. However, in the output, 'PE-6 (1)...' is given an H2 tag, while 'PE-7 – Visitor Control' (and the subsequent 'PE-8' and 'PE-9' headings) are incorrectly nested as H3 tags.",
+      "source_pdf_quote": "PE-6 (1) – Monitoring Physical Access | Intrusion Alarms and Surveillance Equipment\n\nPE-7 – Visitor Control",
+      "output_quote": "{\"type\": \"heading\", \"level\": 2, \"text\": \"PE-6 (1) – Monitoring Physical Access | Intrusion Alarms and Surveillance Equipment\"} ... {\"type\": \"heading\", \"level\": 3, \"text\": \"PE-7 – Visitor Control\"}",
+      "location": "Page 7",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF uses bold formatting for meaningful emphasis on defined terms in tables (e.g., 'Senior Management', 'Security Liaison') and specific alerts ('Note:'). In the HTML, this bold formatting is completely stripped, rendering these important terms as plain text without semantic or visual emphasis.",
+      "source_pdf_quote": "In the Responsibilities table on Page 1, the roles \"Senior Management\", \"Security Liaison\", and \"Facility Management\" are bolded. On Page 9, PE-11 section c(i), the text reads: \"Note: Most UPS batteries do not last...\" with \"Note:\" in bold.",
+      "output_quote": "The HTML renders these elements without any bolding or strong tags: <td>Senior<br>Management</td>, <td>Security Liaison</td>, and \"Note: Most UPS batteries do not last...\"",
+      "location": "Page 1 (Responsibilities Table) and Page 9 (Section PE-11)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Examined lists spanning across page breaks. On Page 12, items 'ii.' through 'vi.' are visually indented in the source as sub-points of item 'd.' from the previous page, while item 'e.' is a top-level parent item. In the output, the list structure is flattened, rendering the roman numeral sub-points ('ii.', 'iii.', etc.) and the lettered point ('e.') at the exact same hierarchical level within the JSON array, losing the intended semantic nesting.",
+      "source_pdf_quote": "ii. Design requirements for secure data storage...\n...\nvi. NIST SP 800-46...\ne. This control is optional...",
+      "output_quote": "\"items\": [ { \"text\": \"ii. Design requirements for secure data storage...\" }, ... { \"text\": \"vi. NIST SP 800-46...\" }, { \"text\": \"e. This control is optional for LOW risk information systems.\" } ]",
+      "location": "Page 12",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Correct the heading levels for PE-7, PE-8, and PE-9 to match PE-6.",
+    "Restore bold formatting for key terms and notes.",
+    "Fix the list nesting for items spanning page 11 to 12."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.7881,
+      "raw_score": 0.7881,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7881,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.895929203539823,
+      "shingling_precision": 0.9783533049864708,
+      "duplication_ratio": 0.04324852360019538,
+      "word_count_ratio": 0.8405833542871511,
+      "baseline_words": 3977,
+      "gemini_words": 3343,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 171797,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

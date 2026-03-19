@@ -1,0 +1,119 @@
+{
+  "document_id": "20200522-nc911-board-minutes-approved-685f9cb7",
+  "audited_at": "2026-03-19T06:37:12.964048Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/20200522-nc911-board-minutes-approved-685f9cb7/20200522-nc911-board-minutes-approved-685f9cb7.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/20200522-nc911-board-minutes-approved-685f9cb7/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/20200522-nc911-board-minutes-approved-685f9cb7/20200522-nc911-board-minutes-approved-685f9cb7.html"
+  },
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "There is an error in the extraction of the phone numbers on page 3. The source document contains the phone number '910-564-4194', but the output JSON incorrectly extracted it as '910-564-2194'. This alters contact information.",
+      "source_pdf_quote": "910-564-4194",
+      "output_quote": "910-564-2194",
+      "location": "Page 3, Phone Numbers table",
+      "source": "fidelity_llm",
+      "check_id": "C2",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The source document uses a numbered, bolded sequence for its main section headings (Items 1 through 13). The extraction handles these inconsistently, completely breaking the document's heading hierarchy. Sections 1-5 are extracted as an ordered list, Section 6 is properly recognized as a Heading (Level 2), Sections 7-8 are extracted as another ordered list, and Sections 9-13 are extracted as plain paragraphs with Markdown bolding.",
+      "source_pdf_quote": "Visual section headings: \"1. Chair's Opening Remarks\", \"6. Executive Director Report\", \"7. Education Committee Report\", \"9. Finance Team Report\"",
+      "output_quote": "Section 1-5 rendered as `{\"type\": \"list\", \"list_type\": \"ordered\"}`, Section 6 rendered as `{\"type\": \"heading\", \"level\": 2}`, Sections 7-8 rendered as `{\"type\": \"list\", \"list_type\": \"ordered\"}`, and Section 9 rendered as `{\"type\": \"paragraph\", \"text\": \"**9. Finance Team Report**...\"}`.",
+      "location": "Pages 3, 4, 5, 6, 7",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There are instances of severe content duplication where sections of the source document have been extracted as images and placed directly adjacent to the extracted HTML text for the exact same content. This happens with the Roll Call Vote table and the Education/Funding Committee Reports.",
+      "source_pdf_quote": "Page 4 contains a table for 'ROLL CALL VOTE' and Page 5 contains paragraphs for '7. Education Committee Report' and '8. Funding Committee Report'.",
+      "output_quote": "The HTML contains an `<img>` tag displaying the Roll Call Vote table immediately preceding the HTML `<table>` of the same data. Further down, there is an `<img>` tag with alt text 'A document excerpt showing the Education Committee and Funding Committee reports...' immediately followed by the HTML `<ol>` containing the exact text of those reports.",
+      "location": "Page 4 and Page 5 (HTML Body)",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Because the pipeline incorrectly categorized some numbered sections as lists (Sections 1-5 and 7-8), it stripped their explicit numbers. As a result, the sequence '7. Education Committee Report' and '8. Funding Committee Report' are placed in an isolated ordered list without their original numbering, causing the sequence to reset back to a generic 1 and 2, which causes a loss of the original contextual numbering.",
+      "source_pdf_quote": "7. Education Committee Report — Mr. Greene said...\n8. Funding Committee Report — Mr. Bone reported...",
+      "output_quote": "{\"text\": \"Education Committee Report — Mr. Greene said...\"} inside an ordered list (numbers '7.' and '8.' stripped).",
+      "location": "Page 5",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "raw_score": 0.4,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.951424078280622,
+      "shingling_precision": 0.9647413182140326,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9976553341148886,
+      "baseline_words": 2559,
+      "gemini_words": 2553,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.3333333333333333,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 247259,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

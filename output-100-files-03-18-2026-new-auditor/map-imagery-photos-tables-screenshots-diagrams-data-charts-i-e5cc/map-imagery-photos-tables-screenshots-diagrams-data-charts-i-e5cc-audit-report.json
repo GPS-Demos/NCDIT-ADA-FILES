@@ -1,0 +1,122 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc",
+  "audited_at": "2026-03-19T06:56:06.035370Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc/map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc/map-imagery-photos-tables-screenshots-diagrams-data-charts-i-e5cc.html"
+  },
+  "quality_score": 71,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7095,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6428571428571428,
+  "fidelity_visual": 0.47619047619047616,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While programmatic content preservation signals are strong (shingling recall 0.925, content score 1.0), the LLM fidelity evaluation identified severe visual and structural defects. The insertion of hallucinated images into continuous text blocks, corroborated by a low image count ratio (0.595) indicating mismatched or missing images, along with broken heading hierarchies, mandates a human review to verify the extent of the corruption.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is highly inconsistent and breaks logical nesting. Headings with the exact same visual styling in the source are given different hierarchy levels in the output. For example, top-level headings styled in large 18pt blue text are sometimes tagged as H1 ('FY23-24 Council Highlights'), sometimes H2 ('Strategic Direction...'), and even H3 ('Accomplishments 2023-2024'). Sibling sub-sections are also split: 'Hydrography' (H3) and 'Seamless Parcels' (H2) share the exact same black ",
+      "source_pdf_quote": "Major sections like 'FY23-24 Council Highlights' (page 5) and 'Accomplishments 2023-2024' (page 16) are styled identically in large blue font. Sub-sections 'Hydrography' (page 7) and 'Seamless Parcels' (page 8) are styled identically in bold black font under 'Statewide Coordination'.",
+      "output_quote": "The output renders 'FY23-24 Council Highlights' as H1 (page 10) but 'Accomplishments 2023-2024' as H3 (page 21). It renders 'Hydrography' as H3 (page 12) but its sibling 'Seamless Parcels' as H2 (page 13).",
+      "location": "Output pages 10, 12, 13, 21",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Images placed next to wrong text",
+      "severity": "major",
+      "analysis": "The HTML output includes several hallucinated images (such as a dental procedure, an architectural drawing, and a documentary poster) that do not exist in the source document. These images are injected directly into the middle of continuous text blocks, destroying the context and flow of the original paragraphs.",
+      "source_pdf_quote": "Pages 19-20 (physical pages 24-25) contain continuous text: 'in recruitment, retention and pay equalization within state agencies. North Carolina does not have a GIS position classification...'",
+      "output_quote": "An <img> element with alt text about a dental procedure ('A person wearing a surgical mask and a blue button-down shirt is performing a procedure on a patient's mouth...') is inserted between the sentences.",
+      "location": "GIS Staffing section",
+      "source": "fidelity_llm",
+      "check_id": "V4",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF explicitly states that certain list items under 'Future Priorities' are indicated in bold because they require a regular funding source. In the PDF, these items are visibly bolded. However, the HTML output renders these specific list items as plain text, resulting in a loss of semantic meaning.",
+      "source_pdf_quote": "The list item 'Formalize the partnership between DEQ, NCDOT and NCDIT to secure the future development of NC Hydro.' is bolded in the PDF.",
+      "output_quote": "<li>Formalize the partnership between DEQ, NCDOT and NCDIT to secure the future development of NC Hydro.</li> (The bold formatting is missing).",
+      "location": "Future Priorities / Data improvement section",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "The source PDF contains a sequence of three images in the Hydrography Working Group Recommendations section (Figures 22A, 22B, and 22C). The HTML output renders `<figcaption>Figure 22B.</figcaption>` and includes the subsequent text referencing Figure 22C, but the actual image for Figure 22C is completely missing from the HTML.",
+      "source_pdf_quote": "Page 28 (physical page 33) displays Figure 22C, an aerial map with hydrography data.",
+      "output_quote": "The text '<p>Figure 22C shows new hydrography data over recent imagery, again demonstrating the greater accuracy of the new data.</p>' is present, but no corresponding <img> element follows it.",
+      "location": "Hydrography Working Group Recommendations section",
+      "source": "fidelity_llm",
+      "check_id": "V2",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Inspect the HTML for hallucinated or incorrectly placed images and remove them.",
+    "Verify and restore missing images (e.g., Figure 22C).",
+    "Correct the heading hierarchy to match the source document's logical nesting.",
+    "Restore bold formatting to list items under 'Future Priorities' as it carries semantic meaning."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7095,
+      "raw_score": 0.7095,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7095,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6428571428571428,
+      "fidelity_visual": 0.47619047619047616,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9246432142532497,
+      "shingling_precision": 0.9720948012232415,
+      "duplication_ratio": 0.014271419637273295,
+      "word_count_ratio": 0.8990122481232714,
+      "baseline_words": 12655,
+      "gemini_words": 11377,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.5952380952380952,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 281687,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

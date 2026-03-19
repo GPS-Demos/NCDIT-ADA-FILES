@@ -1,0 +1,109 @@
+{
+  "document_id": "multi-factor-authentication-report-december-2015-68613ee4",
+  "audited_at": "2026-03-19T06:51:24.183706Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/multi-factor-authentication-report-december-2015-68613ee4/multi-factor-authentication-report-december-2015-68613ee4.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/multi-factor-authentication-report-december-2015-68613ee4/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/multi-factor-authentication-report-december-2015-68613ee4/multi-factor-authentication-report-december-2015-68613ee4.html"
+  },
+  "quality_score": 79,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7881,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document shows strong content preservation with a shingling recall of 0.925, but the structural score is low at 0.571. Major concerns include a broken heading hierarchy where a primary section heading was incorrectly tagged as a header/footer, and a jagged table structure. These structural defects impact accessibility and require human verification.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "On page 12 of the source PDF, 'Budget' is a major section heading (styled in large blue text, same as 'Background' and 'Benefits'). In the output, 'Budget' is incorrectly tagged as a header (`header_footer`), completely removing it from the document's heading structure. Furthermore, the underlined text 'MFA Project Budget FY 2015-2017' is inappropriately assigned as an H1, breaking the logical hierarchy by jumping from H3 on the previous page to H1.",
+      "source_pdf_quote": "The section heading 'Budget' styled in large blue text, followed by the underlined text 'MFA Project Budget FY 2015-2017'.",
+      "output_quote": "{\"type\": \"header_footer\", \"subtype\": \"header\", \"text\": \"Budget\"}, {\"type\": \"heading\", \"level\": 1, \"text\": \"MFA Project Budget FY 2015-2017\"}",
+      "location": "Page 12",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF uses bold formatting to emphasize the 'Total budget' rows at the bottom of the financial lists on page 12, distinguishing them from the line items above. In the HTML output, this bold formatting is lost, rendering the totals in the same unstyled text as the rest of the table cells. Additionally, underlines on the budget section heading and column headers are missing, though the bolding of the totals carries more semantic weight.",
+      "source_pdf_quote": "Total budget – FY 2015 – 2016 $623,215 (formatted as bold text)",
+      "output_quote": "<tr><td>Total budget – FY 2015 – 2016</td><td>$623,215</td></tr> (rendered as plain unstyled text within table cells)",
+      "location": "Page 12, MFA Project Budget FY 2015-2017 section",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "On page 10, the MFA Project status is presented as a list with aligned columns. The output extracts this as a table, but fails to maintain a consistent column structure. The first four rows are extracted with only 2 columns (`column_start: 0` and `column_start: 1`), while the remaining rows have 3 columns. This results in a jagged, invalid table structure where the earlier rows do not span the full width of the table.",
+      "source_pdf_quote": "1. Requirements Analysis Phase Complete\n...\n5. Procurement Phase Pending Jan 2016",
+      "output_quote": "Row 0 has 2 columns (ending at column_start: 1). Row 4 has 3 columns (ending at column_start: 2).",
+      "location": "Page 10, first table",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fix the heading hierarchy on page 12 to ensure 'Budget' is properly tagged and H1s are not used out of order.",
+    "Restore bold formatting to the 'Total budget' rows in the financial lists.",
+    "Correct the column spans and alignment in the project status table on page 10."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.7881,
+      "raw_score": 0.7881,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7881,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9247143177235043,
+      "shingling_precision": 0.9692343823391264,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8590951932139491,
+      "baseline_words": 2122,
+      "gemini_words": 1823,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 178245,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

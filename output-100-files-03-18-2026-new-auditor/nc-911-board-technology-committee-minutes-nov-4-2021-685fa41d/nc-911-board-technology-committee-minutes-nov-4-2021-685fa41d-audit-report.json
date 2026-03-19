@@ -1,0 +1,122 @@
+{
+  "document_id": "nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d",
+  "audited_at": "2026-03-19T07:22:53.219959Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d.html"
+  },
+  "quality_score": 81,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.8078,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.9285714285714286,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document has high content preservation scores, but it contains several significant structural and formatting issues. Specifically, a continuous numbered list is broken into multiple disconnected lists and flattened paragraphs, which violates the strict rule against list numbering resets. Additionally, there is a transcription error regarding an approval date watermark and inconsistent loss of bold formatting for agenda items. Due to these structural and content defects, human review is required.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The HTML output contains two consecutive `<img>` tags at the very beginning of the document that both represent the same NC DIT 911 Board logo from the document headers. This is a duplication of the same image.",
+      "source_pdf_quote": "A single NC DIT 911 Board logo appears in the top-left header of each page.",
+      "output_quote": "<img src=\"[...]\" alt=\"The logo for the NC DIT 911 Board...\">\n<img src=\"[...]\" alt=\"The logo for the North Carolina Department of Information Technology 911 Board...\">",
+      "location": "Beginning of the document body",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF uses bold formatting to denote the title of each agenda item in the numbered lists (e.g., '1. Chair's Welcome & Goals for Today's Meeting'). While items 6 through 9 successfully retained this bolding using `<strong>` tags, items 1-5 and 10-14 lost their bold formatting entirely in the HTML output. This loses meaning as it removes the visual distinction between the agenda topic and its associated description.",
+      "source_pdf_quote": "1. Chair’s Welcome & Goals for Today’s Meeting",
+      "output_quote": "<li>Chair’s Welcome &amp; Goals for Today’s Meeting – Meeting was called to order at 3:00PM by Chairman Jeff Shipp</li>",
+      "location": "List item 1 (and 2-5, 10-14)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The output contains a transcription error of the prominent background watermark on page 1. The source document's watermark clearly states 'Approved 2/10/2022', but the output records this as 'Approved 2/25/2022', altering the documented approval date.",
+      "source_pdf_quote": "Approved 2/10/2022",
+      "output_quote": "Approved 2/25/2022",
+      "location": "Page 1, final paragraph",
+      "source": "fidelity_llm",
+      "check_id": "C6",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source document contains a single continuous numbered list from 1 to 14 spanning pages 2 through 4. The output breaks this continuous list in multiple ways: on page 2, items 1-4 are grouped into one ordered list, while item 5 is placed in a separate ordered list (which will cause numbering to reset to 1). On page 3, items 6 through 9 are completely flattened into plain paragraphs instead of list items. On page 4, items 10 through 14 are grouped into another ordered list (which will also rest",
+      "source_pdf_quote": "Numbered list items spanning from '1. Chair’s Welcome...' to '14. Adjourn – 4:48 PM' across pages 2, 3, and 4.",
+      "output_quote": "Multiple fragmented formats: two separate ordered lists on page 2, plain paragraphs with bolded numbers on page 3 (e.g., '**6. 2022 Technology Committee Goals**'), and an ordered list on page 4 with numbers stripped (e.g., 'NMAC– Mr. Means...').",
+      "location": "Pages 2, 3, and 4",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fix the continuous numbered list (items 1-14) so it renders as a single, unbroken ordered list.",
+    "Restore bold formatting to the titles of agenda items 1-5 and 10-14 to match the source PDF.",
+    "Correct the transcription of the approval date watermark from 2/25/2022 to 2/10/2022.",
+    "Remove the duplicate logo image tag at the beginning of the document."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8078,
+      "raw_score": 0.8078,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8078,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.9285714285714286,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9738360908041555,
+      "shingling_precision": 0.968247895944912,
+      "duplication_ratio": 0.00881057268722467,
+      "word_count_ratio": 0.9931818181818182,
+      "baseline_words": 880,
+      "gemini_words": 874,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.38461538461538464,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 242586,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

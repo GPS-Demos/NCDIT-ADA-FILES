@@ -1,0 +1,122 @@
+{
+  "document_id": "911-board-technology-committee-agenda-june-9-2022-685fa07f",
+  "audited_at": "2026-03-19T06:35:41.126674Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/911-board-technology-committee-agenda-june-9-2022-685fa07f/911-board-technology-committee-agenda-june-9-2022-685fa07f.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/911-board-technology-committee-agenda-june-9-2022-685fa07f/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/911-board-technology-committee-agenda-june-9-2022-685fa07f/911-board-technology-committee-agenda-june-9-2022-685fa07f.html"
+  },
+  "quality_score": 70,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7048,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document has a moderate fidelity composite score of 0.7048 with perfect content extraction, but significant structural and visual issues. The LLM identified a major issue with an image of an attendance sheet duplicating the extracted HTML text, which severely impacts the user experience and accessibility. Additionally, broken heading hierarchies and loss of semantic text formatting warrant human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "Reviewed the heading levels assigned in the JSON output against the visual hierarchy of the source PDF. In the source, several agenda item headings share the exact same visual styling (bold, red, same font size), such as 'ESINet Update (Tom Rogers)' on page 5, 'GIS Update (Tom Rogers)' on page 7, and 'Data Analytics Update (Tom Rogers)' on page 7. However, the JSON output inconsistently assigns these sibling headings to varying hierarchical levels (H2, H3, and H4).",
+      "source_pdf_quote": "Visually identical headings: 'ESINet Update (Tom Rogers)' (Page 5), 'GIS Update (Tom Rogers)' (Page 7), and 'Data Analytics Update (Tom Rogers)' (Page 7).",
+      "output_quote": "\"text\": \"ESINet Update (Tom Rogers)\" with \"level\": 2; \"text\": \"GIS Update (Tom Rogers)\" with \"level\": 3; \"text\": \"Data Analytics Update (Tom Rogers)\" with \"level\": 4.",
+      "location": "Pages 5 and 7",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The HTML includes an image of the Page 2 attendance sheet (as indicated by the alt text describing the 'meeting attendance sheet' and 'DRAFT' watermark). This image acts as a screenshot of the page, but the identical content (the minutes headers and attendance table) is extracted and rendered as actual HTML text and tables immediately below it, causing the content to be visually duplicated for a sighted user.",
+      "source_pdf_quote": "Page 2 contains the header 'MINUTES' and the 'Attendance' table.",
+      "output_quote": "<img src=\"[base64 image stripped for token budget]\" alt=\"The document is a meeting attendance sheet for the DIT 911 Board, dated Thursday, March 10, 2022, displaying a table of members and staff with their attendance status marked as present (P) or not present (NP) via Phone/Teams. The document has a large &quot;DRAFT&quot; watermark overlaid across the page.\"> followed by <h2>Attendance</h2> and its corresponding <table>.",
+      "location": "Page 2 / Elements preceding the Attendance table",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "Meaningful text formatting has been stripped in several places. On pages 3 and 4, the numbered list items contain bolded titles (e.g., '1. Chair’s Welcome & Goals for Today’s Meeting –') which serve as structural emphasis, but the HTML renders them as unstyled plain text. Additionally, italicized definitions and underlined links in the PDF were converted to plain text.",
+      "source_pdf_quote": "1. Chair’s Welcome & Goals for Today’s Meeting –",
+      "output_quote": "<li>Chair’s Welcome &amp; Goals for Today’s Meeting – Meeting was called to order at 10:00 AM by Chairman Jeff Shipp</li>",
+      "location": "Page 3, list item 1",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Evaluated all list structures. On page 4 of the source PDF, there is a continuation of the numbered list from page 3, running from items 5 to 10. The JSON output extracts this as a new ordered list without preserving the original numbering or continuation context, meaning it will reset to 1 in standard rendering.",
+      "source_pdf_quote": "5. ESInet Update – Tom Rogers provided the ESInet update... 10.Adjourn – Mr. Ship adjourned the meeting at 10:43 AM.",
+      "output_quote": "A new list block with \"list_type\": \"ordered\" whose first item text is \"ESInet Update – Tom Rogers provided the ESInet update...\"",
+      "location": "Page 4",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove the redundant image of the attendance sheet to resolve duplicate content",
+    "Correct the heading levels to accurately reflect the document hierarchy",
+    "Restore bold, italic, and underline formatting where structurally or semantically important",
+    "Fix ordered list numbering for continuations"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7048,
+      "raw_score": 0.7048,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7048,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8618889416231609,
+      "shingling_precision": 0.9824181769001893,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8539473684210527,
+      "baseline_words": 1520,
+      "gemini_words": 1298,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.6923076923076923,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 155421,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

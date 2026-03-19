@@ -1,0 +1,96 @@
+{
+  "document_id": "gicc-meeting-minutes-02122003-685fb099",
+  "audited_at": "2026-03-19T06:42:47.137380Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-meeting-minutes-02122003-685fb099/gicc-meeting-minutes-02122003-685fb099.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-meeting-minutes-02122003-685fb099/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-meeting-minutes-02122003-685fb099/gicc-meeting-minutes-02122003-685fb099.html"
+  },
+  "quality_score": 79,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7857,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.2857142857142857,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Programmatic signals show near-perfect content preservation with a shingling recall of 0.988 and word count ratio of 0.989. However, the LLM fidelity evaluation identified significant structural issues, specifically broken heading hierarchy and a missed URL conversion, resulting in a very low structural score of 0.285. Given the impact of heading hierarchy on accessibility, human review is warranted to correct these structural defects before publication.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The source document contains four visually identical headings indicating 'Priorities' (Priority #1 through #4), which are all italicized and positioned flush left. In the JSON output, these are treated inconsistently: Priority #1 is embedded inside a paragraph tag, Priority #2 and #3 are extracted as H2 headings, and Priority #4 is extracted as an H3 heading. Headings at the same visual level in the source must be nested at the same level in the output.",
+      "source_pdf_quote": "\"Priority #1—Common Understanding.\" (pg 2), \"Priority #2—Data Inventory\" (pg 3), \"Priority #3—Content Standards and Implementation Plan\" (pg 4), and \"Priority #4—Access and Distribution\" (pg 4) share identical formatting.",
+      "output_quote": "Priority #1 is rendered as plain text in a paragraph (`*Priority #1—Common Understanding.*`), Priorities #2 and #3 are `\"level\": 2`, and Priority #4 is `\"level\": 3`.",
+      "location": "Pages 2, 3, and 4",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "major",
+      "analysis": "The source document contains a clearly visible URL on the final page (www.cgia.state.nc.us/gicc). While another URL on page 5 was successfully converted into a link object in the JSON, the one on page 7 was missed and left as plain text within a paragraph, meaning the link is missing/unclickable.",
+      "source_pdf_quote": "www.cgia.state.nc.us/gicc",
+      "output_quote": "\"text\": \"*All PowerPoint presentations and reports are on the Council Web site: www.cgia.state.nc.us/gicc, then click on “Meetings.” The individual “Presentation” icons follow the Agenda and Minutes.*\"",
+      "location": "Page 7, final paragraph",
+      "source": "fidelity_llm",
+      "check_id": "S7",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Standardize the heading tags for 'Priority #1' through 'Priority #4' to the appropriate consistent heading level.",
+    "Convert the plain text URL 'www.cgia.state.nc.us/gicc' on page 7 into a clickable anchor link."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.7857,
+      "raw_score": 0.7857,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7857,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.2857142857142857,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9884499497823903,
+      "shingling_precision": 0.9894436997319035,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9890795631825273,
+      "baseline_words": 3205,
+      "gemini_words": 3170,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 224062,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "document_id": "draft-fy23-25-goals-and-priorities-685fc8b0",
+  "audited_at": "2026-03-19T07:21:09.897308Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/draft-fy23-25-goals-and-priorities-685fc8b0/draft-fy23-25-goals-and-priorities-685fc8b0.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/draft-fy23-25-goals-and-priorities-685fc8b0/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/draft-fy23-25-goals-and-priorities-685fc8b0/draft-fy23-25-goals-and-priorities-685fc8b0.html"
+  },
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.8952,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9285714285714286,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document has high overall fidelity scores and excellent programmatic metrics, indicating complete content preservation. However, the identified structural issue where a page heading was improperly absorbed into a table as a merged row violates structural integrity and heading hierarchy, requiring human correction to ensure accessibility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "In the source PDF, the sub-section headers inside the tables (e.g., '1.1. Promote free...', '1.2. Recommend...') are explicitly bolded to distinguish them from the standard data rows below them. In the HTML output, these table headers are rendered as plain unstyled text within standard <td> tags without any bolding or heading elements. This formatting carries structural meaning that is lost.",
+      "source_pdf_quote": "\"1.1. Promote free and open discovery of and access to geospatial data created and maintained by local governments and support efficient local to state data sharing.\" (rendered in bold text)",
+      "output_quote": "<td colspan=\"2\">1.1. Promote free and open discovery of and access to geospatial data created and maintained by local governments and support efficient local to state data sharing.</td>",
+      "location": "First table under Goal 1",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The output incorrectly absorbs a standalone page header into a table. On page 2 of the source document, 'Goal 1. Improve, expand, and support statewide geospatial data and applications.' is a page header/heading sitting above the table content. The output JSON merges the table from page 2 into the table from page 1 and incorrectly includes this page header as a 2-column merged row inside the middle of the data table.",
+      "source_pdf_quote": "Goal 1. Improve, expand, and support statewide geospatial data and applications. [Standalone text at the top of Page 2]",
+      "output_quote": "{\"text\": \"Goal 1. Improve, expand, and support statewide geospatial data and applications.\", \"column_start\": 0, \"row_start\": 2, \"num_columns\": 2, \"num_rows\": 1}",
+      "location": "Page 1, third table element (Row 2)",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Extract the page header 'Goal 1...' from the middle of the table and place it as a proper heading.",
+    "Restore bold formatting to sub-section headers within the tables."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.8,
+    "score_breakdown": {
+      "fidelity_composite": 0.8952,
+      "raw_score": 0.8952,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8952,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9285714285714286,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.982256020278834,
+      "shingling_precision": 0.9797724399494311,
+      "duplication_ratio": 0.018928285790455877,
+      "word_count_ratio": 1.0,
+      "baseline_words": 536,
+      "gemini_words": 536,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 139359,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

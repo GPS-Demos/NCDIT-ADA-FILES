@@ -1,0 +1,143 @@
+{
+  "document_id": "ifb-its-400277-2017-1102-final-686b18e9",
+  "audited_at": "2026-03-19T06:47:28.666026Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/ifb-its-400277-2017-1102-final-686b18e9/ifb-its-400277-2017-1102-final-686b18e9.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/ifb-its-400277-2017-1102-final-686b18e9/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/ifb-its-400277-2017-1102-final-686b18e9/ifb-its-400277-2017-1102-final-686b18e9.html"
+  },
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": null,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dims). Manual review required.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated paragraphs or sentences",
+      "severity": "critical",
+      "analysis": "The output on Page 23 contains a massive hallucination where the AI's internal thought process and raw JSON code leaked directly into the extracted text. This text does not exist anywhere in the source document.",
+      "source_pdf_quote": "b. IFB Response Organization: The offer shall be organized and indexed in the following format and shall contain, at a minimum, all listed items in the sequence indicated.",
+      "output_quote": "b. IFB Response Organization: The offer shall be organized and indexed in the following format and shall contain, at a minimum, all listed items in the sequence indicated চক্র . children: [] \n\nI will complete the actual nested array accurately without placeholder text below in the main JSON block.\n\nWait, I will directly output the final valid JSON in the actual response format now without this conversational text. The above was just a thought process snippet leaking out. I am correcting it direc",
+      "location": "Page 23, item 13.b.",
+      "source": "fidelity_llm",
+      "check_id": "C1",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Fidelity Visual evaluation failed — dimension not assessed",
+      "severity": "major",
+      "analysis": "The visual fidelity call did not produce valid results.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "fidelity_llm",
+      "check_id": null,
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "On Page 60, the \"204X Statewide Term Contract Purchase Activity Report\" and \"204X Statewide Term Contract Warranty Report\" tables were extracted as image elements rather than text tables. As a result, all of the textual information within those tables (column headers like 'Purchasing Agency Name', 'Purchase Order Number', 'Invoice Date', etc.) is completely missing from the structured output.",
+      "source_pdf_quote": "Purchasing Agency Name | Purchasing Agency Segment | Purchase Order Number | Invoice Date | Manufacturer Name...",
+      "output_quote": "{\"type\": \"image\", \"description\": \"Two spreadsheet templates are displayed...\"}",
+      "location": "Page 60, 204X Statewide Term Contract Purchase Activity Report & Warranty Report",
+      "source": "fidelity_llm",
+      "check_id": "C5",
+      "fidelity_dimension": "content",
+      "corroborated": true
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The conversion pipeline incorrectly converted several list items in Section G into H2 headings, breaking the semantic hierarchy. Items like '27) WAIVER OF DEFAULT:' and '28) TERMINATION:' were extracted as H2s, while surrounding list items were extracted as plain paragraphs or list items.",
+      "source_pdf_quote": "27) WAIVER OF DEFAULT: Waiver by either party of any default...",
+      "output_quote": "{\"type\": \"heading\", \"level\": 2, \"text\": \"27) WAIVER OF DEFAULT:\"}",
+      "location": "Page 34",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (10x): \"ifb number: its-400277 it infrastructure solutions\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 10 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"attachment d: price proposal\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dims). Manual review required."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "raw_score": 0.4,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8692449355432781,
+      "shingling_precision": 0.9684179673188247,
+      "duplication_ratio": 0.021686324745008943,
+      "word_count_ratio": 0.7639058361358293,
+      "baseline_words": 33601,
+      "gemini_words": 25668,
+      "table_count_ratio": null,
+      "image_count_ratio": null,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 1
+    },
+    "processing_ms": 280316,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

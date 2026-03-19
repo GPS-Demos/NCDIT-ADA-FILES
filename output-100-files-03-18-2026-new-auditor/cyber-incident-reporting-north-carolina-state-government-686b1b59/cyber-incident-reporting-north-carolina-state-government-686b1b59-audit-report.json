@@ -1,0 +1,121 @@
+{
+  "document_id": "cyber-incident-reporting-north-carolina-state-government-686b1b59",
+  "audited_at": "2026-03-19T07:20:39.036773Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/cyber-incident-reporting-north-carolina-state-government-686b1b59/cyber-incident-reporting-north-carolina-state-government-686b1b59.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/cyber-incident-reporting-north-carolina-state-government-686b1b59/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/cyber-incident-reporting-north-carolina-state-government-686b1b59/cyber-incident-reporting-north-carolina-state-government-686b1b59.html"
+  },
+  "quality_score": 78,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.784,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite very strong programmatic scores (shingling recall 0.985, precision 0.978), the LLM fidelity structural score is low (0.571). Major structural concerns are identified, specifically hyperlinks being displaced from inline text to a separate location at the end of the page with stray injected characters. Per the routing instructions, documents with displaced hyperlinks must not be auto-approved, necessitating human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Link injection issues",
+      "severity": "major",
+      "analysis": "The extracted links at the end of Page 2 contain stray text characters prepended to the link text that do not appear in the source.",
+      "source_pdf_quote": "NCEOC@ncdps.gov\nncisaac@ncsbi.gov",
+      "output_quote": "{\n  \"type\": \"link\",\n  \"text\": \"g NCEOC@ncdps.gov\",\n  \"url\": \"mailto:NCEOC@ncdps.gov\"\n},\n{\n  \"type\": \"link\",\n  \"text\": \"y ncisaac@ncsbi.gov\",\n  \"url\": \"mailto:ncisaac@ncsbi.gov\"\n}",
+      "location": "Page 2",
+      "source": "fidelity_llm",
+      "check_id": "S7",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The bold formatting used to emphasize key terms at the start of the bullet points on page 3 ('Incident response.' and 'Recovery response.') was not preserved in the HTML output. The text appears as plain text, losing the visual distinction of these defined list terms.",
+      "source_pdf_quote": "• Incident response. This includes conducting forensics...",
+      "output_quote": "<li>Incident response. This includes conducting forensics...",
+      "location": "Page 3, 'Types of State Incident Response' list",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The output contains standalone link elements at the end of page 2 where stray characters ('g' and 'y') have been prepended to the link text, which do not appear in the source document.",
+      "source_pdf_quote": "NCEOC@ncdps.gov",
+      "output_quote": "g NCEOC@ncdps.gov",
+      "location": "Page 2, link elements following the table",
+      "source": "fidelity_llm",
+      "check_id": "C6",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "At the end of Page 2 in the output, several link elements are appended as separate structural blocks after the table. In the source document, these links are embedded inline within the preceding paragraph and table cells. Placing them at the very end of the page disrupts the logical reading order.",
+      "source_pdf_quote": "Links such as NCEOC@ncdps.gov and ncisaac@ncsbi.gov appear inside the table cells.",
+      "output_quote": "Four standalone \"link\" objects are placed at the end of the page content array, after the table.",
+      "location": "Page 2",
+      "source": "fidelity_llm",
+      "check_id": "S4",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify and fix the placement of hyperlinks at the end of Page 2, restoring them to their proper inline locations.",
+    "Remove any stray characters prepended to link texts.",
+    "Restore missing bold formatting for defined list terms on page 3."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.784,
+      "raw_score": 0.784,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.784,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9849098270150902,
+      "shingling_precision": 0.9780701754385965,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.991725768321513,
+      "baseline_words": 846,
+      "gemini_words": 839,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 108556,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
