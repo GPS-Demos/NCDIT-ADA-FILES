@@ -1,0 +1,110 @@
+{
+  "document_id": "2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES",
+  "audited_at": "2026-03-19T23:55:58.726977Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES/2008-2009_TAX_RATES_AND_EFFECTIVE_TAX_RATES.html"
+  },
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output completely omits the table content for all even-numbered pages (pages 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26). Only the page number header is extracted for these pages, resulting in a massive loss of data.",
+      "source_pdf_quote": "Page 2 contains a full table of data starting with \"2006* .7896 Ashe...\"",
+      "output_quote": "\"content\": [ { \"type\": \"header_footer\", \"subtype\": \"header\", \"text\": \"2\" } ]",
+      "location": "Pages 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26",
+      "source": "fidelity_llm",
+      "check_id": "C3",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "In the source PDF, the names of counties (e.g., 'Alamance', 'Alexander', 'Alleghany') and city grouping headers (e.g., 'Burlington:', 'Gibsonville:') in the 'Counties and Municipalities' column are formatted in bold to visually distinguish them from the individual municipalities listed below them. In the rendered HTML, this bold formatting has been lost, making all entries in that column appear as plain, unstyled text. This loss of formatting removes the meaningful visual hierarchy.",
+      "source_pdf_quote": "County names and groupings like 'Alamance', 'Burlington:', and 'Gibsonville:' are bolded in the 'Counties and Municipalities' column.",
+      "output_quote": "<td>Alamance</td>, <td>Burlington:</td>, <td>Gibsonville:</td> appear as plain text without bold elements (<b>, <strong>) or inline font-weight CSS.",
+      "location": "Throughout the tables in the 'Counties and Municipalities' column",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (27): 1; 2; 3",
+      "severity": "major",
+      "analysis": "header_footer_count=27. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "raw_score": 0.4,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9898616412213741,
+      "shingling_precision": 0.9948453608247423,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9740811848601206,
+      "baseline_words": 7292,
+      "gemini_words": 7103,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 126629,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

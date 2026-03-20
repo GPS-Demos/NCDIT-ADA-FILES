@@ -1,0 +1,112 @@
+{
+  "document_id": "gas1278_6_14",
+  "audited_at": "2026-03-20T00:12:25.526009Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/gas1278_6_14/gas1278_6_14.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/gas1278_6_14/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/gas1278_6_14/gas1278_6_14.html"
+  },
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.8967,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite very strong fidelity scores and good programmatic text match metrics, the LLM flagged a major concern regarding a completely hallucinated image of a bar chart inserted into the HTML output. The routing instructions explicitly prohibit auto-approving documents with out-of-order or improperly placed images.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Images placed next to wrong text",
+      "severity": "major",
+      "analysis": "The HTML output contains a completely hallucinated image of a bar chart. This image is nowhere in the source document and is placed out-of-context between the end of the first page's text and the beginning of the second page's content. As it has no referencing text and alters the visual presentation drastically, it fails contextual placement.",
+      "source_pdf_quote": "The source PDF contains only a map logo on page 1 and no bar graphs.",
+      "output_quote": "<img src=\"[base64 image stripped for token budget]\" alt=\"A horizontal bar graph titled &quot;Percentage of students who answered the question correctly&quot;...\">",
+      "location": "Between the bolded IFTA website reference and the \"Gas 1278 Reverse (Rev 6-14)\" paragraph",
+      "source": "fidelity_llm",
+      "check_id": "V4",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Footnotes preserved and properly placed",
+      "severity": "minor",
+      "analysis": "The source contains a footnote denoted by an asterisk (*) on Page 2, correlating with table entries on Page 1 (e.g., '0.0700*'). In the JSON output, this footnote was converted into an unordered list item. Because markdown parsers interpret the asterisk as a bullet point, the literal '*' character was stripped from the text. This breaks the explicit visual matching between the footnote reference in the table and the footnote definition at the bottom.",
+      "source_pdf_quote": "* Denotes specific fuel taxed at an assigned rate per 100 cubic ft. (See CA, ME, and MS)",
+      "output_quote": "\"type\": \"list\", \"list_type\": \"unordered\", \"items\": [ { \"text\": \"Denotes specific fuel taxed at an assigned rate per 100 cubic ft. (See CA, ME, and MS)\" } ]",
+      "location": "Page 2, bottom footnote",
+      "source": "fidelity_llm",
+      "check_id": "S6",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "1 bare URL(s) in text not converted to hyperlinks: www.iftach.org",
+      "severity": "minor",
+      "analysis": "bare_url_count=1. URLs appear as plain text instead of clickable links.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify and remove the hallucinated bar chart image",
+    "Fix the footnote marker by changing the bullet point back to an asterisk",
+    "Convert the plain text URL (www.iftach.org) into a clickable hyperlink"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8967,
+      "raw_score": 0.8967,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8967,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9179711959924859,
+      "shingling_precision": 0.912826899128269,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9970238095238095,
+      "baseline_words": 1008,
+      "gemini_words": 1005,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 165447,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

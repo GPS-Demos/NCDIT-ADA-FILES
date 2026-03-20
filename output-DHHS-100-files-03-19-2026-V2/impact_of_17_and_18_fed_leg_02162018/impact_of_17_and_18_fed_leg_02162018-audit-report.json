@@ -1,0 +1,111 @@
+{
+  "document_id": "impact_of_17_and_18_fed_leg_02162018",
+  "audited_at": "2026-03-20T00:10:20.260663Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/impact_of_17_and_18_fed_leg_02162018/impact_of_17_and_18_fed_leg_02162018.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/impact_of_17_and_18_fed_leg_02162018/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/impact_of_17_and_18_fed_leg_02162018/impact_of_17_and_18_fed_leg_02162018.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite strong fidelity scores and text matching metrics, programmatic checks identified two structural issues that explicitly block auto-approval according to the instructions: displaced hyperlinks extracted as standalone blocks instead of inline text, and header/footer elements retained in the HTML output. These issues break accessibility and layout, requiring human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "In the source PDF, the text references to 'Form D-410' and 'Form CD-419' on page 2 are formatted with an underline to indicate they are hyperlinks. In the HTML output, these inline mentions lose their underline styling in the main paragraph text.",
+      "source_pdf_quote": "will need to file Form D-410 to receive... will need to file Form CD-419 to receive (with underline)",
+      "output_quote": "will need to file Form D-410 to receive... will need to file Form CD-419 to receive (plain unstyled text)",
+      "location": "Page 2, second paragraph in the HTML",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Displaced hyperlinks: 2 link(s) extracted as standalone elements instead of inline text",
+      "severity": "major",
+      "analysis": "standalone_links=2, examples=['https://www.ncdor.gov/taxes/individual-income-tax/individual', 'https://www.ncdor.gov/taxes/corporate-income-franchise-tax/c']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (3): Tax Administration; Page 1 of 2; February 16, 2018",
+      "severity": "major",
+      "analysis": "header_footer_count=3. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Move standalone hyperlinks back inline within their original paragraphs.",
+    "Remove retained header, footer, and page number elements from the HTML."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9767324228629236,
+      "shingling_precision": 0.9872188139059305,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9824150058616647,
+      "baseline_words": 853,
+      "gemini_words": 838,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 2,
+      "output_link_count": 2,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 154476,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "document_id": "Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010",
+  "audited_at": "2026-03-20T00:05:54.302846Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite very strong content and structural fidelity scores (composite 0.9167) and excellent programmatic text metrics, a programmatic check identified that header/footer elements (date and page numbers) were retained in the HTML output. According to the routing rules, the retention of page numbers or footers in the output explicitly blocks auto-approval and requires human review. There is also a missing bold formatting on the 'Grand Total' row.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF visually distinguishes the 'Grand Total' row at the end of the document by bolding the text and the corresponding sum numbers. In the rendered HTML, this row lacks any bold or emphasis styling (e.g., <strong>, <b>, or CSS font-weight).",
+      "source_pdf_quote": "Grand Total 15,217,750 65,917,291 263,766 81,398,807",
+      "output_quote": "<td>Grand Total</td><td>15,217,750</td><td>65,917,291</td><td>263,766</td><td>81,398,807</td>",
+      "location": "Page 9, final row of the last table",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (2): 4/29/2011; Page 1 of 9",
+      "severity": "major",
+      "analysis": "header_footer_count=2. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Strip the retained header/footer text (e.g., '4/29/2011' and 'Page 1 of 9') from the HTML output.",
+    "Add appropriate bold emphasis to the 'Grand Total' row to match the visual styling of the source PDF."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.979768218424671,
+      "shingling_precision": 0.9888977002379065,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9622166246851386,
+      "baseline_words": 1985,
+      "gemini_words": 1910,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 115532,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
