@@ -1,0 +1,111 @@
+{
+  "document_id": "TY2020_Estates_and_Trusts_Approved_Software_Products",
+  "audited_at": "2026-03-20T00:11:53.366117Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/TY2020_Estates_and_Trusts_Approved_Software_Products/TY2020_Estates_and_Trusts_Approved_Software_Products.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/TY2020_Estates_and_Trusts_Approved_Software_Products/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/TY2020_Estates_and_Trusts_Approved_Software_Products/TY2020_Estates_and_Trusts_Approved_Software_Products.html"
+  },
+  "quality_score": 80,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7967,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Both the LLM and programmatic signals identified that email hyperlinks within the table were extracted as standalone elements at the end of the document instead of inline. According to routing rules, documents with displaced hyperlinks must not be auto-approved, requiring human intervention to fix the table structure and link placement.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Link injection issues",
+      "severity": "major",
+      "analysis": "The email addresses visibly acting as links in the table are rendered merely as plain text within the table cells in the output. Instead of inline links, a single link object is generated out of context at the very end of the document array, leaving the inline occurrences missing their clickable properties and missing the second email link altogether.",
+      "source_pdf_quote": "The two email addresses 'sales@drakesoftware.com' in the 'Sales Contact Information' column.",
+      "output_quote": "Table cells contain plain text with no link properties (e.g., \"text\": \"(800) 890-9500\\nsales@drakesoftware.com\"), and an out-of-context link object is appended at the end: {\"type\": \"link\", \"text\": \"sales@drakesoftware.com\", \"url\": \"mailto:sales@drakesoftware.com\"}.",
+      "location": "Table cells and end of page 1 content array",
+      "source": "fidelity_llm",
+      "check_id": "S7",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The email address 'sales@drakesoftware.com' correctly appears within the 'Sales Contact Information' column of the table for the two Drake Software rows. However, it is additionally extracted and visually duplicated as a standalone paragraph at the end of the HTML document. This standalone paragraph does not exist in the source PDF.",
+      "source_pdf_quote": "The source document concludes immediately after the table row for On-Line Taxes, Inc. and does not have a trailing standalone email address.",
+      "output_quote": "<p><a href=\"mailto:sales@drakesoftware.com\">sales@drakesoftware.com</a></p>",
+      "location": "End of document body",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": true
+    },
+    {
+      "description": "Displaced hyperlinks: 1 link(s) extracted as standalone elements instead of inline text",
+      "severity": "major",
+      "analysis": "standalone_links=1, examples=['mailto:sales@drakesoftware.com']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify the table structure and ensure email addresses are properly formatted as inline links within the appropriate cells.",
+    "Remove any duplicated standalone hyperlinks at the end of the document."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7967,
+      "raw_score": 0.7967,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7967,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 1.0,
+      "shingling_precision": 0.995114006514658,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0067567567567568,
+      "baseline_words": 148,
+      "gemini_words": 149,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 2,
+      "output_link_count": 1,
+      "link_count_ratio": 0.5,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 1
+    },
+    "processing_ms": 227892,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "document_id": "EFS_FNSEP_24_2020a7",
+  "audited_at": "2026-03-19T23:59:08.836481Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/EFS_FNSEP_24_2020a7/EFS_FNSEP_24_2020a7.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/EFS_FNSEP_24_2020a7/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/EFS_FNSEP_24_2020a7/EFS_FNSEP_24_2020a7.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite strong fidelity scores (0.9167 composite) and good programmatic text metrics, the programmatic evaluation detected retained header/footer elements and page numbers in the HTML output. According to the routing rules, documents with retained footers or page numbers cannot be auto-approved, even if content is otherwise preserved. Therefore, human review is required to remove these artifacts.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "In the source PDF, the names of the state officials in the header ('ROY COOPER', 'MANDY COHEN', etc.) and the initial line of the footer ('NC DEPARTMENT OF HEALTH...') are explicitly formatted in bold text to distinguish them from their titles or the rest of the address block. The HTML output renders these as plain, unstyled text within paragraph tags. Since the loss of bold text does not significantly alter the overall comprehension of the document, this is evaluated as a minor defect.",
+      "source_pdf_quote": "ROY COOPER (bolded) \nMANDY COHEN, MD, MPH (bolded) \nSUSAN OSBORNE (bolded)",
+      "output_quote": "<p>ROY COOPER • Governor</p>\n<p>MANDY COHEN, MD, MPH • Secretary</p>\n<p>SUSAN OSBORNE • Assistant Secretary for County Operations for Human Services</p>",
+      "location": "Page 1 Header",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (5): NC DEPARTMENT OF HEALTH AND HUMAN SERVICES • DIVISION OF SOC; 2; 3",
+      "severity": "major",
+      "analysis": "header_footer_count=5. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained headers, footers, and page numbers from the HTML output",
+    "Apply missing bold formatting to state official names and department titles"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.8789501874665239,
+      "shingling_precision": 0.9981751824817519,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.923217550274223,
+      "baseline_words": 547,
+      "gemini_words": 505,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 99815,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "document_id": "nov30_dec06_2020",
+  "audited_at": "2026-03-20T00:16:32.974558Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/nov30_dec06_2020/nov30_dec06_2020.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/nov30_dec06_2020/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/nov30_dec06_2020/nov30_dec06_2020.html"
+  },
+  "quality_score": 71,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7133,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Programmatic signals show near-perfect text preservation, but the LLM fidelity evaluation identified significant structural and visual defects. Specifically, the main heading is embedded in a table cell, breaking the heading hierarchy, and a missing <tr> tag causes the table to render incorrectly. These structural issues violate approval requirements and necessitate manual correction.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The main document title at the top of the first page serves as the primary heading for the document. However, instead of being extracted as an H1 heading, it is embedded as the first cell in the table structure. This leaves the document without a proper heading hierarchy at its start.",
+      "source_pdf_quote": "NORTH CAROLINA FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY FOR THE WEEK ENDING DECEMBER 06, 2020",
+      "output_quote": "{\"text\": \"NORTH CAROLINA FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY FOR THE WEEK ENDING DECEMBER 06, 2020\", \"column_start\": 0, \"row_start\": 0, \"num_columns\": 13, \"num_rows\": 1}",
+      "location": "Page 1, row 0 of the table",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "The HTML contains a major structural error in the first table. After the row for 'Duplin', the HTML has `<td rowspan=\"3\"></td><td colspan=\"4\">Not Expedited</td>...` without an opening `<tr>` tag. This invalid HTML structure causes the subsequent header and data cells (for 'Durham' onwards) to misrender or misalign, breaking the tabular layout for a significant portion of the data.",
+      "source_pdf_quote": "The PDF displays a well-aligned table on page 2 starting with header rows and the county 'Durham'.",
+      "output_quote": "<tr><td>Duplin</td><td>29</td>...<td>8.57</td></tr>\n<td rowspan=\"3\"></td><td colspan=\"4\">Not Expedited</td>...",
+      "location": "Table 1 (between Duplin and Durham rows)",
+      "source": "fidelity_llm",
+      "check_id": "V1",
+      "fidelity_dimension": "visual",
+      "corroborated": true
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "In the source PDF, the county names (e.g., 'Alamance', 'Durham') are bolded. Additionally, the column headers (e.g., 'Not Expedited', 'Timely', 'Count') are bold. In the HTML output, these text elements are rendered as plain text inside `<td>` elements without any bold styling (e.g., `<b>`, `<strong>`, or CSS font-weight) in the first table.",
+      "source_pdf_quote": "County names such as 'Alamance' and headers like 'Not Expedited' are bolded in the PDF.",
+      "output_quote": "<td>Alamance</td> and <td colspan=\"4\">Not Expedited</td>",
+      "location": "Table 1",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Extract the main title from the table and format it as an H1 heading",
+    "Fix the invalid table structure by adding the missing <tr> tag to ensure proper alignment",
+    "Restore bold formatting to county names and column headers"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7133,
+      "raw_score": 0.7133,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7133,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9958626396359123,
+      "shingling_precision": 0.9962748344370861,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9891230455472467,
+      "baseline_words": 1471,
+      "gemini_words": 1455,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 1
+    },
+    "processing_ms": 115525,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

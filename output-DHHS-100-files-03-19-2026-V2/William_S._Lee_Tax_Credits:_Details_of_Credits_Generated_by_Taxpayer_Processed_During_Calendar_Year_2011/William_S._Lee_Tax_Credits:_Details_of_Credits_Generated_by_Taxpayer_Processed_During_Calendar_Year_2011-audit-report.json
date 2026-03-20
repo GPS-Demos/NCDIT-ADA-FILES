@@ -1,0 +1,99 @@
+{
+  "document_id": "William_S._Lee_Tax_Credits:_Details_of_Credits_Generated_by_Taxpayer_Processed_During_Calendar_Year_2011",
+  "audited_at": "2026-03-20T00:10:34.608659Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/William_S._Lee_Tax_Credits:_Details_of_Credits_Generated_by_Taxpayer_Processed_During_Calendar_Year_2011/William_S._Lee_Tax_Credits:_Details_of_Credits_Generated_by_Taxpayer_Processed_During_Calendar_Year_2011.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/William_S._Lee_Tax_Credits:_Details_of_Credits_Generated_by_Taxpayer_Processed_During_Calendar_Year_2011/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/William_S._Lee_Tax_Credits:_Details_of_Credits_Generated_by_Taxpayer_Processed_During_Calendar_Year_2011/William_S._Lee_Tax_Credits:_Details_of_Credits_Generated_by_Taxpayer_Processed_During_Calendar_Year_2011.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the content and structural fidelity scores are perfect (1.0), programmatic checks indicate that running headers or footers ('Revised on 04/10/2013; Page 1 of 1') were retained in the HTML output. According to strict routing instructions, retaining page numbers or footers blocks auto-approval. Additionally, some meaningful bold formatting was lost.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "The source PDF uses bold formatting meaningfully to distinguish the 'Total Credits Generated' summary row from the data rows, as well as to highlight the 'Source:' and 'Notes:' labels at the bottom. The HTML output fails to preserve any of this bold formatting, rendering these elements as standard text.",
+      "source_pdf_quote": "The row 'Total Credits Generated' and the labels 'Source:' and 'Notes:' are styled with bold text.",
+      "output_quote": "<td>Total Credits Generated</td>... <p>Source: Policy Analysis...</p>... <p>Notes: Information from taxpayer...</p>",
+      "location": "Bottom of the data table and footer section",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (2): Revised on 04/10/2013; Page 1 of 1",
+      "severity": "major",
+      "analysis": "header_footer_count=2. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained header/footer elements such as page numbers and revision dates",
+    "Restore bold formatting on the 'Total Credits Generated' summary row and labels like 'Source:' and 'Notes:' if required for clarity"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9330306469920545,
+      "shingling_precision": 0.9558139534883721,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9699570815450643,
+      "baseline_words": 233,
+      "gemini_words": 226,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 179444,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
