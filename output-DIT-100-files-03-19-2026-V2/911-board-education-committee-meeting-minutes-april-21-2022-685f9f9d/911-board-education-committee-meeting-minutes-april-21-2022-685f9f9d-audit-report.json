@@ -1,0 +1,112 @@
+{
+  "document_id": "911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d",
+  "audited_at": "2026-03-20T06:24:44.813977Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d.html"
+  },
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.8967,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the composite fidelity score is high (0.896) and the LLM suggested AUTO_APPROVE, there are specific structural issues that block auto-approval. The programmatic check identified retained headers/footers in the output, and the LLM noted that list numbering resets due to intervening tables. Both of these are explicit blockers that break accessibility and require human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The bold formatting that emphasizes the titles of each Agenda item (e.g., 'Chair Opening Remarks', 'Roll Call') is missing in the HTML output. Furthermore, the italic formatting denoting publication titles ('Recommended Minimum Training Guidelines for the Telecommunicator' and 'APCO, Minimum Training Standards for Public Safety Telecommunicators') in item 11 is lost.",
+      "source_pdf_quote": "1. Chair Opening Remarks – Mr. Greene ... (with 'Chair Opening Remarks' in bold); \"Recommended Minimum Training Guidelines for the Telecommunicator\" (in italics)",
+      "output_quote": "<li>Chair Opening Remarks – Mr. Greene ... (no bold formatting); \"Recommended Minimum Training Guidelines for the Telecommunicator\" (no italic formatting)",
+      "location": "Agenda items 1-11, and Page 3 (Item 11)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (3): 1; 2; 3",
+      "severity": "major",
+      "analysis": "header_footer_count=3. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The source document has a single continuous numbered list from 1 to 11 for the agenda items. However, because tables interrupt the list, the output breaks this into multiple separate ordered lists. Since no starting index is provided for the subsequent lists, they will reset to 1 when rendered, failing to preserve the continuous numbering (e.g., item 5 becomes item 1 of a new list).",
+      "source_pdf_quote": "5. NG911 and NMAC Infographic – Mr. Greene presented...",
+      "output_quote": "{\"type\": \"list\", \"list_type\": \"ordered\", \"items\": [{\"text\": \"NG911 and NMAC Infographic – Mr. Greene presented...\"}]}",
+      "location": "Page 2, first list",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained headers, footers, or page numbers from the HTML",
+    "Fix ordered list structures so numbering continues correctly across tables",
+    "Restore missing bold and italic text formatting"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8967,
+      "raw_score": 0.8967,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8967,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.875,
+      "shingling_precision": 0.9836004472605293,
+      "duplication_ratio": 0.006418485237483954,
+      "word_count_ratio": 0.8012205754141238,
+      "baseline_words": 1147,
+      "gemini_words": 919,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 117261,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
