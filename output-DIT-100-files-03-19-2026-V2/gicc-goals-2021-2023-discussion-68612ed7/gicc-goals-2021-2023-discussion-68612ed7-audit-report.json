@@ -1,0 +1,99 @@
+{
+  "document_id": "gicc-goals-2021-2023-discussion-68612ed7",
+  "audited_at": "2026-03-20T06:30:20.086792Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-goals-2021-2023-discussion-68612ed7/gicc-goals-2021-2023-discussion-68612ed7.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-goals-2021-2023-discussion-68612ed7/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-goals-2021-2023-discussion-68612ed7/gicc-goals-2021-2023-discussion-68612ed7.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document has high overall fidelity scores, but both the LLM and programmatic signals have identified major issues with how specific table rows are handled. Spanning rows that act as sub-headers or captions have lost their bold formatting and are incorrectly coded as standard or header rows instead of <caption> elements. Because these issues affect both visual hierarchy and structural accessibility within tables, human review is needed.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "In the source PDF, the sub-goal rows spanning the table (e.g., \"1.1. Promote free and open discovery...\") are bolded to visually distinguish them as section headers within the table. In the HTML output, these rows are rendered as plain `<td>` elements without any bold tags (such as `<b>` or `<strong>`), causing them to lose their visual hierarchy.",
+      "source_pdf_quote": "1.1. Promote free and open discovery of and access to geospatial data created and maintained by local governments. (Bold font)",
+      "output_quote": "<td colspan=\"2\">1.1. Promote free and open discovery of and access to geospatial data created and maintained by local governments.</td> (No bold tags)",
+      "location": "Page 1, Goal 1 table",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Table caption coded as header row: 2 table(s) have a single spanning first row that is likely a caption/title",
+      "severity": "major",
+      "analysis": "caption_as_header=2. Examples: p1: \"1.1. Promote free and open discovery of and access to geospa\"; p2: \"2.1. Identify opportunities to collaborate on GIS solutions \". First row spans all columns — should be a <caption> element, not a header row.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": "S3",
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Review the spanning rows in the tables to ensure they are properly formatted with bold text.",
+    "Correct the HTML structure of the tables by converting spanning header rows into <caption> elements where appropriate."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9838255977496484,
+      "shingling_precision": 0.9838255977496484,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 461,
+      "gemini_words": 461,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 81336,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

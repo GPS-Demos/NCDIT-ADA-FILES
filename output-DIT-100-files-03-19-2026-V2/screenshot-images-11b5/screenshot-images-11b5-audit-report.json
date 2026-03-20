@@ -1,0 +1,98 @@
+{
+  "document_id": "screenshot-images-11b5",
+  "audited_at": "2026-03-20T06:44:14.159476Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/screenshot-images-11b5/screenshot-images-11b5.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/screenshot-images-11b5/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/screenshot-images-11b5/screenshot-images-11b5.html"
+  },
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.8967,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite strong programmatic metrics and a high LLM composite score (0.89), there is a major structural concern identified regarding images being placed next to the wrong text and out of sequence. According to routing rules, documents with images placed next to the wrong text cannot be auto-approved because this severely impacts accessibility. Therefore, the document must be sent to human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Images placed next to wrong text",
+      "severity": "major",
+      "analysis": "The images in the HTML output are entirely out of order and placed next to the wrong instructions. For example, the very first instruction regarding the 'Computer Icon' is followed by an image of the quick settings panel, while the image of the taskbar icons incorrectly appears after the fourth instruction.",
+      "source_pdf_quote": "The text 'Click on Computer Icon in bottom right of screen to open options' is immediately followed by a small screenshot of the taskbar showing a computer network icon.",
+      "output_quote": "The text 'Click on Computer Icon in bottom right of screen to open options' is followed by an image of the quick settings menu (alt text begins: 'A Windows 11 quick settings menu...'). The taskbar screenshot appears later under the text 'Press “Connect” on this screen'.",
+      "location": "Images 1 through 9 relative to text instructions",
+      "source": "fidelity_llm",
+      "check_id": "V4",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The reading order of the images in relation to the instructional paragraphs is completely out of order across all three pages. On Page 1, the first image (taskbar icon) is placed at the very end of the page's content array, and the subsequent images are misaligned with their paragraphs. On Page 2, the three images are placed in reverse order of their corresponding instructions. On Page 3, the two images are swapped in their sequence.",
+      "source_pdf_quote": "Page 1 logical order: Paragraph (\"Click on Computer Icon...\"), Image (Taskbar icon), Paragraph (\"Once a popup screen...\"), Image (Quick settings menu).",
+      "output_quote": "Page 1 output order: Paragraph (\"Click on Computer Icon...\"), Image (\"A Windows 11 quick settings menu...\"), Paragraph (\"Once a popup...\"), Image (\"list of available wireless networks...\"), Paragraph (\"Select NCGov-Guest\"), Image (\"Windows network connection dialog box...\"), Paragraph (\"Press 'Connect'...\"), Image (\"A close-up of a Windows taskbar notification area...\").",
+      "location": "Pages 1, 2, and 3",
+      "source": "fidelity_llm",
+      "check_id": "S4",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify the sequence and placement of images to ensure they align with the corresponding instructional text."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8967,
+      "raw_score": 0.8967,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8967,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9922178988326849,
+      "shingling_precision": 0.9922178988326849,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 122,
+      "gemini_words": 122,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 109362,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
