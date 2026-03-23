@@ -1,0 +1,100 @@
+{
+  "document_id": "Interest_Rate_Memo_-_July_-_December_2024.pdf",
+  "audited_at": "2026-03-23T18:52:28.847130Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/Interest_Rate_Memo_-_July_-_December_2024.pdf/Interest_Rate_Memo_-_July_-_December_2024.pdf.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/Interest_Rate_Memo_-_July_-_December_2024.pdf/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/Interest_Rate_Memo_-_July_-_December_2024.pdf/Interest_Rate_Memo_-_July_-_December_2024.pdf.html"
+  },
+  "quality_score": 100,
+  "quality_grade": "Good",
+  "fidelity_composite": 1.0,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the LLM fidelity scores are perfect (1.0) and text preservation metrics are strong, programmatic checks identified two major structural issues that block auto-approval. The HTML output retains 5 header/footer elements (including page numbers) and has 3 hyperlinks displaced from inline text to standalone blocks. According to routing instructions, these structural defects necessitate human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Displaced hyperlinks: 3 link(s) extracted as standalone elements instead of inline text",
+      "severity": "major",
+      "analysis": "standalone_links=3, examples=['http://www.ncdor.gov', 'https://www.ncdor.gov', 'https://www.ncdor.gov']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (5): p 1 of 2; 501 N Wilmington St., Raleigh, NC 27604\nPO Box 871 Raleigh N; p 2 of 2",
+      "severity": "major",
+      "analysis": "header_footer_count=5. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained header, footer, and page number artifacts from the HTML.",
+    "Fix displaced hyperlinks by placing them inline with their corresponding paragraph text."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 1.0,
+      "raw_score": 1.0,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 1.0,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9363117870722434,
+      "shingling_precision": 0.9637964774951077,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9243986254295533,
+      "baseline_words": 582,
+      "gemini_words": 538,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 3,
+      "link_count_ratio": null,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 273147,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

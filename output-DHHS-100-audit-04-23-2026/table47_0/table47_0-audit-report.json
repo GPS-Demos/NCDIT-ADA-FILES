@@ -1,0 +1,111 @@
+{
+  "document_id": "table47_0",
+  "audited_at": "2026-03-23T19:10:26.540497Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/table47_0/table47_0.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/table47_0/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/table47_0/table47_0.html"
+  },
+  "quality_score": 60,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.6,
+  "fidelity_content": null,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Final Decider unavailable (LLM call failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': 'RESOURCE_EXHAUSTED'}}). Defaulting to HUMAN_REVIEW.",
+  "decision_method": "fallback",
+  "concerns": [
+    {
+      "description": "Fidelity Content evaluation failed — dimension not assessed",
+      "severity": "major",
+      "analysis": "The content fidelity call did not produce valid results.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "fidelity_llm",
+      "check_id": null,
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "Meaningful text formatting from the source PDF is lost in the HTML output. Specifically, the column header text 'Intangible personal property tax rate and bases:' is explicitly bolded and underlined in the PDF to denote its role as a header for the rightmost column. In the HTML output, it is rendered inside a standard <td> tag with no <b>, <strong>, or <u> tags, rendering it as plain text.",
+      "source_pdf_quote": "Intangible personal property tax rate and bases: (bolded and underlined)",
+      "output_quote": "<td>Intangible personal property tax<br>rate and bases:</td> (plain unstyled text)",
+      "location": "Table header (rightmost column)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The table structure in the JSON has an irregular grid due to missing cell definitions. In the source, the rightmost column header ('Intangible personal property tax rate and bases:') stands alone for the final column. The output assigns this cell to `row_start: 3, column_start: 10` with `num_rows: 1`, but there are no cells provided for column 10 in rows 0, 1, or 2. This leaves gaps in the table grid, corrupting the proper header alignment and structure.",
+      "source_pdf_quote": "The final column header 'Intangible personal property tax rate and bases:' provides the column label for the final column of the table.",
+      "output_quote": "The cell 'Intangible personal property tax rate and bases:' is placed at row_start 3, column_start 10. There are no cells defined for column_start 10 in rows 0, 1, or 2, breaking the grid structure.",
+      "location": "Table, Rows 0-3, Column 10",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Final Decider failed — manual review recommended."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": null,
+  "internal": {
+    "decider_confidence": 0.5,
+    "score_breakdown": {
+      "fidelity_composite": 0.6,
+      "raw_score": 0.6,
+      "ceiling": 0.6,
+      "ceiling_reason": "fidelity_low_score",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.6,
+      "fidelity_content": null,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9652902453620587,
+      "shingling_precision": 0.9676064787042592,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9983164983164983,
+      "baseline_words": 594,
+      "gemini_words": 593,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 271977,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "document_id": "table39_4",
+  "audited_at": "2026-03-23T19:15:20.642647Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/table39_4/table39_4.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/table39_4/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/table39_4/table39_4.html"
+  },
+  "quality_score": 75,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.75,
+  "fidelity_content": 1.0,
+  "fidelity_structural": null,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document shows excellent programmatic text preservation (99.3% recall, 99.5% precision) and perfect LLM content scores. However, the LLM structural evaluation failed completely, meaning we lack confirmation that the document's structure (likely a table given the filename) was correctly preserved. Although the formatting issue with bold text is cosmetic, the missing structural evaluation combined with a composite score of 0.75 warrants a quick human check to ensure the table was constructed properly.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Fidelity Structural evaluation failed — dimension not assessed",
+      "severity": "major",
+      "analysis": "The structural fidelity call did not produce valid results.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "fidelity_llm",
+      "check_id": null,
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF uses bold text extensively, including the sub-header row ('County', 'Rank', '% of total') and the explanatory paragraph at the bottom of the page ('Computations and rankings exclude the following taxes...'). In the HTML output, these elements are rendered as unstyled plain text (<td> and <p> tags respectively) without preserving the bold emphasis. Because this formatting is largely decorative and its absence does not change comprehension of the data, this is a minor defect.",
+      "source_pdf_quote": "The footer note \"Computations and rankings exclude the following taxes...\" is entirely in bold text.",
+      "output_quote": "The HTML renders this as a standard paragraph: \"<p>Computations and rankings exclude the following taxes...\" lacking any bold tags or inline CSS.",
+      "location": "Footer paragraph below the table",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Check if the HTML table structure is intact and correctly represents the source data.",
+    "Verify that the missing bold formatting does not impact the readability of the table."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": null,
+  "internal": {
+    "decider_confidence": 0.75,
+    "score_breakdown": {
+      "fidelity_composite": 0.75,
+      "raw_score": 0.75,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.75,
+      "fidelity_content": 1.0,
+      "fidelity_structural": null,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9932675044883303,
+      "shingling_precision": 0.9946067415730337,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9809750297265161,
+      "baseline_words": 841,
+      "gemini_words": 825,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 267007,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
