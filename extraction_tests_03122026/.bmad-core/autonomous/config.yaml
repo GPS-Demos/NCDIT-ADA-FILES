@@ -1,0 +1,77 @@
+# Autonomous Orchestration Configuration
+# ======================================
+
+# State management
+state_file: .ai/autonomous-state.yaml
+
+# BMAD core path
+bmad_core_path: .bmad-core
+
+# Execution limits
+max_iterations: 50
+checkpoint_frequency: 5  # Checkpoint every N tasks
+max_fix_attempts: 3      # Max attempts to fix failing tests
+
+# Logging
+verbose_logging: true
+log_file: .ai/orchestrator.log
+
+# Autonomy settings
+auto_continue_on_checkpoint: true   # Continue automatically at checkpoints
+auto_continue_on_blocker: false     # Stop on blockers for human intervention
+
+# Agent configuration
+agents:
+  pm:
+    id: pm
+    role: planning
+    timeout: 300  # seconds
+  dev:
+    id: dev
+    role: implementation
+    timeout: 600
+  qa:
+    id: qa
+    role: validation
+    timeout: 300
+  orchestrator:
+    id: bmad-orchestrator
+    role: coordination
+    timeout: 180
+
+# Workflow phases
+workflow:
+  phases:
+    - id: plan
+      agent: pm
+      required: true
+    - id: build
+      agent: dev
+      required: true
+    - id: validate
+      agent: qa
+      required: true
+    - id: checkpoint
+      agent: orchestrator
+      required: false
+
+# Output settings
+output:
+  state_directory: .ai
+  reports_directory: .ai/reports
+  artifacts_directory: .ai/artifacts
+
+# Checkpoint conditions
+checkpoints:
+  after_epic_completion: true
+  every_n_tasks: 5
+  on_blocker: true
+  on_test_failures: true
+  before_architectural_changes: true
+
+# Stop conditions
+stop_conditions:
+  all_epics_complete: true
+  max_iterations_reached: true
+  blocker_encountered: true
+  human_stop_request: true

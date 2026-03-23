@@ -1,0 +1,45 @@
+name: autonomous-app-generator
+id: autonomous-app-generator
+title: Autonomous App Generator from PRD
+description: Fully autonomous app generation from sharded PRD, processing each epic in fresh context
+whenToUse: Use when you have a complete PRD and want zero-intervention app generation
+
+workflow:
+  type: sequential
+  auto_continue: true
+  clear_context_between_epics: true
+
+phases:
+  - name: initialization
+    description: Parse PRD and prepare orchestration
+    steps:
+      - Read PRD and extract all epics
+      - Create orchestration state tracking
+      - Initialize progress reporting
+      - Setup epic dependency graph
+
+  - name: epic_processing
+    description: Process each epic autonomously
+    type: iterative
+    iterate_over: epics
+    fresh_session: true  # Each epic gets fresh context
+    steps:
+      - Load epic requirements
+      - Check dependencies completion
+      - Implement all epic stories
+      - Run tests and validation
+      - Generate epic completion report
+      - Update orchestration state
+
+  - name: integration
+    description: Final integration and validation
+    steps:
+      - Validate all epics completed
+      - Run full integration tests
+      - Generate final documentation
+      - Create deployment artifacts
+
+execution_mode: autonomous
+user_intervention: none
+failure_handling: continue_with_next_epic
+progress_tracking: .bmad-core/autonomous/progress.json
