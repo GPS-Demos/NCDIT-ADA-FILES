@@ -13,12 +13,16 @@ Content types handled: heading, paragraph, table, image, list, form,
 ADA remediation applied before rendering:
   - H1 demotion (only one H1 = document title)
   - Heading hierarchy normalization (no level skips)
-  - Running header/footer deduplication
+  - Running header/footer and repeated heading deduplication
   - Duplicate content removal (paragraphs, images)
-  - Consecutive list merging
+  - Consecutive list merging (same page and across page boundaries)
+  - Interrupted ordered list continuation (start attribute)
+  - Cross-page table merging (same column count, no caption on continuation)
   - Decorative image detection (including role=presentation/none)
   - Table header inference (only explicit _is_header, NOT auto row-0)
   - Table of Contents removal (page-number-based ToC is meaningless post-extraction)
+  - Inline [Image: ...] placeholder stripping
+  - Underlined text misidentified as links → <u> restoration
   - Empty page removal
   - Ordered list duplicate number stripping
   - Markdown-to-HTML conversion in all text fields
@@ -230,11 +234,14 @@ def _apply_ada_remediation(data: dict) -> dict[str, int]:
     stats["images_deduped"] = _deduplicate_images(pages)
     stats["lists_merged"] = _merge_consecutive_lists(pages)
     stats["lists_merged"] += _merge_consecutive_lists_across_pages(pages)
+    stats["lists_continued"] = _continue_interrupted_lists(pages)
     stats["decorative_images_marked"] = _mark_decorative_images(pages)
+    stats["tables_merged_across_pages"] = _merge_consecutive_tables_across_pages(pages)
     stats["table_headers_inferred"] = _infer_table_headers(pages)
     stats["broken_links_fixed"] = _fix_broken_hyperlinks(pages)
     stats["duplicate_links_removed"] = _deduplicate_links(pages)
     stats["inline_links_merged"] = _merge_inline_links(pages)
+    stats["inline_image_placeholders_stripped"] = _strip_inline_image_placeholders(pages)
     stats["boilerplate_removed"] = _remove_boilerplate(pages)
     stats["empty_pages_removed"] = _remove_empty_pages(pages)
 
@@ -323,7 +330,12 @@ def _merge_consecutive_headings(pages: list) -> int:
     return count
 
 def _deduplicate_running_headers(pages: list) -> int:
-    """Remove header_footer items that repeat identically across pages."""
+    """Remove header_footer items AND headings that repeat identically across pages.
+
+    Gemini sometimes re-extracts the same document/section heading on every
+    page (e.g., a running header rendered as a heading element). These should
+    appear once, not on every page.
+    """
     if len(pages) < 2:
         return 0
 
@@ -342,7 +354,21 @@ def _deduplicate_running_headers(pages: list) -> int:
     threshold = max(2, len(pages) // 2)
     running = {t for t, c in hf_texts.items() if c >= threshold}
 
+    # Also detect headings that repeat across many pages (running titles).
+    # Count how many pages each heading text appears on.
+    heading_page_count: dict[str, int] = {}
+    for page in pages:
+        seen_on_page: set[str] = set()
+        for item in page.get("content", []):
+            if item.get("type") == "heading":
+                key = item.get("text", "").strip().lower()
+                if key and key not in seen_on_page:
+                    seen_on_page.add(key)
+                    heading_page_count[key] = heading_page_count.get(key, 0) + 1
+    running_headings = {t for t, c in heading_page_count.items() if c >= threshold}
+
     count = 0
+    first_occurrence: set[str] = set()
     for page in pages:
         original = page.get("content", [])
         filtered = []
@@ -354,6 +380,14 @@ def _deduplicate_running_headers(pages: list) -> int:
                 if normalized in running:
                     count += 1
                     continue
+            elif item.get("type") == "heading":
+                key = item.get("text", "").strip().lower()
+                if key in running_headings:
+                    if key in first_occurrence:
+                        # Already rendered once — skip this duplicate
+                        count += 1
+                        continue
+                    first_occurrence.add(key)
             filtered.append(item)
         page["content"] = filtered
     return count
@@ -515,6 +549,93 @@ def _merge_consecutive_lists_across_pages(pages: list) -> int:
                 last["items"].extend(first_items)
                 content2.pop(0)
                 count += 1
+    return count
+
+
+def _merge_consecutive_tables_across_pages(pages: list) -> int:
+    """Merge tables that span PDF page boundaries.
+
+    When a table is split across two pages, the JSON has two separate table
+    objects. This merges them when:
+      - The last item on page N is a table and the first item on page N+1 is a table
+      - Both tables have the same number of columns
+      - The second table has no caption/title (it's a continuation, not a new table)
+
+    Row indices on the second table's cells are shifted so they append after
+    the first table's last row.
+    """
+    count = 0
+    for i in range(len(pages) - 1):
+        content1 = pages[i].get("content", [])
+        content2 = pages[i + 1].get("content", [])
+        if not content1 or not content2:
+            continue
+        last = content1[-1]
+        first = content2[0]
+        if last.get("type") != "table" or first.get("type") != "table":
+            continue
+        # Don't merge if the second table has its own caption/title — it's a new table
+        if first.get("caption") or first.get("title"):
+            continue
+        cells1 = last.get("cells", [])
+        cells2 = first.get("cells", [])
+        if not cells1 or not cells2:
+            continue
+        # Compare column counts
+        cols1 = max(c.get("column_start", 0) for c in cells1) + 1
+        cols2 = max(c.get("column_start", 0) for c in cells2) + 1
+        if cols1 != cols2:
+            continue
+        # Shift row indices on the second table's cells
+        max_row1 = max(c.get("row_start", 0) for c in cells1) + 1
+        for cell in cells2:
+            cell["row_start"] = cell.get("row_start", 0) + max_row1
+        last["cells"].extend(cells2)
+        content2.pop(0)
+        count += 1
+    return count
+
+
+def _continue_interrupted_lists(pages: list) -> int:
+    """Fix ordered lists that restart at 1 after being interrupted by non-list content.
+
+    When an ordered list is split by an intervening paragraph or heading on
+    the same page (e.g., a note between items 6 and 7), the second list
+    loses its continuation numbering. This detects that pattern and injects
+    the correct ``start`` attribute so the second list continues where the
+    first left off.
+    """
+    count = 0
+    for page in pages:
+        content = page.get("content", [])
+        if len(content) < 3:
+            continue
+        # Walk through looking for list -> non-list -> list patterns
+        for i in range(len(content) - 2):
+            first = content[i]
+            second = content[i + 2]
+            middle = content[i + 1]
+            if (first.get("type") != "list" or second.get("type") != "list"):
+                continue
+            if first.get("list_type") != "ordered" or second.get("list_type") != "ordered":
+                continue
+            if middle.get("type") == "list":
+                continue
+            first_items = first.get("items", [])
+            second_items = second.get("items", [])
+            if not first_items or not second_items:
+                continue
+            last_text = (first_items[-1].get("text", "") if isinstance(first_items[-1], dict)
+                         else str(first_items[-1])).strip()
+            next_text = (second_items[0].get("text", "") if isinstance(second_items[0], dict)
+                         else str(second_items[0])).strip()
+            last_ord = _list_item_ordinal(last_text)
+            next_ord = _list_item_ordinal(next_text)
+            if last_ord and next_ord and last_ord[0] == next_ord[0]:
+                if next_ord[1] == last_ord[1] + 1:
+                    # The second list continues from the first — mark it
+                    second["_start"] = next_ord[1]
+                    count += 1
     return count
 
 
@@ -764,7 +885,11 @@ def _fix_broken_hyperlinks(pages: list) -> int:
             )
 
             if url_equals_text and not url_is_valid:
-                result.append({"type": "paragraph", "text": link_text})
+                # URL == display text and not a real URL means Gemini
+                # misinterpreted underlined text as a hyperlink. Preserve
+                # the underline styling so fidelity to the original PDF
+                # is maintained.
+                result.append({"type": "paragraph", "text": f"<u>{link_text}</u>"})
                 fixed_count += 1
                 continue
 
@@ -1070,6 +1195,36 @@ def _remove_table_of_contents(pages: list) -> int:
     return len(to_remove)
 
 
+_INLINE_IMAGE_RE = re.compile(r"\[Image:\s*[^\]]*\]")
+
+
+def _strip_inline_image_placeholders(pages: list) -> int:
+    """Remove [Image: ...] placeholder text from paragraphs and headings.
+
+    Gemini sometimes inserts alt-text descriptions inline (e.g.,
+    "[Image: NC DIT logo]", "[Image: Green paintbrush icon]") as plain
+    text within paragraphs instead of creating proper image elements.
+    These read badly on screen readers and clutter the output.
+    """
+    count = 0
+    for page in pages:
+        content = page.get("content", [])
+        filtered = []
+        for item in content:
+            if item.get("type") in ("paragraph", "heading"):
+                text = item.get("text", "")
+                new_text = _INLINE_IMAGE_RE.sub("", text).strip()
+                if new_text != text.strip():
+                    count += 1
+                    if not new_text:
+                        # Entire paragraph was just an image placeholder — drop it
+                        continue
+                    item["text"] = new_text
+            filtered.append(item)
+        page["content"] = filtered
+    return count
+
+
 def _remove_boilerplate(pages: list) -> int:
     """Remove boilerplate content like 'page intentionally left blank'."""
     boilerplate_patterns = [
@@ -1288,9 +1443,14 @@ def _render_list(item: dict) -> str:
         if items:
             first_text = items[0].get("text", "") if isinstance(items[0], dict) else str(items[0])
             first_text = first_text.strip()
-            ord_info = _list_item_ordinal(first_text)
-            if ord_info and ord_info[1] > 1:
-                ol_attrs += f' start="{ord_info[1]}"'
+            # Use _start from remediation if set, otherwise detect from prefix
+            explicit_start = item.get("_start")
+            if explicit_start and explicit_start > 1:
+                ol_attrs += f' start="{explicit_start}"'
+            else:
+                ord_info = _list_item_ordinal(first_text)
+                if ord_info and ord_info[1] > 1:
+                    ol_attrs += f' start="{ord_info[1]}"'
 
     items_html = ""
     for li in item.get("items", []):
