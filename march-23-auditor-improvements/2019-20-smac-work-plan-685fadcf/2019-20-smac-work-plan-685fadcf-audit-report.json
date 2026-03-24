@@ -1,0 +1,140 @@
+{
+  "document_id": "2019-20-smac-work-plan-685fadcf",
+  "audited_at": "2026-03-24T01:14:28.087045Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/2019-20-smac-work-plan-685fadcf/2019-20-smac-work-plan-685fadcf.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/2019-20-smac-work-plan-685fadcf/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/2019-20-smac-work-plan-685fadcf/2019-20-smac-work-plan-685fadcf.html"
+  },
+  "quality_score": 97,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9706,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9019607843137255,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The LLM fidelity evaluation identified a corrupted table structure where a continuous table spanning a page boundary was split into two separate tables. Additionally, programmatic checks found that headers and footers from the original PDF were incorrectly retained in the HTML output. With 2 major defects identified, the document must be routed for human review according to the count-based rules.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The source document contains a single large table ('Major Tasks Numbered by Objective') that begins on page 2 and spans across the page boundary onto page 3, with repeated headers on page 3. The extraction split this continuous table into two separate 'table' objects (one on page 2 and one on page 3) instead of rendering it as one continuous table.",
+      "source_pdf_quote": "A continuous table spanning pages 2 and 3 with column headers: 'Objective number and task number', 'Lead Member', 'Date Initiated', 'End Date', 'Status'.",
+      "output_quote": "The output contains two distinct objects with '\"type\": \"table\"'—one in the content array for page 2 and another in the content array for page 3.",
+      "location": "Pages 2 and 3",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (3): NC GICC; FY 2019-2020; Page **1** of 3",
+      "severity": "major",
+      "analysis": "header_footer_count=3. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"work plan\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3/3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"statewide mapping advisory committee\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3/3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Merge the two split tables on pages 2 and 3 into a single continuous table, removing the repeated headers.",
+    "Remove all header and footer artifacts (e.g., page numbers, document titles) from the HTML content."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 1122,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9706,
+      "raw_score": 0.9706,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9706,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9019607843137255,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9718433787945446,
+      "shingling_precision": 0.9883668903803132,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.958179581795818,
+      "baseline_words": 813,
+      "gemini_words": 779,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 190371,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

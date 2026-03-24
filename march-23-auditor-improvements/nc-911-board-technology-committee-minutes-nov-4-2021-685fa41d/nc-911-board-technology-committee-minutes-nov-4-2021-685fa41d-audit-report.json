@@ -1,0 +1,141 @@
+{
+  "document_id": "nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d",
+  "audited_at": "2026-03-24T01:46:24.449834Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d/nc-911-board-technology-committee-minutes-nov-4-2021-685fa41d.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9206,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9019607843137255,
+  "fidelity_visual": 0.8571428571428572,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document contains 2 major defects identified by the LLM fidelity evaluation regarding inconsistent list structure (items 6-9 formatted as paragraphs instead of list items) and lost bold formatting in the agenda titles. Additionally, there are 2 minor programmatic defects related to a repeating decorative image and an 'APPROVED' watermark. According to the strict count-based routing rules, the presence of 1-5 major defects requires a routing of HUMAN_REVIEW.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "The source document contains a continuous numbered list from 1 to 14 representing meeting agenda items. While items 1-5 on page 2 and items 10-14 on page 4 were extracted as proper ordered lists, items 6, 7, 8, and 9 on page 3 were incorrectly extracted as plain text paragraphs starting with the number (e.g., '**6. 2022 Technology Committee Goals**'). This is a defect because numbered items must use proper list formatting rather than plain paragraphs to maintain structural semantics.",
+      "source_pdf_quote": "6. 2022 Technology Committee Goals ... 7. ESInet Update ... 8. GIS Update ... 9. Business Intelligence Invitation for Bid",
+      "output_quote": "{\"type\": \"paragraph\", \"text\": \"**6. 2022 Technology Committee Goals** – The proposed 2022 Technology Committee Goals were discussed. The goals were voted on:\"}",
+      "location": "Page 3",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "In the source PDF, the titles of the numbered list items (e.g., '1. Chair’s Welcome & Goals for Today’s Meeting', '2. Roll Call', '10. NMAC', etc.) are boldly styled to visually separate the agenda item title from its description. In the HTML output, list items 1 through 5 and 10 through 14 completely lose this bold formatting, merging the title into plain text. This removes meaningful visual hierarchy.",
+      "source_pdf_quote": "1. Chair’s Welcome & Goals for Today’s Meeting –",
+      "output_quote": "<li>Chair’s Welcome &amp; Goals for Today’s Meeting – Meeting was called to order at 3:00PM by Chairman Jeff Shipp</li>",
+      "location": "Numbered list items 1-5 (Page 2) and 10-14 (Page 4)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Repeated header/decorative image on 3/4 pages: \"the logo for the north carolina department of info...\"",
+      "severity": "minor",
+      "analysis": "Same image appears on 3/4 pages (75%). Likely a decorative header/logo/seal that should appear once in HTML, not on every page.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Watermark/stamp text \"APPROVED\" appears on 2/4 pages",
+      "severity": "minor",
+      "analysis": "watermark=\"APPROVED\", page_count=2/4. Repeated watermark/stamp text indicates a document overlay that may be duplicated in the HTML output.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Correct the list structure so that items 6-9 are properly formatted as ordered list items to maintain sequence.",
+    "Restore bold formatting to the titles of list items 1-5 and 10-14.",
+    "Ensure repeating headers/logos and watermarks are handled correctly in the HTML."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 1441,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9206,
+      "raw_score": 0.9206,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9206,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9019607843137255,
+      "fidelity_visual": 0.8571428571428572,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9738360908041555,
+      "shingling_precision": 0.968247895944912,
+      "duplication_ratio": 0.00881057268722467,
+      "word_count_ratio": 0.9931818181818182,
+      "baseline_words": 880,
+      "gemini_words": 874,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.38461538461538464,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 326413,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

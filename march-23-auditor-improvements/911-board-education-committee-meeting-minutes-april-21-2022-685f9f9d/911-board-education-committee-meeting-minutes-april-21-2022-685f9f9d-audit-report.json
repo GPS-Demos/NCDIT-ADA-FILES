@@ -1,0 +1,129 @@
+{
+  "document_id": "911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d",
+  "audited_at": "2026-03-24T01:16:27.219541Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d/911-board-education-committee-meeting-minutes-april-21-2022-685f9f9d.html"
+  },
+  "quality_score": 75,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.75,
+  "fidelity_content": 1.0,
+  "fidelity_structural": null,
+  "fidelity_visual": 0.8571428571428572,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document contains two major defects: the failure to preserve meaningful text formatting (bolding for agenda list items and italics for publication titles) and the retention of header/footer elements from the original PDF. Since there are between 1 and 5 major defects, the document requires HUMAN_REVIEW. Furthermore, the structural fidelity evaluation failed to run, so a human reviewer needs to verify structural integrity.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "The source PDF relies on bolding to indicate inline section headers for agenda list items (e.g., 'Chair Opening Remarks', 'Roll Call') and italics to indicate publication titles on page 3. The HTML fails to apply any bold or italic tags to these specific elements, rendering them as plain text and losing this meaningful emphasis.",
+      "source_pdf_quote": "Page 1: 'Chair Opening Remarks' (bold), Page 3: 'Recommended Minimum Training Guidelines for the Telecommunicator' (italicized)",
+      "output_quote": "<li>Chair Opening Remarks – Mr. Greene... (rendered as plain text without <strong>), and 'Recommended Minimum Training Guidelines for the Telecommunicator' (rendered without <em>)",
+      "location": "Agenda List (Items 1-11 on pages 1-3)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (3): 1; 2; 3",
+      "severity": "major",
+      "analysis": "header_footer_count=3. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Fidelity Structural evaluation failed — dimension not assessed",
+      "severity": "informational",
+      "analysis": "The structural fidelity call did not produce valid results.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "fidelity_llm",
+      "check_id": null,
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Check and manually apply bold/italic formatting to inline section headers and publication titles",
+    "Remove retained running headers, footers, and page numbers from the HTML output",
+    "Verify overall document structure and logical reading order since the programmatic structural evaluation failed"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 1288,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.75,
+      "raw_score": 0.75,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.75,
+      "fidelity_content": 1.0,
+      "fidelity_structural": null,
+      "fidelity_visual": 0.8571428571428572,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.875,
+      "shingling_precision": 0.9836004472605293,
+      "duplication_ratio": 0.006418485237483954,
+      "word_count_ratio": 0.8012205754141238,
+      "baseline_words": 1147,
+      "gemini_words": 919,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 309456,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "document_id": "screenshot-images-11b5",
+  "audited_at": "2026-03-24T01:54:33.966728Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/screenshot-images-11b5/screenshot-images-11b5.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/screenshot-images-11b5/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/screenshot-images-11b5/screenshot-images-11b5.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9206,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9019607843137255,
+  "fidelity_visual": 0.8571428571428572,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document exhibits scrambled reading order where instructional text and associated images are severely misaligned, fundamentally changing the meaning of the instructions. Although programmatic metrics show all content is present (shingling 0.992, image ratio 1.0), the 2 major structural and visual defects require human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order of text and images is significantly scrambled across all three pages. The images are placed after the wrong explanatory paragraphs. For example, on Page 1, the first instruction is to click the computer icon, followed by an image of the taskbar. In the output, that instruction is followed by the image of the quick settings menu, and the taskbar image is pushed to the very end of the page. This pattern of misaligned images and text occurs on pages 2 and 3 as well.",
+      "source_pdf_quote": "Page 1: 'Click on Computer Icon in bottom right of screen to open options' followed immediately by a screenshot of the taskbar.",
+      "output_quote": "Page 1: 'Click on Computer Icon in bottom right of screen to open options' followed by an image described as 'A Windows 11 quick settings menu panel displays toggles...'. The taskbar image appears at the end of the page.",
+      "location": "Page 1 (but also occurs on Pages 2 and 3)",
+      "source": "fidelity_llm",
+      "check_id": "S4",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Images placed next to wrong text",
+      "severity": "major",
+      "analysis": "Nearly all images in the HTML output are placed next to the incorrect instructional text. For example, the instruction to click the computer icon is followed by the quick settings menu image instead of the taskbar icon image. The taskbar icon image appears after the 4th step. This shuffling of images next to the wrong instructions completely changes the meaning of the content.",
+      "source_pdf_quote": "The text \"Click on Computer Icon in bottom right of screen to open options\" is followed by a small image of the taskbar icons.",
+      "output_quote": "The text <p>Click on Computer Icon in bottom right of screen to open options</p> is followed by an image with alt text \"A Windows 11 quick settings menu panel displays toggles...\"",
+      "location": "Throughout the document, beginning after the first paragraph.",
+      "source": "fidelity_llm",
+      "check_id": "V4",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Reorder the HTML elements so that each image appears immediately after its corresponding instructional text step."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 742,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9206,
+      "raw_score": 0.9206,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9206,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9019607843137255,
+      "fidelity_visual": 0.8571428571428572,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9922178988326849,
+      "shingling_precision": 0.9922178988326849,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 122,
+      "gemini_words": 122,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 519683,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

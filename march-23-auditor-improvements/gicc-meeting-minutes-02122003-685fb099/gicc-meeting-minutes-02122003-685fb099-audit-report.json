@@ -1,0 +1,129 @@
+{
+  "document_id": "gicc-meeting-minutes-02122003-685fb099",
+  "audited_at": "2026-03-24T01:31:04.215583Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/gicc-meeting-minutes-02122003-685fb099/gicc-meeting-minutes-02122003-685fb099.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/gicc-meeting-minutes-02122003-685fb099/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/gicc-meeting-minutes-02122003-685fb099/gicc-meeting-minutes-02122003-685fb099.html"
+  },
+  "quality_score": 100,
+  "quality_grade": "Good",
+  "fidelity_composite": 1.0,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document received perfect scores from the LLM fidelity evaluation and has excellent programmatic text comparison metrics. However, the programmatic checks identified one major defect regarding the retention of header/footer elements, as well as two minor link-related issues. Per the count-based routing rules, the presence of a major defect necessitates routing to HUMAN_REVIEW.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Header/footer elements retained in output (7): GICC Minutes, February 12, 2003—1; GICC Minutes, February 12, 2003—2; GICC Minutes, February 12, 2003—3",
+      "severity": "major",
+      "analysis": "header_footer_count=7. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Displaced hyperlinks: 1 link(s) extracted as standalone elements instead of inline text",
+      "severity": "minor",
+      "analysis": "standalone_links=1, examples=['http://gisdata.usgs.net/website/NC3/viewer.htm']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "1 bare URL(s) in text not converted to hyperlinks: www.cgia.state.nc.us/gicc,",
+      "severity": "minor",
+      "analysis": "bare_url_count=1. URLs appear as plain text instead of clickable links.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Review and remove the retained running headers/footers (e.g., 'GICC Minutes, February 12, 2003')",
+    "Ensure the standalone link 'http://gisdata.usgs.net/website/NC3/viewer.htm' is placed inline within its paragraph",
+    "Convert the bare URL 'www.cgia.state.nc.us/gicc' into a clickable hyperlink"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 952,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 1.0,
+      "raw_score": 1.0,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 1.0,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9884499497823903,
+      "shingling_precision": 0.9894436997319035,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9890795631825273,
+      "baseline_words": 3205,
+      "gemini_words": 3170,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 1,
+      "output_link_count": 1,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 366740,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

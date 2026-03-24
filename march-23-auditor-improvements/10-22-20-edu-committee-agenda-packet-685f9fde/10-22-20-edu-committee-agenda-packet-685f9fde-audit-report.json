@@ -1,0 +1,129 @@
+{
+  "document_id": "10-22-20-edu-committee-agenda-packet-685f9fde",
+  "audited_at": "2026-03-24T01:15:14.380516Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/10-22-20-edu-committee-agenda-packet-685f9fde/10-22-20-edu-committee-agenda-packet-685f9fde.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/10-22-20-edu-committee-agenda-packet-685f9fde/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/10-22-20-edu-committee-agenda-packet-685f9fde/10-22-20-edu-committee-agenda-packet-685f9fde.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9206,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9019607843137255,
+  "fidelity_visual": 0.8571428571428572,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document contains 3 major defects, including incorrect list conversion, loss of tracked document edits formatting, and retained header/footer elements. According to the count-based routing rules, 1-5 major defects mandate a HUMAN_REVIEW. Programmatic and LLM signals converge on these issues needing human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "Found multiple numbered and lettered list items in the source document that were extracted as plain text paragraphs rather than structural list items. Specifically, items 4, 5, 6, and sub-items a and b of the Agenda on page 3 are formatted as paragraphs starting with numbers/letters.",
+      "source_pdf_quote": "4. Approval of August Minutes – Chuck Greene asked committee members... \n5. UNC School of Government: Fundamentals of Supervision Class...",
+      "output_quote": "{\"type\": \"paragraph\", \"text\": \"4. Approval of August Minutes \\u2013 Chuck Greene asked committee members...\"} and {\"type\": \"paragraph\", \"text\": \"5. UNC School of Government: Fundamentals of Supervision Class \\u2013...\"}",
+      "location": "Page 3",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source document on page 8 contains text with red strikethroughs and underlines to indicate tracked document edits (e.g., deleting 'telecommunicator' and adding capitalized 'Telecommunicator'). The HTML output loses this meaningful formatting entirely, resulting in words being mushed together without context, significantly impacting comprehension.",
+      "source_pdf_quote": "Red strikethrough on 'telecommunicator' and red underline on 'Telecommunicator'",
+      "output_quote": "telecommunicatorTelecommunicator",
+      "location": "Page 8, under Emergency Medical Dispatch (EMD) Authority",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (6): 1; 2; 3",
+      "severity": "major",
+      "analysis": "header_footer_count=6. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Format the numbered and lettered items on page 3 as proper structural lists.",
+    "Ensure tracked edits on page 8 are meaningfully represented in the HTML, preserving context.",
+    "Identify and strip the retained header, footer, or page number elements."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 2202,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9206,
+      "raw_score": 0.9206,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9206,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9019607843137255,
+      "fidelity_visual": 0.8571428571428572,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.885652430623893,
+      "shingling_precision": 0.9721322099805574,
+      "duplication_ratio": 0.02288699545991666,
+      "word_count_ratio": 0.904074074074074,
+      "baseline_words": 2700,
+      "gemini_words": 2441,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 236666,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

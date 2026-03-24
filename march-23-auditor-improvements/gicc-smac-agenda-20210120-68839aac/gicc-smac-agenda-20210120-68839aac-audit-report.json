@@ -1,0 +1,129 @@
+{
+  "document_id": "gicc-smac-agenda-20210120-68839aac",
+  "audited_at": "2026-03-24T01:29:45.045453Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/gicc-smac-agenda-20210120-68839aac/gicc-smac-agenda-20210120-68839aac.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/gicc-smac-agenda-20210120-68839aac/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/gicc-smac-agenda-20210120-68839aac/gicc-smac-agenda-20210120-68839aac.html"
+  },
+  "quality_score": 96,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9606,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9019607843137255,
+  "fidelity_visual": 0.9714285714285714,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document contains one major structural defect regarding improper list nesting and hardcoded bullet characters. Additionally, there are minor issues with lost italic formatting and displaced hyperlinks. Programmatic signals reflect lower text recall and word count ratios, partially disagreeing with the perfect LLM content score. Based on the presence of 1 major defect, the document is routed to HUMAN_REVIEW.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "In the 'Working Groups' section, the source PDF has a 3-level deep list: 'NC Board on Geographic Names' -> 'SMAC Discussion and Approval' -> 'Simone Mountain' and 'Stiles Mountain'. In the JSON output, the level 3 items ('Simone Mountain', 'Stiles Mountain') are flattened to be siblings of the level 2 item ('SMAC Discussion and Approval') instead of being nested as its children. They also retain their bullet character as hardcoded text.",
+      "source_pdf_quote": "o SMAC Discussion and Approval\n▪ Simone Mountain\n▪ Stiles Mountain",
+      "output_quote": "\"children\": [ { \"text\": \"SMAC Discussion and Approval\" }, { \"text\": \"▪ Simone Mountain\" }, { \"text\": \"▪ Stiles Mountain\" } ]",
+      "location": "Working Groups section > NC Board on Geographic Names list item",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "minor",
+      "analysis": "In the source PDF, the topics within the bullet points under 'Framework+ Datasets' and 'Working Groups' (e.g., 'Orthoimagery', 'Cadastral', 'Elevation') are italicized. In the output HTML, these are rendered as plain text without any italic styling. This is a minor issue as the lack of italics does not change the comprehension of the document.",
+      "source_pdf_quote": "Orthoimagery - Ben Shelton\nCadastral - John Bridgers\nElevation – John Lay",
+      "output_quote": "<li>Orthoimagery - Ben Shelton</li><li>Cadastral - John Bridgers</li><li>Elevation – John Lay",
+      "location": "Framework+ Datasets section bullets",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Displaced hyperlinks: 2 link(s) extracted as standalone elements instead of inline text",
+      "severity": "minor",
+      "analysis": "standalone_links=2, examples=['https://ncgov.webex.com/ncgov/j.php?MTID=m936479785f2a0241df', 'https://files.nc.gov/ncdit/GICC-SMAC-Minutes-20201014.pdf']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Correct the list nesting under 'SMAC Discussion and Approval' and remove hardcoded bullet characters.",
+    "Restore inline hyperlinks into their appropriate paragraph contexts.",
+    "Restore italic formatting to topics under 'Framework+ Datasets' and 'Working Groups'."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 943,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9606,
+      "raw_score": 0.9606,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9606,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9019607843137255,
+      "fidelity_visual": 0.9714285714285714,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7356792144026186,
+      "shingling_precision": 0.9220512820512821,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.6898954703832753,
+      "baseline_words": 287,
+      "gemini_words": 198,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 2,
+      "output_link_count": 2,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 134973,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
