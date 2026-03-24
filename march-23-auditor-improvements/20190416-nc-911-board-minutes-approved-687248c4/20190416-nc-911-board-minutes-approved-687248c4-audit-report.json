@@ -1,0 +1,153 @@
+{
+  "document_id": "20190416-nc-911-board-minutes-approved-687248c4",
+  "audited_at": "2026-03-24T01:13:51.862638Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/20190416-nc-911-board-minutes-approved-687248c4/20190416-nc-911-board-minutes-approved-687248c4.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/20190416-nc-911-board-minutes-approved-687248c4/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/20190416-nc-911-board-minutes-approved-687248c4/20190416-nc-911-board-minutes-approved-687248c4.html"
+  },
+  "quality_score": 93,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9312,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.803921568627451,
+  "fidelity_visual": 0.9714285714285714,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document extraction contains 3 major structural defects and 2 minor formatting/layout issues. Key failures include an agenda table that is inconsistently parsed across pages (table on page 1, list on page 2), improperly flattened sub-items missing their numbering, and retained header/footer elements. With 3 major defects, the count-based rules dictate routing to HUMAN_REVIEW.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The main agenda list is presented in a tabular format in the source PDF with columns for 'Tab', 'Topic', and 'Presenter'. The extraction correctly identifies this as a table on page 1. However, the exact same tabular structure continues onto page 2 for items 5 through 13, but the output switches to extracting these rows as a list instead of continuing the table, severely corrupting the overall table structure.",
+      "source_pdf_quote": "Page 2 items continuing the tabular layout (e.g., '5. Executive Director Report' and 'Pokey Harris' in respective columns)",
+      "output_quote": "{\"type\": \"list\", \"list_type\": \"ordered\", \"items\": [ ... {\"text\": \"Executive Director Report Pokey Harris\"} ... ]}",
+      "location": "Page 2, first element",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "major",
+      "analysis": "There are two major list conversion defects. First, on page 1, the sub-items for item 4 ('a) Minutes...', 'b) NG 911 Fund...', etc.) are completely flattened into a single plain-text string with newline characters inside a table cell, losing all list structure. Second, on page 2 where the items are incorrectly extracted as a list instead of a table, the numbers for the main items ('5.', '6.', '7.', etc.) are entirely missing from the text.",
+      "source_pdf_quote": "1. 'a) Minutes of Previous Meeting...' through 'f) Grant Project Updates...'\n2. '5. Executive Director Report', '6. Education Committee Report'",
+      "output_quote": "1. \"Consent Agenda (Vote Required)\\na) Minutes of Previous Meeting – December 7, 2018\\nb) NG 911 Fund...\"\n2. \"Executive Director Report Pokey Harris\", \"Education Committee Report Mike Reitz\"",
+      "location": "Page 1, table cell (row 6, column 1) and Page 2, list items",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (2): NC 911 Board Agenda 20190118 • Page 1 of 2; NC 911 Board Agenda 20190118 ● Page 2 of 2",
+      "severity": "major",
+      "analysis": "header_footer_count=2. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "minor",
+      "analysis": "The source PDF contains emphasized text specifically in agenda item 4 where '(Vote Required)' is italicized (and colored red). In the HTML output, this text is rendered as plain text without any emphasis tags like <em> or <i>. Since the text itself explicitly says 'Vote Required', the meaning is largely preserved without the italics, making this a minor formatting loss.",
+      "source_pdf_quote": "Consent Agenda (Vote Required) [where '(Vote Required)' is italicized]",
+      "output_quote": "Consent Agenda (Vote Required) [plain text]",
+      "location": "Page 1, Item 4",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Displaced hyperlinks: 1 link(s) extracted as standalone elements instead of inline text",
+      "severity": "minor",
+      "analysis": "standalone_links=1, examples=['https://na01.safelinks.protection.outlook.com/?url=https%3A%']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Merge the fragmented agenda items from page 2 back into the main table structure.",
+    "Restore proper list formatting and numbering for nested sub-items.",
+    "Remove retained header/footer text from both pages."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 1078,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9312,
+      "raw_score": 0.9312,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9312,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.803921568627451,
+      "fidelity_visual": 0.9714285714285714,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8014804845222072,
+      "shingling_precision": 0.9754299754299754,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.7722513089005235,
+      "baseline_words": 382,
+      "gemini_words": 295,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 1,
+      "output_link_count": 1,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 154147,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

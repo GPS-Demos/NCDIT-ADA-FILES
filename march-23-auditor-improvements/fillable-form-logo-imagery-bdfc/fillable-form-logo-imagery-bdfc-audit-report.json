@@ -1,0 +1,129 @@
+{
+  "document_id": "fillable-form-logo-imagery-bdfc",
+  "audited_at": "2026-03-24T01:29:36.349234Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/fillable-form-logo-imagery-bdfc/fillable-form-logo-imagery-bdfc.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/fillable-form-logo-imagery-bdfc/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/fillable-form-logo-imagery-bdfc/fillable-form-logo-imagery-bdfc.html"
+  },
+  "quality_score": 60,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.6,
+  "fidelity_content": null,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document contains two major programmatic defects: 3 header/footer elements were retained in the HTML, and it is a fillable form with 15 fields which lose functionality when converted to static HTML. Additionally, the LLM content evaluation failed, requiring human verification of content fidelity. With 2 major defects, the document requires a human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Header/footer elements retained in output (3): Last Update: 7/2025 Page | 1; North Carolina Local Government Committee\nHurricane Prepared; Last Update: 7/2025\nPage | 2",
+      "severity": "major",
+      "analysis": "header_footer_count=3. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Form elements detected: 5 form(s) with 15 field(s) — forms lose functionality in HTML",
+      "severity": "major",
+      "analysis": "form_count=5, total_fields=15. PDF form fields (checkboxes, text inputs, signatures) cannot be faithfully rendered as static HTML.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Fidelity Content evaluation failed — dimension not assessed",
+      "severity": "informational",
+      "analysis": "The content fidelity call did not produce valid results.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "fidelity_llm",
+      "check_id": null,
+      "fidelity_dimension": "content",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Review retained headers/footers to see if they disrupt document flow or accessibility.",
+    "Assess how the form fields were converted and whether the loss of functionality is acceptable for the HTML version.",
+    "Verify overall content preservation manually since the automated content evaluation failed."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 1031,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.6,
+      "raw_score": 0.6,
+      "ceiling": 0.6,
+      "ceiling_reason": "fidelity_low_score",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.6,
+      "fidelity_content": null,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9388888888888889,
+      "shingling_precision": 0.9168173598553345,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9449152542372882,
+      "baseline_words": 236,
+      "gemini_words": 223,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 508119,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
