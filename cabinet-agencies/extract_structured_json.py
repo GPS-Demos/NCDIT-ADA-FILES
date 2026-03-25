@@ -23,6 +23,7 @@ Output:
 """
 
 import base64
+import copy
 import json
 import re
 from datetime import datetime, timezone
@@ -72,12 +73,12 @@ TOP_P = float(os.environ.get("TOP_P", "0.95"))
 TOP_K = int(os.environ.get("TOP_K", "40"))
 
 # Processing settings
-MAX_WORKERS = int(os.environ.get("MAX_WORKERS", "10"))
+MAX_WORKERS = int(os.environ.get("MAX_WORKERS", "30"))
 SIMILARITY_THRESHOLD = float(os.environ.get("SIMILARITY_THRESHOLD", "0.80"))
 RENDER_SCALE = int(os.environ.get("RENDER_SCALE", "3"))
 
 # Feature flags
-ENABLE_COHERENCE_CHECK = _env_bool("ENABLE_COHERENCE_CHECK", True)
+ENABLE_COHERENCE_CHECK = _env_bool("ENABLE_COHERENCE_CHECK", False)
 ENABLE_IMAGE_EXTRACTION = _env_bool("ENABLE_IMAGE_EXTRACTION", True)
 ENABLE_VIDEO_DETECTION = _env_bool("ENABLE_VIDEO_DETECTION", True)
 
@@ -3253,6 +3254,8 @@ class PDFExtractor:
         results_by_pdf = {}
         all_failed_pages = []
         parallel_processing = False
+        pages_received = {}  # Track how many pages received per PDF
+        saved_pdfs = set()  # Track PDFs already saved (to avoid double-counting stats)
 
         with Pool(processes=MAX_WORKERS) as pool:
             parallel_processing = True
@@ -3275,121 +3278,44 @@ class PDFExtractor:
                 self.stats["total_input_tokens"] += token_usage.get("input_tokens", 0)
                 self.stats["total_output_tokens"] += token_usage.get("output_tokens", 0)
 
+                # Write JSON immediately when all pages of a PDF are received
+                pages_received[doc_id] = pages_received.get(doc_id, 0) + 1
+                if pages_received[doc_id] == pdf_info[doc_id]["total_pages"]:
+                    # Skip analytics if this PDF has failed pages — they'll be
+                    # retried and analytics recorded on the final re-save
+                    has_failures = any(d == doc_id for _, _, d in all_failed_pages)
+                    result = self._build_and_save_pdf_result(
+                        doc_id, pdf_info[doc_id], results_by_pdf[doc_id],
+                        extraction_start_time, parallel_processing,
+                        record_analytics=not has_failures,
+                    )
+                    saved_pdfs.add(doc_id)
+
         # Retry failed pages at end of run
         if all_failed_pages:
             print(f"\n{'='*60}")
             print(f"RETRYING {len(all_failed_pages)} FAILED PAGES")
             print(f"{'='*60}")
+            retry_doc_ids = {doc_id for _, _, doc_id in all_failed_pages}
             self._retry_failed_pages(all_failed_pages, results_by_pdf)
 
-        # Build final results, calculate metrics, and save JSON files
+            # Re-save PDFs that had retried pages (results may have improved)
+            for doc_id in retry_doc_ids:
+                if doc_id in pdf_info:
+                    # Reset stats for this PDF before re-saving so they aren't double-counted
+                    self._reset_pdf_stats(doc_id, saved_pdfs)
+                    self._build_and_save_pdf_result(
+                        doc_id, pdf_info[doc_id], results_by_pdf[doc_id],
+                        extraction_start_time, parallel_processing,
+                    )
+
+        # Build all_results from saved JSON files for summary report
         all_results = []
-        for pdf_id, info in pdf_info.items():
-            page_results_dict = results_by_pdf.get(pdf_id, {})
-            # Convert dict to sorted list by page number
-            pages = [page_results_dict[i] for i in sorted(page_results_dict.keys())]
-
-            # Cross-page deduplication: remove repeated headers/footers/tables
-            pages = self._deduplicate_cross_page_content(pages)
-
-            # Cross-page content merging: fix paragraphs/lists/tables split at page boundaries
-            pages = self._merge_cross_page_content(pages)
-
-            # Heading hierarchy normalization: fix flat/inconsistent heading levels
-            pages = self._normalize_heading_hierarchy(pages)
-
-            result = {
-                "pdf_id": pdf_id,
-                "source_path": str(info["pdf_path"]),
-                "total_pages": info["total_pages"],
-                "extraction_timestamp": datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z"),
-                "pages": pages,
-            }
-
-            # Calculate quality metrics
-            result["quality_metrics"] = self._calculate_pdf_metrics(pages)
-
-            # Calculate token usage for this PDF
-            pdf_input_tokens = sum(p.get("token_usage", {}).get("input_tokens", 0) for p in pages)
-            pdf_output_tokens = sum(p.get("token_usage", {}).get("output_tokens", 0) for p in pages)
-            result["token_usage"] = {
-                "input_tokens": pdf_input_tokens,
-                "output_tokens": pdf_output_tokens,
-            }
-
-            # Save individual PDF result
+        for pdf_id in pdf_info:
             output_path = OUTPUT_FOLDER / f"{pdf_id}.json"
-            with open(output_path, "w", encoding="utf-8") as f:
-                json.dump(result, f, indent=2, ensure_ascii=False)
-
-            # Generate per-document HTML immediately after JSON
-            html_path = OUTPUT_FOLDER / f"{pdf_id}.html"
-            generate_document_html(result, html_path)
-
-            all_results.append(result)
-
-            # Record analytics for this document
-            if self._analytics:
-                try:
-                    doc_end_time = datetime.now(tz=timezone.utc)
-                    self._analytics.record_extraction(
-                        document_id=pdf_id,
-                        result=result,
-                        start_time=extraction_start_time,
-                        end_time=doc_end_time,
-                    )
-                except Exception as exc:
-                    logging.getLogger(__name__).debug(
-                        "Analytics recording failed for %s (non-fatal): %s", pdf_id, exc
-                    )
-
-            if self._analytics:
-                try:
-                    token_usage = result.get("token_usage", {})
-                    input_tokens = token_usage.get("input_tokens")
-                    output_tokens = token_usage.get("output_tokens")
-
-                    coherence_scores = [
-                        p.get("validation", {}).get("coherence_score")
-                        for p in result.get("pages", [])
-                        if p.get("validation", {}).get("coherence_score") is not None
-                    ]
-                    avg_confidence = (
-                        round(sum(coherence_scores) / len(coherence_scores), 2)
-                        if coherence_scores else None
-                    )
-
-                    self._analytics.record_stage(
-                        document_id=pdf_id,
-                        stage_name="extraction",
-                        start_time=extraction_start_time,
-                        end_time=doc_end_time,
-                        input_tokens=input_tokens,
-                        output_tokens=output_tokens,
-                        confidence_score=avg_confidence,
-                    )
-                    self._analytics.record_ai_conversion(
-                        document_id=pdf_id,
-                        model_name=GEMINI_MODEL,
-                        prompt_tokens=input_tokens or 0,
-                        completion_tokens=output_tokens or 0,
-                        extraction_confidence=avg_confidence,
-                        chunks_processed=result.get("total_pages"),
-                        parallel_processing=parallel_processing,
-                    )
-                except Exception as exc:
-                    logging.getLogger(__name__).debug(
-                        "Analytics stage/AI recording failed for %s (non-fatal): %s", pdf_id, exc
-                    )
-
-            # Update aggregate stats
-            metrics = result["quality_metrics"]
-            self.stats["total_pages"] += info["total_pages"]
-            self.stats["successful_extractions"] += metrics.get("pages_successful", 0)
-            self.stats["failed_extractions"] += metrics.get("pages_failed", 0)
-            self.stats["pages_by_confidence"]["high"] += metrics.get("pages_high_confidence", 0)
-            self.stats["pages_by_confidence"]["medium"] += metrics.get("pages_medium_confidence", 0)
-            self.stats["pages_by_confidence"]["low"] += metrics.get("pages_low_confidence", 0)
+            if output_path.exists():
+                with open(output_path, "r", encoding="utf-8") as f:
+                    all_results.append(json.load(f))
 
         # Generate summary report
         self._generate_summary_report(all_results)
@@ -3402,6 +3328,139 @@ class PDFExtractor:
                 logging.getLogger(__name__).debug("Analytics flush failed (non-fatal): %s", exc)
 
         return all_results
+
+    def _build_and_save_pdf_result(self, pdf_id, info, page_results_dict,
+                                    extraction_start_time, parallel_processing,
+                                    record_analytics=True):
+        """Post-process pages, save JSON/HTML, record analytics, and update stats.
+
+        Returns the result dict for the PDF.
+        """
+        # Convert dict to sorted list by page number
+        # Deep-copy so post-processing mutations don't affect results_by_pdf
+        # (needed for correct re-save after retries)
+        pages = [copy.deepcopy(page_results_dict[i]) for i in sorted(page_results_dict.keys())]
+
+        # Cross-page deduplication: remove repeated headers/footers/tables
+        pages = self._deduplicate_cross_page_content(pages)
+
+        # Cross-page content merging: fix paragraphs/lists/tables split at page boundaries
+        pages = self._merge_cross_page_content(pages)
+
+        # Heading hierarchy normalization: fix flat/inconsistent heading levels
+        pages = self._normalize_heading_hierarchy(pages)
+
+        result = {
+            "pdf_id": pdf_id,
+            "source_path": str(info["pdf_path"]),
+            "total_pages": info["total_pages"],
+            "extraction_timestamp": datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z"),
+            "pages": pages,
+        }
+
+        # Calculate quality metrics
+        result["quality_metrics"] = self._calculate_pdf_metrics(pages)
+
+        # Calculate token usage for this PDF
+        pdf_input_tokens = sum(p.get("token_usage", {}).get("input_tokens", 0) for p in pages)
+        pdf_output_tokens = sum(p.get("token_usage", {}).get("output_tokens", 0) for p in pages)
+        result["token_usage"] = {
+            "input_tokens": pdf_input_tokens,
+            "output_tokens": pdf_output_tokens,
+        }
+
+        # Save individual PDF result
+        output_path = OUTPUT_FOLDER / f"{pdf_id}.json"
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+
+        # Generate per-document HTML immediately after JSON
+        html_path = OUTPUT_FOLDER / f"{pdf_id}.html"
+        generate_document_html(result, html_path)
+
+        print(f"  Saved {pdf_id}.json ({info['total_pages']} pages)")
+
+        # Record analytics for this document
+        if record_analytics and self._analytics:
+            try:
+                doc_end_time = datetime.now(tz=timezone.utc)
+                self._analytics.record_extraction(
+                    document_id=pdf_id,
+                    result=result,
+                    start_time=extraction_start_time,
+                    end_time=doc_end_time,
+                )
+            except Exception as exc:
+                logging.getLogger(__name__).debug(
+                    "Analytics recording failed for %s (non-fatal): %s", pdf_id, exc
+                )
+
+        if record_analytics and self._analytics:
+            try:
+                token_usage = result.get("token_usage", {})
+                input_tokens = token_usage.get("input_tokens")
+                output_tokens = token_usage.get("output_tokens")
+
+                coherence_scores = [
+                    p.get("validation", {}).get("coherence_score")
+                    for p in result.get("pages", [])
+                    if p.get("validation", {}).get("coherence_score") is not None
+                ]
+                avg_confidence = (
+                    round(sum(coherence_scores) / len(coherence_scores), 2)
+                    if coherence_scores else None
+                )
+
+                self._analytics.record_stage(
+                    document_id=pdf_id,
+                    stage_name="extraction",
+                    start_time=extraction_start_time,
+                    end_time=doc_end_time,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    confidence_score=avg_confidence,
+                )
+                self._analytics.record_ai_conversion(
+                    document_id=pdf_id,
+                    model_name=GEMINI_MODEL,
+                    prompt_tokens=input_tokens or 0,
+                    completion_tokens=output_tokens or 0,
+                    extraction_confidence=avg_confidence,
+                    chunks_processed=result.get("total_pages"),
+                    parallel_processing=parallel_processing,
+                )
+            except Exception as exc:
+                logging.getLogger(__name__).debug(
+                    "Analytics stage/AI recording failed for %s (non-fatal): %s", pdf_id, exc
+                )
+
+        # Update aggregate stats
+        metrics = result["quality_metrics"]
+        self.stats["total_pages"] += info["total_pages"]
+        self.stats["successful_extractions"] += metrics.get("pages_successful", 0)
+        self.stats["failed_extractions"] += metrics.get("pages_failed", 0)
+        self.stats["pages_by_confidence"]["high"] += metrics.get("pages_high_confidence", 0)
+        self.stats["pages_by_confidence"]["medium"] += metrics.get("pages_medium_confidence", 0)
+        self.stats["pages_by_confidence"]["low"] += metrics.get("pages_low_confidence", 0)
+
+        return result
+
+    def _reset_pdf_stats(self, pdf_id, saved_pdfs):
+        """Subtract a previously-saved PDF's stats so it can be re-saved without double-counting."""
+        if pdf_id not in saved_pdfs:
+            return
+        output_path = OUTPUT_FOLDER / f"{pdf_id}.json"
+        if not output_path.exists():
+            return
+        with open(output_path, "r", encoding="utf-8") as f:
+            old_result = json.load(f)
+        old_metrics = old_result.get("quality_metrics", {})
+        self.stats["total_pages"] -= old_result.get("total_pages", 0)
+        self.stats["successful_extractions"] -= old_metrics.get("pages_successful", 0)
+        self.stats["failed_extractions"] -= old_metrics.get("pages_failed", 0)
+        self.stats["pages_by_confidence"]["high"] -= old_metrics.get("pages_high_confidence", 0)
+        self.stats["pages_by_confidence"]["medium"] -= old_metrics.get("pages_medium_confidence", 0)
+        self.stats["pages_by_confidence"]["low"] -= old_metrics.get("pages_low_confidence", 0)
 
     def _retry_failed_pages(self, failed_pages: List[Tuple[str, int, str]], results_by_pdf: Dict):
         """Retry failed pages using multiprocessing.Pool and update results dict.
