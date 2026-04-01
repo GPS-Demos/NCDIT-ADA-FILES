@@ -62,7 +62,7 @@ VIDEO_PATTERNS = [
 ]
 
 # Directories
-DATA_FOLDER = Path("/usr/local/google/home/stonejiang/NCDIT-ADA-FILES/extraction_tests_simplied_html_generator-pro-dhhs-100/json_to_html_to_auditor")
+DATA_FOLDER = Path("/usr/local/google/home/stonejiang/NCDIT-ADA-FILES/extraction-tests_04012026/json_to_html_to_auditor")
 OUTPUT_FOLDER = Path("output")
 REPORTS_FOLDER = OUTPUT_FOLDER / "_reports"
 
