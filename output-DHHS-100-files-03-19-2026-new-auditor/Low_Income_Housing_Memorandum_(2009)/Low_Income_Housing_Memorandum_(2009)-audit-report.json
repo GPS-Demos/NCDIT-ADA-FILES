@@ -1,0 +1,86 @@
+{
+  "document_id": "Low_Income_Housing_Memorandum_(2009)",
+  "audited_at": "2026-03-19T19:40:30.513612Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Low_Income_Housing_Memorandum_(2009)/Low_Income_Housing_Memorandum_(2009).json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Low_Income_Housing_Memorandum_(2009)/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Low_Income_Housing_Memorandum_(2009)/Low_Income_Housing_Memorandum_(2009).html"
+  },
+  "quality_score": 90,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6666666666666667,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The composite fidelity score is strong at 0.90, and programmatic signals confirm excellent content preservation with 99.8% text recall. However, the LLM fidelity analysis identified a major structural defect where parallel sections are incorrectly nested due to broken heading hierarchy (H1 vs H2). According to the strict routing instructions, any broken heading hierarchy prevents auto-approval, necessitating a human review to correct the document structure.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "Analyzed the heading levels assigned in the output compared to their visual hierarchy in the source PDF. In the source document, 'Income', 'Expenses', 'Capitalization Rate', and 'Schedule of Values' are identically formatted (bold, underlined) and represent parallel main sections of the memorandum. However, the output assigns 'Income' as an H1 heading, while assigning 'Expenses', 'Capitalization Rate', and 'Schedule of Values' as H2 headings. This incorrectly nests the latter sections under 'Inc",
+      "source_pdf_quote": "Headings 'Income' (Page 1), 'Expenses' (Page 2), 'Capitalization Rate' (Page 3), and 'Schedule of Values' (Page 3) share identical visual formatting indicating parallel hierarchy.",
+      "output_quote": "\"Income\" is parsed as {\"type\": \"heading\", \"level\": 1}, whereas subsequent parallel headings like \"Expenses\" are parsed as {\"type\": \"heading\", \"level\": 2}.",
+      "location": "Pages 1, 2, and 3",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Review and correct the heading levels so that 'Income', 'Expenses', 'Capitalization Rate', and 'Schedule of Values' are at the same hierarchical level."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9,
+      "raw_score": 0.9,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6666666666666667,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9980676328502416,
+      "shingling_precision": 0.9990328820116054,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9978932584269663,
+      "baseline_words": 1424,
+      "gemini_words": 1421,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 139856,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

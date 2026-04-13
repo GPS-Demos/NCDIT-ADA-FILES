@@ -1,0 +1,122 @@
+{
+  "document_id": "seal-imagery-table-with-shading-colored-text-672b",
+  "audited_at": "2026-03-19T06:59:19.082336Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-imagery-table-with-shading-colored-text-672b/seal-imagery-table-with-shading-colored-text-672b.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-imagery-table-with-shading-colored-text-672b/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-imagery-table-with-shading-colored-text-672b/seal-imagery-table-with-shading-colored-text-672b.html"
+  },
+  "quality_score": 68,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.681,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.2142857142857143,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document exhibits excellent content preservation, as evidenced by a 1.0 content score and high shingling recall. However, there are significant structural defects, including a broken heading hierarchy, loss of critical hyperlinks for driver downloads, and loss of text formatting used for important instructions. Due to these usability and structural issues, the document must be sent to human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is inconsistent for visually identical section headers. Under 'SECTION 2' (which is correctly identified as an H2), the various category pricing headers are styled identically in the source PDF (orange font, same size). However, they are assigned different heading levels in the output: 'Desktop and Workstation Model and Options Pricing' is an H3 (Page 5), 'Portable/Laptop Model and Options Pricing' is an H1 (Page 9), and 'Accessories for all Desktop and Laptop Pricing' is a",
+      "source_pdf_quote": "Visually identical headers like 'Portable/Laptop Model and Options Pricing' and 'Desktop and Workstation Model and Options Pricing'.",
+      "output_quote": "{\"type\": \"heading\", \"level\": 3, \"text\": \"Desktop and Workstation Model and Options Pricing\"} vs {\"type\": \"heading\", \"level\": 1, \"text\": \"Portable/Laptop Model and Options Pricing\"}",
+      "location": "Pages 5, 9, 20, 26, 28",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "major",
+      "analysis": "There are clearly visible hyperlinks in the PDF that are not extracted as link objects in the output. On page 4, three distinct URLs are provided for downloading drivers and support from HP, Lenovo, and Microsoft. While the text is extracted, they are missing from the page's list of functional `link` elements.",
+      "source_pdf_quote": "Links like 'http://ftp.hp.com/pub/caps-softpaq/cmit/HP_Driverpack_Matrix_x64.html' and 'https://pcsupport.lenovo.com/us/en/lenovorecovery'",
+      "output_quote": "The text block contains the URLs as plain text strings, but no corresponding `link` elements exist in the page's content array to make them clickable.",
+      "location": "Page 4",
+      "source": "fidelity_llm",
+      "check_id": "S7",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "The HTML fails to preserve significant text formatting from the source PDF, particularly bolding used to emphasize important instructions, warnings, and list item labels. Multiple instances of bold text in the ordering instructions and table cells have been rendered as plain text, reducing the visual hierarchy of the information.",
+      "source_pdf_quote": "\"To obtain AT&T, T-Mobile, or Verizon data service for your 2-in-2 Laptop/Tablet, you should use the 915A IT Statewide Term Contract for Cellular Services.\"",
+      "output_quote": "To obtain AT&T, T-Mobile, or Verizon data service for your 2-in-2 Laptop/Tablet, you should use the 915A IT Statewide Term Contract for Cellular Services.",
+      "location": "Page 3, \"Line Item Description for 2-in-1 Laptop / Tablet\" table row",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "A single continuous numbered list spans pages 2, 3, and 4 (items 1 through 9). Because the pipeline splits the items into separate `list` objects on each page without providing a mechanism to continue the numbering (such as retaining the explicit numbers or adding a `start` value), the lists will restart at 1 repeatedly when rendered. For instance, list items 4, 5, and 6 on page 4 are grouped in a new ordered list, which will render as 1, 2, 3.",
+      "source_pdf_quote": "Numbered list items: '2. When ordering...', '3. Warranty Information...', '4. Operating System Information...', '5. Resource Media...', '6. Value Added Services...', etc.",
+      "output_quote": "Represented as new arrays of ordered list items on pages 3 and 4, losing the original continuous numbering (e.g., 'Order Delivery...' which is item 7 in the source becomes the first item of a new ordered list).",
+      "location": "Pages 3 and 4",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fix heading levels to ensure a consistent and logical document structure",
+    "Restore functional hyperlinks for the driver download URLs",
+    "Reapply bold formatting to critical instructions and warnings",
+    "Merge or properly number the continuous list items spanning pages 2-4"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.681,
+      "raw_score": 0.681,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.681,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.2142857142857143,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9650613285190889,
+      "shingling_precision": 0.9866992399565689,
+      "duplication_ratio": 0.009005484723408673,
+      "word_count_ratio": 0.9584575217762991,
+      "baseline_words": 43281,
+      "gemini_words": 41483,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 456302,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

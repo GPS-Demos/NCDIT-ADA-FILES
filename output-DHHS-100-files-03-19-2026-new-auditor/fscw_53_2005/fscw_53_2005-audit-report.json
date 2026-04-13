@@ -1,0 +1,99 @@
+{
+  "document_id": "fscw_53_2005",
+  "audited_at": "2026-03-19T19:43:24.766782Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/fscw_53_2005/fscw_53_2005.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/fscw_53_2005/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/fscw_53_2005/fscw_53_2005.html"
+  },
+  "quality_score": 100,
+  "quality_grade": "Good",
+  "fidelity_composite": 1.0,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite a perfect LLM fidelity score of 1.0, the programmatic signals detected two major structural concerns: displaced hyperlinks and retained header/footer elements. According to the strict routing instructions, documents with displaced hyperlinks or retained footers must not be auto-approved, as these issues degrade accessibility and document structure. Therefore, the document must be routed to human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Displaced hyperlinks: 3 link(s) extracted as standalone elements instead of inline text",
+      "severity": "major",
+      "analysis": "standalone_links=3, examples=['http://www.acf.hhs.gov/programs/cb/laws/im/im0508.pdf', 'http://www.acf.hhs.gov/programs/cb/laws/im/im00index.htm#200', 'mailto:thomas.smith@ncmail.net']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (1): FSCWS-53-05",
+      "severity": "major",
+      "analysis": "header_footer_count=1. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Reintegrate the 3 standalone hyperlinks into their proper inline text locations.",
+    "Remove the retained header/footer text 'FSCWS-53-05' from the HTML output."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 1.0,
+      "raw_score": 1.0,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 1.0,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9717241379310345,
+      "shingling_precision": 0.9657299520219328,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0084269662921348,
+      "baseline_words": 356,
+      "gemini_words": 359,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 2,
+      "output_link_count": 3,
+      "link_count_ratio": 1.5,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 218218,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

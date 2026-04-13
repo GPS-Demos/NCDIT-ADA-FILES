@@ -1,0 +1,97 @@
+{
+  "document_id": "near-perfect-powerpoint-slides-by-accessibility-experts-47b0",
+  "audited_at": "2026-03-10T22:29:33.657598Z",
+  "quality_score": 80,
+  "fidelity_composite": 0.7843,
+  "fidelity_content": 0.8837209302325582,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "While programmatic shingling recall is relatively high, the fidelity report provides concrete evidence of major data loss in tables and missing informational content from images. The significant visual score deficiency (0.5) and the truncation of the 'Consent Agenda' and 'Tax Form' tables constitute substantial fidelity failures that cannot be auto-approved.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "There are two instances where tables in the output have significantly fewer rows than in the source PDF. In Section 30 (Page 30), the 'Consent Agenda (Attachment D)' table contains 13 data rows in the source, but only 1 data row in the output. In Section 8 (Page 8), the source contains a complex table (tax form schedules), but the output generated a table shell with headers ('Form Section', 'Details') and no data rows at all. Both cases represent a loss of more than 20% of the data rows.",
+      "source_pdf_quote": "Page 30 contains a table 'Consent Agenda (Attachment D)' with 13 data rows (Charlotte through Lumberton). Page 8 contains a complex table/form with data for Schedules D, E, F, G, H, and I.",
+      "output_quote": "Section 30: Table 'Consent Agenda (Attachment D)' contains only 1 data row ('Charlotte'). Section 8: Table contains only header row ('Form Section', 'Details') and no data rows.",
+      "location": "Sections 8 and 30, Pages 8 and 30"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "In Section 15 (Page 15), a substantial block of text within an image is missing from the output. The text 'Got your REAL ID yet? Beginning May 7, 2025, a REAL ID, U.S. passport or another federally approved identification will be required to board commercial flights and enter secure federal buildings.' constitutes a significant portion (approximately 40%) of the total informational content of that slide. This text is neither extracted into the body nor represented in the alt text for the image.",
+      "source_pdf_quote": "Page 15 text in image: 'Got your REAL ID yet? Beginning May 7, 2025, a REAL ID, U.S. passport or another federally approved identification will be required to board commercial flights and enter secure federal buildings.'",
+      "output_quote": "Section 15 omits this text from the body and the alt text ('North Carolina Driver License example showing a real ID star.').",
+      "location": "Section 15, Page 15"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "Multiple tables present in the source PDF are missing or incomplete in the HTML output. Specifically, Slide 29 in the source contains three sample tables illustrating table types, none of which appear in the HTML under the corresponding heading. Furthermore, the large 'Consent Agenda' table on Slide 30 is truncated in the HTML; it missing the 'Miscellaneous Action Items' sub-section and the 'End Consent Agenda' footer row.",
+      "source_pdf_quote": "Page 29 shows three tables: 'Individual Discussion Item', 'UAL Units', and 'Weekdays/Weekend'. Page 30 shows a comprehensive 'Consent Agenda' table including a section for 'Miscellaneous Action Items'.",
+      "output_quote": "The HTML rendering for 'Slide 29: Types of Tables' contains only text and no tables. The rendering for 'Slide 30: Data Tables' includes only the first 'Consent Agenda' table, omitting the secondary data section and the closing row.",
+      "location": "Slide 29, Slide 30"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "A significant majority of meaningful images from the source PDF are missing from the HTML rendering. This includes portrait photos, instructional screenshots of software interfaces (Word, PowerPoint, Adobe Acrobat), diagrams (like the 'Awesome' graphic on slide 36), and illustrative photos (like the garage sorting on slide 14 or the thinking woman on slide 53). Only the company logo and one of the two portraits on Slide 2 were successfully rendered.",
+      "source_pdf_quote": "Slide 2 has two portraits. Slide 7 has photos of assistive keyboards. Slide 14 has BEFORE/AFTER garage photos. Slide 24 has donut charts. Slide 36 has an 'Accessibility + Usability = Awesome' diagram. Slide 53 has a photo of a woman thinking.",
+      "output_quote": "The HTML output is missing the second portrait on Slide 2, and all meaningful images on slides 7, 14, 24, 36, and 53, as well as many other slides containing UI screenshots or icons.",
+      "location": "Throughout document, specifically slides 2, 7, 14, 24, 36, 53."
+    }
+  ],
+  "action_items": [
+    "Restore the missing data rows for tables on slides 8 and 30.",
+    "Incorporate the text from the REAL ID image on slide 15 into the body or alt-text.",
+    "Re-insert missing instructional screenshots and diagrams critical for the presentation's context.",
+    "Recover the three sample tables from slide 29."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7843,
+      "text_match": 0.901786866476451,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.799,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7843,
+      "fidelity_content": 0.8837209302325582,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8851896690879741,
+      "shingling_precision": 0.9326105442176871,
+      "duplication_ratio": 0.009840465185626956,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 129411,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "document_id": "20190814-nc-911-board-minutes-approved-685f9d99",
+  "audited_at": "2026-03-20T06:24:20.666181Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/20190814-nc-911-board-minutes-approved-685f9d99/20190814-nc-911-board-minutes-approved-685f9d99.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/20190814-nc-911-board-minutes-approved-685f9d99/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/20190814-nc-911-board-minutes-approved-685f9d99/20190814-nc-911-board-minutes-approved-685f9d99.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The LLM fidelity composite score is strong (0.9167) and content preservation is excellent. However, a major programmatic concern indicates that a running header/footer was retained in the HTML output, which explicitly blocks AUTO_APPROVE according to the structural rules. Additionally, there are minor list numbering issues and missing formatting on the title that require human attention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "The main document title/subtitle block detailing the meeting name, date, and time is heavily bolded in the source PDF to emphasize its importance as the header. In the HTML output, this text is rendered as a plain unstyled `<p>` element, losing its visual emphasis.",
+      "source_pdf_quote": "NORTH CAROLINA 911 BOARD MEETING\nWednesday, August 14, 2019\nTeleconference (Special Called)\n6:00 PM – 6:30 PM (Bolded text)",
+      "output_quote": "<p>NORTH CAROLINA 911 BOARD MEETING<br>Wednesday, August 14, 2019<br>Teleconference (Special Called)<br>6:00 PM – 6:30 PM</p>",
+      "location": "Beginning of the document, below the MINUTES heading",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (1): NC 911 Board Minutes for August 14, 2019, as Approved August",
+      "severity": "major",
+      "analysis": "header_footer_count=1. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Mixed numbering types at same list level (1 list(s)): p1:letter+roman — possible sub-point flattening",
+      "severity": "minor",
+      "analysis": "flat_lists=1. Lists with mixed numbering types (numeric+letter or numeric+roman) at the same depth level suggest sub-points were flattened.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": "S5",
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove the retained header/footer text from the HTML output",
+    "Restore bold styling to the main title/subtitle block",
+    "Check list structures for proper hierarchy and nesting instead of flat mixed numbering"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9236479321314952,
+      "shingling_precision": 0.9436619718309859,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9436619718309859,
+      "baseline_words": 213,
+      "gemini_words": 201,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 93108,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

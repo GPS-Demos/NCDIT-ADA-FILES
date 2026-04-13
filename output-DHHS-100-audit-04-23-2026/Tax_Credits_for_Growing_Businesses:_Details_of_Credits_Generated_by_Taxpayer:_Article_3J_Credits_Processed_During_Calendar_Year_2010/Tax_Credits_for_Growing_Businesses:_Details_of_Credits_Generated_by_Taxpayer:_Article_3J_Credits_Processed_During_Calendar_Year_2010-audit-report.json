@@ -1,0 +1,112 @@
+{
+  "document_id": "Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010",
+  "audited_at": "2026-03-23T19:05:21.566164Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010.html"
+  },
+  "quality_score": 75,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.75,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": null,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document contains retained header/footer elements ('Page 1 of 9', date) which explicitly block AUTO_APPROVE. Additionally, a large data table spanning multiple pages was incorrectly split into separate tables with some repeated headers retained. Due to these structural and formatting issues, human review is required.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Fidelity Visual evaluation failed — dimension not assessed",
+      "severity": "major",
+      "analysis": "The visual fidelity call did not produce valid results.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "fidelity_llm",
+      "check_id": null,
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (2): 4/29/2011; Page 1 of 9",
+      "severity": "major",
+      "analysis": "header_footer_count=2. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The source document contains a single large data table that spans all 9 pages, with repeated column headers at the top of each page. According to the structural guidelines, a table spanning multiple pages with repeated headers should be rendered as one continuous table. However, the output breaks this table into 5 separate table objects (one in page 1, page 3, page 5, page 7, and page 9). Furthermore, the repeated headers from the even-numbered pages (e.g., page 4, page 6) are incorrectly retain",
+      "source_pdf_quote": "A single continuous table spanning pages 1 through 9 with repeated headers \"Taxpayer\", \"Creating Jobs ($)\", etc.",
+      "output_quote": "The table is split into multiple separate tables, and repeated headers are treated as data cells (e.g., in Page 3's table content, row 28 contains \"Taxpayer\", \"Creating Jobs ($)\", etc.).",
+      "location": "Pages 1, 3, 5, 7, 9 (Tables)",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained page numbers and dates from the HTML.",
+    "Merge the separate table objects into a single continuous table and remove repeated column headers from the even-numbered pages."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.75,
+      "raw_score": 0.75,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.75,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": null,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9799646434885091,
+      "shingling_precision": 0.9914546899841018,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9692695214105793,
+      "baseline_words": 1985,
+      "gemini_words": 1924,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 239656,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

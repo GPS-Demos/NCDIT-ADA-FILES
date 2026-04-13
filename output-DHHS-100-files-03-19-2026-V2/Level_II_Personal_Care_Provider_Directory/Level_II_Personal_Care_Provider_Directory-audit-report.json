@@ -1,0 +1,99 @@
+{
+  "document_id": "Level_II_Personal_Care_Provider_Directory",
+  "audited_at": "2026-03-20T00:05:11.686807Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Level_II_Personal_Care_Provider_Directory/Level_II_Personal_Care_Provider_Directory.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Level_II_Personal_Care_Provider_Directory/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Level_II_Personal_Care_Provider_Directory/Level_II_Personal_Care_Provider_Directory.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the LLM fidelity composite score is excellent (0.9167) and content and structure scores are perfect, programmatic signals detected 30 header/footer elements retained in the HTML output. The routing instructions explicitly prohibit auto-approval when page numbers or footers are retained, as they disrupt screen reader flow and degrade accessibility. Therefore, human review is required to verify and remove these artifacts.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "On page 1 of the source PDF, the main table heading 'IN-HOME LEVEL 2 - PERSONAL CARE' is bolded. In the rendered HTML, this formatting is lost, and the text is rendered as plain text within a standard table data cell. Since this heading functions purely as a title and its structural separation (colspan='3') retains its visual distinctness enough for comprehension, this is a minor formatting loss.",
+      "source_pdf_quote": "IN-HOME LEVEL 2 - PERSONAL CARE (bolded text inside shaded header cell)",
+      "output_quote": "<tr><td colspan=\"3\">IN-HOME LEVEL 2 - PERSONAL CARE</td></tr>",
+      "location": "Page 1 main directory heading / Table 1, Row 1",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (30): North Carolina Division of Aging and Adult Services; ZGA702-A Provider Directory By Service; Printed Date: 5/2/2023",
+      "severity": "major",
+      "analysis": "header_footer_count=30. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Identify and remove running headers, footers, and page numbers from the HTML output",
+    "Restore bold formatting to the 'IN-HOME LEVEL 2 - PERSONAL CARE' main table heading if necessary for styling"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9038839724680433,
+      "shingling_precision": 0.9197098549274637,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8597599494630449,
+      "baseline_words": 1583,
+      "gemini_words": 1361,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 117832,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

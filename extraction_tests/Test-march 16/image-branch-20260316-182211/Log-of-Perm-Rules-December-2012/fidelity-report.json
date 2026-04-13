@@ -1,0 +1,213 @@
+{
+  "document_id": "Log-of-Perm-Rules-December-2012",
+  "composite_score": 0.7777,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.78 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON consists solely of information directly derived from the source PDF. All headings, descriptions, and rule listings are present in the source. AI-generated table captions and metadata (like rule IDs in hrefs) are acceptable additions per the instructions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "There are no phone numbers, email addresses, or mailing addresses in the output. The URLs found in the href attributes (e.g., http://rats/viewRule.pl?nRuleID=...) appear to be internal rule tracking links extracted from the PDF's annotation structure, which is a correct conversion behavior according to the instructions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All pages (1-8) and all agency sections (Banks, Medical Care Commission, HHS, Private Protective Services Board, Wildlife Resources Commission, Locksmith Licensing Board, Respiratory Care Board, Speech and Language Pathologists/Audiologists) are present in the output JSON. Each agency's rule list has been successfully captured.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Most rule lists are correctly captured in tables with row counts matching the source exactly. In the Private Protective Services Board section, the last rule (.1507) was moved from the table to body paragraphs due to its placement on page 7, but this represents only 1 out of 24 rules (approx 4%), which is not a material omission (threshold ~20%).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The output captures the full text of agency descriptions and rule titles. No substantial paragraphs or lists of rules within any section appear to be truncated or omitted.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "There is a minor OCR error in the title of rule 12 NCAC 07D .1507. The source text on page 7 is 'Training Requirement for Armed Armored Car Service Guards', but the output JSON incorrectly lists it as 'Training Requirement for Armed Armored are Service Guards'. This change from 'Car' to 'are' alters the specific meaning of the rule title.",
+        "b_evidence_source": "Training Requirement for Armed Armored Car Service Guards",
+        "b_evidence_output": "Training Requirement for Armed Armored are Service Guards",
+        "b_evidence_location": "PRIVATE PROTECTIVE SERVICES BOARD section, element index 1 (rule 12 NCAC 07D .1507)",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9883720930232558,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON consists solely of information directly derived from the source PDF. All headings, descriptions, and rule listings are present in the source. AI-generated table captions and metadata (like rule IDs in hrefs) are acceptable additions per the instructions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"There are no phone numbers, email addresses, or mailing addresses in the output. The URLs found in the href attributes (e.g., http://rats/viewRule.pl?nRuleID=...) appear to be internal rule tracking links extracted from the PDF's annotation structure, which is a correct conversion behavior according to the instructions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All pages (1-8) and all agency sections (Banks, Medical Care Commission, HHS, Private Protective Services Board, Wildlife Resources Commission, Locksmith Licensing Board, Respiratory Care Board, Speech and Language Pathologists/Audiologists) are present in the output JSON. Each agency's rule list has been successfully captured.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Most rule lists are correctly captured in tables with row counts matching the source exactly. In the Private Protective Services Board section, the last rule (.1507) was moved from the table to body paragraphs due to its placement on page 7, but this represents only 1 out of 24 rules (approx 4%), which is not a material omission (threshold ~20%).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The output captures the full text of agency descriptions and rule titles. No substantial paragraphs or lists of rules within any section appear to be truncated or omitted.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"There is a minor OCR error in the title of rule 12 NCAC 07D .1507. The source text on page 7 is 'Training Requirement for Armed Armored Car Service Guards', but the output JSON incorrectly lists it as 'Training Requirement for Armed Armored are Service Guards'. This change from 'Car' to 'are' alters the specific meaning of the rule title.\",\n      \"b_evidence_source\": \"Training Requirement for Armed Armored Car Service Guards\",\n      \"b_evidence_output\": \"Training Requirement for Armed Armored are Service Guards\",\n      \"b_evidence_location\": \"PRIVATE PROTECTIVE SERVICES BOARD section, element index 1 (rule 12 NCAC 07D .1507)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 1,\n    \"score\": 0.9883720930232558\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The text content appears to be unique and matches the source without duplication. Each rule filing and agency header is represented only once in the sequence corresponding to the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy fails significantly in the latter half of the document. Major agency headers that should be top-level sections (H2 equivalent) such as 'WILDLIFE RESOURCES COMMISSION', 'LOCKSMITH LICENSING BOARD', and 'RESPIRATORY CARE BOARD' are incorrectly nested as elements within the section titled 'PRIVATE PROTECTIVE SERVICES BOARD'. This creates a flat and incorrect hierarchy where these separate entities appear to be subsections or items of the previous agency.",
+        "b_evidence_source": "Page 7 and 8 headers: WILDLIFE RESOURCES COMMISSION, LOCKSMITH LICENSING BOARD, RESPIRATORY CARE BOARD.",
+        "b_evidence_output": "The headings for these commissions (e.g., heading-3, heading-4, heading-5) are all elements inside the 'PRIVATE PROTECTIVE SERVICES BOARD' section object instead of being new section objects.",
+        "b_evidence_location": "Sections 5, element heading-3 onwards",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The document contains a series of rule filing lists formatted in two columns. While the first four pages use consistent table structures, the conversion fails on pages 7 and 8. The rule lists for the Wildlife Resources Commission, Locksmith Licensing Board, etc., are converted to separate paragraphs instead of tables, losing the row/column relationship. Additionally, the final rule for the 'PRIVATE PROTECTIVE SERVICES BOARD' (Training Requirement for Armed Armored are Service Guards) is excluded from its preceding table and split into two disjointed paragraphs.",
+        "b_evidence_source": "Page 7: Rule list under WILDLIFE RESOURCES COMMISSION. Page 6/7: Training Requirement for Armed Armored are Service Guards / 12 NCAC 07D .1507.",
+        "b_evidence_output": "The rule 'Training Requirement...' is represented as two separate paragraphs after the table. Subsequent rules (e.g., Wildlife Taken for Depredations) are also rendered as individual paragraphs rather than table rows.",
+        "b_evidence_location": "Section 5, elements following table-6",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is significantly impacted by the grouping error. All content from page 7 and 8 is incorrectly grouped within the 'PRIVATE PROTECTIVE SERVICES BOARD' section. For a screen reader user or structural navigator, the flow of information implies these commissions are subordinate to the board on page 5/6, which is a material divergence from the source's logical structure.",
+        "b_evidence_source": "WILDLIFE RESOURCES COMMISSION (Page 7), LOCKSMITH LICENSING BOARD (Page 8), etc.",
+        "b_evidence_output": "These agency names and their respective rules are all sub-elements within the section starting with 'PRIVATE PROTECTIVE SERVICES BOARD'.",
+        "b_evidence_location": "Section 5",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The rule filings are essentially lists of name-action pairs and citations. On pages 7 and 8, the structural conversion to paragraphs fails to preserve the pairing. A single rule entry is now split across two unrelated paragraphs, losing the list item semantics present in the source.",
+        "b_evidence_source": "Page 7: Wildlife Taken for Depredations Amend/* 15A NCAC 10B .0106",
+        "b_evidence_output": "Paragraph 1: 'Wildlife Taken for Depredations\\nAmend/*'; Paragraph 2: '15A NCAC 10B .0106'",
+        "b_evidence_location": "Section 5, elements following heading-3",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The output contains numerous links (e.g., 'http://rats/viewRule.pl?nRuleID=...') that are not visually present in the source document. While these appear to be valid system IDs related to rule filings, they represent a significant addition of external data not explicitly found in the original scan. However, as they appear to be functional enrichments rather than broken or fabricated misinformation, they do not constitute a failure in this context.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.2727272727272727,
+    "penalty_sum": 16,
+    "defect_count": 4,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The text content appears to be unique and matches the source without duplication. Each rule filing and agency header is represented only once in the sequence corresponding to the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy fails significantly in the latter half of the document. Major agency headers that should be top-level sections (H2 equivalent) such as 'WILDLIFE RESOURCES COMMISSION', 'LOCKSMITH LICENSING BOARD', and 'RESPIRATORY CARE BOARD' are incorrectly nested as elements within the section titled 'PRIVATE PROTECTIVE SERVICES BOARD'. This creates a flat and incorrect hierarchy where these separate entities appear to be subsections or items of the previous agency.\",\n      \"b_evidence_source\": \"Page 7 and 8 headers: WILDLIFE RESOURCES COMMISSION, LOCKSMITH LICENSING BOARD, RESPIRATORY CARE BOARD.\",\n      \"b_evidence_output\": \"The headings for these commissions (e.g., heading-3, heading-4, heading-5) are all elements inside the 'PRIVATE PROTECTIVE SERVICES BOARD' section object instead of being new section objects.\",\n      \"b_evidence_location\": \"Sections 5, element heading-3 onwards\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The document contains a series of rule filing lists formatted in two columns. While the first four pages use consistent table structures, the conversion fails on pages 7 and 8. The rule lists for the Wildlife Resources Commission, Locksmith Licensing Board, etc., are converted to separate paragraphs instead of tables, losing the row/column relationship. Additionally, the final rule for the 'PRIVATE PROTECTIVE SERVICES BOARD' (Training Requirement for Armed Armored are Service Guards) is excluded from its preceding table and split into two disjointed paragraphs.\",\n      \"b_evidence_source\": \"Page 7: Rule list under WILDLIFE RESOURCES COMMISSION. Page 6/7: Training Requirement for Armed Armored are Service Guards / 12 NCAC 07D .1507.\",\n      \"b_evidence_output\": \"The rule 'Training Requirement...' is represented as two separate paragraphs after the table. Subsequent rules (e.g., Wildlife Taken for Depredations) are also rendered as individual paragraphs rather than table rows.\",\n      \"b_evidence_location\": \"Section 5, elements following table-6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is significantly impacted by the grouping error. All content from page 7 and 8 is incorrectly grouped within the 'PRIVATE PROTECTIVE SERVICES BOARD' section. For a screen reader user or structural navigator, the flow of information implies these commissions are subordinate to the board on page 5/6, which is a material divergence from the source's logical structure.\",\n      \"b_evidence_source\": \"WILDLIFE RESOURCES COMMISSION (Page 7), LOCKSMITH LICENSING BOARD (Page 8), etc.\",\n      \"b_evidence_output\": \"These agency names and their respective rules are all sub-elements within the section starting with 'PRIVATE PROTECTIVE SERVICES BOARD'.\",\n      \"b_evidence_location\": \"Section 5\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The rule filings are essentially lists of name-action pairs and citations. On pages 7 and 8, the structural conversion to paragraphs fails to preserve the pairing. A single rule entry is now split across two unrelated paragraphs, losing the list item semantics present in the source.\",\n      \"b_evidence_source\": \"Page 7: Wildlife Taken for Depredations Amend/* 15A NCAC 10B .0106\",\n      \"b_evidence_output\": \"Paragraph 1: 'Wildlife Taken for Depredations\\\\nAmend/*'; Paragraph 2: '15A NCAC 10B .0106'\",\n      \"b_evidence_location\": \"Section 5, elements following heading-3\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The output contains numerous links (e.g., 'http://rats/viewRule.pl?nRuleID=...') that are not visually present in the source document. While these appear to be valid system IDs related to rule filings, they represent a significant addition of external data not explicitly found in the original scan. However, as they appear to be functional enrichments rather than broken or fabricated misinformation, they do not constitute a failure in this context.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 4,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 1,\n    \"penalty_sum\": 16,\n    \"score\": 0.2727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the HTML output closely follows the structure of the source PDF. Agencies are listed in the same order, followed by their descriptive paragraphs and then the list of rules. While the HTML uses a table-like structure to align rule names with their NCAC numbers (whereas the PDF uses right-alignment on a plain page), this is a standard and effective translation of the layout for web display. Navigation elements like a Table of Contents have been added at the top, which is an expected enhancement and does not interfere with the document's original intent.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The rules lists, which are presented as aligned columns in the PDF, are rendered as clear, bordered tables in the HTML. The columns are correctly aligned, and the content is easily readable. There are no instances of overlapping text, misaligned columns, or missing borders that would impede understanding of the data relationship between rule names and their NCAC codes.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF is a text-heavy document containing no logos, charts, photos, or diagrams. Consequently, there are no meaningful images to be missing or broken in the HTML conversion. The document consists entirely of text-based rule filings and administrative information.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A thorough visual scan of the entire rendered HTML screenshot shows no instances of content duplication. Each rule filing and descriptive paragraph appears exactly once, following the sequence established in the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the HTML output closely follows the structure of the source PDF. Agencies are listed in the same order, followed by their descriptive paragraphs and then the list of rules. While the HTML uses a table-like structure to align rule names with their NCAC numbers (whereas the PDF uses right-alignment on a plain page), this is a standard and effective translation of the layout for web display. Navigation elements like a Table of Contents have been added at the top, which is an expected enhancement and does not interfere with the document's original intent.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The rules lists, which are presented as aligned columns in the PDF, are rendered as clear, bordered tables in the HTML. The columns are correctly aligned, and the content is easily readable. There are no instances of overlapping text, misaligned columns, or missing borders that would impede understanding of the data relationship between rule names and their NCAC codes.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF is a text-heavy document containing no logos, charts, photos, or diagrams. Consequently, there are no meaningful images to be missing or broken in the HTML conversion. The document consists entirely of text-based rule filings and administrative information.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A thorough visual scan of the entire rendered HTML screenshot shows no instances of content duplication. Each rule filing and descriptive paragraph appears exactly once, following the sequence established in the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 5,
+  "total_critical": 0,
+  "total_major": 3,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

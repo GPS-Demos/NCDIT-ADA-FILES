@@ -1,0 +1,114 @@
+{
+  "document_id": "phy-admin-drug-program-PDF-05.05.2020",
+  "audited_at": "2026-03-16T18:43:01.314512Z",
+  "fidelity_content": 0.872093023255814,
+  "fidelity_structural": 0.31818181818181823,
+  "fidelity_visual": 1.0,
+  "fidelity_composite": 0.7507,
+  "routing": "human_review",
+  "reasoning": "The document suffers from severe structural failure with a structural score of 0.318, leading to corrupted table data and broken heading hierarchies. Significant content loss is evident, with several pages of tabular data missing and a 50% row reduction in key tables, which renders the drug program information unreliable and potentially unusable.",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The 'Effective Dates and End/Obsolete Dates Continuation' table (Element 17) corresponds to source page 27. Page 27 contains 63 data rows, whereas Element 17 in the output contains only 32 data rows, representing a loss of approximately 50%. Additionally, the tables for drug procedure codes on pages 1, 3, and 5 (Elements 9, 10, 11) contain only headers and no data rows, although the data is partially recovered in preceding paragraphs.",
+      "source_pdf_quote": "Effective Dates table on page 27 contains 63 data rows.",
+      "output_quote": "The table in element 17 contains 32 data rows.",
+      "location": "Physician Drug Program Procedure Codes And Rates, Element 17"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "The Clotting Factor table (pages 14-25) is missing significant content. Pages 17-20 are missing entirely from the output and are not covered by the explicit gap notices. This represents 4 pages of tabular data within that section. Furthermore, the Date Tables (pages 27-51) are missing pages 37, 39, and 41-51, which are not covered by gap notices. These omissions constitute a loss of more than 25% of the document's total tabular data content.",
+      "source_pdf_quote": "Pricing and code rows for Clotting Factors on pages 17, 18, 19, and 20 (codes ranging from Advate to Alphanine SD).",
+      "output_quote": "The output transitions from page 16 content (J7190) in Element 16 directly to Date Table content in Element 17, omitting codes from pages 17-20.",
+      "location": "Physician Drug Program Procedure Codes And Rates, after Element 16"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The source document contains clear major section headings such as 'BIOLOGICALS' (Page 1), 'DRUGS' (Page 1), 'IMMUNE GLOBULINS' (Page 8), 'LARCs and Depo-Provera' (Page 8), and 'RADIOPHARMACEUTICALS' (Page 9). These are either entirely missing as structural heading elements in the JSON or are buried inside paragraph content blocks. For example, 'BIOLOGICALS' and 'DRUGS' are found at the end of the text content in element index 1 instead of being marked as headings. Only 'CLOTTING FACTOR' is corre",
+      "source_pdf_quote": "Major section headings: 'BIOLOGICALS' (Page 1), 'DRUGS' (Page 1), 'IMMUNE GLOBULINS' (Page 8), 'LARCs and Depo-Provera' (Page 8), 'RADIOPHARMACEUTICALS' (Page 9), 'VACCINES' (Page 10).",
+      "output_quote": "The text 'DRUGS BIOLOGICALS' appears as plain text at the end of a paragraph. Only one H2 heading exists: 'CLOTTING FACTOR'.",
+      "location": "Sections list, element index 1 and element index 16"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The document's primary content consists of 5-column drug tables and 2-column date tables. The conversion has failed to preserve this structure. Multiple pages of data (e.g., Pages 1-7) are rendered as giant text blobs within paragraphs (element indices 0-7). Where tables are attempted (e.g., element indices 11-13 and 17-20), the columns are merged into a single column, concatenating all row data into a single cell string. Empty table headers (element indices 8-10) further indicate a collapse of ",
+      "source_pdf_quote": "5-column table on Page 1 (ProcCode, NDC, Description, Facility, Non-Facility) and 2-column tables on Pages 27-51 (Effective Date, End/Obsolete Date).",
+      "output_quote": "Data from Page 1 is in a paragraph (index 0). Table at index 11 (Vaccine Fee Schedule Part 1) has only 1 column instead of 5, with row content merged ('90636 58160081552 TWINRIX ... $105.58 $105.58'). Date tables (index 17-20) concatenate an entire page of dates into a single cell.",
+      "location": "Element indices 0-7, 8-13, 17-20"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially disrupted by the failure to correctly associate table headers with their data. For example, the headers for the Page 1 drug table are defined in element index 8, but the actual data for that page was already presented as an unstructured text blob in element indices 0 and 1. This disconnects the structural definition of the information from the information itself, significantly altering how the document must be read and understood.",
+      "source_pdf_quote": "Page 1 logical flow: Table Headers -> Row 1 -> Row 2...",
+      "output_quote": "Data rows from Page 1 (index 0) -> Data rows from Page 1 (index 1) -> ... -> Table Headers for Page 1 (index 8).",
+      "location": "Element indices 0, 1, 8"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The conversion of the two-column date tables (Pages 28, 29, 30) into single-paragraph strings (Elements 18, 19, 20) alters the meaning of the data. By stripping the column structure, the relationship between 'Effective Date' and 'End/Obsolete Date' is lost, and the positional mapping to the drug codes from earlier pages is destroyed, making the information unusable.",
+      "source_pdf_quote": "Two-column date tables on pages 28, 29, and 30.",
+      "output_quote": "Elements 18, 19, and 20 are paragraphs containing a long string of concatenated dates (e.g., '1/1/2015 1/1/2015 1/1/2015...')",
+      "location": "Physician Drug Program Procedure Codes And Rates, Elements 18, 19, 20"
+    }
+  ],
+  "action_items": [
+    "Reconstruct the corrupted table structures to restore the 5-column and 2-column formats",
+    "Locate and reintegrate the missing pages of data identified in the fidelity report (specifically the Clotting Factor and Date tables)",
+    "Correct the heading hierarchy to ensure major sections are properly tagged as H1 or H2 elements",
+    "Re-synchronize the reading order so that drug codes and dates are correctly associated with their headers"
+  ],
+  "quality_score": 77,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7507,
+      "text_match": 0.8422561862394772,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7708,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7507,
+      "fidelity_content": 0.872093023255814,
+      "fidelity_structural": 0.31818181818181823,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7324459234608985,
+      "shingling_precision": 0.99159032887821,
+      "duplication_ratio": 0.00043273137935765776,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.93,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 156629,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

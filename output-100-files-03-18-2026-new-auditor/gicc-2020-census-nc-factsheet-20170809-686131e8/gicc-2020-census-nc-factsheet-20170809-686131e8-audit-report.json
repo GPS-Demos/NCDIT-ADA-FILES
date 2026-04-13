@@ -1,0 +1,96 @@
+{
+  "document_id": "gicc-2020-census-nc-factsheet-20170809-686131e8",
+  "audited_at": "2026-03-19T07:40:35.646184Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-2020-census-nc-factsheet-20170809-686131e8/gicc-2020-census-nc-factsheet-20170809-686131e8.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-2020-census-nc-factsheet-20170809-686131e8/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/gicc-2020-census-nc-factsheet-20170809-686131e8/gicc-2020-census-nc-factsheet-20170809-686131e8.html"
+  },
+  "quality_score": 100,
+  "quality_grade": "Good",
+  "fidelity_composite": 1.0,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite perfect LLM fidelity scores and strong text preservation (shingling recall 0.98), programmatic signals indicate structural issues that explicitly block auto-approval. Specifically, the image count ratio is 1.4x (indicating possible image duplication), and a mailto hyperlink was extracted as a standalone element rather than inline. These structural defects require human review to ensure accessibility.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Output has more images than source PDF (ratio 1.4x) — possible image duplication",
+      "severity": "major",
+      "analysis": "image_count_ratio=1.40. More images in output than in source indicates duplicated or fabricated image elements.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Displaced hyperlinks: 1 link(s) extracted as standalone elements instead of inline text",
+      "severity": "major",
+      "analysis": "standalone_links=1, examples=['mailto:Bob.Coats@osbm.nc.gov']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify if any images were unnecessarily duplicated in the output.",
+    "Check the placement of the 'mailto:Bob.Coats@osbm.nc.gov' link and ensure it is properly formatted inline."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 1.0,
+      "raw_score": 1.0,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 1.0,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.98,
+      "shingling_precision": 0.9613555291319857,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0045558086560364,
+      "baseline_words": 439,
+      "gemini_words": 441,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.4,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 96196,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

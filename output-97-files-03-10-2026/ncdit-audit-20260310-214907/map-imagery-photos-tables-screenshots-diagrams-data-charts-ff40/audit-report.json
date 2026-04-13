@@ -1,0 +1,96 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-ff40",
+  "audited_at": "2026-03-10T22:13:57.745487Z",
+  "quality_score": 60,
+  "fidelity_composite": 0.521,
+  "fidelity_content": null,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document suffers from multiple major fidelity failures, including the presence of OCR metadata artifacts repeated throughout the text and the omission of an entire section ('What We're Doing'). The low fidelity composite score of 0.521 and the corruption of reading order (where important text was incorrectly relegated to image alt-text) necessitate manual intervention to ensure accessibility and content accuracy.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output contains repeated blocks of metadata/style instructions that do not exist in the source PDF. Specifically, the phrases 'Title is Avenir Next LT Pro Regular 24pt' and 'Subtitle is Avenir Next LT Pro Light 18pt' are included as paragraph elements at the start of sections 1 through 11. These lines appear to be artifacts from the provided OCR text rather than actual document content. Since they appear zero times in the source and 11 times in the output, this constitutes a major duplicatio",
+      "source_pdf_quote": "The source PDF images do not contain the text 'Title is Avenir Next LT Pro Regular 24pt' or 'Subtitle is Avenir Next LT Pro Light 18pt'.",
+      "output_quote": "\"text\": \"Title is Avenir Next LT Pro Regular 24pt\",\n\"text\": \"Subtitle is Avenir Next LT Pro Light 18pt\"",
+      "location": "Sections 1 through 11, initial elements."
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The logical reading order and semantic grouping are corrupted in several sections. In Section 1, the central block of presentation text (Roy Cooper, James Weaver, Hope Morgan, etc.) is missing from text elements and relegated to image alt text at the end of the section. In Section 2, the heading 'What We're Doing' is omitted as text and placed in alt text. Most significantly, in Section 11, the reading order is reversed vertically: the bottom row of text labels is placed before the top row of ic",
+      "source_pdf_quote": "Page 11 shows a row of four icons above their corresponding labels (Census, NOAA, Elevation, Hydrography).",
+      "output_quote": "In Section 11, paragraphs containing labels (e.g., '2020 CENSUS UPDATES AND ASSISTANCE') appear before all four icon images.",
+      "location": "Section 1, Section 2, Section 11, Section 13."
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The HTML output has several major layout discrepancies. First, it includes technical metadata text (e.g., 'Title is Avenir Next LT Pro Regular 24pt', 'Subtitle is Avenir Next LT Pro Light 18pt') at the beginning of almost every section, which is not part of the source PDF's content. Second, an entire major section from page 2 of the PDF ('What We're Doing', including the grid of categories and the bottom row of logos/links) is completely missing from the HTML rendering, except for a single URL. ",
+      "source_pdf_quote": "Page 2 of the PDF contains a 'What We're Doing' section with four tiles and a footer row with logos for 'nc ONE map', 'Annual Report', and 'NC Parcels Program'. Page 11 shows four circular icons with text labels in a single horizontal row.",
+      "output_quote": "The HTML screenshot omits the 'What We're Doing' content entirely after the URL. Metadata labels like 'Title is Avenir Next LT Pro Regular 24pt' appear repeatedly. In the 'Intergovernmental Collaboration' section, the clean horizontal layout is replaced by vertically stacked text and multiple green boxes of varying dimensions.",
+      "location": "Throughout the document, specifically after the URL on page 2 and in the collaboration sections on pages 8-12."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images and logos from the source are missing or replaced by generic green blocks in the HTML. Most notably, the 'nc ONE map' logo and other program logos from page 2 are absent. While decorative graphics (like the satellite image on page 1) may be hidden intentionally, the loss of program logos that accompany descriptive text reduces the visual fidelity and informational value of the conversion.",
+      "source_pdf_quote": "PDF page 2 contains the 'nc ONE map' logo and various category icons. Pages 8-12 contain specific circular icons representing programs like 'Address NC' and 'Orthoimagery'.",
+      "output_quote": "The HTML output for these sections either omits the images entirely (page 2) or replaces them with large green rectangular placeholders (pages 8-12).",
+      "location": "Page 2, and the Collaboration sections on pages 8-12."
+    }
+  ],
+  "action_items": [
+    "Remove recurring technical font metadata artifacts from the text.",
+    "Restore the missing 'What We're Doing' content grid and logos from page 2.",
+    "Correct the reading order in section 11 and pull descriptive text out of alt-text into the main HTML body."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.521,
+      "text_match": 0.951578947368421,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.693,
+      "ceiling": 0.6,
+      "ceiling_reason": "fidelity_low_score",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.521,
+      "fidelity_content": null,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9290853031860226,
+      "shingling_precision": 0.9751887810140237,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.9,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 119658,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

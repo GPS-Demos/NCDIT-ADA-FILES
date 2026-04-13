@@ -1,0 +1,76 @@
+{
+  "document_id": "20200522-board-agenda-685f9ca8",
+  "audited_at": "2026-03-10T21:51:04.330417Z",
+  "quality_score": 95,
+  "fidelity_composite": 0.9182,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document demonstrates high content fidelity (1.0) and strong programmatic metrics (shingling recall 0.944), confirming no significant content loss. Identified concerns regarding table cell mapping and list flattening are explicitly classified as minor and do not impact the overall usability of the agenda. Per the scoring band directives, a composite score above 0.85 with converging signals and only minor defects triggers a mandatory AUTO_APPROVE routing.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The table structure is partially corrupted in the mapping of presenters for sub-items. In the source, presenters for sub-items (e.g., Donna Wright/Richard Bradford for item 6b) are aligned under the 'Presenter' column. In the output JSON for item 6, these presenter names are merged into the 'Topic' cell text, while the 'Presenter' cell only lists the primary presenter ('Pokey Harris'). Conversely, for item 8, the sub-presenter ('Marsha Tapler') is correctly mapped to the 'Presenter' cell, indica",
+      "source_pdf_quote": "6. Executive Director Report... Pokey Harris ... b) SL 2020-3 (Section 4.38 Regulatory Flexibility)………Donna Wright/Richard Bradford",
+      "output_quote": "\"text\": \"Executive Director Report\\na) COVID-19 Update\\nb) SL 2020-3 (Section 4.38 Regulatory Flexibility)………Donna Wright/Richard Bradford...\"",
+      "location": "Sections[0].elements[4] (table), Row index 10 (Item 6)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "Sub-lists within the agenda table (items 5, 6, and 8) are merged into single text blocks within table cells. This results in the loss of structural semantics for the list items (a, b, c, etc.) and nested sub-items (i, ii), which should ideally be represented as discrete list elements or separate rows rather than a single string.",
+      "source_pdf_quote": "Item 5: a) Minutes of Previous Meetings – April 24, 2020 [followed by list items b through f and sub-items i, ii]",
+      "output_quote": "\"text\": \"\\na) Minutes of Previous Meetings – April 24, 2020\\nb) NG 911 Fund/Account\\nApril 2020 Month-End Balance $ 66,897,707\\n...f) Grant Project Updates per Reports\\ni. Monthly Reports per PSAP\\nii. Mitchell County Grant Extension Request\"",
+      "location": "Sections[0].elements[4] (table), Row index 9 (Item 5)"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9182,
+      "text_match": 0.9538114907998498,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.95,
+      "raw_score": 0.945,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9182,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9442379182156134,
+      "shingling_precision": 0.9635811836115327,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 58170,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

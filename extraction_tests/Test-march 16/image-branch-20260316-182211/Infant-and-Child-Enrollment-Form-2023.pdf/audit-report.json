@@ -1,0 +1,77 @@
+{
+  "document_id": "Infant-and-Child-Enrollment-Form-2023.pdf",
+  "audited_at": "2026-03-16T18:26:29.711050Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 1.0,
+  "fidelity_composite": 0.8636,
+  "routing": "auto_approve",
+  "reasoning": "The document's composite fidelity score of 0.8636 exceeds the auto-approval threshold of 0.85, and both content and visual scores are perfect. While the structural score is low due to minor text duplication and an extra table row, these formatting artifacts do not compromise the legal or informational integrity of the enrollment form. Per routing instructions, minor imperfections are acceptable in government document conversions when the core content is faithfully preserved.",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "minor",
+      "analysis": "The text 'Parent/Guardian Signature:' appears twice in the output: once as a standalone heading (element index 20) and once as the prefix of the subsequent paragraph (element index 21). In the source PDF, this text only appears once as the label for the signature line.",
+      "source_pdf_quote": "Parent/Guardian Signature:_______________________________________ Date: ___________________",
+      "output_quote": "Heading: 'Parent/Guardian Signature:' followed by Paragraph: 'Parent/Guardian Signature:_______________________________________ Date: ___________________'",
+      "location": "Parent/Guardian Signature section, elements at index 20 and 21"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The table structure in the JSON includes one header row and six data rows. However, the source PDF table only contains five blank rows for child enrollment information. The conversion has inserted an additional redundant empty row.",
+      "source_pdf_quote": "The enrollment table in the center of the form contains 5 rows for data entry.",
+      "output_quote": "The 'rows' array in the table object contains 7 items (1 header + 6 data rows).",
+      "location": "Enrollment table, element index 10"
+    }
+  ],
+  "action_items": [],
+  "quality_score": 92,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8636,
+      "text_match": 0.9448529411764706,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.95,
+      "raw_score": 0.9188,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8636,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9562790697674418,
+      "shingling_precision": 0.9336966394187103,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 59498,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "document_id": "clay_2018_19",
+  "audited_at": "2026-03-20T00:10:18.967179Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/clay_2018_19/clay_2018_19.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/clay_2018_19/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/clay_2018_19/clay_2018_19.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the LLM fidelity scores are excellent (composite 0.9167) and content is fully preserved, programmatic checks identified that headers, footers, and page numbers ('Page 1 of 3', 'clay county') were retained in the HTML output. According to routing rules, the retention of page numbers or footers strictly prevents AUTO_APPROVE, requiring human intervention to clean up the document.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF relies heavily on bold text to indicate sections, sub-sections, column headers, and totals (e.g., '1. Public Assistance Programs', 'A. Division of Social Services', 'Total', 'Federal'). The HTML output places most of these strings into standard <td> elements without any <b>, <strong>, or CSS font-weight styling, stripping the meaningful visual emphasis that helps organize the document structure.",
+      "source_pdf_quote": "Section headers like \"1. Public Assistance Programs\" and \"A. Division of Social Services\" are rendered in a bold font weight.",
+      "output_quote": "<tr><td colspan=\"8\">1. Public Assistance Programs</td></tr><tr><td colspan=\"8\">A. Division of Social Services</td></tr>",
+      "location": "Throughout the document's tables",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (2): G.S. 108A-88 -- Determination of State/County Financial Part; Page 1 of 3",
+      "severity": "major",
+      "analysis": "header_footer_count=2. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"clay county\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove retained headers, footers, and page numbers from the HTML content",
+    "Restore bold formatting for section headers, sub-sections, and totals if necessary for visual hierarchy"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9280701754385965,
+      "shingling_precision": 0.977818853974122,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9294809010773751,
+      "baseline_words": 1021,
+      "gemini_words": 949,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 176775,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "document_id": "NGV-2008-9110",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I have reviewed the output against the source document. The document structure, headings, and body text correspond to the original content. Titles, alt-text, and metadata are within acceptable AI-generated parameters and do not represent fabricated information.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All contact information, including the address (2 S. Salisbury Street, Raleigh, NC), telephone number ((919) 807-7500), fax number ((919) 807-7647), and URL (http://www.ncauditor.net), was verified against pages 3 and 23 of the source document and found to be correct.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The conversion results are missing the entirety of the primary financial statement tables found on pages 7 and 8 of the source PDF. While the section headings for 'Exhibit A' and 'Exhibit B' exist in the JSON, the corresponding data tables are absent.",
+        "b_evidence_source": "Page 7: 'Statement of Receipts, Expenditures, and Net Assets – Modified Cash Basis' [Table Data]; Page 8: 'Statement of Functional Expenditures – Modified Cash Basis' [Table Data].",
+        "b_evidence_output": "Sections 6 and 7 contain only headings without the accompanying financial table data.",
+        "b_evidence_location": "Sections 6 and 7, PDF pages 7 and 8",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Several tables identified in the source PDF are completely absent from the JSON output, including Exhibits A and B, and supplemental tables within the Notes to the Financial Statements (Notes 6, 8, 10A, and 10B). 100% of the rows for these tables are missing.",
+        "b_evidence_source": "Tables for Exhibit A (p. 7), Exhibit B (p. 8), Note 6 (p. 13), Note 8 (p. 14), Note 10A (p. 14), and Note 10B (p. 15).",
+        "b_evidence_output": "The tables are missing entirely from Sections 6, 7, and 8.",
+        "b_evidence_location": "Sections 6, 7, and 8; PDF pages 7, 8, 13, 14, 15",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "A significant portion of the information within 'Note 1 - Significant Accounting Policies' and subsequent notes is missing because the data tables associated with Note 6 (Lease Obligations), Note 8 (Risk Management), and Note 10 (Restricted Net Assets) were not captured.",
+        "b_evidence_source": "Table for Note 6 (p. 13), Table for Note 8 (p. 14), Table for Note 10A (p. 14), Table for Note 10B (p. 15).",
+        "b_evidence_output": "Section 8 contains the introductory text for these notes but omits the critical data tables.",
+        "b_evidence_location": "Section 8, PDF pages 13, 14, 15",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text content that was successfully captured follows the source closely. Wording is preserved correctly, and minor reformatting is within expectations for document conversion.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5930232558139534,
+    "penalty_sum": 35,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I have reviewed the output against the source document. The document structure, headings, and body text correspond to the original content. Titles, alt-text, and metadata are within acceptable AI-generated parameters and do not represent fabricated information.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All contact information, including the address (2 S. Salisbury Street, Raleigh, NC), telephone number ((919) 807-7500), fax number ((919) 807-7647), and URL (http://www.ncauditor.net), was verified against pages 3 and 23 of the source document and found to be correct.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The conversion results are missing the entirety of the primary financial statement tables found on pages 7 and 8 of the source PDF. While the section headings for 'Exhibit A' and 'Exhibit B' exist in the JSON, the corresponding data tables are absent.\",\n      \"b_evidence_source\": \"Page 7: 'Statement of Receipts, Expenditures, and Net Assets – Modified Cash Basis' [Table Data]; Page 8: 'Statement of Functional Expenditures – Modified Cash Basis' [Table Data].\",\n      \"b_evidence_output\": \"Sections 6 and 7 contain only headings without the accompanying financial table data.\",\n      \"b_evidence_location\": \"Sections 6 and 7, PDF pages 7 and 8\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Several tables identified in the source PDF are completely absent from the JSON output, including Exhibits A and B, and supplemental tables within the Notes to the Financial Statements (Notes 6, 8, 10A, and 10B). 100% of the rows for these tables are missing.\",\n      \"b_evidence_source\": \"Tables for Exhibit A (p. 7), Exhibit B (p. 8), Note 6 (p. 13), Note 8 (p. 14), Note 10A (p. 14), and Note 10B (p. 15).\",\n      \"b_evidence_output\": \"The tables are missing entirely from Sections 6, 7, and 8.\",\n      \"b_evidence_location\": \"Sections 6, 7, and 8; PDF pages 7, 8, 13, 14, 15\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"A significant portion of the information within 'Note 1 - Significant Accounting Policies' and subsequent notes is missing because the data tables associated with Note 6 (Lease Obligations), Note 8 (Risk Management), and Note 10 (Restricted Net Assets) were not captured.\",\n      \"b_evidence_source\": \"Table for Note 6 (p. 13), Table for Note 8 (p. 14), Table for Note 10A (p. 14), Table for Note 10B (p. 15).\",\n      \"b_evidence_output\": \"Section 8 contains the introductory text for these notes but omits the critical data tables.\",\n      \"b_evidence_location\": \"Section 8, PDF pages 13, 14, 15\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text content that was successfully captured follows the source closely. Wording is preserved correctly, and minor reformatting is within expectations for document conversion.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 35,\n    \"score\": 0.5930232558139535\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The content appears to be unique and follows the source document's progression. Repetitive signature blocks (e.g., State Auditor) are present in the source PDF and correctly reflected in the output without extraneous duplication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading levels generally follow a logical progression. While some sections like the Notes (Section 8) exhibit a flat hierarchy (where subsections are at the same level as the parent title), these adjustments are within the acceptable scope for accessibility optimization.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Major structural failure: the tables for Exhibit A (page 7) and Exhibit B (page 8), which represent the primary financial statements of the audit report, are completely missing from the output. Sections 6 and 7 contain only the titles/headings for these exhibits without any table elements.",
+        "b_evidence_source": "The full financial tables for Exhibit A (page 7) and Exhibit B (page 8).",
+        "b_evidence_output": "Sections 6 and 7 contain only the Exhibit titles in the heading elements, with no table data present.",
+        "b_evidence_location": "Sections 6 and 7 (pages 7-8 of source PDF)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is significantly disrupted by the total omission of the Table of Contents (page 4). The output skips from page 3 (Section 3) to page 5 (Section 4), as indicated by the skip in reading_order attributes (3 to 5).",
+        "b_evidence_source": "The Table of Contents appearing on page 4 of the source PDF.",
+        "b_evidence_output": "The content for page 4 is entirely missing; Section 3 (reading_order 3) is followed by Section 4 (reading_order 5).",
+        "b_evidence_location": "Between Section 3 and Section 4",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "In Section 8 (Notes to Financial Statements), the list conversion is inconsistent. In the source (page 9), Note 1 has sub-points A, B, and C as part of a single group. The output correctly identifies A and B as list items (element index 3) but converts point C into a subsequent standalone paragraph (element index 6), breaking the list structure.",
+        "b_evidence_source": "Note 1, point C: 'Basis of Accounting – The accompanying financial statements were prepared on the modified cash basis...'",
+        "b_evidence_output": "The text for point C is rendered as a 'paragraph' type in section 8, following a 'list' type that only includes points A and B.",
+        "b_evidence_location": "Section 8, elements 3 and 6",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "External links (e.g., http://www.ncauditor.net) are correctly identified and preserved with appropriate metadata.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 11,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The content appears to be unique and follows the source document's progression. Repetitive signature blocks (e.g., State Auditor) are present in the source PDF and correctly reflected in the output without extraneous duplication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading levels generally follow a logical progression. While some sections like the Notes (Section 8) exhibit a flat hierarchy (where subsections are at the same level as the parent title), these adjustments are within the acceptable scope for accessibility optimization.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Major structural failure: the tables for Exhibit A (page 7) and Exhibit B (page 8), which represent the primary financial statements of the audit report, are completely missing from the output. Sections 6 and 7 contain only the titles/headings for these exhibits without any table elements.\",\n      \"b_evidence_source\": \"The full financial tables for Exhibit A (page 7) and Exhibit B (page 8).\",\n      \"b_evidence_output\": \"Sections 6 and 7 contain only the Exhibit titles in the heading elements, with no table data present.\",\n      \"b_evidence_location\": \"Sections 6 and 7 (pages 7-8 of source PDF)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is significantly disrupted by the total omission of the Table of Contents (page 4). The output skips from page 3 (Section 3) to page 5 (Section 4), as indicated by the skip in reading_order attributes (3 to 5).\",\n      \"b_evidence_source\": \"The Table of Contents appearing on page 4 of the source PDF.\",\n      \"b_evidence_output\": \"The content for page 4 is entirely missing; Section 3 (reading_order 3) is followed by Section 4 (reading_order 5).\",\n      \"b_evidence_location\": \"Between Section 3 and Section 4\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"In Section 8 (Notes to Financial Statements), the list conversion is inconsistent. In the source (page 9), Note 1 has sub-points A, B, and C as part of a single group. The output correctly identifies A and B as list items (element index 3) but converts point C into a subsequent standalone paragraph (element index 6), breaking the list structure.\",\n      \"b_evidence_source\": \"Note 1, point C: 'Basis of Accounting – The accompanying financial statements were prepared on the modified cash basis...'\",\n      \"b_evidence_output\": \"The text for point C is rendered as a 'paragraph' type in section 8, following a 'list' type that only includes points A and B.\",\n      \"b_evidence_location\": \"Section 8, elements 3 and 6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"External links (e.g., http://www.ncauditor.net) are correctly identified and preserved with appropriate metadata.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 1,\n    \"penalty_sum\": 11,\n    \"score\": 0.5\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully maintains the visual organization of the source document. It follows a linear single-column layout typical of web content, which correctly sequences the title pages, transmittal letter, table of contents, auditor's reports, financial exhibits, notes, and supplementary schedules. The complex financial tables and schedules are placed correctly within the flow of the document, matching the source's intent.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables in the HTML output, including complex multi-column financial statements like Exhibit A and Exhibit B, and detailed supplementary schedules like Schedule 1, are rendered with high fidelity. Borders are present where necessary, columns are aligned, and headers are distinct. For instance, the nested column headers in Schedule 1 ('Smart Start Fund' and 'Other Funds' spanning 'Amount Advanced' and 'Refund Due') are correctly represented in the HTML table structure. Data remains readable and understandable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "While the State Seal and the State Auditor's signature are correctly included in the transmittal section, multiple other meaningful images are missing from the HTML output. Specifically, the Clifton Gunderson LLP logo appearing on PDF pages 5 and 21 is missing. Furthermore, the firm's handwritten script signature, which appears on PDF pages 6 and 22 to authenticate the auditor's reports, is absent in the HTML version. These are meaningful elements in a financial audit report that identify and authenticate the auditing entity.",
+        "b_evidence_source": "The source PDF shows the 'Clifton Gunderson LLP' logo on pages 5 and 21, and the firm's script signature on pages 6 and 22.",
+        "b_evidence_output": "In the HTML output, the 'INDEPENDENT AUDITOR'S REPORT' and 'INDEPENDENT AUDITOR'S REPORT ON INTERNAL CONTROL...' sections are missing both the firm's logo and signature images.",
+        "b_evidence_location": "Independent Auditor's Report sections, corresponding to PDF pages 5, 6, 21, and 22.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of visual content duplication in the body of the HTML document. Section headings appear in the navigation/TOC area and again in the body, which is expected accessible design. The body content (paragraphs and tables) is unique and appears only once in its designated section.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.75,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully maintains the visual organization of the source document. It follows a linear single-column layout typical of web content, which correctly sequences the title pages, transmittal letter, table of contents, auditor's reports, financial exhibits, notes, and supplementary schedules. The complex financial tables and schedules are placed correctly within the flow of the document, matching the source's intent.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables in the HTML output, including complex multi-column financial statements like Exhibit A and Exhibit B, and detailed supplementary schedules like Schedule 1, are rendered with high fidelity. Borders are present where necessary, columns are aligned, and headers are distinct. For instance, the nested column headers in Schedule 1 ('Smart Start Fund' and 'Other Funds' spanning 'Amount Advanced' and 'Refund Due') are correctly represented in the HTML table structure. Data remains readable and understandable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"While the State Seal and the State Auditor's signature are correctly included in the transmittal section, multiple other meaningful images are missing from the HTML output. Specifically, the Clifton Gunderson LLP logo appearing on PDF pages 5 and 21 is missing. Furthermore, the firm's handwritten script signature, which appears on PDF pages 6 and 22 to authenticate the auditor's reports, is absent in the HTML version. These are meaningful elements in a financial audit report that identify and authenticate the auditing entity.\",\n      \"b_evidence_source\": \"The source PDF shows the 'Clifton Gunderson LLP' logo on pages 5 and 21, and the firm's script signature on pages 6 and 22.\",\n      \"b_evidence_output\": \"In the HTML output, the 'INDEPENDENT AUDITOR'S REPORT' and 'INDEPENDENT AUDITOR'S REPORT ON INTERNAL CONTROL...' sections are missing both the firm's logo and signature images.\",\n      \"b_evidence_location\": \"Independent Auditor's Report sections, corresponding to PDF pages 5, 6, 21, and 22.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of visual content duplication in the body of the HTML document. Section headings appear in the navigation/TOC area and again in the body, which is expected accessible design. The body content (paragraphs and tables) is unique and appears only once in its designated section.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.75\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 7,
+  "total_critical": 1,
+  "total_major": 5,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

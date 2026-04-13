@@ -1,0 +1,111 @@
+{
+  "document_id": "911-telecommunicators-resolution-rockingham-county-685f6ff5",
+  "audited_at": "2026-03-19T17:55:53.581936Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/911-telecommunicators-resolution-rockingham-county-685f6ff5/911-telecommunicators-resolution-rockingham-county-685f6ff5.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/911-telecommunicators-resolution-rockingham-county-685f6ff5/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/911-telecommunicators-resolution-rockingham-county-685f6ff5/911-telecommunicators-resolution-rockingham-county-685f6ff5.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Although the document achieved a high LLM fidelity composite score (0.9167), programmatic signals indicate it is a scanned document with 0 baseline extractable words. According to routing rules, documents with zero extractable source text must not be auto-approved due to the high risk of page images being duplicated alongside OCR'd text. Additionally, form elements were detected which may lose functionality in HTML.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The HTML successfully preserves the bold formatting for the 'WHEREAS' and 'NOW, THEREFORE' clauses. However, the bold formatting for the word 'ATTEST:' and the printed names and titles underneath the signature lines is missing, rendering them as plain unstyled text. Since this formatting is largely decorative and its absence does not change comprehension, it is a minor defect.",
+      "source_pdf_quote": "Bold text reading \"ATTEST:\" and \"MARK F. RICHARDSON, CHAIRMAN\"",
+      "output_quote": "Plain text reading \"<p>ATTEST:</p>\" and \"<td>MARK F. RICHARDSON, CHAIRMAN...</td>\"",
+      "location": "Signature sections at bottom of document",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Scanned document: source has 0 extractable text but output contains 242 words (OCR'd from images)",
+      "severity": "major",
+      "analysis": "baseline_words=0, gemini_words=242. Entire document is image-based; output likely duplicates content as both page image and extracted text.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Form elements detected: 2 form(s) with 2 field(s) — forms lose functionality in HTML",
+      "severity": "major",
+      "analysis": "form_count=2, total_fields=2. PDF form fields (checkboxes, text inputs, signatures) cannot be faithfully rendered as static HTML.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Check the HTML output to ensure full-page scanned images are not duplicated alongside extracted text.",
+    "Verify that the PDF form fields and signatures are handled correctly and do not break accessibility."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": null,
+      "shingling_precision": null,
+      "duplication_ratio": null,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 242,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 155016,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

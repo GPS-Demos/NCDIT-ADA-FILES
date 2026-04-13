@@ -1,0 +1,112 @@
+{
+  "document_id": "draft-fy23-25-goals-and-priorities-685fc8b0",
+  "audited_at": "2026-03-19T17:59:08.317600Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/draft-fy23-25-goals-and-priorities-685fc8b0/draft-fy23-25-goals-and-priorities-685fc8b0.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/draft-fy23-25-goals-and-priorities-685fc8b0/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/draft-fy23-25-goals-and-priorities-685fc8b0/draft-fy23-25-goals-and-priorities-685fc8b0.html"
+  },
+  "quality_score": 81,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.8133,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While programmatic signals show excellent content preservation (recall 0.982), the LLM fidelity evaluation identified significant visual and structural issues. Specifically, pagination artifacts caused a heading to be duplicated and incorrectly embedded inside a data cell of a massive merged table. The loss of bold formatting in table rows also removes important visual hierarchy, warranting human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The heading 'Goal 1. Improve, expand, and support statewide geospatial data and applications.' appears twice in the rendered HTML output. This is a pagination artifact from the original PDF where the heading was repeated on Page 2, but in the continuous HTML layout, it results in the block-level content being duplicated in the body (once as an `<h2>` and later as a table cell).",
+      "source_pdf_quote": "Goal 1. Improve, expand, and support statewide geospatial data and applications.",
+      "output_quote": "<h2>Goal 1. Improve, expand, and support statewide geospatial data and applications.</h2> [...] <tr><td colspan=\"2\">Goal 1. Improve, expand, and support statewide geospatial data and applications.</td></tr>",
+      "location": "Between item 1.3 and 1.5 in the HTML table",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "In the source PDF, the main goal items inside the tables (e.g., '1.1. Promote free and open discovery...', '1.2. Recommend utility infrastructure solutions...') are styled with bold text to act as subheadings/headers for the row groups. In the rendered HTML, this text is enclosed in standard `<td>` elements without any bold, strong, or inline CSS font-weight styling. This loss of formatting removes visual hierarchy from the tables.",
+      "source_pdf_quote": "1.1. Promote free and open discovery of and access to geospatial data created and maintained by local governments and support efficient local to state data sharing. (Appears bolded in PDF)",
+      "output_quote": "<td colspan=\"2\">1.1. Promote free and open discovery of and access to geospatial data created and maintained by local governments and support efficient local to state data sharing.</td> (No bold styling applied)",
+      "location": "Inside the first table for Goal 1",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "Checked the table structures. The output incorrectly merges multiple distinct tables from Page 1 and Page 2 into a single massive table within the Page 1 content block. Specifically, Table 1.3 from Page 1 is merged with Tables 1.5, 1.6, 1.7, and 1.8 from Page 2. Furthermore, the heading 'Goal 1. Improve, expand...' from the top of source Page 2 was incorrectly embedded as a data cell (row 2) within this merged table.",
+      "source_pdf_quote": "Page 1 ends with Table 1.3. Page 2 begins with the heading 'Goal 1. Improve, expand, and support statewide geospatial data and applications.' followed by Table 1.5.",
+      "output_quote": "The third table object on Page 1 contains row 0 for Table 1.3, row 2 containing the text 'Goal 1. Improve, expand, and support statewide geospatial data and applications.', and row 3 containing Table 1.5.",
+      "location": "Page 1, element index 11 (third table)",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Review the table structures to ensure separate tables are not incorrectly merged.",
+    "Remove pagination artifacts, such as repeated headings, from within table cells.",
+    "Restore necessary bold formatting to maintain visual hierarchy within the tables."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.8133,
+      "raw_score": 0.8133,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8133,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.982256020278834,
+      "shingling_precision": 0.9797724399494311,
+      "duplication_ratio": 0.018928285790455877,
+      "word_count_ratio": 1.0,
+      "baseline_words": 536,
+      "gemini_words": 536,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 119972,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "document_id": "impact_of_17_and_18_fed_leg_02162018",
+  "audited_at": "2026-03-19T19:48:07.841399Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/impact_of_17_and_18_fed_leg_02162018/impact_of_17_and_18_fed_leg_02162018.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/impact_of_17_and_18_fed_leg_02162018/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/impact_of_17_and_18_fed_leg_02162018/impact_of_17_and_18_fed_leg_02162018.html"
+  },
+  "quality_score": 98,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.98,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite excellent content preservation (LLM composite score 0.98, programmatic recall 0.977), there are specific structural violations that block auto-approval. Both programmatic and LLM signals identify displaced hyperlinks breaking the reading order, and programmatic checks found retained headers/footers in the output.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Displaced hyperlinks: 2 link(s) extracted as standalone elements instead of inline text",
+      "severity": "major",
+      "analysis": "standalone_links=2, examples=['https://www.ncdor.gov/taxes/individual-income-tax/individual', 'https://www.ncdor.gov/taxes/corporate-income-franchise-tax/c']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (3): Tax Administration; Page 1 of 2; February 16, 2018",
+      "severity": "major",
+      "analysis": "header_footer_count=3. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "minor",
+      "analysis": "The reading order is materially disrupted on Page 2. Inline links present within a paragraph in the source document have been extracted as separate, standalone 'link' blocks placed immediately after the paragraph. This breaks the logical flow for assistive technologies, as the screen reader will read the full text containing the link words, and then read the disjointed links out of context.",
+      "source_pdf_quote": "Individuals who wait to file their 2017 North Carolina income tax return until the General Assembly makes their determination will need to file Form D-410 to receive an automatic six-month extension of time to file. Corporations that wait to file their 2017 North Carolina income tax return will need to file Form CD-419 to receive an automatic six-month extension of time to file.",
+      "output_quote": "{\"type\": \"paragraph\", \"text\": \"Individuals who wait...\"}, {\"type\": \"link\", \"text\": \"Form D-410\", \"url\": \"...\"}, {\"type\": \"link\", \"text\": \"Form CD-419\", \"url\": \"...\"}",
+      "location": "Page 2, elements index 2, 3, and 4",
+      "source": "fidelity_llm",
+      "check_id": "S4",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Reintegrate standalone hyperlinks into their respective paragraph text",
+    "Remove retained header, footer, and page number artifacts"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.98,
+      "raw_score": 0.98,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.98,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9767324228629236,
+      "shingling_precision": 0.9872188139059305,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9824150058616647,
+      "baseline_words": 853,
+      "gemini_words": 838,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 2,
+      "output_link_count": 2,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 110089,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "document_id": "FY-Evergreen-Farm-USGS-Map-HPO-EDITS",
+  "audited_at": "2026-03-13T21:04:42.138426Z",
+  "quality_score": 87,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9125,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the LLM composite score is high, the evidence provided for the image truncation concern is significant; for a 'Location Map' document, the loss of 80% of the map image constitutes a major failure of utility. The programmatic image_count_ratio (0.25) strongly corroborates that most visual assets were not successfully captured, which justifies a human review despite the 'minor' label assigned by the fidelity system.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "The source document is a 'Location Map', where the topographic map is the most critical piece of content. In the source PDF, the map is a large, square-proportioned image showing a significant geographic area including landmarks like 'Muddy Creek' and 'Clemmons'. In the HTML output, the map image is severely truncated, appearing only as a thin horizontal strip. This strip shows only the top edge of the original map ('Jonestown' area), omitting roughly 80% of the map content and rendering the 'Lo",
+      "source_pdf_quote": "Topographic map image showing geographic area from 'Jonestown' at the top to 'Clemmons' at the bottom.",
+      "output_quote": "The map image is rendered as a narrow horizontal slice, showing only the 'Jonestown' label and omitting the vast majority of the geographic features seen in the source.",
+      "location": "Map image following the 'Base Map' text block",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Identify why the map image was truncated to a narrow strip.",
+    "Re-extract and embed the full square-proportioned map image showing the Muddy Creek and Clemmons areas."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": "flag_for_review",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9125,
+      "text_match": 0.9910179640718563,
+      "content_completeness": 0.9907407407407407,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8742,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9125,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9821958456973294,
+      "shingling_precision": 1.0,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9814814814814815,
+      "baseline_words": 54,
+      "gemini_words": 53,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 0.25,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 67708,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

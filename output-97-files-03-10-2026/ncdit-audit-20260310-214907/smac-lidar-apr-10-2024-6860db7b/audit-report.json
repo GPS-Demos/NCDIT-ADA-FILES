@@ -1,0 +1,104 @@
+{
+  "document_id": "smac-lidar-apr-10-2024-6860db7b",
+  "audited_at": "2026-03-10T22:33:51.704670Z",
+  "quality_score": 68,
+  "fidelity_composite": 0.8006,
+  "fidelity_content": 0.9302325581395349,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.5,
+  "routing": "human_review",
+  "reasoning": "The document is a visual-centric LiDAR status report where the primary information is conveyed through maps and technical legends. The evaluation signals converge on major failures: maps are missing or rendered as solid blocks, and approximately 25% of the unique technical text (including critical legends and dates) is omitted. While textual recall is high, the low precision (21%) and visual score (0.5) indicate the resulting HTML is functionally unusable for its intended purpose.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Significant technical information is missing from the first two sections. In Section 1 (Page 1), the report's reference date 'April 9, 2024 NCEM Status' and the detailed map legend (defining cell sizes like 3, 5, 10, 20, and 50ft) are missing from the text elements. In Section 2 (Page 2), the entire 'Phase & Quality' legend (defining years and Quality Levels 1-2 for all five phases) is omitted. These omissions constitute over 25% of the unique informational text on these pages.",
+      "source_pdf_quote": "Page 1: 'April 9, 2024 NCEM Status' and Status legend ('Reprojected from UTM meter to State Plane feet *', 'DEMs in Que', 'DEMs Processing (3, 5, 10, 20, 50ft)', 'DEMs Created (3, 10, & 20ft Tiled)'). Page 2: 'Phase & Quality' legend details ('Phase 1 (2020) - QL 1', 'Phase 2 (2020) - QL 1', 'Phase 3 (2015) - QL 2', 'Phase 4 (2016) - QL 1', 'Phase 5 (2017) - QL 1').",
+      "output_quote": "(These technical details are entirely absent from the text and paragraphs of sections 1 and 2)",
+      "location": "Sections 1 and 2, Pages 1 and 2"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The source document is primarily a visual status report, with each page organized around a large map of North Carolina. In the HTML version, the first map (from PDF page 1) is completely missing, and the second map (from PDF page 2) is rendered as a solid green square. This drastically alters the visual organization and flow of the document, as the text is no longer visually associated with the geographic data it describes.",
+      "source_pdf_quote": "The source PDF (pages 1 and 2) uses large maps to provide the primary context for the status and quality level data.",
+      "output_quote": "The HTML output omits the first map entirely and displays the second map as an uninformative solid green square, leaving the text in a single column without its visual references.",
+      "location": "Page 1 and Page 2 content"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful visual elements are missing or broken in the HTML output. The status map on page 1 and the diagram showing a plane performing LiDAR collection on page 2 are entirely absent. The quality level map on page 2 is present as a container but is rendered as a solid bright green square, losing all its informational content.",
+      "source_pdf_quote": "Map of 'April 9, 2024 NCEM Status' on page 1; map of 'North Carolina LiDAR Quality Level By Phase' and diagram of plane with LiDAR scanner on page 2.",
+      "output_quote": "The map from page 1 and the plane diagram are missing. The map from page 2 appears as a solid green square.",
+      "location": "Page 1 and Page 2"
+    },
+    {
+      "description": "Low text precision (possible hallucination): 21%",
+      "severity": "major",
+      "analysis": null,
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The agency branding 'NC DEPARTMENT OF PUBLIC SAFETY' and 'Emergency Management', which appears prominently at the top of every page in the source, is entirely missing from the output text and metadata. While the main document content is prioritized, the total loss of authoring agency identity is a defect.",
+      "source_pdf_quote": "NC DEPARTMENT OF PUBLIC SAFETY Emergency Management",
+      "output_quote": "(Text not found in output)",
+      "location": "Header of all pages"
+    }
+  ],
+  "action_items": [
+    "Restore the missing status maps and LiDAR collection diagrams",
+    "Ensure technical legends for map cell sizes and quality levels are correctly converted as text",
+    "Verify the presence of the specific report date and agency identification"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8006,
+      "text_match": 0.34626865671641793,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6828,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8006,
+      "fidelity_content": 0.9302325581395349,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9942857142857143,
+      "shingling_precision": 0.20963855421686747,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.96,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 64306,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

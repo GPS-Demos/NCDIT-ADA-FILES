@@ -1,0 +1,213 @@
+{
+  "document_id": "03020104Final",
+  "composite_score": 0.9593,
+  "risk_level": "LOW",
+  "routing_action": "AUTO_APPROVE",
+  "routing_reason": "Score 0.96 >= 0.85",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output content aligns with the source text provided in the PDF and OCR. No invented sections or fabricated body text were identified. Headings and paragraphs found in the full element content areas correspond to text present in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All URLs identified in the output (e.g., http://portal.ncdenr.org/web/wq/ps/csu/classifications, http://portal.ncdenr.org/web/wq/aps/lau) exist within the source document. While one association in Table 4-9 appears incorrect (attaching a URL to a slash character), the information itself is not fabricated and exists elsewhere in the document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All major sections identified in the source PDF have corresponding headers in the JSON output. Although many sections are marked as truncated (which is an expected artifact for this evaluation), no entire topics or pages were silently dropped from the structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Table 4-2 (Wastewater Dischargers) in the source PDF (pages 18-19) contains 18 data rows, whereas the output JSON only contains 4 data rows (77% missing). Table 4-3 (Non-Discharge Permits) on page 20 of the source contains 16 data rows, but the output JSON contains 0 data rows, only the header row (100% missing). Both failures exceed the 20% threshold.",
+        "b_evidence_source": "Table 4-2 contains 18 rows including facilities from NC0003255 to NC0088072. Table 4-3 contains 16 rows including facilities like 'PCS Phosphate' and 'Town of Bath'.",
+        "b_evidence_output": "JSON element for Table 4-2 contains only 4 data rows. JSON element for Table 4-3 contains 0 data rows (only header).",
+        "b_evidence_location": "Sections 'Wastewater Dischargers' (reading_order 16) and 'Non-Discharge' (reading_order 19).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The complete omission of data rows in Table 4-3 within the 'Non-Discharge' section results in a loss of over 50% of that section's informative content. Similarly, the loss of 14 rows in Table 4-2 represents a substantial omission of the core data for the 'Wastewater Dischargers' section.",
+        "b_evidence_source": "Table 4-2 (18 rows) and Table 4-3 (16 rows) provide the primary data for their respective sections.",
+        "b_evidence_output": "The tables in these sections are significantly depopulated of their data rows.",
+        "b_evidence_location": "Sections 'Wastewater Dischargers' (reading_order 16) and 'Non-Discharge' (reading_order 19).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "Minor text differences observed (such as hyphenation differences or formatting of subscripts) are within acceptable limits for OCR conversion. No wording changes were found that alter the meaning of the technical information provided.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.8837209302325582,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output content aligns with the source text provided in the PDF and OCR. No invented sections or fabricated body text were identified. Headings and paragraphs found in the full element content areas correspond to text present in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All URLs identified in the output (e.g., http://portal.ncdenr.org/web/wq/ps/csu/classifications, http://portal.ncdenr.org/web/wq/aps/lau) exist within the source document. While one association in Table 4-9 appears incorrect (attaching a URL to a slash character), the information itself is not fabricated and exists elsewhere in the document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All major sections identified in the source PDF have corresponding headers in the JSON output. Although many sections are marked as truncated (which is an expected artifact for this evaluation), no entire topics or pages were silently dropped from the structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Table 4-2 (Wastewater Dischargers) in the source PDF (pages 18-19) contains 18 data rows, whereas the output JSON only contains 4 data rows (77% missing). Table 4-3 (Non-Discharge Permits) on page 20 of the source contains 16 data rows, but the output JSON contains 0 data rows, only the header row (100% missing). Both failures exceed the 20% threshold.\",\n      \"b_evidence_source\": \"Table 4-2 contains 18 rows including facilities from NC0003255 to NC0088072. Table 4-3 contains 16 rows including facilities like 'PCS Phosphate' and 'Town of Bath'.\",\n      \"b_evidence_output\": \"JSON element for Table 4-2 contains only 4 data rows. JSON element for Table 4-3 contains 0 data rows (only header).\",\n      \"b_evidence_location\": \"Sections 'Wastewater Dischargers' (reading_order 16) and 'Non-Discharge' (reading_order 19).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The complete omission of data rows in Table 4-3 within the 'Non-Discharge' section results in a loss of over 50% of that section's informative content. Similarly, the loss of 14 rows in Table 4-2 represents a substantial omission of the core data for the 'Wastewater Dischargers' section.\",\n      \"b_evidence_source\": \"Table 4-2 (18 rows) and Table 4-3 (16 rows) provide the primary data for their respective sections.\",\n      \"b_evidence_output\": \"The tables in these sections are significantly depopulated of their data rows.\",\n      \"b_evidence_location\": \"Sections 'Wastewater Dischargers' (reading_order 16) and 'Non-Discharge' (reading_order 19).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"Minor text differences observed (such as hyphenation differences or formatting of subscripts) are within acceptable limits for OCR conversion. No wording changes were found that alter the meaning of the technical information provided.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.8837209302325582\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have carefully reviewed the converted JSON output against the source PDF. I checked for duplicated text blocks, paragraphs, and sections. The reading order proceeds logically from the beginning of the subbasin description to the references at the end without repeated content. Multi-page tables (like Table 4-1 and Table 4-2) have been correctly consolidated into single logical structures rather than repeating headers or content across page breaks. No evidence of content duplication was found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy in the output is logically sound and follows the structure of the source document. Major sections (e.g., General Description, General Biological Health, Nutrient Enrichment) are handled as section titles or high-level headings. Sub-headings like 'Special Study- Rose Acres' are correctly nested at a lower level (H3). While some sibling headings in the PDF (like 'Section 319-Grant Program' and 'Clean Water Management Trust Fund' on page 27) have been nested as H3 and H4 respectively, this is an acceptable adjustment for screen reader navigation and does not involve skipping levels (e.g., H2 to H4). No skips in heading levels were observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "I examined all tables in the output, including those spanning multiple pages and those representing sidebars. The primary data tables (4-1, 4-2, 4-4, 4-6, 4-7, 4-8, 4-9) have correctly identified header rows and the column counts match the source. Complex cells containing multiple values (like the IDs in the last row of Table 4-1 on page 7) are preserved within a single cell as in the original. The 'Subbasin at a Glance' sidebar from page 1 is rendered as a table, which faithfully preserves the key-value information. Chart data from the figures (e.g., Figures 4-13, 4-14) have been supplementary converted into tables for accessibility, which is an expected enhancement and not a structural defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order of the content in the JSON follows the logical flow of the source PDF. Sidebars (like 'Subbasin at a Glance') are integrated into the text flow appropriately after the introduction. Images and their captions are placed correctly relative to the associated text. Multi-column layouts are properly linearized into a logical top-to-bottom reading sequence. The sequence of sections (Introduction -> Description -> Water Quality Parameters -> Permits -> Restoration/Planning -> References) matches the intended narrative arc of the document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "I verified the list conversion, specifically the 'Recommendations' section on page 28 and the 'References' section on page 29. The recommendations are correctly identified as an unordered list, and each bullet point is preserved as a distinct list item. Similarly, the reference entries are maintained as individual blocks. The meaning and organization of these lists are fully preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "All URLs found in the text (e.g., ncdenr.org, nc-climate.ncsu.edu, farmland.org, usda.gov) have been successfully converted into active links with the correct 'href' attributes in the JSON. There is no evidence of missing links that were present in the source, nor any fabricated or broken URLs inserted into the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have carefully reviewed the converted JSON output against the source PDF. I checked for duplicated text blocks, paragraphs, and sections. The reading order proceeds logically from the beginning of the subbasin description to the references at the end without repeated content. Multi-page tables (like Table 4-1 and Table 4-2) have been correctly consolidated into single logical structures rather than repeating headers or content across page breaks. No evidence of content duplication was found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy in the output is logically sound and follows the structure of the source document. Major sections (e.g., General Description, General Biological Health, Nutrient Enrichment) are handled as section titles or high-level headings. Sub-headings like 'Special Study- Rose Acres' are correctly nested at a lower level (H3). While some sibling headings in the PDF (like 'Section 319-Grant Program' and 'Clean Water Management Trust Fund' on page 27) have been nested as H3 and H4 respectively, this is an acceptable adjustment for screen reader navigation and does not involve skipping levels (e.g., H2 to H4). No skips in heading levels were observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"I examined all tables in the output, including those spanning multiple pages and those representing sidebars. The primary data tables (4-1, 4-2, 4-4, 4-6, 4-7, 4-8, 4-9) have correctly identified header rows and the column counts match the source. Complex cells containing multiple values (like the IDs in the last row of Table 4-1 on page 7) are preserved within a single cell as in the original. The 'Subbasin at a Glance' sidebar from page 1 is rendered as a table, which faithfully preserves the key-value information. Chart data from the figures (e.g., Figures 4-13, 4-14) have been supplementary converted into tables for accessibility, which is an expected enhancement and not a structural defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order of the content in the JSON follows the logical flow of the source PDF. Sidebars (like 'Subbasin at a Glance') are integrated into the text flow appropriately after the introduction. Images and their captions are placed correctly relative to the associated text. Multi-column layouts are properly linearized into a logical top-to-bottom reading sequence. The sequence of sections (Introduction -> Description -> Water Quality Parameters -> Permits -> Restoration/Planning -> References) matches the intended narrative arc of the document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"I verified the list conversion, specifically the 'Recommendations' section on page 28 and the 'References' section on page 29. The recommendations are correctly identified as an unordered list, and each bullet point is preserved as a distinct list item. Similarly, the reference entries are maintained as individual blocks. The meaning and organization of these lists are fully preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"All URLs found in the text (e.g., ncdenr.org, nc-climate.ncsu.edu, farmland.org, usda.gov) have been successfully converted into active links with the correct 'href' attributes in the JSON. There is no evidence of missing links that were present in the source, nor any fabricated or broken URLs inserted into the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output maintains the visual organization of the source PDF. The multi-column layout on the first page, specifically the 'Subbasin at a Glance' sidebar, has been correctly reflowed into the single-column HTML structure. Headings, sections, and the placement of visual aids (maps and charts) relative to the text are preserved, allowing for easy navigation and information retrieval.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "All tables from the source PDF (Tables 4-1 through 4-9 and the 'Subbasin at a Glance' data) are correctly rendered in the HTML. Table headers are visually distinct, and data alignment across columns is accurate. Complex multi-row entries, such as the multiple Station IDs for 'Pungo Lake Canals' in Table 4-1, are handled correctly without breaking the table structure. Tables split across pages in the PDF (like Table 4-9) are merged into single continuous tables in the HTML, which is a visual improvement for the format.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "All meaningful images, maps, and charts from the source PDF are present in the converted HTML. This includes the HUC map on page 2, the numerous precipitation and nutrient level bar charts (Figures 4-2 through 4-30), and the regional maps (Figures 4-1, 4-8, 4-12, etc.). No broken image icons or missing meaningful visual content were observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A thorough visual scan of the rendered HTML output confirms that there is no duplicated content. Paragraphs, tables, and images appear exactly once in their designated logical order according to the source material.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output maintains the visual organization of the source PDF. The multi-column layout on the first page, specifically the 'Subbasin at a Glance' sidebar, has been correctly reflowed into the single-column HTML structure. Headings, sections, and the placement of visual aids (maps and charts) relative to the text are preserved, allowing for easy navigation and information retrieval.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"All tables from the source PDF (Tables 4-1 through 4-9 and the 'Subbasin at a Glance' data) are correctly rendered in the HTML. Table headers are visually distinct, and data alignment across columns is accurate. Complex multi-row entries, such as the multiple Station IDs for 'Pungo Lake Canals' in Table 4-1, are handled correctly without breaking the table structure. Tables split across pages in the PDF (like Table 4-9) are merged into single continuous tables in the HTML, which is a visual improvement for the format.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"All meaningful images, maps, and charts from the source PDF are present in the converted HTML. This includes the HUC map on page 2, the numerous precipitation and nutrient level bar charts (Figures 4-2 through 4-30), and the regional maps (Figures 4-1, 4-8, 4-12, etc.). No broken image icons or missing meaningful visual content were observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A thorough visual scan of the rendered HTML output confirms that there is no duplicated content. Paragraphs, tables, and images appear exactly once in their designated logical order according to the source material.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 0,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

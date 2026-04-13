@@ -1,0 +1,97 @@
+{
+  "document_id": "logo-imagery-screenshot-imagery",
+  "audited_at": "2026-03-10T19:53:07.522693Z",
+  "quality_score": 74,
+  "fidelity_composite": 0.7239,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9545454545454546,
+  "fidelity_visual": 0.25,
+  "routing": "human_review",
+  "reasoning": "The conversion suffers from significant functional defects, specifically the decoupling of instructional steps from their corresponding UI elements and the loss of essential screenshots in a technical guide. Low shingling recall (0.701) and a very low visual fidelity score (0.25) corroborate these structural failures, which compromise the document's utility as an accessible instructional resource.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the HTML is severely compromised. Instructional steps are separated from the UI elements (buttons) they refer to. Specifically, in the 'How to unlock your account' section, buttons like 'SAVE', 'CONFIRM', and 'Next' are inserted between steps and are assigned incorrect list numbers (restarting at 1), which breaks the logical flow and meaning of the guide. In the source, these buttons are inline with the steps in their respective sections.",
+      "source_pdf_quote": "The source PDF maintains a clear numbered sequence within columns where buttons are positioned directly after the instruction that refers to them (e.g., Page 1, 'How to register' steps 4 and 5).",
+      "output_quote": "In the HTML, the 'How to unlock your account' section contains a jumble of buttons ('Send Request', 'SAVE', 'CONFIRM', 'Next') interspersed with restarted numbered lists that do not match the source text or logic.",
+      "location": "HTML output, 'How to unlock your account' section"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Multiple meaningful images, including UI screenshots and functional buttons, are missing from the HTML output. They are replaced by generic green placeholder boxes or alt-text descriptions like 'Menu with options...', 'Send Request button', and 'Save button'. For example, the screenshots for 'Password' tab (Page 2) and 'Profile Information' tab (Page 2) are entirely absent, substituted by green blocks. This prevents a user from visually identifying the UI elements described in the text.",
+      "source_pdf_quote": "In the source PDF, Page 2 shows screenshots of the 'Password' and 'Profile Information' tabs. Page 3 shows a screenshot of the 'delete' confirmation modal.",
+      "output_quote": "The HTML shows large green boxes under 'How to reset your password' and 'How to update your profile'. It also displays text like 'Menu with options: Forgot Username, Forgot Password, Unlock Account' instead of the actual UI images.",
+      "location": "Throughout the HTML document"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The content block listing 'Forgot Username', 'Forgot Password', and 'Unlock Account' is visually duplicated within the 'How to register' section of the HTML. Furthermore, this content is misplaced as it does not appear in the 'How to register' section of the source PDF at all.",
+      "source_pdf_quote": "PDF Page 1, 'How to register' section contains no such menu list.",
+      "output_quote": "The list 'Forgot Username / Forgot Password / Unlock Account' appears twice under the 'How to register' heading in the HTML.",
+      "location": "HTML output, 'How to register' section"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The conversion fails to maintain the structural integrity of numbered lists. Continuous sequences in the source (e.g., 'How to register' steps 1-6) are split into multiple separate 'list' objects to accommodate interleaved images. Because the JSON 'text' field does not include the original numbers and the lists are sibling elements, the sequential numbering is lost. Additionally, in 'How to delete your account' step 3, the text is missing a reference to the menu icon ('Click on the in the upper ",
+      "source_pdf_quote": "Page 1: 'How to register' steps 1-6. Page 3: 'How to delete your account' step 3: 'Click on the [vertical dots icon] in the upper right corner...'",
+      "output_quote": "The 'How to register' section (reading_order 2) splits the 1-6 sequence into four separate 'list' elements. The 'How to delete your account' section (reading_order 9) has a list item text: 'Click on the in the upper right corner and click on “Delete my account”.'",
+      "location": "Sections[0].subsections[0] and Sections[0].subsections[8]"
+    }
+  ],
+  "action_items": [
+    "Re-integrate missing UI screenshots or ensure alt-text provides equivalent functional guidance.",
+    "Correct the logical flow by ensuring buttons appear inline with their respective instructional steps.",
+    "Remove the duplicated 'Forgot Username/Password/Unlock' content block from the 'How to register' section.",
+    "Repair the broken list sequences to ensure continuous numbering."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7239,
+      "text_match": 0.7594417522775733,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7405,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7239,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9545454545454546,
+      "fidelity_visual": 0.25,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7007722007722008,
+      "shingling_precision": 0.8642857142857143,
+      "duplication_ratio": 0.02203856749311295,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.96,
+      "pipeline_routing": "flag_for_review",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 88938,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

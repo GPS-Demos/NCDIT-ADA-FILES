@@ -1,0 +1,141 @@
+{
+  "document_id": "HPO",
+  "audited_at": "2026-03-16T18:36:14.414341Z",
+  "fidelity_content": 0.6395348837209303,
+  "fidelity_structural": 0.2727272727272727,
+  "fidelity_visual": 0.8125,
+  "fidelity_composite": 0.4,
+  "routing": "reject",
+  "reasoning": "The document exhibits catastrophic content and structural failures, including the complete omission of multiple major sections (Section VI: Hickory Housing and Section III: Methodology) totaling over 20 pages of missing content. With a structural score of 0.27 and pervasive duplication of existing sections, the conversion is fundamentally broken and unfit for publication.",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "Multiple entire sections and page ranges are missing from the output. Specifically, Section 'VI. HICKORY HOUSING' (Pages 42-58) is completely absent. Furthermore, Section 'III. METHODOLOGY' (Pages 7-11) is significantly compromised: the section title is missing, and all content from Pages 7, 8, 9, and 10 is omitted. Only the tail end of the methodology content from Page 11 is present, but it has been erroneously appended to the end of Section II.",
+      "source_pdf_quote": "Section VI. HICKORY HOUSING (Pages 42-58); Section III. METHODOLOGY (Pages 7-10).",
+      "output_quote": "The entire section VI is missing. Section III title and pages 7-10 are missing.",
+      "location": "Sections list, between page 42 and 58; and page 7 to 10."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Within Section 'APPENDIX A – UPDATED PROPERTIES', two full pages of data (Pages 72 and 73) containing entries CT0922 through CT1319 are missing. The JSON table for Appendix A stops at CT0920 (end of Page 71) and immediately jumps to Appendix B.",
+      "source_pdf_quote": "Entries CT0922 to CT1313 (Page 72) and CT1314 to CT1319 (Page 73).",
+      "output_quote": "The output table for Appendix A terminates at CT0920.",
+      "location": "APPENDIX A - UPDATED PROPERTIES, following entry CT0920."
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output contains several instances of duplicated content. In section 'II. ARCHITECTURAL SURVEY HISTORY', the fourth paragraph element is a near-exact duplication of the second half of the third paragraph element, repeating text from page 6 of the source. In 'APPENDIX A – UPDATED PROPERTIES', the table rows for survey sites CT0453 through CT0508 (originally on page 66) are repeated twice within the same table element (rows 22-31 are identical to rows 32-41). Additionally, the entire content of",
+      "source_pdf_quote": "The text 'the Claremont High School and Kenworth historic districts that have since been added...' appears once at the top of page 6. The Appendix A table entries for CT0453-CT0508 appear once on page 66.",
+      "output_quote": "The text 'the Claremont High School and Kenworth historic districts...' appears in both the third and fourth paragraph elements of section 'II. ARCHITECTURAL SURVEY HISTORY'. Table rows for CT0453-CT0508 are duplicated at index 32-41 in the Appendix A table.",
+      "location": "Sections 'II. ARCHITECTURAL SURVEY HISTORY' and 'APPENDIX A – UPDATED PROPERTIES' (element index 0)"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is mostly preserved through normalization, but major section headers from the source are missing in the output structure. Specifically, 'III. METHODOLOGY' (source page 7) and 'VI. HICKORY HOUSING' (source page 42) do not appear as section titles or heading elements. While the text associated with Section III is erroneously appended to Section II, the structural marker (the heading) is lost, which breaks the navigation hierarchy intended by the document's organization.",
+      "source_pdf_quote": "III. METHODOLOGY (Page 7); VI. HICKORY HOUSING (Page 42)",
+      "output_quote": "The sections list skips from 'II. ARCHITECTURAL SURVEY HISTORY' to 'IV. HICKORY IN THE TWENTIETH CENTURY'.",
+      "location": "Sections array, between indices 2 and 3"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is significantly impacted by the missing sections and the injection of a redundant section. The text from Section III (Methodology) is merged into Section II, which is a significant structural deviation. Furthermore, the creation of the 'Survey Properties List' section (index 10) disrupts the flow by re-inserting Appendix B data as a series of paragraphs immediately after the table, which does not exist in the source document.",
+      "source_pdf_quote": "Methodology text begins on page 7 after the header 'III. METHODOLOGY'.",
+      "output_quote": "Methodology text is found within elements of the 'II. ARCHITECTURAL SURVEY HISTORY' section.",
+      "location": "Sections[2]"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "In Section II, a paragraph from the top of Page 6 is duplicated. The text beginning 'the Claremont High School and Kenworth historic districts...' appears once as the end of a longer block and then repeats immediately as a standalone paragraph.",
+      "source_pdf_quote": "the Claremont High School and Kenworth historic districts that have since been added to the National Register as boundary increase areas. A similar expansion of the Oakwood Historic District was also recommended. Hood and Phillips further proposed that the residential neighborhood around the Green Park School might be a potential historic district. No action was taken, however, to have the Oakwood Historic District Boundary Increase and Green Park Historic District placed on the North Carolina S",
+      "output_quote": "The exact paragraph above is repeated twice consecutively at the end of Section II elements.",
+      "location": "Section II. ARCHITECTURAL SURVEY HISTORY, elements index."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The Table of Contents (page 2) is missing from the output. Other lists, such as those in Appendix C, are rendered as paragraphs. Since the source lists in Appendix C do not use bullets or numbers (they are vertical blocks of text), rendering them as paragraphs is an acceptable reformatting, though the semantic grouping of the TOC is lost.",
+      "source_pdf_quote": "TABLE OF CONTENTS (Page 2)",
+      "output_quote": "The TOC section is entirely missing from the JSON.",
+      "location": "Start of document after cover page"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "minor",
+      "analysis": "The HTML document fails to represent the visual organization of the source PDF by completely omitting Section III (Methodology) and the beginning of Section VI (Hickory Housing), including the header and first four pages of content (text and images from PDF pages 42-45). This loss of information and structural gap significantly changes the document's flow and meaning. Furthermore, the content of Sections IV and V is repeated, creating a confusing and disorganized reading experience.",
+      "source_pdf_quote": "Table of Contents lists 'III. Methodology' on page 6 and 'VI. Hickory Housing' on page 41. Section III covers pages 6-10 and Section VI begins on page 42.",
+      "output_quote": "The HTML main body skips from Section II to Section IV. Section VI header is missing, and content jumps from Section V to text found on page 46 of the original PDF.",
+      "location": "Main document body, between sections II/IV and after section V."
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Several meaningful images present in the source PDF are missing from the HTML output. Specifically, the Ridgeview Cemetery photos (p. 22), the Montgomery Ward and J.C. Penney store photos (p. 25), the Corinth Evangelical and Episcopal church photos (p. 30), and the map of the Proposed Oakwood Historic District (p. 44) have no corresponding image elements in the HTML.",
+      "source_pdf_quote": "Ridgeview Cemetery (p. 22), Montgomery Ward/J.C. Penney (p. 25), Corinth Evangelical/Episcopal (p. 30), Map (p. 44).",
+      "output_quote": "No <img> elements correspond to these specific meaningful architectural photos and maps.",
+      "location": "Sections corresponding to pages 22, 25, 30, and 44."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "The document contains extensive visual duplication. Sections IV and V, including their associated images, appear twice in the document body. Within the first table of Appendix A, rows CT0453 through CT0505 are repeated sequentially. Appendix B's data is provided in a table and then repeated as a paragraph-based list under 'Survey Properties List'. Additionally, the 'Study List properties' section is rendered twice.",
+      "source_pdf_quote": "Single occurrences of Sections IV, V, Appendix A/B data, and the Study List.",
+      "output_quote": "Sections IV and V repeat; Appendix A table repeats rows CT0453-CT0505; Appendix B content is repeated as a list; Study List properties appear twice.",
+      "location": "Main body, Appendix A, and footer sections."
+    }
+  ],
+  "action_items": [],
+  "quality_score": 40,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 1.0,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8795703354018689,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.0,
+      "raw_score": 0.5399,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6395348837209303,
+      "fidelity_structural": 0.2727272727272727,
+      "fidelity_visual": 0.8125,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8516089590396265,
+      "shingling_precision": 0.9870523061066735,
+      "duplication_ratio": 0.05268430350295144,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.89,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 154116,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

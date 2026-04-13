@@ -1,0 +1,112 @@
+{
+  "document_id": "04_15_Actives",
+  "audited_at": "2026-03-23T18:38:59.490903Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/04_15_Actives/04_15_Actives.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/04_15_Actives/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/04_15_Actives/04_15_Actives.html"
+  },
+  "quality_score": 92,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.9167,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The document has high fidelity and programmatic scores, indicating excellent content and structure preservation. However, programmatic signals identified repeated text ('fns active case error rates' and 'oct 2014 - apr 2015') across all 3 pages, indicating headers/footers were retained in the HTML output. According to routing rules, retained headers/footers block auto-approval because they negatively impact accessibility. Therefore, the document is routed to human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF contains bold text for the summary row 'STATE' which is lost in the HTML output, where it is rendered as a standard unstyled table cell. The subtitle 'Oct 2014 - Apr 2015' also loses its bold styling. Since this formatting is not critical for comprehension, this is a minor issue.",
+      "source_pdf_quote": "The text 'STATE' in the final row of the document is bold.",
+      "output_quote": "The text is rendered as plain text: '<td colspan=\"2\">STATE</td>'",
+      "location": "Bottom row of the final table",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"fns active case error rates\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3/3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"oct 2014 - apr 2015\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3/3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Check and remove retained header/footer text from the HTML output.",
+    "Evaluate if the missing bold formatting needs to be restored."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9167,
+      "raw_score": 0.9167,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.9167,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9898454746136865,
+      "shingling_precision": 0.9790393013100437,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 1.0,
+      "baseline_words": 1087,
+      "gemini_words": 1087,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 219258,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-365a",
+  "audited_at": "2026-03-10T22:17:50.373252Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.5930232558139534,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.5,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The output is missing the first 10 pages of the source document. The source PDF contains a title page (p. 1), a blank page (p. 2), an Executive Summary (pp. 3-4), a Table of Contents (p. 5), an Introduction (p. 6), Section I (pp. 7-8), Council Membership details (p. 9), and the start of Section II (p. 10). The JSON output begins with the 'Imagery for the State' section from page 11. Section 47 of the output explicitly confirms this omission with the text '[Pages 1-11 unavailable]'. This is a cri",
+      "source_pdf_quote": "Source PDF pages 1-10 containing the title page, Executive Summary, Table of Contents, Introduction, Section I, and the beginning of Section II.",
+      "output_quote": "The output starts at page 11 ('Imagery for the State'). Section 47 states: 'Content from pages 1-11 could not be converted. This section may be available after retry.'",
+      "location": "Start of document and Section 47"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The table in Section 44 (Appendix A: Council Members) contains only 10 rows of data. The source document's Appendix A spans pages 31 to 34 and contains a total of 36 data rows (31 members across three pages and 5 advisory members on the fourth). The output has omitted 26 out of 36 rows, which is approximately 72% of the table's data. This exceeds the 20% threshold for a major defect.",
+      "source_pdf_quote": "Appendix A table on pages 31-34 contains 36 rows of data (members and advisory members).",
+      "output_quote": "The table in Section 44 contains only 10 data rows, ending with 'John Farley'.",
+      "location": "Section 44 (Appendix A)"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "Section 44 (Appendix A) is missing a significant amount of text content. As noted in check C4, it only contains data from page 31 of the source, omitting the subsequent pages (32-34) that comprise the remainder of the appendix. The loss of 72% of the content within this section is a major defect.",
+      "source_pdf_quote": "Appendix A spans pages 31-34 of the source document.",
+      "output_quote": "Section 44 only contains the content from page 31.",
+      "location": "Section 44 (Appendix A)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table in 'Appendix A' (listing Council Members) is severely corrupted due to truncation. The source table in the PDF spans four pages (31, 32, 33, and 34). However, the converted output only contains the rows found on page 31, effectively losing three-quarters of the table's structural data without indicating a split or continuation.",
+      "source_pdf_quote": "Table 'Appendix A: Fiscal Year 2013-14 Geographic Information Coordinating Council Members' spanning pages 31-34.",
+      "output_quote": "The JSON table in the section 'Appendix A: Fiscal Year 2013-14 Geographic Information Coordinating Council Members' only contains rows up to 'John Farley' (the end of page 31). Members from pages 32-34 (e.g., Edward Finley, Tony Tata, Sarah Koonts) are missing.",
+      "location": "Appendix A, Page 31 / table element"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The document structure is fundamentally altered because the entire first quarter of the document is missing from its intended position. Pages 1 through 10, which contain the Title, Executive Summary, Introduction, and the 'Purpose of the Council' section, are omitted from the start of the JSON. Instead, the document erroneously begins with content from page 11. Furthermore, a non-source error message section '[Pages 1-11 unavailable]' is appended to the end of the JSON, creating a highly disjoin",
+      "source_pdf_quote": "The document begins with the Title Page (Page 1) followed by the Executive Summary (Page 3).",
+      "output_quote": "The JSON starts with content from Page 11 ('Imagery for the State') and appends an error message '[Pages 1-11 unavailable]' at the end (index 47).",
+      "location": "Sections list start and index 47"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "major",
+      "analysis": "The visual organization of the document is severely compromised by the omission of the first 10 pages of body content. The source PDF begins with a cover page, followed by an Executive Summary (page 3), Introduction (page 6), and Section I (page 7). However, the HTML screenshot shows that the body content begins abruptly with the 'Imagery for the State' subsection from Section II (page 11). Although these sections appear in the Table of Contents at the top of the page, the actual content is miss",
+      "source_pdf_quote": "Executive Summary (p.3), Introduction (p.6), Section I. Purpose of the Geographic Information Coordinating Council (p.7), Section II. Accomplishments (p.10).",
+      "output_quote": "The body content starts with 'Imagery for the State' and ends with a note '[Pages 1-11 unavailable]'.",
+      "location": "Start of body content following the Table of Contents"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Multiple meaningful images present in the source PDF are missing from the HTML output because the pages they reside on were not rendered. This includes the NCGICC logo on the cover page, the 'State Capital and Vicinity' photo (p. 6), Figure 1: A GIS Community of Collaboration (p. 7), Figure 2: Organizational Structure (p. 8), and the photo of 'The Council in a Recent Quarterly Meeting' (p. 9). While images on subsequent pages (Figures 3-7) are present, the absence of these primary diagrams and l",
+      "source_pdf_quote": "NCGICC Logo (p.1), State Capital photo (p.6), Figure 1 (p.7), Figure 2 (p.8), Council Meeting photo (p.9).",
+      "output_quote": "These images are absent from the HTML rendering.",
+      "location": "First 10 pages of the document"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "The URL for the GIS Applications report in the section 'Review of GIS Applications in State Government' is corrupted. The link is split across two separate text objects due to a line break in the source text. While the second object contains the correct 'href', the visible link text is fragmented, which compromises the functional presentation of the document's links.",
+      "source_pdf_quote": "http://www.ncleg.net/DocumentSites/committees/JLOCIT/Reports%20to%20the%20General%20Assembly/2013%20GA%20Report%20GIS%20Applications%20FINAL.pdf",
+      "output_quote": "The URL is split into two parts: '...General' and '%20Assembly...'",
+      "location": "Section 'Review of GIS Applications in State Government', Page 21-22"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8760909328455709,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5475,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5930232558139534,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.5,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7867467617796133,
+      "shingling_precision": 0.9883268482490273,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.96,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 97377,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

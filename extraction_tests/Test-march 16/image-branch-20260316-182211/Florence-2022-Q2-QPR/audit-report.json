@@ -1,0 +1,105 @@
+{
+  "document_id": "Florence-2022-Q2-QPR",
+  "audited_at": "2026-03-16T18:44:02.063189Z",
+  "fidelity_content": 0.5930232558139534,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 1.0,
+  "fidelity_composite": 0.4,
+  "routing": "human_review",
+  "reasoning": "The conversion failed to capture essential financial and performance data, with critical tables on pages 2, 3, and 4 entirely missing or severely truncated. The composite score of 0.4 reflects significant content and structural loss, including a 70% row omission in target reporting and the collapse of data tables into unintelligible text strings.",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "Several significant data tables are entirely missing from the conversion. Page 2 contains a large 'Overall' financial table with grant sub-codes, which is not present in the 'Overall Progress' section of the output. Page 3 includes a 'Project Summary' table for Administration that is absent. Furthermore, Page 4 contains a comprehensive table of project-level financial data for all ten project categories; this entire table is omitted from the output.",
+      "source_pdf_quote": "The source document contains an 'Overall' financial table on Page 2, a 'Project Summary' table on Page 3, and a detailed project table on Page 4.",
+      "output_quote": "These tables are missing from the JSON sections covering pages 2-4 (Sections 'Overall Progress' and 'Project Summary').",
+      "location": "Pages 2, 3, and 4"
+    },
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "The table titled 'Progress Toward Required Numeric Targets' on Page 2 has 7 data rows in the source document (Overall Benefit Percentage, Minimum Non Federal Match, Overall Benefit Amount, Limit on Public Services, Limit on Admin/Planning, Limit on Admin, Most Impacted and Distressed). The corresponding table in Section 2 of the output contains only the first 2 rows, omitting more than 70% of the data.",
+      "source_pdf_quote": "Requirement Target Projected Actual\nOverall Benefit Percentage 70.00% 64.61% N/A\nMinimum Non Federal Match $.00 $.00 $.00\nOverall Benefit Amount $357,059,752.00 $250,701,528.00 $.00\nLimit on Public Services $.00 $.00 $.00\nLimit on Admin/Planning $.00 $32,558,640.00 $.00\nLimit on Admin $.00 $27,132,200.00 $.00\nMost Impacted and Distressed $.00 $342,642,894.00 $53,560,745.43",
+      "output_quote": "{\n  \"type\": \"table\",\n  \"rows\": [\n    ... [Header Row] ...\n    { \"cells\": [ { \"content\": [ { \"text\": \"Overall Benefit Percentage\" } ] }, ... ] },\n    { \"cells\": [ { \"content\": [ { \"text\": \"Minimum Non Federal Match\" } ] }, ... ] }\n  ]\n}",
+      "location": "Section 2, heading-8, table-1 (Page 2)"
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "In several instances, structured tables are converted as unstructured text blocks within paragraph elements. For example, on page 22 (Palatine Meadows) and page 24 (Cliffdale Crossing), the 'Accomplishments Performance Measures' and 'Beneficiaries Performance Measures' tables are rendered as single strings of text. This transformation causes a significant loss of information as the alignment between headers and data values is destroyed, rendering the content unintelligible.",
+      "source_pdf_quote": "Structured tables for 'Accomplishments Performance Measures' and 'Beneficiaries Performance Measures' on pages 22 and 24.",
+      "output_quote": "\"This Report Period Cumulative Actual Total / Expected\\nTotal Total\\nActivity funds eligible for DREF 0 0/0\\n# of Properties 0 0/1...\"",
+      "location": "Sections 11 and 12 (Pages 22 and 24)"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The document suffers from significant table structure corruption. 1) The main 'Overall' summary table at the top of Page 2 is entirely missing from the output. 2) The 'Project Summary' table on Pages 3 and 4 is severely truncated, with only the header information for project 101 captured; all subsequent rows for projects 102 through 9999 are missing. 3) Multiple 'Overall' tables within activity sections (e.g., Pages 23, 25, 27) have been collapsed into single, unstructured paragraphs of text, lo",
+      "source_pdf_quote": "The 'Overall' table on Page 2 with columns 'This Report Period' and 'To Date'; the multi-page 'Project Summary' table on Pages 3-4; and the activity-level 'Overall' tables on pages like 23 and 25.",
+      "output_quote": "Section 2 missing Page 2 summary table; Section 4 ('Activities') missing project summary data for all projects except 101; Section 12, element 10 collapsing the Page 23 table into a paragraph.",
+      "location": "Pages 2, 3, 4, 23, 25, 27"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially disrupted by the failure to correctly process major data blocks (tables). By omitting the summary table on Page 2 and most of the project summary data on Pages 3-4, and by linearizing activity financial data into dense text blocks elsewhere, the logical flow and accessibility of the financial reporting are severely compromised.",
+      "source_pdf_quote": "Financial data is presented in clear tabular hierarchies (Summary -> Project Level -> Activity Level).",
+      "output_quote": "The output removes or obscures these hierarchies by omitting tables or collapsing them into text, forcing the reader to hunt for data in unstructured blocks.",
+      "location": "Document-wide"
+    }
+  ],
+  "action_items": [
+    "Investigate why the table extraction engine is skipping the primary financial summary tables on the early pages.",
+    "Re-evaluate the OCR/parsing logic that is linearizing structured tables into paragraphs.",
+    "Verify the integrity of project-level data for the entire 102-9999 sequence which is currently missing."
+  ],
+  "quality_score": 40,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.8222360951217522,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.6105,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.5930232558139534,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7201517820842933,
+      "shingling_precision": 0.9732600732600732,
+      "duplication_ratio": 0.008415501860078738,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.89,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 63703,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

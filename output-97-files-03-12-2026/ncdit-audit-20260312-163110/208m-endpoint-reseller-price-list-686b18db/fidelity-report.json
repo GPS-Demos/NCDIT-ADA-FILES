@@ -1,0 +1,152 @@
+{
+  "document_id": "208m-endpoint-reseller-price-list-686b18db",
+  "composite_score": 0.6,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The JSON output contains a duplication of the 'Professional Services' section (Heading 9 and Heading 10). However, upon inspection of the source PDF, this specific section is repeated verbatim at the bottom of page 11 and the top of page 12. Therefore, this is an intentional repetition in the source document and not a conversion defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy follows a logical and consistent structure throughout the converted document. The document title in metadata acts as H1, section titles (Broadcom, Sophos, etc.) function as H2, and individual price list titles within those sections are correctly assigned as H3. This provides a valid and accessible navigation structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Several tables in the document have been severely corrupted during conversion, resulting in massive data loss. The tables for Trellix (pages 14 and 15) and CrowdStrike (page 16) only contain a single data row each, despite the source document listing dozens of line items. Furthermore, the Presidio Cisco table (page 19) contains only the header row, with all 8 data rows omitted. Additionally, all tables in the Sophos section (pages 5-9) are rendered as images rather than structured table objects, which fundamentally breaks the semantic organization of the data.",
+        "b_evidence_source": "Multiple tables across the document (pages 14, 15, 16, and 19) containing numerous line items and pricing data.",
+        "b_evidence_output": "The corresponding table elements in the JSON output (e.g., 'Carahsoft Trellix Price List Page 14', 'Cost Proposal Form', 'Presidio Cisco Price List') are missing the vast majority of their rows, often containing only headers or a single line item.",
+        "b_evidence_location": "Trellix section (reading_order 4), CrowdStrike section (reading_order 5), Presidio section (reading_order 7).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The overall reading order of the document is preserved, following the sequence of the source pages correctly from the initial Broadcom section through to the final Presidio section.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list of responsibilities under the 'Professional Services' heading on page 11 was correctly identified and converted into a structured list format.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The external URL found in the Broadcom section ('https://www.symantec.com/services/education-services/training-courses') is correctly captured and correctly formatted as a functional link in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The JSON output contains a duplication of the 'Professional Services' section (Heading 9 and Heading 10). However, upon inspection of the source PDF, this specific section is repeated verbatim at the bottom of page 11 and the top of page 12. Therefore, this is an intentional repetition in the source document and not a conversion defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy follows a logical and consistent structure throughout the converted document. The document title in metadata acts as H1, section titles (Broadcom, Sophos, etc.) function as H2, and individual price list titles within those sections are correctly assigned as H3. This provides a valid and accessible navigation structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Several tables in the document have been severely corrupted during conversion, resulting in massive data loss. The tables for Trellix (pages 14 and 15) and CrowdStrike (page 16) only contain a single data row each, despite the source document listing dozens of line items. Furthermore, the Presidio Cisco table (page 19) contains only the header row, with all 8 data rows omitted. Additionally, all tables in the Sophos section (pages 5-9) are rendered as images rather than structured table objects, which fundamentally breaks the semantic organization of the data.\",\n      \"b_evidence_source\": \"Multiple tables across the document (pages 14, 15, 16, and 19) containing numerous line items and pricing data.\",\n      \"b_evidence_output\": \"The corresponding table elements in the JSON output (e.g., 'Carahsoft Trellix Price List Page 14', 'Cost Proposal Form', 'Presidio Cisco Price List') are missing the vast majority of their rows, often containing only headers or a single line item.\",\n      \"b_evidence_location\": \"Trellix section (reading_order 4), CrowdStrike section (reading_order 5), Presidio section (reading_order 7).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The overall reading order of the document is preserved, following the sequence of the source pages correctly from the initial Broadcom section through to the final Presidio section.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list of responsibilities under the 'Professional Services' heading on page 11 was correctly identified and converted into a structured list format.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The external URL found in the Broadcom section ('https://www.symantec.com/services/education-services/training-courses') is correctly captured and correctly formatted as a functional link in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the document is significantly compromised by the absence of several major sections and tables that are present in the source PDF. Specifically, the SHI Trellix price list tables on PDF pages 10 and 11 are entirely missing from the HTML output, leaving only empty headings and the subsequent Professional Services text. Additionally, the first page of the Carahsoft Trellix price list (PDF page 13, containing line items 1-9) is missing, as the HTML skips directly to page 14 (line item 10). These omissions represent a major failure in maintaining the visual organization and completeness of the document.",
+        "b_evidence_source": "PDF pages 10 and 11 contain multiple tables for the SHI Trellix (Formerly McAfee) Price List. PDF page 13 contains the first part of the Carahsoft Trellix Price List (Line Nos. 1-9).",
+        "b_evidence_output": "The HTML screenshot shows headings for 'SHI Trellix (Formerly McAfee) Price List' and 'Carahsoft Trellix (Formerly McAfee) Price List', but the expected tables for pages 10, 11, and 13 are absent. The Carahsoft Trellix section starts directly with 'Page 14' data.",
+        "b_evidence_location": "SHI Trellix and Carahsoft Trellix sections, corresponding to PDF pages 10, 11, and 13.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables that are successfully rendered in the HTML (e.g., Broadcom, CrowdStrike, Presidio, and parts of Carahsoft Trellix) maintain proper tabular structure with clear rows and columns. They are readable and the data is correctly aligned. While many tables are missing (noted in V1), those that are present do not exhibit visual corruption or misalignment.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The Sophos Price List in the source PDF (pages 5-9) is composed of images/screenshots of spreadsheet tables. The HTML conversion successfully captures the first image (from page 5) but fails to render the images for the subsequent four pages (pages 6-9). The HTML output displays the headings for these pages ('SHI (Sophos) Price List (Continued)'), but no images follow them, leaving the sections empty.",
+        "b_evidence_source": "PDF pages 6, 7, 8, and 9 contain meaningful image content (screenshots of Sophos price lists).",
+        "b_evidence_output": "The HTML screenshot shows four consecutive headings for 'SHI (Sophos) Price List (Continued)' with no images or content rendered beneath them.",
+        "b_evidence_location": "SOPHOS section, corresponding to PDF pages 6-9.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no evidence of visual duplication of body content (paragraphs or tables) within the rendered HTML. While headings appear in both the Table of Contents and the document body, this is an expected accessibility feature. The repetition of the 'SHI (Sophos) Price List (Continued)' heading corresponds to separate pages in the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the document is significantly compromised by the absence of several major sections and tables that are present in the source PDF. Specifically, the SHI Trellix price list tables on PDF pages 10 and 11 are entirely missing from the HTML output, leaving only empty headings and the subsequent Professional Services text. Additionally, the first page of the Carahsoft Trellix price list (PDF page 13, containing line items 1-9) is missing, as the HTML skips directly to page 14 (line item 10). These omissions represent a major failure in maintaining the visual organization and completeness of the document.\",\n      \"b_evidence_source\": \"PDF pages 10 and 11 contain multiple tables for the SHI Trellix (Formerly McAfee) Price List. PDF page 13 contains the first part of the Carahsoft Trellix Price List (Line Nos. 1-9).\",\n      \"b_evidence_output\": \"The HTML screenshot shows headings for 'SHI Trellix (Formerly McAfee) Price List' and 'Carahsoft Trellix (Formerly McAfee) Price List', but the expected tables for pages 10, 11, and 13 are absent. The Carahsoft Trellix section starts directly with 'Page 14' data.\",\n      \"b_evidence_location\": \"SHI Trellix and Carahsoft Trellix sections, corresponding to PDF pages 10, 11, and 13.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables that are successfully rendered in the HTML (e.g., Broadcom, CrowdStrike, Presidio, and parts of Carahsoft Trellix) maintain proper tabular structure with clear rows and columns. They are readable and the data is correctly aligned. While many tables are missing (noted in V1), those that are present do not exhibit visual corruption or misalignment.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The Sophos Price List in the source PDF (pages 5-9) is composed of images/screenshots of spreadsheet tables. The HTML conversion successfully captures the first image (from page 5) but fails to render the images for the subsequent four pages (pages 6-9). The HTML output displays the headings for these pages ('SHI (Sophos) Price List (Continued)'), but no images follow them, leaving the sections empty.\",\n      \"b_evidence_source\": \"PDF pages 6, 7, 8, and 9 contain meaningful image content (screenshots of Sophos price lists).\",\n      \"b_evidence_output\": \"The HTML screenshot shows four consecutive headings for 'SHI (Sophos) Price List (Continued)' with no images or content rendered beneath them.\",\n      \"b_evidence_location\": \"SOPHOS section, corresponding to PDF pages 6-9.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no evidence of visual duplication of body content (paragraphs or tables) within the rendered HTML. While headings appear in both the Table of Contents and the document body, this is an expected accessibility feature. The repetition of the 'SHI (Sophos) Price List (Continued)' heading corresponds to separate pages in the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 0,
+  "total_major": 3,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

@@ -1,0 +1,107 @@
+{
+  "document_id": "seal-imagery-11ab",
+  "audited_at": "2026-03-19T06:57:19.133305Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-imagery-11ab/seal-imagery-11ab.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-imagery-11ab/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/seal-imagery-11ab/seal-imagery-11ab.html"
+  },
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": null,
+  "fidelity_visual": 0.7619047619047619,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Fidelity composite critically low: 0.40 (2/3 dims). Manual review required.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Fabricated contact information",
+      "severity": "critical",
+      "analysis": "The pipeline hallucinated several external URLs (specifically pointing to TechTarget dictionary definitions) that are not visible or present as text in the source PDF. For example, on page 7, the word 'network' was turned into a hyperlink to 'searchnetworking.techtarget.com'. This pattern is repeated on multiple pages (e.g., page 30 for the word 'protocol' and page 50 for 'network.'). This constitutes fabricated contact/URL information.",
+      "source_pdf_quote": "Page 7 plain text: \"...a server program in a computer in a distributed network that provides the business logic...\"",
+      "output_quote": "{\"type\": \"link\", \"text\": \"network\", \"url\": \"http://searchnetworking.techtarget.com/sDefinition/0,,sid7_gci212644,00.html\"}",
+      "location": "Page 7, 30, and 50",
+      "source": "fidelity_llm",
+      "check_id": "C2",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Fidelity Structural evaluation failed — dimension not assessed",
+      "severity": "major",
+      "analysis": "The structural fidelity call did not produce valid results.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "fidelity_llm",
+      "check_id": null,
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "While most bold dictionary terms are preserved, the bold formatting for defined terms at the beginning of list items is consistently missing. For example, under 'Intrusion Detection System (IDS)' and 'Vulnerability Risk Ratings', the initial terms in the numbered list items are bolded in the source PDF but rendered as plain text in the HTML output. Because these denote defined terms or specific risk categories, losing this emphasis changes how easily a user can scan the content.",
+      "source_pdf_quote": "In the PDF, page 41, list items begin with bold text such as \"1. Host – Host-based...\" and \"2. Network – A network-based...\".",
+      "output_quote": "In the HTML output, the list items are rendered without bold tags: \"<li>Host – Host-based intrusion detection systems...</li>\".",
+      "location": "Page 41 (Intrusion Detection System) and Page 75 (Vulnerability Risk Ratings)",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (2/3 dims). Manual review required."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "raw_score": 0.4,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": null,
+      "fidelity_visual": 0.7619047619047619,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9229875518672199,
+      "shingling_precision": 0.9023691042838597,
+      "duplication_ratio": 0.00017289521685382573,
+      "word_count_ratio": 0.9789697141239739,
+      "baseline_words": 35330,
+      "gemini_words": 34587,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 307314,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "document_id": "AfricanAmerican_-HealthDisparities_2.4.26_Spanish_web.pdf",
+  "audited_at": "2026-03-16T18:26:50.139610Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.875,
+  "fidelity_composite": 0.9562,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score is very high (0.9562), the identified concern regarding triple-duplication of section headings ('ACCESO A LA ATENCIÓN DE SALUD' appearing three times) creates a significant accessibility and usability issue. The presence of large PDF screenshots alongside rendered text further complicates the document structure, necessitating human intervention to ensure the HTML is clean and professional for government use.",
+  "concerns": [
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "While the main photographs from the PDF are present as images in the HTML, the specific icons used to represent each health section (e.g., medical clipboard, heart rate line, pregnant silhouette, dollar sign) are missing as distinct images. Instead, the HTML displays their text descriptions (e.g., 'Icono de portapapeles médico', 'Silueta de una mujer embarazada') inside the section header boxes. These icons are meaningful visual markers in the source document.",
+      "source_pdf_quote": "Visual icons for 'ACCESO A LA ATENCIÓN DE SALUD' (clipboard), 'ENFERMEDADES CRÓNICAS' (heart line), 'SALUD MATERNA E INFANTIL' (pregnant silhouette), etc., on pages 1 and 2.",
+      "output_quote": "The actual icon images are missing; instead, text descriptions such as 'Icono de portapapeles médico', 'Icono de corazón con línea de pulso', and 'Silueta de una mujer embarazada' are displayed in the section header boxes.",
+      "location": "Section headers throughout the document."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "There is significant visual duplication of text throughout the converted document. Main section titles like 'ACCESO A LA ATENCIÓN DE SALUD' appear up to three times consecutively: once as a stylized heading, once as plain text, and once within the icon description box. Furthermore, the pipeline has included large fallback images which are screenshots of the original PDF; these images contain visual text (like the main document title and subheadings) that is then repeated immediately as rendered ",
+      "source_pdf_quote": "Main title 'Enfoque en la salud afroamericana en Carolina del Norte' and section headers like 'ACCESO A LA ATENCIÓN DE SALUD'.",
+      "output_quote": "The main title is duplicated (appears as HTML text and within a header image). Section titles are triplicated (as a heading, as plain text, and inside a descriptive box). Additionally, a middle fallback image includes the 'SALUD MENTAL Y DEL COMPORTAMIENTO' header which is then repeated as text below.",
+      "location": "Main header and throughout all section headers."
+    }
+  ],
+  "action_items": [
+    "Deduplicate section headers to ensure each title appears only once in the hierarchy.",
+    "Remove or hide the large fallback screenshots if the HTML text rendering is accurate and complete.",
+    "Verify that the text descriptions of icons are properly formatted as ARIA labels or alt-text rather than visible redundant text."
+  ],
+  "quality_score": 89,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.92,
+    "score_breakdown": {
+      "fidelity_composite": 0.9562,
+      "text_match": 0.9613362202288895,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8886,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9562,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.875,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9658172778123058,
+      "shingling_precision": 0.9568965517241379,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 96371,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

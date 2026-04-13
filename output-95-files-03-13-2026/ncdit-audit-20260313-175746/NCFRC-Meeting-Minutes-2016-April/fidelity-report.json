@@ -1,0 +1,213 @@
+{
+  "document_id": "NCFRC-Meeting-Minutes-2016-April",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output contains a section titled '[Pages 21-22 unavailable]' with body text explaining a conversion failure. While this text does not appear in the source PDF, the 'Acceptable Changes' guidelines state that AI-generated section labels and pipeline-added metadata are expected and not considered defects. This content serves as a diagnostic placeholder for the missing content flagged in C3.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "I verified the URLs (e.g., buckleupnc.org) and addresses (e.g., 20 Canoe Lane, Woodfin, NC; 8550 Shipyard Boulevard, Mann's Harbor, NC) against the source. All contact information present in the output correctly matches the source PDF. No fabricated info found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The entire content of Page 22 of the source PDF is missing from the output. This includes two paragraphs describing the 'Long Term Care' and 'Legal Shield' benefit programs and a concluding 'Questions?' prompt. The output acknowledges this loss with a placeholder section stating 'Content from pages 21-22 could not be converted'.",
+        "b_evidence_source": "Two new benefits will be available soon on the NCSFA web site for members. One is a Long Term Care option... The other is a Legal Shield program that members can purchase... Questions?",
+        "b_evidence_output": "Content from pages 21-22 could not be converted. This section may be available after retry.",
+        "b_evidence_location": "Page 22",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The output contains two tables corresponding to those on page 18 of the source. The 'Inspection for March 2016' table in the output has 4 rows, matching the source. The 'Year to Date 2016 Failures' table has 5 rows, matching the source. Row counts and data values are accurate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Heading-37 'New Benefits for 2016' exists in the JSON, but it contains zero content elements in its subsection (or following paragraphs), whereas the source has approximately 10 lines of text under this heading. The loss of all body text within a section that technically exists constitutes a major omission.",
+        "b_evidence_source": "Two new benefits will be available soon on the NCSFA web site for members. One is a Long Term Care option that allows members to select a long term care protection for themselves or their spouses. The other is a Legal Shield program that members can purchase that has two offerings; one is a prepaid legal service and the other is an ID protection option. Look for these soon. Questions?",
+        "b_evidence_output": "[Empty section under heading-37]",
+        "b_evidence_location": "New Benefits for 2016 (heading-37)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text that was successfully converted is highly faithful to the source, preserving even apparent typos like 'April12' and 'adjourned ta'. No wording changes were found that alter the meaning of the document's content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.6511627906976745,
+    "penalty_sum": 30,
+    "defect_count": 2,
+    "critical_count": 1,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output contains a section titled '[Pages 21-22 unavailable]' with body text explaining a conversion failure. While this text does not appear in the source PDF, the 'Acceptable Changes' guidelines state that AI-generated section labels and pipeline-added metadata are expected and not considered defects. This content serves as a diagnostic placeholder for the missing content flagged in C3.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"I verified the URLs (e.g., buckleupnc.org) and addresses (e.g., 20 Canoe Lane, Woodfin, NC; 8550 Shipyard Boulevard, Mann's Harbor, NC) against the source. All contact information present in the output correctly matches the source PDF. No fabricated info found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The entire content of Page 22 of the source PDF is missing from the output. This includes two paragraphs describing the 'Long Term Care' and 'Legal Shield' benefit programs and a concluding 'Questions?' prompt. The output acknowledges this loss with a placeholder section stating 'Content from pages 21-22 could not be converted'.\",\n      \"b_evidence_source\": \"Two new benefits will be available soon on the NCSFA web site for members. One is a Long Term Care option... The other is a Legal Shield program that members can purchase... Questions?\",\n      \"b_evidence_output\": \"Content from pages 21-22 could not be converted. This section may be available after retry.\",\n      \"b_evidence_location\": \"Page 22\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The output contains two tables corresponding to those on page 18 of the source. The 'Inspection for March 2016' table in the output has 4 rows, matching the source. The 'Year to Date 2016 Failures' table has 5 rows, matching the source. Row counts and data values are accurate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Heading-37 'New Benefits for 2016' exists in the JSON, but it contains zero content elements in its subsection (or following paragraphs), whereas the source has approximately 10 lines of text under this heading. The loss of all body text within a section that technically exists constitutes a major omission.\",\n      \"b_evidence_source\": \"Two new benefits will be available soon on the NCSFA web site for members. One is a Long Term Care option that allows members to select a long term care protection for themselves or their spouses. The other is a Legal Shield program that members can purchase that has two offerings; one is a prepaid legal service and the other is an ID protection option. Look for these soon. Questions?\",\n      \"b_evidence_output\": \"[Empty section under heading-37]\",\n      \"b_evidence_location\": \"New Benefits for 2016 (heading-37)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text that was successfully converted is highly faithful to the source, preserving even apparent typos like 'April12' and 'adjourned ta'. No wording changes were found that alter the meaning of the document's content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 1,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 30,\n    \"score\": 0.6511627906976745\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I carefully compared the content of each page in the source PDF with the elements in the JSON output. All sections, paragraphs, and list items appear exactly once in the output, mirroring their single occurrence in the source. There are no instances of repeated content blocks or sections that appear twice.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is consistent and follows logical nesting rules. The document title is rendered as an H2. Major sections (Welcome, Call to Order, Invocation; Board Reports; OLD BUSINESS; AGENCY REPORTS; etc.) are correctly identified as H2. Subsections such as 'Certification Board Update' (under Board Reports) and 'Meg Langston – Injury Prevention' (under Department of Insurance) are appropriately nested as H3 and H4 respectively. There are no skipped levels or incorrect parent-child relationships.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The two tables found on page 18 of the source PDF are faithfully represented in the JSON. The 'Inspection for March 2016' table correctly identifies the 'Year to Date' super-header and the 'Districts' and 'Departments' sub-headers, maintaining the 3-column structure. The 'Year to Date 2016 Failures' table also preserves the relationship between the failure categories and their corresponding counts. Row and column relationships are accurately maintained.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order generally follows the source until the end of the document. However, there is a material divergence at the end of the JSON. The source PDF contains content on page 21 (after the 'New Benefits for 2016' heading) and the entirety of page 22 (including the final paragraphs and the 'Questions?' prompt). The JSON output truncates at this point and inserts a new section titled '[Pages 21-22 unavailable]' with a placeholder message stating the content could not be converted. This is a material failure to preserve the organization and flow of the document.",
+        "b_evidence_source": "Two new benefits will be available soon on the NCSFA web site for members. One is a Long Term Care option that allows members to select a long term care protection for themselves or their spouses... Questions?",
+        "b_evidence_output": "[Pages 21-22 unavailable] ... Content from pages 21-22 could not be converted. This section may be available after retry.",
+        "b_evidence_location": "End of document, Section 2, Pages 21-22",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The document contains several lists (e.g., page 3/4 Injury Prevention, page 20 Bylaw Changes, page 20/21 Legislative Issues). These are correctly converted into structured list objects (unordered and ordered) in the JSON. The nesting and numbering of these lists match the source intent.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URL mentioned in the text (e.g., www.buckleupnc.org on page 4) is correctly preserved within the paragraph content. No fabricated or broken links were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I carefully compared the content of each page in the source PDF with the elements in the JSON output. All sections, paragraphs, and list items appear exactly once in the output, mirroring their single occurrence in the source. There are no instances of repeated content blocks or sections that appear twice.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is consistent and follows logical nesting rules. The document title is rendered as an H2. Major sections (Welcome, Call to Order, Invocation; Board Reports; OLD BUSINESS; AGENCY REPORTS; etc.) are correctly identified as H2. Subsections such as 'Certification Board Update' (under Board Reports) and 'Meg Langston – Injury Prevention' (under Department of Insurance) are appropriately nested as H3 and H4 respectively. There are no skipped levels or incorrect parent-child relationships.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The two tables found on page 18 of the source PDF are faithfully represented in the JSON. The 'Inspection for March 2016' table correctly identifies the 'Year to Date' super-header and the 'Districts' and 'Departments' sub-headers, maintaining the 3-column structure. The 'Year to Date 2016 Failures' table also preserves the relationship between the failure categories and their corresponding counts. Row and column relationships are accurately maintained.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order generally follows the source until the end of the document. However, there is a material divergence at the end of the JSON. The source PDF contains content on page 21 (after the 'New Benefits for 2016' heading) and the entirety of page 22 (including the final paragraphs and the 'Questions?' prompt). The JSON output truncates at this point and inserts a new section titled '[Pages 21-22 unavailable]' with a placeholder message stating the content could not be converted. This is a material failure to preserve the organization and flow of the document.\",\n      \"b_evidence_source\": \"Two new benefits will be available soon on the NCSFA web site for members. One is a Long Term Care option that allows members to select a long term care protection for themselves or their spouses... Questions?\",\n      \"b_evidence_output\": \"[Pages 21-22 unavailable] ... Content from pages 21-22 could not be converted. This section may be available after retry.\",\n      \"b_evidence_location\": \"End of document, Section 2, Pages 21-22\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The document contains several lists (e.g., page 3/4 Injury Prevention, page 20 Bylaw Changes, page 20/21 Legislative Issues). These are correctly converted into structured list objects (unordered and ordered) in the JSON. The nesting and numbering of these lists match the source intent.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URL mentioned in the text (e.g., www.buckleupnc.org on page 4) is correctly preserved within the paragraph content. No fabricated or broken links were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output faithfully represents the visual organization of the source PDF. The document is primarily single-column text with headings, which is preserved in the HTML. The two-column attendee list on page 1 has been collapsed into a single column/paragraph in the HTML, which is an expected and acceptable transformation for responsive web content. The overall flow of sections and the hierarchical structure of information match the source's intent.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables located on page 18 of the source PDF ('Inspection for March 2016' and 'Year to Date 2016 Failures') are correctly rendered as HTML tables. They maintain clear column and row structures, and the content remains legible and correctly aligned with headers. No overlapping content or alignment corruption is observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF does not contain any meaningful images, logos, charts, or diagrams. It is a text-only document. Therefore, no images are missing or broken in the HTML output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no visual evidence of duplicated body content in the HTML output. Paragraphs, tables, and lists appear exactly once in the document body. While headings appear in both the Table of Contents and the body, this is intentional accessible design and does not constitute a defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output faithfully represents the visual organization of the source PDF. The document is primarily single-column text with headings, which is preserved in the HTML. The two-column attendee list on page 1 has been collapsed into a single column/paragraph in the HTML, which is an expected and acceptable transformation for responsive web content. The overall flow of sections and the hierarchical structure of information match the source's intent.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables located on page 18 of the source PDF ('Inspection for March 2016' and 'Year to Date 2016 Failures') are correctly rendered as HTML tables. They maintain clear column and row structures, and the content remains legible and correctly aligned with headers. No overlapping content or alignment corruption is observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF does not contain any meaningful images, logos, charts, or diagrams. It is a text-only document. Therefore, no images are missing or broken in the HTML output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no visual evidence of duplicated body content in the HTML output. Paragraphs, tables, and lists appear exactly once in the document body. While headings appear in both the Table of Contents and the body, this is intentional accessible design and does not constitute a defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 3,
+  "total_critical": 1,
+  "total_major": 2,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

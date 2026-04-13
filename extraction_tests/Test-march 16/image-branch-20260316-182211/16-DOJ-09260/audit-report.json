@@ -1,0 +1,97 @@
+{
+  "document_id": "16-DOJ-09260",
+  "audited_at": "2026-03-16T18:25:06.855111Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.9375,
+  "fidelity_composite": 0.8281,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant structural and reading order failures, specifically with the 'CONCLUSIONS OF LAW' section being nested incorrectly and appearing after its actual content in the sequence. These defects, combined with merged lists and double-numbering issues, undermine the integrity of the legal document. While the composite score is moderate, the specific nature of the hierarchy breakage requires human intervention.",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy is correctly flattened into sections, but there is a significant nesting error. The content belonging to the 'CONCLUSIONS OF LAW' section (specifically numbered items 1 through 5 on page 3) is incorrectly nested within the previous 'FINDINGS OF FACT' section's list element. Consequently, the 'CONCLUSIONS OF LAW' section in the JSON (index 6) is missing its primary subordinate content.",
+      "source_pdf_quote": "On page 3, the heading 'CONCLUSIONS OF LAW' is followed by numbered points 1 through 5.",
+      "output_quote": "The numbered items 1 through 5 (from the Conclusions of Law) are contained within the 'items' array of the second 'list' type element in the 'FINDINGS OF FACT' section (index 5). The 'CONCLUSIONS OF LAW' section (index 6) contains only the transitional sentence 'Based on the foregoing...'.",
+      "location": "Sections index 5 and 6"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially broken on page 3. The conclusion points (1-5) appear in the JSON sequence before the 'CONCLUSIONS OF LAW' heading that defines them. In the source, the heading precedes the items. In the JSON, the items are part of section 5 ('FINDINGS OF FACT') while the heading is section 6.",
+      "source_pdf_quote": "Source Page 3: Heading 'CONCLUSIONS OF LAW' -> Items 1-5 -> 'Based on the foregoing...' -> Heading 'PROPOSAL FOR DECISION'.",
+      "output_quote": "Output Reading Order: Section 5 (Items 1-17 Findings AND Items 1-5 Conclusions) -> Section 6 (Heading 'CONCLUSIONS OF LAW' + 'Based on the foregoing...') -> Section 7 (Heading 'PROPOSAL FOR DECISION').",
+      "location": "Sections index 5 and 6"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The pipeline failed to distinguish between two distinct numbered lists on page 3. The 'FINDINGS OF FACT' list (1-17) and the 'CONCLUSIONS OF LAW' list (1-5) were merged into a single continuous list structure within Section 5.",
+      "source_pdf_quote": "Page 3 contains two separate numbered lists. One ends at '17. Petitioner has been gainfully employed...' and the next begins at '1. The parties are properly before...'.",
+      "output_quote": "The second list element in section 5 contains 19 items, merging the end of the findings (items 4-17) with the entirety of the conclusions (items 1-5).",
+      "location": "Section 5, second element (list)"
+    },
+    {
+      "description": "Major visual layout difference",
+      "severity": "minor",
+      "analysis": "The document contains multiple sections with numbered lists (FINDINGS OF FACT and CONCLUSIONS OF LAW). In the HTML rendering, these lists are affected by a double-numbering defect where the CSS-generated list markers (e.g., '1.', '11.', '15.') are displayed alongside the hardcoded text numbers from the source document (e.g., '1.', '14.', '1.'). Furthermore, the automatic list counter restarts incorrectly after item 3 in 'FINDINGS OF FACT' because an unnumbered paragraph ('A conviction in Vance C",
+      "source_pdf_quote": "Numbered list items in FINDINGS OF FACT (1 through 17) and CONCLUSIONS OF LAW (1 through 5).",
+      "output_quote": "The HTML rendering displays double numbers like '11. 14. The Court finds...' and '15. 1. The parties...'.",
+      "location": "FINDINGS OF FACT and CONCLUSIONS OF LAW sections, middle to end of document."
+    }
+  ],
+  "action_items": [
+    "Re-order the JSON elements to ensure headings precede their content.",
+    "Fix the section nesting so 'CONCLUSIONS OF LAW' is a sibling rather than a child of 'FINDINGS OF FACT'.",
+    "Resolve the list merging and double-numbering CSS defects."
+  ],
+  "quality_score": 84,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8281,
+      "text_match": 0.9954644054427134,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8393,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8281,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.9375,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9960536700868192,
+      "shingling_precision": 0.9948758376034686,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 85243,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

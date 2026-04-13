@@ -1,0 +1,76 @@
+{
+  "document_id": "newsletter-with-many-images-and-formatted-text-117c",
+  "audited_at": "2026-03-10T22:26:38.750589Z",
+  "quality_score": 95,
+  "fidelity_composite": 0.9182,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.7272727272727273,
+  "fidelity_visual": 1.0,
+  "routing": "auto_approve",
+  "reasoning": "The document shows strong content preservation with a fidelity composite score of 0.9182 and high shingling recall (0.96). While there are minor structural issues concerning heading hierarchy and the conversion of hyperlinks to plain text, these are classified as minor defects. Per the routing instructions, a fidelity score above 0.85 with only minor concerns necessitates an AUTO_APPROVE decision.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The heading hierarchy is significantly flawed. While the newsletter title is correctly tagged as an H2 heading, the subsequent major article titles (e.g., 'Bernice Bond Named...', 'Protect Yourself...', 'Protect Your Devices...') are only present as subsection title strings and are not tagged as 'heading' elements. This omits them from the document's navigational structure. Conversely, a minor slogan at the end of the document ('Remember … Stop. Think. Connect.') is tagged as an H3 heading. This",
+      "source_pdf_quote": "Major article titles such as 'Bernice Bond Named NCDIT Chief Information Security Officer' and 'Protect Yourself from Job Termination Scams' are the primary headings for the newsletter content.",
+      "output_quote": "These titles are included as subsection titles but are missing from the 'heading' elements in the JSON. The only tagged headings are the H2 title and the H3 'Remember … Stop. Think. Connect.'",
+      "location": "sections[0].subsections, page 1-3"
+    },
+    {
+      "description": "Link injection issues",
+      "severity": "minor",
+      "analysis": "Multiple hyperlinks present in the source PDF are missing from the JSON output. While the first article correctly identifies some links (e.g., 'Social engineering'), many others are rendered as plain text. This includes the 'Read the SAC newsletters' link, social media links (X, Facebook, LinkedIn), and several government/educational URLs in the training and newsletter sections. These are clearly intended to be interactive in the source and their omission as clickable elements is a structural de",
+      "source_pdf_quote": "Hyperlinks for 'Read the SAC newsletters', 'X', 'Facebook', 'LinkedIn', and several URLs like 'https://fedvte.usalearning.gov/'.",
+      "output_quote": "These elements are rendered as plain text within paragraphs without 'href' attributes or link tags.",
+      "location": "sections[0].subsections[4] and [5], page 3"
+    }
+  ],
+  "action_items": [],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9182,
+      "text_match": 0.9736508383824151,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.95,
+      "raw_score": 0.9495,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9182,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.7272727272727273,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9599888858016116,
+      "shingling_precision": 0.9877072612921669,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors"
+    },
+    "processing_ms": 106495,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

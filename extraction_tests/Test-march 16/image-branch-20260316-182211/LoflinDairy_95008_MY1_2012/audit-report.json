@@ -1,0 +1,98 @@
+{
+  "document_id": "LoflinDairy_95008_MY1_2012",
+  "audited_at": "2026-03-16T18:37:39.174312Z",
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.5454545454545454,
+  "fidelity_visual": 0.6875,
+  "fidelity_composite": 0.7339,
+  "routing": "human_review",
+  "reasoning": "While the content score remains high at 0.94, the structural and visual scores (0.54 and 0.68 respectively) indicate significant fidelity failures. The loss of nearly 90% of data in Table 4 and the truncation of Table 1, combined with the total omission of the Table of Contents and a page of visual data, necessitates a human review to ensure the document meets government standards.",
+  "concerns": [
+    {
+      "description": "Table with significantly fewer rows",
+      "severity": "major",
+      "analysis": "Significant row loss was observed in Table 1 and Table 4. Table 1 in the source lists five reaches (A1, A2, B1, B2, B3) in the 'Project Components' section, but the output only shows Reach A1, merged into a single cell. Additionally, Table 1 in the source includes 'Component Summation' and 'BMP Elements' sections which are entirely absent from the output. Table 4 in the source (Project Baseline Information and Attributes) contains over 40 rows of data across multiple categories, but the output J",
+      "source_pdf_quote": "Table 1 contains 5 rows for Project Components (Reaches A1, A2, B1, B2, B3) plus Component Summation and BMP Elements sections. Table 4 contains approximately 45 rows of data across multiple sections (Project Information, Watershed Summary, Reach Summary, Regulatory Considerations).",
+      "output_quote": "Table 1 output only shows one row under Project Components ('Reach A1 / Area A / Restoration / 1.7 / 1:1') and omits the Summation and BMP sections. Table 4 output contains only 4 rows total.",
+      "location": "Appendix 1. General Tables and Figures, section reading_order 11 (element Table 1 and Table 4)."
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "Significant structural corruption and loss occurred in the conversion of tables. 1) A paragraph on page 5 ('There were no significant deviations...') was incorrectly converted into a 2x2 table in Section 1.2. 2) Table 1 (page 11) is severely truncated, containing only the first row of data and omitting all summation and BMP elements. 3) Table 4 (page 14) is truncated, omitting nearly 90% of the baseline attributes and summary information. 4) Tables 8a and 8b (pages 28-29) were replaced entirely ",
+      "source_pdf_quote": "Multiple tables across pages 5, 11, 14, 28, and 29 containing multi-row and multi-column project data.",
+      "output_quote": "Truncated tables in section 9 (Tables 1 and 4) and placeholder strings replacing tables in section 15 (Tables 8a and 8b).",
+      "location": "Sections 3, 9, and 15"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is materially broken by the omission of major structural components. The Table of Contents (page 3) is entirely missing from the output. Additionally, an entire page of visual data (page 23, containing Vegetation Photographs for plots 7-12) is omitted, causing a skip in the chronological sequence of project monitoring photos.",
+      "source_pdf_quote": "Table of Contents (Page 3); Vegetation Photographs for Plots 7-12 (Page 23).",
+      "output_quote": "The output sections skip directly from the preparer info to the Executive Summary (omitting Page 3). Section 14 skips from plots 1-6 to plots 13-16.",
+      "location": "Between Section 2 and 3; Section 14"
+    },
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "Several major table rendering issues were identified. 1) Table 1 (Project Components and Mitigation Credits) has lost its nested header structure (specifically the 'R' and 'RE' sub-categories for Stream and Wetland types), making the data columns ambiguous. 2) In section 1.2, a plain text sentence has been incorrectly converted into a table format ('Project Element Deviations Summary'), with the sentence fragmented across cells, which disrupts the reading flow. 3) Tables 8a and 8b are structural",
+      "source_pdf_quote": "Table 1 headers with R/RE sub-columns (page 11); 'There were no significant deviations reported...' text (page 5); Tables 8a and 8b with 17 columns including P/T sub-headers (pages 28-29).",
+      "output_quote": "Table 1 with flattened headers; 'Project Element Deviations Summary' table in Section 1.2; Tables 8a and 8b with column count mismatch and missing P/T sub-headers.",
+      "location": "Table 1 (Project Components and Mitigation Credits), Section 1.2 (Project Element Deviations Summary), and Appendix 2 (Tables 8a and 8b)."
+    }
+  ],
+  "action_items": [
+    "Restore missing rows and nested header structures in Table 1 and Table 4",
+    "Reconstruct the Table of Contents and integrate missing visual content from page 23",
+    "Convert the misidentified table in Section 1.2 back to paragraph text",
+    "Fix structural rendering for Tables 8a and 8b"
+  ],
+  "quality_score": 76,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7339,
+      "text_match": 0.8482307729670555,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7647,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7339,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.5454545454545454,
+      "fidelity_visual": 0.6875,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.7612442768650687,
+      "shingling_precision": 0.9776893808370806,
+      "duplication_ratio": 0.011766049805803062,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.92,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 104851,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

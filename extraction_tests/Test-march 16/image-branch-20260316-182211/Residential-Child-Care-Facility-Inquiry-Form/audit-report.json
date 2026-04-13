@@ -1,0 +1,79 @@
+{
+  "document_id": "Residential-Child-Care-Facility-Inquiry-Form",
+  "audited_at": "2026-03-16T18:30:35.201940Z",
+  "fidelity_content": 0.9418604651162791,
+  "fidelity_structural": 0.7727272727272727,
+  "fidelity_visual": 1.0,
+  "fidelity_composite": 0.9115,
+  "routing": "human_review",
+  "reasoning": "While the composite fidelity score is high (0.9115), the structural score (0.77) reveals a systematic failure to preserve repeating form fields in Sections 11, 13, and 18. Collapsing multiple data entry blocks into a single instance fundamentally compromises the utility of the inquiry form for users needing to provide multiple owners, educational records, or references.",
+  "concerns": [
+    {
+      "description": "Significant text omission within a section",
+      "severity": "minor",
+      "analysis": "The output fails to capture repeating form data blocks in several sections. Specifically, in Section 11 (Owners, Partners, etc.), the source provides three identical entry blocks for Owner or Shareholder information, but the JSON only includes one. In Section 13 (Educational Experience), the source provides two blocks for College/University details, while the JSON only includes one. In Section 18 (References), the source provides three entry blocks for references, but the JSON only captures one.",
+      "source_pdf_quote": "Owner or Shareholder Name: ... Address: ... City: ... State: ... Zip Code: ... Telephone Number: ... Social Security Number: ... Percentage interest in this agency: ... Title: ... [Repeated 3 times on Page 3]",
+      "output_quote": "Owner or Shareholder Name: _________________________________________________________________________\\nAddress: _________________________________________________________________________________________\\nCity: __________________________________ State: _________________________ Zip Code: ________________\\nTelephone Number: _______________________________ Social Security Number: ___________________________\\nPercentage interest in this agency: ____________________ Title: _____________________________",
+      "location": "Section 11, page 3"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The pipeline has failed to preserve the structural count of repeating entry fields. In multiple sections, the source provides a specific list of slots for data entry (e.g., three blocks for owners in Section 11, two blocks for colleges in Section 13, and three blocks for references in Section 18). The output collapses these repeating identical structures into a single instance. This is a major failure of structural fidelity as it fundamentally changes the intended layout and capacity of the form",
+      "source_pdf_quote": "Page 3, Section 11 contains three identical blocks for 'Owner or Shareholder Name'. Page 7, Section 18 contains three identical blocks for 'Name:' (References).",
+      "output_quote": "The output at index 34 only provides one 'Owner or Shareholder Name' block. The output at index 61 only provides one 'Name:' (Reference) block.",
+      "location": "Sections 11 and 18, elements at indices 34 and 61"
+    }
+  ],
+  "action_items": [
+    "Restore missing repeating blocks for Owners/Shareholders (Section 11), College/University details (Section 13), and References (Section 18) to match the source PDF's structure."
+  ],
+  "quality_score": 87,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.9115,
+      "text_match": 0.9724335747021922,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8712,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.9115,
+      "fidelity_content": 0.9418604651162791,
+      "fidelity_structural": 0.7727272727272727,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9692374350086655,
+      "shingling_precision": 0.9774961765348481,
+      "duplication_ratio": 0.001387443635102324,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 1.0,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 54054,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

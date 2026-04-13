@@ -1,0 +1,213 @@
+{
+  "document_id": "logo-imagery-screenshot-imagery-fca1",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I reviewed the output sections for any fabricated content. All text in the 'How to register', 'How to unlock your account', 'How to retrieve your username', 'How to reset your password', 'How to change your password', and 'How to update your profile' sections is present in the source PDF. No invented introductions, conclusions, or headings were found for the existing content.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The URL 'https://myncid.nc.gov/' appears repeatedly in both the source and the output. I verified this URL against every instance in the source PDF across all three pages. There are no other phone numbers or email addresses in the document. The output accurately reflects the source URL without fabrication.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source document consists of 3 pages. Page 3 contains two primary sections: 'How to enroll Open Subscription Applications' and 'How to delete your account'. The output JSON's 'sections' array contains content from Page 1 and Page 2 only, ending after the 'How to update your profile' section. The entirety of Page 3 is missing from the structured content, despite the metadata correctly identifying a page count of 3 and a heading count of 9 (which should include the missing sections).",
+        "b_evidence_source": "Entire Page 3 content, including headings: 'How to enroll Open Subscription Applications' and 'How to delete your account' and their respective steps.",
+        "b_evidence_output": "The JSON 'sections' array ends at index 1, with the last subsection being 'How to update your profile'. No content from Page 3 is present.",
+        "b_evidence_location": "Page 3 of the source document.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document consists of text, lists, and images illustrating procedural steps; it contains no tables. This check is not applicable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within the sections that were successfully converted (Pages 1 and 2), the text content is faithfully preserved. All steps, notes, and button labels (captured as images with alt text) are present. The only omission is the entire missing page (C3), which is handled under that check.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "I compared the wording in the output sections to the source PDF. The text is identical in meaning and wording for the provided sections. Reformatting choices (such as representing UI buttons as separate image elements within a list) are acceptable and do not alter the instructions' meaning.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I reviewed the output sections for any fabricated content. All text in the 'How to register', 'How to unlock your account', 'How to retrieve your username', 'How to reset your password', 'How to change your password', and 'How to update your profile' sections is present in the source PDF. No invented introductions, conclusions, or headings were found for the existing content.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The URL 'https://myncid.nc.gov/' appears repeatedly in both the source and the output. I verified this URL against every instance in the source PDF across all three pages. There are no other phone numbers or email addresses in the document. The output accurately reflects the source URL without fabrication.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source document consists of 3 pages. Page 3 contains two primary sections: 'How to enroll Open Subscription Applications' and 'How to delete your account'. The output JSON's 'sections' array contains content from Page 1 and Page 2 only, ending after the 'How to update your profile' section. The entirety of Page 3 is missing from the structured content, despite the metadata correctly identifying a page count of 3 and a heading count of 9 (which should include the missing sections).\",\n      \"b_evidence_source\": \"Entire Page 3 content, including headings: 'How to enroll Open Subscription Applications' and 'How to delete your account' and their respective steps.\",\n      \"b_evidence_output\": \"The JSON 'sections' array ends at index 1, with the last subsection being 'How to update your profile'. No content from Page 3 is present.\",\n      \"b_evidence_location\": \"Page 3 of the source document.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document consists of text, lists, and images illustrating procedural steps; it contains no tables. This check is not applicable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within the sections that were successfully converted (Pages 1 and 2), the text content is faithfully preserved. All steps, notes, and button labels (captured as images with alt text) are present. The only omission is the entire missing page (C3), which is handled under that check.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"I compared the wording in the output sections to the source PDF. The text is identical in meaning and wording for the provided sections. Reformatting choices (such as representing UI buttons as separate image elements within a list) are acceptable and do not alter the instructions' meaning.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output does not contain duplicated content. While several images (e.g., 'Trouble Signing On?' and the 'Forgot...' link block) appear multiple times in the output, this reflects the intentional repetition found in the source document where these UI snippets are provided as visual aids in each separate procedure column on Page 1.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved. The document title is at the top level of the JSON structure, and the individual task headers (e.g., 'How to register') are correctly nested as subsections. Although Section 1 (Page 2) has a null title, this is a minor normalization artifact and does not constitute a major hierarchy break as the subsections correctly follow.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source document does not contain any tables.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is significantly different because the entire third page of the document is missing from the output. The source document contains three pages of instructions, but the JSON output terminates after the third subsection of the second page ('How to update your profile'). This constitutes a material divergence in the organization and completeness of the document.",
+        "b_evidence_source": "Page 3 of 3 contains two main sections: 'How to enroll Open Subscription Applications' and 'How to delete your account'.",
+        "b_evidence_output": "The JSON `sections` array contains only two elements, and the document ends after the 'How to update your profile' subsection of the second section.",
+        "b_evidence_location": "End of document, representing missing Page 3 content.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The numbered lists in the source are incorrectly split into multiple separate list objects in the JSON. For example, the 6-step 'How to register' process is fragmented into four distinct list elements due to the placement of interstitial images and paragraphs. This breaks the structural continuity of the numbered steps. Additionally, Step 5 of 'How to register' is split across a list item, an image, and a separate paragraph element.",
+        "b_evidence_source": "Page 1, 'How to register' section: A single continuous list numbering 1 through 6.",
+        "b_evidence_output": "In `sections[0].subsections[0].elements`, the list is fragmented into separate `list` objects at indices 0 (Steps 1-2), 2 (Steps 3-4), 4 (Step 5), and 7 (Step 6).",
+        "b_evidence_location": "sections[0].subsections[0].elements",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URLs present in the source document (e.g., https://myncid.nc.gov/) are correctly captured in the output text and formatted with underlining, preserving their visibility and accuracy.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output does not contain duplicated content. While several images (e.g., 'Trouble Signing On?' and the 'Forgot...' link block) appear multiple times in the output, this reflects the intentional repetition found in the source document where these UI snippets are provided as visual aids in each separate procedure column on Page 1.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved. The document title is at the top level of the JSON structure, and the individual task headers (e.g., 'How to register') are correctly nested as subsections. Although Section 1 (Page 2) has a null title, this is a minor normalization artifact and does not constitute a major hierarchy break as the subsections correctly follow.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source document does not contain any tables.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is significantly different because the entire third page of the document is missing from the output. The source document contains three pages of instructions, but the JSON output terminates after the third subsection of the second page ('How to update your profile'). This constitutes a material divergence in the organization and completeness of the document.\",\n      \"b_evidence_source\": \"Page 3 of 3 contains two main sections: 'How to enroll Open Subscription Applications' and 'How to delete your account'.\",\n      \"b_evidence_output\": \"The JSON `sections` array contains only two elements, and the document ends after the 'How to update your profile' subsection of the second section.\",\n      \"b_evidence_location\": \"End of document, representing missing Page 3 content.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The numbered lists in the source are incorrectly split into multiple separate list objects in the JSON. For example, the 6-step 'How to register' process is fragmented into four distinct list elements due to the placement of interstitial images and paragraphs. This breaks the structural continuity of the numbered steps. Additionally, Step 5 of 'How to register' is split across a list item, an image, and a separate paragraph element.\",\n      \"b_evidence_source\": \"Page 1, 'How to register' section: A single continuous list numbering 1 through 6.\",\n      \"b_evidence_output\": \"In `sections[0].subsections[0].elements`, the list is fragmented into separate `list` objects at indices 0 (Steps 1-2), 2 (Steps 3-4), 4 (Step 5), and 7 (Step 6).\",\n      \"b_evidence_location\": \"sections[0].subsections[0].elements\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URLs present in the source document (e.g., https://myncid.nc.gov/) are correctly captured in the output text and formatted with underlining, preserving their visibility and accuracy.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization of the document is severely compromised. Instructional steps from one section are interleaved with UI elements (buttons and links) from entirely different sections. For example, the 'Send Request' button, which belongs to the 'How to retrieve your username' section, is rendered inside the 'How to unlock your account' section. Conversely, buttons like 'SAVE' and 'CONFIRM' from the registration section are moved to the unlock section. This makes the guide's visual flow illogical and confusing.",
+        "b_evidence_source": "In the source PDF (Page 1), 'How to unlock your account' Step 2 is 'Click “Trouble Signing On?”'. The 'Send Request' button is part of 'How to retrieve your username' Step 5.",
+        "b_evidence_output": "In the HTML, the 'Send Request' button appears immediately after Step 2 of the 'How to unlock your account' section.",
+        "b_evidence_location": "How to unlock your account section",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "There are no tables present in the source document to evaluate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Several meaningful images, specifically screenshots of the software interface used for instructional purposes, are missing in the HTML output. They have been replaced by solid green rectangular placeholders. This includes screenshots of the password change tab, profile information tab, and account deletion confirmation dialog. Additionally, the MyNCID logo is missing from the header.",
+        "b_evidence_source": "The source PDF (Page 2) contains a large screenshot of the 'Password' tab and Page 3 contains a screenshot of the account deletion dialog.",
+        "b_evidence_output": "The HTML output shows solid green rectangles in place of these screenshots.",
+        "b_evidence_location": "How to change your password, How to update your profile, and How to delete your account sections",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A specific UI element block containing 'Forgot Username', 'Forgot Password', and 'Unlock Account' links is duplicated twice within the 'How to register' section of the HTML. This content does not belong in that section at all according to the source PDF, indicating a failure in content extraction and placement that leads to visual duplication.",
+        "b_evidence_source": "The source PDF (Page 1) shows this block of links only in the 'How to unlock your account' and 'How to retrieve your username' sections.",
+        "b_evidence_output": "The block of links appears twice within the 'How to register' section (after Step 4 and Step 5).",
+        "b_evidence_location": "How to register section",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.25,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization of the document is severely compromised. Instructional steps from one section are interleaved with UI elements (buttons and links) from entirely different sections. For example, the 'Send Request' button, which belongs to the 'How to retrieve your username' section, is rendered inside the 'How to unlock your account' section. Conversely, buttons like 'SAVE' and 'CONFIRM' from the registration section are moved to the unlock section. This makes the guide's visual flow illogical and confusing.\",\n      \"b_evidence_source\": \"In the source PDF (Page 1), 'How to unlock your account' Step 2 is 'Click “Trouble Signing On?”'. The 'Send Request' button is part of 'How to retrieve your username' Step 5.\",\n      \"b_evidence_output\": \"In the HTML, the 'Send Request' button appears immediately after Step 2 of the 'How to unlock your account' section.\",\n      \"b_evidence_location\": \"How to unlock your account section\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"There are no tables present in the source document to evaluate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Several meaningful images, specifically screenshots of the software interface used for instructional purposes, are missing in the HTML output. They have been replaced by solid green rectangular placeholders. This includes screenshots of the password change tab, profile information tab, and account deletion confirmation dialog. Additionally, the MyNCID logo is missing from the header.\",\n      \"b_evidence_source\": \"The source PDF (Page 2) contains a large screenshot of the 'Password' tab and Page 3 contains a screenshot of the account deletion dialog.\",\n      \"b_evidence_output\": \"The HTML output shows solid green rectangles in place of these screenshots.\",\n      \"b_evidence_location\": \"How to change your password, How to update your profile, and How to delete your account sections\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A specific UI element block containing 'Forgot Username', 'Forgot Password', and 'Unlock Account' links is duplicated twice within the 'How to register' section of the HTML. This content does not belong in that section at all according to the source PDF, indicating a failure in content extraction and placement that leads to visual duplication.\",\n      \"b_evidence_source\": \"The source PDF (Page 1) shows this block of links only in the 'How to unlock your account' and 'How to retrieve your username' sections.\",\n      \"b_evidence_output\": \"The block of links appears twice within the 'How to register' section (after Step 4 and Step 5).\",\n      \"b_evidence_location\": \"How to register section\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.25\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 6,
+  "total_critical": 1,
+  "total_major": 4,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

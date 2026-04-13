@@ -1,0 +1,213 @@
+{
+  "document_id": "memo-with-links-1334",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I have reviewed the entire body text of the JSON output against both pages of the source PDF. All headings, paragraphs, and list items in the output correspond directly to text present in the source document. There are no fabricated paragraphs or sentences. The AI-generated table caption and summaries are permitted additions.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The output JSON contains a URL 'https://www.ncleg.gov/Sessions/2023/Bills/House/html/H971v7.html' associated with the text 'SL 2024-26,'. This specific URL does not exist anywhere in the text of the source PDF, nor is it visible in the provided OCR. While it is a factually correct link to the referenced legislation, the audit instructions strictly prohibit the inclusion of URLs that do not exist in the source PDF. This constitutes a fabrication of information not present in the original document.",
+        "b_evidence_source": "SL 2024-26, Section 7",
+        "b_evidence_output": "{\"href\": \"https://www.ncleg.gov/Sessions/2023/Bills/House/html/H971v7.html\", \"text\": \"SL 2024-26,\", \"title\": null, \"opens_new_window\": true}",
+        "b_evidence_location": "Page 1, intro paragraph after the memorandum header table.",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All sections from both pages of the source PDF are represented in the JSON output. This includes the memorandum header, the four introductory bullet points, the reporting obligations section, the reporting requirements section, the seven recommendations for appropriate viewing, and the directives for deleting and prohibiting access to pornography.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source PDF contains a memorandum header formatted as a key-value list (To, From, CC, Subject, Date). The JSON output correctly converts this into a table with 5 rows. No rows or data points from this section are missing.",
+        "b_evidence_source": "Memorandum header block (To, From, CC, Subject, Date)",
+        "b_evidence_output": "Table element with 5 rows containing the header information.",
+        "b_evidence_location": "Page 1, element index 4",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "I performed a line-by-line comparison of all paragraphs and lists. The text is preserved with high fidelity. For example, the list of seven recommendations for appropriate viewing on page 2 matches the source exactly. No significant text content has been omitted within any section.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The wording in the JSON output faithfully represents the source. It correctly preserves typos found in the original document, such as 'in Per Section 7(e)' on page 2, and maintains capitalization and punctuation. Whitespace and layout adjustments such as newlines within sentences are within acceptable reformatting limits.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7093023255813953,
+    "penalty_sum": 25,
+    "defect_count": 1,
+    "critical_count": 1,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I have reviewed the entire body text of the JSON output against both pages of the source PDF. All headings, paragraphs, and list items in the output correspond directly to text present in the source document. There are no fabricated paragraphs or sentences. The AI-generated table caption and summaries are permitted additions.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The output JSON contains a URL 'https://www.ncleg.gov/Sessions/2023/Bills/House/html/H971v7.html' associated with the text 'SL 2024-26,'. This specific URL does not exist anywhere in the text of the source PDF, nor is it visible in the provided OCR. While it is a factually correct link to the referenced legislation, the audit instructions strictly prohibit the inclusion of URLs that do not exist in the source PDF. This constitutes a fabrication of information not present in the original document.\",\n      \"b_evidence_source\": \"SL 2024-26, Section 7\",\n      \"b_evidence_output\": \"{\\\"href\\\": \\\"https://www.ncleg.gov/Sessions/2023/Bills/House/html/H971v7.html\\\", \\\"text\\\": \\\"SL 2024-26,\\\", \\\"title\\\": null, \\\"opens_new_window\\\": true}\",\n      \"b_evidence_location\": \"Page 1, intro paragraph after the memorandum header table.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All sections from both pages of the source PDF are represented in the JSON output. This includes the memorandum header, the four introductory bullet points, the reporting obligations section, the reporting requirements section, the seven recommendations for appropriate viewing, and the directives for deleting and prohibiting access to pornography.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source PDF contains a memorandum header formatted as a key-value list (To, From, CC, Subject, Date). The JSON output correctly converts this into a table with 5 rows. No rows or data points from this section are missing.\",\n      \"b_evidence_source\": \"Memorandum header block (To, From, CC, Subject, Date)\",\n      \"b_evidence_output\": \"Table element with 5 rows containing the header information.\",\n      \"b_evidence_location\": \"Page 1, element index 4\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"I performed a line-by-line comparison of all paragraphs and lists. The text is preserved with high fidelity. For example, the list of seven recommendations for appropriate viewing on page 2 matches the source exactly. No significant text content has been omitted within any section.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The wording in the JSON output faithfully represents the source. It correctly preserves typos found in the original document, such as 'in Per Section 7(e)' on page 2, and maintains capitalization and punctuation. Whitespace and layout adjustments such as newlines within sentences are within acceptable reformatting limits.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 1,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 25,\n    \"score\": 0.7093023255813954\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output was reviewed for repeated text blocks, such as paragraphs, list items, or header fields appearing more than once. No instances of content duplication were found; the memorandum fields (To, From, CC, etc.) are captured once in a table, and each section/paragraph appears only once, matching the source document's structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document title and all major sections are assigned H2 heading levels. While the document lacks an H1 (often used for the primary title), it presents a consistent flat hierarchy without any skips (e.g., H2 to H4). This adjustment is acceptable as a normalization for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The memorandum header fields (To, From, CC, Subject, Date) are represented as a 5-row, 2-column table. This correctly maps the key-value structure of the source document's letterhead, including multi-line text within cells (e.g., the CC field).",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the logical flow of the original memorandum, starting with the logo and agency leadership names, followed by the memorandum header, intro paragraphs, and then the detailed sections in the sequence they appear in the PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "All four lists in the document (introductory bullets, reporting obligations, reporting requirements, and viewing exceptions) are correctly identified with the proper number of items and hierarchy. Bulleted list formatting is preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There are multiple instances of visible URLs or linked text in the source that are not preserved as functional links in the output. Specifically, the URL 'it.nc.gov/805' and the linked text 'Acceptable Use Policy (AUP)' are rendered as formatted text but lack an 'href' attribute. Additionally, the standalone URL 'it.nc.gov' appearing in the header and footer area of page 1 is missing entirely from the output.",
+        "b_evidence_source": "it.nc.gov/805 (page 1, Public Agency Reporting Requirements section); Acceptable Use Policy (AUP) (page 2, Directive for Prohibiting Access to Unauthorized Pornography section); it.nc.gov (page 1, header and footer)",
+        "b_evidence_output": "The text 'it.nc.gov/805' and 'Acceptable Use Policy (AUP)' exist in elements 11 and 24 but are missing the 'href' property. 'it.nc.gov' is not present.",
+        "b_evidence_location": "Sections 'Public Agency Reporting Requirements' and 'Directive for Prohibiting Access to Unauthorized Pornography'",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9545454545454546,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output was reviewed for repeated text blocks, such as paragraphs, list items, or header fields appearing more than once. No instances of content duplication were found; the memorandum fields (To, From, CC, etc.) are captured once in a table, and each section/paragraph appears only once, matching the source document's structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document title and all major sections are assigned H2 heading levels. While the document lacks an H1 (often used for the primary title), it presents a consistent flat hierarchy without any skips (e.g., H2 to H4). This adjustment is acceptable as a normalization for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The memorandum header fields (To, From, CC, Subject, Date) are represented as a 5-row, 2-column table. This correctly maps the key-value structure of the source document's letterhead, including multi-line text within cells (e.g., the CC field).\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the logical flow of the original memorandum, starting with the logo and agency leadership names, followed by the memorandum header, intro paragraphs, and then the detailed sections in the sequence they appear in the PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"All four lists in the document (introductory bullets, reporting obligations, reporting requirements, and viewing exceptions) are correctly identified with the proper number of items and hierarchy. Bulleted list formatting is preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There are multiple instances of visible URLs or linked text in the source that are not preserved as functional links in the output. Specifically, the URL 'it.nc.gov/805' and the linked text 'Acceptable Use Policy (AUP)' are rendered as formatted text but lack an 'href' attribute. Additionally, the standalone URL 'it.nc.gov' appearing in the header and footer area of page 1 is missing entirely from the output.\",\n      \"b_evidence_source\": \"it.nc.gov/805 (page 1, Public Agency Reporting Requirements section); Acceptable Use Policy (AUP) (page 2, Directive for Prohibiting Access to Unauthorized Pornography section); it.nc.gov (page 1, header and footer)\",\n      \"b_evidence_output\": \"The text 'it.nc.gov/805' and 'Acceptable Use Policy (AUP)' exist in elements 11 and 24 but are missing the 'href' property. 'it.nc.gov' is not present.\",\n      \"b_evidence_location\": \"Sections 'Public Agency Reporting Requirements' and 'Directive for Prohibiting Access to Unauthorized Pornography'\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 3,\n    \"penalty_sum\": 3,\n    \"score\": 0.8636363636363636\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document faithfully recreates the layout of the source PDF. It maintains the single-column flow of information, preserves the hierarchy of headings, and correctly positions the introductory memorandum metadata (To, From, CC, etc.) before the body text. The inclusion of a Table of Contents is a standard accessibility feature for HTML documents and does not constitute a layout failure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The memorandum metadata section (To, From, CC, Subject, Date) has been converted into a structured HTML table titled 'Memorandum Details'. This table is visually sound, with clear borders and correctly aligned key-value pairs. There are no other tables in the source document to evaluate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The primary meaningful image from the source PDF, the NCDIT logo, is present and correctly rendered at the top of the HTML document. No other meaningful images are missing.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no visual duplication of body content. The presence of section headings in the Table of Contents and again in the document body is an intentional accessibility feature and not a defect. The document title appearing at the top of the page is also standard practice.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document faithfully recreates the layout of the source PDF. It maintains the single-column flow of information, preserves the hierarchy of headings, and correctly positions the introductory memorandum metadata (To, From, CC, etc.) before the body text. The inclusion of a Table of Contents is a standard accessibility feature for HTML documents and does not constitute a layout failure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The memorandum metadata section (To, From, CC, Subject, Date) has been converted into a structured HTML table titled 'Memorandum Details'. This table is visually sound, with clear borders and correctly aligned key-value pairs. There are no other tables in the source document to evaluate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The primary meaningful image from the source PDF, the NCDIT logo, is present and correctly rendered at the top of the HTML document. No other meaningful images are missing.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no visual duplication of body content. The presence of section headings in the Table of Contents and again in the document body is an intentional accessibility feature and not a defect. The document title appearing at the top of the page is also standard practice.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 1,
+  "total_major": 0,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

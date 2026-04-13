@@ -1,0 +1,213 @@
+{
+  "document_id": "WRC---No-Wake-Zone-Onslow-County",
+  "composite_score": 0.9741,
+  "risk_level": "LOW",
+  "routing_action": "AUTO_APPROVE",
+  "routing_reason": "Score 0.97 >= 0.85",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output JSON contains only text that is present in the source PDF. All narrative sections, impact analyses, and the appendix content (including the complex strikethroughs and underlines for rule changes) directly correspond to the text on pages 1 and 2 of the source document. No fabricated introductions, headings, or conclusions were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "All contact information in the output matches the source document. This includes the name (Betsy Haywood), address (1701 Mail Service Center, Raleigh, N.C 27699-1701), phone number ((919) 707-0013), and email address (betsy.haywood@ncwildlife.org). Legal citations and coordinates in the appendix also match perfectly.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output includes content from both page 1 (Fiscal Note Review) and page 2 (Appendix 1). All sub-paragraphs and numbered list items in the Regulated Areas section of the Appendix are present, including the history note.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The output represents the top summary information (Contact, Impact, Authority) and the History Note as tables. The row counts and logical structure of these tables match the visual arrangement in the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "The core text of all sections is fully captured. The output correctly retains strike-through and underline markup which is essential for legal documents showing proposed rule changes.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "There are minor defects in how the pipeline applied strikethrough and underline flags to specific words in the amendment markup of Appendix 1. In item (1), 'Pender' is incorrectly marked with underline instead of strikethrough in a combined span. In item (2), 'those' is missing its strikethrough flag. Also in item (2), 'River' (the first instance) is incorrectly included in a strikethrough span with 'near', and a comma was moved inside the span. These errors change the technical representation of what text is being removed vs. added, though the literal text content is preserved.",
+        "b_evidence_source": "the ~~Pender~~ <u>Onslow-Pender</u> County line; ~~New River: those~~ <u>the</u>; waters of New River, ~~near~~ <u>River</u>",
+        "b_evidence_output": "{\"text\": \"Pender Onslow-Pender\", \"underline\": true}; {\"text\": \" those \", \"strikethrough\": false}; {\"text\": \"River, near\", \"strikethrough\": true}",
+        "b_evidence_location": "Appendix 1, items (1) and (2) on page 2",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9883720930232558,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output JSON contains only text that is present in the source PDF. All narrative sections, impact analyses, and the appendix content (including the complex strikethroughs and underlines for rule changes) directly correspond to the text on pages 1 and 2 of the source document. No fabricated introductions, headings, or conclusions were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"All contact information in the output matches the source document. This includes the name (Betsy Haywood), address (1701 Mail Service Center, Raleigh, N.C 27699-1701), phone number ((919) 707-0013), and email address (betsy.haywood@ncwildlife.org). Legal citations and coordinates in the appendix also match perfectly.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output includes content from both page 1 (Fiscal Note Review) and page 2 (Appendix 1). All sub-paragraphs and numbered list items in the Regulated Areas section of the Appendix are present, including the history note.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The output represents the top summary information (Contact, Impact, Authority) and the History Note as tables. The row counts and logical structure of these tables match the visual arrangement in the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"The core text of all sections is fully captured. The output correctly retains strike-through and underline markup which is essential for legal documents showing proposed rule changes.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"There are minor defects in how the pipeline applied strikethrough and underline flags to specific words in the amendment markup of Appendix 1. In item (1), 'Pender' is incorrectly marked with underline instead of strikethrough in a combined span. In item (2), 'those' is missing its strikethrough flag. Also in item (2), 'River' (the first instance) is incorrectly included in a strikethrough span with 'near', and a comma was moved inside the span. These errors change the technical representation of what text is being removed vs. added, though the literal text content is preserved.\",\n      \"b_evidence_source\": \"the ~~Pender~~ <u>Onslow-Pender</u> County line; ~~New River: those~~ <u>the</u>; waters of New River, ~~near~~ <u>River</u>\",\n      \"b_evidence_output\": \"{\\\"text\\\": \\\"Pender Onslow-Pender\\\", \\\"underline\\\": true}; {\\\"text\\\": \\\" those \\\", \\\"strikethrough\\\": false}; {\\\"text\\\": \\\"River, near\\\", \\\"strikethrough\\\": true}\",\n      \"b_evidence_location\": \"Appendix 1, items (1) and (2) on page 2\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 3,\n    \"penalty_sum\": 3,\n    \"score\": 0.9651162790697675\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have carefully compared the source PDF and the output JSON. There is no evidence of duplicated text content. The repetition of the rule identifier '15A NCAC 10F .0320' is present in both the source (page 1 heading and page 2 appendix heading) and the output, which is correct behavior for intentional repetition.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is logical and follows a consistent structure. The main titles on page 1 are marked as H2. The Appendix title is correctly identified as a subsection title, and the rule name within the appendix is marked as H3. No heading levels are skipped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The pipeline correctly identified the key-value layouts in the source as tables for structural accessibility. The 'Contact/Impact/Authority' information on page 1 is rendered as a 3x2 table, and the 'History Note' on page 2 is rendered as a 1x2 table. Both accurately reflect the column-wise organization of the original document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the JSON output follows the logical flow of the source document from top to bottom, including the transition from the fiscal note summary on page 1 to the technical rule changes in the appendix on page 2.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list of regulated areas in Appendix 1 (items 1 through 4) is correctly converted into an ordered list. The pipeline successfully handled the amendment markings (strikethroughs and underlines) within the list items, preserving the meaning of the proposed rule changes.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The email address provided in the contact section ('betsy.haywood@ncwildlife.org') is correctly captured as a functional 'mailto:' link. No broken or fabricated links were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have carefully compared the source PDF and the output JSON. There is no evidence of duplicated text content. The repetition of the rule identifier '15A NCAC 10F .0320' is present in both the source (page 1 heading and page 2 appendix heading) and the output, which is correct behavior for intentional repetition.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is logical and follows a consistent structure. The main titles on page 1 are marked as H2. The Appendix title is correctly identified as a subsection title, and the rule name within the appendix is marked as H3. No heading levels are skipped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The pipeline correctly identified the key-value layouts in the source as tables for structural accessibility. The 'Contact/Impact/Authority' information on page 1 is rendered as a 3x2 table, and the 'History Note' on page 2 is rendered as a 1x2 table. Both accurately reflect the column-wise organization of the original document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the JSON output follows the logical flow of the source document from top to bottom, including the transition from the fiscal note summary on page 1 to the technical rule changes in the appendix on page 2.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list of regulated areas in Appendix 1 (items 1 through 4) is correctly converted into an ordered list. The pipeline successfully handled the amendment markings (strikethroughs and underlines) within the list items, preserving the meaning of the proposed rule changes.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The email address provided in the contact section ('betsy.haywood@ncwildlife.org') is correctly captured as a functional 'mailto:' link. No broken or fabricated links were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML layout faithfully represents the document's structure and organization. Key-value pairs in the contact and impact sections are rendered in a table, which preserves their visual relationship and makes them easy to find. The legal text in Appendix 1 successfully uses semantic markup (<del> and <u>) to represent strikethroughs and underlines from the source. The document flows logically from the introductory fiscal note to the rule text in Appendix 1.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables used for the contact information and history notes are well-structured and highly readable. They include captions for context and maintain clear alignment between headers/labels and their corresponding data. No visual corruption or misalignment was observed.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The North Carolina Wildlife Resources Commission logo at the top of the document is correctly included as an <img> element with appropriate alternative text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There are several instances of minor visual duplication. 1) The header text 'Fiscal Note Review of' is repeated twice at the start of the document (once in the <h1> header and again in the first <h2> of the main section). 2) In Appendix 1, the list items (1) through (4) are placed within an ordered list (<ol>), causing visual duplication of ordinal indicators (rendering as '1. (1)', etc.). 3) The 'History Note' label is duplicated in its layout table, appearing both as a column entry and as the starting text in the content cell.",
+        "b_evidence_source": "Fiscal Note Review of (header text); (1) (list item counter); History Note: (label)",
+        "b_evidence_output": "<h1>Fiscal Note Review of ...</h1> ... <h2>Fiscal Note Review of</h2>; <li>(1) ...</li> (rendered in <ol>); <td><em>History Note:</em></td><td><em>History Note: Authority...</em></td>",
+        "b_evidence_location": "Top of page 1 (header); Page 2 (Appendix 1 list); Page 2 (History Note table)",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.9375,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML layout faithfully represents the document's structure and organization. Key-value pairs in the contact and impact sections are rendered in a table, which preserves their visual relationship and makes them easy to find. The legal text in Appendix 1 successfully uses semantic markup (<del> and <u>) to represent strikethroughs and underlines from the source. The document flows logically from the introductory fiscal note to the rule text in Appendix 1.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables used for the contact information and history notes are well-structured and highly readable. They include captions for context and maintain clear alignment between headers/labels and their corresponding data. No visual corruption or misalignment was observed.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The North Carolina Wildlife Resources Commission logo at the top of the document is correctly included as an <img> element with appropriate alternative text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There are several instances of minor visual duplication. 1) The header text 'Fiscal Note Review of' is repeated twice at the start of the document (once in the <h1> header and again in the first <h2> of the main section). 2) In Appendix 1, the list items (1) through (4) are placed within an ordered list (<ol>), causing visual duplication of ordinal indicators (rendering as '1. (1)', etc.). 3) The 'History Note' label is duplicated in its layout table, appearing both as a column entry and as the starting text in the content cell.\",\n      \"b_evidence_source\": \"Fiscal Note Review of (header text); (1) (list item counter); History Note: (label)\",\n      \"b_evidence_output\": \"<h1>Fiscal Note Review of ...</h1> ... <h2>Fiscal Note Review of</h2>; <li>(1) ...</li> (rendered in <ol>); <td><em>History Note:</em></td><td><em>History Note: Authority...</em></td>\",\n      \"b_evidence_location\": \"Top of page 1 (header); Page 2 (Appendix 1 list); Page 2 (History Note table)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 3,\n    \"penalty_sum\": 3,\n    \"score\": 0.625\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 0,
+  "total_major": 0,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

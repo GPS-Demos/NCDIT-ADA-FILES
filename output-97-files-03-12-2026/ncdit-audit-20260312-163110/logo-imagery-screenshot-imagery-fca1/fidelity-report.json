@@ -1,0 +1,152 @@
+{
+  "document_id": "logo-imagery-screenshot-imagery-fca1",
+  "composite_score": 0.5752,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output follows the source document's content structure accurately without any repeated text blocks or sections. Each procedure (e.g., 'How to register', 'How to unlock your account') appears exactly once as it does in the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved and logically nested. The document title 'MyNCID User Guide' serves as the primary heading, and the procedural sections are categorized as subsections. The use of 'Slide 2' and 'Slide 3' as higher-level section titles for subsequent pages maintains a clear and navigable structure for screen readers.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "There are no tables in the source document, and consequently, no table elements are present in the JSON output. This check is not applicable but passes by default as no corruption occurred.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order in the JSON output follows the visual flow of the original document. The multi-column layout on pages 1 and 2 is linearized correctly by processing sections in a logical left-to-right, top-to-bottom sequence. Steps within the procedures are also ordered correctly relative to each other.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The document contains several numbered procedural lists (1-6, 1-7, 1-8, etc.). The conversion process fragmented these lists into multiple separate list objects whenever an image was interleaved. This results in the loss of the original numbering sequence (e.g., step 3 becomes step 1 of a new list). Furthermore, several list items are split mid-sentence across a list item element and a subsequent paragraph element (e.g., Step 5 in 'How to register' and Step 3 in 'How to delete your account'), which disrupts the structural integrity and meaning of the individual steps.",
+        "b_evidence_source": "Page 1, 'How to register' section contains a numbered list from 1 to 6. Item 5 reads: '5. Verify your details and click [CONFIRM] and you will see a Success message on the screen.'\nPage 3, 'How to delete your account' section contains a numbered list from 1 to 4.",
+        "b_evidence_output": "In the JSON for 'How to register', the list is split into 4 separate list objects. Item 5 is split between a list item ('Verify your details and click ') and a paragraph element ('and you will see a Success message on the screen.'). In 'How to delete your account', item 4 becomes item 1 of a new list object.",
+        "b_evidence_location": "Sections 'How to register' (Page 1), 'How to unlock your account' (Page 1), 'How to retrieve your username' (Page 1), 'How to reset your password' (Page 2), 'How to enroll Open Subscription Applications' (Page 3), 'How to delete your account' (Page 3).",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URLs provided in the document (specifically 'https://myncid.nc.gov/') are accurately captured in the text content of the list items. No fabricated or broken links were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9545454545454546,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output follows the source document's content structure accurately without any repeated text blocks or sections. Each procedure (e.g., 'How to register', 'How to unlock your account') appears exactly once as it does in the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved and logically nested. The document title 'MyNCID User Guide' serves as the primary heading, and the procedural sections are categorized as subsections. The use of 'Slide 2' and 'Slide 3' as higher-level section titles for subsequent pages maintains a clear and navigable structure for screen readers.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"There are no tables in the source document, and consequently, no table elements are present in the JSON output. This check is not applicable but passes by default as no corruption occurred.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order in the JSON output follows the visual flow of the original document. The multi-column layout on pages 1 and 2 is linearized correctly by processing sections in a logical left-to-right, top-to-bottom sequence. Steps within the procedures are also ordered correctly relative to each other.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The document contains several numbered procedural lists (1-6, 1-7, 1-8, etc.). The conversion process fragmented these lists into multiple separate list objects whenever an image was interleaved. This results in the loss of the original numbering sequence (e.g., step 3 becomes step 1 of a new list). Furthermore, several list items are split mid-sentence across a list item element and a subsequent paragraph element (e.g., Step 5 in 'How to register' and Step 3 in 'How to delete your account'), which disrupts the structural integrity and meaning of the individual steps.\",\n      \"b_evidence_source\": \"Page 1, 'How to register' section contains a numbered list from 1 to 6. Item 5 reads: '5. Verify your details and click [CONFIRM] and you will see a Success message on the screen.'\\nPage 3, 'How to delete your account' section contains a numbered list from 1 to 4.\",\n      \"b_evidence_output\": \"In the JSON for 'How to register', the list is split into 4 separate list objects. Item 5 is split between a list item ('Verify your details and click ') and a paragraph element ('and you will see a Success message on the screen.'). In 'How to delete your account', item 4 becomes item 1 of a new list object.\",\n      \"b_evidence_location\": \"Sections 'How to register' (Page 1), 'How to unlock your account' (Page 1), 'How to retrieve your username' (Page 1), 'How to reset your password' (Page 2), 'How to enroll Open Subscription Applications' (Page 3), 'How to delete your account' (Page 3).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URLs provided in the document (specifically 'https://myncid.nc.gov/') are accurately captured in the text content of the list items. No fabricated or broken links were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 1,\n    \"score\": 0.9545454545454546\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The layout in the converted HTML is severely disorganized compared to the source PDF. While the PDF uses a clear three-column structure on pages 1 and 2, the HTML collapses this into a single column but does so by interleaving components from different sections and repeating them. For instance, in the 'How to register' section, UI elements like the 'Forgot Username' block (which belongs to a different process) are inserted between steps. The logical flow of the instructions is completely broken, making it difficult for a user to follow the guide.",
+        "b_evidence_source": "The source PDF organizes content into three distinct vertical columns per page (e.g., 'How to register', 'How to unlock your account', 'How to retrieve your username' on Page 1).",
+        "b_evidence_output": "The HTML screenshot shows 'How to register' followed by elements from 'How to retrieve your username', then repeats of steps. Sections are not visually or logically separated correctly.",
+        "b_evidence_location": "Throughout the document, specifically the transition between sections derived from Page 1 and Page 2.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The source document does not contain any formal data tables; it uses multi-column layouts for instructional text and screenshots.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Meaningful images, specifically the UI screenshots essential for a user guide, are missing or replaced by placeholders. Large green boxes appear where complex UI screenshots should be in the 'How to reset your password' and 'How to update your profile' sections. Additionally, the 'MyNCID' logo from the header is missing, and several UI icons are replaced by text labels like 'SAVE button' or '3 vertical dots menu icon' without the actual visual asset.",
+        "b_evidence_source": "The source PDF contains numerous screenshots of the application UI (e.g., Page 2 shows the 'Password' and 'Profile Information' tabs). The top right of every page has the MyNCID logo.",
+        "b_evidence_output": "The HTML screenshot shows large green boxes for the main screenshots. The MyNCID logo is absent from the top of the page. Text labels are used as placeholders for missing icons.",
+        "b_evidence_location": "Sections 'How to reset your password', 'How to update your profile', and the document header.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The HTML output contains significant visual duplication of body content. Blocks of text and UI elements are repeated multiple times within the same section. For example, the block containing 'Forgot Username / Forgot Password / Unlock Account' links appears twice under the 'How to register' heading. Furthermore, numbered lists are restarted and repeated, leading to multiple instances of '1. Go to...' within a single logical section.",
+        "b_evidence_source": "Each instruction set and UI component block appears only once in its respective section in the PDF.",
+        "b_evidence_output": "The 'Forgot Username' link block is duplicated under 'How to register'. Numbered steps are repeated multiple times (e.g., three separate items labeled '1.' appear under the 'How to register' section).",
+        "b_evidence_location": "Throughout the HTML document, notably under 'How to register' and 'How to unlock your account'.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      }
+    ],
+    "score": 0.25,
+    "penalty_sum": 15,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The layout in the converted HTML is severely disorganized compared to the source PDF. While the PDF uses a clear three-column structure on pages 1 and 2, the HTML collapses this into a single column but does so by interleaving components from different sections and repeating them. For instance, in the 'How to register' section, UI elements like the 'Forgot Username' block (which belongs to a different process) are inserted between steps. The logical flow of the instructions is completely broken, making it difficult for a user to follow the guide.\",\n      \"b_evidence_source\": \"The source PDF organizes content into three distinct vertical columns per page (e.g., 'How to register', 'How to unlock your account', 'How to retrieve your username' on Page 1).\",\n      \"b_evidence_output\": \"The HTML screenshot shows 'How to register' followed by elements from 'How to retrieve your username', then repeats of steps. Sections are not visually or logically separated correctly.\",\n      \"b_evidence_location\": \"Throughout the document, specifically the transition between sections derived from Page 1 and Page 2.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The source document does not contain any formal data tables; it uses multi-column layouts for instructional text and screenshots.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Meaningful images, specifically the UI screenshots essential for a user guide, are missing or replaced by placeholders. Large green boxes appear where complex UI screenshots should be in the 'How to reset your password' and 'How to update your profile' sections. Additionally, the 'MyNCID' logo from the header is missing, and several UI icons are replaced by text labels like 'SAVE button' or '3 vertical dots menu icon' without the actual visual asset.\",\n      \"b_evidence_source\": \"The source PDF contains numerous screenshots of the application UI (e.g., Page 2 shows the 'Password' and 'Profile Information' tabs). The top right of every page has the MyNCID logo.\",\n      \"b_evidence_output\": \"The HTML screenshot shows large green boxes for the main screenshots. The MyNCID logo is absent from the top of the page. Text labels are used as placeholders for missing icons.\",\n      \"b_evidence_location\": \"Sections 'How to reset your password', 'How to update your profile', and the document header.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The HTML output contains significant visual duplication of body content. Blocks of text and UI elements are repeated multiple times within the same section. For example, the block containing 'Forgot Username / Forgot Password / Unlock Account' links appears twice under the 'How to register' heading. Furthermore, numbered lists are restarted and repeated, leading to multiple instances of '1. Go to...' within a single logical section.\",\n      \"b_evidence_source\": \"Each instruction set and UI component block appears only once in its respective section in the PDF.\",\n      \"b_evidence_output\": \"The 'Forgot Username' link block is duplicated under 'How to register'. Numbered steps are repeated multiple times (e.g., three separate items labeled '1.' appear under the 'How to register' section).\",\n      \"b_evidence_location\": \"Throughout the HTML document, notably under 'How to register' and 'How to unlock your account'.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 3,\n    \"minor_count\": 0,\n    \"penalty_sum\": 15,\n    \"score\": 0.25\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 4,
+  "total_critical": 0,
+  "total_major": 3,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

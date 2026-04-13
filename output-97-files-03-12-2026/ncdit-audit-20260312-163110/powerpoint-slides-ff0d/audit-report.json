@@ -1,0 +1,93 @@
+{
+  "document_id": "powerpoint-slides-ff0d",
+  "audited_at": "2026-03-12T19:42:16.841105Z",
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "routing_label": "Reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The source document contains 58 slides. The output JSON metadata correctly lists 'page_count: 58'. However, the 'sections' array only includes content from the first six slides and the last two slides. Content from slides 7 through 56 is missing, explicitly replaced by a placeholder object indicating omission for token budget. Since the objective is to evaluate if the output contains the same information as the source, the absence of approximately 86% of the document's pages constitutes a failur",
+      "source_pdf_quote": "The source PDF contains content on slides 7 through 56, including sections like 'Copilot in Teams Overview' (Slide 7), 'How to Get Started...' (Slide 8), 'Standard Meeting' (Slide 13), 'Recap meetings' (Slide 29), and 'Tips & Tricks' (Slide 54).",
+      "output_quote": "{\"_omitted\": \"31 sections omitted for token budget\"}",
+      "location": "In the 'sections' array, between the 'Art of Prompting' section and the 'Questions' section.",
+      "source": "fidelity_llm",
+      "check_id": "C3",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Most meaningful images, including photos and UI screenshots from the Teams interface, are present in the HTML output. However, the functional QR code present on page 58 of the source PDF is missing from the final section of the HTML document. While the survey link text is present, the QR code image itself is a meaningful functional element that was not rendered.",
+      "source_pdf_quote": "QR code image on page 58 providing a visual link to the survey.",
+      "output_quote": "The QR code image is absent in the 'NC DIT Innovation Summit Follow-Up' section at the end of the HTML output.",
+      "location": "End of document, section 'NC DIT Innovation Summit Follow-Up'",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "routing_changed": true,
+  "pipeline_original_routing": "needs_retry",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9016820981592029,
+      "content_completeness": 0.7224719101123596,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5069,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9531863485351857,
+      "shingling_precision": 0.8897659994361432,
+      "duplication_ratio": 0.028337657154260627,
+      "word_count_ratio": 0.9449438202247191,
+      "baseline_words": 1780,
+      "gemini_words": 1682,
+      "table_count_ratio": 1.5,
+      "image_count_ratio": 0.640625,
+      "image_placeholder_ratio": 0.3170731707317073,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 127,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

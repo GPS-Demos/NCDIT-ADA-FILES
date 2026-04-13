@@ -1,0 +1,111 @@
+{
+  "document_id": "2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES",
+  "audited_at": "2026-03-23T18:36:54.453887Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES/2005-2006_TAX_RATES_AND_EQUALIZED_TAX_RATES.html"
+  },
+  "quality_score": 40,
+  "quality_grade": "Poor",
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.7093023255813953,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "A significant failure occurred during the extraction where the content of every even-numbered page (with the exception of page 28) was completely omitted. Pages 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, and 26 only contain their page number in the output, entirely dropping the large data tables present on these pages in the source document.",
+      "source_pdf_quote": "Large data tables containing county tax rates, e.g., Page 2: '1998 .5895 Ashe .6100...'",
+      "output_quote": "The JSON output for Page 2 contains only: { \"type\": \"header_footer\", \"subtype\": \"header\", \"text\": \"2\" }",
+      "location": "Pages 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26",
+      "source": "fidelity_llm",
+      "check_id": "C3",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (28): 1; 2; 3",
+      "severity": "major",
+      "analysis": "header_footer_count=28. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The source PDF contains a single continuous data table that spans all 28 pages. The output incorrectly fragments this into 14 separate tables (one for each odd/even pair of pages, leaving even pages empty of table content). Additionally, the repeated column headers from the tops of the even pages are incorrectly preserved as data rows in the middle of these fragmented tables.",
+      "source_pdf_quote": "A single continuous table from page 1 to 28 with repeated column headers on each page.",
+      "output_quote": "The table is broken into separate JSON table objects on pages 1, 3, 5, etc. Repeated header rows are embedded as data cells, such as in the Page 1 table at row 30: 'YEAR OF LATEST REVALUATION', 'SALES ASSESS RATIO1 2004', etc.",
+      "location": "Pages 1-28 (Tables)",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dims). Manual review required."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "raw_score": 0.4,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.7093023255813953,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9902350813743219,
+      "shingling_precision": 0.9939496611810261,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.97192096270985,
+      "baseline_words": 6731,
+      "gemini_words": 6542,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 94225,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

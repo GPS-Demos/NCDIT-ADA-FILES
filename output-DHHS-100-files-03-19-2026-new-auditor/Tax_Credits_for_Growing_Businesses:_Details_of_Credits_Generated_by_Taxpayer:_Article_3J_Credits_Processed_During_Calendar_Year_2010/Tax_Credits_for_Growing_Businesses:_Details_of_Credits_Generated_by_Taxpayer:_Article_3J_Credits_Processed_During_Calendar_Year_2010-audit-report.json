@@ -1,0 +1,99 @@
+{
+  "document_id": "Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010",
+  "audited_at": "2026-03-19T19:38:36.801061Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-19-dhhs-100/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010/Tax_Credits_for_Growing_Businesses:_Details_of_Credits_Generated_by_Taxpayer:_Article_3J_Credits_Processed_During_Calendar_Year_2010.html"
+  },
+  "quality_score": 98,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.98,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.9333333333333333,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Despite very high fidelity scores (0.98 composite) and excellent programmatic text metrics, there are specific structural concerns that block auto-approval. The instructions explicitly prohibit auto-approval when page numbers or footers are retained in the HTML output. Additionally, the merging of paginated tables resulted in header rows being incorrectly embedded into the middle of the table bodies.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Header/footer elements retained in output (2): 4/29/2011; Page 1 of 9",
+      "severity": "major",
+      "analysis": "header_footer_count=2. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "The pipeline merged multiple paginated tables together (e.g., merging Page 2's table into Page 1's JSON object, and Page 4 into Page 3). During this merge, the repeated table header rows from the top of the continuation pages were incorrectly embedded into the middle of the merged tables as regular data rows. Header data appearing in the table body is a structural corruption.",
+      "source_pdf_quote": "Table header row on Page 2: \"Taxpayer | Creating Jobs ($) | Business Property Investment ($) | Real Property Investment ($) | Total Generated ($)\"",
+      "output_quote": "{\"text\": \"Taxpayer\", \"column_start\": 0, \"row_start\": 22}",
+      "location": "Page 1, Table row 22 (and Page 3, Table row 28)",
+      "source": "fidelity_llm",
+      "check_id": "S3",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Locate and remove retained running headers, footers, and page numbers.",
+    "Inspect merged tables and remove any repeated header rows that are incorrectly embedded within the table body data."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.98,
+      "raw_score": 0.98,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.98,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.9333333333333333,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.979768218424671,
+      "shingling_precision": 0.9888977002379065,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.9622166246851386,
+      "baseline_words": 1985,
+      "gemini_words": 1910,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 218192,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

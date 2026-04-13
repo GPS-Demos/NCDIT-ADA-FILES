@@ -1,0 +1,123 @@
+{
+  "document_id": "2019_Personal_Property_Appraisal_and_Assessment_Manual_Section_V:_Accounting_for_Appraisers",
+  "audited_at": "2026-03-23T18:38:27.778263Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/2019_Personal_Property_Appraisal_and_Assessment_Manual_Section_V:_Accounting_for_Appraisers/2019_Personal_Property_Appraisal_and_Assessment_Manual_Section_V:_Accounting_for_Appraisers.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/2019_Personal_Property_Appraisal_and_Assessment_Manual_Section_V:_Accounting_for_Appraisers/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-23-dhhs-100/2019_Personal_Property_Appraisal_and_Assessment_Manual_Section_V:_Accounting_for_Appraisers/2019_Personal_Property_Appraisal_and_Assessment_Manual_Section_V:_Accounting_for_Appraisers.html"
+  },
+  "quality_score": 88,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.88,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Final Decider unavailable (LLM call failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': 'RESOURCE_EXHAUSTED'}}). Defaulting to HUMAN_REVIEW.",
+  "decision_method": "fallback",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The output inconsistently assigns heading levels to sibling sections with the exact same visual styling. In the source, 'Straight Line Method', 'Decreasing Charge Methods' (page 10), 'Double Declining Balance Method', and 'Sum of the Years Digits' (page 11) share the same formatting (underlined, italicized text) and logical depth. However, the output tags the first two as H3 but promotes the latter two to H2.",
+      "source_pdf_quote": "Visual headings 'Straight Line Method', 'Decreasing Charge Methods' (page 10), and 'Double Declining Balance Method', 'Sum of the Years Digits' (page 11).",
+      "output_quote": "'Straight Line Method' is extracted as `level: 3`, while 'Double Declining Balance Method' is extracted as `level: 2`.",
+      "location": "Pages 10 and 11",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Table caption coded as header row: 1 table(s) have a single spanning first row that is likely a caption/title",
+      "severity": "major",
+      "analysis": "caption_as_header=1. Examples: p6: \"Balance Sheet\". First row spans all columns — should be a <caption> element, not a header row.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": "S3",
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Header/footer elements retained in output (1): Section 5-Page 1",
+      "severity": "major",
+      "analysis": "header_footer_count=1. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The output contains two list formatting errors: (1) A numbered list spanning pages 18-19 in the PDF is split incorrectly; the end of item 4 is parsed as a standalone paragraph on the next page, and item 5 initiates a new ordered list. (2) On page 11, two distinct footnote-style bullets are incorrectly merged into a single list item separated by a newline.",
+      "source_pdf_quote": "(1) '4. (13a) Retail merchant. - ... [page break] the merchant, to users or consumers. 5. (19) Wholesale merchant...' (2) '* Cost - Salvage Value' and '** Salvage Value'",
+      "output_quote": "(1) The text 'the merchant, to users or consumers.' is rendered as a standalone `<p>`, and item '(19) Wholesale merchant...' begins a new list block. (2) Rendered as a single list item: 'Cost - Salvage Value\\n** Salvage Value'",
+      "location": "Pages 11, 18, and 19",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Final Decider failed — manual review recommended."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": null,
+  "internal": {
+    "decider_confidence": 0.5,
+    "score_breakdown": {
+      "fidelity_composite": 0.88,
+      "raw_score": 0.88,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.88,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9447236180904522,
+      "shingling_precision": 0.9742226946585172,
+      "duplication_ratio": 0.013060586610108001,
+      "word_count_ratio": 0.9482134424681253,
+      "baseline_words": 6353,
+      "gemini_words": 6024,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 187547,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

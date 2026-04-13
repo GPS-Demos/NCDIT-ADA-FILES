@@ -1,0 +1,106 @@
+{
+  "document_id": "Log-of-Perm-Rules-December-2012",
+  "audited_at": "2026-03-16T18:29:54.447351Z",
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.2727272727272727,
+  "fidelity_visual": 1.0,
+  "fidelity_composite": 0.7777,
+  "routing": "human_review",
+  "reasoning": "While the content accuracy is high (0.98), the structural score is critically low (0.27) due to significant failures in document hierarchy and table formatting. The nesting of multiple independent state agencies within the section of another board creates a fundamentally incorrect logical structure and reading order that would be highly confusing for users, especially those using assistive technologies. These structural defects, combined with the loss of table semantics on later pages, require manual intervention to ensure the document is legally accurate and accessible.",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy fails significantly in the latter half of the document. Major agency headers that should be top-level sections (H2 equivalent) such as 'WILDLIFE RESOURCES COMMISSION', 'LOCKSMITH LICENSING BOARD', and 'RESPIRATORY CARE BOARD' are incorrectly nested as elements within the section titled 'PRIVATE PROTECTIVE SERVICES BOARD'. This creates a flat and incorrect hierarchy where these separate entities appear to be subsections or items of the previous agency.",
+      "source_pdf_quote": "Page 7 and 8 headers: WILDLIFE RESOURCES COMMISSION, LOCKSMITH LICENSING BOARD, RESPIRATORY CARE BOARD.",
+      "output_quote": "The headings for these commissions (e.g., heading-3, heading-4, heading-5) are all elements inside the 'PRIVATE PROTECTIVE SERVICES BOARD' section object instead of being new section objects.",
+      "location": "Sections 5, element heading-3 onwards"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The document contains a series of rule filing lists formatted in two columns. While the first four pages use consistent table structures, the conversion fails on pages 7 and 8. The rule lists for the Wildlife Resources Commission, Locksmith Licensing Board, etc., are converted to separate paragraphs instead of tables, losing the row/column relationship. Additionally, the final rule for the 'PRIVATE PROTECTIVE SERVICES BOARD' (Training Requirement for Armed Armored are Service Guards) is excluded",
+      "source_pdf_quote": "Page 7: Rule list under WILDLIFE RESOURCES COMMISSION. Page 6/7: Training Requirement for Armed Armored are Service Guards / 12 NCAC 07D .1507.",
+      "output_quote": "The rule 'Training Requirement...' is represented as two separate paragraphs after the table. Subsequent rules (e.g., Wildlife Taken for Depredations) are also rendered as individual paragraphs rather than table rows.",
+      "location": "Section 5, elements following table-6"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The reading order is significantly impacted by the grouping error. All content from page 7 and 8 is incorrectly grouped within the 'PRIVATE PROTECTIVE SERVICES BOARD' section. For a screen reader user or structural navigator, the flow of information implies these commissions are subordinate to the board on page 5/6, which is a material divergence from the source's logical structure.",
+      "source_pdf_quote": "WILDLIFE RESOURCES COMMISSION (Page 7), LOCKSMITH LICENSING BOARD (Page 8), etc.",
+      "output_quote": "These agency names and their respective rules are all sub-elements within the section starting with 'PRIVATE PROTECTIVE SERVICES BOARD'.",
+      "location": "Section 5"
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "There is a minor OCR error in the title of rule 12 NCAC 07D .1507. The source text on page 7 is 'Training Requirement for Armed Armored Car Service Guards', but the output JSON incorrectly lists it as 'Training Requirement for Armed Armored are Service Guards'. This change from 'Car' to 'are' alters the specific meaning of the rule title.",
+      "source_pdf_quote": "Training Requirement for Armed Armored Car Service Guards",
+      "output_quote": "Training Requirement for Armed Armored are Service Guards",
+      "location": "PRIVATE PROTECTIVE SERVICES BOARD section, element index 1 (rule 12 NCAC 07D .1507)"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The rule filings are essentially lists of name-action pairs and citations. On pages 7 and 8, the structural conversion to paragraphs fails to preserve the pairing. A single rule entry is now split across two unrelated paragraphs, losing the list item semantics present in the source.",
+      "source_pdf_quote": "Page 7: Wildlife Taken for Depredations Amend/* 15A NCAC 10B .0106",
+      "output_quote": "Paragraph 1: 'Wildlife Taken for Depredations\\nAmend/*'; Paragraph 2: '15A NCAC 10B .0106'",
+      "location": "Section 5, elements following heading-3"
+    }
+  ],
+  "action_items": [
+    "Correct the heading levels for Wildlife Resources Commission, Locksmith Licensing Board, and Respiratory Care Board to H2 equivalent",
+    "Restore table structures for the rule lists on pages 7 and 8",
+    "Correct the OCR error in rule title 12 NCAC 07D .1507",
+    "Ensure the final rule for Private Protective Services Board is included and correctly placed"
+  ],
+  "quality_score": 82,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7777,
+      "text_match": 0.9957570936091222,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.8169,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7777,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.2727272727272727,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9928609201480698,
+      "shingling_precision": 0.9986702127659575,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 66533,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "document_id": "208m-endpoint-reseller-price-list-686b18db",
+  "composite_score": 0.7025,
+  "risk_level": "MEDIUM",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Score 0.70 in review range",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output document follows the structure and content of the source PDF across all sections (Broadcom, Sophos, Trellix, CrowdStrike, and Cisco). The text provided in the headings, paragraphs, and tables corresponds to information found in the source. For example, the total amount for the Trellix section ($605,501.09) in the output matches the total shown on page 15 of the source. No fabricated text was identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The source document contains one URL on page 1: 'https://www.symantec.com/services/education-services/training-courses'. The output document includes this URL at element index 2 (within the Training row of the first table). Although the text is split across cells due to formatting, the 'href' correctly identifies the full URL. No other contact information is present in the source or output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "All major sections defined by the primary headings in the source PDF (Broadcom, Sophos, Trellix, CrowdStrike, Cisco) are present in the output JSON. While some tabular data within those sections is missing or truncated, the sections themselves are represented.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Several tables in the output are significantly truncated compared to the source. 1. The Trellix price list table (element index 12) is captioned as 'Lines 10-29' but only contains 2 data rows (Lines 10 and 11), missing 18 rows from that specific page range alone. 2. The CrowdStrike 'Cost Proposal Form' table (element index 17) only contains 1 row, whereas the source on page 16 shows 9 distinct cost item rows. 3. The Cisco 'Cost Proposal Form' table (element index 21) only contains 1 row, whereas the source on page 19 shows 8 distinct cost item rows. In all these cases, more than 20% of the rows are missing.",
+        "b_evidence_source": "Source Page 14 contains 20 rows (Lines 10-29). Source Page 16 contains 9 rows of cost items. Source Page 19 contains 8 rows of cost items.",
+        "b_evidence_output": "Output element index 12 contains 2 rows. Output element index 17 contains 1 row. Output element index 21 contains 1 row.",
+        "b_evidence_location": "Trellix (index 12), CrowdStrike (index 17), and Cisco (index 21) sections.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within the 'TRELLIX (Formerly MCAFEE)' section, substantial tabular content is omitted. The 'Additional Modules required or proposed...' table on page 10 (approx. 11 rows) and the 'Maintenance costs...' table on page 11 (approx. 10 rows) are entirely absent from the structured JSON output. This represents a loss of more than 25% of the information for that section.",
+        "b_evidence_source": "Source Page 10: 'Additional Modules required or proposed...' table with 11 rows. Source Page 11: 'Maintenance costs, to include, per year' table with 10 rows.",
+        "b_evidence_output": "The tables mentioned above are completely missing from the structured data in the Trellix section (elements 8-13).",
+        "b_evidence_location": "Trellix section (Pages 10-11 in source).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text that was successfully converted generally maintains the meaning of the source. The primary issues are structural omissions (C4, C5) rather than incorrect wording in the extracted text.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.8837209302325582,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output document follows the structure and content of the source PDF across all sections (Broadcom, Sophos, Trellix, CrowdStrike, and Cisco). The text provided in the headings, paragraphs, and tables corresponds to information found in the source. For example, the total amount for the Trellix section ($605,501.09) in the output matches the total shown on page 15 of the source. No fabricated text was identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The source document contains one URL on page 1: 'https://www.symantec.com/services/education-services/training-courses'. The output document includes this URL at element index 2 (within the Training row of the first table). Although the text is split across cells due to formatting, the 'href' correctly identifies the full URL. No other contact information is present in the source or output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"All major sections defined by the primary headings in the source PDF (Broadcom, Sophos, Trellix, CrowdStrike, Cisco) are present in the output JSON. While some tabular data within those sections is missing or truncated, the sections themselves are represented.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Several tables in the output are significantly truncated compared to the source. 1. The Trellix price list table (element index 12) is captioned as 'Lines 10-29' but only contains 2 data rows (Lines 10 and 11), missing 18 rows from that specific page range alone. 2. The CrowdStrike 'Cost Proposal Form' table (element index 17) only contains 1 row, whereas the source on page 16 shows 9 distinct cost item rows. 3. The Cisco 'Cost Proposal Form' table (element index 21) only contains 1 row, whereas the source on page 19 shows 8 distinct cost item rows. In all these cases, more than 20% of the rows are missing.\",\n      \"b_evidence_source\": \"Source Page 14 contains 20 rows (Lines 10-29). Source Page 16 contains 9 rows of cost items. Source Page 19 contains 8 rows of cost items.\",\n      \"b_evidence_output\": \"Output element index 12 contains 2 rows. Output element index 17 contains 1 row. Output element index 21 contains 1 row.\",\n      \"b_evidence_location\": \"Trellix (index 12), CrowdStrike (index 17), and Cisco (index 21) sections.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within the 'TRELLIX (Formerly MCAFEE)' section, substantial tabular content is omitted. The 'Additional Modules required or proposed...' table on page 10 (approx. 11 rows) and the 'Maintenance costs...' table on page 11 (approx. 10 rows) are entirely absent from the structured JSON output. This represents a loss of more than 25% of the information for that section.\",\n      \"b_evidence_source\": \"Source Page 10: 'Additional Modules required or proposed...' table with 11 rows. Source Page 11: 'Maintenance costs, to include, per year' table with 10 rows.\",\n      \"b_evidence_output\": \"The tables mentioned above are completely missing from the structured data in the Trellix section (elements 8-13).\",\n      \"b_evidence_location\": \"Trellix section (Pages 10-11 in source).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text that was successfully converted generally maintains the meaning of the source. The primary issues are structural omissions (C4, C5) rather than incorrect wording in the extracted text.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.8837\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The output contains repeated sections for 'Professional Services' within the Trellix (Formerly McAfee) section. However, upon inspection of the source PDF (pages 11 and 12), this duplication exists in the original document as part of the page transition. The check requires flagging duplicates not present or intended in the source. Since the repetition is in the source, this is not a conversion defect.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is generally preserved, with major sections (vendors) starting as H2 and sub-sections as H3. The document title is promoted to H2, which is acceptable normalization. There are no significant skips or nesting errors that disrupt navigation.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The output fails to capture significant tabular data across multiple sections. First, the table on page 13 of the source (Lines 1-9 of the Carahsoft Trellix Price List) is missing; the corresponding table in the output (table-4) begins at Line 10. Second, the 'Cost Proposal Form' table for CrowdStrike on page 14 is incomplete, containing only the first data row ('Cloud Subscription/ Licensing Fee') and omitting approximately eight other rows present in the source (e.g., 'Customization required/proposed addressing specification', 'Additional modules required or proposed addressing specifications', 'Technical and user documentation', etc.). Third, the table on page 15 ('DLT (CrowdStrike) Price List (Continued)') is entirely absent. Finally, large portions of tabular data for Sophos (pages 3-7) and Trellix (pages 10-11) are rendered as images rather than structured tables, which represents a significant loss of structural information.",
+        "b_evidence_source": "Table on page 13 (Lines 1-9); Table on page 14 (rows for 'Customization', 'Additional modules', etc.); Table on page 15 (Years 1-5 horizontal table).",
+        "b_evidence_output": "table-4 (starts at Line 10); table-6 (contains only one data row); missing table for page 15.",
+        "b_evidence_location": "Carahsoft Trellix section (page 13); CrowdStrike section (pages 14-15).",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "While there are significant omissions of content (noted in S3), the remaining elements follow the logical top-to-bottom reading order of the source document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The bulleted lists in the Professional Services sections are correctly identified and formatted as list items.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "In the Broadcom (Symantec) section, a URL in the 'Training' row of the first table is broken. The hyphen used for a line-break in the source text was included in the 'href' and 'text' properties of the link, and the final word of the URL ('courses') was excluded from the link object entirely. This results in a broken link that would not function as intended.",
+        "b_evidence_source": "https://www.symantec.com/services/education-services/training-courses",
+        "b_evidence_output": "href: 'https://www.symantec.com/services/education-services/training-', text: 'https://www.symantec.com/services/education-services/training-'",
+        "b_evidence_location": "Broadcom (Symantec) section, first table, 'Training' row (page 3).",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.7272727272727273,
+    "penalty_sum": 6,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The output contains repeated sections for 'Professional Services' within the Trellix (Formerly McAfee) section. However, upon inspection of the source PDF (pages 11 and 12), this duplication exists in the original document as part of the page transition. The check requires flagging duplicates not present or intended in the source. Since the repetition is in the source, this is not a conversion defect.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is generally preserved, with major sections (vendors) starting as H2 and sub-sections as H3. The document title is promoted to H2, which is acceptable normalization. There are no significant skips or nesting errors that disrupt navigation.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The output fails to capture significant tabular data across multiple sections. First, the table on page 13 of the source (Lines 1-9 of the Carahsoft Trellix Price List) is missing; the corresponding table in the output (table-4) begins at Line 10. Second, the 'Cost Proposal Form' table for CrowdStrike on page 14 is incomplete, containing only the first data row ('Cloud Subscription/ Licensing Fee') and omitting approximately eight other rows present in the source (e.g., 'Customization required/proposed addressing specification', 'Additional modules required or proposed addressing specifications', 'Technical and user documentation', etc.). Third, the table on page 15 ('DLT (CrowdStrike) Price List (Continued)') is entirely absent. Finally, large portions of tabular data for Sophos (pages 3-7) and Trellix (pages 10-11) are rendered as images rather than structured tables, which represents a significant loss of structural information.\",\n      \"b_evidence_source\": \"Table on page 13 (Lines 1-9); Table on page 14 (rows for 'Customization', 'Additional modules', etc.); Table on page 15 (Years 1-5 horizontal table).\",\n      \"b_evidence_output\": \"table-4 (starts at Line 10); table-6 (contains only one data row); missing table for page 15.\",\n      \"b_evidence_location\": \"Carahsoft Trellix section (page 13); CrowdStrike section (pages 14-15).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"While there are significant omissions of content (noted in S3), the remaining elements follow the logical top-to-bottom reading order of the source document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The bulleted lists in the Professional Services sections are correctly identified and formatted as list items.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"In the Broadcom (Symantec) section, a URL in the 'Training' row of the first table is broken. The hyphen used for a line-break in the source text was included in the 'href' and 'text' properties of the link, and the final word of the URL ('courses') was excluded from the link object entirely. This results in a broken link that would not function as intended.\",\n      \"b_evidence_source\": \"https://www.symantec.com/services/education-services/training-courses\",\n      \"b_evidence_output\": \"href: 'https://www.symantec.com/services/education-services/training-', text: 'https://www.symantec.com/services/education-services/training-'\",\n      \"b_evidence_location\": \"Broadcom (Symantec) section, first table, 'Training' row (page 3).\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 1,\n    \"penalty_sum\": 6,\n    \"score\": 0.7272727272727273\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The visual organization is significantly compromised in the SHI (Sophos) Price List section. While the source PDF contains content across five pages (pages 5-9 of the original document), the converted HTML output only displays an image for the first page of this section (page 5) and then lists three empty 'SHI (Sophos) Price List (Continued)' headings with no content following them. This results in the complete visual omission of pages 6, 7, 8, and 9 of the Sophos price list, failing to faithfully represent the original layout and flow of information.",
+        "b_evidence_source": "The source PDF contains content for Sophos on pages 5 through 9, including Intercept X, Additional Modules, Technical Documentation, Installation Costs, and Support details.",
+        "b_evidence_output": "The HTML screenshot shows 'SHI (Sophos) Price List (Continued)' headings followed by no content, skipping the material from PDF pages 6, 7, 8, and 9.",
+        "b_evidence_location": "SHI (Sophos) Price List section, starting around the middle of the HTML screenshot.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables for the Trellix (Formerly McAfee) section are severely misrendered and truncated. The source PDF (pages 13-15) lists 43 line items in a continuous price list. However, the HTML output splits these into separate tables that omit most of the rows. Specifically, the table for 'Lines 10-29' only displays rows 10 and 11, and the table for 'Lines 30-43' only displays row 30. Lines 1-9, 12-29, and 31-43 are missing entirely from the visual output, rendering the tables incomplete and useless for a user.",
+        "b_evidence_source": "PDF Pages 13, 14, and 15 show a complete table with line items 1 through 43.",
+        "b_evidence_output": "The HTML screenshot tables 'Carahsoft Trellix Price List - Lines 10-29' and 'Carahsoft Trellix Price List - Lines 30-43' show only lines 10, 11, and 30 respectively.",
+        "b_evidence_location": "Carahsoft Trellix (Formerly McAfee) Price List (Continued) section.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "Meaningful images from the source PDF are present in the output. The Sophos section uses images to represent the PDF page content, and these are rendered correctly. There are no logos, charts, or other meaningful decorative or content-bearing images in the source that are missing in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "The HTML output correctly reflects the content duplication found in the source PDF. Specifically, the 'Professional Services' block for Trellix (Security Engineer description) appears twice in the HTML, mirroring its duplication on PDF pages 11 and 12. Document titles and section headings appearing in both the Table of Contents and the body content are expected and necessary for accessibility.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The visual organization is significantly compromised in the SHI (Sophos) Price List section. While the source PDF contains content across five pages (pages 5-9 of the original document), the converted HTML output only displays an image for the first page of this section (page 5) and then lists three empty 'SHI (Sophos) Price List (Continued)' headings with no content following them. This results in the complete visual omission of pages 6, 7, 8, and 9 of the Sophos price list, failing to faithfully represent the original layout and flow of information.\",\n      \"b_evidence_source\": \"The source PDF contains content for Sophos on pages 5 through 9, including Intercept X, Additional Modules, Technical Documentation, Installation Costs, and Support details.\",\n      \"b_evidence_output\": \"The HTML screenshot shows 'SHI (Sophos) Price List (Continued)' headings followed by no content, skipping the material from PDF pages 6, 7, 8, and 9.\",\n      \"b_evidence_location\": \"SHI (Sophos) Price List section, starting around the middle of the HTML screenshot.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables for the Trellix (Formerly McAfee) section are severely misrendered and truncated. The source PDF (pages 13-15) lists 43 line items in a continuous price list. However, the HTML output splits these into separate tables that omit most of the rows. Specifically, the table for 'Lines 10-29' only displays rows 10 and 11, and the table for 'Lines 30-43' only displays row 30. Lines 1-9, 12-29, and 31-43 are missing entirely from the visual output, rendering the tables incomplete and useless for a user.\",\n      \"b_evidence_source\": \"PDF Pages 13, 14, and 15 show a complete table with line items 1 through 43.\",\n      \"b_evidence_output\": \"The HTML screenshot tables 'Carahsoft Trellix Price List - Lines 10-29' and 'Carahsoft Trellix Price List - Lines 30-43' show only lines 10, 11, and 30 respectively.\",\n      \"b_evidence_location\": \"Carahsoft Trellix (Formerly McAfee) Price List (Continued) section.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"Meaningful images from the source PDF are present in the output. The Sophos section uses images to represent the PDF page content, and these are rendered correctly. There are no logos, charts, or other meaningful decorative or content-bearing images in the source that are missing in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"The HTML output correctly reflects the content duplication found in the source PDF. Specifically, the 'Professional Services' block for Trellix (Security Engineer description) appears twice in the HTML, mirroring its duplication on PDF pages 11 and 12. Document titles and section headings appearing in both the Table of Contents and the body content are expected and necessary for accessibility.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 6,
+  "total_critical": 0,
+  "total_major": 5,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

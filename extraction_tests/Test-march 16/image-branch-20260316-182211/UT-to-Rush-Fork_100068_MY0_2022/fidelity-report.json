@@ -1,0 +1,213 @@
+{
+  "document_id": "UT-to-Rush-Fork_100068_MY0_2022",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output was carefully reviewed against the source document. The text in the 'Response to DMS Comments' section, project summaries, and Appendix tables matches the content provided in the source PDF. No evidence of fabricated paragraphs, sentences, or section headings was found. AI-generated elements like alt text and table summaries are expected and not considered defects.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "Contact information was cross-verified. The addresses for Paul Wiesner (p2) and Michael Baker Engineering (p2), phone numbers (828-412-6101, 828-380-0118), and URLs (MBAKERINTL.COM and the NC DEQ basin classification link) all match the source document exactly. No fabricated contact details were identified.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output is missing two entire tables from Appendix A. 'Table 4. Project Contacts' (found on p19 of the source) and 'Table 5. Project Baseline Information and Attributes' (found on p20 of the source) are completely absent from the elements list in the output JSON. These are substantive data sections required by the report structure.",
+        "b_evidence_source": "Table 4. Project Contacts (p19); Table 5. Project Baseline Information and Attributes (p20)",
+        "b_evidence_output": "The tables are entirely omitted from the output elements between 'Table 3' and 'Appendix B'.",
+        "b_evidence_location": "Appendix A, between pages 18 and 21",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "Multiple tables suffer from material row loss. Table 6 (p40) in the source lists over 20 species, but the output only contains 1 species ('Acer negundo'). The 'Proposed BMP Planted Species' table (p97) is missing the entire 'Temporary Inundation Zone' section (10 shrub species rows). Table 7 (p43-45) and Table 8 (p46) also show significant loss of metrics or data rows, often merging multiple source rows into single concatenated strings, which materially reduces the row count.",
+        "b_evidence_source": "Table 6 lists 20+ species (p40). BMP Planted Species table lists 20 species (p97).",
+        "b_evidence_output": "Table 6 lists only 1 species (element index 18). BMP table lists only 10 species (element index 65).",
+        "b_evidence_location": "Tables 6, 7, 8, and BMP Species Table",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "As noted in C4, significant portions of text content are missing from tables. In Table 6, approximately 95% of the species data is absent. In the BMP Species Table, 50% of the species list (the entire shrubs section) is missing. This constitutes a major omission of technical data.",
+        "b_evidence_source": "Full lists of species and metrics in Tables 6 and BMP Species table.",
+        "b_evidence_output": "Truncated species lists representing less than 50-10% of the source data.",
+        "b_evidence_location": "Appendix C (Table 6) and Appendix E (BMP Table)",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "The text that was successfully converted appears to be highly accurate. Values for stream lengths (e.g., 2,843.58 ft), mitigation ratios, and credits match the source precisely. Minor differences are primarily OCR-related or due to concatenated formatting, but they do not alter the meaning of the data that is present.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5930232558139534,
+    "penalty_sum": 35,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output was carefully reviewed against the source document. The text in the 'Response to DMS Comments' section, project summaries, and Appendix tables matches the content provided in the source PDF. No evidence of fabricated paragraphs, sentences, or section headings was found. AI-generated elements like alt text and table summaries are expected and not considered defects.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"Contact information was cross-verified. The addresses for Paul Wiesner (p2) and Michael Baker Engineering (p2), phone numbers (828-412-6101, 828-380-0118), and URLs (MBAKERINTL.COM and the NC DEQ basin classification link) all match the source document exactly. No fabricated contact details were identified.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output is missing two entire tables from Appendix A. 'Table 4. Project Contacts' (found on p19 of the source) and 'Table 5. Project Baseline Information and Attributes' (found on p20 of the source) are completely absent from the elements list in the output JSON. These are substantive data sections required by the report structure.\",\n      \"b_evidence_source\": \"Table 4. Project Contacts (p19); Table 5. Project Baseline Information and Attributes (p20)\",\n      \"b_evidence_output\": \"The tables are entirely omitted from the output elements between 'Table 3' and 'Appendix B'.\",\n      \"b_evidence_location\": \"Appendix A, between pages 18 and 21\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"Multiple tables suffer from material row loss. Table 6 (p40) in the source lists over 20 species, but the output only contains 1 species ('Acer negundo'). The 'Proposed BMP Planted Species' table (p97) is missing the entire 'Temporary Inundation Zone' section (10 shrub species rows). Table 7 (p43-45) and Table 8 (p46) also show significant loss of metrics or data rows, often merging multiple source rows into single concatenated strings, which materially reduces the row count.\",\n      \"b_evidence_source\": \"Table 6 lists 20+ species (p40). BMP Planted Species table lists 20 species (p97).\",\n      \"b_evidence_output\": \"Table 6 lists only 1 species (element index 18). BMP table lists only 10 species (element index 65).\",\n      \"b_evidence_location\": \"Tables 6, 7, 8, and BMP Species Table\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"As noted in C4, significant portions of text content are missing from tables. In Table 6, approximately 95% of the species data is absent. In the BMP Species Table, 50% of the species list (the entire shrubs section) is missing. This constitutes a major omission of technical data.\",\n      \"b_evidence_source\": \"Full lists of species and metrics in Tables 6 and BMP Species table.\",\n      \"b_evidence_output\": \"Truncated species lists representing less than 50-10% of the source data.\",\n      \"b_evidence_location\": \"Appendix C (Table 6) and Appendix E (BMP Table)\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"The text that was successfully converted appears to be highly accurate. Values for stream lengths (e.g., 2,843.58 ft), mitigation ratios, and credits match the source precisely. Minor differences are primarily OCR-related or due to concatenated formatting, but they do not alter the meaning of the data that is present.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\",\n      \"d_severity\": null\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 35,\n    \"score\": 0.5930232558139535\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "The end of the Response Letter (from page 5/6) is duplicated. Section index 1 ('Response to DMS Comments') ends with the signature of Jason York. Section index 2 ('Response Letter') begins with the final response from page 5 ('Both the soil road and the fencing...') and repeats the signature and closing text again.",
+        "b_evidence_source": "The response letter concludes once on page 6 with Jason York's signature.",
+        "b_evidence_output": "The text 'RESPONSE: Both the soil road...' through 'Environmental Scientist' appears at the end of the section 'Response to DMS Comments' and is repeated in its entirety in the following section 'Response Letter'.",
+        "b_evidence_location": "Sections 2 and 3, element index 2 and 3, spanning pages 5-6.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The heading hierarchy is preserved logically. Section titles are used consistently, and H3 levels are correctly assigned to subsections (e.g., 1.1, 1.2). No heading levels are skipped.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "Several complex data tables have suffered severe structural corruption. In Table 7 (Page 43) and Table 8 (Page 46), the column structure has collapsed, and the output concatenates data from all columns into single text blocks or rows within one cell. Additionally, Table 6 (Page 40) is missing most of its data columns; the source has columns for 7 different vegetation plots, but the output only renders columns for 'Veg Plot 1 F'.",
+        "b_evidence_source": "Table 7. Baseline Stream Data Summary (Page 43) contains multiple columns (Min, Mean, Med, Max) nested under several categorical headers.",
+        "b_evidence_output": "Table 7 (reading_order 21) collapses these into a single column of concatenated strings: 'BF Width (ft) 7.1000 9.65 ----- 12.2000 9.90 11.39 ----- 12.88...'",
+        "b_evidence_location": "Baseline Stream Data Summary, element index 21, page 43.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order generally follows the source document's flow from page to page. While the Table of Contents (Page 7) is omitted and there is a duplication error (S1), the core informational content is presented in the sequence intended by the source.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "Lists, such as the bullet points in the Response Letter and the project goals in section 1.2, are correctly identified and converted into structured list elements.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The URL provided in section 1.8 (Page 13) is correctly identified and rendered as a clickable hyperlink in the JSON output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5454545454545454,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"The end of the Response Letter (from page 5/6) is duplicated. Section index 1 ('Response to DMS Comments') ends with the signature of Jason York. Section index 2 ('Response Letter') begins with the final response from page 5 ('Both the soil road and the fencing...') and repeats the signature and closing text again.\",\n      \"b_evidence_source\": \"The response letter concludes once on page 6 with Jason York's signature.\",\n      \"b_evidence_output\": \"The text 'RESPONSE: Both the soil road...' through 'Environmental Scientist' appears at the end of the section 'Response to DMS Comments' and is repeated in its entirety in the following section 'Response Letter'.\",\n      \"b_evidence_location\": \"Sections 2 and 3, element index 2 and 3, spanning pages 5-6.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The heading hierarchy is preserved logically. Section titles are used consistently, and H3 levels are correctly assigned to subsections (e.g., 1.1, 1.2). No heading levels are skipped.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"Several complex data tables have suffered severe structural corruption. In Table 7 (Page 43) and Table 8 (Page 46), the column structure has collapsed, and the output concatenates data from all columns into single text blocks or rows within one cell. Additionally, Table 6 (Page 40) is missing most of its data columns; the source has columns for 7 different vegetation plots, but the output only renders columns for 'Veg Plot 1 F'.\",\n      \"b_evidence_source\": \"Table 7. Baseline Stream Data Summary (Page 43) contains multiple columns (Min, Mean, Med, Max) nested under several categorical headers.\",\n      \"b_evidence_output\": \"Table 7 (reading_order 21) collapses these into a single column of concatenated strings: 'BF Width (ft) 7.1000 9.65 ----- 12.2000 9.90 11.39 ----- 12.88...'\",\n      \"b_evidence_location\": \"Baseline Stream Data Summary, element index 21, page 43.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order generally follows the source document's flow from page to page. While the Table of Contents (Page 7) is omitted and there is a duplication error (S1), the core informational content is presented in the sequence intended by the source.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"Lists, such as the bullet points in the Response Letter and the project goals in section 1.2, are correctly identified and converted into structured list elements.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The URL provided in section 1.8 (Page 13) is correctly identified and rendered as a clickable hyperlink in the JSON output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5454545454545454\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML document follows the overall visual organization of the source PDF, including the cover page, response letter, project summary, and appendices. The complex engineering drawings in Appendix E are handled as full-page renders, which is an acceptable fallback for preserving information flow. While there is content duplication (noted in V4), the primary organization of sections matches the source document's structure.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "Several technical tables are severely misrendered. In Table 7 (Baseline Stream Data Summary) and Table 8 (Cross-Section Morphology Data Summary), the multi-column numeric data has been concatenated into a single string within a single table cell for each row. This destroys the tabular structure and makes the data impossible to read or interpret correctly. For example, row 1 of Table 7 in the HTML contains 16 distinct values run together in one <td> element.",
+        "b_evidence_source": "Table 7 on PDF page 43 shows distinct columns for Min, Mean, Med, and Max across different categories (Pre-Existing, Reference, Design, As-built).",
+        "b_evidence_output": "<td>BF Width (ft) 7.1000 9.65 ----- 12.2000 9.90 11.39 ----- 12.88 9.00 9.50 ----- 10.00 7.79 9.28 9.28 10.76...</td>",
+        "b_evidence_location": "Baseline Stream Data Summary, Section 19",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "In the section for Appendix D (Cross-Section data), many images intended to show the left and right banks of stream reaches have invalid and broken 'src' attributes. Instead of valid image paths or base64 data, the HTML uses placeholders like 'image_56_0', which do not point to valid resources.",
+        "b_evidence_source": "Photos 'Looking at the Left Bank' and 'Looking at the Right Bank' for Cross-Section 2 on PDF page 56.",
+        "b_evidence_output": "<img src=\"image_56_0\" alt=\"Looking at the Left Bank of Permanent Cross-Section 2\" ...>",
+        "b_evidence_location": "Permanent Cross-Section 2, Section 29",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is significant visual duplication of content blocks throughout the HTML. Section 1.5 (Project Timeline) and Section 1.6 (Design Change Deviations) appear twice: once within the '1.0 PROJECT SUMMARY' block and again as individual standalone sections. The response letter signature and response text are also repeated. Additionally, the 'Figure 5' photo log and several 'Figure 8' cross-section entries are duplicated in full.",
+        "b_evidence_source": "Section 1.5 Project Timeline appears once on PDF page 11.",
+        "b_evidence_output": "The text for '1.5 Project Timeline' appears in both Section 3 and Section 6 of the HTML output.",
+        "b_evidence_location": "Section 3 and Section 6",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      }
+    ],
+    "score": 0.5625,
+    "penalty_sum": 7,
+    "defect_count": 3,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 2,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML document follows the overall visual organization of the source PDF, including the cover page, response letter, project summary, and appendices. The complex engineering drawings in Appendix E are handled as full-page renders, which is an acceptable fallback for preserving information flow. While there is content duplication (noted in V4), the primary organization of sections matches the source document's structure.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"Several technical tables are severely misrendered. In Table 7 (Baseline Stream Data Summary) and Table 8 (Cross-Section Morphology Data Summary), the multi-column numeric data has been concatenated into a single string within a single table cell for each row. This destroys the tabular structure and makes the data impossible to read or interpret correctly. For example, row 1 of Table 7 in the HTML contains 16 distinct values run together in one <td> element.\",\n      \"b_evidence_source\": \"Table 7 on PDF page 43 shows distinct columns for Min, Mean, Med, and Max across different categories (Pre-Existing, Reference, Design, As-built).\",\n      \"b_evidence_output\": \"<td>BF Width (ft) 7.1000 9.65 ----- 12.2000 9.90 11.39 ----- 12.88 9.00 9.50 ----- 10.00 7.79 9.28 9.28 10.76...</td>\",\n      \"b_evidence_location\": \"Baseline Stream Data Summary, Section 19\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"In the section for Appendix D (Cross-Section data), many images intended to show the left and right banks of stream reaches have invalid and broken 'src' attributes. Instead of valid image paths or base64 data, the HTML uses placeholders like 'image_56_0', which do not point to valid resources.\",\n      \"b_evidence_source\": \"Photos 'Looking at the Left Bank' and 'Looking at the Right Bank' for Cross-Section 2 on PDF page 56.\",\n      \"b_evidence_output\": \"<img src=\\\"image_56_0\\\" alt=\\\"Looking at the Left Bank of Permanent Cross-Section 2\\\" ...>\",\n      \"b_evidence_location\": \"Permanent Cross-Section 2, Section 29\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is significant visual duplication of content blocks throughout the HTML. Section 1.5 (Project Timeline) and Section 1.6 (Design Change Deviations) appear twice: once within the '1.0 PROJECT SUMMARY' block and again as individual standalone sections. The response letter signature and response text are also repeated. Additionally, the 'Figure 5' photo log and several 'Figure 8' cross-section entries are duplicated in full.\",\n      \"b_evidence_source\": \"Section 1.5 Project Timeline appears once on PDF page 11.\",\n      \"b_evidence_output\": \"The text for '1.5 Project Timeline' appears in both Section 3 and Section 6 of the HTML output.\",\n      \"b_evidence_location\": \"Section 3 and Section 6\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 2,\n    \"penalty_sum\": 7,\n    \"score\": 0.125\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 8,
+  "total_critical": 1,
+  "total_major": 5,
+  "total_minor": 2,
+  "programmatic_signals": null,
+  "corroboration": null
+}

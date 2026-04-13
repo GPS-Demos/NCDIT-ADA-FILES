@@ -1,0 +1,116 @@
+{
+  "document_id": "draft-fy23-25-goals-and-priorities-685fc8b0",
+  "audited_at": "2026-03-24T01:22:16.600952Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/draft-fy23-25-goals-and-priorities-685fc8b0/draft-fy23-25-goals-and-priorities-685fc8b0.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/draft-fy23-25-goals-and-priorities-685fc8b0/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/draft-fy23-25-goals-and-priorities-685fc8b0/draft-fy23-25-goals-and-priorities-685fc8b0.html"
+  },
+  "quality_score": 99,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.99,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.9714285714285714,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "Overall quality scores are very high, with a fidelity composite of 0.99 and excellent programmatic text preservation. However, programmatic analysis flagged a MAJOR structural issue where single spanning first rows in 4 tables are likely captions but coded as header rows. There is also a MINOR fidelity issue concerning the loss of bold formatting in these headers. Based on the rules, 1 MAJOR defect requires HUMAN_REVIEW.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Table caption coded as header row: 4 table(s) have a single spanning first row that is likely a caption/title",
+      "severity": "major",
+      "analysis": "caption_as_header=4. Examples: p1: \"1.1. Promote free and open discovery of and access to geospa\"; p1: \"1.2. Recommend utility infrastructure solutions that maintai\"; p1: \"1.3. Support priority initiatives that compile and maintain \". First row spans all columns — should be a <caption> element, not a header row.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": "S3",
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "minor",
+      "analysis": "The source PDF uses bold formatting to emphasize the sub-goal statements that serve as table headers (e.g., '1.1. Promote free and open...', '1.2. Recommend utility...', '2.1. Identify opportunities...'). In the HTML output, these statements are rendered inside standard `<td>` elements without any `<strong>`, `<b>`, or `<th>` tags, losing the bold visual distinction present in the original document.",
+      "source_pdf_quote": "1.1. Promote free and open discovery of and access to geospatial data created and maintained by local governments and support efficient local to state data sharing. (Appears as bold text in the PDF)",
+      "output_quote": "<td colspan=\"2\">1.1. Promote free and open discovery of and access to geospatial data created and maintained by local governments and support efficient local to state data sharing.</td> (Lacks strong/bold formatting)",
+      "location": "Tables corresponding to sub-goals 1.1, 1.2, 1.3, etc.",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Inspect the 4 tables and convert the spanning first rows into <caption> elements if appropriate",
+    "Verify and restore bold text formatting for the sub-goal statements to match the source PDF"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 958,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.99,
+      "raw_score": 0.99,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.99,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.9714285714285714,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.982256020278834,
+      "shingling_precision": 0.9797724399494311,
+      "duplication_ratio": 0.018928285790455877,
+      "word_count_ratio": 1.0,
+      "baseline_words": 536,
+      "gemini_words": 536,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 349381,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

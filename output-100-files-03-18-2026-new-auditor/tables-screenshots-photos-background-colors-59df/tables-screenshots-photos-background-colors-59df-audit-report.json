@@ -1,0 +1,109 @@
+{
+  "document_id": "tables-screenshots-photos-background-colors-59df",
+  "audited_at": "2026-03-19T07:03:27.532508Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/tables-screenshots-photos-background-colors-59df/tables-screenshots-photos-background-colors-59df.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/tables-screenshots-photos-background-colors-59df/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/tables-screenshots-photos-background-colors-59df/tables-screenshots-photos-background-colors-59df.html"
+  },
+  "quality_score": 70,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7048,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.5714285714285714,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While the document has excellent content preservation (content score 1.0, recall 0.96), it suffers from significant structural and visual defects. The most pressing issue is the duplicated rendering of financial tables as both HTML text tables and full image captures, which degrades both the visual experience and screen reader navigation. Combined with a broken heading hierarchy and lost text formatting, these major defects necessitate a human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy incorrectly treats sibling sections with equivalent visual weight at different heading levels. On Page 45, 'Appendix A' is appropriately nested as an H2 beneath the H1 'Appendix'. However, on Pages 46 and 49, 'Appendix B' and 'Appendix C' are rendered as H1 elements, breaking the established sibling hierarchy. Additionally, on Page 31, 'FY 2021 - 2022' is an H1, while its direct counterpart 'FY 2022 - 2023' on Page 32 is rendered as an H2.",
+      "source_pdf_quote": "Appendix B – North Carolina Population by County: 2022 Estimated\n[and]\nFY 2022 – 2023 (July 1, 2022, - June 30, 2023)",
+      "output_quote": "{\"type\": \"heading\", \"level\": 1, \"text\": \"Appendix B – North Carolina Population by County: 2022 Estimated\"}\n[and]\n{\"type\": \"heading\", \"level\": 2, \"text\": \"FY 2022 – 2023 (July 1, 2022, - June 30, 2023)\"}",
+      "location": "Page 32 and Page 46",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "In the HTML output, the large financial tables for 'FY 2021-2022' and 'FY 2022-2023' are extracted and rendered as HTML text tables. However, immediately following these HTML tables, the same tables are also embedded as full image captures (<img> tags). This results in the user seeing the identical tabular data twice in the body content.",
+      "source_pdf_quote": "Pages 30 and 31 contain financial tables detailing revenues and expenditures for FY 2021-2022 and FY 2022-2023.",
+      "output_quote": "The financial tables are rendered as structured HTML <table> elements, but are immediately followed by <img> elements containing the same tables (e.g., <img src=\"...\" alt=\"This table presents the monthly financial data...\">).",
+      "location": "FY 2021 – 2022 and FY 2022 – 2023 sections",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": true
+    },
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "While most italicized titles are preserved, the bold and underline emphasis on key terms is lost. Specifically, in the Executive Summary, the list of goals ('Goal 1:' through 'Goal 10:') relies on bold and underline formatting to visually separate the keyword from the goal description. In the HTML output, this text is rendered as plain unstyled text within list items.",
+      "source_pdf_quote": "On pages 3 and 4, the keywords 'Goal 1:' through 'Goal 10:' are formatted with both bold and underline to emphasize the terms.",
+      "output_quote": "The text is rendered as plain, unstyled text inside <li> elements (e.g., '<li>Goal 1: Run and manage...</li>'), losing the bold and underline emphasis.",
+      "location": "Executive Summary",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove duplicate image captures of the financial tables where valid HTML tables exist",
+    "Correct heading hierarchy for Appendices and FY headers to ensure logical nesting",
+    "Restore bold and underline formatting to key terms in the Executive Summary list"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.7048,
+      "raw_score": 0.7048,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7048,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.5714285714285714,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9601645782681878,
+      "shingling_precision": 0.7871818460594909,
+      "duplication_ratio": 0.003949343339587242,
+      "word_count_ratio": 0.9802552977425643,
+      "baseline_words": 15903,
+      "gemini_words": 15589,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 1
+    },
+    "processing_ms": 189837,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

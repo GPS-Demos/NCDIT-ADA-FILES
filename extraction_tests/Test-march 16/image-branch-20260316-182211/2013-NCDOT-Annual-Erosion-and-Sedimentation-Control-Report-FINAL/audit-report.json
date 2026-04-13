@@ -1,0 +1,93 @@
+{
+  "document_id": "2013-NCDOT-Annual-Erosion-and-Sedimentation-Control-Report-FINAL",
+  "audited_at": "2026-03-16T18:28:15.242569Z",
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6818181818181819,
+  "fidelity_visual": 0.9375,
+  "fidelity_composite": 0.8827,
+  "routing": "auto_approve",
+  "reasoning": "The document demonstrates exceptional content fidelity with a perfect score of 1.0 and a strong composite score of 0.8827, placing it firmly in the auto-approval range. While the pipeline introduced minor structural changes by using 'layout tables' and duplicating some text for captions, these are cosmetic formatting issues that do not compromise the integrity or accuracy of the government report.",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "minor",
+      "analysis": "The output contains duplicated text strings that appear only once in the source. Specifically, text used for image captions is repeated inside fabricated layout tables in Sections 14 and 15. The text 'US 321: Rock fill section' appears twice in Section 14 (once as a table cell and once as an image caption), and 'Design Review' appears twice in Section 15 in similar fashion.",
+      "source_pdf_quote": "The text 'US 321: Rock fill section' appears once as a caption on page 7. The text 'Design Review' appears once as a caption on page 8.",
+      "output_quote": "Section 14, element index 0 (table cell) and element index 1 (image caption) both contain 'US 321: Rock fill section'. Section 15, element index 0 (image caption) and element index 3 (table cell) both contain 'Design Review'.",
+      "location": "Sections 14 and 15"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "minor",
+      "analysis": "While the primary data tables on pages 3 and 4 are rendered with perfect structural fidelity (matching row and column counts), the pipeline has fabricated several 'layout tables' in the output that do not exist in the source document. These tables (found in Sections 9, 14, and 15) use AI-generated headers ('Visual Context', 'Description', 'Update', 'Details') to organize content that appears as simple paragraphs, bullets, or images in the source PDF. This significantly alters the document's orig",
+      "source_pdf_quote": "The content for 'Certification Levels' (page 5), 'Calibration' (page 7), and 'Design Build Update' (page 8) is presented as text boxes, paragraphs, and images, not as tabular data with headers.",
+      "output_quote": "The output contains tables in Sections 9, 14, and 15 that do not exist in the source. For example, Section 14's table includes inferred headers 'Visual Context' and 'Description'.",
+      "location": "Sections 9, 14, and 15"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The majority of lists (pages 3, 4, 6, and 8) are converted correctly into unordered lists. However, the bulleted list inside the 'CERTIFICATION LEVELS' box on page 5 was incorrectly converted into a single-column table in Section 9, losing its list structure.",
+      "source_pdf_quote": "Page 5, 'CERTIFICATION LEVELS' section contains a bulleted list of three levels (Level I, Level II, Level III).",
+      "output_quote": "Section 9 renders these levels as rows within a table element rather than items in a list element.",
+      "location": "Section 9"
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "minor",
+      "analysis": "There is visual duplication of content in the 'CALIBRATION' and 'DESIGN BUILD UPDATE' sections. The labels for the images ('US 321: Rock fill section' and 'Design Review') have been extracted both as data in a synthesized table and again as figure captions below the tables, leading to identical text appearing twice in close proximity.",
+      "source_pdf_quote": "Page 6: 'US 321: Rock fill section' (used once as caption). Page 7: 'Design Review: Land Quality returned...' (used once as caption).",
+      "output_quote": "Section 13: 'US 321: Rock fill section' appears in the table row and the figcaption. Section 14: 'Design Review' appears in the table row and 'Design Review: Land Quality...' appears in the figcaption.",
+      "location": "Sections 13 and 14"
+    }
+  ],
+  "action_items": [],
+  "quality_score": 93,
+  "quality_score_note": "Blended 0-100 score combining fidelity evaluation (40%), text matching (20%), content completeness (15%), accessibility compliance (10%), and decision confidence (15%). Routing decisions are based on fidelity scores above, not this score.",
+  "decision_method": "llm_final_decider",
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8827,
+      "text_match": 0.9491686830843046,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.95,
+      "raw_score": 0.9282,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.8827,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6818181818181819,
+      "fidelity_visual": 0.9375,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9298597194388778,
+      "shingling_precision": 0.9759289553634026,
+      "duplication_ratio": 0.004801259346713892,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.98,
+      "pipeline_routing": "auto_approve",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge"
+    },
+    "processing_ms": 76777,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

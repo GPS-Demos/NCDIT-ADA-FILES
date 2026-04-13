@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>NORTH CAROLINA&#39;S FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY FOR THE WEEK ENDING JULY 20, 2018</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>NORTH CAROLINA&#39;S FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY FOR THE WEEK ENDING JULY 20, 2018</h1>
+    </header>
+    <main id="main-content" role="main">
+<section>
+<div class="table-responsive" role="region" tabindex="0" aria-label="NORTH CAROLINA&#39;S FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY FOR THE WEEK ENDING JULY 20, 2018">
+<table>
+<caption>NORTH CAROLINA&#39;S FNS APPLICATION PROCESSING TIMELINESS RATE BY COUNTY FOR THE WEEK ENDING JULY 20, 2018</caption><thead><tr><th scope="col" rowspan="3"><strong>County</strong></th><th scope="col" colspan="4"><strong>Not Expedited</strong></th><th scope="col" colspan="4"><strong>Expedited</strong></th><th scope="col" colspan="4"><strong>All Approved</strong></th></tr>
+<tr><th scope="col" colspan="2"><strong>Timely</strong></th><th scope="col" colspan="2"><strong>Untimely</strong></th><th scope="col" colspan="2"><strong>Timely</strong></th><th scope="col" colspan="2"><strong>Untimely</strong></th><th scope="col" colspan="2"><strong>Timely</strong></th><th scope="col" colspan="2"><strong>Untimely</strong></th></tr>
+<tr><th scope="col"><strong>Count</strong></th><th scope="col"><strong>Pct</strong></th><th scope="col"><strong>Count</strong></th><th scope="col"><strong>Pct</strong></th><th scope="col"><strong>Count</strong></th><th scope="col"><strong>Pct</strong></th><th scope="col"><strong>Count</strong></th><th scope="col"><strong>Pct</strong></th><th scope="col"><strong>Count</strong></th><th scope="col"><strong>Pct</strong></th><th scope="col"><strong>Count</strong></th><th scope="col"><strong>Pct</strong></th></tr>
+</thead><tbody><tr><td>Alamance</td><td>62</td><td>98.41%</td><td>1</td><td>1.59%</td><td>55</td><td>100.00%</td><td>0</td><td>0.00%</td><td>117</td><td>99.15%</td><td>1</td><td>0.85%</td></tr>
+<tr><td>Alexander</td><td>15</td><td>93.75%</td><td>1</td><td>6.25%</td><td>6</td><td>85.71%</td><td>1</td><td>14.29%</td><td>21</td><td>91.30%</td><td>2</td><td>8.70%</td></tr>
+<tr><td>Alleghany</td><td>5</td><td>100.00%</td><td>0</td><td>0.00%</td><td>5</td><td>100.00%</td><td>0</td><td>0</td><td>10</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Anson</td><td>22</td><td>100.00%</td><td>0</td><td>0.00%</td><td>15</td><td>100.00%</td><td>0</td><td>0.00%</td><td>37</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Ashe</td><td>13</td><td>100.00%</td><td>0</td><td>0.00%</td><td>3</td><td>100.00%</td><td>0</td><td>0.00%</td><td>16</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Avery</td><td>8</td><td>88.89%</td><td>1</td><td>11.11%</td><td>5</td><td>100.00%</td><td>0</td><td>0.00%</td><td>13</td><td>92.86%</td><td>1</td><td>7.14%</td></tr>
+<tr><td>Beaufort</td><td>38</td><td>100.00%</td><td>0</td><td>0.00%</td><td>10</td><td>100.00%</td><td>0</td><td>0.00%</td><td>48</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Bertie</td><td>13</td><td>100.00%</td><td>0</td><td>0.00%</td><td>7</td><td>100.00%</td><td>0</td><td>0.00%</td><td>20</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Bladen</td><td>26</td><td>92.86%</td><td>2</td><td>7.14%</td><td>27</td><td>100.00%</td><td>0</td><td>0.00%</td><td>53</td><td>96.36%</td><td>2</td><td>3.64%</td></tr>
+<tr><td>Brunswick</td><td>42</td><td>100.00%</td><td>0</td><td>0.00%</td><td>30</td><td>100.00%</td><td>0</td><td>0.00%</td><td>72</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Buncombe</td><td>124</td><td>94.66%</td><td>7</td><td>5.34%</td><td>101</td><td>96.19%</td><td>4</td><td>3.81%</td><td>225</td><td>95.34%</td><td>11</td><td>4.66%</td></tr>
+<tr><td>Burke</td><td>56</td><td>100.00%</td><td>0</td><td>0.00%</td><td>20</td><td>95.24%</td><td>1</td><td>4.76%</td><td>76</td><td>98.70%</td><td>1</td><td>1.30%</td></tr>
+<tr><td>Cabarrus</td><td>91</td><td>93.81%</td><td>6</td><td>6.19%</td><td>56</td><td>98.25%</td><td>1</td><td>1.75%</td><td>147</td><td>95.45%</td><td>7</td><td>4.55%</td></tr>
+<tr><td>Caldwell</td><td>36</td><td>92.31%</td><td>3</td><td>7.69%</td><td>22</td><td>100.00%</td><td>0</td><td>0.00%</td><td>58</td><td>95.08%</td><td>3</td><td>4.92%</td></tr>
+<tr><td>Camden</td><td>3</td><td>100.00%</td><td>0</td><td>0.00%</td><td>1</td><td>100.00%</td><td>0</td><td>0.00%</td><td>4</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Carteret</td><td>20</td><td>100.00%</td><td>0</td><td>0.00%</td><td>20</td><td>100.00%</td><td>0</td><td>0.00%</td><td>40</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Caswell</td><td>10</td><td>100.00%</td><td>0</td><td>0.00%</td><td>16</td><td>100.00%</td><td>0</td><td>0.00%</td><td>26</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Catawba</td><td>94</td><td>97.92%</td><td>2</td><td>2.08%</td><td>52</td><td>96.30%</td><td>2</td><td>3.70%</td><td>146</td><td>97.33%</td><td>4</td><td>2.67%</td></tr>
+<tr><td>Chatham</td><td>22</td><td>100.00%</td><td>0</td><td>0.00%</td><td>16</td><td>100.00%</td><td>0</td><td>0.00%</td><td>38</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Cherokee</td><td>16</td><td>100.00%</td><td>0</td><td>0.00%</td><td>19</td><td>95.00%</td><td>1</td><td>5.00%</td><td>35</td><td>97.22%</td><td>1</td><td>2.78%</td></tr>
+<tr><td>Chowan</td><td>12</td><td>100.00%</td><td>0</td><td>0.00%</td><td>1</td><td>100.00%</td><td>0</td><td>0.00%</td><td>13</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Clay</td><td>2</td><td>100.00%</td><td>0</td><td>0.00%</td><td>7</td><td>77.78%</td><td>2</td><td>22.22%</td><td>9</td><td>81.82%</td><td>2</td><td>18.18%</td></tr>
+<tr><td>Cleveland</td><td>72</td><td>97.30%</td><td>2</td><td>2.70%</td><td>47</td><td>95.92%</td><td>2</td><td>4.08%</td><td>119</td><td>96.75%</td><td>4</td><td>3.25%</td></tr>
+<tr><td>Columbus</td><td>56</td><td>94.92%</td><td>3</td><td>5.08%</td><td>26</td><td>89.66%</td><td>3</td><td>10.34%</td><td>82</td><td>93.18%</td><td>6</td><td>6.82%</td></tr>
+<tr><td>Craven</td><td>49</td><td>98.00%</td><td>1</td><td>2.00%</td><td>33</td><td>91.67%</td><td>3</td><td>8.33%</td><td>82</td><td>95.35%</td><td>4</td><td>4.65%</td></tr>
+<tr><td>Cumberland</td><td>254</td><td>97.32%</td><td>7</td><td>2.68%</td><td>221</td><td>95.67%</td><td>10</td><td>4.33%</td><td>475</td><td>96.54%</td><td>17</td><td>3.46%</td></tr>
+<tr><td>Currituck</td><td>5</td><td>83.33%</td><td>1</td><td>16.67%</td><td>2</td><td>100.00%</td><td>0</td><td>0.00%</td><td>7</td><td>87.50%</td><td>1</td><td>12.50%</td></tr>
+<tr><td>Dare</td><td>8</td><td>100.00%</td><td>0</td><td>0.00%</td><td>4</td><td>100.00%</td><td>0</td><td>0.00%</td><td>12</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Davidson</td><td>99</td><td>98.02%</td><td>2</td><td>1.98%</td><td>57</td><td>98.28%</td><td>1</td><td>1.72%</td><td>156</td><td>98.11%</td><td>3</td><td>1.89%</td></tr>
+<tr><td>Davie</td><td>11</td><td>91.67%</td><td>1</td><td>8.33%</td><td>14</td><td>100.00%</td><td>0</td><td>0.00%</td><td>25</td><td>96.15%</td><td>1</td><td>3.85%</td></tr>
+<tr><td>Duplin</td><td>23</td><td>100.00%</td><td>0</td><td>0.00%</td><td>19</td><td>95.00%</td><td>1</td><td>5.00%</td><td>42</td><td>97.67%</td><td>1</td><td>2.33%</td></tr>
+<tr><td>Durham</td><td>159</td><td>94.64%</td><td>9</td><td>5.36%</td><td>76</td><td>97.44%</td><td>2</td><td>2.56%</td><td>235</td><td>95.53%</td><td>11</td><td>4.47%</td></tr>
+<tr><td>Edgecombe</td><td>51</td><td>96.23%</td><td>2</td><td>3.77%</td><td>27</td><td>100.00%</td><td>0</td><td>0.00%</td><td>78</td><td>97.50%</td><td>2</td><td>2.50%</td></tr>
+<tr><td>Forsyth</td><td>230</td><td>98.71%</td><td>3</td><td>1.29%</td><td>109</td><td>100.00%</td><td>0</td><td>0.00%</td><td>339</td><td>99.12%</td><td>3</td><td>0.88%</td></tr>
+<tr><td>Franklin</td><td>33</td><td>100.00%</td><td>0</td><td>0.00%</td><td>26</td><td>100.00%</td><td>0</td><td>0.00%</td><td>59</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Gaston</td><td>154</td><td>96.86%</td><td>5</td><td>3.14%</td><td>108</td><td>97.30%</td><td>3</td><td>2.70%</td><td>262</td><td>97.04%</td><td>8</td><td>2.96%</td></tr>
+<tr><td>Gates</td><td>7</td><td>100.00%</td><td>0</td><td>0.00%</td><td>2</td><td>100.00%</td><td>0</td><td>0.00%</td><td>9</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Graham</td><td>5</td><td>100.00%</td><td>0</td><td>0.00%</td><td>2</td><td>100.00%</td><td>0</td><td>0.00%</td><td>7</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Granville</td><td>19</td><td>95.00%</td><td>1</td><td>5.00%</td><td>4</td><td>80.00%</td><td>1</td><td>20.00%</td><td>23</td><td>92.00%</td><td>2</td><td>8.00%</td></tr>
+<tr><td>Greene</td><td>16</td><td>94.12%</td><td>1</td><td>5.88%</td><td>6</td><td>100.00%</td><td>0</td><td>0.00%</td><td>22</td><td>95.65%</td><td>1</td><td>4.35%</td></tr>
+<tr><td>Guilford</td><td>315</td><td>98.75%</td><td>4</td><td>1.25%</td><td>231</td><td>98.30%</td><td>4</td><td>1.70%</td><td>546</td><td>98.56%</td><td>8</td><td>1.44%</td></tr>
+<tr><td>Halifax</td><td>55</td><td>98.21%</td><td>1</td><td>1.79%</td><td>30</td><td>96.77%</td><td>1</td><td>3.23%</td><td>85</td><td>97.70%</td><td>2</td><td>2.30%</td></tr>
+<tr><td>Harnett</td><td>71</td><td>97.26%</td><td>2</td><td>2.74%</td><td>27</td><td>93.10%</td><td>2</td><td>6.90%</td><td>98</td><td>96.08%</td><td>4</td><td>3.92%</td></tr>
+<tr><td>Haywood</td><td>25</td><td>96.15%</td><td>1</td><td>3.85%</td><td>16</td><td>100.00%</td><td>0</td><td>0.00%</td><td>41</td><td>97.62%</td><td>1</td><td>2.38%</td></tr>
+<tr><td>Henderson</td><td>49</td><td>96.08%</td><td>2</td><td>3.92%</td><td>19</td><td>100.00%</td><td>0</td><td>0.00%</td><td>68</td><td>97.14%</td><td>2</td><td>2.86%</td></tr>
+<tr><td>Hertford</td><td>15</td><td>100.00%</td><td>0</td><td>0.00%</td><td>9</td><td>90.00%</td><td>1</td><td>10.00%</td><td>24</td><td>96.00%</td><td>1</td><td>4.00%</td></tr>
+<tr><td>Hoke</td><td>41</td><td>95.35%</td><td>2</td><td>4.65%</td><td>24</td><td>96.00%</td><td>1</td><td>4.00%</td><td>65</td><td>95.59%</td><td>3</td><td>4.41%</td></tr>
+<tr><td>Hyde</td><td>2</td><td>100.00%</td><td>0</td><td>0.00%</td><td>1</td><td>100.00%</td><td>0</td><td>0.00%</td><td>3</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Iredell</td><td>38</td><td>86.36%</td><td>6</td><td>13.64%</td><td>17</td><td>80.95%</td><td>4</td><td>19.05%</td><td>55</td><td>84.62%</td><td>10</td><td>15.38%</td></tr>
+<tr><td>Jackson</td><td>19</td><td>95.00%</td><td>1</td><td>5.00%</td><td>6</td><td>100.00%</td><td>0</td><td>0.00%</td><td>25</td><td>96.15%</td><td>1</td><td>3.85%</td></tr>
+<tr><td>Johnston</td><td>122</td><td>100.00%</td><td>0</td><td>0.00%</td><td>53</td><td>96.36%</td><td>2</td><td>3.64%</td><td>175</td><td>98.87%</td><td>2</td><td>1.13%</td></tr>
+<tr><td>Jones</td><td>9</td><td>100.00%</td><td>0</td><td>0.00%</td><td>3</td><td>100.00%</td><td>0</td><td>0.00%</td><td>12</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Lee</td><td>49</td><td>100.00%</td><td>0</td><td>0.00%</td><td>19</td><td>95.00%</td><td>1</td><td>5.00%</td><td>68</td><td>98.55%</td><td>1</td><td>1.45%</td></tr>
+<tr><td>Lenoir</td><td>61</td><td>98.39%</td><td>1</td><td>1.61%</td><td>35</td><td>97.22%</td><td>1</td><td>2.78%</td><td>96</td><td>97.96%</td><td>2</td><td>2.04%</td></tr>
+<tr><td>Lincoln</td><td>30</td><td>96.77%</td><td>1</td><td>3.23%</td><td>28</td><td>100.00%</td><td>0</td><td>0.00%</td><td>58</td><td>98.31%</td><td>1</td><td>1.69%</td></tr>
+<tr><td>Macon</td><td>18</td><td>100.00%</td><td>0</td><td>0.00%</td><td>7</td><td>100.00%</td><td>0</td><td>0.00%</td><td>25</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Madison</td><td>4</td><td>100.00%</td><td>0</td><td>0.00%</td><td>5</td><td>100.00%</td><td>0</td><td>0.00%</td><td>9</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Martin</td><td>23</td><td>95.83%</td><td>1</td><td>4.17%</td><td>6</td><td>75.00%</td><td>2</td><td>25.00%</td><td>29</td><td>90.63%</td><td>3</td><td>9.38%</td></tr>
+<tr><td>McDowell</td><td>32</td><td>100.00%</td><td>0</td><td>0.00%</td><td>25</td><td>89.29%</td><td>3</td><td>10.71%</td><td>57</td><td>95.00%</td><td>3</td><td>5.00%</td></tr>
+<tr><td>Mecklenburg</td><td>528</td><td>94.96%</td><td>28</td><td>5.04%</td><td>354</td><td>92.43%</td><td>29</td><td>7.57%</td><td>882</td><td>93.93%</td><td>57</td><td>6.07%</td></tr>
+<tr><td>Mitchell</td><td>7</td><td>100.00%</td><td>0</td><td>0.00%</td><td>5</td><td>100.00%</td><td>0</td><td>0.00%</td><td>12</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Montgomery</td><td>8</td><td>88.89%</td><td>1</td><td>11.11%</td><td>9</td><td>100.00%</td><td>0</td><td>0.00%</td><td>17</td><td>94.44%</td><td>1</td><td>5.56%</td></tr>
+<tr><td>Moore</td><td>34</td><td>91.89%</td><td>3</td><td>8.11%</td><td>30</td><td>90.91%</td><td>3</td><td>9.09%</td><td>64</td><td>91.43%</td><td>6</td><td>8.57%</td></tr>
+<tr><td>Nash</td><td>48</td><td>97.96%</td><td>1</td><td>2.04%</td><td>31</td><td>93.94%</td><td>2</td><td>6.06%</td><td>79</td><td>96.34%</td><td>3</td><td>3.66%</td></tr>
+<tr><td>New Hanover</td><td>104</td><td>97.20%</td><td>3</td><td>2.80%</td><td>73</td><td>97.33%</td><td>2</td><td>2.67%</td><td>177</td><td>97.25%</td><td>5</td><td>2.75%</td></tr>
+<tr><td>Northampton</td><td>14</td><td>100.00%</td><td>0</td><td>0.00%</td><td>14</td><td>100.00%</td><td>0</td><td>0.00%</td><td>28</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Onslow</td><td>95</td><td>93.14%</td><td>7</td><td>6.86%</td><td>47</td><td>100.00%</td><td>0</td><td>0.00%</td><td>142</td><td>95.30%</td><td>7</td><td>4.70%</td></tr>
+<tr><td>Orange</td><td>28</td><td>96.55%</td><td>1</td><td>3.45%</td><td>30</td><td>100.00%</td><td>0</td><td>0.00%</td><td>58</td><td>98.31%</td><td>1</td><td>1.69%</td></tr>
+<tr><td>Pamlico</td><td>3</td><td>100.00%</td><td>0</td><td>0.00%</td><td>3</td><td>100.00%</td><td>0</td><td>0.00%</td><td>6</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Pasquotank</td><td>40</td><td>100.00%</td><td>0</td><td>0.00%</td><td>17</td><td>89.47%</td><td>2</td><td>10.53%</td><td>57</td><td>96.61%</td><td>2</td><td>3.39%</td></tr>
+<tr><td>Pender</td><td>30</td><td>93.75%</td><td>2</td><td>6.25%</td><td>4</td><td>80.00%</td><td>1</td><td>20.00%</td><td>34</td><td>91.89%</td><td>3</td><td>8.11%</td></tr>
+<tr><td>Perquimans</td><td>8</td><td>88.89%</td><td>1</td><td>11.11%</td><td>4</td><td>100.00%</td><td>0</td><td>0.00%</td><td>12</td><td>92.31%</td><td>1</td><td>7.69%</td></tr>
+<tr><td>Person</td><td>29</td><td>100.00%</td><td>0</td><td>0.00%</td><td>13</td><td>100.00%</td><td>0</td><td>0.00%</td><td>42</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Pitt</td><td>157</td><td>99.37%</td><td>1</td><td>0.63%</td><td>54</td><td>94.74%</td><td>3</td><td>5.26%</td><td>211</td><td>98.14%</td><td>4</td><td>1.86%</td></tr>
+<tr><td>Polk</td><td>7</td><td>100.00%</td><td>0</td><td>0.00%</td><td>5</td><td>100.00%</td><td>0</td><td>0.00%</td><td>12</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Randolph</td><td>71</td><td>97.26%</td><td>2</td><td>2.74%</td><td>53</td><td>100.00%</td><td>0</td><td>0.00%</td><td>124</td><td>98.41%</td><td>2</td><td>1.59%</td></tr>
+<tr><td>Richmond</td><td>47</td><td>100.00%</td><td>0</td><td>0.00%</td><td>42</td><td>97.67%</td><td>1</td><td>2.33%</td><td>89</td><td>98.89%</td><td>1</td><td>1.11%</td></tr>
+<tr><td>Robeson</td><td>116</td><td>92.80%</td><td>9</td><td>7.20%</td><td>102</td><td>93.58%</td><td>7</td><td>6.42%</td><td>218</td><td>93.16%</td><td>16</td><td>6.84%</td></tr>
+<tr><td>Rockingham</td><td>54</td><td>96.43%</td><td>2</td><td>3.57%</td><td>38</td><td>97.44%</td><td>1</td><td>2.56%</td><td>92</td><td>96.84%</td><td>3</td><td>3.16%</td></tr>
+<tr><td>Rowan</td><td>70</td><td>95.89%</td><td>3</td><td>4.11%</td><td>43</td><td>93.48%</td><td>3</td><td>6.52%</td><td>113</td><td>94.96%</td><td>6</td><td>5.04%</td></tr>
+<tr><td>Rutherford</td><td>59</td><td>100.00%</td><td>0</td><td>0.00%</td><td>39</td><td>100.00%</td><td>0</td><td>0.00%</td><td>98</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Sampson</td><td>37</td><td>100.00%</td><td>0</td><td>0.00%</td><td>22</td><td>100.00%</td><td>0</td><td>0.00%</td><td>59</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Scotland</td><td>53</td><td>100.00%</td><td>0</td><td>0.00%</td><td>17</td><td>94.44%</td><td>1</td><td>5.56%</td><td>70</td><td>98.59%</td><td>1</td><td>1.41%</td></tr>
+<tr><td>Stanly</td><td>28</td><td>93.33%</td><td>2</td><td>6.67%</td><td>18</td><td>94.74%</td><td>1</td><td>5.26%</td><td>46</td><td>93.88%</td><td>3</td><td>6.12%</td></tr>
+<tr><td>Stokes</td><td>21</td><td>100.00%</td><td>0</td><td>0.00%</td><td>13</td><td>100.00%</td><td>0</td><td>0.00%</td><td>34</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Surry</td><td>40</td><td>97.56%</td><td>1</td><td>2.44%</td><td>20</td><td>100.00%</td><td>0</td><td>0.00%</td><td>60</td><td>98.36%</td><td>1</td><td>1.64%</td></tr>
+<tr><td>Swain</td><td>16</td><td>100.00%</td><td>0</td><td>0.00%</td><td>2</td><td>100.00%</td><td>0</td><td>0.00%</td><td>18</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Transylvania</td><td>17</td><td>100.00%</td><td>0</td><td>0.00%</td><td>10</td><td>100.00%</td><td>0</td><td>0.00%</td><td>27</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Tyrrell</td><td>3</td><td>100.00%</td><td>0</td><td>0.00%</td><td>2</td><td>100.00%</td><td>0</td><td>0.00%</td><td>5</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Union</td><td>72</td><td>98.63%</td><td>1</td><td>1.37%</td><td>53</td><td>96.36%</td><td>2</td><td>3.64%</td><td>125</td><td>97.66%</td><td>3</td><td>2.34%</td></tr>
+<tr><td>Vance</td><td>45</td><td>97.83%</td><td>1</td><td>2.17%</td><td>19</td><td>100.00%</td><td>0</td><td>0.00%</td><td>64</td><td>98.46%</td><td>1</td><td>1.54%</td></tr>
+<tr><td>Wake</td><td>332</td><td>96.79%</td><td>11</td><td>3.21%</td><td>161</td><td>98.17%</td><td>3</td><td>1.83%</td><td>493</td><td>97.24%</td><td>14</td><td>2.76%</td></tr>
+<tr><td>Warren</td><td>10</td><td>90.91%</td><td>1</td><td>9.09%</td><td>5</td><td>100.00%</td><td>0</td><td>0.00%</td><td>15</td><td>93.75%</td><td>1</td><td>6.25%</td></tr>
+<tr><td>Washington</td><td>16</td><td>100.00%</td><td>0</td><td>0.00%</td><td>3</td><td>100.00%</td><td>0</td><td>0.00%</td><td>19</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Watauga</td><td>17</td><td>100.00%</td><td>0</td><td>0.00%</td><td>6</td><td>100.00%</td><td>0</td><td>0.00%</td><td>23</td><td>100.00%</td><td>0</td><td>0.00%</td></tr>
+<tr><td>Wayne</td><td>94</td><td>94.95%</td><td>5</td><td>5.05%</td><td>41</td><td>97.62%</td><td>1</td><td>2.38%</td><td>135</td><td>95.74%</td><td>6</td><td>4.26%</td></tr>
+<tr><td>Wilkes</td><td>44</td><td>100.00%</td><td>0</td><td>0.00%</td><td>16</td><td>88.89%</td><td>2</td><td>11.11%</td><td>60</td><td>96.77%</td><td>2</td><td>3.23%</td></tr>
+<tr><td>Wilson</td><td>64</td><td>100.00%</td><td>0</td><td>0.00%</td><td>32</td><td>94.12%</td><td>2</td><td>5.88%</td><td>96</td><td>97.96%</td><td>2</td><td>2.04%</td></tr>
+<tr><td>Yadkin</td><td>17</td><td>100.00%</td><td>0</td><td>0.00%</td><td>12</td><td>92.31%</td><td>1</td><td>7.69%</td><td>29</td><td>96.67%</td><td>1</td><td>3.33%</td></tr>
+<tr><td>Yancey</td><td>3</td><td>75.00%</td><td>1</td><td>25.00%</td><td>4</td><td>100.00%</td><td>0</td><td>0.00%</td><td>7</td><td>87.50%</td><td>1</td><td>12.50%</td></tr>
+<tr><td><strong>All Counties</strong></td><td>5445</td><td>96.97%</td><td>170</td><td>3.03%</td><td>3304</td><td>96.30%</td><td>127</td><td>3.70%</td><td>8749</td><td>96.72%</td><td>297</td><td>3.28%</td></tr>
+</tbody></table>
+</div>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

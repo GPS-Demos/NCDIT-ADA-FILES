@@ -1,0 +1,93 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-365a",
+  "audited_at": "2026-03-19T06:45:58.485986Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-365a/map-imagery-photos-tables-screenshots-diagrams-data-charts-365a.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-365a/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-365a/map-imagery-photos-tables-screenshots-diagrams-data-charts-365a.html"
+  },
+  "quality_score": 88,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.8762,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6428571428571428,
+  "fidelity_visual": 0.9523809523809523,
+  "routing": "auto_approve",
+  "routing_label": "Auto-Approve",
+  "reasoning": "The document exhibits strong overall quality with an LLM fidelity composite score of 0.8762 and perfect content preservation (score 1.0). Programmatic signals confirm high text retention (shingling recall 0.964). While there are minor issues with heading hierarchy continuity and a few missing images (reflected by an image count ratio of 0.842), these defects do not warrant the cost of human review given the strong primary signals and instructions to lean toward approval for minor cosmetic issues.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "minor",
+      "analysis": "The output fails to maintain a consistent heading hierarchy, especially across page breaks. For example, on page 20, the section 'Collaborating and Applying GIS Technology' (bold in source, mapped to H2) contains an underlined subsection 'Census Collaboration' (mapped to H3). On page 21, three more underlined subsections continue under the same parent ('GIS Technology for State Agencies', 'Imagery Acquisition after Emergency Events', and 'Review of GIS Applications in State Government'). However",
+      "source_pdf_quote": "Page 20 has underlined subsection 'Census Collaboration'. Page 21 has sibling underlined subsections 'GIS Technology for State Agencies', 'Imagery Acquisition after Emergency Events', and 'Review of GIS Applications in State Government'.",
+      "output_quote": "{\"type\": \"heading\", \"level\": 3, \"text\": \"Census Collaboration\"} vs {\"type\": \"heading\", \"level\": 2, \"text\": \"GIS Technology for State Agencies\"} (and subsequent H2s)",
+      "location": "Pages 20-21, 26, 28-29",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Comparing the images in the source PDF to the rendered HTML reveals that multiple meaningful images have been omitted from the output. For example, the map labeled 'Figure 7. NC Parcels Project, Example Where Four Counties Meet' on page 19 of the PDF is entirely missing from the HTML between its introductory and subsequent paragraphs. Additionally, the aerial image labeled 'Imagery in Nags Head, NC' on page 17 is also absent from the HTML.",
+      "source_pdf_quote": "Page 19 contains an image with the caption 'Figure 7. NC Parcels Project, Example Where Four Counties Meet'.",
+      "output_quote": "The text 'An example of multi-county parcel data is shown in Figure 7.' is followed immediately by the next paragraph ('The project team will continue adding counties...') with no <img> element or figure in between.",
+      "location": "Page 19 / Section: A Statewide Parcels Dataset",
+      "source": "fidelity_llm",
+      "check_id": "V2",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.8762,
+      "raw_score": 0.8762,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.8762,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6428571428571428,
+      "fidelity_visual": 0.9523809523809523,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9635817533320818,
+      "shingling_precision": 0.9677601809954751,
+      "duplication_ratio": 0.013349970684185997,
+      "word_count_ratio": 0.9799229365240316,
+      "baseline_words": 9862,
+      "gemini_words": 9664,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.8421052631578947,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge_with_minors",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 199902,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "document_id": "Jul16-Jul20-2018",
+  "composite_score": 1.0,
+  "risk_level": "LOW",
+  "routing_action": "AUTO_APPROVE",
+  "routing_reason": "Score 1.00 >= 0.85",
+  "knockout_triggered": null,
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "The output document contains a heading and a large table that corresponds exactly to the four-page source PDF. I checked for any invented section headings, introductory text, or concluding remarks that do not exist in the source. The AI-generated table caption and summary are allowed as per the 'Acceptable Changes' criteria. No fabricated paragraphs or sentences were found.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The source document contains no contact information (phone numbers, emails, addresses, or URLs). I verified that the output document also contains no such information. There are no hallucinations of contact details.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The source PDF has 4 pages. Page 1 contains 28 county rows (Alamance to Dare). Page 2 contains 27 rows (Davidson to Lincoln). Page 3 contains 27 rows (Macon to Sampson). Page 4 contains 18 county rows (Scotland to Yancey) and one summary row ('All Counties'). All 101 data rows are present in the single consolidated table in the output JSON. No pages or sections are missing.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The source document's data is spread across four tables (one per page). I counted the data rows in the source: Page 1 (28 rows), Page 2 (27 rows), Page 3 (27 rows), Page 4 (19 rows including summary). Total = 101 data rows. The output JSON table contains exactly 101 data rows (indices 3 through 103 in the rows array). All counties are represented with their full set of data columns.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "I cross-referenced several counties from different pages (e.g., Clay from page 1, Iredell from page 2, Robeson from page 3, and Wake from page 4) to ensure no internal column data was omitted. In all cases, the Timely and Untimely counts and percentages for both 'Not Expedited' and 'Expedited' categories, as well as the 'All Approved' totals, were preserved correctly. The text within the table cells is complete.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "I verified that the numeric values and percentages in the output match the source. For example, for 'All Counties' at the end of the report, the source shows 8749 timely approved applications (96.72%) and 297 untimely (3.28%). The output JSON contains these exact figures. No changes in meaning or factual errors were introduced during conversion.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"The output document contains a heading and a large table that corresponds exactly to the four-page source PDF. I checked for any invented section headings, introductory text, or concluding remarks that do not exist in the source. The AI-generated table caption and summary are allowed as per the 'Acceptable Changes' criteria. No fabricated paragraphs or sentences were found.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The source document contains no contact information (phone numbers, emails, addresses, or URLs). I verified that the output document also contains no such information. There are no hallucinations of contact details.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The source PDF has 4 pages. Page 1 contains 28 county rows (Alamance to Dare). Page 2 contains 27 rows (Davidson to Lincoln). Page 3 contains 27 rows (Macon to Sampson). Page 4 contains 18 county rows (Scotland to Yancey) and one summary row ('All Counties'). All 101 data rows are present in the single consolidated table in the output JSON. No pages or sections are missing.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The source document's data is spread across four tables (one per page). I counted the data rows in the source: Page 1 (28 rows), Page 2 (27 rows), Page 3 (27 rows), Page 4 (19 rows including summary). Total = 101 data rows. The output JSON table contains exactly 101 data rows (indices 3 through 103 in the rows array). All counties are represented with their full set of data columns.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"I cross-referenced several counties from different pages (e.g., Clay from page 1, Iredell from page 2, Robeson from page 3, and Wake from page 4) to ensure no internal column data was omitted. In all cases, the Timely and Untimely counts and percentages for both 'Not Expedited' and 'Expedited' categories, as well as the 'All Approved' totals, were preserved correctly. The text within the table cells is complete.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"I verified that the numeric values and percentages in the output match the source. For example, for 'All Counties' at the end of the report, the source shows 8749 timely approved applications (96.72%) and 297 untimely (3.28%). The output JSON contains these exact figures. No changes in meaning or factual errors were introduced during conversion.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the source PDF and the converted JSON output. The source document contains a title repeated on each of its four pages, and a single table split across those pages. The output provides the heading once and combines the four-page table into a single continuous table. All county rows from Alamance through Yancey, including the final 'All Counties' summary row, appear exactly once in the output, matching their occurrence in the source. No content blocks or paragraphs are duplicated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The document title is correctly identified as a heading. The assigned level 2 is acceptable as a normalization from the source's visually dominant title. There are no other headings in the source document, and therefore no hierarchy violations like skipped levels or incorrect nesting.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The source table contains a complex three-level header structure. The output successfully captures this structure: the first row uses colspans (4) and rowspans (3) to define 'County' and the major categories; the second row correctly maps sub-categories ('Timely', 'Untimely'); and the third row maps the final 'Count' and 'Pct' headers. The pipeline has consolidated the data from all four pages into one unified logical table, which is structurally sound and consistent with the column definitions found in the original document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order follows the logical flow of the original document: heading first, followed by the table. Within the table, the counties are listed in the exact alphabetical order provided across the four pages of the source PDF, ending with the 'All Counties' total row.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The source PDF does not contain any lists; it consists entirely of a title and a data table. Consequently, no list conversion errors are present.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The source document does not contain any hyperlinks. The JSON output correctly reflects this and does not contain any injected or fabricated links.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the source PDF and the converted JSON output. The source document contains a title repeated on each of its four pages, and a single table split across those pages. The output provides the heading once and combines the four-page table into a single continuous table. All county rows from Alamance through Yancey, including the final 'All Counties' summary row, appear exactly once in the output, matching their occurrence in the source. No content blocks or paragraphs are duplicated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The document title is correctly identified as a heading. The assigned level 2 is acceptable as a normalization from the source's visually dominant title. There are no other headings in the source document, and therefore no hierarchy violations like skipped levels or incorrect nesting.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The source table contains a complex three-level header structure. The output successfully captures this structure: the first row uses colspans (4) and rowspans (3) to define 'County' and the major categories; the second row correctly maps sub-categories ('Timely', 'Untimely'); and the third row maps the final 'Count' and 'Pct' headers. The pipeline has consolidated the data from all four pages into one unified logical table, which is structurally sound and consistent with the column definitions found in the original document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order follows the logical flow of the original document: heading first, followed by the table. Within the table, the counties are listed in the exact alphabetical order provided across the four pages of the source PDF, ending with the 'All Counties' total row.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The source PDF does not contain any lists; it consists entirely of a title and a data table. Consequently, no list conversion errors are present.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The source document does not contain any hyperlinks. The JSON output correctly reflects this and does not contain any injected or fabricated links.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The HTML output successfully translates the multi-page tabular data from the PDF into a single, continuous, and well-organized table. The alphabetical flow of counties and the grouping of metrics (Not Expedited, Expedited, All Approved) are maintained correctly. While the PDF is split across four pages, the HTML consolidates this into one view, which is an appropriate and expected transition for web accessibility and usability.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The table in the HTML screenshot is rendered with clear borders, distinct header rows, and properly aligned columns. Sighted users can easily associate county names with their respective count and percentage data across all categories. The complex header structure (nested headers) is preserved visually.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF contains no meaningful images, logos, or charts; it is entirely comprised of text and table structures. No visual content from the source is missing in the conversion.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There is no duplication of body content. Every county record and the summary 'All Counties' row appears exactly once in the HTML output, matching the unique records in the source PDF. While the document title appears at the top and again just above the table, this is consistent with standard accessible landmarks for web documents and is not considered a defect per the evaluation criteria.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The HTML output successfully translates the multi-page tabular data from the PDF into a single, continuous, and well-organized table. The alphabetical flow of counties and the grouping of metrics (Not Expedited, Expedited, All Approved) are maintained correctly. While the PDF is split across four pages, the HTML consolidates this into one view, which is an appropriate and expected transition for web accessibility and usability.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The table in the HTML screenshot is rendered with clear borders, distinct header rows, and properly aligned columns. Sighted users can easily associate county names with their respective count and percentage data across all categories. The complex header structure (nested headers) is preserved visually.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF contains no meaningful images, logos, or charts; it is entirely comprised of text and table structures. No visual content from the source is missing in the conversion.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There is no duplication of body content. Every county record and the summary 'All Counties' row appears exactly once in the HTML output, matching the unique records in the source PDF. While the document title appears at the top and again just above the table, this is consistent with standard accessible landmarks for web documents and is not considered a defect per the evaluation criteria.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 0,
+  "total_critical": 0,
+  "total_major": 0,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

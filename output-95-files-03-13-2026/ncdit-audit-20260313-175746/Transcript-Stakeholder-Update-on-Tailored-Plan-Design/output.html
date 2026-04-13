@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" data-schema-version="1.0.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ADA Compliance Engine v0.1.0">
+    <meta name="schema-version" content="1.0.0">
+    <title>Stakeholder Update on Tailored Plan Design-20181128 1252-1</title>
+    <style>
+/**
+ * ADA Compliance Engine - WCAG 2.1 AA Compliant Stylesheet
+ * NC.gov-inspired accessible styling
+ *
+ * WCAG Requirements:
+ * - 1.4.3 Contrast (Minimum): 4.5:1 for normal text, 3:1 for large text
+ * - 1.4.4 Resize Text: Text can be resized to 200% without loss of functionality
+ * - 1.4.10 Reflow: Content reflows at 320px without horizontal scrolling
+ * - 2.4.7 Focus Visible: Focus indicators are visible
+ * - 2.4.1 Bypass Blocks: Skip link for navigation
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Colors - All meet WCAG AA contrast requirements */
+    --color-text-primary: #333333;     /* 12.63:1 contrast on white */
+    --color-text-secondary: #555555;   /* 7.46:1 contrast on white */
+    --color-background: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-link: #0066cc;             /* 5.91:1 contrast on white */
+    --color-link-visited: #551a8b;     /* 7.43:1 contrast on white */
+    --color-focus-outline: #005fcc;
+    --color-border: #cccccc;
+
+    /* Typography - Using rem for scalability */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    --font-size-base: 1rem;            /* 16px default */
+    --font-size-small: 0.875rem;       /* 14px */
+    --font-size-large: 1.125rem;       /* 18px */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+
+    /* Spacing - Using rem for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Layout */
+    --max-width-content: 70ch;         /* Optimal reading length */
+    --max-width-page: 75rem;           /* 1200px */
+}
+
+/* ============================================
+   Base Reset & Typography
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;  /* Respects user browser settings */
+}
+
+body {
+    margin: 0;
+    padding: var(--spacing-md);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Skip Link (WCAG 2.4.1 Bypass Blocks)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-link);
+    color: #ffffff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Focus Indicators (WCAG 2.4.7 Focus Visible)
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+main {
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--max-width-content);
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* External link indicator (Story 7.4 AC1, WCAG 3.2.5) */
+a.external-link::after,
+a[target="_blank"]::after {
+    content: " (opens in new window)";  /* Screen reader accessible */
+    font-size: 0.8em;
+    vertical-align: super;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Visual indicator for external links (visible) */
+a.external-link::before,
+a[target="_blank"]::before {
+    content: " ↗";  /* Visual arrow indicator */
+    font-size: 0.8em;
+}
+
+/* Email link styling (Story 7.4 AC6) */
+a.email-link::before {
+    content: "✉ ";
+}
+
+/* Phone link styling (Story 7.4 AC6) */
+a.phone-link::before {
+    content: "☎ ";
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol {
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* Definition lists */
+dl {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+dt {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+dd {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+/* Responsive table wrapper for horizontal scrolling (Story 7.1 AC6) */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+}
+
+/* Focus indicator when table container is focused for keyboard scrolling */
+.table-responsive:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+caption {
+    padding: var(--spacing-sm);
+    font-weight: 700;
+    text-align: left;
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-background-alt);
+    font-weight: 700;
+}
+
+/* Table summary for screen readers */
+.table-summary {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+figcaption {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--color-border);
+    background-color: var(--color-background-alt);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-background-alt);
+    padding: 0.125em 0.25em;
+    border-radius: 2px;
+}
+
+pre {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--font-size-small);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Footnote back-reference links */
+footer ol a[aria-label="Back to content"] {
+    margin-left: var(--spacing-xs);
+    text-decoration: none;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   Visually Hidden (for screen readers only)
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   Reflow at 320px (WCAG 1.4.10 Reflow)
+   ============================================ */
+@media (max-width: 320px) {
+    body {
+        padding: 0 var(--spacing-md);
+    }
+
+    main {
+        max-width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support (WCAG 1.4.11)
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-primary: #000000;
+        --color-text-secondary: #000000;
+        --color-background: #ffffff;
+        --color-background-alt: #ffffff;
+        --color-link: #0000cc;
+        --color-link-visited: #551a8b;
+        --color-focus-outline: #000000;
+        --color-border: #000000;
+    }
+
+    th, td {
+        border-width: 2px;
+    }
+
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* ============================================
+   Reduced Motion Support (WCAG 2.3.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* ============================================
+   Target Size Enhancement (WCAG 2.5.5 AAA)
+   ============================================ */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Ensure sufficient touch target spacing */
+nav a,
+footer a,
+.footnotes a {
+    padding: var(--spacing-xs);
+    margin: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+/* ============================================
+   Text Spacing Support (WCAG 1.4.12)
+   ============================================ */
+body {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Allow text spacing to be overridden without breaking layout */
+p, li, td, th, dd, blockquote {
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+/* ============================================
+   Additional WCAG 2.1 AA Enhancements
+   ============================================ */
+
+/* Ensure links are distinguishable from text (WCAG 1.4.1) */
+a:not(:hover):not(:focus) {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+}
+
+/* Error state styling (for future form support) */
+.error {
+    color: #cc0000;  /* 5.62:1 contrast ratio */
+    border-color: #cc0000;
+}
+
+.error-message {
+    color: #cc0000;
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xs);
+}
+
+/* Success state styling */
+.success {
+    color: #006600;  /* 6.35:1 contrast ratio */
+}
+
+/* Warning state styling */
+.warning {
+    color: #795600;  /* 4.67:1 contrast ratio */
+    background-color: #fff8e6;
+}
+
+/* Form field focus enhancements (for future form support) */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+/* Table row hover for better tracking (WCAG 1.3.3) */
+tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+/* Ensure abbreviations are styled accessibly */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Mark/highlight styling */
+mark {
+    background-color: #ffffcc;
+    color: var(--color-text-primary);
+    padding: 0.125em 0.25em;
+}
+
+/* ============================================
+   AI-Generated Title Notice
+   ============================================ */
+.ai-generated-notice {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Document Navigation (Story 1.6)
+   ============================================ */
+.document-nav {
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-nav h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.document-nav .nav-title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    line-height: var(--line-height-heading);
+}
+
+.document-nav ul {
+    list-style: none;
+    padding-left: var(--spacing-md);
+}
+
+.document-nav li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-nav details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-xs) 0;
+}
+
+/* ============================================
+   Table Zebra Striping (Story 1.6)
+   ============================================ */
+tbody tr:nth-child(even) {
+    background-color: var(--color-background-alt);
+}
+
+/* ============================================
+   Dark Mode (Story 1.6, WCAG 1.4.3)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #e0e0e0;     /* 13.28:1 on #1a1a1a */
+        --color-text-secondary: #b0b0b0;   /* 7.53:1 on #1a1a1a */
+        --color-background: #1a1a1a;
+        --color-background-alt: #2a2a2a;
+        --color-link: #6db3f2;             /* 5.72:1 on #1a1a1a */
+        --color-link-visited: #c4a5de;     /* 5.18:1 on #1a1a1a */
+        --color-focus-outline: #6db3f2;
+        --color-border: #555555;
+    }
+
+    mark {
+        background-color: #665500;
+        color: var(--color-text-primary);
+    }
+
+    .error {
+        color: #ff6b6b;  /* 5.12:1 on #1a1a1a */
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #6bcf6b;  /* 5.31:1 on #1a1a1a */
+    }
+
+    .warning {
+        color: #e6c350;  /* 6.15:1 on #1a1a1a */
+        background-color: #3a3000;
+    }
+
+    .skip-link {
+        background: #0050a0;  /* 7.12:1 with white text */
+    }
+}
+
+/* ============================================
+   Responsive Breakpoints (Story 1.6)
+   ============================================ */
+@media (min-width: 768px) {
+    main {
+        padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    body {
+        padding: var(--spacing-lg);
+    }
+
+    .document-nav {
+        max-width: 300px;
+        float: left;
+        margin-right: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   Print Styles (Story 1.6 Enhanced)
+   ============================================ */
+@media print {
+    .skip-link,
+    .document-nav {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Stakeholder Update on Tailored Plan Design-20181128 1252-1</h1>
+    </header>
+    <nav aria-label="Table of Contents" class="document-nav">
+        <details>
+        <summary>Contents (24 items)</summary>
+        <ul>
+                    <li><a href="#heading-1">Debra</a></li>
+                    <li><a href="#heading-2">Debra</a></li>
+                    <li><a href="#heading-3">Debra</a></li>
+                    <li><a href="#heading-4">Kelsey</a></li>
+                    <li><a href="#heading-5">Debra</a></li>
+                    <li><a href="#heading-6">Dave Richard</a></li>
+                    <li><a href="#heading-7">Debra</a></li>
+                    <li><a href="#heading-8">Dave Richard</a></li>
+                    <li><a href="#heading-9">Dr. McCoy</a></li>
+                    <li><a href="#heading-10">Dave Richard</a></li>
+                    <li><a href="#heading-11">Dr. McCoy</a></li>
+                    <li><a href="#heading-12">Debra</a></li>
+                    <li><a href="#heading-13">Dave Richard</a></li>
+                    <li><a href="#heading-14">Debra</a></li>
+                    <li><a href="#heading-15">Dave Richard</a></li>
+                    <li><a href="#heading-16">Debra</a></li>
+                    <li><a href="#heading-17">Dave Richard</a></li>
+                    <li><a href="#heading-18">Debra</a></li>
+                    <li><a href="#heading-19">Kelsey</a></li>
+                    <li><a href="#heading-20">Debra</a></li>
+                    <li><a href="#heading-21">Debra</a></li>
+                    <li><a href="#heading-22">Debra</a></li>
+                    <li><a href="#heading-23">Janie Shaver</a></li>
+                    <li><a href="#heading-24">Debra</a></li>
+        </ul>
+        </details>
+    </nav>
+    <main id="main-content" role="main">
+<section aria-labelledby="section-1">
+<h2 id="section-1">Janie Shaver</h2>
+<p>Good morning everyone, this is Janie Shivar with the Division of Mental Health, Developmental Disabilities and Substance Abuse Services, in the Department of Health and Human Services. We’re very welcome . . . We’re very happy to have all of you join us this morning. Welcome to the stakeholder kickoff webinar for tailored plans. </p>
+
+<p>We’re delighted this morning that both Deputy Secretary Kody Kinsley, and Deputy Secretary Dave Richard are able to join us as presenters, in addition to them, we also have a group of panelists that are available to answer questions at the end of our presentation today. We have Jay Ludlam, who is the Assistant Secretary for Medicaid Transformation. In the room, we also have Dr. Keith McCoy, with DMH DDSAS as well. We have Debra Farrington with us from NC Medicaid, and Kelsey Nicks from NC Medicaid, as well. So, with that, I’d like to turn it over to Deputy Secretary Kody Kinsley and he will get us kicked off for our first presentation.</p>
+
+</section>
+<section aria-labelledby="section-2">
+<h2 id="section-2">Kody Kinsley</h2>
+<p>Thank you, Janie. Good morning, everyone. I hope everyone is well. I’d like to echo Janie and say thank you for your time and your focus, and hope that you are relaxed, but not too relaxed, this is a very exciting time for the state and for the department of course, so thank you for your joining us and for your inclusion. I’d like to highlight just a few things as we get kicked off. </p>
+
+<p>And the first is a common theme that I think you’ll see throughout the work here, and throughout the individuals that are presenting and those that you just heard are in the room, which is really focusing on a great deal of collaboration in this effort. And in doing that, we’re trying to really make sure that we bring together folks across the department and across the state to make sure we design these tailored plans to work well for everyone, and to really drive our behavioral health strategy in a thoughtful, forward thinking way.</p>
+
+<p>The Division of Mental Health, Developmental Disabilities and Substance Abuse Services, as you know, stewards several key responsibilities for the state. And the primary one is really driving and designing the behavioral health with policy for the state. And so we think of ourselves as regardless of who the payer is, regardless of if it’s Medicaid, or if an individual did not have insurance, or if it’s a private payer, that it’s our goal to design (Slide 2)rules and policies and legislation and regulation that helps shape the behavioral health public policy strategy that, that really incentivizes and drives the best health for North Carolinians. Starting with behavioral health, but as we know, leaning into social determinants of health and beyond.</p>
+
+<p>And so that’s the focus that our division really brings to this partnership, is in holding that responsibility of thinking about regardless of where the dollar comes from, that will help fund the insurance and access, but rather, how do we actually just make sure that folks are well in their being and starting with behavioral health as our primary focus there. So, I think you’ll hear that throughout the presentation to day. Of course, the Division of Mental Health also remains the steward of the responsibility for those that are uninsured, don’t have insurance. And we’ve used funding from the state in the form of IPRS as formally known, or single stream dollars. And then we’ve also used the federal block grant funds from varying sources and other grants to help make up that difference for those in our state that are particularly in need of behavioral health services, but don’t have access to insurance. </p>
+
+<p>And so, we’ve been trying to be incredibly thoughtful about how we fold those resources into the tailored plan, to make sure that those individuals continue to have the access that they need to get the services that they need throughout our state system. The division, in partnership with the division of – the Division of Mental Health, in partnership with the Department of State Offered Health Facilities also is incredibly focused thinking about the continuum of care, as we operate the state security net for those with the most complex needs that go into some of our inpatient settings that the state runs, and trying to be thoughtful about how do we design community services that really help people get the access that they need in community to care, so that they don’t end up in a facility. And if they do, that it’s a brief stay and that they are able to return to community with the right services and supports that they need to live and thrive. And so, we’re bringing that type of thinking into this project, as well.</p>
+
+<p>All this partnership and effort and thoughtfulness would not be possible without incredibly deep inclusion and engagement with our consumers and families. The core topline goal for us is nothing about us without us. We have to go with and through our consumers and their family members to really understand how the rubber meets the road in these individuals’ lives as we design policies. I think we have a lot of experience in designing policies and programs at the state level, that when it filters down to the individuals throughout the state, it doesn’t always play out how we want it. And we’re trying to get ahead of those things, with events like today, and with thoughtful engagement with our state CFAC and our local CFACs, and over the coming months and year, I think you’ll see a really thoughtful rollout of our design principles, and a commitment to plain language, and to really talk about, you know, when functionally, what the experience will be, whether it be enrollment, or who to call for what, or how people will navigate plans, or if someone goes into crises, how do they change plans. All those sorts of questions are at the forefront of our minds, and we want to work with consumers and their family members to really understand what they need to do this right. </p>
+
+<p>We have a very unique opportunity here to learn from everything that’s maybe not working as well as we would like to now. And as we reshuffle the deck and the design of these plans to really come out the other side with something far more elegant and far more easy to navigate for individuals and to again continue to stay focused on the behavioral health and wellness of all people in the state regardless of what the funding source is, and how we get that done.</p>
+
+<p>So, with that, I’d like to turn it over to my colleague Deputy Secretary Dave Richard, who’ll continue through the presentation. And again, thank all of you for your time and attention and partnership through this process.</p>
+
+</section>
+<section aria-label="Dave Richard (part 1)">
+<h2 id="section-3">Dave Richard</h2>
+<p>Thank you, Kody, and I want to echo the things that Kody said, in terms of our engagement strategy. What we know is that the work that we’re doing is something that must have the involvement of all our stakeholders, starting with families and consumers, but also our provider community, the folks that will be running these plans, and, and frankly, every citizen in North Carolina that has an interest in this. This is a North Carolina plan, it’s designed to support people that have significant and serious mental health and mental disability and substance use, and traumatic brain injury needs. But it is a plan that is designed for our citizens. So, we’re excited that you’re on the phone today for this conference call.</p>
+
+<p>We’re going to show the first slide (Slide 3) which is really the beginning (Slide 4) overview of what we’re going to talk about today. Won’t spend much time on that but wanted to make sure that people had a chance to see where we’ll get to. I also re-echo the point that we will have time for questions at the end, that you’ll go through this process. So, we won’t, we won’t, we won’t read the slides to you, we’ll try to highlight what is in those, but make sure that we have time for the questions. And as we get to the end, we’ll also talk about other opportunities for stakeholders to be involved, because again, we are committed to that transparent effort that we have folks from across the state be involved in the process as we move forward.</p>
+
+<p>So, we’ll start with the first slide that really is just a beginning of the overview of the tailored plans. And so many of you have, let me even say this, because we want to make sure what this meeting is about is really a level step, so that we have across the state for all of you that are on the phone and other folks that’ll be able to get more information from this from you and other people is that, remind people what we’re doing, what this looks like, and that we’re all starting from the same place and that as we begin the work with stakeholders across North Carolina, we understand, we have a common understanding of what we’re trying to achieve. </p>
+
+<p>So before talking about the key features and tailored plans, I think we should remind everybody that this is part of a larger transformation inside of Medicaid that we are launching our standard plans in November of 2019. And in those standard plans, people who have mild mental health, mild to moderate mental health needs, substance use needs, will be able to receive services through those standard plans. And those individuals that are not in those standard plans initially will be on, continue with LME-MCO system, until we launch tailored plans live. So although this is a concentration on tailored plan design, it’s really important to remember that actually our behavioral health integration begins, actually it begins now as we are doing the planning for the launch of the standard plans that actually goes live in November of 2019, with two regions and then in 2020 in February, with the rest of the four regions of the state that we’ll identify.</p>
+
+<p>But tailored plans are a unique part of how we in North Carolina are designing our behavioral health, DD and substance use integration. And we have, what we’ve done instead is over the past several years, working with general assembly, many of you who are on the phone, trying to come to a consensus about how best to launch these. And in the legislative short session last year, the General Assembly approved the ability for us to move forward, so we’re basing our efforts on a General Assembly approved plan, as we go forward. So, tailored plans are designed for those individuals who have significant behavioral health needs and intellectual development disabilities. I want to say this is that, when we do that, and sometimes we’ll shorten it, it includes people with substance use, with substance use needs, and those with traumatic brain injuries. So, not to leave that out as we talk about in the next point.</p>
+
+<p>(Slide 5) The tailored plans are regional plans. They are not statewide. The LME-MCOs, as you know them today, will be the only organizations that, for the initial launch of tailored plans that will be able to have a contract for tailored plans. And those LME-MCOs will have to contract with an entity that holds a prepaid health plan license in North Carolina that covers the same services that must be covered under the Standard Plan benefit contract. So, that’s a lot of words, but what you do, another way of saying that is that we would expect that as plans develop in North Carolina as we award bids, those plans that either have those bids or who are prepared to have a bid and have that license will be in contract with our LME-MCOs to help facilitate the integration of physical and behavioral health services. Cody made the point, and I think it’s really important that we continue to say this over and over again, is that a unique factor in our design of tailored plans is that of State-funded and block-granted funded federal services will be included in the plans themselves. Many states, when they do carveouts of behavioral health and other services do not have the State-funded services included in that. We think this is an important design component of what we’re trying to achieve.</p>
+
+<p>(Slide 6) So, if we turn to the next slide, you’ll see this is an Overview of the Eligible Population. Just a reminder is that anybody who has a qualifying I/DD diagnosis will be in there. Those people that are on Innovations and TBI Waiver or on wait lists for those services will be in the Tailored Plan. Now those folks that have a Qualifying Serious Mental Illness or Serious Emotional Disturbance will be in Tailored Plans. We also have some other ways to identify folks, that with, those with two or more psychiatric inpatient stays or readmissions within the past 18 months will also be in the Tailored Plans. And, again, using the qualifying language, those with Substance Use diagnosis who have used an enhanced service, and then, Medicaid enrollees requiring Tailored Plan-only benefits. There are some benefits that Standard Plans will not have, and so if an individual requires those Tailored Plan-only benefits, they’ll obviously be inside of the Tailored Plan. As so many of you know, we are in the process of an engagement with the U.S. Department of Justice, we call it the Transition to Community Living Program. Those enrollees will be inside our Tailored Plans. Children with complex, in the complex needs settlement population, which is another unique group of individuals, will be inside. And then the legislation requires that children ages 0-3 with or at risk for I/DD who will meet eligibility criteria will be in the plans. And then those children involved with Division of Juvenile Justice of Public Safety and Delinquency Prevention Programs who meet the eligibility criteria. And then those folks who are, kids who are in North Carolina Health Choice who meet the eligibility criteria. So, I just violated what I said is read every bit of the slide . . . </p>
+
+<p>(Slide 7) . . . but I think this one is important to make sure that we call out to folks as you’re thinking about who will be in Tailored Plans as we go forward. What most folks have talked about is, we’ve been around the state and listening to people, and their concerns, have been several key items. One of those have been, though, about so, what happens? How do you get into a Tailored Plan? How do we make sure that identification is done properly? So, this slide tries to outline what we’re going to be doing in that effort. So, you think about it, there’s the first part is the individuals that we define in those populations. The DHHS Data Review will be the work that will do that. So, we have to make sure that as we’re, one, as we’re launching Standard Plans, we know who the current population in Medicaid and those will be receiving State services, who will be inside of Tailored Plans, so they don’t get assigned to a Standard Plan. So, we’ll be making that review process to make sure that, according to what the criteria that was listed, those individuals will be identified. And then we want to make sure that if somebody is not identified and doesn’t get assigned to a Tailored Plan initially, but believes that they should be in a Tailored Plan, or a family member or a Provider believes that, we’ll have a self-identification process, and that’s the slide on the right-hand side as you’re looking at it that sort of describes that, or the box on the right-hand side. And then, at the bottom, we describe an additional process, that each year, the Tailored Plan enrollees will be re-enrolled in the current plan, unless they meet both of the following criteria: Have a Serious Mental Illness or Substance Use Disorder and have not used any Medical or State-funded services in the past 24 months. Now, it’s real important to talk about that, because what we’re trying to assure is that people don’t wind up in plans that aren’t appropriate for them. And our belief is that if someone has spent that long of time not receiving a service, then it would be illogical for them to be able to be supported in a Standard Plan. Now, again, we always have the ability for people to request an assessment to move back into a Tailored Plan, but what we don’t want to do is have people inappropriately in a Tailored Plan or in a Standard Plan when they shouldn’t be in the Standard Plan.</p>
+
+<p>(Slide 8) Now, we’ll move to the next slide. And here’s a description of the Plan Benefits that will be inside of the Tailored Plans. And it goes without saying, but it’s a – I want to remind everybody what is the big deal about this change, is that currently inside the LME-MCO system, only specialty services for people with mental health development disabilities, substance use and traumatic brain injuries, are provided through that plan. Physical health services and pharmacy services are provided through currently a fee-for-service Medicaid, or, if you are receiving State-funded services, you may not have any other way of getting those physical health services. Our goal is to make sure that the plan that a person is in is allowed to manage all of the services that individuals need. Bringing up behavioral health, TB and substance use integration to the forefront. So, the LME-MCOs who today only manage the behavioral health specialty services will now manage all of the services, the total cost of the care that people receive inside of one plan, and that is the significant differences with moving forward, the most important component of the Tailored Plans. And, again, just as a reminder, if an individual is in a Standard Plan but has the behavioral health need, that Standard Plan will also manage all physical health and specialty services that that individual needs. So, the way to think about it is that you will have one health insurance card, and that health insurance card will allow you to receive all of the services that are available through the Medicaid and State-funded services plans. The – inside of our Tailored Plan benefits, the long-term supports and services is like personal care, private duty nursing, or home health services that for those individuals will be available. The full range of behavioral health and health services from outpatient, residential for in-patient treatment services will be available, so anything in terms of your specialty services that people now are aware of, those services will move into the tailored plans. We are terribly excited about our 1115 waiver and do additional things around substance use, including the ability to waive the IMD exclusion, and with that new 1115 waiver, we’ll be adding additional services for substance use, and those’ll be included in the Tailored Plan. For those individuals who are in a ICF, for people with development disabilities, they’ll be there. Important to note that the B3 services that are available currently in our LME-MCOs will be there, and important also because we have just launched our TBI waiver, those individuals who are enrollees will be inside the Tailored Plans. And, again, as we mentioned, all behavioral health services, DD and substance use that are State-funded only services will be available for individuals inside the Tailored Plans.</p>
+
+<p>(Slide 9) Next slide, say a couple of words about this. We’ve mentioned that when we went around the state, we were talking to people across the state in stakeholder meetings and others as we were preparing for our launch of managed care. What we heard from people where we want to make sure that if you do a specialty program like Tailored Plans there’s really clarity in terms of who is in which programs and how does that work. What we heard from every meeting that we had from the very beginning of doing waiver stakeholder meetings – and there was a significant desire of community-based, and people used different words for this – but it was either case management, care management, care coordination, which as we talked to people across the state, what we heard loud and clear is that what folks wanted was something more intensive than what they felt they were getting from traditional care coordination. I want to make it clear that health plans will always have a responsibility to provide care coordination. But the view was that on the ground, inside, as people are receiving services, there is a need for this intensive care management role. In our Standard Plans, as we are thinking about how we will provide care management for that are receiving mostly physical health services, we have a really robust effort around that care management, which is community-based. It relies upon community-based providers, opposition community in their offices that do that care management. I won’t go into all the details, but it includes our advanced medical home program inside of there. And what we believe is that for these specialty populations, people that have significant needs that are beyond just the physical health side, that we have to have that kind of a community-based commitment for care management. So, this is why you’ll hear, see a lot of emphasis on this. We’ve heard it from people across the state. We’re trying to develop a design principle around that that we’ll share with folks and receive a great deal of feedback on that side, that is that commitment for that, that local community-based care management. Everyone that is going to be inside of a Tailored Plan will be eligible for this care management service. And the way we think about it now is that every enrollee will have a single assigned care manager who’ll be responsible for ensuring that integrated coordinated physical health, behavioral health, I/DD and TPI services. We believe that these must be holistic, and intensive, and that it will be available for longer periods of time than current care coordination is. And it will have a much greater focus on transitions of care and the population health management for these individuals. It will be community based. Tailored Plans will be required to contract with what we’re calling tier 3 or 4 advanced medical homes and community-based care management agencies to provide local care management.</p>
+
+<p>The behavioral health plans will only be allowed to provide those services in- house, when we determine that the capacity for the advanced medical homes does not exist, and that we need to have the health plan provide that. So, in other words – and, again, you’ll have a lot more information from this as we publish more detail on paper about what our current vision and thinking is on this – but what we want to do is again, make sure that there is that care coordination, that care management at the community-based level, and that it is similar to, but it recognizes the significant differences that a behavioral health DD and substance use population have from those people that are really receiving primarily their physical health services. So, that care management function will have to be performed by people that have expertise in both the physical health and the specialty services offered in Tailored Plans.</p>
+
+<p>(Slide 10) So, if you flip to the next slide, there are Key Design Questions on Tailored Plans that we are working through and we want to just hit highlights of that today to think about what we are, we as a [honking] – that was a, if y’all all heard that, that was not us doing it. It was not there for emphasis, so, we are talking about Key Design Questions and we’re on slide 9, as people are looking at. It says 10 up here. Mine says 9 for some reason. But, the, so one, most important, we want to make sure that we’re ensuring smooth transitions. People will need to transition between Medicaid fee-for-service, Tailored Plans and Standard Plans depending on service needs. And we understand that this can be a complex and difficult transition. We are working on internally ideas on how best to do that, but it’s clearly something that we’re going to be seeking input from you, from stakeholders across the state, to make sure that we are getting that right. What we want to – what is a clear goal of the state and of our view of success in both transition to Standard Plans and, as we make the transition, to Tailored Plans, and all in between, is that if an individual was receiving services prior to launch of a Standard Plan or Tailored Plans, that they will continue to receive those services as soon as those plans are launched. So, in other words, there is no room in our mind for error when we make this transition, that people have to have continuity of service as they go forward. And, that for those providers and others on the phone is that we believe that another key tenet in our initial, sort of, evaluation of success is that those providers who are providing those services will get paid, regardless of whether there’s a mistake in how we do business or some other error, that we’ll make sure that providers are being paid and that beneficiaries are receiving the services. So, looking for, as we begin our continued conversation, comment and support and recommendations around how we can best help ensure that process.</p>
+
+<p>(Slide 11) We are, we are clearly, as Cody mentioned in the very beginning, committed to consumer and family representation on Tailored Plan operations. We’ve said in multiple places that the State CFAC will continue, that we believe that the local CFACs will continue, and we have to work on how to do that design for supporting the Tailored Plan effort. So, we will continue to have engaged conversations with the community, especially how CFACs and other families and consumers to ensure that that representation is there and that it provided input to the state and to the plan as they go live in this effort. I should also say that we’re working through ways in which we will have that continued feedback loop for our Standard Plans as well, because they will be serving people with behavioral health needs as we go forward. So, that is, so a key component is our, as we’re designing.</p>
+
+<p>(Should be Slide 12, but he went back to Slide 10) And then, and then, we want to make sure that we have an effective service authorization and appeal process. We know that there will be times in this effort, as there is today, where people will want to, are concerned about the service that are authorized, or service that they’re available, and believe that there are additional service that should be available or that their service plan was not the one that they felt best met their needs, we want to be clear that there needs to be a process by which people have a method in which they can inform folks about their concerns. There’s an appeal process to meet those individuals’ needs. And, and obviously, we as a state need to monitor closely and carefully when we see the sort of denial rates that will happen, that currently happen to make sure that we’re not seeing things that aren’t consistent with what our values are and what was decided for the state and along with you in terms of were the appropriate use of benefits and how that will work in the state. So, we’ll be looking for stakeholder involvement as we go forward.</p>
+
+<p>(Back to Slide 11) Let me say a couple of words, then I’ll slip to the next slides as we sort of end this and get ready for questions. Did I mention, in the beginning, in 39, in the beginning, that, that the department level, this is a joint effort. We know that, one, it’s not just the division of mental health, DD and substance use, and the Medicaid agency who have a stake in Tailored Plan launch. Frankly, every part of our Department has a role in this. There were multiple places that we impact. We believe that the best way that we do this in the state is that we make sure we have a coordinated, collaborative process. Collaboration as we are rolling out Tailored Plans. Our current work internally in design has extensively involved members of our staff from both divisions, along with other places in the Department. As we reach out to our stakeholder community, we will do it the same way. And what you will see it that, you know, there are often times when people from Division of Mental Health, DD and substance use are presenting, and when they present, they will be speaking as a Department representative when we’re talking about Tailored Plans. Same way when people from those __________ Medicaid speak, we’ll be speaking as a holistic way. We’ll be talking about the, this as a Department, not as one or other division. And, there will be other people from the Department that will be in other venues, when they’ll be speaking. And it’ll be the same thing. Same token is that when, we’ll have formal ways to ask for your feedback, and we’ll talk about those in a second. But we know, there are tons of times – tons is the wrong word – there are an awful lot of times that we are in meetings and other places with stakeholders where we will hear from you. And our goal, and we, we’re working very hard to make sure that we can meet this, is that, when you speak to any of us, and you have a concern or a recommendation, it gets raised to make sure that the team that’s working on design hears it, so that we get all of that input. We obviously want to get it through a formal process, and we’ll talk about that. But we want to be clear is that, we will over the next several years be continuing our really intensive engagement with stakeholders, but we want to hear from you. That is one of the most important things that we want to communicate.</p>
+
+<p>(Slide 12) If you go to the next slide, it gives you the timeline that we’re thinking of. And I want to just remind folks again that we are going to launch, with our Standard Plans, in February of 2000 – excuse me, in November of 2019 – and that we will be totally implementing our first phase of the Standard Plan launch in February of 2020. While we’re going through that process, we are hoping to launch the beginning of the SUD part of our 1115 waiver early. Our goal is, is that we will, we will move toward implementing the waiver of the IMD provisions for the SUD part of 1115 waiver in January of 2019. Now, as a, as a good state bureaucrat, I’m going to say that there’s always a chance we may have to delay that a little bit, but our goal is to make sure that we can, we can have that benefit available for people as soon as possible. And, again, our goal is on in January 2019. The – if you see on this slide is that, we show that behavioral health Tailored Plan design is ongoing, from now through February of 2020, and then, until the plans launch in the remaining regions, we believe that that’s the time for us to really release the RFA for Tailored Plans. We’re not calling it RFP, because as we mentioned, there’s a requirement that LME-MCOs receive that contract, so we’re going to do it a different way. But, I want to assure everyone it will be a rigorous process by which we are issuing this RFA. We’re very serious. Important responses that are needed for the LME-MCO system along with their health plan partners, so that, so that we have in North Carolina is the best of what we, what Tailored Plans can be. So, although there is a guarantee of a contract for LME-MCOs that will do Tailored Plans, there’s not a guarantee of a contract for each individual LME-MCO. What we need to do is to make sure that we are expecting and demanding the highest quality in responses and, and I will say this, we have, we have high expectations of the LME-MCO system, and we have no doubt that we will meet those expectations. We want to be clear for our stakeholder community that we intend to create a rigorous process for those RFA’s to come through. And in May of 2020 is when we intend to do the award of the contract for Tailored Plans. What we didn’t talk about in here – and I’ll just, because people asked the question, I’m sure, is that our legislation requires that there is a regional system. It says that the regions have to be 5 through 7 regions. The Department is continuing to evaluate what is the best way to move forward with that. But that’s why we didn’t give you any specifics on that at this time.</p>
+
+<p>But obviously we’ll know that well in advance of issuing the RFA for our Tailored Plans.</p>
+
+<p>(Slide 13) And then finally, on the last page, the Opportunities to Engage. This is the first of this type of webinar. Our goal is that every other month, we will have one like this. And to be clear, why we want to do this is we know many of you may not be able to attend a specific meeting that other constituent groups hold or associations, so we want to make sure there’s a level set in place. That you get to hear anybody in the state who wants to hear where we are in Tailored Plans will have an opportunity to call into these webinars and ask, and ask questions, or at least understand where we are and hear from what we’re doing. We will issue white papers, like were done through the Standard Plan process. And when those white papers come in, those will be ways that we’ll ask people to give us comment and feedback, and we’d like a lot of that in writing, but we’ll also post opportunities for people to give other responses. And then there’ll be frequently asked questions that we’ll take from those comments and other things that we’ll make sure are published on our website, which is listed on this slide, and we really encourage people to stay close to that, that transformation website. And then, we will have very specific engagements with families, caregivers, consumer representatives, Providers, our health plans and LME-MCOs, our counties, and the general public. And you can imagine the way we’ll do this or understand we’ll do this, is use as many of the existing processes that we have, and then, but, want to be clear, is that we are always open for requests for Bruce or individuals to meet with us to discuss Tailored Plan concerns or things that you would like to, for us to know, that you may not feel comfortable putting in writing. So, what I think all of us want to convey is that we are absolutely committed to this stakeholder process and that that stakeholder process is one that will drive how Tailored Plans are implemented in North Carolina. And it’s got the time slide, so it’s almost perfect. But I would add one other comment is that these slides will be available after the presentation on our Medicaid Transformation Web page. And then I’m going to turn it over to Debra, who will manage the question process. And then thank you for being a part of this.</p>
+
+</section>
+<section aria-label="Debra (part 1)">
+<h2 id="section-4">Debra</h2>
+<p>Thank you, Dave. We have a series of questions that we will address and just want to remind folks that the information from the slides will be available on the Medicaid Transformation website. That website address is in the lower corner of the slide that’s on the screen right now, should you need to access it later.</p>
+
+<p>The first question is for Dave. And the participant asks, “How will the Department decide on which two reasons go first in the Standard Plan?</p>
+
+</section>
+<section aria-label="Dave Richard (part 2)">
+<h2 id="section-5">Dave Richard</h2>
+<p>So, I’ll start, and Jay will probably jump in on this. I think the Department is in the process of evaluating what is the best two regions to go forward with. We have not made that decision yet. Jay, do you want to add something to that?</p>
+
+</section>
+<section aria-labelledby="section-6">
+<h2 id="section-6">Jay</h2>
+<p>Yes, good morning everybody. That decision will be based on a number of factors that are primarily driven by the respondents, the health plans that have applied to become the Standard Plans and after the time of award, we will announce that. These are, this is just a decision that we wanted to make sure we got right, and we will make that decision and announce that in the first week of February.</p>
+
+</section>
+<section aria-label="Debra (part 2)">
+<h2 id="section-7">Debra</h2>
+<p>Thank you, Jay. The next question is for Dr. McCoy. The participant asks, “So the IPRS funds will cover __________ health services, as well in the Tailored Plan. Does that mean there will be an increase in IPRS funds given to Tailored Plans?</p>
+
+</section>
+<section aria-labelledby="section-8">
+<h2 id="section-8">Dr. McCoy</h2>
+<p>This is an important area to clarify. The IPRS funds, as they used to be called, they’re dedicated for behavioral health and I-DD services. So, for those who are uninsured, who belong to a Tailored Plan, they’re belong to a Tailored Plan in the same sense that they do currently. For those that belong to a Tailored Plan who have Medicaid, that’s where the tailored plans will pick up additional coverage for fiscal health and pharmacy services that they don’t currently cover.</p>
+
+</section>
+<section aria-label="Debra (part 3)">
+<h2 id="section-9">Debra</h2>
+<p>Thank you. We have several questions for Deb Goda about individuals who are on the registry of unmet needs or the IDB waiting list. The first question is, “IDB wait list people, will they be covered in the Tailored Plan?”</p>
+
+</section>
+<section aria-label="Deb Goda (part 1)">
+<h2 id="section-10">Deb Goda</h2>
+<p>Yes, individuals who are on the IDB wait list will be in the Tailored Plans unless they choose to opt out of that and, and receive their physical health services while they are waiting on the waiting list through the Standard Plan.</p>
+
+</section>
+<section aria-label="Debra (part 4)">
+<h2 id="section-11">Debra</h2>
+<p>Thank you, Deb. We have a couple of questions around SIS assessment, and I want to just raise those for you. The first question asks, “How can the NCOs do the SIS assessment given that they also manage the fund?”</p>
+
+</section>
+<section aria-label="Deb Goda (part 2)">
+<h2 id="section-12">Deb Goda</h2>
+<p>So, the SIS assessments are done by an individual in a department that is not part of utilization management. The SIS assessment is the standardized tool that can only be administered by a SIS-certified trainer or a SIS-certified assessor. And they are trained by AAIDD, the American Association for Individuals with Developmental Disabilities, and there is inter-rater reliability and assessing of the assessor every year.</p>
+
+</section>
+<section aria-label="Debra (part 5)">
+<h2 id="section-13">Debra</h2>
+<p>And then we have one final question around the SIS assessment, and this respondent says, “The SIS budget determination is used as a guideline, but does not come near meeting the current needs of the individual. Is this budget going to become a hard limit for individuals?”</p>
+
+</section>
+<section aria-label="Deb Goda (part 3)">
+<h2 id="section-14">Deb Goda</h2>
+<p>When we move to the Tailored Plans, we will still be utilizing the Innovation C waiver, as the vehicle for serving the individuals who are on the waiver. And that waiver is currently in the renewal process, and the SIS assessment budget guideline is still a guideline.</p>
+
+<h3 id="heading-1">Debra</h3>
+<p>Thank you, Deb. Kelsey, we have several questions, some about care management, and others about what types of services fall into Standard Plan. The first question is, “Does psychological testing fall into Tailored Plan or Standard Plan?”</p>
+
+<p>Psychological testing actually falls on both the Standard and the Tailored Plan. It’s incorporated in our behavioral health outpatient therapy service definition, which is included in both plans. So, individuals will be able to get psych testing regardless of what plan they choose.</p>
+
+<h3 id="heading-2">Debra</h3>
+<p>Thank you. The next question is around SACOT. “Is SACOT service identified in the Tailored Plans?”</p>
+
+<p>Yes, yes, it is. SACOT, it will be available in the Tailored Plan.</p>
+
+<h3 id="heading-3">Debra</h3>
+<p>Okay. Thank you. This question relates to individuals who have severe mental illness who are released from prison and may not be eligible due to not having Medicaid services in the past years or State funds that we manage. “So, technically, will individuals who are released from prison with SMI be eligible for the Tailored Plan or the Standard Plan?”</p>
+
+<h3 id="heading-4">Kelsey</h3>
+<p>That’s a great question. Recently, we actually just had a internal work group on that question, of how to provide the best care for individuals who are incarcerated, whether they’re juveniles or adults. Our goal is to ensure a smooth transition out of the facility, and to assess them, what the appropriate plan for them, whether it be Standard Plan or Tailored Plan. And also, to look to see if they are Medicaid eligible, to start that paperwork prior to release, so they will have Medicaid upon release. If they are not Medicaid eligible and they still need behavioral health services, they can be served under the Tailored Plan because State-funded services will be issued under the Tailored Plan.</p>
+
+<h3 id="heading-5">Debra</h3>
+<p>Thank you, Kelsey. Dave, I just have a question for you. We have a participant who said that we didn’t mention Cap C or Cap DA. Are those in or out of Tailored Plans?</p>
+
+<h3 id="heading-6">Dave Richard</h3>
+<p>So, to the legislation required as to, to evaluate where those programs should be, and we are in the process of reviewing all of the information about those programs before making a recommendation about how we should manage Cap C and Cap DA. So, the best, the closest answer right now with the _________________ is that, and our current thinking is that at launch of Tailored Plans, they would not include these individuals inside of that.</p>
+
+<h3 id="heading-7">Debra</h3>
+<p>Okay. Thank you. Dr. McCoy, we have a question around Tailored Plans. The respondent asks, “How will Tailored Plans contract with providers for physical health and pharmacy services? Will this be through the partnership with the Standard Plan PHC?”</p>
+
+<h3 id="heading-8">Dave Richard</h3>
+<p>So, I’m going to jump in with Dr. McCoy. We’ll tag team on this.</p>
+
+<h3 id="heading-9">Dr. McCoy</h3>
+<p>Okay.</p>
+
+<h3 id="heading-10">Dave Richard</h3>
+<p>So, the thing that, that we want to make clear is that the partnership with a health plan does not mean we believe that there will be two separate benefit packages or that that individual services we manage that way. We want that – we want the contract with the health plans because we want to make sure the expertise is available at the LME-MCO level, but our expectation is it will be managed seamlessly. Is that right, Dr. McCoy?</p>
+
+<h3 id="heading-11">Dr. McCoy</h3>
+<p>Right. That’s the goal. We want the system to really move forward to a truly integrated one, as opposed to kind of a duct-tape version of our current system. And so, we’re really trying to push that forward.</p>
+
+<h3 id="heading-12">Debra</h3>
+<p>That feels great. We have a question about dental services. The individual asks, “How are dental services going to be handled for those in the Tailored Plans?”</p>
+
+<h3 id="heading-13">Dave Richard</h3>
+<p>In the, in the – this is Dave – in the legislation, is that dental services for all populations are carved out of managed care, so it will be handled the same way as it is today.</p>
+
+<h3 id="heading-14">Debra</h3>
+<p>Thank you. We also have a question around the Innovations waiver. The participant asks, “As the Innovation waivers are renewed every five years, how will the services be maintained and who will be designed?”</p>
+
+<p>That will continue through the current process that we have for the innovations waiver design and renewal. We will continue to get stakeholder feedback from providers, individuals, their families, anyone who wishes to be involved in that process.</p>
+
+<h3 id="heading-15">Dave Richard</h3>
+<p>Debra, can I add something? Definitely correct on that. One of the things that we want to, we’re trying to do right now is to make sure that as we are going through this transition that we’re as consistent as possible and have a lot of change. But, what we also want to be clear about is that the value of Tailored Plans allows us to think differently about how we provide I/DD services, including that integration with physical health. So, I think you can expect that once we get past this renewal of the Innovations waiver, as we continue to work toward design of the Tailored Plans, we’ll be looking for a lot of feedback from consumers and families and providers about, what are the kind of design changes in the Innovations waiver that we can take advantage of because of the new integrated system?</p>
+
+<h3 id="heading-16">Debra</h3>
+<p>Thank you. Dave, we have another question about how family members can participate. The participant asks, “On current work groups and/or committees, are family members represented, and do they have a voice?”</p>
+
+<h3 id="heading-17">Dave Richard</h3>
+<p>A lot of other comments on this, I think in clearly in our ______ packs, family members have, have a great voice in this effort. Our Medicaid advisory committee has concern with family members on our subcommittees around, as work on a subcommittee around this ________, and we have multiple other avenues in which we engage families or consumers. I think the, what I would say to anyone who has an interest in participating in a more formal way is that, that please let us know so that we can, we can work to find a way to make sure that you have the input that is, is that that you’re working to have in this process. We obviously can’t have a room where every stakeholder in North Carolina is present for every meeting, but we don’t want to exclude anybody’s voice in this process, so please make sure you get __________.</p>
+
+<h3 id="heading-18">Debra</h3>
+<p>Thank you, Dave. Kelsey, we have a question around basic benefit SUD services. “Will basic benefit SUD Medicaid services fall under the Standard Plan? Then IPRS basic benefit SUD along with SUD enhanced services falling under Tailored Plan?”</p>
+
+<h3 id="heading-19">Kelsey</h3>
+<p>So, let me start with the State-funded services, or IPRS, as it used to be known as. All State- funded services are covered under the Tailored Plan. So, if you are currently getting services or will need services, and you do not have Medicaid, you will be in the Tailored Plan. Standard Plan does not cover State-funded services. In regards to the fitness use disorder array of services, there will be a basic benefit package in the Standard Plan, as well as in the Tailored Plan. We want to ensure individuals that have substance use needs are able to get that immediate service regardless of which plan they’re in.</p>
+
+<h3 id="heading-20">Debra</h3>
+<p>We have time just for a couple more questions. We have a question around the waivers, and how the waivers are managed. This participant asks whether the BC waivers will be a part of the 1115 waivers when the Tailored Plans are launched.</p>
+
+<p>So, currently the Innovation C waiver and the TBI C waiver are both underneath the B waiver as the managed care vehicle. When the Tailored Plans launch, the intent is to take the B waiver, the B3 services, incorporate them into the 1115, and have the 1115 be the vehicle for managed care. The C waivers will continue.</p>
+
+<h3 id="heading-21">Debra</h3>
+<p>Thank you. Dave, is there anything you want to add to that? All right. Sounds good. We have a question around the CDSA’s. This question is, “What will be the role of the CDSA’s with Medicaid transformation and where do they fit?” Deb, you can take that.</p>
+
+<p>The CDSA services will continue. Individuals 0-3 who are currently being served by the CDSA’s, if they meet the eligibility criteria, they would move into those Tailored Plans. If not, they would move into the Standard Plans.</p>
+
+<h3 id="heading-22">Debra</h3>
+<p>Thank you. I think that addresses most of our questions. I just want to remind folks that the slides will be available at the Medicaid Transformation website. You can continue to submit questions via that website e-mail address, and we’ll address those at a later date. We want to thank everyone for participating, and I’ll just hand it over to Janie for any final comments.</p>
+
+<h3 id="heading-23">Janie Shaver</h3>
+<p>Debra, thank you so much. And thank you to all of our panelists who are here today, and in particular, a big note of gratitude to all of you for joining us today. We know it was a bit of short notice, but it’s very important. And we’re just very grateful to all of you for taking the time out of your schedules to be a part of this. As Dave mentioned previously, this is just the beginning. We will have ongoing communication. We will have venues such as this, which we think is the best way to sort of reach the most folks in our audience across the state. We’ll have white papers that will be posted. We’ll have frequently asked questions that we will post. So, please stay tuned for those coming attractions. The best way to find out about what is coming up is to check the website here on the last slide. You may also submit questions to <a href="mailto:Medicaid.Transformation@DHHS.NC.gov" class="email-link">Medicaid.Transformation@DHHS.NC.gov</a>. That is also in the bottom right-hand corner of your last slide. I do believe that we’ll probably be reconvening in January for our next, sort of, large- scale webinar for an update for Tailored Plans. So, stay tuned to your e-mail and to our website for the date for that. And, again, thank you all so much. We appreciate your participation, your questions, and we certainly welcome your feedback into this process. Thank you.</p>
+
+<h3 id="heading-24">Debra</h3>
+<p>Thank you, everyone. Have a nice day.</p>
+
+</section>
+    </main>
+    <footer>
+        <p>Converted to accessible HTML by ADA Compliance Engine.</p>
+    </footer>
+</body>
+</html>

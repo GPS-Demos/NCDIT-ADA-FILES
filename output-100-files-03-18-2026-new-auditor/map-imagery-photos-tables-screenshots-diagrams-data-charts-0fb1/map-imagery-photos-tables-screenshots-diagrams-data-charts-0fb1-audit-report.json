@@ -1,0 +1,109 @@
+{
+  "document_id": "map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1",
+  "audited_at": "2026-03-19T06:51:01.836660Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1/map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1/map-imagery-photos-tables-screenshots-diagrams-data-charts-0fb1.html"
+  },
+  "quality_score": 79,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7929,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 0.6428571428571428,
+  "fidelity_visual": 0.7142857142857143,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "While text content preservation is strong (Content score 1.0, Shingling Recall 0.891), the document suffers from notable structural and visual defects. The programmatic image count ratio is extremely low (0.427), strongly corroborating the LLM concern that meaningful visual content, specifically a chart, is missing. Combined with major heading hierarchy errors, human review is necessary to ensure crucial data is not lost.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy in the output contains several major structural errors compared to the source document and its Table of Contents. First, on Page 12, 'ATLAS Schema' is an H3 subsection of 'ATLAS Project' (H2), but it is incorrectly promoted to an H1 in the output. Second, on Page 22 and 23, 'Stream Segmentation' and 'Smoothing' are sibling sub-headings (both visually identical in the source and peers in the TOC) under 'Polyline Issues' (H2). However, 'Stream Segmentation' is assigned H3, wh",
+      "source_pdf_quote": "TOC and visual hierarchy establish 'ATLAS Project' (Page 10) as H2, and 'ATLAS Schema' (Page 12) as its H3 child. 'Stream Segmentation' (Page 22) and 'Smoothing' (Page 23) are peers under 'Polyline Issues'.",
+      "output_quote": "Page 10: {\"level\": 2, \"text\": \"ATLAS Project\"}\nPage 12: {\"level\": 1, \"text\": \"ATLAS Schema\"}\nPage 22: {\"level\": 3, \"text\": \"Stream Segmentation\"}\nPage 23: {\"level\": 2, \"text\": \"Smoothing\"}",
+      "location": "Pages 10, 12, 22, and 23",
+      "source": "fidelity_llm",
+      "check_id": "S2",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    },
+    {
+      "description": "Text formatting not preserved (bold, italic, underline)",
+      "severity": "major",
+      "analysis": "While some text formatting is preserved (such as bolding for recommendations), meaningful bold formatting was lost in the bulleted list outlining EDH specifications on page 30. The source PDF bolds the specification categories and the concluding rules for visual emphasis, but the HTML renders this text plainly without any styling.",
+      "source_pdf_quote": "List items and rule outcomes bolded, such as 'EDH Lake/pond collection specifications' and 'then stream/river is represented as a 2-dimensional (polygon) basic feature object.'",
+      "output_quote": "The text is rendered plainly within list items without `<strong>` or `<b>` tags: `<li>EDH Lake/pond collection specifications...` and `...then stream/river is represented as a 2-dimensional (polygon) basic feature object.</li>`",
+      "location": "Page 30 / HTML bulleted list outlining EDH specifications",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "minor",
+      "analysis": "Most images from the source PDF are present in the HTML output. However, the chart corresponding to Figure 22 on page 37 of the source document is completely missing from the output. There are no image tags corresponding to this meaningful chart in the expected location.",
+      "source_pdf_quote": "Figure 22 chart showing survey results titled 'How important is capturing non-networked sinkholes less than 2 acres to your business needs?'",
+      "output_quote": "The chart image and any corresponding `<img>` tags are completely absent between the paragraph ending '...can be used for regulatory purposes.' and the 'Waterbody Differentiation' heading.",
+      "location": "Page 37 / HTML section between Case 4 recommendation and Waterbody Differentiation heading",
+      "source": "fidelity_llm",
+      "check_id": "V2",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Verify the impact of the missing chart (Figure 22) and restore it if necessary.",
+    "Correct heading tags on pages 12, 22, and 23 to match the structural hierarchy of the source document Table of Contents.",
+    "Check the bulleted list on page 30 and restore bold styling where needed for emphasis."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.85,
+    "score_breakdown": {
+      "fidelity_composite": 0.7929,
+      "raw_score": 0.7929,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7929,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 0.6428571428571428,
+      "fidelity_visual": 0.7142857142857143,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8913514070714359,
+      "shingling_precision": 0.9549420209828824,
+      "duplication_ratio": 0.016993525529480004,
+      "word_count_ratio": 0.8797408937288772,
+      "baseline_words": 10652,
+      "gemini_words": 9371,
+      "table_count_ratio": null,
+      "image_count_ratio": 0.42735042735042733,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 266926,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

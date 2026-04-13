@@ -1,0 +1,152 @@
+{
+  "document_id": "I-H-S--Home-Health-Fee-Schedule---January-2021",
+  "composite_score": 0.6,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: content_evaluation_missing",
+  "knockout_triggered": "content_evaluation_missing",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [],
+    "score": 0.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": null,
+    "evaluation_status": "failed"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have reviewed the output against the source document. No paragraph or section appears to be duplicated in the output. While some table headers are repeated in the source (e.g., 'Ostomy Supplies (continued)'), the output has correctly consolidated or linearized these into distinct sections without repetition.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The output uses a flat section structure which is a simplified version of the source's hierarchy. In the source, titles like 'Home Health Care Medical Supplies' are H2 and specific supplies like 'Ostomy Supplies' are H3. The output combines these into single section titles (e.g., 'Home Health Care Medical Supplies Ostomy Supplies'). This is an acceptable normalization for accessibility as it preserves the semantic relationship without skipping levels.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "The tables included in the output (e.g., Section 2 and 5) correctly identify headers and maintain the column alignment (HCPCS Code, Description, Billing Unit, Maximum Rate / Unit). While the tables are truncated (missing most rows), the structure of the rows that are present is accurate.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The reading order is fatally compromised. The source PDF is a 10-page document starting with 'Home Health Visits' on page 1. The output skips the first 5 pages entirely, starting with Code A9999 from page 6. Furthermore, within pages 6-9, large sections of content are omitted, capturing only small fragments of tables (e.g., only 2 rows for Tracheostomy and Miscellaneous supplies). Finally, a section at the very end of the output (Section 6) contains a disclaimer claiming pages 1-6 are unavailable, despite content from page 6 appearing at the start of the document. This is a major failure of structural fidelity and logical flow.",
+        "b_evidence_source": "Page 1: 'INDIAN HOME HEALTH SERVICES... Home Health Visits... RC420 Physical Therapy'",
+        "b_evidence_output": "The output begins Section 1 with: 'A9999 Miscellaneous DME supply...'. It ends with Section 6: '[Pages 1-6 unavailable] Content from pages 1-6 could not be converted.'",
+        "b_evidence_location": "Entire document, specifically start and end of sections list.",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The source document contains tabular data rather than lists. No list conversion errors were detected.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "There are no links present in the source document, and none have been erroneously added to the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.7727272727272727,
+    "penalty_sum": 5,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 1,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have reviewed the output against the source document. No paragraph or section appears to be duplicated in the output. While some table headers are repeated in the source (e.g., 'Ostomy Supplies (continued)'), the output has correctly consolidated or linearized these into distinct sections without repetition.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The output uses a flat section structure which is a simplified version of the source's hierarchy. In the source, titles like 'Home Health Care Medical Supplies' are H2 and specific supplies like 'Ostomy Supplies' are H3. The output combines these into single section titles (e.g., 'Home Health Care Medical Supplies Ostomy Supplies'). This is an acceptable normalization for accessibility as it preserves the semantic relationship without skipping levels.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"The tables included in the output (e.g., Section 2 and 5) correctly identify headers and maintain the column alignment (HCPCS Code, Description, Billing Unit, Maximum Rate / Unit). While the tables are truncated (missing most rows), the structure of the rows that are present is accurate.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The reading order is fatally compromised. The source PDF is a 10-page document starting with 'Home Health Visits' on page 1. The output skips the first 5 pages entirely, starting with Code A9999 from page 6. Furthermore, within pages 6-9, large sections of content are omitted, capturing only small fragments of tables (e.g., only 2 rows for Tracheostomy and Miscellaneous supplies). Finally, a section at the very end of the output (Section 6) contains a disclaimer claiming pages 1-6 are unavailable, despite content from page 6 appearing at the start of the document. This is a major failure of structural fidelity and logical flow.\",\n      \"b_evidence_source\": \"Page 1: 'INDIAN HOME HEALTH SERVICES... Home Health Visits... RC420 Physical Therapy'\",\n      \"b_evidence_output\": \"The output begins Section 1 with: 'A9999 Miscellaneous DME supply...'. It ends with Section 6: '[Pages 1-6 unavailable] Content from pages 1-6 could not be converted.'\",\n      \"b_evidence_location\": \"Entire document, specifically start and end of sections list.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The source document contains tabular data rather than lists. No list conversion errors were detected.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"There are no links present in the source document, and none have been erroneously added to the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 1,\n    \"minor_count\": 0,\n    \"penalty_sum\": 5,\n    \"score\": 0.7727272727272727\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The converted HTML output fails to faithfully represent the visual organization of the 10-page source document. More than half of the document (Pages 1-5 and the beginning of Page 6) is missing, and a placeholder message stating '[Pages 1-6 unavailable]' is placed at the end of the document. This is a significant deviation from the source's visual flow. Furthermore, the tables for 'Tracheostomy Supplies' and 'Miscellaneous Supplies' are severely truncated in the output, showing only the first two rows each, whereas the source PDF contains comprehensive lists on pages 8 and 9. This loss of content and structural rearrangement constitutes a major layout difference that loses critical information.",
+        "b_evidence_source": "The source PDF is a 10-page document starting with 'Home Health Visits' on page 1. Page 8 contains a full table of Tracheostomy Supplies (A4623 through S8189). Page 9 contains a full table of Miscellaneous Supplies (A4250 through T1999).",
+        "b_evidence_output": "The HTML rendering begins with content from PDF page 6 and ends with a placeholder: '[Pages 1-6 unavailable] Content from pages 1-6 could not be converted.' The 'Tracheostomy Supplies' table only shows codes A4623 and A4624. The 'Miscellaneous Supplies' table only shows codes A4250 and A4320.",
+        "b_evidence_location": "Throughout the document; specifically the start and end of the HTML output, and the truncated tables corresponding to PDF pages 8 and 9.",
+        "c_verdict": "FAIL",
+        "d_severity": "minor"
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "The tables that are present in the HTML output (Ostomy, Tracheostomy, Miscellaneous, and COVID-19 Infusion) are visually well-rendered. They maintain a clear tabular structure with distinct headers and rows. Columns are properly aligned, and borders are visible, allowing a sighted user to easily read and understand the relationship between the HCPCS codes and their corresponding rates/units. While the content is truncated (noted in V1), the rendering quality of the table structure itself is high.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "The source PDF consists entirely of text and tables. There are no logos, charts, photos, or other meaningful graphics present in the source material that are missing from the HTML output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "There are no visual instances of content duplication in the HTML output. Each heading and table section appears only once, corresponding to its unique location in the source PDF.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.9375,
+    "penalty_sum": 1,
+    "defect_count": 1,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 1,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The converted HTML output fails to faithfully represent the visual organization of the 10-page source document. More than half of the document (Pages 1-5 and the beginning of Page 6) is missing, and a placeholder message stating '[Pages 1-6 unavailable]' is placed at the end of the document. This is a significant deviation from the source's visual flow. Furthermore, the tables for 'Tracheostomy Supplies' and 'Miscellaneous Supplies' are severely truncated in the output, showing only the first two rows each, whereas the source PDF contains comprehensive lists on pages 8 and 9. This loss of content and structural rearrangement constitutes a major layout difference that loses critical information.\",\n      \"b_evidence_source\": \"The source PDF is a 10-page document starting with 'Home Health Visits' on page 1. Page 8 contains a full table of Tracheostomy Supplies (A4623 through S8189). Page 9 contains a full table of Miscellaneous Supplies (A4250 through T1999).\",\n      \"b_evidence_output\": \"The HTML rendering begins with content from PDF page 6 and ends with a placeholder: '[Pages 1-6 unavailable] Content from pages 1-6 could not be converted.' The 'Tracheostomy Supplies' table only shows codes A4623 and A4624. The 'Miscellaneous Supplies' table only shows codes A4250 and A4320.\",\n      \"b_evidence_location\": \"Throughout the document; specifically the start and end of the HTML output, and the truncated tables corresponding to PDF pages 8 and 9.\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MINOR\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"The tables that are present in the HTML output (Ostomy, Tracheostomy, Miscellaneous, and COVID-19 Infusion) are visually well-rendered. They maintain a clear tabular structure with distinct headers and rows. Columns are properly aligned, and borders are visible, allowing a sighted user to easily read and understand the relationship between the HCPCS codes and their corresponding rates/units. While the content is truncated (noted in V1), the rendering quality of the table structure itself is high.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"The source PDF consists entirely of text and tables. There are no logos, charts, photos, or other meaningful graphics present in the source material that are missing from the HTML output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"There are no visual instances of content duplication in the HTML output. Each heading and table section appears only once, corresponding to its unique location in the source PDF.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 1,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 1,\n    \"penalty_sum\": 1,\n    \"score\": 0.875\n  }\n}\n",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 2,
+  "total_critical": 0,
+  "total_major": 1,
+  "total_minor": 1,
+  "programmatic_signals": null,
+  "corroboration": null
+}

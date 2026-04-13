@@ -1,0 +1,213 @@
+{
+  "document_id": "Florence-2022-Q2-QPR",
+  "composite_score": 0.4,
+  "risk_level": "HIGH",
+  "routing_action": "FLAG_FOR_REVIEW",
+  "routing_reason": "Knockout rule: critical_veto",
+  "knockout_triggered": "critical_veto",
+  "content_fidelity": {
+    "call_type": "content_fidelity",
+    "checks": [
+      {
+        "check_id": "C1",
+        "check_name": "Fabricated paragraphs or sentences",
+        "a_analysis": "I have carefully compared the output JSON against the source PDF. The textual content that is present in the output, such as the narratives on disaster damage and recovery needs, as well as the activity metadata, matches the information in the source. I did not find any fabricated body text or invented paragraphs. The note regarding unavailable pages is an acceptable pipeline addition regarding conversion status.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C2",
+        "check_name": "Fabricated contact information",
+        "a_analysis": "The URL present in the 'Recovery Needs' narrative on page 1 ('https://files.nc.gov/ncosbm/documents/files/Florence_Report_Full_rev20181016v10.pdf') is correctly preserved in the output. I found no other phone numbers, emails, or URLs in the source to compare, and no fabricated ones in the output.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "C3",
+        "check_name": "Complete section or page missing",
+        "a_analysis": "The output suffers from massive content omission. Several entire sections and multiple pages are missing. Specifically, the 'Overall', 'Progress Toward Required Numeric Targets', and 'Funds Expended' tables on page 2 are entirely absent. Additionally, activity reports spanning pages 13 through 20 (Activities 999HRB1102, 999HRB1108, and 047AHD2408) are completely omitted from the conversion result.",
+        "b_evidence_source": "Page 2 contains 'Overall', 'Progress Toward Required Numeric Targets', and 'Funds Expended' tables. Pages 13-20 contain full reports for Activities 999HRB1102, 999HRB1108, and 047AHD2408.",
+        "b_evidence_output": "The tables on page 2 and the entire activity sections for activities 999HRB1102, 999HRB1108, and 047AHD2408 are missing from the JSON.",
+        "b_evidence_location": "Pages 2 and 13-20",
+        "c_verdict": "FAIL",
+        "d_severity": "critical"
+      },
+      {
+        "check_id": "C4",
+        "check_name": "Table with significantly fewer rows",
+        "a_analysis": "The 'Project Summary' table, which starts on page 3 and continues on page 4, contains rows for several projects (101, 102, 103, 105, 107, 110, 111, 112, 9999). The output JSON representation of this table in 'sections[4]' contains only one entry: '101 / Administration'. This represents a loss of more than 80% of the table rows.",
+        "b_evidence_source": "The 'Project Summary' table on pages 3-4 lists data for projects 101, 102, 103, 105, 107, 110, 111, 112, and 9999.",
+        "b_evidence_output": "The table in elements of sections[4] only contains one row: '101 / Administration'.",
+        "b_evidence_location": "Project Summary section, elements index 0, pages 3-4",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C5",
+        "check_name": "Significant text omission within a section",
+        "a_analysis": "Within individual activity reports (e.g., Activity 999ADM1002 on page 5, Activity 017PLN9102 on page 7), the source document provides a substantial financial table titled 'Overall' containing budgetary and expenditure data. In almost all converted activity sections (sections 5, 11, etc.), these critical data tables are omitted, leaving only metadata and narrative text.",
+        "b_evidence_source": "Activity reports (e.g., p.5 for 999ADM1002, p.7 for 017PLN9102) feature a detailed table titled 'Overall' with columns for 'Apr 1 thru Jun 30, 2022' and 'To Date'.",
+        "b_evidence_output": "The activity reports in the output (e.g., sections 5, 6, 11) do not include the data from these 'Overall' financial tables.",
+        "b_evidence_location": "Activity sections, multiple pages",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "C6",
+        "check_name": "Minor text differences beyond acceptable reformatting",
+        "a_analysis": "For the text content that was successfully captured (narratives, location descriptions), the wording matches the source accurately. For example, the merge of the 'Overall Progress Narrative' across the page 2/3 boundary is handled correctly without loss of meaning.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5930232558139534,
+    "penalty_sum": 35,
+    "defect_count": 3,
+    "critical_count": 1,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"C1\",\n      \"check_name\": \"Fabricated paragraphs or sentences\",\n      \"a_analysis\": \"I have carefully compared the output JSON against the source PDF. The textual content that is present in the output, such as the narratives on disaster damage and recovery needs, as well as the activity metadata, matches the information in the source. I did not find any fabricated body text or invented paragraphs. The note regarding unavailable pages is an acceptable pipeline addition regarding conversion status.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C2\",\n      \"check_name\": \"Fabricated contact information\",\n      \"a_analysis\": \"The URL present in the 'Recovery Needs' narrative on page 1 ('https://files.nc.gov/ncosbm/documents/files/Florence_Report_Full_rev20181016v10.pdf') is correctly preserved in the output. I found no other phone numbers, emails, or URLs in the source to compare, and no fabricated ones in the output.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"C3\",\n      \"check_name\": \"Complete section or page missing\",\n      \"a_analysis\": \"The output suffers from massive content omission. Several entire sections and multiple pages are missing. Specifically, the 'Overall', 'Progress Toward Required Numeric Targets', and 'Funds Expended' tables on page 2 are entirely absent. Additionally, activity reports spanning pages 13 through 20 (Activities 999HRB1102, 999HRB1108, and 047AHD2408) are completely omitted from the conversion result.\",\n      \"b_evidence_source\": \"Page 2 contains 'Overall', 'Progress Toward Required Numeric Targets', and 'Funds Expended' tables. Pages 13-20 contain full reports for Activities 999HRB1102, 999HRB1108, and 047AHD2408.\",\n      \"b_evidence_output\": \"The tables on page 2 and the entire activity sections for activities 999HRB1102, 999HRB1108, and 047AHD2408 are missing from the JSON.\",\n      \"b_evidence_location\": \"Pages 2 and 13-20\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"CRITICAL\"\n    },\n    {\n      \"check_id\": \"C4\",\n      \"check_name\": \"Table with significantly fewer rows\",\n      \"a_analysis\": \"The 'Project Summary' table, which starts on page 3 and continues on page 4, contains rows for several projects (101, 102, 103, 105, 107, 110, 111, 112, 9999). The output JSON representation of this table in 'sections[4]' contains only one entry: '101 / Administration'. This represents a loss of more than 80% of the table rows.\",\n      \"b_evidence_source\": \"The 'Project Summary' table on pages 3-4 lists data for projects 101, 102, 103, 105, 107, 110, 111, 112, and 9999.\",\n      \"b_evidence_output\": \"The table in elements of sections[4] only contains one row: '101 / Administration'.\",\n      \"b_evidence_location\": \"Project Summary section, elements index 0, pages 3-4\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C5\",\n      \"check_name\": \"Significant text omission within a section\",\n      \"a_analysis\": \"Within individual activity reports (e.g., Activity 999ADM1002 on page 5, Activity 017PLN9102 on page 7), the source document provides a substantial financial table titled 'Overall' containing budgetary and expenditure data. In almost all converted activity sections (sections 5, 11, etc.), these critical data tables are omitted, leaving only metadata and narrative text.\",\n      \"b_evidence_source\": \"Activity reports (e.g., p.5 for 999ADM1002, p.7 for 017PLN9102) feature a detailed table titled 'Overall' with columns for 'Apr 1 thru Jun 30, 2022' and 'To Date'.\",\n      \"b_evidence_output\": \"The activity reports in the output (e.g., sections 5, 6, 11) do not include the data from these 'Overall' financial tables.\",\n      \"b_evidence_location\": \"Activity sections, multiple pages\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"C6\",\n      \"check_name\": \"Minor text differences beyond acceptable reformatting\",\n      \"a_analysis\": \"For the text content that was successfully captured (narratives, location descriptions), the wording matches the source accurately. For example, the merge of the 'Overall Progress Narrative' across the page 2/3 boundary is handled correctly without loss of meaning.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 3,\n    \"critical_count\": 1,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 35,\n    \"score\": 0.5930232558139535\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "structural_fidelity": {
+    "call_type": "structural_fidelity",
+    "checks": [
+      {
+        "check_id": "S1",
+        "check_name": "Content duplicated",
+        "a_analysis": "I have carefully reviewed the output against the 28-page source document. I do not find any instances of paragraphs, tables, or lists being duplicated in the conversion that only appeared once in the original.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S2",
+        "check_name": "Heading hierarchy broken",
+        "a_analysis": "The output mostly uses a flat structure where major section titles are placed in the section title field and subsections (like 'Disaster Damage' or 'Activity Description') are correctly identified as H3 headings. This normalization is acceptable.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S3",
+        "check_name": "Table structure corrupted",
+        "a_analysis": "There are several major table structure failures. First, the 'Overall' and 'Progress Toward Required Numeric Targets' financial tables on Page 2 are entirely missing from the output. Second, the 'Project Summary' table spanning pages 3-4 is severely truncated; in the output (element index 5), it only contains a single header row with two cells, whereas the source contains 9 rows of data across multiple columns.",
+        "b_evidence_source": "The source contains tables on page 2 ('Overall', 'Progress Toward Required Numeric Targets') and a full multi-column 'Project Summary' table on pages 3-4.",
+        "b_evidence_output": "The tables on page 2 are missing. The Project Summary table (element index 5) only shows: 'cells': [{'cell_type': 'header', 'content': [{'text': 'Project # /'}]}, {'cell_type': 'header', 'content': [{'text': '101 / Administration'}]}]",
+        "b_evidence_location": "Overall section / Project Summary section, page 2-4, element index 5",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S4",
+        "check_name": "Reading order significantly different",
+        "a_analysis": "The output contains a massive gap where content from pages 13 through 20 is omitted and replaced by a placeholder claiming pages 11-21 are unavailable (though some content from p11 and p21 is actually present). Specifically, the detailed activity reports for the Homeowner Recovery Program (Urgent Need), Homeowner Recovery Program (Low/Mod), and Love Mill Apartments are missing entirely. This constitutes a significant material divergence in reading order and structural completeness.",
+        "b_evidence_source": "Pages 13-20 contain activity reports for 999HRB1102, 999HRB1108, and 047AHD2408.",
+        "b_evidence_output": "[Pages 11-21 unavailable] Content from pages 11-21 could not be converted.",
+        "b_evidence_location": "Between element index 21 and 22, page 13-20, element index 26",
+        "c_verdict": "FAIL",
+        "d_severity": "major"
+      },
+      {
+        "check_id": "S5",
+        "check_name": "Lists converted incorrectly",
+        "a_analysis": "The list under 'Section 3 Qualitative Efforts' on page 21 is correctly captured as a nested list structure, preserving the meaning and hierarchy of the original bulleted and numbered points.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "S7",
+        "check_name": "Link injection issues",
+        "a_analysis": "The hyperlink in the narrative section on page 1 is correctly captured as a clickable link element with the accurate URL. No links are missing or fabricated.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 0.5454545454545454,
+    "penalty_sum": 10,
+    "defect_count": 2,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"S1\",\n      \"check_name\": \"Content duplicated\",\n      \"a_analysis\": \"I have carefully reviewed the output against the 28-page source document. I do not find any instances of paragraphs, tables, or lists being duplicated in the conversion that only appeared once in the original.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S2\",\n      \"check_name\": \"Heading hierarchy broken\",\n      \"a_analysis\": \"The output mostly uses a flat structure where major section titles are placed in the section title field and subsections (like 'Disaster Damage' or 'Activity Description') are correctly identified as H3 headings. This normalization is acceptable.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S3\",\n      \"check_name\": \"Table structure corrupted\",\n      \"a_analysis\": \"There are several major table structure failures. First, the 'Overall' and 'Progress Toward Required Numeric Targets' financial tables on Page 2 are entirely missing from the output. Second, the 'Project Summary' table spanning pages 3-4 is severely truncated; in the output (element index 5), it only contains a single header row with two cells, whereas the source contains 9 rows of data across multiple columns.\",\n      \"b_evidence_source\": \"The source contains tables on page 2 ('Overall', 'Progress Toward Required Numeric Targets') and a full multi-column 'Project Summary' table on pages 3-4.\",\n      \"b_evidence_output\": \"The tables on page 2 are missing. The Project Summary table (element index 5) only shows: 'cells': [{'cell_type': 'header', 'content': [{'text': 'Project # /'}]}, {'cell_type': 'header', 'content': [{'text': '101 / Administration'}]}]\",\n      \"b_evidence_location\": \"Overall section / Project Summary section, page 2-4, element index 5\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S4\",\n      \"check_name\": \"Reading order significantly different\",\n      \"a_analysis\": \"The output contains a massive gap where content from pages 13 through 20 is omitted and replaced by a placeholder claiming pages 11-21 are unavailable (though some content from p11 and p21 is actually present). Specifically, the detailed activity reports for the Homeowner Recovery Program (Urgent Need), Homeowner Recovery Program (Low/Mod), and Love Mill Apartments are missing entirely. This constitutes a significant material divergence in reading order and structural completeness.\",\n      \"b_evidence_source\": \"Pages 13-20 contain activity reports for 999HRB1102, 999HRB1108, and 047AHD2408.\",\n      \"b_evidence_output\": \"[Pages 11-21 unavailable] Content from pages 11-21 could not be converted.\",\n      \"b_evidence_location\": \"Between element index 21 and 22, page 13-20, element index 26\",\n      \"c_verdict\": \"FAIL\",\n      \"d_severity\": \"MAJOR\"\n    },\n    {\n      \"check_id\": \"S5\",\n      \"check_name\": \"Lists converted incorrectly\",\n      \"a_analysis\": \"The list under 'Section 3 Qualitative Efforts' on page 21 is correctly captured as a nested list structure, preserving the meaning and hierarchy of the original bulleted and numbered points.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"S7\",\n      \"check_name\": \"Link injection issues\",\n      \"a_analysis\": \"The hyperlink in the narrative section on page 1 is correctly captured as a clickable link element with the accurate URL. No links are missing or fabricated.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 2,\n    \"critical_count\": 0,\n    \"major_count\": 2,\n    \"minor_count\": 0,\n    \"penalty_sum\": 10,\n    \"score\": 0.5454545454545454\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "visual_fidelity": {
+    "call_type": "visual_fidelity",
+    "checks": [
+      {
+        "check_id": "V1",
+        "check_name": "Major visual layout difference",
+        "a_analysis": "The rendered HTML output faithfully maintains the visual organization and flow of information from the source PDF. Key sections such as Grant Information, Narratives, Financial 'Overall' tables, and individual Grantee Activity reports are presented in the same sequence and structural hierarchy. The transition from the PDF's multi-column or grid-like grant headers to the HTML's organized rows is clean and does not hinder the ability to locate information.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V2",
+        "check_name": "Tables visually broken or misrendered",
+        "a_analysis": "All tables throughout the document, including the complex financial tables (e.g., 'Overall', 'Project Summary') and performance measure tables (e.g., 'Accomplishments Performance Measures', 'Beneficiaries Performance Measures'), are rendered correctly. Rows and columns are properly aligned, borders are present to distinguish cells, and headers are visually distinct. The data remains legible and understandable in its tabular format.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V3",
+        "check_name": "Images missing or broken",
+        "a_analysis": "There are no meaningful images (charts, graphs, or photos) in the source PDF that are absent from the HTML. The logos present in the PDF margins are decorative elements, and their absence in the HTML is a standard accessibility practice. The informational content of the document is entirely preserved.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      },
+      {
+        "check_id": "V4",
+        "check_name": "Content visually duplicated on page",
+        "a_analysis": "A thorough visual scan of the HTML output confirms that no body content, such as paragraphs, table data, or specific activity report sections, is duplicated. Each section appears exactly once in the body of the document.",
+        "b_evidence_source": "",
+        "b_evidence_output": "",
+        "b_evidence_location": "",
+        "c_verdict": "PASS",
+        "d_severity": null
+      }
+    ],
+    "score": 1.0,
+    "penalty_sum": 0,
+    "defect_count": 0,
+    "critical_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "raw_response": "{\n  \"checks\": [\n    {\n      \"check_id\": \"V1\",\n      \"check_name\": \"Major visual layout difference\",\n      \"a_analysis\": \"The rendered HTML output faithfully maintains the visual organization and flow of information from the source PDF. Key sections such as Grant Information, Narratives, Financial 'Overall' tables, and individual Grantee Activity reports are presented in the same sequence and structural hierarchy. The transition from the PDF's multi-column or grid-like grant headers to the HTML's organized rows is clean and does not hinder the ability to locate information.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V2\",\n      \"check_name\": \"Tables visually broken or misrendered\",\n      \"a_analysis\": \"All tables throughout the document, including the complex financial tables (e.g., 'Overall', 'Project Summary') and performance measure tables (e.g., 'Accomplishments Performance Measures', 'Beneficiaries Performance Measures'), are rendered correctly. Rows and columns are properly aligned, borders are present to distinguish cells, and headers are visually distinct. The data remains legible and understandable in its tabular format.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V3\",\n      \"check_name\": \"Images missing or broken\",\n      \"a_analysis\": \"There are no meaningful images (charts, graphs, or photos) in the source PDF that are absent from the HTML. The logos present in the PDF margins are decorative elements, and their absence in the HTML is a standard accessibility practice. The informational content of the document is entirely preserved.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    },\n    {\n      \"check_id\": \"V4\",\n      \"check_name\": \"Content visually duplicated on page\",\n      \"a_analysis\": \"A thorough visual scan of the HTML output confirms that no body content, such as paragraphs, table data, or specific activity report sections, is duplicated. Each section appears exactly once in the body of the document.\",\n      \"b_evidence_source\": \"\",\n      \"b_evidence_output\": \"\",\n      \"b_evidence_location\": \"\",\n      \"c_verdict\": \"PASS\"\n    }\n  ],\n  \"summary\": {\n    \"total_defects\": 0,\n    \"critical_count\": 0,\n    \"major_count\": 0,\n    \"minor_count\": 0,\n    \"penalty_sum\": 0,\n    \"score\": 1.0\n  }\n}",
+    "evaluation_status": "complete"
+  },
+  "total_defects": 5,
+  "total_critical": 1,
+  "total_major": 4,
+  "total_minor": 0,
+  "programmatic_signals": null,
+  "corroboration": null
+}

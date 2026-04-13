@@ -1,0 +1,140 @@
+{
+  "document_id": "text-some-colored-text-3638",
+  "audited_at": "2026-03-24T01:55:41.374885Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/text-some-colored-text-3638/text-some-colored-text-3638.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/text-some-colored-text-3638/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/text-some-colored-text-3638/text-some-colored-text-3638.html"
+  },
+  "quality_score": 100,
+  "quality_grade": "Good",
+  "fidelity_composite": 1.0,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 1.0,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The LLM fidelity evaluation indicates perfect scores and recommends AUTO_APPROVE. However, programmatic checks identified 1 MAJOR defect (retained header/footer elements) and a few minor issues (repeated footer text, displaced hyperlinks). According to the count-based routing rules, 1-5 major defects require routing to HUMAN_REVIEW.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Header/footer elements retained in output (1): 1 of 3",
+      "severity": "major",
+      "analysis": "header_footer_count=1. Running headers/footers/page numbers should be stripped during PDF-to-HTML conversion.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"nc dit's firsttech annual review 2020\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3/3 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Displaced hyperlinks: 2 link(s) extracted as standalone elements instead of inline text",
+      "severity": "minor",
+      "analysis": "standalone_links=2, examples=['mailto:firsttech@nc.gov', 'https://www.ncbroadband.gov/firsttech/']. Links should be inline within paragraphs, not separate blocks.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Source PDF contains 2 instance(s) of blue-styled text without hyperlink annotations. These appear to be intended as hyperlinks but were not annotated in the PDF (likely lost during Word-to-PDF export). This is a source document limitation, not a pipeline defect. Examples: page 3: \"firsttech@nc.gov\"; page 3: \"www.ncbroadband.gov/firsttech/\"",
+      "severity": "informational",
+      "analysis": "orphaned_blue_text_count=2. Blue text without link annotations detected via PyMuPDF color extraction.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": "S7",
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Review HTML output to ensure running headers and footers are properly stripped.",
+    "Verify the placement of the displaced hyperlinks and integrate them into their respective paragraphs if necessary."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 974,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 1.0,
+      "raw_score": 1.0,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 1.0,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 1.0,
+      "fidelity_routing": "AUTO_APPROVE",
+      "fidelity_available": true,
+      "shingling_recall": 0.9171489491318916,
+      "shingling_precision": 0.9744336569579288,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.8957388939256573,
+      "baseline_words": 1103,
+      "gemini_words": 988,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 2,
+      "link_count_ratio": null,
+      "image_placeholder_ratio": null,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 309648,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "document_id": "20190416-nc-911-board-minutes-approved-687248c4",
+  "audited_at": "2026-03-19T06:35:20.635116Z",
+  "source_files": {
+    "extraction_json": "../../google/backend/e2e-results/ncdit-audit-04-17/20190416-nc-911-board-minutes-approved-687248c4/20190416-nc-911-board-minutes-approved-687248c4.json",
+    "source_pdf": "../../google/backend/e2e-results/ncdit-audit-04-17/20190416-nc-911-board-minutes-approved-687248c4/source.pdf",
+    "rendered_html": "../../google/backend/e2e-results/ncdit-audit-04-17/20190416-nc-911-board-minutes-approved-687248c4/20190416-nc-911-board-minutes-approved-687248c4.html"
+  },
+  "quality_score": 79,
+  "quality_grade": "Fair",
+  "fidelity_composite": 0.7864,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.8571428571428572,
+  "fidelity_visual": 0.5238095238095238,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The LLM fidelity signal flags major structural issues, specifically the loss of a table structure on the second page which was converted into a flattened ordered list. This is corroborated by a low programmatic word count ratio (0.772) and shingling recall (0.801). Furthermore, explicit agenda item numbering was lost, which impacts the document's usability, necessitating human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Tables visually broken or misrendered",
+      "severity": "major",
+      "analysis": "In the source PDF, the main agenda is laid out as a table with three distinct columns ('Tab', 'Topic', 'Presenter') that span both pages. In the HTML output, only the first page is rendered as a `<table>`. On the second page, the tabular structure is entirely lost and replaced with an ordered list (`<ol>`). This merges the 'Topic' and 'Presenter' columns into single lines of text, destroying the visual alignment and tabular structure.",
+      "source_pdf_quote": "The agenda list containing columns for 'Tab', 'Topic', and 'Presenter' spanning both pages (items 1-13).",
+      "output_quote": "Items on page 2 are rendered as an ordered list instead of a table, squishing columns together (e.g., `<li>Education Committee Report Mike Reitz</li>`).",
+      "location": "Agenda items 5 through 13 (Page 2)",
+      "source": "fidelity_llm",
+      "check_id": "V1",
+      "fidelity_dimension": "visual",
+      "corroborated": true
+    },
+    {
+      "description": "Text formatting not preserved",
+      "severity": "major",
+      "analysis": "The source PDF uses italics to emphasize certain text, such as the '(Vote Required)' note on the Consent Agenda item. In the HTML output, this text is rendered without any `<i>` or `<em>` tags, losing the visual emphasis.",
+      "source_pdf_quote": "The text '(Vote Required)' is italicized in agenda item 4.",
+      "output_quote": "The text 'Consent Agenda (Vote Required)' appears without any italicization tags.",
+      "location": "Agenda item 4",
+      "source": "fidelity_llm",
+      "check_id": "V5",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "On page 2, the extraction pipeline incorrectly parsed the continued agenda list. It grouped items 'g' and 'h' with the remaining numbered items (5-13) into a single ordered list, stripping the explicit numbers '5', '6', '7', etc., from the text. This alters the reference numbering for the agenda items.",
+      "source_pdf_quote": "5. Executive Director Report Pokey Harris\n[...]\n6. Education Committee Report Mike Reitz\n[...]\n7. Funding Committee Report David Bone",
+      "output_quote": "\"text\": \"Executive Director Report Pokey Harris\"\n[...]\n\"text\": \"Education Committee Report Mike Reitz\"\n[...]\n\"text\": \"Funding Committee Report David Bone\"",
+      "location": "Page 2, main ordered list",
+      "source": "fidelity_llm",
+      "check_id": "C6",
+      "fidelity_dimension": "content",
+      "corroborated": false
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The output extracted the agenda items on page 2 as an ordered list. However, it completely lost the explicit numbering (5, 6, 7, etc.) from the source document text. Additionally, items 'g)' and 'h)', which are continuation sub-items of item 4 from page 1, are incorrectly nested at the root level of this ordered list alongside the main items, effectively flattening the hierarchy.",
+      "source_pdf_quote": "5. Executive Director Report Pokey Harris",
+      "output_quote": "{\"text\": \"Executive Director Report Pokey Harris\"} (the number '5.' is stripped entirely)",
+      "location": "Page 2, first list element",
+      "source": "fidelity_llm",
+      "check_id": "S5",
+      "fidelity_dimension": "structural",
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Reconstruct the table structure for the agenda items on page 2.",
+    "Restore the explicit numbering and proper nesting for the agenda list items."
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "internal": {
+    "decider_confidence": 0.9,
+    "score_breakdown": {
+      "fidelity_composite": 0.7864,
+      "raw_score": 0.7864,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.7864,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.8571428571428572,
+      "fidelity_visual": 0.5238095238095238,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8014804845222072,
+      "shingling_precision": 0.9754299754299754,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": 0.7722513089005235,
+      "baseline_words": 382,
+      "gemini_words": 295,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 1
+    },
+    "processing_ms": 134930,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

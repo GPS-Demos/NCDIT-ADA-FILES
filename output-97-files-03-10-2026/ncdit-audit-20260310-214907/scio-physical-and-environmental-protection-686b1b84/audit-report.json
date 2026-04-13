@@ -1,0 +1,105 @@
+{
+  "document_id": "scio-physical-and-environmental-protection-686b1b84",
+  "audited_at": "2026-03-10T22:37:00.365056Z",
+  "quality_score": 78,
+  "fidelity_composite": 0.7584,
+  "fidelity_content": 0.9883720930232558,
+  "fidelity_structural": 0.5,
+  "fidelity_visual": 0.75,
+  "routing": "human_review",
+  "reasoning": "The document exhibits significant structural and content duplication (sections PE-15 to PE-17 appear twice), which is corroborated by a duplication ratio of 0.091. Additionally, the heading hierarchy is broken (starting at H2) and critical list content is missing in section PE-17, making the document unsuitable for automated approval without remediation. While the content score is high, the low structural score (0.5) and duplication defects require human intervention.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The output exhibits significant content duplication. The text for sections PE-15 (Water Damage Protection), PE-16 (Delivery and Removal), and PE-17 (Alternate Work Site) appears at the end of section 1 (elements 38-49) and is then repeated in dedicated subsequent sections 2, 3, and 4. This is a clear structural defect where content is segments and repeated redundantly.",
+      "source_pdf_quote": "The sections PE-15, PE-16, and PE-17 appear exactly once on page 11 and continue on page 12 of the source document.",
+      "output_quote": "Section PE-15 text appears in Section 1 (starting at element index 38) and is duplicated in Section 2. Section PE-16 text appears in Section 1 (element index 42) and is duplicated in Section 3.",
+      "location": "Sections 1, 2, 3, and 4; page 11 and 12."
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The heading hierarchy begins with an H2 for the document title ('Physical and Environmental Protection Policy') and major sections like 'Scope'. According to accessibility standards, the document title should be H1, and major sections should be H2. Starting the hierarchy at H2 without an H1 is a break in structural hierarchy.",
+      "source_pdf_quote": "'Physical and Environmental Protection Policy' is clearly the top-level document title.",
+      "output_quote": "{\"type\": \"heading\", \"level\": 2, \"text\": \"Physical and Environmental Protection Policy\"}",
+      "location": "Section 1, element index 1."
+    },
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "There is significant visual duplication of body content in the rendered HTML. The sections PE-15 (Water Damage Protection), PE-16 (Delivery and Removal), and the first part of PE-17 (Alternate Work Site) that appear on page 11 of the PDF are rendered once in the HTML and then immediately repeated. The first iteration of PE-17 ends prematurely at item 'i' (matching the end of PDF page 11), followed by the complete block for PE-15, PE-16, and the full PE-17 (items a through e). This is a genuine d",
+      "source_pdf_quote": "Page 11 contains sections PE-15, PE-16, and the beginning of PE-17 (items a-d.i).",
+      "output_quote": "The HTML screenshot shows these sections appearing twice in the body. The first instance ends after 'PE-17... i. Sufficient physical access controls...', and is immediately followed by a second rendering starting again with 'PE-15—Water Damage Protection'.",
+      "location": "Sections PE-15, PE-16, and PE-17, corresponding to the transition from PDF page 11 to page 12."
+    },
+    {
+      "description": "Minor text differences beyond acceptable reformatting",
+      "severity": "minor",
+      "analysis": "The output fails to include critical document metadata found in the header of every page of the source PDF. Specifically, the Document Number (SCIO-SEC-313), the Version Number (4), the Effective Date (01/29/2018), and the Review Date (03/26/2025) are entirely missing from the body and metadata of the converted document. These are key informational identifiers for a government policy.",
+      "source_pdf_quote": "Document No. SCIO-SEC-313, Effective Date 01/29/2018, Review Date 03/26/2025, Version 4",
+      "output_quote": "The fields for Document No, Effective Date, Review Date, and Version are absent from the JSON elements and metadata.",
+      "location": "Page headers, pages 1-12"
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The conversion of complex lists is inconsistent. In section PE-17 (Section 4), the sub-items 'ii' through 'vi' belonging to item 'd' (found on source page 12) are completely missing from the list structure in the output. Additionally, the list in PE-2 from page 3 (items i-viii) is orphaned into a separate list object rather than being properly nested or continued as a single list structure, losing the connection to the preceding items on page 2.",
+      "source_pdf_quote": "PE-17 item 'd' contains a nested list with items i, ii, iii, iv, v, vi (pages 11-12).",
+      "output_quote": "In Section 4, the list for PE-17 contains item 'd' which has a 'nested_list' containing only sub-item 'i'. Items 'ii' through 'vi' are not present.",
+      "location": "Section 4, PE-17 list; page 12."
+    }
+  ],
+  "action_items": [
+    "Remove duplicated text blocks for sections PE-15, PE-16, and PE-17",
+    "Set the document title as H1 and shift subsequent headings to H2",
+    "Verify and restore missing list items in section PE-17 (sub-items ii-vi)",
+    "Insert missing policy header metadata (Version 4, Effective Date 01/29/2018)"
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.7584,
+      "text_match": 0.8559361438853125,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.5,
+      "raw_score": 0.7773,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.7584,
+      "fidelity_content": 0.9883720930232558,
+      "fidelity_structural": 0.5,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8523893805309735,
+      "shingling_precision": 0.9901315789473685,
+      "duplication_ratio": 0.09117531360636391,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "partial_disagree"
+    },
+    "processing_ms": 114847,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

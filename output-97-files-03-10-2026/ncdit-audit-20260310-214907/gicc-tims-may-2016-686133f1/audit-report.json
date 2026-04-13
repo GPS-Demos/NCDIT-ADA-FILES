@@ -1,0 +1,126 @@
+{
+  "document_id": "gicc-tims-may-2016-686133f1",
+  "audited_at": "2026-03-10T22:06:00.704254Z",
+  "quality_score": 40,
+  "fidelity_composite": 0.4,
+  "fidelity_content": 0.6511627906976745,
+  "fidelity_structural": 0.045454545454545414,
+  "fidelity_visual": 0.75,
+  "routing": "reject",
+  "reasoning": "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication.",
+  "decision_method": "hard_veto:V7",
+  "concerns": [
+    {
+      "description": "Complete section or page missing",
+      "severity": "critical",
+      "analysis": "The conversion process failed to capture a significant block of the document. Pages 18, 19, 20, 21, and 22 from the source PDF are completely missing from the JSON output. These pages contain critical content, including 'State Funding for School Transportation' (P18), a chart showing the 'Number of Buses Operated' (P19), 'Other applications' (P20), 'Data for Growth Projections' (P21), and 'School Assignment' (P22). Neither the headings nor the text/images from these pages appear in the output.",
+      "source_pdf_quote": "Source PDF Pages 18 ('State Funding for School Transportation'), 19 ('Public Schools of North Carolina Number of Buses Operated'), 20 ('Other applications'), 21 ('Data for Growth Projections'), and 22 ('School Assignment – balancing equity based on median income').",
+      "output_quote": "The content from these pages is entirely absent from the JSON sections and elements.",
+      "location": "Sections following 'School Boundary Planning' (Page 17) and preceding 'Future Growth Maps' (Page 23)."
+    },
+    {
+      "description": "Significant text omission within a section",
+      "severity": "major",
+      "analysis": "While some sections are identified by their headings, the primary content (images, screenshots, and maps) is omitted. In Section 12, headings for 'Bus Run Optimization' (P13), 'Case Study – Charlotte/Meck...' (P14), 'Bus Routes Before/After...' (P15), and 'School Boundary Planning' (P17) are present, but the essential visual data (screenshots and maps) that defines these pages is missing. Additionally, Section 6 ('Pen Plotters') is missing one of its three images, and Section 9 ('Student Data fr",
+      "source_pdf_quote": "Visual content on Pages 13 (software screenshot), 14 (two maps), 15 (two bus route diagrams), 17 (map and tally table), 6 (one of three plotter photos), and 9 (one of two database screenshots).",
+      "output_quote": "The headings for these sections exist in the JSON, but the image elements for the primary content are missing.",
+      "location": "Sections 6, 9, and 12."
+    },
+    {
+      "description": "Content duplicated",
+      "severity": "major",
+      "analysis": "The report footer from page 11 ('Turn Left on S WEST RAILRO ST WA 2216 2207' and '730 S WEST RAILRO ST WA 7:23 1') is included twice in the output. It appears correctly within the table structure at the end of section 10 and is then repeated as a standalone paragraph at the start of section 11.",
+      "source_pdf_quote": "Turn Left on S WEST RAILRO ST WA 2216 2207\n730 S WEST RAILRO ST WA 7:23 1",
+      "output_quote": "In section 10: Table 'Bus Routing Information Detail Continued' contains these values. In section 11: The first element is a paragraph containing 'Turn Left on S WEST RAILRO ST WA 2216 2207\n730 S WEST RAILRO ST WA 7:23 1'.",
+      "location": "Sections 10 and 11, pages 11 and 12"
+    },
+    {
+      "description": "Heading hierarchy broken",
+      "severity": "major",
+      "analysis": "The output fails to maintain a logical heading hierarchy. Specifically, the document's overall header ('The Value of GIS Supporting our Public Schools') is used as the primary title for sections 11 and 12, displacing the actual slide titles. In section 11, the intended title ('NCDOT Railroad Crossing Report') is relegated to a lower-level heading (H2) instead of being the section title. In section 4, the title is redundant, containing both the full text and a sub-header of the same name.",
+      "source_pdf_quote": "Page 12: NCDOT Railroad Crossing Report; Page 24: The Value of GIS Supporting our Public Schools",
+      "output_quote": "Section 11 title: 'The Value of GIS Supporting our Public Schools'; Section 12 title: 'The Value of GIS Supporting our Public Schools'",
+      "location": "Sections 11 and 12, pages 12 and 24"
+    },
+    {
+      "description": "Table structure corrupted",
+      "severity": "major",
+      "analysis": "The table representing the 'Bus Routing Information' report on page 11 is structurally corrupted. The original report contains five columns (Runld, Stop, Description, Time, Stpld), but the output table only contains three (Description, Time, Stpld). The data from the 'Runld' and 'Stop' columns has been incorrectly merged into the 'Description' column, which breaks the relational integrity of the data.",
+      "source_pdf_quote": "Table headers: Runld, Stop, Description, Time, Stpld",
+      "output_quote": "Table headers: Description, Time, Stpld. Data cell: 'Runld Stop'",
+      "location": "Section 10, page 11"
+    },
+    {
+      "description": "Reading order significantly different",
+      "severity": "major",
+      "analysis": "The output exhibits a critical failure in reading order and content preservation. Approximately 45% of the document (pages 13 through 23) is entirely missing from the JSON. The output sequence jumps directly from the content of page 12 (Section 11) to the content of page 24 (Section 12), omitting several key structural elements such as the 'Improvement from Stop Consolidation' table, 'School Boundary Planning' map, and growth projection maps.",
+      "source_pdf_quote": "Pages 13-23 containing: Bus Run Optimization, Case Study – Charlotte/Meck, Improvement from Stop Consolidation, School Boundary Planning, State Funding..., Number of Buses Operated, Other applications, etc.",
+      "output_quote": "The JSON terminates after Section 11 (Page 12) and jumps to Section 12 (Page 24), with no content from the intervening pages.",
+      "location": "Between Sections 11 and 12"
+    },
+    {
+      "description": "Images missing or broken",
+      "severity": "major",
+      "analysis": "Several meaningful images, maps, and diagrams essential to the document's content are missing or broken in the HTML output. Specifically, large green blocks appear where photos should be (pages 3, 6, 11, and the bottom of the page). More critically, information-dense diagrams and maps (such as the TIMS System diagram on page 8, the NCDOT Railroad Crossing map on page 12, the route optimization maps on pages 13-15, and the growth/income maps on pages 17, 22, and 23) are absent or replaced with te",
+      "source_pdf_quote": "The source PDF contains essential maps and diagrams on pages 8, 12, 13, 14, 15, 17, 22, and 23, as well as several contextual photos on pages 3, 6, and 11.",
+      "output_quote": "The HTML screenshot shows large green blocks (e.g., under 'A Bit of History', 'Pen Plotters', and 'Bus Routing Information') and text placeholders (e.g., 'Diagram showing The TIMS System...', 'NCDOT Railroad Crossing Report', 'Bus Run Optimization') instead of the actual visual content.",
+      "location": "Throughout the document body, corresponding to source pages 3, 6, 8, 11, 12, 13, 14, 15, 17, 22, and 23."
+    },
+    {
+      "description": "Lists converted incorrectly",
+      "severity": "minor",
+      "analysis": "The bulleted list on page 12 regarding NCDOT prioritizing signal enhancements (indicated by blue square bullet points in the source) has been incorrectly converted into a single paragraph in Section 11. This loses the structural distinction between the separate points intended by the source.",
+      "source_pdf_quote": "Bulleted list on page 12: 'Railroads are added...', 'Railroad warnings can be...', 'Load Counts used by...'",
+      "output_quote": "Section 11, paragraph: 'Railroads are added to TIMS as non-travel streets\\nRailroad warnings can be placed within driver directions generated from TIMS and can alert the driver to an upcoming stop.\\nLoad Counts used by NCDOT to prioritize signal enhancements'",
+      "location": "Section 11, page 12"
+    }
+  ],
+  "action_items": [
+    "Fidelity composite critically low: 0.40 (3/3 dimensions evaluated). Document quality below minimum threshold for publication."
+  ],
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.4,
+      "text_match": 0.9259431765253843,
+      "content_completeness": 1.0,
+      "accessibility": null,
+      "decision_confidence": 0.050000000000000044,
+      "raw_score": 0.5585,
+      "ceiling": 0.4,
+      "ceiling_reason": "fidelity_critical_veto",
+      "available_components": 4
+    },
+    "signals": {
+      "fidelity_composite": 0.4,
+      "fidelity_content": 0.6511627906976745,
+      "fidelity_structural": 0.045454545454545414,
+      "fidelity_visual": 0.75,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.8910802330793366,
+      "shingling_precision": 0.9636451769268056,
+      "duplication_ratio": 0.0,
+      "word_count_ratio": null,
+      "baseline_words": 0,
+      "gemini_words": 0,
+      "table_count_ratio": 1.0,
+      "image_count_ratio": 1.0,
+      "pipeline_confidence": 0.97,
+      "pipeline_routing": "needs_retry",
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": false,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "major_disagree"
+    },
+    "processing_ms": 115538,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}

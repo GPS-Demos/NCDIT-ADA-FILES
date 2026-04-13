@@ -1,0 +1,141 @@
+{
+  "document_id": "standards-committee-meeting-agenda-packet-october-7-2021-685fa26e",
+  "audited_at": "2026-03-24T01:52:28.290491Z",
+  "source_files": {
+    "extraction_json": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e.json",
+    "source_pdf": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e/source.pdf",
+    "rendered_html": "/home/zzman/Dev/NCDIT-ADA-FILES/march-23-auditor-improvements/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e/standards-committee-meeting-agenda-packet-october-7-2021-685fa26e.html"
+  },
+  "quality_score": 95,
+  "quality_grade": "Good",
+  "fidelity_composite": 0.95,
+  "fidelity_content": 1.0,
+  "fidelity_structural": 1.0,
+  "fidelity_visual": 0.8571428571428572,
+  "routing": "human_review",
+  "routing_label": "Human Review",
+  "reasoning": "The conversion contains two major defects: visual duplication of tabular content (rendered as both images and HTML tables) and table captions improperly coded as header rows. The word count ratio of 1.214 corroborates the text duplication issue. Based on the count-based routing rules for 1-5 major defects, this document requires human review.",
+  "decision_method": "llm_final_decider",
+  "concerns": [
+    {
+      "description": "Content visually duplicated on page",
+      "severity": "major",
+      "analysis": "The HTML output contains visual duplication of tabular content. Specifically, the attendance table from page 2 and the roll call votes table from page 4 are both embedded as full images (screenshots of the tables) and subsequently rendered again as structured HTML <table> elements immediately below the images. This causes the user to see the same table data twice.",
+      "source_pdf_quote": "Page 2 features a table titled \"NORTH CAROLINA 911 Standards Committee Attendance\". Page 4 features a table titled \"NORTH CAROLINA 911Board Standards Committee Meeting ROLL CALL VOTES\".",
+      "output_quote": "<img src=\"[base64 image stripped for token budget]\" alt=\"The attendance log for the North Carolina 911 Standards Committee meeting...\"> followed by <table><tr><td colspan=\"4\">NORTH CAROLINA 911 Standards Committee<br>Attendance... (and similarly for the roll call table)",
+      "location": "Page 2 and Page 4 tables",
+      "source": "fidelity_llm",
+      "check_id": "V3",
+      "fidelity_dimension": "visual",
+      "corroborated": false
+    },
+    {
+      "description": "Table caption coded as header row: 2 table(s) have a single spanning first row that is likely a caption/title",
+      "severity": "major",
+      "analysis": "caption_as_header=2. Examples: p2: \"NORTH CAROLINA 911 Standards Committee\nAttendance\nJanuary 7,\"; p4: \"NORTH CAROLINA 911Board\nStandards Committee Meeting\nROLL CAL\". First row spans all columns — should be a <caption> element, not a header row.",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": "S3",
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (3x): \"north carolina 911 board\"",
+      "severity": "minor",
+      "analysis": "Short text block appears on 3/7 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    },
+    {
+      "description": "Repeated footer/header text (2x): \"**thursday, october 7, 2021**\"",
+      "severity": "minor",
+      "analysis": "Short text with footer-like pattern appears on 2 pages",
+      "source_pdf_quote": null,
+      "output_quote": null,
+      "location": null,
+      "source": "programmatic",
+      "check_id": null,
+      "fidelity_dimension": null,
+      "corroborated": false
+    }
+  ],
+  "action_items": [
+    "Remove the redundant image captures of the tables, retaining only the structured HTML table data",
+    "Convert the single spanning first rows of the tables into proper <caption> elements",
+    "Review and remove repetitive header/footer artifacts"
+  ],
+  "routing_changed": false,
+  "pipeline_original_routing": null,
+  "exclusion_reason": null,
+  "axe_compliance": {
+    "available": true,
+    "score": 1.0,
+    "total_violations": 0,
+    "total_affected_nodes": 0,
+    "by_severity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violations": [],
+    "wcag_level": "WCAG 2.1 AA",
+    "axe_version": "4.11.1",
+    "scan_duration_ms": 1557,
+    "error": null
+  },
+  "internal": {
+    "decider_confidence": 0.95,
+    "score_breakdown": {
+      "fidelity_composite": 0.95,
+      "raw_score": 0.95,
+      "ceiling": null,
+      "ceiling_reason": null,
+      "available_components": 1
+    },
+    "signals": {
+      "fidelity_composite": 0.95,
+      "fidelity_content": 1.0,
+      "fidelity_structural": 1.0,
+      "fidelity_visual": 0.8571428571428572,
+      "fidelity_routing": "FLAG_FOR_REVIEW",
+      "fidelity_available": true,
+      "shingling_recall": 0.9758797943851325,
+      "shingling_precision": 0.88745055735347,
+      "duplication_ratio": 0.003749250149970006,
+      "word_count_ratio": 1.214207650273224,
+      "baseline_words": 915,
+      "gemini_words": 1111,
+      "table_count_ratio": null,
+      "image_count_ratio": 1.0,
+      "source_link_count": 0,
+      "output_link_count": 0,
+      "link_count_ratio": 1.0,
+      "image_placeholder_ratio": 0.0,
+      "pipeline_confidence": null,
+      "pipeline_routing": null,
+      "pipeline_success": true,
+      "pipeline_error": null,
+      "axe_violations": 0,
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_moderate": 0,
+      "axe_minor": 0,
+      "axe_available": true,
+      "legacy_accuracy_score": null,
+      "signal_agreement": "converge",
+      "fabrication_detected_count": 0,
+      "deduplicated_count": 0
+    },
+    "processing_ms": 135871,
+    "fidelity_report_path": "fidelity-report.json",
+    "routing_escalated_from": null
+  }
+}
