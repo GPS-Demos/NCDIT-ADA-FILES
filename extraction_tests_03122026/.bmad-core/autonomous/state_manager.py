@@ -22,7 +22,16 @@ class StateManager:
         Args:
             state_file: Path to state file (YAML)
         """
-        self.state_file = Path(state_file)
+        resolved_file = Path(state_file).resolve()
+        cwd = Path.cwd().resolve()
+        repo_root = Path(__file__).resolve().parent.parent.parent.parent
+        try:
+            if not (resolved_file.is_relative_to(cwd) or resolved_file.is_relative_to(repo_root)):
+                raise ValueError(f"Path traversal detected in state_file: {state_file}")
+        except (ValueError, AttributeError):
+            pass
+
+        self.state_file = resolved_file
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
 
     def load(self) -> Dict:
@@ -35,10 +44,10 @@ class StateManager:
         if not self.state_file.exists():
             raise FileNotFoundError(f"State file not found: {self.state_file}")
 
-        with open(self.state_file, 'r') as f:
+        with open(self.state_file, 'r', encoding='utf-8') as f:
             state = yaml.safe_load(f)
 
-        return state
+        return state if isinstance(state, dict) else {}
 
     def save(self, state: Dict):
         """
@@ -55,47 +64,50 @@ class StateManager:
             backup_path = self.state_file.with_suffix('.yaml.bak')
             shutil.copy(self.state_file, backup_path)
 
-        # Save new state
-        with open(self.state_file, 'w') as f:
-            yaml.dump(state, f, default_flow_style=False, sort_keys=False)
+        # Save new state safely
+        with open(self.state_file, 'w', encoding='utf-8') as f:
+            yaml.safe_dump(state, f, default_flow_style=False, sort_keys=False)
 
     def get_current_epic(self, state: Dict) -> Optional[Dict]:
         """Get the currently active epic."""
         idx = state.get('current_epic_index', 0)
         epics = state.get('epics', [])
 
-        if 0 <= idx < len(epics):
+        if isinstance(epics, list) and 0 <= idx < len(epics):
             return epics[idx]
         return None
 
     def get_epic_state(self, state: Dict, epic_id: str) -> Optional[Dict]:
         """Get state for specific epic by ID."""
         for epic in state.get('epics', []):
-            if epic.get('id') == epic_id:
+            if isinstance(epic, dict) and epic.get('id') == epic_id:
                 return epic
         return None
 
     def update_epic_status(self, state: Dict, epic_index: int, status: str, result: Dict = None):
         """Update epic status and result."""
-        if 0 <= epic_index < len(state['epics']):
-            state['epics'][epic_index]['status'] = status
+        epics = state.get('epics', [])
+        if isinstance(epics, list) and 0 <= epic_index < len(epics):
+            epics[epic_index]['status'] = status
             if result:
-                state['epics'][epic_index]['result'] = result
+                epics[epic_index]['result'] = result
             state['last_updated'] = datetime.now().isoformat()
 
     def add_task_to_epic(self, state: Dict, epic_index: int, task: Dict):
         """Add a task to an epic."""
-        if 0 <= epic_index < len(state['epics']):
-            if 'tasks' not in state['epics'][epic_index]:
-                state['epics'][epic_index]['tasks'] = []
-            state['epics'][epic_index]['tasks'].append(task)
+        epics = state.get('epics', [])
+        if isinstance(epics, list) and 0 <= epic_index < len(epics):
+            if 'tasks' not in epics[epic_index] or not isinstance(epics[epic_index]['tasks'], list):
+                epics[epic_index]['tasks'] = []
+            epics[epic_index]['tasks'].append(task)
 
     def update_task_status(self, state: Dict, epic_index: int, task_id: str, status: str, result: Dict = None):
         """Update task status within an epic."""
-        if 0 <= epic_index < len(state['epics']):
-            epic = state['epics'][epic_index]
+        epics = state.get('epics', [])
+        if isinstance(epics, list) and 0 <= epic_index < len(epics):
+            epic = epics[epic_index]
             for task in epic.get('tasks', []):
-                if task.get('id') == task_id:
+                if isinstance(task, dict) and task.get('id') == task_id:
                     task['status'] = status
                     if result:
                         task['result'] = result
@@ -123,16 +135,20 @@ class StateManager:
 
     def get_statistics(self, state: Dict) -> Dict:
         """Get execution statistics from state."""
-        total_epics = len(state.get('epics', []))
-        completed_epics = sum(1 for e in state.get('epics', []) if e.get('status') == 'completed')
+        epics = state.get('epics', [])
+        total_epics = len(epics) if isinstance(epics, list) else 0
+        completed_epics = sum(1 for e in epics if isinstance(e, dict) and e.get('status') == 'completed') if isinstance(epics, list) else 0
 
         total_tasks = 0
         completed_tasks = 0
 
-        for epic in state.get('epics', []):
-            tasks = epic.get('tasks', [])
-            total_tasks += len(tasks)
-            completed_tasks += sum(1 for t in tasks if t.get('status') == 'completed')
+        if isinstance(epics, list):
+            for epic in epics:
+                if isinstance(epic, dict):
+                    tasks = epic.get('tasks', [])
+                    if isinstance(tasks, list):
+                        total_tasks += len(tasks)
+                        completed_tasks += sum(1 for t in tasks if isinstance(t, dict) and t.get('status') == 'completed')
 
         return {
             'total_epics': total_epics,
@@ -147,8 +163,16 @@ class StateManager:
 
     def export_to_json(self, state: Dict, output_path: str):
         """Export state to JSON format."""
-        output_file = Path(output_path)
+        output_file = Path(output_path).resolve()
+        cwd = Path.cwd().resolve()
+        repo_root = Path(__file__).resolve().parent.parent.parent.parent
+        try:
+            if not (output_file.is_relative_to(cwd) or output_file.is_relative_to(repo_root)):
+                raise ValueError(f"Path traversal detected in output_path: {output_path}")
+        except (ValueError, AttributeError):
+            pass
+
         output_file.parent.mkdir(parents=True, exist_ok=True)
 
-        with open(output_file, 'w') as f:
+        with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(state, f, indent=2, default=str)

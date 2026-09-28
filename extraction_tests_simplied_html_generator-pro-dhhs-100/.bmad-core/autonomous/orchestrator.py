@@ -101,6 +101,7 @@ class AutonomousOrchestrator:
 
             # Main orchestration loop
             while not self._is_complete(state):
+                state['iterations'] = state.get('iterations', 0) + 1
                 current_epic = state['epics'][state['current_epic_index']]
 
                 self.logger.info("\n" + "=" * 80)
@@ -188,7 +189,8 @@ class AutonomousOrchestrator:
         self.logger.warning(f"Details: {epic_result.get('blocker_details', 'No details')}")
 
         if self.config.get('auto_continue_on_blocker', False):
-            return False
+            self.logger.info("Auto-continuing past blocker per configuration...")
+            return True
 
         # In autonomous mode, we log and stop
         state['status'] = 'blocked'
@@ -209,12 +211,15 @@ class AutonomousOrchestrator:
         self.logger.info(f"Tasks completed: {state['total_tasks_completed']}")
         self.logger.info(f"Current status: {epic_result.get('summary', 'In progress')}")
 
-        if self.config.get('auto_continue_on_checkpoint', True):
+        if self.config.get('auto_continue_on_checkpoint', False):
             self.logger.info("Auto-continuing after checkpoint...")
             return True
 
-        # In fully autonomous mode, continue automatically
-        return True
+        # When auto_continue_on_checkpoint is False, pause execution awaiting approval
+        self.logger.info("Auto-continue on checkpoint disabled. Awaiting approval.")
+        state['status'] = 'checkpoint_waiting'
+        self.state_manager.save(state)
+        return False
 
     def _generate_final_report(self, state: Dict) -> Dict:
         """Generate final orchestration report."""

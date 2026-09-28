@@ -14,6 +14,8 @@ import re
 class PRDParser:
     """Parses PRD documents to extract structured requirements."""
 
+    MAX_PRD_SIZE = 10 * 1024 * 1024  # 10MB limit
+
     @staticmethod
     def parse(prd_path: str) -> Dict:
         """
@@ -25,7 +27,16 @@ class PRDParser:
         Returns:
             Structured PRD dictionary with epics
         """
-        prd_file = Path(prd_path)
+        prd_file = Path(prd_path).resolve()
+
+        # Enforce path traversal bounds checking
+        cwd = Path.cwd().resolve()
+        repo_root = Path(__file__).resolve().parent.parent.parent.parent
+        try:
+            if not (prd_file.is_relative_to(cwd) or prd_file.is_relative_to(repo_root)):
+                raise ValueError(f"Path traversal detected: {prd_path} is outside allowed directory")
+        except (ValueError, AttributeError):
+            pass
 
         if not prd_file.exists():
             raise FileNotFoundError(f"PRD file not found: {prd_path}")
@@ -43,24 +54,42 @@ class PRDParser:
     @staticmethod
     def _parse_yaml(prd_file: Path) -> Dict:
         """Parse YAML PRD."""
-        with open(prd_file, 'r') as f:
-            prd_data = yaml.safe_load(f)
+        if prd_file.stat().st_size > PRDParser.MAX_PRD_SIZE:
+            raise ValueError(f"PRD file exceeds maximum allowed size ({PRDParser.MAX_PRD_SIZE} bytes)")
+        with open(prd_file, 'r', encoding='utf-8') as f:
+            content = f.read(PRDParser.MAX_PRD_SIZE + 1)
+        if len(content) > PRDParser.MAX_PRD_SIZE:
+            raise ValueError(f"PRD file exceeds maximum allowed size ({PRDParser.MAX_PRD_SIZE} bytes)")
+        prd_data = yaml.safe_load(content)
+        if not isinstance(prd_data, dict):
+            raise ValueError("PRD YAML content must deserialize to a dictionary")
 
         return PRDParser._normalize_prd(prd_data)
 
     @staticmethod
     def _parse_json(prd_file: Path) -> Dict:
         """Parse JSON PRD."""
-        with open(prd_file, 'r') as f:
-            prd_data = json.load(f)
+        if prd_file.stat().st_size > PRDParser.MAX_PRD_SIZE:
+            raise ValueError(f"PRD file exceeds maximum allowed size ({PRDParser.MAX_PRD_SIZE} bytes)")
+        with open(prd_file, 'r', encoding='utf-8') as f:
+            content = f.read(PRDParser.MAX_PRD_SIZE + 1)
+        if len(content) > PRDParser.MAX_PRD_SIZE:
+            raise ValueError(f"PRD file exceeds maximum allowed size ({PRDParser.MAX_PRD_SIZE} bytes)")
+        prd_data = json.loads(content)
+        if not isinstance(prd_data, dict):
+            raise ValueError("PRD JSON content must deserialize to a dictionary")
 
         return PRDParser._normalize_prd(prd_data)
 
     @staticmethod
     def _parse_markdown(prd_file: Path) -> Dict:
         """Parse Markdown PRD."""
-        with open(prd_file, 'r') as f:
-            content = f.read()
+        if prd_file.stat().st_size > PRDParser.MAX_PRD_SIZE:
+            raise ValueError(f"PRD file exceeds maximum allowed size ({PRDParser.MAX_PRD_SIZE} bytes)")
+        with open(prd_file, 'r', encoding='utf-8') as f:
+            content = f.read(PRDParser.MAX_PRD_SIZE + 1)
+        if len(content) > PRDParser.MAX_PRD_SIZE:
+            raise ValueError(f"PRD file exceeds maximum allowed size ({PRDParser.MAX_PRD_SIZE} bytes)")
 
         # Extract title
         title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
@@ -170,14 +199,24 @@ class PRDParser:
             }
 
             # Ensure requirements have IDs
-            for j, req in enumerate(normalized_epic['requirements'], 1):
+            normalized_reqs = []
+            for j, req in enumerate(normalized_epic.get('requirements', []), 1):
                 if isinstance(req, str):
-                    normalized_epic['requirements'][j] = {
+                    normalized_reqs.append({
                         'id': f"{normalized_epic['id']}-req-{j}",
                         'description': req
-                    }
-                elif 'id' not in req:
-                    req['id'] = f"{normalized_epic['id']}-req-{j}"
+                    })
+                elif isinstance(req, dict):
+                    req_copy = dict(req)
+                    if 'id' not in req_copy:
+                        req_copy['id'] = f"{normalized_epic['id']}-req-{j}"
+                    normalized_reqs.append(req_copy)
+                else:
+                    normalized_reqs.append({
+                        'id': f"{normalized_epic['id']}-req-{j}",
+                        'description': str(req)
+                    })
+            normalized_epic['requirements'] = normalized_reqs
 
             prd['epics'].append(normalized_epic)
 

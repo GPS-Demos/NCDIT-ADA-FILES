@@ -13,6 +13,7 @@ Output:
 """
 
 import base64
+import html
 import json
 import re
 from datetime import datetime, timezone
@@ -1541,17 +1542,17 @@ class PDFExtractor:
         <tr>
             <td class="status-success">Fully Successful</td>
             <td>{len(summary['pdfs_by_status']['fully_successful'])}</td>
-            <td>{', '.join(summary['pdfs_by_status']['fully_successful'][:5])}{'...' if len(summary['pdfs_by_status']['fully_successful']) > 5 else ''}</td>
+            <td>{', '.join(html.escape(str(x)) for x in summary['pdfs_by_status']['fully_successful'][:5])}{'...' if len(summary['pdfs_by_status']['fully_successful']) > 5 else ''}</td>
         </tr>
         <tr>
             <td class="status-partial">Partial Issues</td>
             <td>{len(summary['pdfs_by_status']['partial_issues'])}</td>
-            <td>{', '.join(summary['pdfs_by_status']['partial_issues'][:5])}{'...' if len(summary['pdfs_by_status']['partial_issues']) > 5 else ''}</td>
+            <td>{', '.join(html.escape(str(x)) for x in summary['pdfs_by_status']['partial_issues'][:5])}{'...' if len(summary['pdfs_by_status']['partial_issues']) > 5 else ''}</td>
         </tr>
         <tr>
             <td class="status-failed">Failed</td>
             <td>{len(summary['pdfs_by_status']['failed'])}</td>
-            <td>{', '.join(summary['pdfs_by_status']['failed'][:5])}{'...' if len(summary['pdfs_by_status']['failed']) > 5 else ''}</td>
+            <td>{', '.join(html.escape(str(x)) for x in summary['pdfs_by_status']['failed'][:5])}{'...' if len(summary['pdfs_by_status']['failed']) > 5 else ''}</td>
         </tr>
     </table>
 
@@ -1585,9 +1586,10 @@ class PDFExtractor:
                 conf_class = ""
                 conf_label = "N/A"
 
+            safe_pdf_id = html.escape(str(result.get('pdf_id', '')))
             html += f"""        <tr>
-            <td>{result['pdf_id']}</td>
-            <td>{result['total_pages']}</td>
+            <td>{safe_pdf_id}</td>
+            <td>{result.get('total_pages', 0)}</td>
             <td>{metrics.get('pages_successful', 0)}</td>
             <td>{coherence if coherence is not None else 'N/A'}</td>
             <td class="{conf_class}">{conf_label}</td>

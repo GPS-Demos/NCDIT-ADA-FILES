@@ -3,9 +3,10 @@ Regenerate sample_pages_review.html from existing JSON output files.
 This avoids rerunning the full extraction pipeline.
 """
 
+import base64
+import html
 import json
 import random
-import base64
 from pathlib import Path
 
 import pypdfium2 as pdfium
@@ -41,11 +42,25 @@ def generate_sample_pages_report(results: list, num_samples: int = 30):
     - Random pages (for unbiased sampling)
     - Pages with coherence issues
     """
+    repo_root = Path(__file__).resolve().parent.parent
     # Collect all pages with their metadata
     all_pages = []
     for result in results:
         pdf_id = result["pdf_id"]
-        pdf_path = Path(result.get("source_path", DATA_FOLDER / pdf_id / "source.pdf"))
+        safe_pdf_id = Path(str(pdf_id)).name
+        source_path_raw = result.get("source_path")
+        if source_path_raw:
+            pdf_path = Path(source_path_raw).resolve()
+        else:
+            pdf_path = (DATA_FOLDER / safe_pdf_id / "source.pdf").resolve()
+
+        # Restrict path evaluations strictly within repository boundaries
+        try:
+            if not (pdf_path.is_relative_to(repo_root) or pdf_path.is_relative_to(Path.cwd().resolve())):
+                print(f"Warning: Disallowed PDF path outside repository boundary: {pdf_path}")
+                continue
+        except (ValueError, AttributeError):
+            pass
 
         if not pdf_path.exists():
             print(f"Warning: PDF not found: {pdf_path}")
@@ -218,7 +233,7 @@ def generate_sample_pages_report(results: list, num_samples: int = 30):
 
             if item_type == "heading":
                 level = item.get("level", 1)
-                text = item.get("text", "").replace("<", "&lt;").replace(">", "&gt;")
+                text = html.escape(item.get("text", ""))
                 content_html += f'''
                 <div class="content-item">
                     <div class="content-type">Heading (H{level})</div>
@@ -226,7 +241,7 @@ def generate_sample_pages_report(results: list, num_samples: int = 30):
                 </div>'''
 
             elif item_type == "paragraph":
-                text = item.get("text", "").replace("<", "&lt;").replace(">", "&gt;")
+                text = html.escape(item.get("text", ""))
                 content_html += f'''
                 <div class="content-item">
                     <div class="content-type">Paragraph</div>
@@ -236,20 +251,18 @@ def generate_sample_pages_report(results: list, num_samples: int = 30):
             elif item_type == "table":
                 cells = item.get("cells", [])
                 if cells:
-                    # Build table HTML
-                    max_row = max((c.get("row_start", 0) + c.get("num_rows", 1)) for c in cells)
-                    max_col = max((c.get("column_start", 0) + c.get("num_columns", 1)) for c in cells)
+                    # Bound table dimensions to avoid excessive iteration / DoS
+                    MAX_TABLE_ROWS = 100
+                    MAX_TABLE_COLS = 50
+                    max_row = min(max((int(c.get("row_start", 0)) + int(c.get("num_rows", 1))) for c in cells), MAX_TABLE_ROWS)
+                    max_col = min(max((int(c.get("column_start", 0)) + int(c.get("num_columns", 1))) for c in cells), MAX_TABLE_COLS)
 
+                    cell_map = {(c.get("row_start"), c.get("column_start")): html.escape(str(c.get("text", ""))) for c in cells}
                     table_html = '<table class="extracted-table">'
                     for r in range(max_row):
                         table_html += "<tr>"
                         for c in range(max_col):
-                            # Find cell at this position
-                            cell_text = ""
-                            for cell in cells:
-                                if cell.get("row_start") == r and cell.get("column_start") == c:
-                                    cell_text = cell.get("text", "").replace("<", "&lt;").replace(">", "&gt;")
-                                    break
+                            cell_text = cell_map.get((r, c), "")
                             table_html += f"<td>{cell_text}</td>"
                         table_html += "</tr>"
                     table_html += "</table>"
@@ -261,7 +274,7 @@ def generate_sample_pages_report(results: list, num_samples: int = 30):
                     </div>'''
 
             elif item_type == "image":
-                desc = item.get("description", "No description")
+                desc = html.escape(item.get("description", "No description"))
                 content_html += f'''
                 <div class="content-item">
                     <div class="content-type">Image</div>
@@ -269,7 +282,7 @@ def generate_sample_pages_report(results: list, num_samples: int = 30):
                 </div>'''
 
             elif item_type == "video":
-                url = item.get("url", "")
+                url = html.escape(item.get("url", ""))
                 content_html += f'''
                 <div class="content-item">
                     <div class="content-type">Video</div>
@@ -277,14 +290,14 @@ def generate_sample_pages_report(results: list, num_samples: int = 30):
                 </div>'''
 
             elif item_type == "form":
-                form_title = item.get("title", "Untitled Form").replace("<", "&lt;").replace(">", "&gt;")
+                form_title = html.escape(item.get("title", "Untitled Form"))
                 fields = item.get("fields", [])
                 fields_html = '<table class="extracted-table"><tr><th>Label</th><th>Type</th><th>Value</th></tr>'
                 for field in fields:
-                    label = field.get("label", "").replace("<", "&lt;").replace(">", "&gt;")
-                    ftype = field.get("field_type", "unknown")
+                    label = html.escape(str(field.get("label", "")))
+                    ftype = html.escape(str(field.get("field_type", "unknown")))
                     value = field.get("value") or "[empty]"
-                    value = str(value).replace("<", "&lt;").replace(">", "&gt;")
+                    value = html.escape(str(value))
                     fields_html += f"<tr><td>{label}</td><td>{ftype}</td><td>{value}</td></tr>"
                 fields_html += "</table>"
                 content_html += f'''
@@ -298,13 +311,15 @@ def generate_sample_pages_report(results: list, num_samples: int = 30):
         if sample["coherence_issues"]:
             issues_html = '<div class="issues-list"><strong>Coherence Issues:</strong><ul>'
             for issue in sample["coherence_issues"]:
-                issues_html += f"<li>{issue}</li>"
+                issues_html += f"<li>{html.escape(str(issue))}</li>"
             issues_html += "</ul></div>"
 
+        safe_sample_pdf_id = html.escape(str(sample["pdf_id"]))
+        safe_page_number = html.escape(str(sample["page_number"]))
         html += f'''
     <div class="page-sample">
         <div class="page-header">
-            <h2>#{i+1}: {sample["pdf_id"]} - Page {sample["page_number"]}</h2>
+            <h2>#{i+1}: {safe_sample_pdf_id} - Page {safe_page_number}</h2>
             <div>
                 <span class="score-badge {score_class}">
                     Coherence: {sample["coherence_score"]}/10
